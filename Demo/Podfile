@@ -1,0 +1,3 @@
+target 'Demo' do
+    pod 'LoopMeSDK', '~> 6.4.1'
+end

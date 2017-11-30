@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "3FFFAB50E379D9BDDB1EA2DD210E9C392F3ED72A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3FFFAB50E379D9BDDB1EA2DD210E9C392F3ED72A" : 0,
+    "33525396941315BFDCF9CEFE9BA9F28F6BCF14ED" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DE8B73FA-63A7-428E-936B-4BE90B3A9B25",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3FFFAB50E379D9BDDB1EA2DD210E9C392F3ED72A" : "open-mediation\/",
+    "33525396941315BFDCF9CEFE9BA9F28F6BCF14ED" : "loopme-ios-sdk-release\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LoopMeCompiler",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LoopMe\/iOS\/framework\/LoopMeCompiler.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/loopme\/loopme-ios-sdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "33525396941315BFDCF9CEFE9BA9F28F6BCF14ED"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SponsorPay\/open-mediation.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3FFFAB50E379D9BDDB1EA2DD210E9C392F3ED72A"
+    }
+  ]
+}

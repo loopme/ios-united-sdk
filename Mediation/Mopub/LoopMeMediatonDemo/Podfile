@@ -1,0 +1,4 @@
+platform :ios, '8.0'
+target 'LoopMeMediatonDemo' do
+    pod 'mopub-ios-sdk', '~> 4.9.1'
+end
