@@ -15,7 +15,6 @@
 @property (nonatomic, strong) UIButton *replayButton;
 @property (nonatomic, strong) UIButton *skipButton;
 @property (nonatomic, strong) UIButton *muteButton;
-//@property (nonatomic, strong) UIButton *expandButton;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UILabel *countDownLabel;
 @property (nonatomic, assign) CGFloat videoDuration;
@@ -23,6 +22,7 @@
 @property (nonatomic, assign) CMTime skipOffset;
 
 @end
+
 
 @implementation LoopMeVASTPlayerUIView
 
@@ -56,8 +56,6 @@
     NSBundle *resourcesBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"]];
     
     self.muteButton = [[UIButton alloc] init];
-    UIEdgeInsets insets = UIEdgeInsetsMake(10, 10, 10, 10);
-    [self.muteButton setImageEdgeInsets:insets];
     [self.muteButton setImage:[UIImage imageNamed:@"loopmemute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
     [self.muteButton setImage:[UIImage imageNamed:@"loopmeunmute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [self.muteButton addTarget:self action:@selector(mute:) forControlEvents:UIControlEventTouchUpInside];
@@ -69,6 +67,8 @@
     self.progressView.trackTintColor = [UIColor lightGrayColor];
     self.progressView.progressTintColor = [UIColor colorWithRed:0 green:142/255.f blue:239/255.f alpha:1];
     self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.progressView.layer.masksToBounds = YES;
+    self.progressView.layer.cornerRadius = self.progressView.bounds.size.height / 2;
     [self addSubview:self.progressView];
     
     self.countDownLabel = [[UILabel alloc] init];
@@ -89,73 +89,53 @@
         });
     });
     self.endCardBackground.contentMode = UIViewContentModeScaleAspectFill;
+    self.endCardBackground.clipsToBounds = YES;
     [self addSubview:self.endCardBackground];
     
     self.endCard = [[UIImageView alloc] init];
     self.endCard.translatesAutoresizingMaskIntoConstraints = NO;
     self.endCard.backgroundColor = [UIColor clearColor];
     self.endCard.image = self.endCardImage;
-    self.endCard.contentMode = UIViewContentModeScaleAspectFit;
+    self.endCard.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:self.endCard];
     
     self.replayButton = [[UIButton alloc] init];
-    [self.replayButton setImageEdgeInsets:insets];
     [self.replayButton setImage:[UIImage imageNamed:@"loopmereplay" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [self.replayButton addTarget:self action:@selector(replay:) forControlEvents:UIControlEventTouchUpInside];
-    self.replayButton.hidden = YES;
     self.replayButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.replayButton];
     
     self.skipButton = [[UIButton alloc] init];
-    [self.skipButton setImageEdgeInsets:insets];
     [self.skipButton setImage:[UIImage imageNamed:@"loopmeskip" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [self.skipButton addTarget:self action:@selector(skip:) forControlEvents:UIControlEventTouchUpInside];
     self.skipButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.skipButton.hidden = YES;
     [self addSubview:self.skipButton];
     
     self.closeButton = [[UIButton alloc] init];
-    [self.closeButton setImageEdgeInsets:insets];
     [self.closeButton setImage:[UIImage imageNamed:@"loopmeclose" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.closeButton.hidden = NO;
     [self addSubview:self.closeButton];
     
-//    self.expandButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-//    [self.expandButton addTarget:self action:@selector(expandCollapse:) forControlEvents:UIControlEventTouchUpInside];
-//    self.expandButton.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self.expandButton setTitle:@"EXPAND" forState:UIControlStateNormal];
-//    [self.expandButton setTitle:@"COLLAPSE" forState:UIControlStateSelected];
-//    [self addSubview:self.expandButton];
-    
     NSDictionary *views = @{@"progress" : self.progressView, @"mute" : self.muteButton, @"countdown" : self.countDownLabel, @"close" : self.closeButton, @"replay" : self.replayButton, @"skipped" : self.skipButton,  @"endCard" : self.endCard, @"endCardBackground" : self.endCardBackground};
-    
-//    NSLayoutConstraint *expandConstraint = [NSLayoutConstraint constraintWithItem:self.expandButton
-//                                                         attribute:NSLayoutAttributeCenterX
-//                                                         relatedBy:NSLayoutRelationEqual
-//                                                            toItem:self.progressView
-//                                                         attribute:NSLayoutAttributeCenterX
-//                                                        multiplier:1.f constant:0.f];
-//    [self addConstraint:expandConstraint];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(-3)-[mute(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(-3)-[mute(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(-10)-[replay(70)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(-6)-[replay(70)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(-10)-[close(70)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[close(70)]-(-6)-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(-10)-[skipped(70)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[skipped(70)]-(-6)-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[progress]-1-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[progress]|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[countdown]-4-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-5-[countdown]" options:0 metrics:nil views:views]];
+
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mute(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mute(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[replay(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[replay(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[close(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[close(50)]-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[skipped(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[skipped(50)]|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[countdown]-4-[progress]-0-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[progress]-0-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[countdown]" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[endCard]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[endCard]|" options:0 metrics:nil views:views]];
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[endCardBackground]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[endCardBackground]|" options:0 metrics:nil views:views]];
-//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[expand][progress]" options:0 metrics:nil views:views]];
 }
 
 - (void)setVideoCurrentTime:(CGFloat)currentTime {

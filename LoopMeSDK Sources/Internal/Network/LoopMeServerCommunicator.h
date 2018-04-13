@@ -16,20 +16,20 @@
     NSURLConnectionDataDelegate
 >
 
-@property (nonatomic, weak) id<LoopMeServerCommunicatorDelegate> delegate;
+@property (nonatomic, weak) id<LoopMeServerCommunicatorDelegate> _Nullable delegate;
 @property (nonatomic, assign, readonly, getter = isLoading) BOOL loading;
-@property (nonatomic, strong) NSString *appKey;
+@property (nonatomic, strong) NSString * _Nullable appKey;
 
-- (instancetype)initWithDelegate:(id<LoopMeServerCommunicatorDelegate>)delegate;
-- (void)loadURL:(NSURL *)URL requestBody:(NSData *)body;
+- (_Nullable instancetype)initWithDelegate:(id<LoopMeServerCommunicatorDelegate> _Nullable)delegate;
+- (void)loadURL:(NSURL * _Nonnull)URL requestBody:(NSData * _Nullable)body method:(NSString * _Nullable) method;
 - (void)cancel;
 
 @end
 
 @protocol LoopMeServerCommunicatorDelegate <NSObject>
 
-- (void)serverCommunicator:(LoopMeServerCommunicator *)communicator didReceiveAdConfiguration:(LoopMeAdConfiguration *)configuration;
-- (void)serverCommunicator:(LoopMeServerCommunicator *)communicator didFailWithError:(NSError *)error;
-- (void)serverCommunicatorDidReceiveAd:(LoopMeServerCommunicator *)communicator;
+- (void)serverCommunicator:(LoopMeServerCommunicator * _Nonnull)communicator didReceiveAdConfiguration:(LoopMeAdConfiguration * _Nonnull)configuration;
+- (void)serverCommunicator:(LoopMeServerCommunicator * _Nonnull)communicator didFailWithError:(NSError * _Nonnull)error;
+- (void)serverCommunicatorDidReceiveAd:(LoopMeServerCommunicator * _Nonnull)communicator;
 
 @end

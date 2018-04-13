@@ -32,16 +32,17 @@
         errorMessage = @"Can not load video without Wi-Fi connection";
     } else if (statusCode == LoopMeErrorCodeVideoDownloadTimeout) {
         errorMessage = @"Video download timeout";
-    } else if (statusCode == LoopMeErrorCodeNoMraidJS) {
+    } else if (statusCode == LoopMeErrorCodeNoResourceBundle) {
         errorMessage = @"mraid.js does not exist in the project";
     } else if (statusCode == LoopMeErrorCodeIncorrectResponse) {
         errorMessage = @"Incorrect response";
+    } else if (statusCode == LoopMeErrorCodeInvalidRequest) {
+        errorMessage = @"Container size is not valid for chosen ad type";
     } else {
         errorMessage = [NSString stringWithFormat:@"API returned status code %ld.", (long)statusCode];
     }
     NSDictionary *errorInfo = @{NSLocalizedDescriptionKey:errorMessage};
     return [NSError errorWithDomain:kLoopMeErrorDomain code:statusCode userInfo:errorInfo];
 }
-
 
 @end

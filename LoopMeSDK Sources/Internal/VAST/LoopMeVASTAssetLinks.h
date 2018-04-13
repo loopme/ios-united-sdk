@@ -14,4 +14,6 @@
 @property (nonatomic) NSDictionary *adParameters;
 @property (nonatomic) NSArray *endCard;
 
+@property (nonatomic) NSArray *adVerification;
+
 @end

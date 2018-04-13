@@ -15,6 +15,10 @@
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeLogging.h"
 #import "LoopMeORTBTools.h"
+#import "LoopMeError.h"
+
+#import "LoopMeInterstitialGeneral.h"
+#import "LoopMeAdView.h"
 
 NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
@@ -29,7 +33,15 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
 @property (nonatomic, strong) NSTimer *adExpirationTimer;
 @property (nonatomic, assign) NSInteger expirationTime;
+
 @property (nonatomic, strong) NSString *appKey;
+@property (nonatomic, strong) LoopMeTargeting *targeting;
+@property (nonatomic, strong) NSString *integrationType;
+@property (nonatomic, assign) CGSize adSpotSize;
+@property (nonatomic, assign) LoopMeAdType adTypes;
+@property (nonatomic, weak) id adUnit;
+
+@property (nonatomic, assign) BOOL swapRequest;
 
 @end
 
@@ -64,7 +76,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.loading = YES;
     LoopMeLogInfo(@"Did start loading ad");
     LoopMeLogDebug(@"loads ad with URL %@", [URL absoluteString]);
-    [self.communicator loadURL:URL requestBody:body];
+    [self.communicator loadURL:URL requestBody:body method:@"POST"];
 }
 
 - (void)scheduleAdExpirationIn:(NSTimeInterval)interval {
@@ -83,14 +95,34 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     }
 }
 
+- (BOOL)isAdType:(LoopMeAdType)adType1 equalTo:(LoopMeAdType)adType2 {
+    return (adType1 & adType2) == adType2;
+}
+
 #pragma mark - Public
 
 - (void)loadAdWithAppKey:(NSString *)appKey targeting:(LoopMeTargeting *)targeting
-         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size {
+         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size adSpot:(id)adSpot preferredAdTypes:(LoopMeAdType)adTypes {
     
     self.appKey = appKey;
     self.communicator.appKey = appKey;
-    NSData *requestBody = [LoopMeORTBTools makeRequestBodyWithAppKey:appKey targeting:targeting integrationType:integrationType adSpotSize:size];
+    self.targeting = targeting;
+    self.integrationType = integrationType;
+    self.adSpotSize = size;
+    self.adUnit = adSpot;
+    self.adTypes = adTypes;
+    
+    NSData *requestBody;
+    LoopMeORTBTools *rtbTools = [[LoopMeORTBTools alloc] initWithAppKey:appKey targeting:targeting adSpotSize:size integrationType:integrationType];
+    
+    if ([adSpot isKindOfClass:[LoopMeAdView class]]) {
+        self.swapRequest = YES;
+    }
+    
+    rtbTools.banner = [self isAdType:adTypes equalTo:LoopMeAdTypeHTML];
+    rtbTools.video = [self isAdType:adTypes equalTo:LoopMeAdTypeVideo];
+    
+    requestBody = [rtbTools makeRequestBody];
     
     if (self.testServerBaseURL) {
         #pragma mark TODO: make request
@@ -124,14 +156,23 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     }
     self.loading = NO;
     [self scheduleAdExpirationIn:self.expirationTime];
+    
+    self.swapRequest = NO;
 }
 
 - (void)serverCommunicator:(LoopMeServerCommunicator *)communicator didFailWithError:(NSError *)error {
     self.loading = NO;
-    LoopMeLogDebug(@"Ad failed to load with error: %@", error);
-    
-    if ([self.delegate respondsToSelector:@selector(adManager:didFailToLoadAdWithError:)]) {
-        [self.delegate adManager:self didFailToLoadAdWithError:error];
+    if (self.swapRequest) {
+        LoopMeLogDebug(@"Ad failed to load with error: %@", error);
+        
+        if ([self.delegate respondsToSelector:@selector(adManager:didFailToLoadAdWithError:)]) {
+            [self.delegate adManager:self didFailToLoadAdWithError:error];
+        }
+        self.swapRequest = NO;
+    } else {
+        self.swapRequest = YES;
+        CGSize swapedSize = CGSizeMake(self.adSpotSize.height, self.adSpotSize.width);
+        [self loadAdWithAppKey:self.appKey targeting:self.targeting integrationType:self.integrationType adSpotSize:swapedSize adSpot:self.adUnit preferredAdTypes:self.adTypes];
     }
 }
 

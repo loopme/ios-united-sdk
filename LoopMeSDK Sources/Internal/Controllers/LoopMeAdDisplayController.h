@@ -20,6 +20,7 @@
     LoopMeDestinationDisplayControllerDelegate
 >
 
+@property (nonatomic, assign) BOOL isInterstitial;
 @property (nonatomic, weak) id<LoopMeAdDisplayControllerDelegate> delegate;
 @property (nonatomic, strong) id<LoopMeVideoCommunicatorProtocol> videoClient;
 @property (nonatomic, weak) LoopMeAdConfiguration *adConfiguration;
@@ -65,5 +66,9 @@
 - (UIViewController *)viewControllerForPresentation;
 - (UIView *)containerView;
 - (NSString *)appKey;
+
+@optional
+- (void)adDisplayController:(LoopMeAdDisplayController *)adDisplayController allowOrientationChange:(BOOL)allowOrientationChange orientation:(NSInteger)orientation;
+- (void)adDisplayController:(LoopMeAdDisplayController *)adDisplayController willResizeAd:(CGSize)size;
 
 @end

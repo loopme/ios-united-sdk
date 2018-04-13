@@ -22,7 +22,6 @@
 - (instancetype)initWithURL:(NSURL *)URL
        HTMLString:(NSString *)HTMLString
          delegate:(id<LoopMeBrowserControllerDelegate>)delegate;
-- (void)layoutBrowseToolbar;
 
 @end
 

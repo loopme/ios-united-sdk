@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoopMeOrientationViewControllerProtocol.h"
 
 @protocol LoopMeMaximizedViewControllerDelegate;
 @protocol LoopMeAdDisplayControllerDelegate;
 
-@interface LoopMeMaximizedViewController : UIViewController
+@interface LoopMeMaximizedViewController : UIViewController <LoopMeOrientationViewControllerProtocol>
 
 - (instancetype)initWithDelegate:(id<LoopMeMaximizedViewControllerDelegate, LoopMeAdDisplayControllerDelegate>)delegate;
 - (void)show;
@@ -23,5 +24,6 @@
 
 - (void)maximizedViewControllerShouldRemove:(LoopMeMaximizedViewController *)maximizedViewController;
 - (void)maximizedAdViewDidPresent:(LoopMeMaximizedViewController *)maximizedViewController;
+- (void)maximizedControllerWillTransitionToSize:(CGSize)size;
 
 @end

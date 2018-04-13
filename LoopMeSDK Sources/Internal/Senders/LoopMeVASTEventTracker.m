@@ -11,11 +11,14 @@
 #import "LoopMeVASTProgressEvent.h"
 #import "LoopMeVASTTrackingLinks.h"
 #import "LoopMeVPAIDError.h"
+#import "LMVASTMacroProcessor.h"
+#import "LoopMeViewabilityProtocol.h"
 
 @interface LoopMeVASTEventTracker ()
 
 @property (nonatomic, weak) LoopMeVASTTrackingLinks *links;
 @property (nonatomic, strong) NSMutableSet *sentEvents;
+@property (nonatomic) double currentTime;
 
 @end
 
@@ -89,15 +92,34 @@
             case LoopMeVASTEventTypeCompanionClickTracking:
                 eventURLs = self.links.companionTrackingLinks.clickTracking;
                 break;
+            case LoopMeVASTEventTypeViewable:
+                eventURLs = self.links.viewableImpression.viewable;
+                break;
+            case LoopMeVASTEventTypeNotViewable:
+                eventURLs = self.links.viewableImpression.notViewable;
+                break;
+            case LoopMeVASTEventTypeViewUndetermined:
+                eventURLs = self.links.viewableImpression.viewUndetermined;
+                break;
             default:
                 break;
         }
         
-        for (NSString *URL in eventURLs) {
-            [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:URL]] resume];
+        for (NSString *URLstring in eventURLs) {
+            NSURL *URL = [NSURL URLWithString:URLstring];
+            URL = [LMVASTMacroProcessor macroExpandedURLForURL:URL errorCode:0 videoTimeOffset:self.currentTime videoAssetURL:nil];
+            [[[NSURLSession sharedSession] dataTaskWithURL:URL] resume];
         }
         
         [self.sentEvents addObject:@(type)];
+        if (type == LoopMeVASTEventTypeViewable) {
+            [self.sentEvents addObject:@(LoopMeVASTEventTypeNotViewable)];
+        }
+        
+        if (type == LoopMeVASTEventTypeNotViewable) {
+            [self.sentEvents addObject:@(LoopMeVASTEventTypeViewable)];
+        }
+        
     }
 }
 
@@ -105,13 +127,16 @@
     NSSet *errorTemplates = self.links.errorLinkTemplates;
     NSError *error = [LoopMeVPAIDError errorForStatusCode:code];
     for (NSString *template in errorTemplates) {
-        NSString *errorLink = [template stringByReplacingOccurrencesOfString:@"[ERRORCODE]" withString:[NSString stringWithFormat:@"%li", (long)error.code]];
-        NSURL *URL = [NSURL URLWithString:errorLink];
+        NSURL *URL = [LMVASTMacroProcessor macroExpandedURLForURL:[NSURL URLWithString:template] errorCode:error.code];
         [[[NSURLSession sharedSession] dataTaskWithURL:URL] resume];
     }
 }
 
 - (void)setCurrentTime:(double)currentTime {
+    _currentTime = currentTime;
+    if (currentTime >= 2) {
+        [self.viwableManager checkViwabilityCriteria];
+    }
     NSSet *events = self.links.linearTrackingLinks.progress;
     for (LoopMeVASTProgressEvent *e in events) {
         if (![self.sentEvents containsObject:@(e.offset.value+60)]) {
@@ -122,6 +147,5 @@
         }
     }
 }
-
 
 @end

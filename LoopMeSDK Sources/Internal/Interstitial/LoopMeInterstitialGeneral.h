@@ -8,7 +8,7 @@
 /**
  * AppKeys for test purposes
  */
-
+#import "LoopMeAdType.h"
 @class LoopMeInterstitialGeneral;
 @class LoopMeTargeting;
 @class UIViewController;
@@ -69,7 +69,8 @@
  * @param delegate - delegate
  */
 + (LoopMeInterstitialGeneral *)interstitialWithAppKey:(NSString *)appKey
-                                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate;
+                                     preferredAdTypes:(LoopMeAdType)adTypes
+                                             delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate;
 
 /**
  * Starts loading ad content process.

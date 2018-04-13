@@ -10,7 +10,19 @@
 
 @interface LoopMeORTBTools : NSObject
 
-+ (NSData *)makeRequestBodyWithAppKey:(NSString *)appKey targeting:(LoopMeTargeting *)targeting
-                      integrationType:(NSString *)integrationType adSpotSize:(CGSize)size;
+@property (nonatomic, strong) NSString * _Nonnull appKey;
+@property (nonatomic, strong) LoopMeTargeting * _Nullable targeting;
+@property (nonatomic, strong) NSString * _Nonnull integrationType;
+@property (nonatomic, assign) CGSize size;
+
+@property (nonatomic, assign) BOOL video;
+@property (nonatomic, assign) BOOL banner;
+
+- (instancetype _Nullable)initWithAppKey:(NSString * _Nonnull)appKey
+                     targeting:(LoopMeTargeting * _Nullable)targeting
+                    adSpotSize:(CGSize)size
+               integrationType:(NSString * _Nonnull)integrationType;
+
+- (NSData * _Nonnull )makeRequestBody;
 
 @end

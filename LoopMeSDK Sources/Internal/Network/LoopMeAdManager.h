@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoopMeAdType.h"
 
 @class LoopMeAdConfiguration;
 @class LoopMeInterstitialGeneral;
 @class LoopMeAdManager;
 @class LoopMeTargeting;
+@class LoopMeAdView;
 
 @protocol LoopMeAdManagerDelegate;
 
@@ -23,7 +25,7 @@
 
 - (instancetype)initWithDelegate:(id<LoopMeAdManagerDelegate>)delegate;
 - (void)loadAdWithAppKey:(NSString *)appKey targeting:(LoopMeTargeting *)targeting
-         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size;
+         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size adSpot:(id)adSpot preferredAdTypes:(LoopMeAdType)adTypes;
 - (void)invalidateTimers;
 
 @end

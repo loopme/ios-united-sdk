@@ -43,8 +43,10 @@ const int kLDAdIndex = 5;
     // Intializing `LoopMeAdView`
     self.mpuVideo = [LoopMeAdView adViewWithAppKey:TEST_APP_KEY_MPU
                                              frame:(CGRect){10, 0, kLDAdCellWidth, kLDAdCellHeight}
-                                        scrollView:self.tableView
+                                        scrollView:nil
                                           delegate:self];
+    
+    
     
     /*
      * Enable minimized mode.
@@ -113,17 +115,16 @@ const int kLDAdIndex = 5;
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
-        // Adding `LoopMeAdView` as a subview
         [cell.contentView addSubview:self.mpuVideo];
         return cell;
     } else {
         static NSString *CityCellIdentifier = @"CityCell";
-        TableCityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CityCellIdentifier forIndexPath:indexPath];
+        TableCityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CityCellIdentifier];
         if (!cell) {
-            cell = (TableCityCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CityCellIdentifier];
+            cell = [[TableCityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CityCellIdentifier];
         }
-        cell.showsReorderControl = YES;
         cell.data = self.cities[indexPath.row];
+        
         return cell;
     }
 }
@@ -133,7 +134,7 @@ const int kLDAdIndex = 5;
     /*
      * Updating ad visibility in order to manage video ad playback
      */
-    [self.mpuVideo updateAdVisibilityInScrollView];
+//    [self.mpuVideo updateAdVisibilityInScrollView];
 }
 
 #pragma mark - LoopMeAdViewDelegate

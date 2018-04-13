@@ -8,10 +8,13 @@
 
 #import "LoopMeMaximizedViewController.h"
 #import "LoopMeAdDisplayControllerNormal.h"
+#import "LoopMeAdConfiguration.h"
 
 @interface LoopMeMaximizedViewController ()
 
 @property (nonatomic, weak) id<LoopMeMaximizedViewControllerDelegate, LoopMeAdDisplayControllerDelegate> delegate;
+@property (nonatomic, assign) LoopMeAdOrientation adOrientation;
+@property (nonatomic, assign) BOOL allowOrientationChange;
 
 @end
 
@@ -21,6 +24,7 @@
     self = [super init];
     if (self) {
         _delegate = delegate;
+        _allowOrientationChange = YES;
     }
     return self;
 }
@@ -39,16 +43,41 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    UIInterfaceOrientationMask supportedOrientations = [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:[UIApplication sharedApplication].keyWindow];
-    if (supportedOrientations & UIInterfaceOrientationMaskLandscape) {
-        return UIInterfaceOrientationMaskLandscape;
-    }
-    return [self.presentingViewController supportedInterfaceOrientations];
+- (BOOL)shouldAutorotate {
+    return self.allowOrientationChange;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationLandscapeLeft;
+    if (self.adOrientation == LoopMeAdOrientationLandscape) {
+        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+            return [UIApplication sharedApplication].statusBarOrientation;
+        }
+        return UIInterfaceOrientationLandscapeLeft;
+    } else {
+        return UIInterfaceOrientationPortrait;
+    }
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    UIInterfaceOrientationMask applicationSupportedOrientations =
+    [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:[UIApplication sharedApplication].keyWindow];
+    UIInterfaceOrientationMask interstitialSupportedOrientations = applicationSupportedOrientations;
+    
+    if (self.adOrientation == LoopMeAdOrientationPortrait) {
+        interstitialSupportedOrientations |=
+        (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown);
+    } else if (self.adOrientation == LoopMeAdOrientationLandscape) {
+        interstitialSupportedOrientations |= UIInterfaceOrientationMaskLandscape;
+    }
+    return interstitialSupportedOrientations;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self.delegate maximizedControllerWillTransitionToSize:size];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 #pragma mark -- Public methods
@@ -62,6 +91,21 @@
 - (void)hide {
     [self dismissViewControllerAnimated:NO completion:^{
         [self.delegate maximizedViewControllerShouldRemove:self];
+    }];
+}
+
+- (void)setOrientation:(LoopMeAdOrientation)orientation {
+    _adOrientation = orientation;
+}
+
+- (void)setAllowOrientationChange:(BOOL)autorotate {
+    _allowOrientationChange = autorotate;
+}
+
+- (void)forceChangeOrientation {
+    UIViewController *presentingVC = self.presentingViewController;
+    [self dismissViewControllerAnimated:NO completion:^{
+        [presentingVC presentViewController:self animated:NO completion:nil];
     }];
 }
 

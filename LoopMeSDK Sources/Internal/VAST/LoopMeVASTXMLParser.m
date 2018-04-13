@@ -38,6 +38,17 @@
 - (instancetype)initXMLWithData:(NSData *)data error:(NSError **)error {
     if (self = [super init]) {
         self.xmlDoc = [[DDXMLDocument alloc] initWithData:data options:DDXMLDocumentXMLKind error:error];
+        
+        //Because KissXML can't work with namespaces
+        DDXMLNode * _Nullable element = [self.xmlDoc rootElement];
+        while (element != nil) {
+            if ([element isKindOfClass:[DDXMLElement class]]) {
+                [(DDXMLElement *)element removeNamespaceForPrefix:@""];
+            }
+            element = [element nextNode];
+        }
+        //-----------------------------------------
+    
         if (error && *error) {
             *error = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeXMLParsingFailed];
             return nil;
@@ -63,6 +74,7 @@
     [vastLinks.impressionLinks addObjectsFromArray:[self impressionLinks]];
     [vastLinks.linearTrackingLinks add:[self linearTrackLinks]];
     [vastLinks.companionTrackingLinks add:[self companionAdsTrackLinks]];
+    [vastLinks.viewableImpression add:[self viewableImpression]];
     vastLinks.clickThroughVideo = [self videoClickThrough];
     vastLinks.clickThroughCompanion = [self companionClickThrough];
 }
@@ -77,6 +89,7 @@
     
     [self initStaticResources:vastAssets];
     [self initAdParameters:vastAssets];
+    [self initAdVerifications:vastAssets];
 }
 
 - (NSString *)adTagURL:(NSError **)error {
@@ -126,7 +139,7 @@
 }
 
 - (void)initMediaFiles:(LoopMeVASTAssetLinks *)vastAssets {
-    NSArray *mediaFiles = [self.linearCreativeNode nodesForXPath:@"//Linear/MediaFiles/MediaFile" error:nil];
+    NSArray *mediaFiles = [self.linearCreativeNode nodesForXPath:@"Linear/MediaFiles/MediaFile" error:nil];
     mediaFiles = [self sortMediaFiles:mediaFiles];
     NSMutableArray *videoURLs = [[NSMutableArray alloc] init];
     for (DDXMLElement *element in mediaFiles) {
@@ -144,7 +157,7 @@
 }
 
 - (void)initInteractiveFiles:(LoopMeVASTAssetLinks *)vastAssets {
-    NSArray *interactiveCreativeFiles = [self.linearCreativeNode nodesForXPath:@"//Linear/MediaFiles/InteractiveCreativeFile" error:nil];
+    NSArray *interactiveCreativeFiles = [self.linearCreativeNode nodesForXPath:@"Linear/MediaFiles/InteractiveCreativeFile" error:nil];
     for (DDXMLElement *element in interactiveCreativeFiles) {
         NSString *framework = [[element attributeForName:@"apiFramework"] stringValue];
         NSString *type = [[element attributeForName:@"type"] stringValue];
@@ -156,7 +169,7 @@
 }
 
 - (void)initAdParameters:(LoopMeVASTAssetLinks *)vastAssets {
-    NSArray *adParameters = [self.linearCreativeNode nodesForXPath:@"//Linear/AdParameters" error:nil];
+    NSArray *adParameters = [self.linearCreativeNode nodesForXPath:@"Linear/AdParameters" error:nil];
     if (adParameters && adParameters.count > 0) {
         NSString *adParametersString = [adParameters[0] stringValue];
         adParametersString = [adParametersString stringByReplacingOccurrencesOfString:@"\\s" withString:@""
@@ -167,7 +180,7 @@
 }
 
 - (void)initStaticResources:(LoopMeVASTAssetLinks *)vastAssets {
-    NSArray *staticResources = [self.companionCreativeNode nodesForXPath:@"//CompanionAds/Companion/StaticResource" error:nil];
+    NSArray *staticResources = [self.companionCreativeNode nodesForXPath:@"CompanionAds/Companion/StaticResource" error:nil];
     staticResources = [self sortMediaFiles:staticResources];
 
     NSMutableArray *staticResourcesURLs = [[NSMutableArray alloc] init];
@@ -175,6 +188,16 @@
         [staticResourcesURLs addObject:[self trim:[element stringValue]]];
     }
     vastAssets.endCard = staticResourcesURLs;
+}
+
+- (void)initAdVerifications:(LoopMeVASTAssetLinks *)vastAssets {
+    NSArray *jsresources = [self.xmlDoc nodesForXPath:@"//VAST/Ad/InLine/AdVerifications/Verification/JavaScriptResource" error:nil];
+    
+    NSMutableArray *links = [[NSMutableArray alloc] init];
+    for (DDXMLElement *element in jsresources) {
+        [links addObject:[element stringValue]];
+    }
+    vastAssets.adVerification = links;
 }
 
 - (BOOL)isWrapper {
@@ -198,10 +221,10 @@
             if (!self.adID.length) {
                 self.adID = [[(DDXMLElement *)creativeNode attributeForName:@"id"] stringValue];
             }
-            NSString *name = [[creativeNode nextNode] name];
-            if ([name isEqualToString:@"Linear"]) {
+        
+            if ([creativeNode nodesForXPath:@"Linear" error:nil].count > 0) {
                 self.linearCreativeNode = creativeNode;
-            } else {
+            } else if ([creativeNode nodesForXPath:@"CompanionAds" error:nil].count > 0) {
                 self.companionCreativeNode = creativeNode;
             }
         }
@@ -214,7 +237,7 @@
     if (_skipOffset.value != 0) {
         return _skipOffset;
     }
-    NSString *timeString = [[(DDXMLElement *)[[self.linearCreativeNode nodesForXPath:@"//Linear" error:nil] objectAtIndex:0] attributeForName:@"skipoffset"] stringValue];
+    NSString *timeString = [[(DDXMLElement *)[[self.linearCreativeNode nodesForXPath:@"Linear" error:nil] objectAtIndex:0] attributeForName:@"skipoffset"] stringValue];
     _skipOffset = [LoopMeVPAIDConverter skipOffsetFromString:timeString];
     return _skipOffset;
 }
@@ -224,14 +247,14 @@
         return _duration;
     }
     
-    NSString *durationString = [[[self.linearCreativeNode nodesForXPath:@"//Linear/Duration" error:nil] firstObject] stringValue];
+    NSString *durationString = [[[self.linearCreativeNode nodesForXPath:@"Linear/Duration" error:nil] firstObject] stringValue];
     _duration = [LoopMeVPAIDConverter timeFromString:durationString];
     return _duration;
 }
 
 //tracking links
 - (NSString *)videoClickThrough {
-    NSArray *videoClickThrough = [self.linearCreativeNode nodesForXPath:@"//Linear/VideoClicks/ClickThrough" error:nil];
+    NSArray *videoClickThrough = [self.linearCreativeNode nodesForXPath:@"Linear/VideoClicks/ClickThrough" error:nil];
     if (videoClickThrough.count == 0) {
         return nil;
     }
@@ -279,7 +302,7 @@
 - (LoopMeVastLinearTrackingLinks *)linearTrackLinks {
     LoopMeVastLinearTrackingLinks *linearTrackLinks = [[LoopMeVastLinearTrackingLinks alloc] init];
     
-    NSArray *trackingEvents = [self.linearCreativeNode nodesForXPath:@"//Linear/TrackingEvents/Tracking" error:nil];
+    NSArray *trackingEvents = [self.linearCreativeNode nodesForXPath:@"Linear/TrackingEvents/Tracking" error:nil];
 
     for (DDXMLElement *tracking in trackingEvents) {
         NSString *attributeName = [[tracking attributeForName:@"event"] stringValue];
@@ -299,7 +322,7 @@
         }
     }
 
-    NSArray *videoClickTracking = [self.linearCreativeNode nodesForXPath:@"//Linear/VideoClicks/ClickTracking" error:nil];
+    NSArray *videoClickTracking = [self.linearCreativeNode nodesForXPath:@"Linear/VideoClicks/ClickTracking" error:nil];
     for (DDXMLNode *node in videoClickTracking) {
         [linearTrackLinks.clickTracking addObject:[self trim:[node stringValue]]];
     }
@@ -310,9 +333,9 @@
 - (LoopMeVastCompanionAdsTrackingLinks *)companionAdsTrackLinks {
     LoopMeVastCompanionAdsTrackingLinks *companionTrackingLinks = [[LoopMeVastCompanionAdsTrackingLinks alloc] init];
     
-    NSArray *companionAds = [self.companionCreativeNode nodesForXPath:@"//CompanionAds/Companion" error:nil];
+    NSArray *companionAds = [self.companionCreativeNode nodesForXPath:@"CompanionAds/Companion" error:nil];
     for (DDXMLNode *ad in companionAds) {
-        NSArray *trackingEvents = [ad nodesForXPath:@"//Companion/TrackingEvents/Tracking" error:nil];
+        NSArray *trackingEvents = [ad nodesForXPath:@"TrackingEvents/Tracking" error:nil];
         
         for (DDXMLElement *tracking in trackingEvents) {
             NSString *attributeName = [[tracking attributeForName:@"event"] stringValue];
@@ -322,13 +345,58 @@
             }
         }
         
-        NSArray *videoClickTracking = [ad nodesForXPath:@"//Companion/CompanionClickTracking" error:nil];
+        NSArray *videoClickTracking = [ad nodesForXPath:@"CompanionClickTracking" error:nil];
         for (DDXMLNode *node in videoClickTracking) {
             [companionTrackingLinks.clickTracking addObject:[self trim:[node stringValue]]];
         }
     }
     
     return companionTrackingLinks;
+}
+
+- (LoopMeVASTViewableImpression *)viewableImpression {
+    LoopMeVASTViewableImpression *viewableImpressionLinks = [[LoopMeVASTViewableImpression alloc] init];
+    
+    //ViewableImpressions
+    NSMutableArray *viewableLinks = [[NSMutableArray alloc] init];
+    NSArray *viewableImpressions = nil;
+    if (self.isWrapper) {
+        viewableImpressions = [self.xmlDoc nodesForXPath:@"//VAST/Ad/Wrapper/ViewableImpression/Viewable" error:nil];
+    } else {
+        viewableImpressions = [self.xmlDoc nodesForXPath:@"//VAST/Ad/InLine/ViewableImpression/Viewable" error:nil];
+    }
+    for (DDXMLNode *node in viewableImpressions) {
+        [viewableLinks addObject:[self trim:[node stringValue]]];
+    }
+    [viewableImpressionLinks.viewable addObjectsFromArray:viewableLinks];
+    
+    //NotViewable
+    NSMutableArray *notViewableLinks = [[NSMutableArray alloc] init];
+    NSArray *notViewable = nil;
+    if (self.isWrapper) {
+        notViewable = [self.xmlDoc nodesForXPath:@"//VAST/Ad/Wrapper/ViewableImpression/NotViewable" error:nil];
+    } else {
+        notViewable = [self.xmlDoc nodesForXPath:@"//VAST/Ad/InLine/ViewableImpression/NotViewable" error:nil];
+    }
+    for (DDXMLNode *node in notViewable) {
+        [notViewableLinks addObject:[self trim:[node stringValue]]];
+    }
+    [viewableImpressionLinks.notViewable addObjectsFromArray:notViewableLinks];
+    
+    //NotViewable
+    NSMutableArray *viewUndeterminedLinks = [[NSMutableArray alloc] init];
+    NSArray *viewUndetermined = nil;
+    if (self.isWrapper) {
+        viewUndetermined = [self.xmlDoc nodesForXPath:@"//VAST/Ad/Wrapper/ViewableImpression/ViewUndetermined" error:nil];
+    } else {
+        viewUndetermined = [self.xmlDoc nodesForXPath:@"//VAST/Ad/InLine/ViewableImpression/ViewUndetermined" error:nil];
+    }
+    for (DDXMLNode *node in viewUndetermined) {
+        [viewUndeterminedLinks addObject:[self trim:[node stringValue]]];
+    }
+    [viewableImpressionLinks.viewUndetermined addObjectsFromArray:viewUndeterminedLinks];
+    
+    return viewableImpressionLinks;
 }
 
 - (NSString *)trim:(NSString *)string {

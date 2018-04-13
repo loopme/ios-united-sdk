@@ -66,6 +66,7 @@
 - (instancetype)initWithAppKey:(NSString *)appKey
                          frame:(CGRect)frame
                     scrollView:(UIScrollView *)scrollView
+              preferredAdTypes:(LoopMeAdType)preferredAdTypes
                       delegate:(id<LoopMeAdViewDelegate>)delegate {
     self = [super init];
     if (self) {
@@ -75,20 +76,21 @@
             return nil;
         }
         
-        if (SYSTEM_VERSION_LESS_THAN(@"9.0")) {
-            LoopMeLogDebug(@"Block iOS versions less then 9.0");
+        if (SYSTEM_VERSION_LESS_THAN(@"10.0")) {
+            LoopMeLogDebug(@"Block iOS versions less then 10.0");
             return nil;
         }
         
         _appKey = appKey;
         _delegate = delegate;
+        _preferredAdTypes = preferredAdTypes;
         _adManager = [[LoopMeAdManager alloc] initWithDelegate:self];
         _adDisplayController = [[LoopMeAdDisplayControllerNormal alloc] initWithDelegate:self];
         _adDisplayControllerVPAID = [[LoopMeVPAIDAdDisplayController alloc] initWithDelegate:self];
         _maximizedController = [[LoopMeMaximizedViewController alloc] initWithDelegate:self];
         _scrollView = scrollView;
         self.frame = frame;
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor clearColor];
         [self registerObservers];
         LoopMeLogInfo(@"Ad view initialized with appKey: %@", appKey);
         
@@ -102,7 +104,7 @@
         _minimizedModeEnabled = minimizedModeEnabled;
         if (_minimizedModeEnabled) {
             _minimizedView = [[LoopMeMinimizedAdView alloc] initWithDelegate:self];
-            _minimizedView.backgroundColor = [UIColor blackColor];
+            _minimizedView.backgroundColor = [UIColor clearColor];
             _minimizedView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
             [[UIApplication sharedApplication].keyWindow addSubview:_minimizedView];
         } else {
@@ -120,10 +122,11 @@
     if (!isMaximized) {
         if (self.adConfiguration.creativeType == LoopMeCreativeTypeMRAID) {
             [self.adDisplayController setExpandProperties:self.adConfiguration];
+            [self.adDisplayController setOrientationProperties:nil];
         }
         [self.maximizedController show];
         
-        if (self.adConfiguration.creativeType == LoopMeCreativeTypeNormal) {
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
             [self.adDisplayController moveView:NO];
             [self.adDisplayController expandReporting];
         } else {
@@ -139,13 +142,31 @@
                              frame:(CGRect)frame
                         scrollView:(UIScrollView *)scrollView
                           delegate:(id<LoopMeAdViewDelegate>)delegate {
-    return [[self alloc] initWithAppKey:appKey frame:frame scrollView:scrollView delegate:delegate];
+    return [[self alloc] initWithAppKey:appKey frame:frame scrollView:scrollView preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
 }
 
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
                           delegate:(id<LoopMeAdViewDelegate>)delegate {
-    return [LoopMeAdView adViewWithAppKey:appKey frame:frame scrollView:nil delegate:delegate];
+    return [LoopMeAdView adViewWithAppKey:appKey frame:frame scrollView:nil preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+}
+
+
++ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
+                             frame:(CGRect)frame
+                        scrollView:(UIScrollView *)scrollView
+                  preferredAdTypes:(LoopMeAdType)adTypes
+                          delegate:(id<LoopMeAdViewDelegate>)delegate {
+    
+    return [[self alloc] initWithAppKey:appKey frame:frame scrollView:scrollView preferredAdTypes:adTypes delegate:delegate];
+}
+
++ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
+                             frame:(CGRect)frame
+                  preferredAdTypes:(LoopMeAdType)preferredAdTypes
+                          delegate:(id<LoopMeAdViewDelegate>)delegate {
+    
+    return [LoopMeAdView adViewWithAppKey:appKey frame:frame scrollView:nil preferredAdTypes:preferredAdTypes delegate:delegate];
 }
 
 #pragma mark - LifeCycle
@@ -154,13 +175,17 @@
     [super willMoveToSuperview:newSuperview];
     if (!newSuperview) {
         [self closeAd];
-        if ([self.delegate respondsToSelector:@selector(loopMeAdViewDidDisappear:)]) {
-            [self.delegate loopMeAdViewDidDisappear:self];
+        if ([self.delegate respondsToSelector:@selector(loopMeAdViewWillDisappear:)]) {
+            [self.delegate loopMeAdViewWillDisappear:self];
         }
     } else {
         if (!self.isReady) {
             [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"Banner added to view, but wasn't ready to be displayed" appkey:self.appKey];
             self.needsToBeDisplayedWhenReady = YES;
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(loopMeAdViewWillAppear:)]) {
+            [self.delegate loopMeAdViewWillAppear:self];
         }
     }
 }
@@ -246,7 +271,7 @@
     self.ready = NO;
     self.loading = YES;
     self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
-    [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:self.containerView.bounds.size];
+    [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:self.containerView.bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes];
 }
 
 - (void)setAdVisible:(BOOL)visible {
@@ -412,6 +437,7 @@
 
 - (void)closeAd {
     [self.minimizedView removeFromSuperview];
+    [self.maximizedController hide];
     if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
         [self.adDisplayController closeAd];
     } else {
@@ -537,11 +563,14 @@
     }
 }
 
+- (void)maximizedControllerWillTransitionToSize:(CGSize)size {
+    [self.adDisplayController resizeTo:size];
+}
+
 #pragma mark - LoopMeAdDisplayControllerNormalDelegate
 
 - (UIView *)containerView {
-    BOOL isMaximized = [self.maximizedController isBeingPresented];
-    
+    BOOL isMaximized = [self.maximizedController presentingViewController] != nil;
     if (self.isMinimized) {
         return self.minimizedView;
     } else if (isMaximized) {
@@ -552,6 +581,10 @@
 }
 
 - (UIViewController *)viewControllerForPresentation {
+    if ([self.maximizedController presentingViewController]) {
+        return self.maximizedController;
+    }
+
     return self.delegate.viewControllerForPresentation;
 }
 
@@ -579,7 +612,7 @@
 }
 
 - (void)adDisplayControllerDidReceiveTap:(LoopMeAdDisplayControllerNormal *)adDisplayController {
-    if ([self isMaximizedControllerIsPresented]) {
+    if ([self isMaximizedControllerIsPresented] && self.adConfiguration.creativeType != LoopMeCreativeTypeMRAID) {
         [self removeMaximizedView];
     }
     if ([self.delegate respondsToSelector:@selector(loopMeAdViewDidReceiveTap:)]) {
@@ -634,5 +667,20 @@
 - (void)adDisplayControllerWillCollapse:(LoopMeAdDisplayControllerNormal *)adDisplayController {
     [self removeMaximizedView];
 }
+
+- (void)adDisplayControllerAllowOrientationChange:(BOOL)allowOrientationChange orientation:(NSInteger)orientation {
+    [self.maximizedController setAllowOrientationChange:allowOrientationChange];
+    [self.maximizedController setOrientation:orientation];
+    [self.maximizedController forceChangeOrientation];
+}
+
+- (void)adDisplayController:(LoopMeAdDisplayController *)adDisplayController willResizeAd:(CGSize)size {
+    float x = self.frame.origin.x;
+    float y = self.frame.origin.y;
+    
+    CGRect newFrame = CGRectMake(x, y, size.width, size.height);
+    self.frame = newFrame;
+}
+
 
 @end

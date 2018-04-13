@@ -42,6 +42,7 @@ extern const struct LoopMeTrackerNameStruct {
 - (BOOL)isPortrait;
 - (BOOL)isVPAID;
 - (BOOL)isAutoLoading;
+- (void)parseXML:(NSData *)data error:(NSError **)error;
 
 @property (nonatomic, strong) NSString *appKey;
 @property (nonatomic, assign) BOOL allowOrientationChange;

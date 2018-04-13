@@ -14,6 +14,7 @@
 #import "LoopMeVPAIDError.h"
 
 const NSTimeInterval kLoopMeAdRequestTimeOutInterval = 20.0;
+const NSInteger kLoopMeMaxWrapperNodes = 5;
 
 @interface LoopMeServerCommunicator ()
 <
@@ -68,7 +69,7 @@ const NSTimeInterval kLoopMeAdRequestTimeOutInterval = 20.0;
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         configuration.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
         configuration.timeoutIntervalForRequest = kLoopMeAdRequestTimeOutInterval;
-        configuration.HTTPAdditionalHeaders = @{@"User-Agent" : self.userAgent};
+        configuration.HTTPAdditionalHeaders = @{@"User-Agent" : self.userAgent, @"x-openrtb-version" : @"2.5"};
         _session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     }
     return _session;
@@ -91,7 +92,7 @@ const NSTimeInterval kLoopMeAdRequestTimeOutInterval = 20.0;
 
 #pragma mark - Public
 
-- (void)loadURL:(NSURL *)URL requestBody:(NSData *)body {
+- (void)loadURL:(NSURL *)URL requestBody:(NSData *)body method:(NSString *)method {
     [self cancel];
     self.URL = URL;
     self.data = [NSMutableData new];
@@ -100,14 +101,18 @@ const NSTimeInterval kLoopMeAdRequestTimeOutInterval = 20.0;
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:60.0];
     
-    
-    [request setHTTPMethod:@"POST"];
+    if (method) {
+        [request setHTTPMethod:method];
+    }
     [request setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
     [request setHTTPBody:body];
     
     self.sessionDataTask = [self.session dataTaskWithRequest:request];
     [self.sessionDataTask resume];
     
+    if (!self.configuration.isWrapper) {
+        self.configuration = nil;
+    }
     self.loading = YES;
 }
 
@@ -136,18 +141,25 @@ const NSTimeInterval kLoopMeAdRequestTimeOutInterval = 20.0;
         [self.delegate serverCommunicator:self didFailWithError:error];
     } else {
         NSError *parseError;
-        self.configuration = [[LoopMeAdConfiguration alloc] initWithData:[NSData dataWithData:self.data] error:&parseError];
+        
+        if (!self.configuration) {
+            self.configuration = [[LoopMeAdConfiguration alloc] initWithData:self.data error:&parseError];
+        }  else {
+            [self.configuration parseXML:[NSData dataWithData:self.data] error:&parseError];
+        }
+        
         if (parseError && !self.configuration.isWrapper) {
             [self loadingTaskCompletedSuccessfully:NO error:parseError];
             return;
         }
         if ([self.configuration isWrapper]) {
-            if (self.wrapperRequestCounter >= 5) {
+            if (self.wrapperRequestCounter >= kLoopMeMaxWrapperNodes) {
                 [self loadingTaskCompletedSuccessfully:NO error:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeWrapperLimit]];
+                self.wrapperRequestCounter = 0;
                 return;
             }
             self.wrapperRequestCounter ++;
-            [self loadURL:self.configuration.adTagURL requestBody:nil];
+            [self loadURL:self.configuration.adTagURL requestBody:nil method:nil];
         } else {
             self.wrapperRequestCounter = 0;
             [self loadingTaskCompletedSuccessfully:YES error:nil];
@@ -165,7 +177,9 @@ const NSTimeInterval kLoopMeAdRequestTimeOutInterval = 20.0;
     
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
     if (statusCode != 200) {
-        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeServer errorMessage:[NSString stringWithFormat:@"Response code: %ld", (long)statusCode] appkey:[self appKey]];
+        if (statusCode != 204) {
+            [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeServer errorMessage:[NSString stringWithFormat:@"Response code: %ld", (long)statusCode] appkey:[self appKey]];
+        }
         self.loading = NO;
         [self.delegate serverCommunicator:self didFailWithError:[LoopMeError errorForStatusCode:statusCode]];
         

@@ -19,6 +19,7 @@
 
 static NSString * const kLoopMeIntegrationTypeNormal = @"normal";
 static const NSTimeInterval kLoopMeTimeToReload = 900;
+static const int kLoopMeLoadCounter = 3;
 
 @interface LoopMeInterstitial ()
 <
@@ -55,10 +56,25 @@ static const NSTimeInterval kLoopMeTimeToReload = 900;
 
 - (instancetype)initWithAppKey:(NSString *)appKey
                       delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+}
+
+- (instancetype)initWithAppKey:(NSString *)appKey
+              preferredAdTypes:(LoopMeAdType)adTypes
+                      delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    if (!appKey) {
+        LoopMeLogError(@"AppKey cann't be nil");
+        return nil;
+    }
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"10.0")) {
+        LoopMeLogDebug(@"Block iOS versions less then 10.0");
+        return nil;
+    }
     
     if (self = [super init]) {
-        _interstitial1 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey delegate:self];
-        _interstitial2 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey delegate:self];
+        _interstitial1 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self];
+        _interstitial2 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self];
         _delegate = delegate;
         _autoLoadingEnabled = YES;
         _failCount = 0;
@@ -80,6 +96,12 @@ static const NSTimeInterval kLoopMeTimeToReload = 900;
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
                                              delegate:(id<LoopMeInterstitialDelegate>)delegate {
     return [[LoopMeInterstitial alloc] initWithAppKey:appKey delegate:delegate];
+}
+
++ (instancetype)interstitialWithAppKey:(NSString *)appKey
+                      preferredAdTypes:(LoopMeAdType)adTypes
+                              delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate];
 }
 
 #pragma mark - Private
@@ -112,7 +134,7 @@ static const NSTimeInterval kLoopMeTimeToReload = 900;
 }
 
 - (void)loadAdWithTargeting:(LoopMeTargeting *)targeting integrationType:(NSString *)integrationType {
-    if (self.failCount >= 5) {
+    if (self.failCount >= kLoopMeLoadCounter) {
         return;
     }
     

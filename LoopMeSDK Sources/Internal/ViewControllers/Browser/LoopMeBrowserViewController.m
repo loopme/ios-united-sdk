@@ -1,4 +1,4 @@
- //
+//
 //  LoopMeBrowserController.m
 //  LoopMeSDK
 //
@@ -45,24 +45,77 @@
 
 #pragma mark - Properties
 
-- (UIWebView *)webView {
-    if (!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 44)];
-        _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth |
-        UIViewAutoresizingFlexibleHeight;
-        _webView.delegate = self;
-        _webView.scalesPageToFit = YES;
-        [self.view addSubview:_webView];
-        self.webViewLoadCount = 0;
+- (UIWebView *)createWebView {
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    webView.translatesAutoresizingMaskIntoConstraints = NO;
+    webView.delegate = self;
+    webView.scalesPageToFit = YES;
+    webView.backgroundColor = [UIColor whiteColor];
+    self.webViewLoadCount = 0;
+    
+    return webView;
+}
+
+- (UIToolbar *)createToolbar {
+    self.spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+    [self.spinner sizeToFit];
+    self.spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    self.spinner.hidesWhenStopped = YES;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        LoopMeBackView *backView = [[LoopMeBackView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        self.backButton = [[UIBarButtonItem alloc] initWithCustomView:backView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
+        [backView addGestureRecognizer:tap];
+    } else {
+        UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
+        back.frame = CGRectMake(0, 0, 44, 44);
+        [back setImage:[UIImage imageFromDataOfType:LoopMeImageTypeBrowserBackActive] forState:UIControlStateNormal];
+        [back setImage:[UIImage imageFromDataOfType:LoopMeImageTypeBrowserBack] forState:UIControlStateDisabled];
+        [back setImage:[UIImage imageFromDataOfType:LoopMeImageTypeBrowserBack] forState:UIControlStateHighlighted];
+        [back addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+        self.backButton = [[UIBarButtonItem alloc] initWithCustomView:back];
     }
-    return _webView;
+    
+    self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                    target:self
+                                                                    action:@selector(done)];
+    
+    
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                       target:self
+                                                                       action:@selector(refresh)];
+    
+    self.safariButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                      target:self
+                                                                      action:@selector(safari:)];
+    
+    
+    UIBarButtonItem *flexiSpace1 = [[UIBarButtonItem alloc]
+                                    initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                    target:nil
+                                    action:nil];
+    
+    
+    UIBarButtonItem *spinnerItem = [[UIBarButtonItem alloc] initWithTitle:@"S"
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:nil
+                                                                   action:nil];
+    spinnerItem.customView = self.spinner;
+    
+    UIToolbar *browseToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    browseToolbar.barStyle = UIBarStyleBlack;
+    browseToolbar.translatesAutoresizingMaskIntoConstraints = NO;
+    browseToolbar.items = @[self.backButton, flexiSpace1, self.refreshButton, flexiSpace1, self.safariButton, flexiSpace1, spinnerItem, flexiSpace1, self.doneButton];
+    
+    return browseToolbar;
 }
 
 #pragma mark - Lifecycle
 
 - (instancetype)initWithURL:(NSURL *)URL
-       HTMLString:(NSString *)HTMLString
-         delegate:(id<LoopMeBrowserControllerDelegate>)delegate {
+                 HTMLString:(NSString *)HTMLString
+                   delegate:(id<LoopMeBrowserControllerDelegate>)delegate {
     if (self = [super init]) {
         [self view];
         _delegate = delegate;
@@ -86,6 +139,33 @@
     [self dismissActionSheetAnimated:NO];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.webView = [self createWebView];
+    UIToolbar *toolBar = [self createToolbar];
+    [self.view addSubview:self.webView];
+    [self.view addSubview:toolBar];
+    
+    if (@available(iOS 11.0, *)) {
+        [toolBar.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor].active = YES;
+        [self.webView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+        [self.webView.bottomAnchor constraintEqualToAnchor:toolBar.safeAreaLayoutGuide.topAnchor].active = YES;
+        
+        [toolBar.topAnchor constraintEqualToAnchor:self.webView.bottomAnchor].active = YES;
+    } else {
+        [self.webView.topAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.topAnchor].active = YES;
+        [self.webView.bottomAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.bottomAnchor].active = YES;
+    }
+    
+    [self.webView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
+    [self.webView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
+    [toolBar.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
+    [toolBar.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
+}
+
+#pragma mark - Private
+
 - (void)initActionSheet {
     self.actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -98,8 +178,6 @@
     [self.actionSheet addAction:cancel];
     [self.actionSheet addAction:safari];
 }
-
-#pragma mark - Private
 
 - (void)cleanUp {
     [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML = \"\";"];
@@ -224,66 +302,6 @@
     return YES;
 }
 
-#pragma mark - Public
-
-- (void)layoutBrowseToolbar {
-    self.spinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
-    [self.spinner sizeToFit];
-    self.spinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    self.spinner.hidesWhenStopped = YES;
-    
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        LoopMeBackView *backView = [[LoopMeBackView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        self.backButton = [[UIBarButtonItem alloc] initWithCustomView:backView];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(back:)];
-        [backView addGestureRecognizer:tap];
-    } else {
-        UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
-        back.frame = CGRectMake(0, 0, 44, 44);
-        [back setImage:[UIImage imageFromDataOfType:LoopMeImageTypeBrowserBackActive] forState:UIControlStateNormal];
-        [back setImage:[UIImage imageFromDataOfType:LoopMeImageTypeBrowserBack] forState:UIControlStateDisabled];
-        [back setImage:[UIImage imageFromDataOfType:LoopMeImageTypeBrowserBack] forState:UIControlStateHighlighted];
-        [back addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
-        self.backButton = [[UIBarButtonItem alloc] initWithCustomView:back];
-    }
-    
-    self.doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                    target:self
-                                                                    action:@selector(done)];
-    
-    
-    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                       target:self
-                                                                       action:@selector(refresh)];
-    
-    self.safariButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                      target:self
-                                                                      action:@selector(safari:)];
-    
-    
-    UIBarButtonItem *flexiSpace1 = [[UIBarButtonItem alloc]
-                                    initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                    target:nil
-                                    action:nil];
-    
-    
-    UIBarButtonItem *spinnerItem = [[UIBarButtonItem alloc] initWithTitle:@"S"
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:nil
-                                                                   action:nil];
-    spinnerItem.customView = self.spinner;
-    
-    UIToolbar *browseToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 44, self.view.bounds.size.width, 44)];
-    
-    browseToolbar.barStyle = UIBarStyleBlackTranslucent;
-    
-    browseToolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-    browseToolbar.items = @[self.backButton, flexiSpace1, self.refreshButton, flexiSpace1, self.safariButton, flexiSpace1, spinnerItem, flexiSpace1, self.doneButton];
-    
-    [self.view addSubview:browseToolbar];
-}
-
-
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
@@ -309,18 +327,18 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     self.refreshButton.enabled = YES;
     self.safariButton.enabled = YES;
- 
+    
     [self.spinner startAnimating];
-
+    
     self.webViewLoadCount++;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     self.webViewLoadCount--;
     [self refreshBackButtonState];
-
+    
     if (self.webViewLoadCount > 0) return;
-
+    
     self.refreshButton.enabled = YES;
     self.safariButton.enabled = YES;
     
@@ -329,17 +347,17 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     self.webViewLoadCount--;
-
+    
     self.refreshButton.enabled = YES;
     self.safariButton.enabled = YES;
-
+    
     [self refreshBackButtonState];
     
     [self.spinner stopAnimating];
-
+    
     // Ignore NSURLErrorDomain error (-999).
     if (error.code == NSURLErrorCancelled) return;
-
+    
     // Ignore "Frame Load Interrupted" errors after navigating to iTunes or the App Store.
     if (error.code == 102 && [error.domain isEqual:@"WebKitErrorDomain"]) return;
     

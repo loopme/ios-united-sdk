@@ -19,6 +19,7 @@
         _impressionLinks = [NSMutableSet new];
         _linearTrackingLinks = [[LoopMeVastLinearTrackingLinks alloc] init];
         _companionTrackingLinks = [[LoopMeVastCompanionAdsTrackingLinks alloc] init];
+        _viewableImpression = [[LoopMeVASTViewableImpression alloc] init];
     }
     return self;
 }
@@ -93,6 +94,25 @@
 - (void)add:(LoopMeVastCompanionAdsTrackingLinks *)links {
     [self.creativeView addObjectsFromArray:[links.creativeView allObjects]];
     [self.clickTracking addObjectsFromArray:[links.clickTracking allObjects]];
+}
+
+@end
+
+@implementation LoopMeVASTViewableImpression
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _viewable = [NSMutableSet new];
+        _notViewable = [NSMutableSet new];
+        _viewUndetermined = [[NSMutableSet alloc] init];
+    }
+    return self;
+}
+
+- (void)add:(LoopMeVASTViewableImpression *)links {
+    [self.viewable addObjectsFromArray:[links.viewable allObjects]];
+    [self.notViewable addObjectsFromArray:[links.notViewable allObjects]];
+    [self.viewUndetermined addObjectsFromArray:[links.viewUndetermined allObjects]];
 }
 
 @end

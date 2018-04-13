@@ -9,13 +9,16 @@
 #ifndef LoopMeDefinitions_h
 #define LoopMeDefinitions_h
 
-#define LOOPME_SDK_VERSION @"1.0.0"
+#define LOOPME_SDK_VERSION @"1.1.0"
 
 #define LOOPME_MOAT_PARTNER_CODE @"loopmeinappvideo302333386816"
 #define LOOPME_DV_API_KEY @"LOOPMEIOSD13D4FE26E66464694E2A21D977C21C9"
 
 #define kLoopMeWebViewLoadingTimeout 180
-#define kLoopMeBaseURL @"https://i.loopme.me/html/ios/"
+#define kLoopMeBaseURL @"https://i.loopme.me"
+
+#define kLoopMeHTMLBannerSize CGSizeMake(320, 50)
+#define kLoopMeMPUBannerSize CGSizeMake(300, 250)
 
 #define LOOPME_USERDEFAULTS_KEY_AUTOLOADING @"loopmeautoloading"
 

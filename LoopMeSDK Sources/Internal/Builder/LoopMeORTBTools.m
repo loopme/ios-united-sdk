@@ -29,19 +29,30 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 
 @implementation LoopMeORTBTools
 
-+ (NSData *)makeRequestBodyWithAppKey:(NSString *)appKey
-                            targeting:(LoopMeTargeting *)targeting
-                      integrationType:(NSString *)integrationType adSpotSize:(CGSize)size {
+- (instancetype)initWithAppKey:(NSString *)appKey
+                     targeting:(LoopMeTargeting *)targeting
+                    adSpotSize:(CGSize)size integrationType:(NSString *)integrationType {
+    self = [super init];
+    if (self) {
+        self.appKey = appKey;
+        self.targeting = targeting;
+        self.integrationType = integrationType;
+        self.size = size;
+    }
+    return self;
+}
+
+- (NSData *)makeRequestBody {
     NSData *jsonData;
     
     NSMutableDictionary *request = [[NSMutableDictionary alloc] init];
     request[@"id"] = [[NSUUID UUID] UUIDString];
-    request[@"imp"] = @[[self impressionObject:size integrationType:integrationType]];
-    request[@"app"] = [self appObject:appKey];
+    request[@"imp"] = @[[self impressionObject:self.size integrationType:self.integrationType]];
+    request[@"app"] = [self appObject:self.appKey];
     request[@"device"] = [self deviceObject];
     
-    if (targeting) {
-        request[@"user"] = [self userObject:targeting];
+    if (self.targeting) {
+        request[@"user"] = [self userObject:self.targeting];
     }
     
     request[@"tmax"] = @250;
@@ -55,7 +66,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     return jsonData;
 }
 
-+ (NSDictionary *)appObject:(NSString *)appKey {
+- (NSDictionary *)appObject:(NSString *)appKey {
     NSMutableDictionary *app = [[NSMutableDictionary alloc] init];
     
     app[@"id"] = appKey;
@@ -66,7 +77,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     return app;
 }
 
-+ (NSDictionary *)userObject:(LoopMeTargeting *)targeting {
+- (NSDictionary *)userObject:(LoopMeTargeting *)targeting {
     NSMutableDictionary *user = [[NSMutableDictionary alloc] init];
     user[@"gender"] = targeting.genderParameter;
     user[@"yob"] = @(targeting.yearOfBirth);
@@ -75,7 +86,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     return user;
 }
 
-+ (NSDictionary *)deviceObject {
+- (NSDictionary *)deviceObject {
     NSMutableDictionary *device = [[NSMutableDictionary alloc] init];
     
     device[@"dnt"] = [self parameterForDNT];
@@ -105,7 +116,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     return device;
 }
 
-+ (NSDictionary *)impressionObject:(CGSize)size
+- (NSDictionary *)impressionObject:(CGSize)size
                    integrationType:(NSString *)integrationType {
     NSMutableDictionary *impression = [[NSMutableDictionary alloc] init];
     impression[@"id"] = @1;
@@ -114,21 +125,28 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     impression[@"instl"] = @1; //TODO: now hardcoded
     impression[@"bidfloor"] = @0;
     impression[@"secure"] = @1;
-    impression[@"video"] = [self videoObject:size];
-    impression[@"banner"] = [self bannerObject:size];
+    
+    if (self.video) {
+        impression[@"video"] = [self videoObject:size];
+    }
+    
+    if (self.banner) {
+        impression[@"banner"] = [self bannerObject:size];
+    }
+    
     impression[@"metric"] = [self parameterForAvailableTrackers];
     impression[@"ext"] = @{@"it" : integrationType, @"supported_techs" : @[@"VIDEO - for usual MP4 video", @"VAST2", @"VAST3", @"VAST4", @"VPAID1", @"VPAID2", @"MRAID2", @"V360"]};
 
     return impression;
 }
 
-+ (NSDictionary *)videoObject:(CGSize)size {
+- (NSDictionary *)videoObject:(CGSize)size {
     NSMutableDictionary *video = [[NSMutableDictionary alloc] init];
     
     video[@"mimes"] = @[@"video/mp4"];
     video[@"minduration"] = @5;
     video[@"maxduration"] = @30;
-    video[@"protocols"] = @[@2, @3];
+    video[@"protocols"] = @[@2, @3, @7, @8];
     video[@"startdelay"] = @0;
     video[@"linearity"] = @1;
     video[@"sequence"] = @1;
@@ -138,23 +156,32 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     video[@"delivery"] = @[@2];
     video[@"w"] = @(size.width);
     video[@"h"] = @(size.height);
+    video[@"api"] = @[@2, @5];
+    video[@"skip"] = @1; // 0 - not, 1 - skippable
+    
+//    video[@"placement"] = @[@4]; //@2 = in-banner, 4-in-feed, 5 = interstitial
+    
+//    video[@"playbackmethod"] = @[@1]; //-- ?
+     //playbackend - ??
     
     return video;
 }
 
-+ (NSDictionary *)bannerObject:(CGSize)size {
+- (NSDictionary *)bannerObject:(CGSize)size {
     NSMutableDictionary *banner = [[NSMutableDictionary alloc] init];
     
     banner[@"w"] = @(size.width);
     banner[@"h"] = @(size.height);
     banner[@"id"] = @1;
     banner[@"battr"] = @[@3, @8];
-    banner[@"api"] = @[@3, @5];
+    banner[@"api"] = @[@2, @5];
+//    banner[@"vcm"] = @[@1]; //--?
+    //banner[@"format"] - ??
     
     return banner;
 }
 
-+ (LoopMeDeviceCharge)parameterForBatteryState {
+- (LoopMeDeviceCharge)parameterForBatteryState {
     [UIDevice currentDevice].batteryMonitoringEnabled = YES;
     UIDeviceBatteryState currentState = [[UIDevice currentDevice] batteryState];
     if (currentState != UIDeviceBatteryStateUnknown) {
@@ -167,7 +194,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     return LoopMeDeviceChargeUnknown;
 }
 
-+ (NSString *)parameterForTimeZone {
+- (NSString *)parameterForTimeZone {
     static NSDateFormatter *formatter;
     @synchronized(self) {
         if (!formatter) {
@@ -179,42 +206,42 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     return [formatter stringFromDate:today];
 }
 
-+ (NSString *)parameterForOrientation {
+- (NSString *)parameterForOrientation {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     return UIInterfaceOrientationIsPortrait(orientation) ?
     kLoopMeInterfaceOrientationPortrait :
     kLoopMeInterfaceOrientationLandscape;
 }
 
-+ (NSInteger)parameterForConnectionType {
+- (NSInteger)parameterForConnectionType {
     return [[LoopMeReachability reachabilityForLocalWiFi] connectionType];
 }
 
-+ (NSString *)parameterForBundleIdentifier {
+- (NSString *)parameterForBundleIdentifier {
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     return bundleIdentifier ? [bundleIdentifier lm_stringByAddingPercentEncodingForRFC3986] : @"";
 }
 
-+ (NSString *)parameterForDNT {
+- (NSString *)parameterForDNT {
     return ([LoopMeIdentityProvider advertisingTrackingEnabled] ? @"0" : @"1");
 }
 
-+ (NSString *)parameterForWiFiName {
+- (NSString *)parameterForWiFiName {
     return [[LoopMeReachability reachabilityForLocalWiFi] getSSID];
 }
 
-+ (NSString *)parameterForLanguage {
+- (NSString *)parameterForLanguage {
     return [NSLocale preferredLanguages][0];
 }
 
-+ (NSString *)userAgent {
+- (NSString *)userAgent {
     if (_userAgent == nil) {
         _userAgent = [[[UIWebView alloc] init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     }
     return _userAgent;
 }
 
-+ (NSArray *)parameterForAvailableTrackers {
+- (NSArray *)parameterForAvailableTrackers {
     NSArray *vendors = [self viewabilityVendors];
     NSMutableArray *parameter = [[NSMutableArray alloc] init];
     for (NSString *vendor in vendors) {
@@ -223,7 +250,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     return parameter;
 }
 
-+ (NSArray *)viewabilityVendors {
+- (NSArray *)viewabilityVendors {
     return @[@"moat"];
 }
 

@@ -39,6 +39,9 @@
         case LoopMeVPAIDErrorCodeMediaDisplay:
             errorMessage = @"Problem displaying MediaFile.";
             break;
+        case LoopMeVPAIDErrorCodeVerificationFail:
+            errorMessage = @"Verification script fail";
+            break;
         case LoopMeVPAIDErrorCodeCompanionError:
             errorMessage = @"General CompanionAds error.";
             break;

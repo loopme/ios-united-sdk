@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LoopMeAdType.h"
 
 /**
  * AppKeys for test purposes
@@ -60,6 +61,12 @@ static NSString * const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitia
  */
 @property (nonatomic, assign, getter = isDoNotLoadVideoWithoutWiFi) BOOL doNotLoadVideoWithoutWiFi;
 
+/**
+ * You can filter ads by types.
+ * Please include LoopMeAdType.h file.
+ */
+@property (nonatomic, assign) LoopMeAdType preferredAdTypes;
+
 
 /**
  * Indicates whether ad content was loaded succesfully and ready to be displayed.
@@ -81,8 +88,13 @@ static NSString * const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitia
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
                                              delegate:(id<LoopMeInterstitialDelegate>)delegate;
 
++ (instancetype)interstitialWithAppKey:(NSString *)appKey
+                      preferredAdTypes:(LoopMeAdType)adTypes
+                              delegate:(id<LoopMeInterstitialDelegate>)delegate;
+
 - (instancetype)initWithAppKey:(NSString *)appKey
-                          delegate:(id<LoopMeInterstitialDelegate>)delegate;
+              preferredAdTypes:(LoopMeAdType)adTypes
+                      delegate:(id<LoopMeInterstitialDelegate>)delegate;
 
 
 /**

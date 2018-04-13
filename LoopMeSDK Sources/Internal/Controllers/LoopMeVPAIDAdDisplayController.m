@@ -17,14 +17,16 @@
 #import "LoopMeVPAIDVideoClient.h"
 #import "LoopMeVASTImageDownloader.h"
 #import "LoopMeVPAIDError.h"
+#import "LoopMeError.h"
 #import "LoopMeLogging.h"
 #import "LoopMeAdWebView.h"
 #import "LoopMeDVSDKWrapper.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeDefinitions.h"
 #import "LoopMeCloseButton.h"
-
 #import "LoopMeAdDisplayControllerNormal.h"
+#import "LoopMeViewabilityProtocol.h"
+#import "LoopMeViewabilityManager.h"
 
 NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
@@ -34,7 +36,8 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     LoopMeVASTImageDownloaderDelegate,
     LoopMeVpaidProtocol,
     DVVideoSDKDelegate,
-    UIWebViewDelegate
+    UIWebViewDelegate,
+    LoopMeViewabilityProtocol
 >
 
 @property (nonatomic, strong) LoopMeCloseButton *closeButton;
@@ -138,7 +141,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         }
         
         if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
-            //if frame is zero WebView display content incorrect
             LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
             options.debugLoggingEnabled = true;
             [[LOOMoatAnalytics sharedInstance] startWithOptions:options];
@@ -161,6 +163,7 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     if (configuration) {
         super.adConfiguration = configuration;
         self.vastEventTracker = [[LoopMeVASTEventTracker alloc] initWithTrackingLinks:super.adConfiguration.trackingLinks];
+        self.vastEventTracker.viwableManager = self;
         
         if (!configuration.assetLinks.vpaidURL) {
             self.videoClient = [[LoopMeVPAIDVideoClient alloc] initWithDelegate:self];
@@ -175,25 +178,39 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     self.loadVideoCounter = 0;
     self.needCloseCallback = YES;
     self.isNotPlay = YES;
-
+    
     [[LoopMeDVSDKWrapper sharedInstance] clean];
     
     if (self.adConfiguration.assetLinks.vpaidURL) {
-        NSBundle *resourcesBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"]];
-        NSString *htmlPath = [resourcesBundle pathForResource:@"loopmead" ofType:@"html"];
-        NSString *htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:NULL];
+        
+        NSString *htmlString = [self stringFromFile:@"loopmead" withExtension:@"html"];
+        
+        if (htmlString) {
+            htmlString = [self injectAdVerification:htmlString];
+        } else {
+            [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeError errorForStatusCode:LoopMeErrorCodeNoResourceBundle]];
+            return;
+        }
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.webView loadHTMLString:[NSString stringWithFormat:htmlString, self.adConfiguration.assetLinks.vpaidURL] baseURL:[NSURL URLWithString:kLoopMeBaseURL]];
         });
         
+        self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeWebViewLoadingTimeout target:self selector:@selector(cancelWebView) userInfo:nil repeats:NO];
     } else {
+        self.isNeedJSInject = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.webView loadHTMLString:[self makeVastVerificationHTML] baseURL:[NSURL URLWithString:kLoopMeBaseURL]];
+        });
+        
         NSURL *imageURL;
-        if (self.adConfiguration.assetLinks.endCard.count)
+        if (self.adConfiguration.assetLinks.endCard.count) {
             imageURL = [NSURL URLWithString:[self.adConfiguration.assetLinks.endCard objectAtIndex:self.loadImageCounter]];
+        }
         [self.imageDownloader loadImageWithURL:imageURL];
     }
-    self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeWebViewLoadingTimeout target:self selector:@selector(cancelWebView) userInfo:nil repeats:NO];
+    
 }
 
 - (void)displayAd {
@@ -208,14 +225,17 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     [self.delegate.containerView bringSubviewToFront:self.webView];
     
 //    [self.vpaidClient resizeAdWithWidth:adjustedFrame.size.width height:adjustedFrame.size.height viewMode:LoopMeVPAIDViewMode.fullscreen];
-    
     [(LoopMeVPAIDVideoClient *)self.videoClient willAppear];
 }
 
 - (void)closeAd {
     self.needCloseCallback = NO;
     [self.showCloseButtonTimer invalidate];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.webView loadHTMLString:@"about:blank" baseURL:nil];
+    });
     [self closeAdPrivate];
+    [self.webView removeFromSuperview];
 }
 
 - (void)closeAdPrivate {
@@ -293,9 +313,45 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
 #pragma mark - Private
 
+- (NSString *)stringFromFile:(NSString *)filename withExtension:(NSString *)extension {
+    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+    if (!bundleURL) {
+        return nil;
+    }
+    NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+    NSString *htmlPath = [resourcesBundle pathForResource:filename ofType:extension];
+    return [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:NULL];
+}
+
+- (NSString *)injectAdVerification:(NSString *)htmlString {
+    if (self.adConfiguration.assetLinks.adVerification.count == 0) {
+        return htmlString;
+    }
+    
+    NSMutableString *copyHTMLstring = [htmlString mutableCopy];
+    NSMutableString *pattern = [NSMutableString new];
+    for (NSString *script in self.adConfiguration.assetLinks.adVerification) {
+        [pattern appendString:[NSString stringWithFormat:@"\"%@\",", script]];
+    }
+    //remove last ','
+    if (pattern.length) {
+        pattern = [[pattern substringToIndex:[pattern length] - 1] mutableCopy];
+    }
+    
+    [copyHTMLstring replaceOccurrencesOfString:@"[SCRIPTPLACE]" withString:pattern options:0 range:NSMakeRange(0, [htmlString length])];
+    
+    return copyHTMLstring;
+}
+
+- (NSString *)makeVastVerificationHTML {
+    NSString *htmlString = [self stringFromFile:@"loopmevast4" withExtension:@"html"];
+    htmlString = [self injectAdVerification:htmlString];
+    return htmlString;
+}
+
 - (CGRect)adjusFrame:(CGRect)frame {
     CGRect result = frame;
-    if (!self.adConfiguration.isVPAID && [self adOrientationMatchContainer:frame]) {
+    if (!self.adConfiguration.isVPAID && self.isInterstitial && [self adOrientationMatchContainer:frame]) {
         result = CGRectMake(frame.origin.x, frame.origin.y, frame.size.height, frame.size.width);
     }
     
@@ -316,7 +372,7 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
  navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *URL = [request URL];
-    if ([[URL absoluteString] isEqualToString:kLoopMeBaseURL]) {
+    if (self.adConfiguration.assetLinks.vpaidURL && [[URL absoluteString] isEqualToString:kLoopMeBaseURL]) {
         self.isNeedJSInject = YES;
     }
     if ([self shouldIntercept:URL navigationType:navigationType]) {
@@ -324,6 +380,11 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         self.isTimerCloseButtonPaused = YES;
         [self.destinationDisplayClient displayDestinationWithURL:URL];
         return NO;
+    }
+    if ([URL.scheme isEqualToString:@"lmscript"]) {
+        if ([URL.host isEqualToString:@"notloaded"]) {
+            [self.vastEventTracker trackError:LoopMeVPAIDErrorCodeVerificationFail];
+        }
     }
     return YES;
 }
@@ -718,7 +779,7 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     }
 }
 
-#pragma mark - Desti
+#pragma mark - Destination Protocol
 
 - (void)destinationDisplayControllerDidDismissModal:(LoopMeDestinationDisplayController *)destinationDisplayController {
     self.isTimerCloseButtonPaused = NO;
@@ -748,6 +809,17 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         [self.imageDownloader loadImageWithURL:[NSURL URLWithString:self.adConfiguration.assetLinks.endCard[self.loadImageCounter]]];
     } else {
         [self.videoClient loadWithURL:videoURL];
+    }
+}
+
+#pragma mark LoopMeViewabilityProtocol
+
+- (void)checkViwabilityCriteria {
+    BOOL visible = [[LoopMeViewabilityManager sharedInstance] isViewable:self.delegate.containerView];
+    if (visible) {
+        [self.vastEventTracker trackEvent:LoopMeVASTEventTypeViewable];
+    } else {
+        [self.vastEventTracker trackEvent:LoopMeVASTEventTypeNotViewable];
     }
 }
 

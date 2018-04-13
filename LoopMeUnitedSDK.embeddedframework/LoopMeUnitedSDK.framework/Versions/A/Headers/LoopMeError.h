@@ -27,5 +27,6 @@ typedef NS_ENUM(NSUInteger, LoopMeErrorCode) {
     LoopMeErrorCodeURLResolve = -20,
     LoopMeErrorCodeWrirtingToDisk = -21,
     LoopMeErrorCodeCanNotLoadVideo = -22,
-    LoopMeErrorCodeNoMraidJS = -23
+    LoopMeErrorCodeNoResourceBundle = -23,
+    LoopMeErrorCodeInvalidRequest = -24
 };

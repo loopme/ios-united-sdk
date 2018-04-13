@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoopMeAdType.h"
 
 /**
  * AppKey for test purposes
  */
 
-static NSString * const TEST_APP_KEY_MPU = @"test_mpu";
+static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
 
 @class LoopMeTargeting;
 
@@ -73,12 +74,29 @@ static NSString * const TEST_APP_KEY_MPU = @"test_mpu";
 @property (nonatomic, assign, readonly, getter = isReady) BOOL ready;
 
 /**
+ * You can filter ads by types.
+ * Please include LoopMeAdType.h file.
+ */
+@property (nonatomic, assign) LoopMeAdType preferredAdTypes;
+
+/**
  * Returns new `LoopMeAdView` object with the given appKey
  * @param appKey - unique identifier in LoopMe ad network.
  * @param delegate - delegate
  */
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+                          delegate:(id<LoopMeAdViewDelegate>)delegate;
+
+/**
+ * Returns new `LoopMeAdView` object with the given appKey
+ * @param appKey - unique identifier in LoopMe ad network.
+ * @param preferredAdTypes -
+ * @param delegate - delegate
+ */
++ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
+                             frame:(CGRect)frame
+                  preferredAdTypes:(LoopMeAdType)preferredAdTypes
                           delegate:(id<LoopMeAdViewDelegate>)delegate;
 
 /**
@@ -91,6 +109,19 @@ static NSString * const TEST_APP_KEY_MPU = @"test_mpu";
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
                         scrollView:(UIScrollView *)scrollView
+                          delegate:(id<LoopMeAdViewDelegate>)delegate;
+
+/**
+ * Returns new `LoopMeAdView` object with the given appKey.
+ * Use this method if adView will be added to scrollable content.
+ * @param appKey - unique identifier in LoopMe ad network.
+ * @param scrollView scrollView to be used to calculate ad area visibility and manage ad activity
+ * @param delegate - delegate
+ */
++ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
+                             frame:(CGRect)frame
+                        scrollView:(UIScrollView *)scrollView
+                  preferredAdTypes:(LoopMeAdType)preferredAdTypes
                           delegate:(id<LoopMeAdViewDelegate>)delegate;
 /**
  * Starts loading ad content process.
@@ -194,7 +225,7 @@ static NSString * const TEST_APP_KEY_MPU = @"test_mpu";
  * AdView `ready` property is set to NO
  * @param adView object the sender of message
  */
-- (void)loopMeAdViewDidDisappear:(LoopMeAdView *)adView;
+- (void)loopMeAdViewWillAppear:(LoopMeAdView *)adView;
 
 
 @end

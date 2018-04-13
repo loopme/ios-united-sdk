@@ -118,9 +118,7 @@
                                                                      delegate:self];
     [[self.delegate viewControllerForPresentingModalView] presentViewController:self.browserController
                                                                        animated:NO
-                                                                     completion:^{
-                                                                         [self.browserController layoutBrowseToolbar];
-                                                                     }];    
+                                                                     completion:nil];
 }
 
 - (void)showStoreKitProductWithParameter:(NSString *)parameter fallbackURL:(NSURL *)URL {

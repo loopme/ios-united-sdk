@@ -20,7 +20,6 @@
 
 @property (nonatomic, assign, getter=isVisibleNoJS) BOOL visibleNoJS;
 @property (nonatomic, assign) BOOL forceHidden;
-@property (nonatomic, assign) BOOL isInterstitial;
 
 
 - (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate;
@@ -28,6 +27,7 @@
 - (void)displayAd;
 - (void)closeAd;
 - (void)moveView:(BOOL)hideWebView;
+- (void)setOrientationProperties:(NSDictionary *)orientationProperties;
 
 - (void)expandReporting;
 - (void)collapseReporting;

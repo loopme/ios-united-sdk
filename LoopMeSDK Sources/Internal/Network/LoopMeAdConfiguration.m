@@ -69,7 +69,7 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
             *error = [LoopMeError errorForStatusCode:LoopMeErrorCodeIncorrectResponse];
             return nil;
         }
-        
+
         NSData *creativeData = [_creativeContent dataUsingEncoding:NSUTF8StringEncoding];
         if (_creativeType == LoopMeCreativeTypeVPAID) {
             [self parseXML:creativeData error:error];
@@ -122,7 +122,6 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
         autoLoading = [[dictionary objectForKey:@"autoloading"] boolValue];
     }
     [[NSUserDefaults standardUserDefaults] setBool:autoLoading forKey:LOOPME_USERDEFAULTS_KEY_AUTOLOADING];
-
 }
 
 - (void)parseXML:(NSData *)data error:(NSError **)error {

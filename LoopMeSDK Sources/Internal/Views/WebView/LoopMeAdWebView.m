@@ -15,7 +15,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.opaque = NO;
-        self.scalesPageToFit = YES;
+        self.scalesPageToFit = NO;
         self.userInteractionEnabled = YES;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 

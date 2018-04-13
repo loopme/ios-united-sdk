@@ -6,15 +6,14 @@
 //  Copyright (c) 2012 LoopMe. All rights reserved.
 //
 
+#import "LoopMeOrientationViewControllerProtocol.h"
+
 @class LoopMeInterstitialViewController;
 @protocol LoopMeInterstitialViewControllerDelegate;
 
-@interface LoopMeInterstitialViewController : UIViewController
+@interface LoopMeInterstitialViewController : UIViewController <LoopMeOrientationViewControllerProtocol>
 
 @property (nonatomic, weak) id<LoopMeInterstitialViewControllerDelegate> delegate;
-- (void)setOrientation:(LoopMeAdOrientation)orientation;
-- (void)setAllowOrientationChange:(BOOL)autorotate;
-- (void)forceChangeOrientation;
 
 @end
 

@@ -20,6 +20,7 @@
 #import "LoopMeDVSDKWrapper.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeDefinitions.h"
+#import "LoopMeAdView.h"
 
 static void *VPAIDvideoControllerStatusObservationContext = &VPAIDvideoControllerStatusObservationContext;
 NSString * const kLoopMeVPAIDVideoStatusKey = @"status";
@@ -319,7 +320,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)adjustViewToFrame:(CGRect)frame {
     self.videoView.frame = frame;
+    
     self.vastUIView.frame = frame;
+
     if (self.playerLayer) {
         self.playerLayer.frame = frame;
         if (self.layerGravity) {
@@ -339,6 +342,10 @@ const NSInteger kResizeOffsetVPAID = 11;
         if ((100 - floorf(k)) <= kResizeOffsetVPAID) {
             [self.playerLayer setVideoGravity:AVLayerVideoGravityResize];
         }
+    }
+    
+    if  ([[self.delegate performSelector:@selector(delegate)] isKindOfClass:[LoopMeAdView class]]) {
+        self.vastUIView.frame = self.playerLayer.videoRect;
     }
 }
 

@@ -8,6 +8,7 @@
 
 @class LoopMeVastLinearTrackingLinks;
 @class LoopMeVastCompanionAdsTrackingLinks;
+@class LoopMeVASTViewableImpression;
 
 @interface LoopMeVASTTrackingLinks : NSObject
 
@@ -16,6 +17,7 @@
 @property (nonatomic) NSString *clickThroughCompanion;
 @property (nonatomic) NSString *clickThroughVideo;
 @property (nonatomic) LoopMeVastLinearTrackingLinks *linearTrackingLinks;
+@property (nonatomic) LoopMeVASTViewableImpression *viewableImpression;
 @property (nonatomic) LoopMeVastCompanionAdsTrackingLinks *companionTrackingLinks;
 
 @end
@@ -51,3 +53,14 @@
 - (void)add:(LoopMeVastCompanionAdsTrackingLinks *)links;
 
 @end
+
+@interface LoopMeVASTViewableImpression : NSObject
+
+@property (nonatomic) NSMutableSet *viewable;
+@property (nonatomic) NSMutableSet *notViewable;
+@property (nonatomic) NSMutableSet *viewUndetermined;
+
+- (void)add:(LoopMeVASTViewableImpression *)links;
+
+@end
+

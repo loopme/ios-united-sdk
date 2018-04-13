@@ -37,6 +37,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
 @property (nonatomic, strong) LoopMeAdDisplayControllerNormal *adDisplayController;
 @property (nonatomic, strong) LoopMeVPAIDAdDisplayController *adDisplayControllerVPAID;
 @property (nonatomic, strong) LoopMeInterstitialViewController *adInterstitialViewController;
+@property (nonatomic, assign) LoopMeAdType preferredAdTypes;
 @property (nonatomic, strong) NSTimer *timeoutTimer;
 
 @end
@@ -65,26 +66,23 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 - (instancetype)initWithAppKey:(NSString *)appKey
                       delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate {
-    if (!appKey) {
-        LoopMeLogError(@"AppKey cann't be nil");
-        return nil;
-    }
-    
-    if (SYSTEM_VERSION_LESS_THAN(@"9.0")) {
-        LoopMeLogDebug(@"Block iOS versions less then 9.0");
-        return nil;
-    }
-    
+    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+}
+
+- (instancetype)initWithAppKey:(NSString *)appKey
+              preferredAdTypes:(LoopMeAdType)adTypes
+                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate {
     if (self = [super init]) {
         _appKey = [appKey copy];
         _delegate = delegate;
         _adManager = [[LoopMeAdManager alloc] initWithDelegate:self];
-        
+        _preferredAdTypes = adTypes;
         
         self.adDisplayController = [[LoopMeAdDisplayControllerNormal alloc] initWithDelegate:self];
         self.adDisplayController.isInterstitial = YES;
         
         self.adDisplayControllerVPAID = [[LoopMeVPAIDAdDisplayController alloc] initWithDelegate:self];
+        self.adDisplayControllerVPAID.isInterstitial = YES;
         
         _adInterstitialViewController = [[LoopMeInterstitialViewController alloc] init];
         _adInterstitialViewController.delegate = self;
@@ -102,8 +100,9 @@ const NSInteger kLoopMeRequestTimeout = 180;
 #pragma mark - Class Methods
 
 + (LoopMeInterstitialGeneral *)interstitialWithAppKey:(NSString *)appKey
+                                     preferredAdTypes:(LoopMeAdType)adTypes
                                       delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate {
-    return [[LoopMeInterstitialGeneral alloc] initWithAppKey:appKey delegate:delegate];
+    return [[LoopMeInterstitialGeneral alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate];
 }
 
 #pragma mark - Private
@@ -207,7 +206,10 @@ const NSInteger kLoopMeRequestTimeout = 180;
     self.loading = YES;
     self.ready = NO;
     self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeRequestTimeout target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
-    [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:self.containerView.bounds.size];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:[[UIApplication sharedApplication] keyWindow].bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes];
+    });
 }
 
 - (void)showFromViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -412,6 +414,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 - (void)adDisplayControllerShouldCloseAd:(LoopMeAdDisplayControllerNormal *)adDisplayController {
     [self dismissAnimated:NO];
+    
     LoopMeAdConfiguration *c = [[self.adManager performSelector:@selector(communicator)] performSelector:@selector(configuration)];
     c.trackingLinks = nil;
     c.assetLinks = nil;
