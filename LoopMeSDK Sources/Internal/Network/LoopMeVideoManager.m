@@ -39,7 +39,7 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
 #pragma mark - Life Cycle
 
 - (void)dealloc {
-//    [self.session invalidateAndCancel];
+
 }
 
 - (instancetype)initWithVideoPath:(NSString *)videoPath delegate:(id<LoopMeVideoManagerDelegate>)delegate {
@@ -75,7 +75,7 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
 - (void)cancel {
     [self.dataTask cancel];
     self.dataTask = nil;
-    [self.session finishTasksAndInvalidate];
+    [self.session invalidateAndCancel];
 }
 
 - (void)clearOldCacheFiles {
@@ -194,7 +194,9 @@ didCompleteWithError:(NSError *)error {
     } else {
         [self cacheVideoData:[NSData dataWithData:self.videoData]];
         self.videoData = nil;
+        [self.dataTask cancel];
         self.dataTask = nil;
+        [self.session invalidateAndCancel];
         self.session = nil;
     }
 }

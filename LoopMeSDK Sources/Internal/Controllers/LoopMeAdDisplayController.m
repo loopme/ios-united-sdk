@@ -1,6 +1,6 @@
 //
 //  LoopMeAdDisplayController.m
-//  Tester
+//  LoopMeSDK
 //
 //  Created by Bohdan on 5/8/17.
 //  Copyright © 2017 LoopMe. All rights reserved.
@@ -41,6 +41,7 @@
         _destinationDisplayClient = [LoopMeDestinationDisplayController controllerWithDelegate:self];
         //if frame is zero WebView display content incorrect
         _webView = [[LoopMeAdWebView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        _webView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }
@@ -103,9 +104,7 @@
 }
 
 - (void)stopHandlingRequests {
-//    [self.destinationDisplayClient cancel];
     self.destinationDisplayClient = nil;
-//    [self.videoClient cancel];
     self.videoClient = nil;
     self.destinationDisplayClient = nil;
     [self.webViewTimeOutTimer invalidate];

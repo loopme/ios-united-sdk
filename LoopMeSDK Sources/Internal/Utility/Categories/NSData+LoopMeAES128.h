@@ -1,5 +1,6 @@
 //
 //  NSData+LoopMeAES128.h
+//  LoopMeSDK
 //
 //  Created by Bohdan on 3/1/16.
 //  Copyright © 2016 LoopMe. All rights reserved.

@@ -11,6 +11,7 @@
 #import <LOOMoatMobileAppKit/LOOMoatWebTracker.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 
+#import "LoopMeIASWrapper.h"
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeAdConfiguration.h"
 #import "LoopMeAdWebView.h"
@@ -55,6 +56,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 @property (nonatomic, assign) BOOL adDisplayed;
 @property (nonatomic, strong) LOOMoatWebTracker *moatTracker;
+@property (nonatomic, strong) LoopMeIASWrapper *iasWarpper;
 
 - (void)deviceShaken;
 - (void)interceptURL:(NSURL *)URL;
@@ -129,7 +131,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 #pragma mark - Life Cycle
 
 - (void)dealloc {
-    self.webView.delegate = nil;
+    [self invalidateTimer];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kLoopMeShakeNotificationName object:nil];
 }
 
@@ -140,6 +142,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         self.delegate = delegate;
         _JSClient = [[LoopMeJSClient alloc] initWithDelegate:self];
         _mraidClient = [[LoopMeMRAIDClient alloc] initWithDelegate:self];
+        _iasWarpper = [[LoopMeIASWrapper alloc] init];
         
         if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
             //if frame is zero WebView display content incorrect
@@ -239,6 +242,11 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     return preferredOrientation;
 }
 
+- (void)invalidateTimer {
+    [self.webViewTimeOutTimer invalidate];
+    self.webViewTimeOutTimer = nil;
+}
+
 #pragma mark - Public
 
 - (void)setExpandProperties:(LoopMeAdConfiguration *)configuration {
@@ -246,57 +254,67 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 - (void)loadAdConfiguration {
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
-        LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
-        options.debugLoggingEnabled = YES;
-        [[LOOMoatAnalytics sharedInstance] startWithOptions:options];
-        
-        if (!self.moatTracker) {
-            self.moatTracker = [LOOMoatWebTracker trackerWithWebComponent:self.webView];
-        }
-    }
-
-    if (self.adConfiguration.creativeType == LoopMeCreativeTypeMRAID) {
-        
-        NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
-        if (!bundleURL) {
-            [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeError errorForStatusCode:LoopMeErrorCodeNoResourceBundle]];
-            return;
-        }
-        NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
-        NSString *jsPath = [resourcesBundle pathForResource:@"mraid" ofType:@"js"];
-        NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
-        
-        if (mraidjs) {
-            mraidjs = [mraidjs stringByAppendingString:@"</script>"];
-            mraidjs = [@"<script>" stringByAppendingString:mraidjs];
-            
-            NSMutableString *html = [self.adConfiguration.creativeContent mutableCopy];
-            
-            NSRange range = [html rangeOfString:@"<script>"];
-            [html insertString:mraidjs atIndex:range.location];
-            self.adConfiguration.creativeContent = html;
-        } else {
-            [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeError errorForStatusCode:LoopMeErrorCodeNoResourceBundle]];
-            return;
-        }
-    }
-    
     dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.adConfiguration useTracking:LoopMeTrackerName.ias]) {
+                [self.iasWarpper initWithPartnerVersion:LOOPME_SDK_VERSION creativeType:self.adConfiguration.creativeType adConfiguration:self.adConfiguration];
+                [self.iasWarpper registerAdView:self.webView];
+        }
+    
+        if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
+            LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
+            options.debugLoggingEnabled = YES;
+            [[LOOMoatAnalytics sharedInstance] startWithOptions:options];
+            
+            if (!self.moatTracker) {
+                self.moatTracker = [LOOMoatWebTracker trackerWithWebComponent:self.webView];
+            }
+        }
+
+        if (self.adConfiguration.creativeType == LoopMeCreativeTypeMRAID) {
+            NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+            if (!bundleURL) {
+                [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeError errorForStatusCode:LoopMeErrorCodeNoResourceBundle]];
+                return;
+            }
+            NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+            NSString *jsPath = [resourcesBundle pathForResource:@"mraid" ofType:@"js"];
+            NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
+            
+            if (mraidjs) {
+                mraidjs = [mraidjs stringByAppendingString:@"</script>"];
+                mraidjs = [@"<script>" stringByAppendingString:mraidjs];
+                
+                NSMutableString *html = [self.adConfiguration.creativeContent mutableCopy];
+                
+                NSRange range = [html rangeOfString:@"<script>"];
+                [html insertString:mraidjs atIndex:range.location];
+                self.adConfiguration.creativeContent = html;
+            } else {
+                [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeError errorForStatusCode:LoopMeErrorCodeNoResourceBundle]];
+                return;
+            }
+        }
+    
         [self.webView loadHTMLString:self.adConfiguration.creativeContent
                              baseURL:[NSURL URLWithString:kLoopMeBaseURL]];
-    });
     
-    self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeWebViewLoadingTimeout target:self selector:@selector(cancelWebView) userInfo:nil repeats:NO];
+        self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeWebViewLoadingTimeout target:self selector:@selector(cancelWebView) userInfo:nil repeats:NO];
+    });
 }
 
 - (void)displayAd {
+    
+    if ([self.adConfiguration useTracking:LoopMeTrackerName.ias]) {
+        [self.iasWarpper recordReadyEvent];
+        [self.iasWarpper recordAdLoadedEvent];
+    }
+    
     if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
         [self.moatTracker startTracking];
     }
+    
     self.adDisplayed = YES;
     ((LoopMeVideoClientNormal *)self.videoClient).viewController = [self.delegate viewControllerForPresentation];
-    self.webView.frame = self.delegate.containerView.bounds;
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     CGRect adjustedFrame = [self adjustFrame:self.delegate.containerView.bounds];
     [self.videoClient adjustViewToFrame:adjustedFrame];
@@ -304,6 +322,12 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [self.delegate.containerView addSubview:self.webView];
     [self.delegate.containerView bringSubviewToFront:self.webView];
     [(LoopMeVideoClientNormal *)self.videoClient willAppear];
+    
+    NSArray *constraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
+    NSArray *constraintsV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
+    [self.delegate.containerView addConstraints:constraintsH];
+    [self.delegate.containerView addConstraints:constraintsV];
+    
     
     if (self.adConfiguration.creativeType == LoopMeCreativeTypeMRAID) {
         self.originalSize = adjustedFrame.size;
@@ -332,9 +356,18 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     
     self.pinchWebView = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchWebView:)];
     [self.webView addGestureRecognizer:self.pinchWebView];
+    
+    //AVID
+    [self.iasWarpper recordAdImpressionEvent];
 }
 
 - (void)closeAd {
+    if ([self.adConfiguration useTracking:LoopMeTrackerName.ias]) {
+        [self.iasWarpper clean];
+        [self.iasWarpper unregisterAdView:self.webView];
+        [self.iasWarpper endSession];
+    }
+    
     [self.JSClient executeEvent:LoopMeEvent.state forNamespace:kLoopMeNamespaceWebview param:LoopMeWebViewState.closed];
     if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
         [self.moatTracker stopTracking];
@@ -342,6 +375,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [self stopHandlingRequests];
     self.visible = NO;
     self.adDisplayed = NO;
+    [self.videoClient cancel];
     [self.webView removeGestureRecognizer:self.panWebView];
     [self.webView removeGestureRecognizer:self.pinchWebView];
     [self.webView removeFromSuperview];
@@ -475,8 +509,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 - (void)JSClientDidReceiveSuccessCommand:(LoopMeJSClient *)client {
     LoopMeLogInfo(@"Ad was successfully loaded");
-    [self.webViewTimeOutTimer invalidate];
-    self.webViewTimeOutTimer = nil;
+    [self invalidateTimer];
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd:self];
     }
@@ -485,14 +518,14 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 - (void)JSClientDidReceiveFailCommand:(LoopMeJSClient *)client {
     NSError *error = [LoopMeError errorForStatusCode:LoopMeErrorCodeSpecificHost];
     LoopMeLogInfo(@"Ad failed to load: %@", error);
-    [self.webViewTimeOutTimer invalidate];
-    self.webViewTimeOutTimer = nil;
+    [self invalidateTimer];
     if ([self.delegate respondsToSelector:@selector(adDisplayController:didFailToLoadAdWithError:)]) {
         [self.delegate adDisplayController:self didFailToLoadAdWithError:error];
     }
 }
 
 - (void)JSClientDidReceiveCloseCommand:(LoopMeJSClient *)client {
+    [self.iasWarpper recordAdUserCloseEvent];
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerShouldCloseAd:)]) {
         [self.delegate adDisplayControllerShouldCloseAd:self];
     }
@@ -526,10 +559,14 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerDidReceiveTap:)]) {
         [self.delegate adDisplayControllerDidReceiveTap:self];
     }
+    [self.iasWarpper recordAdClickThruEvent];
     [self interceptURL:URL];
 }
 
 - (void)mraidClient:(LoopMeMRAIDClient *)client useCustomClose:(BOOL)useCustomCLose {
+    if (!useCustomCLose) {
+        [self.iasWarpper registerFriendlyObstruction:self.closeButton];
+    }
     self.useCustomClose = useCustomCLose;
 }
 
@@ -547,6 +584,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         [self.mraidClient executeEvent:LoopMeMRAIDFunctions.stateChange params:@[LoopMeMRAIDState.defaultt]];
         return;
     }
+    [self.iasWarpper recordAdUserCloseEvent];
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerShouldCloseAd:)]) {
         [self.delegate adDisplayControllerShouldCloseAd:self];
     }
@@ -579,6 +617,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 - (void)videoClientDidReachEnd:(LoopMeVideoClient *)client {
     LoopMeLogInfo(@"Video ad did reach end");
+    [self.iasWarpper recordAdCompleteEvent];
     if ([self.delegate respondsToSelector:
          @selector(adDisplayControllerVideoDidReachEnd:)]) {
         [self.delegate adDisplayControllerVideoDidReachEnd:self];
@@ -600,9 +639,17 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 - (void)videoClientDidBecomeActive:(LoopMeVideoClient *)client {
     [self layoutSubviews];
-    if (/*!self.isDestIsShown && ![self.videoClient playerReachedEnd] && !self.isEndCardClicked && */self.visible) {
+    if (self.visible) {
         [self.videoClient play];
     }
+}
+
+#pragma mark - Override
+
+- (void)destinationDisplayControllerWillPresentModal:(LoopMeDestinationDisplayController *)destinationDisplayController {
+    //AVID
+    [self.iasWarpper recordAdClickThruEvent];
+    [super destinationDisplayControllerWillPresentModal:destinationDisplayController];
 }
 
 @end

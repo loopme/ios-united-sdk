@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIButton *replayButton;
 @property (nonatomic, strong) UIButton *skipButton;
 @property (nonatomic, strong) UIButton *muteButton;
+
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UILabel *countDownLabel;
 @property (nonatomic, assign) CGFloat videoDuration;
@@ -56,6 +57,8 @@
     NSBundle *resourcesBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"]];
     
     self.muteButton = [[UIButton alloc] init];
+    UIEdgeInsets insets = UIEdgeInsetsMake(10, 10, 10, 10);
+
     [self.muteButton setImage:[UIImage imageNamed:@"loopmemute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
     [self.muteButton setImage:[UIImage imageNamed:@"loopmeunmute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [self.muteButton addTarget:self action:@selector(mute:) forControlEvents:UIControlEventTouchUpInside];
@@ -119,12 +122,12 @@
     [self addSubview:self.closeButton];
     
     NSDictionary *views = @{@"progress" : self.progressView, @"mute" : self.muteButton, @"countdown" : self.countDownLabel, @"close" : self.closeButton, @"replay" : self.replayButton, @"skipped" : self.skipButton,  @"endCard" : self.endCard, @"endCardBackground" : self.endCardBackground};
-
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mute(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[mute(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[replay(50)]" options:0 metrics:nil views:views]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[mute(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[mute(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[replay(50)]" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[replay(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[close(50)]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[close(50)]" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[close(50)]-|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[skipped(50)]" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[skipped(50)]|" options:0 metrics:nil views:views]];

@@ -85,7 +85,7 @@ static dispatch_once_t onceToken;
 }
 
 - (void)dealloc {
-//    [self.session invalidateAndCancel];
+
 }
 
 - (instancetype)init {
@@ -127,6 +127,7 @@ static dispatch_once_t onceToken;
     if (!_logFilePath) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
+        documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"lm_assets/"];
         _logFilePath = [documentsDirectory stringByAppendingPathComponent:@"loopmelog.lm"];
     }
     return _logFilePath;

@@ -67,8 +67,8 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
 @interface LoopMeJSClient ()
 
 @property (nonatomic, weak) id<LoopMeJSClientDelegate> delegate;
-@property (nonatomic, strong, readonly) id<LoopMeVideoCommunicatorProtocol> videoClient;
-@property (nonatomic, strong, readonly) UIWebView *webViewClient;
+@property (nonatomic, weak, readonly) id<LoopMeVideoCommunicatorProtocol> videoClient;
+@property (nonatomic, weak, readonly) UIWebView *webViewClient;
 @property (nonatomic, strong) NSMutableSet *events360;
 
 - (void)loadVideoWithParams:(NSDictionary *)params;
@@ -79,6 +79,10 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
 @implementation LoopMeJSClient
 
 #pragma mark - Life Cycle
+
+- (void)dealloc {
+    
+}
 
 - (instancetype)initWithDelegate:(id<LoopMeJSClientDelegate>)deleagate {
     if (self = [super init]) {

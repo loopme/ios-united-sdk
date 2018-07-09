@@ -1,6 +1,6 @@
 //
 //  LoopMeVASTProgressEvent.m
-//  LoopMe
+//  LoopMeSDK
 //
 //  Copyright © 2016 LoopMe. All rights reserved.
 //

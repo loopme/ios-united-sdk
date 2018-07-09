@@ -31,7 +31,7 @@ const float kLDAdViewWidth = 300.0f;
 
         // Intializing `LoopMeAdView`
         _adView = [LoopMeAdView adViewWithAppKey:TEST_APP_KEY_MPU
-                                           frame:adFrame
+                                           frame:adFrame viewControllerForPresentationGDPRWindow: self 
                                         delegate:self];
     }
     return _adView;

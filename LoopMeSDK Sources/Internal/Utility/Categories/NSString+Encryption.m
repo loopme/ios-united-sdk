@@ -1,6 +1,6 @@
 //
 //  NSString+MD5.m
-//  Tester
+//  LoopMeSDK
 //
 //  Created by Bohdan on 3/15/17.
 //  Copyright © 2017 LoopMe. All rights reserved.

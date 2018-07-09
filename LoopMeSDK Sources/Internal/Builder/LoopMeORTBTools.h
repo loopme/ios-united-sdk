@@ -1,6 +1,6 @@
 //
 //  LoopMeORTBTools.h
-//  Tester
+//  LoopMeSDK
 //
 //  Created by Bohdan on 4/5/17.
 //  Copyright © 2017 LoopMe. All rights reserved.
@@ -11,7 +11,7 @@
 @interface LoopMeORTBTools : NSObject
 
 @property (nonatomic, strong) NSString * _Nonnull appKey;
-@property (nonatomic, strong) LoopMeTargeting * _Nullable targeting;
+@property (nonatomic, weak) LoopMeTargeting * _Nullable targeting;
 @property (nonatomic, strong) NSString * _Nonnull integrationType;
 @property (nonatomic, assign) CGSize size;
 
@@ -21,7 +21,8 @@
 - (instancetype _Nullable)initWithAppKey:(NSString * _Nonnull)appKey
                      targeting:(LoopMeTargeting * _Nullable)targeting
                     adSpotSize:(CGSize)size
-               integrationType:(NSString * _Nonnull)integrationType;
+                         integrationType:(NSString * _Nonnull)integrationType
+                          isInterstitial:(BOOL)isInterstitial;
 
 - (NSData * _Nonnull )makeRequestBody;
 

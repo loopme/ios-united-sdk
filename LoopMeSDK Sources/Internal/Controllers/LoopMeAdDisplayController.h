@@ -1,6 +1,6 @@
 //
 //  LoopMeAdDisplayController.h
-//  Tester
+//  LoopMeSDK
 //
 //  Created by Bohdan on 5/8/17.
 //  Copyright © 2017 LoopMe. All rights reserved.

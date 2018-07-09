@@ -17,10 +17,10 @@
 #import "LoopMeReachability.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeAdConfiguration.h"
-#import "LoopMeDVSDKWrapper.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeDefinitions.h"
 #import "LoopMeAdView.h"
+#import "LoopMeIASWrapper.h"
 
 static void *VPAIDvideoControllerStatusObservationContext = &VPAIDvideoControllerStatusObservationContext;
 NSString * const kLoopMeVPAIDVideoStatusKey = @"status";
@@ -94,6 +94,14 @@ const NSInteger kResizeOffsetVPAID = 11;
          [self.delegate videoClient:self setupView:_videoView];
     }
     return _videoView;
+}
+
+- (LoopMeIASWrapper *)iasWrapper {
+    if ([self.delegate respondsToSelector:@selector(iasWarpper)]) {
+        return [self.delegate performSelector:@selector(iasWarpper)];
+    }
+    
+    return nil;
 }
 
 - (void)setPlayerItem:(AVPlayerItem *)playerItem {
@@ -243,13 +251,13 @@ const NSInteger kResizeOffsetVPAID = 11;
                                              double percent = currentTime / CMTimeGetSeconds(selfWeak.playerItem.duration);
                                              if (percent >= 0.25 && percent < 0.5) {
                                                  [selfWeak.eventSender trackEvent:LoopMeVASTEventTypeLinearFirstQuartile];
-                                                 [[LoopMeDVSDKWrapper sharedInstance] adFirstQuartile:selfWeak.configuration.adIDVAST];
+                                                 [selfWeak.iasWrapper recordAdVideoFirstQuartileEvent];
                                              } else if (percent >= 0.5 && percent < 0.75) {
                                                  [selfWeak.eventSender trackEvent:LoopMeVASTEventTypeLinearMidpoint];
-                                                 [[LoopMeDVSDKWrapper sharedInstance] adMidpoint:selfWeak.configuration.adIDVAST];
+                                                 [selfWeak.iasWrapper recordAdVideoMidpointEvent];
                                              } else if (percent >= 0.75) {
                                                  [selfWeak.eventSender trackEvent:LoopMeVASTEventTypeLinearThirdQuartile];
-                                                 [[LoopMeDVSDKWrapper sharedInstance] adThirdQuartile:selfWeak.configuration.adIDVAST];
+                                                 [selfWeak.iasWrapper recordAdVideoThirdQuartileEvent];
                                              }
                                              [selfWeak.eventSender setCurrentTime:currentTime];
                                              if (currentTime > 0 && selfWeak.isShouldPlay) {
@@ -267,6 +275,7 @@ const NSInteger kResizeOffsetVPAID = 11;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (self.isShouldPlay) {
                     [self.player play];
+                    [self.iasWrapper recordAdPlayingEvent];
                 }
             });
             break;
@@ -286,7 +295,6 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.shouldPlay = NO;
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearComplete];
     [self.delegate videoClientDidReachEnd:self];
-    [[LoopMeDVSDKWrapper sharedInstance] adComplete:self.configuration.adIDVAST];
     
     if ([self.vastUIView endCardImage]) {
         [self showEndCard];
@@ -372,7 +380,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (void)willAppear {
     [self.delegate videoClient:self setupView:self.videoView];
     if (!self.skipped) {
-        [[LoopMeDVSDKWrapper sharedInstance] adImpression:self.configuration.adIDVAST];
         [self play];
         
         LoopMeSkipOffset skipOffset = [self.delegate skipOffset];
@@ -422,6 +429,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)setMute:(BOOL)mute {
     self.player.volume = (mute) ? 0.0f : 1.0f;
+    [self.iasWrapper recordAdVolumeChangeEvent:self.player.volume];
 }
 
 - (void)seekToTime:(double)time {
@@ -447,15 +455,14 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.player play];
     [self.vastUIView showEndCard:NO];
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearStart];
-    
-    [[LoopMeDVSDKWrapper sharedInstance] adPlaying:self.configuration.adIDVAST];
+    [self.iasWrapper recordAdPlayingEvent];
 }
 
 - (void)pause {
     self.shouldPlay = NO;
     [self.player pause];
     
-    [[LoopMeDVSDKWrapper sharedInstance] adPaused:self.configuration.adIDVAST];
+    [self.iasWrapper recordAdPausedEvent];
 }
 
 - (void)skip {
@@ -481,10 +488,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)uiViewMuted:(BOOL)mute {
     [self.eventSender trackEvent: mute ? LoopMeVASTEventTypeLinearMute : LoopMeVASTEventTypeLinearUnmute];
-    if (mute) {
-        [[LoopMeDVSDKWrapper sharedInstance] adMute:self.configuration.adIDVAST];
-    }
-    
     [self setMute:mute];
 }
 

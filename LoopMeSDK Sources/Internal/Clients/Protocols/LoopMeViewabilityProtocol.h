@@ -15,4 +15,4 @@
 
 @end
 
-#endif /* LoopMeViewabilityProtocol_h */
+#endif

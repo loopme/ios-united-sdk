@@ -35,6 +35,10 @@ const struct LoopMeVPAIDViewModeStruct LoopMeVPAIDViewMode = {
 
 #pragma mark - Life Cycle
 
+- (void)dealloc {
+    [self stopActionTimeOutTimer];
+}
+
 - (instancetype)initWithDelegate:(id<LoopMeVpaidProtocol>)deleagate jsContext:(JSContext *)context {
     if (self = [super init]) {
         _delegate = deleagate;

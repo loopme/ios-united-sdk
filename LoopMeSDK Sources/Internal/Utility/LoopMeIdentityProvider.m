@@ -14,15 +14,11 @@
 #import "LoopMeIdentityProvider.h"
 #import "LoopMeLogging.h"
 
-//typedef enum : NSUInteger {
-//    Phone = 4,
-//    Tablet = 5
-//} LoopMeORTBDeviceType;
-
 typedef NS_ENUM(NSUInteger, LoopMeORTBDeviceType) {
     LoopMeORTBDeviceTypePhone = 4,
     LoopMeORTBDeviceTypeTablet = 5,
 };
+
 @implementation LoopMeIdentityProvider
 
 #pragma mark - Class Methods

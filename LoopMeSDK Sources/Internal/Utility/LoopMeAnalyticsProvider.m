@@ -1,5 +1,6 @@
 //
 //  AnalyticsProvider.m
+//  LoopMeSDK
 //
 //  Created by Bohdan on 2/29/16.
 //  Copyright © 2016 LoopMe. All rights reserved.
@@ -38,7 +39,6 @@ static NSTimeInterval const kLoopMeAnalyticsSendInterval = 900;
 - (void)dealloc {
     [_senderTimer invalidate];
     _senderTimer = nil;
-//    [self.session invalidateAndCancel];
 }
 
 - (instancetype)init {

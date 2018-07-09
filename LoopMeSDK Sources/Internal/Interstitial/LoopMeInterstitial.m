@@ -16,6 +16,7 @@
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAnalyticsProvider.h"
+#import "LoopMeGDPRTools.h"
 
 static NSString * const kLoopMeIntegrationTypeNormal = @"normal";
 static const NSTimeInterval kLoopMeTimeToReload = 900;
@@ -50,16 +51,20 @@ static const int kLoopMeLoadCounter = 3;
 #pragma mark - Life Cycle
 
 - (void)dealloc {
+    [self.timerToReload invalidate];
+    self.timerToReload = nil;
     self.interstitial1 = nil;
     self.interstitial2 = nil;
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                       delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+    return [self initWithAppKey:appKey viewControllerForPresentationGDPRWindow:viewController  preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
               preferredAdTypes:(LoopMeAdType)adTypes
                       delegate:(id<LoopMeInterstitialDelegate>)delegate {
     if (!appKey) {
@@ -71,6 +76,13 @@ static const int kLoopMeLoadCounter = 3;
         LoopMeLogDebug(@"Block iOS versions less then 10.0");
         return nil;
     }
+    
+    if (!viewController) {
+        LoopMeLogError(@"viewController cann't be nil");
+        return nil;
+    }
+    
+    [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:viewController];
     
     if (self = [super init]) {
         _interstitial1 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self];
@@ -94,14 +106,16 @@ static const int kLoopMeLoadCounter = 3;
 #pragma mark - Class Methods
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                                              delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey delegate:delegate];
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey viewControllerForPresentationGDPRWindow:viewController delegate:delegate];
 }
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                       preferredAdTypes:(LoopMeAdType)adTypes
                               delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate];
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey viewControllerForPresentationGDPRWindow:viewController preferredAdTypes:adTypes delegate:delegate];
 }
 
 #pragma mark - Private
@@ -122,6 +136,10 @@ static const int kLoopMeLoadCounter = 3;
 - (BOOL)isAutoLoadingEnabled {
     BOOL responseAutoLoading = [[NSUserDefaults standardUserDefaults] boolForKey:LOOPME_USERDEFAULTS_KEY_AUTOLOADING];
     return (_autoLoadingEnabled && responseAutoLoading);
+}
+
+- (void)loadURL:(NSURL *)url {
+    [self.interstitial1 loadURL:url];
 }
 
 - (void)loadAd {

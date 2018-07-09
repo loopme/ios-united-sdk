@@ -13,7 +13,8 @@ static const NSString *kLoopMeCampaign = @"campaign";
 static const NSString *kLoopMeLineItem = @"lineitem";
 static const NSString *kLoopMeCreative = @"id";
 static const NSString *kLoopMeAPP = @"appname";
-static const NSString *kLoopMePlacement = @"PLACEMENT";
+static const NSString *kLoopMeDeveloper = @"developer";
+static const NSString *kLoopMeCompany = @"company";
 
 @interface LoopMeGlobalSettings : NSObject
 

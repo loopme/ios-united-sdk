@@ -43,9 +43,9 @@
 		01980CFF1ABB39F900513556 /* LDInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01980CE71ABB39F900513556 /* LDInterstitialViewController.m */; };
 		01980D001ABB39F900513556 /* LDScrollableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01980CE91ABB39F900513556 /* LDScrollableViewController.m */; };
 		01980D011ABB39F900513556 /* LDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01980CEB1ABB39F900513556 /* LDViewController.m */; };
-		47116DED20810AD10034546F /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 47116DEA20810AD10034546F /* LoopMeResources.bundle */; };
-		47116DEF20810AD10034546F /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47116DEC20810AD10034546F /* LoopMeUnitedSDK.framework */; };
 		47116DF120810C240034546F /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 47116DF020810C240034546F /* libxml2.tbd */; };
+		47431E7720F3ABA8006ED298 /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 47431E7520F3ABA7006ED298 /* LoopMeResources.bundle */; };
+		47431E7820F3ABA8006ED298 /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47431E7620F3ABA7006ED298 /* LoopMeUnitedSDK.framework */; };
 		477789101D2F8805003533BC /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4777890F1D2F8805003533BC /* GLKit.framework */; };
 		477789121D2F880B003533BC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477789111D2F880B003533BC /* OpenGLES.framework */; };
 		477789141D2F8862003533BC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477789131D2F8862003533BC /* CoreMotion.framework */; };
@@ -150,9 +150,9 @@
 		01980CE91ABB39F900513556 /* LDScrollableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDScrollableViewController.m; sourceTree = "<group>"; };
 		01980CEA1ABB39F900513556 /* LDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDViewController.h; sourceTree = "<group>"; };
 		01980CEB1ABB39F900513556 /* LDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDViewController.m; sourceTree = "<group>"; };
-		47116DEA20810AD10034546F /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
-		47116DEC20810AD10034546F /* LoopMeUnitedSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoopMeUnitedSDK.framework; sourceTree = "<group>"; };
 		47116DF020810C240034546F /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		47431E7520F3ABA7006ED298 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
+		47431E7620F3ABA7006ED298 /* LoopMeUnitedSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoopMeUnitedSDK.framework; sourceTree = "<group>"; };
 		4777890F1D2F8805003533BC /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		477789111D2F880B003533BC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		477789131D2F8862003533BC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -197,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47116DF120810C240034546F /* libxml2.tbd in Frameworks */,
+				47431E7820F3ABA8006ED298 /* LoopMeUnitedSDK.framework in Frameworks */,
 				6F71AABD199112DE009F6D99 /* MessageUI.framework in Frameworks */,
 				6F71AABF199112E2009F6D99 /* StoreKit.framework in Frameworks */,
 				EFE19E3C1A09320500BA3FE9 /* AVFoundation.framework in Frameworks */,
@@ -209,7 +210,6 @@
 				6F71AA7C19910FD1009F6D99 /* UIKit.framework in Frameworks */,
 				6F71AA7819910FD1009F6D99 /* Foundation.framework in Frameworks */,
 				477789141D2F8862003533BC /* CoreMotion.framework in Frameworks */,
-				47116DEF20810AD10034546F /* LoopMeUnitedSDK.framework in Frameworks */,
 				6F71AA7A19910FD1009F6D99 /* CoreGraphics.framework in Frameworks */,
 				477789121D2F880B003533BC /* OpenGLES.framework in Frameworks */,
 				477789101D2F8805003533BC /* GLKit.framework in Frameworks */,
@@ -340,20 +340,20 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		47116DE820810AD10034546F /* LoopMeUnitedSDK.embeddedframework */ = {
+		47431E7320F3ABA7006ED298 /* LoopMeUnitedSDK.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
-				47116DE920810AD10034546F /* Resources */,
-				47116DEC20810AD10034546F /* LoopMeUnitedSDK.framework */,
+				47431E7420F3ABA7006ED298 /* Resources */,
+				47431E7620F3ABA7006ED298 /* LoopMeUnitedSDK.framework */,
 			);
 			name = LoopMeUnitedSDK.embeddedframework;
-			path = ../LoopMeUnitedSDK.embeddedframework;
+			path = "../../loopme-ios-sdk-release/LoopMeUnitedSDK.embeddedframework";
 			sourceTree = "<group>";
 		};
-		47116DE920810AD10034546F /* Resources */ = {
+		47431E7420F3ABA7006ED298 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				47116DEA20810AD10034546F /* LoopMeResources.bundle */,
+				47431E7520F3ABA7006ED298 /* LoopMeResources.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -380,8 +380,8 @@
 		6F71AA7619910FD1009F6D99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				47431E7320F3ABA7006ED298 /* LoopMeUnitedSDK.embeddedframework */,
 				47116DF020810C240034546F /* libxml2.tbd */,
-				47116DE820810AD10034546F /* LoopMeUnitedSDK.embeddedframework */,
 				477789131D2F8862003533BC /* CoreMotion.framework */,
 				477789111D2F880B003533BC /* OpenGLES.framework */,
 				4777890F1D2F8805003533BC /* GLKit.framework */,
@@ -536,7 +536,7 @@
 				EFDB8DCF1AA86BD2005CE218 /* bg_iPad_main@2x.png in Resources */,
 				6F71AA9319910FD1009F6D99 /* Images.xcassets in Resources */,
 				0120CD4019BDD99000C7F0D8 /* icon_114x114.png in Resources */,
-				47116DED20810AD10034546F /* LoopMeResources.bundle in Resources */,
+				47431E7720F3ABA8006ED298 /* LoopMeResources.bundle in Resources */,
 				6F71AA8219910FD1009F6D99 /* InfoPlist.strings in Resources */,
 				0120CD4A19BDDA8200C7F0D8 /* splash_768x1024.png in Resources */,
 				EFDB8DD61AA878B6005CE218 /* texture_highlighted.png in Resources */,

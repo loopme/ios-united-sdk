@@ -1,5 +1,6 @@
 //
 //  LoopMeErrorSender.m
+//  LoopMeSDK
 //
 //  Created by Bohdan on 12/11/15.
 //  Copyright © 2015 LoopMe. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  LoopMeMaximizedViewController.h
-//  LoopMe
+//  LoopMeSDK
 //
 //  Created by Kogda Bogdan on 9/7/15.
 //  Copyright (c) 2015 LoopMe. All rights reserved.

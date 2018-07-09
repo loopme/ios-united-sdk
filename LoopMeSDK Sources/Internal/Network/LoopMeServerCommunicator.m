@@ -51,7 +51,6 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
 
 - (void)dealloc {
     [self.sessionDataTask cancel];
-//    [self.session invalidateAndCancel];
 }
 
 - (instancetype)initWithDelegate:(id<LoopMeServerCommunicatorDelegate>)delegate {
@@ -104,8 +103,13 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
     if (method) {
         [request setHTTPMethod:method];
     }
+    
+    if (body) {
+        [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:body];
+    }
+    
     [request setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
-    [request setHTTPBody:body];
     
     self.sessionDataTask = [self.session dataTaskWithRequest:request];
     [self.sessionDataTask resume];
@@ -120,6 +124,8 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
     self.loading = NO;
     [self.sessionDataTask cancel];
     self.sessionDataTask = nil;
+    [self.session invalidateAndCancel];
+    self.session = nil;
 }
 
 #pragma mark - NSURLSession delegate
@@ -135,8 +141,6 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
             [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeServer errorMessage:@"Time out" appkey:[self appKey]];
         } else {
             [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeServer errorMessage:[NSString stringWithFormat:@"Response code: %ld", (long)error.code] appkey:[self appKey]];
-            //-----??????-----
-            //error = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeWrapperError];
         }
         [self.delegate serverCommunicator:self didFailWithError:error];
     } else {
@@ -178,7 +182,7 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
     if (statusCode != 200) {
         if (statusCode != 204) {
-            [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeServer errorMessage:[NSString stringWithFormat:@"Response code: %ld", (long)statusCode] appkey:[self appKey]];
+            [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeServer errorMessage:[NSString stringWithFormat:@"Response code: %ld", statusCode] appkey:[self appKey]];
         }
         self.loading = NO;
         [self.delegate serverCommunicator:self didFailWithError:[LoopMeError errorForStatusCode:statusCode]];

@@ -1,6 +1,6 @@
 //
 //  LoopMe360ViewController.m
-//  LoopMe
+//  LoopMeSDK
 //
 //  Created by Bohdan on 4/25/16.
 //  Copyright © 2016 LoopMe. All rights reserved.

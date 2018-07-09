@@ -1,6 +1,6 @@
 //
 //  LoopMeAdType.h
-//  Tester
+//  LoopMeSDK
 //
 //  Created by Bohdan on 3/21/18.
 //  Copyright © 2018 LoopMe. All rights reserved.

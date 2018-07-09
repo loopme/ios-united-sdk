@@ -10,6 +10,7 @@
 #import <LOOMoatMobileAppKit/LOOMoatAnalytics.h>
 #import <LOOMoatMobileAppKit/LOOMoatWebTracker.h>
 
+#import "LoopMeIASWrapper.h"
 #import "LoopMeVPAIDClient.h"
 #import "LoopMeVPAIDAdDisplayController.h"
 #import "LoopMeAdConfiguration.h"
@@ -20,7 +21,6 @@
 #import "LoopMeError.h"
 #import "LoopMeLogging.h"
 #import "LoopMeAdWebView.h"
-#import "LoopMeDVSDKWrapper.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeDefinitions.h"
 #import "LoopMeCloseButton.h"
@@ -35,7 +35,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     LoopMeVPAIDVideoClientDelegate,
     LoopMeVASTImageDownloaderDelegate,
     LoopMeVpaidProtocol,
-    DVVideoSDKDelegate,
     UIWebViewDelegate,
     LoopMeViewabilityProtocol
 >
@@ -67,6 +66,8 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 @property (nonatomic, assign) double currentVolume;
 @property (nonatomic, assign) int showCloseButtonTimerCounter;
 
+@property (nonatomic, strong) LoopMeIASWrapper *iasWarpper;
+
 - (void)handleVpaidStop;
 
 @end
@@ -94,9 +95,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         super.visible = visible;
         if (visible) {
             [self.vpaidClient resumeAd];
-            if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-                [[LoopMeDVSDKWrapper sharedInstance] adResumedForView:self.delegate.containerView adId:self.adConfiguration.adIDVAST];
-            }
         } else {
             [self.vpaidClient pauseAd];
         }
@@ -105,7 +103,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
 - (double)videoDuration {
     if (_videoDuration <= 0) {
-        //_videoDuration = self.vpaidClient.getAdDuration;
         _videoDuration = [self.adConfiguration duration].value;
     }
     return _videoDuration;
@@ -135,10 +132,7 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     if (self) {
 
         self.webView.delegate = self;
-        
-        if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-            [[LoopMeDVSDKWrapper sharedInstance] initWithAPIKey:LOOPME_DV_API_KEY];
-        }
+        _iasWarpper = [[LoopMeIASWrapper alloc] init];
         
         if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
             LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
@@ -179,10 +173,7 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     self.needCloseCallback = YES;
     self.isNotPlay = YES;
     
-    [[LoopMeDVSDKWrapper sharedInstance] clean];
-    
     if (self.adConfiguration.assetLinks.vpaidURL) {
-        
         NSString *htmlString = [self stringFromFile:@"loopmead" withExtension:@"html"];
         
         if (htmlString) {
@@ -198,6 +189,14 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         
         self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeWebViewLoadingTimeout target:self selector:@selector(cancelWebView) userInfo:nil repeats:NO];
     } else {
+        if ([self.adConfiguration useTracking:LoopMeTrackerName.ias]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.iasWarpper initWithPartnerVersion:LOOPME_SDK_VERSION creativeType:self.adConfiguration.creativeType adConfiguration:self.adConfiguration];
+                [self.iasWarpper registerAdView:self.delegate.containerView];
+                [self.iasWarpper registerFriendlyObstruction:self.webView];
+            });
+        }
+        
         self.isNeedJSInject = NO;
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -214,18 +213,28 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 }
 
 - (void)displayAd {
+    if ([self.adConfiguration useTracking:LoopMeTrackerName.ias]) {
+        [self.iasWarpper recordReadyEvent];
+        [self.iasWarpper recordAdLoadedEvent];
+    }
     self.isNotPlay = NO;
     self.isDeferredAdStopped = NO;
     
     ((LoopMeVPAIDVideoClient *)self.videoClient).viewController = [self.delegate viewControllerForPresentation];
     CGRect adjustedFrame = [self adjusFrame:self.delegate.containerView.bounds];
-    self.webView.frame = adjustedFrame;
     [self.videoClient adjustViewToFrame:adjustedFrame];
     [self.delegate.containerView addSubview:self.webView];
     [self.delegate.containerView bringSubviewToFront:self.webView];
     
-//    [self.vpaidClient resizeAdWithWidth:adjustedFrame.size.width height:adjustedFrame.size.height viewMode:LoopMeVPAIDViewMode.fullscreen];
+    NSArray *constraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
+    NSArray *constraintsV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
+    [self.delegate.containerView addConstraints:constraintsH];
+    [self.delegate.containerView addConstraints:constraintsV];
+    
     [(LoopMeVPAIDVideoClient *)self.videoClient willAppear];
+    
+    //AVID
+    [self.iasWarpper recordAdImpressionEvent];
 }
 
 - (void)closeAd {
@@ -247,6 +256,12 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         //TODO check on skip
         [self.vpaidClient stopAd];
     }
+    
+    if ([self.adConfiguration useTracking:LoopMeTrackerName.ias]) {
+        [self.iasWarpper clean];
+        [self.iasWarpper unregisterAdView:self.webView];
+        [self.iasWarpper endSession];
+    }
 }
 
 - (void)closeAdByButton {
@@ -266,10 +281,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
 - (void)stopHandlingRequests {
     [super stopHandlingRequests];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
-//        [self.webView stopLoading];
-//    });
 }
 
 - (void)moveView:(BOOL)hideWebView {
@@ -295,10 +306,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     }
     
     if (!self.isNotPlay) {
-        if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-            [[LoopMeDVSDKWrapper sharedInstance] stopMeasuringAd:self.delegate.containerView];
-        }
-        
         [self.vpaidClient stopActionTimeOutTimer];
         [self stopHandlingRequests];
         self.visible = NO;
@@ -447,15 +454,10 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         [self stopHandlingRequests];
         NSError *error = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeVPAIDError];
         [self.delegate adDisplayController:self didFailToLoadAdWithError:error];
-    } else {
-        /////////CHECK THIS SHIT
-//        [self handleVpaidStop];
-        //////////
     }
-   
     
     [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeJS errorMessage:message appkey:self.adConfiguration.appKey];
-//    [self.vastEventTracker trackError:LoopMeVPAIDErrorCodeVPAIDError];
+    [self.vastEventTracker trackError:LoopMeVPAIDErrorCodeVPAIDError];
 }
 
 - (void)vpaidAdLoaded {
@@ -465,11 +467,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     self.webViewTimeOutTimer = nil;
     self.currentVolume = [self.vpaidClient getAdVolume];
     self.lastVolume = self.currentVolume;
-    
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] startMeasuringAd:self.delegate.containerView];
-        [[LoopMeDVSDKWrapper sharedInstance] adLoadedView:self.delegate.containerView withCallback:self vastFile:self.adConfiguration.vastFileContent adId:self.adConfiguration.adIDVAST];
-    }
     
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd:self];
@@ -482,17 +479,9 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
 - (void)vpaidAdStarted {
     LoopMeLogDebug(@"VPAID ad started");
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adStartedForView:self.delegate.containerView adId:self.adConfiguration.adIDVAST];
-    }
     [self.vpaidClient stopActionTimeOutTimer];
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearCreativeView];
     
-//    if (self.isVideoVPAID) {
-//        //count 25%
-//        duration = (duration / 4);
-//    }
-    //3 is delta for lags before receive events
     dispatch_async(dispatch_get_main_queue(), ^{
         self.showCloseButtonTimerCounter = 0;
          self.showCloseButtonTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(showCloseButtonTimerTick) userInfo:nil repeats:YES];
@@ -500,16 +489,10 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 }
 
 - (void)vpaidAdPaused {
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adPaused:self.adConfiguration.adIDVAST];
-    }
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearPause];
 }
 
 - (void)vpaidAdPlaying {
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adPlaying:self.adConfiguration.adIDVAST];
-    }
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearResume];
 }
 
@@ -523,25 +506,14 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 }
 
 - (void)vpaidAdStopped {
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adStopped:self.adConfiguration.adIDVAST];
-    }
     [self handleVpaidStop];
 }
 
 - (void)vpaidAdVolumeChanged {
     self.currentVolume = [self.vpaidClient getAdVolume];
     
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adVolumeChange:self.adConfiguration.adIDVAST newVolumeLevel:self.currentVolume];
-    }
-    
     if (self.currentVolume == 0 && self.lastVolume > 0) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearMute];
-        
-        if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-            [[LoopMeDVSDKWrapper sharedInstance] adMute:self.adConfiguration.adIDVAST];
-        }
     }
     if (self.currentVolume > 0 && self.lastVolume == 0) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearUnmute];
@@ -566,10 +538,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     if (adRemainingTime < 0) {
         return;
     }
-    
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adDurationChange:self.adConfiguration.adIDVAST newDuration:[self.vpaidClient getAdDuration]];
-    }
     double currentTime = self.videoDuration - self.vpaidClient.getAdRemainingTime;
     [self.vastEventTracker setCurrentTime:currentTime];
 }
@@ -581,9 +549,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
 - (void)vpaidAdImpression {
     [self.impressionTimeOutTimer invalidate];
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adImpression:self.adConfiguration.adIDVAST];
-    }
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeImpression];
 }
 
@@ -595,31 +560,18 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.showCloseButtonTimer invalidate];
     });
-    
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adFirstQuartile:self.adConfiguration.adIDVAST];
-    }
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearFirstQuartile];
 }
 
 - (void)vpaidAdVideoMidpoint {
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adMidpoint:self.adConfiguration.adIDVAST];
-    }
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearMidpoint];
 }
 
 - (void)vpaidAdVideoThirdQuartile {
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adThirdQuartile:self.adConfiguration.adIDVAST];
-    }
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearThirdQuartile];
 }
 
 - (void)vpaidAdVideoComplete {
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adComplete:self.adConfiguration.adIDVAST];
-    }
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearComplete];
 }
 
@@ -639,14 +591,11 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 }
 
 - (void)vpaidAdInteraction:(NSString *)eventID {
-    NSLog(@"VPAID Ad interaction: %@", eventID);
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adEvent:eventID eventInfo:nil adId:self.adConfiguration.adIDVAST];
-    }
+    LoopMeLogDebug(@"VPAID Ad interaction: %@", eventID);
 }
 
 - (void)vpaidAdUserAcceptInvitation {
-    NSLog(@"VPAID Ad UserAcceptInvitation");
+    LoopMeLogDebug(@"VPAID Ad UserAcceptInvitation");
 }
 
 - (void)vpaidAdUserMinimize {
@@ -686,11 +635,6 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
 - (void)videoClientDidLoadVideo:(LoopMeVPAIDVideoClient *)client {
     LoopMeLogInfo(@"Did load video ad");
-    
-    if ([self.adConfiguration useTracking:LoopMeTrackerName.dv]) {
-        [[LoopMeDVSDKWrapper sharedInstance] adLoadedView:self.delegate.containerView withCallback:self vastFile:self.adConfiguration.vastFileContent adId:self.adConfiguration.adIDVAST];
-    }
-    
     if ([self.delegate respondsToSelector:
          @selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd:self];
@@ -722,6 +666,7 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 - (void)videoClient:(LoopMeVPAIDVideoClient *)client setupView:(UIView *)view {
     dispatch_async(dispatch_get_main_queue(), ^{
         view.frame = [self adjusFrame:self.delegate.containerView.bounds];
+        [self.iasWarpper registerFriendlyObstruction:view];
         [[self.delegate containerView] addSubview:view];
     });
 }

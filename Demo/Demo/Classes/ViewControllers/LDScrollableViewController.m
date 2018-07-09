@@ -43,6 +43,7 @@ const int kLDAdIndex = 5;
     // Intializing `LoopMeAdView`
     self.mpuVideo = [LoopMeAdView adViewWithAppKey:TEST_APP_KEY_MPU
                                              frame:(CGRect){10, 0, kLDAdCellWidth, kLDAdCellHeight}
+           viewControllerForPresentationGDPRWindow: self
                                         scrollView:nil
                                           delegate:self];
     

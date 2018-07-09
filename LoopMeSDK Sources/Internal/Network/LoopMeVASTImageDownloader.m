@@ -21,6 +21,10 @@
 
 @implementation LoopMeVASTImageDownloader
 
+- (void)dealloc {
+    
+}
+
 - (instancetype)initWithDelegate:(id<LoopMeVASTImageDownloaderDelegate>)delegate {
     self = [super init];
     if (self) {

@@ -21,7 +21,7 @@
 
         self.scrollView.bounces = NO;
         self.scrollView.scrollEnabled = NO;
-        self.suppressesIncrementalRendering = YES;
+        self.suppressesIncrementalRendering = NO;
         self.clipsToBounds = NO;
         self.dataDetectorTypes = UIDataDetectorTypeAll;
 

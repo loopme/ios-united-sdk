@@ -1,5 +1,6 @@
 //
 //  LoopMeVastXMLParser.m
+//  LoopMeSDK
 //
 //  Copyright © 2016 LoopMe. All rights reserved.
 //
@@ -39,7 +40,7 @@
     if (self = [super init]) {
         self.xmlDoc = [[DDXMLDocument alloc] initWithData:data options:DDXMLDocumentXMLKind error:error];
         
-        //Because KissXML can't work with namespaces
+        //KissXML can't work with namespaces
         DDXMLNode * _Nullable element = [self.xmlDoc rootElement];
         while (element != nil) {
             if ([element isKindOfClass:[DDXMLElement class]]) {

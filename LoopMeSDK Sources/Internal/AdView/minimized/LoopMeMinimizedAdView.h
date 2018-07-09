@@ -1,6 +1,6 @@
 //
 //  LoopMeMinimizedView.h
-//  LoopMeSDKTester
+//  LoopMeSDK
 //
 //  Created by Dmitriy on 5/13/15.
 //  Copyright (c) 2015 Injectios. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  LoopMeVastEventSender.m
-//  NewTestApp
+//  LoopMeSDK
 //
 //  Created by Bohdan on 6/15/16.
 //  Copyright © 2016 LoopMe. All rights reserved.
@@ -11,7 +11,7 @@
 #import "LoopMeVASTProgressEvent.h"
 #import "LoopMeVASTTrackingLinks.h"
 #import "LoopMeVPAIDError.h"
-#import "LMVASTMacroProcessor.h"
+#import "LoopMeVASTMacroProcessor.h"
 #import "LoopMeViewabilityProtocol.h"
 
 @interface LoopMeVASTEventTracker ()
@@ -107,7 +107,7 @@
         
         for (NSString *URLstring in eventURLs) {
             NSURL *URL = [NSURL URLWithString:URLstring];
-            URL = [LMVASTMacroProcessor macroExpandedURLForURL:URL errorCode:0 videoTimeOffset:self.currentTime videoAssetURL:nil];
+            URL = [LoopMeVASTMacroProcessor macroExpandedURLForURL:URL errorCode:0 videoTimeOffset:self.currentTime videoAssetURL:nil];
             [[[NSURLSession sharedSession] dataTaskWithURL:URL] resume];
         }
         
@@ -127,7 +127,7 @@
     NSSet *errorTemplates = self.links.errorLinkTemplates;
     NSError *error = [LoopMeVPAIDError errorForStatusCode:code];
     for (NSString *template in errorTemplates) {
-        NSURL *URL = [LMVASTMacroProcessor macroExpandedURLForURL:[NSURL URLWithString:template] errorCode:error.code];
+        NSURL *URL = [LoopMeVASTMacroProcessor macroExpandedURLForURL:[NSURL URLWithString:template] errorCode:error.code];
         [[[NSURLSession sharedSession] dataTaskWithURL:URL] resume];
     }
 }

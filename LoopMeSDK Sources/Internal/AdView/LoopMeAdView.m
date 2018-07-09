@@ -20,6 +20,7 @@
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAnalyticsProvider.h"
+#import "LoopMeGDPRTools.h"
 
 @interface LoopMeAdView ()
 <
@@ -65,6 +66,7 @@
 
 - (instancetype)initWithAppKey:(NSString *)appKey
                          frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                     scrollView:(UIScrollView *)scrollView
               preferredAdTypes:(LoopMeAdType)preferredAdTypes
                       delegate:(id<LoopMeAdViewDelegate>)delegate {
@@ -80,6 +82,13 @@
             LoopMeLogDebug(@"Block iOS versions less then 10.0");
             return nil;
         }
+        
+        if (!viewController) {
+            LoopMeLogError(@"viewController cann't be nil");
+            return nil;
+        }
+        
+        [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:viewController];
         
         _appKey = appKey;
         _delegate = delegate;
@@ -126,7 +135,7 @@
         }
         [self.maximizedController show];
         
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
             [self.adDisplayController moveView:NO];
             [self.adDisplayController expandReporting];
         } else {
@@ -140,33 +149,37 @@
 
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                         scrollView:(UIScrollView *)scrollView
                           delegate:(id<LoopMeAdViewDelegate>)delegate {
-    return [[self alloc] initWithAppKey:appKey frame:frame scrollView:scrollView preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+    return [[self alloc] initWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:scrollView preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
 }
 
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                           delegate:(id<LoopMeAdViewDelegate>)delegate {
-    return [LoopMeAdView adViewWithAppKey:appKey frame:frame scrollView:nil preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+    return [LoopMeAdView adViewWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:nil preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
 }
 
 
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                         scrollView:(UIScrollView *)scrollView
                   preferredAdTypes:(LoopMeAdType)adTypes
                           delegate:(id<LoopMeAdViewDelegate>)delegate {
     
-    return [[self alloc] initWithAppKey:appKey frame:frame scrollView:scrollView preferredAdTypes:adTypes delegate:delegate];
+    return [[self alloc] initWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:scrollView preferredAdTypes:adTypes delegate:delegate];
 }
 
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                   preferredAdTypes:(LoopMeAdType)preferredAdTypes
                           delegate:(id<LoopMeAdViewDelegate>)delegate {
     
-    return [LoopMeAdView adViewWithAppKey:appKey frame:frame scrollView:nil preferredAdTypes:preferredAdTypes delegate:delegate];
+    return [LoopMeAdView adViewWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:nil preferredAdTypes:preferredAdTypes delegate:delegate];
 }
 
 #pragma mark - LifeCycle
@@ -229,7 +242,7 @@
 }
 
 - (void)willResignActive:(NSNotification *)notification {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         self.adDisplayController.visible = NO;
     } else {
         self.adDisplayControllerVPAID.visible = NO;
@@ -276,7 +289,7 @@
 
 - (void)setAdVisible:(BOOL)visible {
     if (self.isReady) {
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
             self.adDisplayController.forceHidden = !visible;
             self.adDisplayController.visible = visible;
         } else {
@@ -341,7 +354,7 @@
         self.minimized = YES;
         [self.minimizedView show];
         
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
             [self.adDisplayController moveView:YES];
         } else {
             [self.adDisplayControllerVPAID moveView:YES];
@@ -354,7 +367,7 @@
         self.minimized = NO;
         [self.minimizedView hide];
         
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
             [self.adDisplayController moveView:NO];
         } else {
             [self.adDisplayControllerVPAID moveView:NO];
@@ -370,7 +383,7 @@
 - (void)removeMaximizedView {
     [self.maximizedController hide];
     
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         [self.adDisplayController moveView:NO];
         [self.adDisplayController collapseReporting];
     } else {
@@ -391,7 +404,7 @@
     self.loading = NO;
     self.ready = NO;
     
-    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVAST) {
         [self.adDisplayControllerVPAID.vastEventTracker trackError:error.code];
     }
     
@@ -405,7 +418,7 @@
 
 - (void)updateVisibility {
     if (!self.scrollView) {
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
             self.adDisplayController.visible = YES;
         } else {
             self.adDisplayControllerVPAID.visible = YES;
@@ -420,7 +433,7 @@
 
 - (void)updateAdVisibilityWhenScroll {
     if (!self.isVisibilityUpdated) {
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
             self.adDisplayController.visible = YES;
         } else {
             self.adDisplayControllerVPAID.visible = YES;
@@ -438,7 +451,7 @@
 - (void)closeAd {
     [self.minimizedView removeFromSuperview];
     [self.maximizedController hide];
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         [self.adDisplayController closeAd];
     } else {
         [self.adDisplayControllerVPAID closeAd];
@@ -448,7 +461,7 @@
 }
 
 - (void)displayAd {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         [self.adDisplayController displayAd];
     } else {
         [self.adDisplayControllerVPAID displayAd];
@@ -466,7 +479,7 @@
 }
 
 - (void)timeOut {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         [self.adDisplayController stopHandlingRequests];
     } else {
         [self.adDisplayControllerVPAID stopHandlingRequests];
@@ -498,7 +511,7 @@
         [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug = self.appKey;
     }
     
-    if (adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         [[LoopMeGlobalSettings sharedInstance].adIds setObject:adConfiguration.adIdsForMOAT forKey:self.appKey];
         [self.adDisplayController setAdConfiguration:self.adConfiguration];
         [self.adDisplayController loadAdConfiguration];
@@ -508,7 +521,7 @@
 }
 
 - (void)adManagerDidReceiveAd:(LoopMeAdManager *)manager {
-    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVAST) {
         if (!self.adConfiguration) {
             NSError *error = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeUndefined];
             [self failedLoadingAdWithError:error];
@@ -547,7 +560,7 @@
 #pragma mark - LoopMeMaximizedAdViewDelegate
 
 - (void)maximizedAdViewDidPresent:(LoopMeMaximizedViewController *)maximizedViewController {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         [self.adDisplayController layoutSubviews];
         [self setAdVisible:YES];
     } else {
@@ -556,7 +569,7 @@
 }
 
 - (void)maximizedViewControllerShouldRemove:(LoopMeMaximizedViewController *)maximizedViewController {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVPAID) {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {
         [self.adDisplayController moveView:NO];
     } else {
         [self.adDisplayControllerVPAID moveView:NO];

@@ -1,5 +1,6 @@
 //
 //  AnalyticsProvider.h
+//  LoopMeSDK
 //
 //  Created by Bohdan on 2/29/16.
 //  Copyright © 2016 LoopMe. All rights reserved.

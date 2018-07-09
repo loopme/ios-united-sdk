@@ -1,6 +1,6 @@
 //
 //  LoopMeAdConfiguration.m
-//  LoopMe
+//  LoopMeSDK
 //
 //  Created by Dmitriy Lihachov on 07/11/13.
 //  Copyright (c) 2013 LoopMe. All rights reserved.
@@ -17,12 +17,14 @@ const int kLoopMeExpireTimeIntervalMinimum = 600;
 // Events
 const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
     .moat = @"moat",
-    .dv = @"dv"
+    .dv = @"dv",
+    .ias = @"ias"
 };
 
 @interface LoopMeAdConfiguration ()
 
 @property (nonatomic) NSArray *measurePartners;
+@property (nonatomic) NSDictionary *jsonMacroses;
 
 @end
 
@@ -58,7 +60,7 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
             
             NSString *crtp = bid[@"ext"][@"crtype"];
             if ([crtp isEqualToString:@"VAST"]) {
-                _creativeType = LoopMeCreativeTypeVPAID;
+                _creativeType = LoopMeCreativeTypeVAST;
             } else if ([crtp containsString:@"MRAID"]) {
                 _creativeType = LoopMeCreativeTypeMRAID;
             } else {
@@ -71,7 +73,7 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
         }
 
         NSData *creativeData = [_creativeContent dataUsingEncoding:NSUTF8StringEncoding];
-        if (_creativeType == LoopMeCreativeTypeVPAID) {
+        if (_creativeType == LoopMeCreativeTypeVAST) {
             [self parseXML:creativeData error:error];
         }
         [self mapAdConfigurationFromDictionary:bid[@"ext"]];
@@ -94,6 +96,16 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
     NSDictionary *jsonMacroses = bid[@"ext"];
     
     _adIdsForMOAT = [NSDictionary dictionaryWithObjectsAndKeys:[[jsonMacroses objectForKey:kLoopMeAdvertiser] stringByRemovingPercentEncoding], @"level1", [[jsonMacroses objectForKey:kLoopMeCampaign] stringByRemovingPercentEncoding], @"level2", [[jsonMacroses objectForKey:kLoopMeLineItem] stringByRemovingPercentEncoding], @"level3", [[bid objectForKey:kLoopMeCreative] stringByRemovingPercentEncoding], @"level4", [[jsonMacroses objectForKey:kLoopMeAPP] stringByRemovingPercentEncoding], @"slicer1", @"", @"slicer2",  nil];
+    
+    
+    NSString *placemantid = [NSString stringWithFormat:@"%@_%@", [[self.jsonMacroses objectForKey:kLoopMeAPP] stringByRemovingPercentEncoding],  self.appKey];
+    
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier] != nil ? [[NSBundle mainBundle] bundleIdentifier] : @"unknown";
+    
+    NSString *anId = kLoopMeIASAnID;
+    NSString *pubId = [NSString stringWithFormat:@"%@_%@", [[self.jsonMacroses objectForKey:kLoopMeCompany] stringByRemovingPercentEncoding], [[self.jsonMacroses objectForKey:kLoopMeDeveloper] stringByRemovingPercentEncoding]];
+    
+    _adIdsForIAS = [NSDictionary dictionaryWithObjectsAndKeys: anId, @"anId", [[self.jsonMacroses objectForKey:kLoopMeAdvertiser] stringByRemovingPercentEncoding], @"advId", [[self.jsonMacroses objectForKey:kLoopMeCampaign] stringByRemovingPercentEncoding], @"campId", pubId, @"pubId", bundleIdentifier, @"chanId", placemantid, @"placementId", bundleIdentifier, @"bundleId",  nil];
 }
 
 - (void)mapAdConfigurationFromDictionary:(NSDictionary *)dictionary {
@@ -122,6 +134,7 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
         autoLoading = [[dictionary objectForKey:@"autoloading"] boolValue];
     }
     [[NSUserDefaults standardUserDefaults] setBool:autoLoading forKey:LOOPME_USERDEFAULTS_KEY_AUTOLOADING];
+
 }
 
 - (void)parseXML:(NSData *)data error:(NSError **)error {
@@ -141,6 +154,10 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
     if ([parser isWrapper]) {
         _adTagURL = [NSURL URLWithString:[parser adTagURL:error]];
         _wrapper = YES;
+    }
+    
+    if (self.isVPAID) {
+        _creativeType = LoopMeCreativeTypeVPAID;
     }
 }
 

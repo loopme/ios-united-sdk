@@ -125,8 +125,7 @@ static NSString * const kLoopMeSafariNavigateHost = @"navigate";
 }
 
 - (void)cancel {
-    //[self.dataTask cancel];
-    //self.dataTask = nil;
+
 }
 
 @end

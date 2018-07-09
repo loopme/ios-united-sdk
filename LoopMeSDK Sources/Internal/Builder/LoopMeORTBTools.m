@@ -1,6 +1,6 @@
 //
 //  LoopMeORTBTools.m
-//  Tester
+//  LoopMeSDK
 //
 //  Created by Bohdan on 4/5/17.
 //  Copyright © 2017 LoopMe. All rights reserved.
@@ -16,6 +16,7 @@
 #import "LoopMeTargeting.h"
 #import "LoopMeIdentityProvider.h"
 #import "LoopMeORTBTools.h"
+#import "LoopMeGDPRTools.h"
 
 static NSString *_userAgent;
 NSString * const kLoopMeInterfaceOrientationPortrait = @"p";
@@ -27,17 +28,26 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     LoopMeDeviceChargeUnknown = -1,
 };
 
+@interface LoopMeORTBTools ()
+
+@property (nonatomic, assign) BOOL isInterstitial;
+
+@end
+
 @implementation LoopMeORTBTools
 
 - (instancetype)initWithAppKey:(NSString *)appKey
                      targeting:(LoopMeTargeting *)targeting
-                    adSpotSize:(CGSize)size integrationType:(NSString *)integrationType {
+                    adSpotSize:(CGSize)size
+               integrationType:(NSString *)integrationType
+                isInterstitial:(BOOL)isInterstitial {
     self = [super init];
     if (self) {
         self.appKey = appKey;
         self.targeting = targeting;
         self.integrationType = integrationType;
         self.size = size;
+        self.isInterstitial = isInterstitial;
     }
     return self;
 }
@@ -50,10 +60,8 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     request[@"imp"] = @[[self impressionObject:self.size integrationType:self.integrationType]];
     request[@"app"] = [self appObject:self.appKey];
     request[@"device"] = [self deviceObject];
-    
-    if (self.targeting) {
-        request[@"user"] = [self userObject:self.targeting];
-    }
+    request[@"regs"] = [self regsObject];
+    request[@"user"] = [self userObject:self.targeting];
     
     request[@"tmax"] = @250;
     request[@"bcat"] = @[@"IAB25-3",
@@ -64,6 +72,19 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     jsonData = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:&error];
     
     return jsonData;
+}
+
+- (NSDictionary *)regsObject {
+    NSMutableDictionary *regs = [[NSMutableDictionary alloc] init];
+    regs[@"coppa"] = @0;
+    if ([[LoopMeGDPRTools sharedInstance] cmpPresent]) {
+        NSString *subject = [[LoopMeGDPRTools sharedInstance] subjectToGDPR];
+        if (subject) {
+            regs[@"ext"] = @{@"gdpr" : subject};
+        }
+    }
+    
+    return regs;
 }
 
 - (NSDictionary *)appObject:(NSString *)appKey {
@@ -79,10 +100,29 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 
 - (NSDictionary *)userObject:(LoopMeTargeting *)targeting {
     NSMutableDictionary *user = [[NSMutableDictionary alloc] init];
-    user[@"gender"] = targeting.genderParameter;
-    user[@"yob"] = @(targeting.yearOfBirth);
-    user[@"keywords"] = targeting.keywords;
     
+    if (targeting) {
+        user[@"gender"] = targeting.genderParameter;
+        user[@"yob"] = @(targeting.yearOfBirth);
+        user[@"keywords"] = targeting.keywords;
+    }
+    
+    NSMutableDictionary *ext = [[NSMutableDictionary alloc] init];
+    
+    ext[@"consent_type"] = @([[LoopMeGDPRTools sharedInstance] consentType]);
+    
+    if ([[LoopMeGDPRTools sharedInstance] userConsentString]) {
+        ext[@"consent"] = [[LoopMeGDPRTools sharedInstance] userConsentString];
+    } else {
+        int gdpr = 0;
+        if ([LoopMeIdentityProvider advertisingTrackingEnabled]) {
+            gdpr = [[LoopMeGDPRTools sharedInstance] isUserConsent] ? 1 : 0;
+        }
+        ext[@"consent"] = @(gdpr);
+    }
+    
+    user[@"ext"] = ext;
+
     return user;
 }
 
@@ -122,7 +162,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     impression[@"id"] = @1;
     impression[@"displaymanager"] = @"LOOPME_SDK";
     impression[@"displaymanagerver"] = LOOPME_SDK_VERSION;
-    impression[@"instl"] = @1; //TODO: now hardcoded
+    impression[@"instl"] = self.isInterstitial ? @1 : @0;
     impression[@"bidfloor"] = @0;
     impression[@"secure"] = @1;
     
@@ -159,11 +199,6 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     video[@"api"] = @[@2, @5];
     video[@"skip"] = @1; // 0 - not, 1 - skippable
     
-//    video[@"placement"] = @[@4]; //@2 = in-banner, 4-in-feed, 5 = interstitial
-    
-//    video[@"playbackmethod"] = @[@1]; //-- ?
-     //playbackend - ??
-    
     return video;
 }
 
@@ -175,8 +210,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     banner[@"id"] = @1;
     banner[@"battr"] = @[@3, @8];
     banner[@"api"] = @[@2, @5];
-//    banner[@"vcm"] = @[@1]; //--?
-    //banner[@"format"] - ??
+    banner[@"expdir"] = @[@5];
     
     return banner;
 }

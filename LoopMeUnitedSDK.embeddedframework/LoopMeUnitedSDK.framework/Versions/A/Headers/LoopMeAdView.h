@@ -1,5 +1,5 @@
 //
-//  Nativevideo.h
+//  LoopMeAdView.h
 //  LoopMeSDK
 //
 //  Created by Kogda Bogdan on 2/13/15.
@@ -12,6 +12,9 @@
 /**
  * AppKey for test purposes
  */
+
+#define kLoopMeExpandableBannerSize CGSizeMake(320, 50)
+#define kLoopMeMPUBannerSize CGSizeMake(300, 250)
 
 static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
 
@@ -37,7 +40,7 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
 
 @property (nonatomic, weak) id<LoopMeAdViewDelegate> delegate;
 
-/*
+/**
  * Enabling minimized mode.
  * Represents copy of original ad added on top of `UIWindow`'s right-bottom corner.
  * Minimized ad appears/disappears on the screen during scrolling when visibility of original ad is changed
@@ -74,8 +77,8 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
 @property (nonatomic, assign, readonly, getter = isReady) BOOL ready;
 
 /**
- * You can filter ads by types.
- * Please include LoopMeAdType.h file.
+ * You can filter ad if you want (video or html) by set this value.
+ * Default value `LoopMeAdTypeAll`.
  */
 @property (nonatomic, assign) LoopMeAdType preferredAdTypes;
 
@@ -86,6 +89,7 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
  */
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                           delegate:(id<LoopMeAdViewDelegate>)delegate;
 
 /**
@@ -96,6 +100,7 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
  */
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                   preferredAdTypes:(LoopMeAdType)preferredAdTypes
                           delegate:(id<LoopMeAdViewDelegate>)delegate;
 
@@ -108,6 +113,7 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
  */
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                         scrollView:(UIScrollView *)scrollView
                           delegate:(id<LoopMeAdViewDelegate>)delegate;
 
@@ -120,6 +126,7 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
  */
 + (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
                              frame:(CGRect)frame
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                         scrollView:(UIScrollView *)scrollView
                   preferredAdTypes:(LoopMeAdType)preferredAdTypes
                           delegate:(id<LoopMeAdViewDelegate>)delegate;

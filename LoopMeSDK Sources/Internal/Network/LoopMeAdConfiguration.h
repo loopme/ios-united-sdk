@@ -1,6 +1,6 @@
 //
 //  LoopMeAdConfiguration.h
-//  LoopMe
+//  LoopMeSDK
 //
 //  Created by Dmitriy Lihachov on 07/11/13.
 //  Copyright (c) 2013 LoopMe. All rights reserved.
@@ -19,6 +19,7 @@ typedef NS_ENUM (NSInteger, LoopMeAdOrientation) {
 
 typedef NS_ENUM (NSInteger, LoopMeCreativeType) {
     LoopMeCreativeTypeVPAID,
+    LoopMeCreativeTypeVAST,
     LoopMeCreativeTypeNormal,
     LoopMeCreativeTypeMRAID
 };
@@ -33,6 +34,7 @@ struct LoopMeMRAIDExpandProperties {
 extern const struct LoopMeTrackerNameStruct {
     __unsafe_unretained NSString *moat;
     __unsafe_unretained NSString *dv;
+    __unsafe_unretained NSString *ias;
 } LoopMeTrackerName;
 
 @interface LoopMeAdConfiguration : NSObject
@@ -50,6 +52,7 @@ extern const struct LoopMeTrackerNameStruct {
 @property (nonatomic, assign) struct LoopMeMRAIDExpandProperties expandProperties;
 @property (nonatomic, assign) LoopMeCreativeType creativeType;
 @property (nonatomic, strong) NSDictionary *adIdsForMOAT;
+@property (nonatomic, strong) NSDictionary *adIdsForIAS;
 @property (nonatomic, assign) NSInteger expirationTime;
 @property (nonatomic, strong) NSString *creativeContent;
 

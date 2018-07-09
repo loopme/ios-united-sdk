@@ -1,6 +1,6 @@
 //
 //  LoopMeOrientationViewControllerProtocol.h
-//  Tester
+//  LoopMeSDK
 //
 //  Created by Bohdan on 12/7/17.
 //  Copyright © 2017 LoopMe. All rights reserved.

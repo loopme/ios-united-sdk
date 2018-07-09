@@ -62,8 +62,7 @@ static NSString * const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitia
 @property (nonatomic, assign, getter = isDoNotLoadVideoWithoutWiFi) BOOL doNotLoadVideoWithoutWiFi;
 
 /**
- * You can filter ads by types.
- * Please include LoopMeAdType.h file.
+ *
  */
 @property (nonatomic, assign) LoopMeAdType preferredAdTypes;
 
@@ -86,13 +85,16 @@ static NSString * const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitia
  * @param delegate - delegate
  */
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                                              delegate:(id<LoopMeInterstitialDelegate>)delegate;
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                       preferredAdTypes:(LoopMeAdType)adTypes
                               delegate:(id<LoopMeInterstitialDelegate>)delegate;
 
 - (instancetype)initWithAppKey:(NSString *)appKey
+viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
               preferredAdTypes:(LoopMeAdType)adTypes
                       delegate:(id<LoopMeInterstitialDelegate>)delegate;
 
@@ -103,6 +105,8 @@ static NSString * const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitia
  * After its execution, the `LoopMeInterstitial` notifies its delegate whether the loading of the ad content failed or succeded.
  */
 - (void)loadAd;
+
+- (void)loadURL:(NSURL *)url;
 
 /**
  * See `loadAd` method

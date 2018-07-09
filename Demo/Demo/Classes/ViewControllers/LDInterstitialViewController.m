@@ -40,8 +40,7 @@
     [super viewWillAppear:animated];
 
     // Intializing `LoopMeInterstitial`
-    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:TEST_APP_KEY_INTERSTITIAL_LANDSCAPE
-                                                          delegate:self];
+    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:TEST_APP_KEY_INTERSTITIAL_LANDSCAPE viewControllerForPresentationGDPRWindow: self delegate:self];
     if ([self.interstitial isReady]) {
         [self togglePreloadingProgress:LDButtonStateShow];
     } else {

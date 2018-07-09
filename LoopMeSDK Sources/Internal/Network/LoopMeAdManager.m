@@ -50,9 +50,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 #pragma mark - Life Cycle
 
 - (void)dealloc {
-    [_adExpirationTimer invalidate];
-    _adExpirationTimer = nil;
-    
+    [self invalidateTimers];
     [_communicator cancel];    
 }
 
@@ -101,6 +99,11 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
 #pragma mark - Public
 
+- (void)loadURL:(NSURL *)url {
+    self.swapRequest = NO;
+    [self.communicator loadURL:url requestBody:nil method:@"GET"];
+}
+
 - (void)loadAdWithAppKey:(NSString *)appKey targeting:(LoopMeTargeting *)targeting
          integrationType:(NSString *)integrationType adSpotSize:(CGSize)size adSpot:(id)adSpot preferredAdTypes:(LoopMeAdType)adTypes {
     
@@ -113,7 +116,9 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.adTypes = adTypes;
     
     NSData *requestBody;
-    LoopMeORTBTools *rtbTools = [[LoopMeORTBTools alloc] initWithAppKey:appKey targeting:targeting adSpotSize:size integrationType:integrationType];
+    BOOL isInterstitial = [self.adUnit isKindOfClass:[LoopMeInterstitialGeneral class]] ? YES : NO;
+    
+    LoopMeORTBTools *rtbTools = [[LoopMeORTBTools alloc] initWithAppKey:appKey targeting:targeting adSpotSize:size integrationType:integrationType isInterstitial:isInterstitial];
     
     if ([adSpot isKindOfClass:[LoopMeAdView class]]) {
         self.swapRequest = YES;
@@ -147,7 +152,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
         [self.delegate adManager:self didReceiveAdConfiguration:adConfiguration];
     }
     self.loading = NO;
-//    [self scheduleAdExpirationIn:adConfiguration.expirationTime];
 }
 
 - (void)serverCommunicatorDidReceiveAd:(LoopMeServerCommunicator *)communicator {
@@ -172,7 +176,9 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     } else {
         self.swapRequest = YES;
         CGSize swapedSize = CGSizeMake(self.adSpotSize.height, self.adSpotSize.width);
-        [self loadAdWithAppKey:self.appKey targeting:self.targeting integrationType:self.integrationType adSpotSize:swapedSize adSpot:self.adUnit preferredAdTypes:self.adTypes];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self loadAdWithAppKey:self.appKey targeting:self.targeting integrationType:self.integrationType adSpotSize:swapedSize adSpot:self.adUnit preferredAdTypes:self.adTypes];
+        });
     }
 }
 

@@ -8,7 +8,7 @@
 #ifndef LoopMeVPAIDDefinitions_h
 #define LoopMeVPAIDDefinitions_h
 
-#define LOOPME_VPAID_SDK_VERSION @"1.1.2"
+#define LOOPME_SDK_VERSION @"1.2.0"
 
 #undef SYSTEM_VERSION_LESS_THAN
 
