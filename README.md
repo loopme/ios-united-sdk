@@ -1,8 +1,13 @@
 You can find integration guide in our github [wiki](https://github.com/loopme/ios-united-sdk/wiki) page.
 
 ## What's new ##
-** 1.2.0**
+**7.0.0**
 
+- fixed VAST player UI
+- so high version for clearer update from old SDK
+
+**1.2.0**
+ 
 - GDPR support
 - support IAS viewability measurement
 - eliminated memory leaks

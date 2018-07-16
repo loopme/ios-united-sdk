@@ -174,6 +174,10 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         impression[@"banner"] = [self bannerObject:size];
     }
     
+    if (!integrationType) {
+        integrationType = @"normal";
+    }
+    
     impression[@"metric"] = [self parameterForAvailableTrackers];
     impression[@"ext"] = @{@"it" : integrationType, @"supported_techs" : @[@"VIDEO - for usual MP4 video", @"VAST2", @"VAST3", @"VAST4", @"VPAID1", @"VPAID2", @"MRAID2", @"V360"]};
 

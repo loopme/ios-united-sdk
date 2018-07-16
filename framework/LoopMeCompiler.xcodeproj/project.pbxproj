@@ -165,6 +165,7 @@
 		47431E5A20F3831B006ED298 /* LoopMeGDPRViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 47431DB920F3831A006ED298 /* LoopMeGDPRViewController.h */; };
 		47431E5B20F3831B006ED298 /* LoopMeGDPRTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 47431DBA20F3831A006ED298 /* LoopMeGDPRTools.m */; };
 		47431E5C20F3831B006ED298 /* LoopMeInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = 47431DBB20F3831A006ED298 /* LoopMeInterstitial.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47A99B3D20FCCB4D002AF262 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A99B3C20FCCB4D002AF262 /* libxml2.tbd */; };
 		D003B2701AFB9C3D007C7E0F /* LoopMeCompiler-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = D003B26E1AFB9C3D007C7E0F /* LoopMeCompiler-Prefix.pch */; };
 /* End PBXBuildFile section */
 
@@ -328,6 +329,7 @@
 		47431DB920F3831A006ED298 /* LoopMeGDPRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRViewController.h; sourceTree = "<group>"; };
 		47431DBA20F3831A006ED298 /* LoopMeGDPRTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRTools.m; sourceTree = "<group>"; };
 		47431DBB20F3831A006ED298 /* LoopMeInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeInterstitial.h; sourceTree = "<group>"; };
+		47A99B3C20FCCB4D002AF262 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/usr/lib/libxml2.tbd; sourceTree = DEVELOPER_DIR; };
 		D003B26B1AFB9C2D007C7E0F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LoopMeCompiler/Info.plist; sourceTree = "<group>"; };
 		D003B26D1AFB9C3D007C7E0F /* LoopMeCompiler-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "LoopMeCompiler-Info.plist"; path = "LoopMeCompiler/LoopMeCompiler-Info.plist"; sourceTree = "<group>"; };
 		D003B26E1AFB9C3D007C7E0F /* LoopMeCompiler-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LoopMeCompiler-Prefix.pch"; path = "LoopMeCompiler/LoopMeCompiler-Prefix.pch"; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47A99B3D20FCCB4D002AF262 /* libxml2.tbd in Frameworks */,
 				47431DC820F3831A006ED298 /* libAvid-loopme-3.6.8.a in Frameworks */,
 				47431DCE20F3831A006ED298 /* LOOMoatMobileAppKit.framework in Frameworks */,
 			);
@@ -778,6 +781,7 @@
 		47CBA60A1FCEC6970058D220 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				47A99B3C20FCCB4D002AF262 /* libxml2.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

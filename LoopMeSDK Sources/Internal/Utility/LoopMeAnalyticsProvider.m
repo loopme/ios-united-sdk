@@ -43,7 +43,7 @@ static NSTimeInterval const kLoopMeAnalyticsSendInterval = 900;
 
 - (instancetype)init {
     if (self = [super init]) {
-        _analyticURLString = @"https://track.loopme.me/api/v2/events";
+        _analyticURLString = @"https://tk0x1.com/api/v2/events";
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:kLoopMeBackgroundAnalyticSessionID];
         self.session = [NSURLSession sessionWithConfiguration:configuration delegate:nil delegateQueue:nil];
         

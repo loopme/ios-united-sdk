@@ -12,7 +12,7 @@
 @property (nonatomic) NSArray *videoURL;
 @property (nonatomic) NSString *vpaidURL;
 @property (nonatomic) NSDictionary *adParameters;
-@property (nonatomic) NSArray *endCard;
+@property (nonatomic) NSMutableArray *endCard;
 
 @property (nonatomic) NSArray *adVerification;
 

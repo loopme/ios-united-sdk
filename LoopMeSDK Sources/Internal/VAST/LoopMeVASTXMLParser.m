@@ -188,7 +188,11 @@
     for (DDXMLElement *element in staticResources) {
         [staticResourcesURLs addObject:[self trim:[element stringValue]]];
     }
-    vastAssets.endCard = staticResourcesURLs;
+    if (vastAssets.endCard) {
+        [vastAssets.endCard addObjectsFromArray:staticResourcesURLs];
+    } else {
+        vastAssets.endCard = staticResourcesURLs;
+    }
 }
 
 - (void)initAdVerifications:(LoopMeVASTAssetLinks *)vastAssets {

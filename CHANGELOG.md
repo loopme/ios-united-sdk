@@ -1,3 +1,8 @@
+## Version 7.0.0 (16.07.2018)
+
+- fixed VAST player UI
+- so high version for clearer update from old SDK
+
 ## Version 1.2.0 (09.07.2018)
 
 - GDPR support
