@@ -184,7 +184,8 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.webView loadHTMLString:[NSString stringWithFormat:htmlString, self.adConfiguration.assetLinks.vpaidURL] baseURL:[NSURL URLWithString:kLoopMeBaseURL]];
+            NSString *finalHTML = [NSString stringWithFormat:htmlString, self.adConfiguration.assetLinks.vpaidURL];
+            [self.webView loadHTMLString:finalHTML baseURL:[NSURL URLWithString:kLoopMeBaseURL]];
         });
         
         self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeWebViewLoadingTimeout target:self selector:@selector(cancelWebView) userInfo:nil repeats:NO];
@@ -242,9 +243,9 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
     [self.showCloseButtonTimer invalidate];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.webView loadHTMLString:@"about:blank" baseURL:nil];
+        [self closeAdPrivate];
+        [self.webView removeFromSuperview];
     });
-    [self closeAdPrivate];
-    [self.webView removeFromSuperview];
 }
 
 - (void)closeAdPrivate {
@@ -530,16 +531,18 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 }
 
 - (void)vpaidAdDurationChange {
-    if (!self.isVisible) {
-        return;
-    }
-    
-    NSInteger adRemainingTime = self.vpaidClient.getAdRemainingTime;
-    if (adRemainingTime < 0) {
-        return;
-    }
-    double currentTime = self.videoDuration - self.vpaidClient.getAdRemainingTime;
-    [self.vastEventTracker setCurrentTime:currentTime];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.isVisible) {
+            return;
+        }
+        
+        NSInteger adRemainingTime = self.vpaidClient.getAdRemainingTime;
+        if (adRemainingTime < 0) {
+            return;
+        }
+        double currentTime = self.videoDuration - self.vpaidClient.getAdRemainingTime;
+        [self.vastEventTracker setCurrentTime:currentTime];
+    });
 }
 
 - (void)vpaidAdRemainingTimeChange {

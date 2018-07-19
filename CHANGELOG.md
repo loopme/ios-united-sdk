@@ -1,3 +1,7 @@
+## Version 7.0.1 (19.07.2018)
+
+- fixed VPAID ad
+
 ## Version 7.0.0 (16.07.2018)
 
 - fixed VAST player UI

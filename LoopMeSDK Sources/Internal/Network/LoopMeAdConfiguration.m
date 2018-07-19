@@ -155,10 +155,6 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
         _adTagURL = [NSURL URLWithString:[parser adTagURL:error]];
         _wrapper = YES;
     }
-    
-    if (self.isVPAID) {
-        _creativeType = LoopMeCreativeTypeVPAID;
-    }
 }
 
 - (NSString *)description {
