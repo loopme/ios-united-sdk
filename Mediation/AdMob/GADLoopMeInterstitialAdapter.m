@@ -6,6 +6,7 @@
 //
 
 #import "GADLoopMeInterstitialAdapter.h"
+#import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
 
 @implementation GADLoopMeInterstitialAdapter
 
@@ -13,10 +14,25 @@
 
 - (void)requestInterstitialAdWithParameter:(NSString *)serverParameter label:(NSString *)serverLabel request:(GADCustomEventRequest *)request {
 
-    self.loopMeInterstitial = [LoopMeInterstitial interstitialWithAppKey:serverParameter
-                                                                delegate:self];
+    if (NSClassFromString(@"PACConsentInformation")) {
+        Class informationClass = NSClassFromString(@"PACConsentInformation");
+        SEL sharedelector = NSSelectorFromString(@"sharedInstance");
+        if ([informationClass respondsToSelector:sharedelector]) {
+            id informationInstance = [informationClass performSelector:sharedelector];
+            SEL consentStatusSel = NSSelectorFromString(@"consentStatus");
+            if ([informationInstance respondsToSelector:consentStatusSel]) {
+                //                PACConsentStatusUnknown = 0,          ///< Unknown consent status.
+                //                PACConsentStatusNonPersonalized = 1,  ///< User consented to non-personalized ads.
+                //                PACConsentStatusPersonalized = 2,
+                NSUInteger consentStatus = (NSUInteger)[informationInstance performSelector:consentStatusSel];
+                BOOL boolConsent = consentStatus == 2 ? YES : NO;
+                [LoopMeGDPRTools.sharedInstance setCustomUserConsent:boolConsent];
+            }
+        }
+    }
+    
+    self.loopMeInterstitial = [LoopMeInterstitial interstitialWithAppKey:serverParameter viewControllerForPresentationGDPRWindow:[UIViewController new] delegate:self];
     [self.loopMeInterstitial loadAdWithTargeting:nil integrationType:@"admob"];
-
 }
 
 - (void)presentFromRootViewController:(UIViewController *)rootViewController {

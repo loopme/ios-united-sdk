@@ -24,7 +24,7 @@ NSString * const kMopubAdUnitID = @"4c2678be84404c7184f8aa1947f8b8fb";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[MoPub sharedInstance] initializeRewardedVideoWithGlobalMediationSettings:nil delegate:self];
+    [MPRewardedVideo setDelegate:self forAdUnitId:kMopubAdUnitID];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +40,7 @@ NSString * const kMopubAdUnitID = @"4c2678be84404c7184f8aa1947f8b8fb";
 - (void)rewardedVideoAdDidLoadForAdUnitID:(NSString *)adUnitID {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     if ([MPRewardedVideo hasAdAvailableForAdUnitID:kMopubAdUnitID]) {
-        [MPRewardedVideo presentRewardedVideoAdForAdUnitID:kMopubAdUnitID fromViewController:self];
+        [MPRewardedVideo presentRewardedVideoAdForAdUnitID:kMopubAdUnitID fromViewController:self withReward:nil];
     }
 }
 

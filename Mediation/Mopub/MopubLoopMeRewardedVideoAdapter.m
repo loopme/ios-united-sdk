@@ -3,12 +3,12 @@
 //  Bridge
 //
 //
-
+#import "Mopub.h"
 #import "MopubLoopMeRewardedVideoAdapter.h"
 #import "MPRewardedVideoReward.h"
 #import "MPLogging.h"
 #import "MPError.h"
-#import "MPInstanceProvider+LoopMe.h"
+#import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
 
 @interface MopubLoopMeRewardedVideoAdapter ()
 
@@ -27,10 +27,11 @@
         return;
     }
     
+    [[LoopMeGDPRTools sharedInstance] setCustomUserConsent:[[MoPub sharedInstance] canCollectPersonalInfo]];
+    
     NSString *appKey = [info objectForKey:@"app_key"];
     if (!self.loopmeInterstitial) {
-        self.loopmeInterstitial = [[MPInstanceProvider sharedProvider] buildLoopMeInterstitialWithAppKey:appKey
-                                                                                            delegate:self];
+        self.loopmeInterstitial = [LoopMeInterstitial interstitialWithAppKey:appKey viewControllerForPresentationGDPRWindow:[UIViewController new] delegate:self];
     }
     
     if (!self.loopmeInterstitial) {

@@ -7,8 +7,8 @@
 //
 
 #import "MPNativeAd.h"
-#import "LoopMeAdView.h"
-#import "LoopMeInterstitial.h"
+#import <LoopMeUnitedSDK/LoopMeAdView.h>
+#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
 
 @interface MopubLoopMeNativeAd : MPNativeAd
 

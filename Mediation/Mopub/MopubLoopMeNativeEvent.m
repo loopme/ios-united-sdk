@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 injectios. All rights reserved.
 //
 
-#import "LoopMeAdView.h"
-#import "LoopMeError.h"
-#import "LoopMeLogging.h"
+#import <LoopMeUnitedSDK/LoopMeAdView.h>
+#import <LoopMeUnitedSDK/LoopMeError.h>
+#import <LoopMeUnitedSDK/LoopMeLogging.h>
+#import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
 #import "MopubLoopMeNativeEvent.h"
 #import "MPNativeAd.h"
 #import "MopubLoopMeNativeAd.h"
 #import "MPError.h"
+#import "Mopub.h"
 
 @interface MopubLoopMeNativeEvent ()
 <
@@ -40,10 +42,8 @@
         return;
     }
 
-    self.adView = [LoopMeAdView adViewWithAppKey:info[@"app_key"]
-                                                    frame:CGRectZero
-                                               scrollView:nil
-                                                 delegate:self];
+    [[LoopMeGDPRTools sharedInstance] setCustomUserConsent:[[MoPub sharedInstance] canCollectPersonalInfo]];
+    self.adView = [LoopMeAdView adViewWithAppKey:info[@"app_key"] frame:CGRectZero viewControllerForPresentationGDPRWindow:[[UIViewController alloc] init] delegate:self];
 
     if (!self.adView) {
         LoopMeLogDebug(@"Old iOS version");

@@ -5,7 +5,7 @@
 
 
 #import "MPRewardedVideoCustomEvent.h"
-#import "LoopMeInterstitial.h"
+#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
 
 @interface MopubLoopMeRewardedVideoAdapter : MPRewardedVideoCustomEvent
 <

@@ -6,7 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LoopMeInterstitial.h"
+#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
+
+@class PACConsentInformation;
 
 @import GoogleMobileAds;
 

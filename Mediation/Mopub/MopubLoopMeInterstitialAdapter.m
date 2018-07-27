@@ -4,10 +4,11 @@
 //
 //
 
+#import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
+#import "Mopub.h"
 #import "MopubLoopMeInterstitialAdapter.h"
 #import "MPLogging.h"
 #import "MPError.h"
-#import "MPInstanceProvider+LoopMe.h"
 
 @implementation MopubLoopMeInterstitialAdapter
 
@@ -20,9 +21,10 @@
         return;
     }
     
+    [[LoopMeGDPRTools sharedInstance] setCustomUserConsent:[[MoPub sharedInstance] canCollectPersonalInfo]];
     NSString *appKey = [info objectForKey:@"app_key"];
     if (!self.loopmeInterstitial) {
-        self.loopmeInterstitial = [[MPInstanceProvider sharedProvider] buildLoopMeInterstitialWithAppKey:appKey delegate:self];
+        self.loopmeInterstitial = [LoopMeInterstitial interstitialWithAppKey:appKey viewControllerForPresentationGDPRWindow:[UIViewController new] delegate:self];
     }
         
     if (!self.loopmeInterstitial) {

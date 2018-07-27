@@ -5,7 +5,7 @@
 
 
 #import "MPInterstitialCustomEvent.h"
-#import "LoopMeInterstitial.h"
+#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
 
 @interface MopubLoopMeInterstitialAdapter : MPInterstitialCustomEvent
 <

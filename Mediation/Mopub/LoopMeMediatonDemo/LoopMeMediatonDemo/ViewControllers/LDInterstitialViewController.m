@@ -15,6 +15,8 @@
 >
 
 @property (nonatomic) MPInterstitialAdController *interstitial;
+@property (weak, nonatomic) IBOutlet UIButton *loadButton;
+@property (weak, nonatomic) IBOutlet UIButton *showButton;
 
 @end
 
@@ -38,13 +40,26 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
+- (IBAction)showClick:(id)sender {
+    [self.interstitial showFromViewController:self];
+}
+
 - (void)interstitialDidLoadAd:(MPInterstitialAdController *)interstitial {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    [self.interstitial showFromViewController:self];
+    self.showButton.enabled = YES;
 }
 
 - (void)interstitialDidFailToLoadAd:(MPInterstitialAdController *)interstitial {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    self.showButton.enabled = NO;
+}
+
+- (void)interstitialDidDisappear:(MPInterstitialAdController *)interstitial {
+    if ([self.interstitial ready]) {
+        self.showButton.enabled = YES;
+    } else {
+        self.showButton.enabled = NO;
+    }
 }
 /*
 #pragma mark - Navigation

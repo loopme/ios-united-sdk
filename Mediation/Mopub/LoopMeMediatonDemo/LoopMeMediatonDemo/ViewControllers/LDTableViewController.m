@@ -7,6 +7,7 @@
 //
 
 #import "LDTableViewController.h"
+#import "Mopub.h"
 
 @interface LDTableViewController ()
 
@@ -17,6 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"e0f79a7b925b424e9159e2e1d2a0777b"];
+    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:nil];
     
     self.menuItems = [NSArray arrayWithObjects:@"Native Ads (Ad Request)", @"Interstitial Ad",  @"Rewarded Video Ad", nil];
     //TODO: bridge for MPTableViewPlacer
