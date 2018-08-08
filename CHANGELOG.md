@@ -1,3 +1,8 @@
+## Version 7.0.2 (08.08.2018)
+
+- fixed bugs video caching
+- fixed layout errors on vast ad
+
 ## Version 7.0.1 (19.07.2018)
 
 - fixed VPAID ad

@@ -124,7 +124,7 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
         return NO;
     }
     
-    NSString *videoPath = [[self assetsDirectory] stringByAppendingPathComponent:URL.lastPathComponent];
+    NSString *videoPath = [[self assetsDirectory] stringByAppendingPathComponent:self.videoPath];
     return [[NSFileManager defaultManager] fileExistsAtPath:videoPath];
 }
 

@@ -17,6 +17,8 @@
 #import "LoopMeIdentityProvider.h"
 #import "LoopMeORTBTools.h"
 #import "LoopMeGDPRTools.h"
+#import "LoopMeAudioCheck.h"
+#import "LoopMeGlobalSettings.h"
 
 static NSString *_userAgent;
 NSString * const kLoopMeInterfaceOrientationPortrait = @"p";
@@ -151,9 +153,21 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     device[@"ifa"] = [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier];
     device[@"w"] = @([[UIScreen mainScreen] bounds].size.width);
     device[@"h"] = @([[UIScreen mainScreen] bounds].size.height);
-    device[@"ext"] = @{@"phonename" : [LoopMeIdentityProvider phoneName], @"plugin" : @([self parameterForBatteryState]), @"chargelevel" : [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel], @"wifiname" : [self parameterForWiFiName], @"orientation" : [self parameterForOrientation], @"timezone" : [self parameterForTimeZone]};
+    device[@"ext"] = [self extForDevice];
     
     return device;
+}
+
+- (NSDictionary *)extForDevice {
+    NSMutableDictionary *ext = [[NSMutableDictionary alloc] initWithDictionary:@{@"phonename" : [LoopMeIdentityProvider phoneName], @"plugin" : @([self parameterForBatteryState]), @"chargelevel" : [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel], @"wifiname" : [self parameterForWiFiName], @"orientation" : [self parameterForOrientation], @"timezone" : [self parameterForTimeZone]}];
+    
+    if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled) {
+        [ext setObject:[[LoopMeAudioCheck shared] currentOutputs] forKey:@"audio_outputs"]; //
+        NSUInteger isAudioPlaying = [[LoopMeAudioCheck shared] isAudioPlaying] ? 1 : 0;
+        [ext setObject:@(isAudioPlaying) forKey:@"music"];
+    }
+    
+    return ext;
 }
 
 - (NSDictionary *)impressionObject:(CGSize)size

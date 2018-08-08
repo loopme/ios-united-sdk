@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470AD701211AE665008DAD6B /* LoopMeAudioCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 470AD6FF211AE664008DAD6B /* LoopMeAudioCheck.m */; };
+		470AD702211AE665008DAD6B /* LoopMeAudioCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 470AD700211AE665008DAD6B /* LoopMeAudioCheck.h */; };
 		4742E3702107524D0013BB80 /* LoopMe360ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47431D4F20F3831A006ED298 /* LoopMe360ViewController.m */; };
 		4742E3712107524D0013BB80 /* LoopMeInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47431D4620F3831A006ED298 /* LoopMeInterstitialViewController.m */; };
 		4742E3722107524D0013BB80 /* LoopMeVASTXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 47431D9A20F3831A006ED298 /* LoopMeVASTXMLParser.m */; };
@@ -328,6 +330,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		470AD6FF211AE664008DAD6B /* LoopMeAudioCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAudioCheck.m; sourceTree = "<group>"; };
+		470AD700211AE665008DAD6B /* LoopMeAudioCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAudioCheck.h; sourceTree = "<group>"; };
 		473CB0C41F7E8B7B003431CD /* LoopMeCompilerUnity-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LoopMeCompilerUnity-Info.plist"; path = "/Users/bohdan/Work/loopme-ios-sdk-release/framework/LoopMeCompilerUnity-Info.plist"; sourceTree = "<absolute>"; };
 		4742E4172107524D0013BB80 /* LoopMeUnitedSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoopMeUnitedSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4742E4182107524D0013BB80 /* LoopMeCompiler copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LoopMeCompiler copy-Info.plist"; path = "/Users/bohdan/Work/loopme-ios-sdk-united-release/framework/LoopMeCompiler copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -823,6 +827,8 @@
 		47431D7820F3831A006ED298 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				470AD700211AE665008DAD6B /* LoopMeAudioCheck.h */,
+				470AD6FF211AE664008DAD6B /* LoopMeAudioCheck.m */,
 				47431D7920F3831A006ED298 /* LoopMeAnalyticsProvider.m */,
 				47431D7A20F3831A006ED298 /* LoopMeError.m */,
 				47431D7B20F3831A006ED298 /* LoopMeAdType.h */,
@@ -1098,6 +1104,7 @@
 				47431E5C20F3831B006ED298 /* LoopMeInterstitial.h in Headers */,
 				47431E2920F3831B006ED298 /* LoopMeLogging.h in Headers */,
 				47431DDD20F3831A006ED298 /* LoopMeJSCommunicatorProtocol.h in Headers */,
+				470AD702211AE665008DAD6B /* LoopMeAudioCheck.h in Headers */,
 				47431E3620F3831B006ED298 /* NSURL+LoopMeAdditions.h in Headers */,
 				47431E4720F3831B006ED298 /* DDXML.h in Headers */,
 				47431DD020F3831A006ED298 /* LoopMeViewabilityManager.h in Headers */,
@@ -1417,6 +1424,7 @@
 				47431DFA20F3831A006ED298 /* LoopMeInterstitialViewController.m in Sources */,
 				47431E4020F3831B006ED298 /* LoopMeVASTXMLParser.m in Sources */,
 				47431DF620F3831A006ED298 /* LoopMeErrorEventSender.m in Sources */,
+				470AD701211AE665008DAD6B /* LoopMeAudioCheck.m in Sources */,
 				47431DF720F3831A006ED298 /* LoopMeVASTEventTracker.m in Sources */,
 				47431DEB20F3831A006ED298 /* LoopMeVASTImageDownloader.m in Sources */,
 				47431E1E20F3831A006ED298 /* LoopMeAdView.m in Sources */,

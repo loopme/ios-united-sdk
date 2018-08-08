@@ -21,6 +21,7 @@
 #import "LoopMeDefinitions.h"
 #import "LoopMeAdView.h"
 #import "LoopMeIASWrapper.h"
+#import "NSString+Encryption.h"
 
 static void *VPAIDvideoControllerStatusObservationContext = &VPAIDvideoControllerStatusObservationContext;
 NSString * const kLoopMeVPAIDVideoStatusKey = @"status";
@@ -87,11 +88,10 @@ const NSInteger kResizeOffsetVPAID = 11;
         _playerLayer.needsDisplayOnBoundsChange = YES;
             
         UIView *videoView = [[UIView alloc] init];
-        [videoView.layer addSublayer:_playerLayer];
-        [videoView addSubview:self.vastUIView];
         _videoView = videoView;
-        
          [self.delegate videoClient:self setupView:_videoView];
+        [_videoView.layer addSublayer:_playerLayer];
+        [_videoView addSubview:self.vastUIView];
     }
     return _videoView;
 }
@@ -410,7 +410,7 @@ const NSInteger kResizeOffsetVPAID = 11;
     
     self.videoURL = URL;
     
-    self.videoPath = URL.lastPathComponent;
+    self.videoPath = [NSString stringWithFormat:@"%@.mp4", [URL.absoluteString lm_MD5]];
     self.videoManager = [[LoopMeVideoManager alloc] initWithVideoPath:self.videoPath delegate:self];
     if ([self playerHasBufferedURL:URL]) {
         [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
@@ -520,7 +520,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
     NSTimeInterval secondsFromVideoLoadStart = [self.loadingVideoStartDate timeIntervalSinceNow];
     [LoopMeLoggingSender sharedInstance].videoLoadingTimeInterval = fabs(secondsFromVideoLoadStart);
-    [self setupPlayerWithFileURL:videoURL];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setupPlayerWithFileURL:videoURL];
+    });
 }
 
 - (void)videoManager:(LoopMeVideoManager *)videoManager didFailLoadWithError:(NSError *)error {

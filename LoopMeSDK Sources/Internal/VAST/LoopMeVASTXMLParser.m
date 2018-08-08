@@ -98,6 +98,7 @@
     if (error && !*error) {
         if (uris && uris.count > 0) {
             NSString *uri = [uris[0] stringValue];
+            uri = [self removeEncodeBadSymbols:uri];
             return [self trim:uri];
         }
     } else {
@@ -406,6 +407,13 @@
 
 - (NSString *)trim:(NSString *)string {
     return [string stringByTrimmingCharactersInSet:[NSMutableCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+- (NSString *)removeEncodeBadSymbols:(NSString *)string {
+    string = [string stringByReplacingOccurrencesOfString:@"{" withString:@"%7B"];
+    string = [string stringByReplacingOccurrencesOfString:@"}" withString:@"%7D"];
+    string = [string stringByReplacingOccurrencesOfString:@"%%" withString:@"%25%25"];
+    return string;
 }
 
 - (NSString *)adjustName:(NSString *)name {
