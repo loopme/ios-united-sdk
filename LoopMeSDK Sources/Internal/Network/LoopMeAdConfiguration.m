@@ -152,7 +152,8 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
     self.skipOffset = [parser skipOffset];
     self.duration = [parser duration];
     if ([parser isWrapper]) {
-        _adTagURL = [NSURL URLWithString:[parser adTagURL:error]];
+        NSString *adTagUriString = [parser adTagURL:error];
+        _adTagURL = [NSURL URLWithString:adTagUriString];
         _wrapper = YES;
     }
 }

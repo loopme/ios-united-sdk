@@ -458,7 +458,7 @@ const CGFloat kOneFrameDuration = 0.03;
 #pragma mark - LoopMeJSVideoTransportProtocol
 
 - (void)loadWithURL:(NSURL *)URL {
-    self.videoPath = URL.lastPathComponent;
+    self.videoPath = [NSString stringWithFormat:@"%li.mp4", URL.hash];
     self.videoManager = [[LoopMeVideoManager alloc] initWithVideoPath:self.videoPath delegate:self];
     if ([self playerHasBufferedURL:URL]) {
         [self.JSClient setVideoState:LoopMeVideoState.ready];

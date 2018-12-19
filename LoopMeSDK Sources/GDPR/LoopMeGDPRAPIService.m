@@ -75,8 +75,6 @@ static dispatch_queue_t queue;
     if ([resultDict objectForKey:kLoopMeConsentURLKey]) {
         NSString *urlString = [NSString stringWithFormat:@"%@?is_sdk=true&device_id=%@", [resultDict objectForKey:kLoopMeConsentURLKey], deviceID];
         
-        urlString = [NSString stringWithFormat:@"%@?is_sdk=true&device_id=%@", @"https://i.loopme.me/html/gdpr_page/gdpr_page.html", deviceID];
-        
         return [NSURL URLWithString:urlString];
     }
     

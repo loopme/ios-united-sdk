@@ -2,10 +2,10 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.0.2**
+**Version 7.0.3**
 
-- fixed bugs video caching
-- fixed layout errors on vast ad
+- fixed VPAID ads
+- fixed GDPR dialog window
 
 
 Please view the [changelog](CHANGELOG.md) for details.

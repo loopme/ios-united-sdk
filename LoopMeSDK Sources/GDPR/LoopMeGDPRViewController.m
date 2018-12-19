@@ -40,8 +40,9 @@ static NSTimeInterval _kLoopMeClosePopupInterval = 5;
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
         _webView.backgroundColor = [UIColor whiteColor];
         _webView.navigationDelegate = self;
+        _webView.UIDelegate = self;
         _url = url;
-        
+
         [_webView loadRequest:[NSURLRequest requestWithURL:url]];
     }
     
@@ -171,7 +172,10 @@ static NSTimeInterval _kLoopMeClosePopupInterval = 5;
 #pragma mark - WKWebViewDelegate
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    [self.spinner startAnimating];
+//    [self.spinner startAnimating];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     if ([self shouldInterceptURL:navigationAction.request.URL]) {
         [self processURL:navigationAction.request.URL];
         decisionHandler(WKNavigationActionPolicyCancel);
@@ -181,7 +185,20 @@ static NSTimeInterval _kLoopMeClosePopupInterval = 5;
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    [self.spinner stopAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    
+    if (!navigationAction.targetFrame.isMainFrame) {
+        [webView loadRequest:navigationAction.request];
+    }
+    
+    return nil;
 }
 
 @end

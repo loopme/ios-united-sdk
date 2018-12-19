@@ -1,3 +1,9 @@
+
+## Version 7.0.3 (18.12.2018)
+
+- fixed VPAID ads
+- fixed GDPR dialog window
+
 ## Version 7.0.2 (08.08.2018)
 
 - fixed bugs video caching

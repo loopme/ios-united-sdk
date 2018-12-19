@@ -25,7 +25,7 @@
     NSMutableArray *outputs = [NSMutableArray new];
     AVAudioSessionRouteDescription *currentRoute = [[AVAudioSession sharedInstance] currentRoute];
     for (AVAudioSessionPortDescription *description in currentRoute.outputs) {
-        [outputs addObject:[description.portName lowercaseString]];
+        [outputs addObject:[description.portType lowercaseString]];
     }
     return outputs;
 }

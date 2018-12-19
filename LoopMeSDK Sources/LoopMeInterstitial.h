@@ -36,7 +36,7 @@ static NSString * const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitia
  */
 @interface LoopMeInterstitial : NSObject
 
-@property (nonatomic, weak) id<LoopMeInterstitialDelegate> delegate;
+@property (nonatomic, weak) _Nullable id<LoopMeInterstitialDelegate> delegate;
 
 /**
  * The appKey uniquely identifies your app to the LoopMe ad network.
@@ -86,17 +86,17 @@ static NSString * const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitia
  */
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
 viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                                             delegate:(id<LoopMeInterstitialDelegate>)delegate;
+                                             delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
 viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                       preferredAdTypes:(LoopMeAdType)adTypes
-                              delegate:(id<LoopMeInterstitialDelegate>)delegate;
+                              delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
 - (instancetype)initWithAppKey:(NSString *)appKey
 viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
               preferredAdTypes:(LoopMeAdType)adTypes
-                      delegate:(id<LoopMeInterstitialDelegate>)delegate;
+                      delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
 
 /**

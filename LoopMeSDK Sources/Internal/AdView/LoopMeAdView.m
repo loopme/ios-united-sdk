@@ -287,6 +287,16 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:self.containerView.bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes];
 }
 
+- (void)loadURL:(NSURL *)url {
+    self.loading = YES;
+    self.ready = NO;
+    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.adManager loadURL:url];
+    });
+}
+
 - (void)setAdVisible:(BOOL)visible {
     if (self.isReady) {
         if (self.adConfiguration.creativeType != LoopMeCreativeTypeVAST) {

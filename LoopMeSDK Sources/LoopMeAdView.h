@@ -136,6 +136,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
  * After its execution, the `LoopMeInterstitial` notifies its delegate whether the loading of the ad content failed or succeded.
  */
 - (void)loadAd;
+- (void)loadURL:(NSURL *)url;
 
 /**
  * See `loadAd` method

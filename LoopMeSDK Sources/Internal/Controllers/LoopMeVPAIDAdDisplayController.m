@@ -332,21 +332,24 @@ NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 }
 
 - (NSString *)injectAdVerification:(NSString *)htmlString {
-    if (self.adConfiguration.assetLinks.adVerification.count == 0) {
-        return htmlString;
-    }
+    
     
     NSMutableString *copyHTMLstring = [htmlString mutableCopy];
-    NSMutableString *pattern = [NSMutableString new];
-    for (NSString *script in self.adConfiguration.assetLinks.adVerification) {
-        [pattern appendString:[NSString stringWithFormat:@"\"%@\",", script]];
-    }
-    //remove last ','
-    if (pattern.length) {
-        pattern = [[pattern substringToIndex:[pattern length] - 1] mutableCopy];
-    }
     
-    [copyHTMLstring replaceOccurrencesOfString:@"[SCRIPTPLACE]" withString:pattern options:0 range:NSMakeRange(0, [htmlString length])];
+    if (self.adConfiguration.assetLinks.adVerification.count == 0) {
+        [copyHTMLstring replaceOccurrencesOfString:@"[SCRIPTPLACE]" withString:@"" options:0 range:NSMakeRange(0, [htmlString length])];
+    } else {
+        NSMutableString *pattern = [NSMutableString new];
+        for (NSString *script in self.adConfiguration.assetLinks.adVerification) {
+            [pattern appendString:[NSString stringWithFormat:@"\"%@\",", script]];
+        }
+        //remove last ','
+        if (pattern.length) {
+            pattern = [[pattern substringToIndex:[pattern length] - 1] mutableCopy];
+        }
+        
+        [copyHTMLstring replaceOccurrencesOfString:@"[SCRIPTPLACE]" withString:pattern options:0 range:NSMakeRange(0, [htmlString length])];
+    }
     
     return copyHTMLstring;
 }

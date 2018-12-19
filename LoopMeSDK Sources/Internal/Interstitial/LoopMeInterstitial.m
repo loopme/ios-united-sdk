@@ -272,7 +272,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
         if (self.timerToReload.isValid) {
             return;
         }
-        if (self.failCount >= 5) {
+        if (self.failCount >= kLoopMeLoadCounter) {
             self.timerToReload = [NSTimer scheduledTimerWithTimeInterval:kLoopMeTimeToReload target:self selector:@selector(reload) userInfo:nil repeats:NO];
             if ([self.delegate respondsToSelector:@selector(loopMeInterstitial:didFailToLoadAdWithError:)]) {
                 [self.delegate loopMeInterstitial:self didFailToLoadAdWithError:error];
