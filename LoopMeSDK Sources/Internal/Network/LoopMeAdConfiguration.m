@@ -17,7 +17,6 @@ const int kLoopMeExpireTimeIntervalMinimum = 600;
 // Events
 const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
     .moat = @"moat",
-    .dv = @"dv",
     .ias = @"ias"
 };
 

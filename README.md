@@ -2,10 +2,9 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.0.3**
+**Version 7.0.4**
 
-- fixed VPAID ads
-- fixed GDPR dialog window
+- IAS measurement support improvements
 
 
 Please view the [changelog](CHANGELOG.md) for details.

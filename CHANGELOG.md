@@ -1,4 +1,8 @@
 
+## Version 7.0.4 (24.01.2019)
+
+- IAS measurement support improvements
+
 ## Version 7.0.3 (18.12.2018)
 
 - fixed VPAID ads

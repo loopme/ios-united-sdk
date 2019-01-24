@@ -33,7 +33,6 @@ struct LoopMeMRAIDExpandProperties {
 
 extern const struct LoopMeTrackerNameStruct {
     __unsafe_unretained NSString *moat;
-    __unsafe_unretained NSString *dv;
     __unsafe_unretained NSString *ias;
 } LoopMeTrackerName;
 

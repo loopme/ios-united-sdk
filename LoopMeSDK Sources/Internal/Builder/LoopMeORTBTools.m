@@ -19,6 +19,7 @@
 #import "LoopMeGDPRTools.h"
 #import "LoopMeAudioCheck.h"
 #import "LoopMeGlobalSettings.h"
+#import "LoopMeAdConfiguration.h"
 
 static NSString *_userAgent;
 NSString * const kLoopMeInterfaceOrientationPortrait = @"p";
@@ -303,7 +304,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 }
 
 - (NSArray *)viewabilityVendors {
-    return @[@"moat"];
+    return @[LoopMeTrackerName.moat, LoopMeTrackerName.ias];
 }
 
 @end
