@@ -7,6 +7,7 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
+#import <WebKit/WebKit.h>
 
 #import "LoopMeAdWebView.h"
 #import "LoopMeDefinitions.h"
@@ -68,7 +69,7 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
 
 @property (nonatomic, weak) id<LoopMeJSClientDelegate> delegate;
 @property (nonatomic, weak, readonly) id<LoopMeVideoCommunicatorProtocol> videoClient;
-@property (nonatomic, weak, readonly) UIWebView *webViewClient;
+@property (nonatomic, weak, readonly) WKWebView *webViewClient;
 @property (nonatomic, strong) NSMutableSet *events360;
 
 - (void)loadVideoWithParams:(NSDictionary *)params;
@@ -98,7 +99,7 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
     return [self.delegate videoCommunicator];
 }
 
-- (UIWebView *)webViewClient {
+- (WKWebView *)webViewClient {
     return [self.delegate webViewTransport];
 }
 
@@ -192,7 +193,7 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
 - (void)executeInteractionCustomEvent:(NSString *)customEventName {
     if (![self.events360 containsObject:customEventName]) {
         NSString *eventString = [NSString stringWithFormat:@"L.track({eventType:\"INTERACTION\", customEventName: \"video360&mode=%@\"})", customEventName];
-        [self.webViewClient stringByEvaluatingJavaScriptFromString:eventString];
+        [self.webViewClient evaluateJavaScript:eventString completionHandler:nil];
         
         [self.events360 addObject:customEventName];
     }
@@ -204,7 +205,7 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
 
 - (void)executeEvent:(NSString *)event forNamespace:(NSString *)ns param:(NSObject *)param paramBOOL:(BOOL)isBOOL {
     NSString *eventString = [self makeEventStringForEvent:event namespace:ns withParam:param paramBOOL:isBOOL];
-    [self.webViewClient stringByEvaluatingJavaScriptFromString:eventString];
+    [self.webViewClient evaluateJavaScript:eventString completionHandler:nil];
 }
 
 - (BOOL)shouldInterceptURL:(NSURL *)URL {

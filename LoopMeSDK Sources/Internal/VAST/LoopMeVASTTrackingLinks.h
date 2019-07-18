@@ -13,12 +13,15 @@
 @interface LoopMeVASTTrackingLinks : NSObject
 
 @property (nonatomic) NSMutableSet *errorLinkTemplates;
+@property (nonatomic) NSMutableSet *adVerificationErrorLinkTemplates;
 @property (nonatomic) NSMutableSet *impressionLinks;
 @property (nonatomic) NSString *clickThroughCompanion;
 @property (nonatomic) NSString *clickThroughVideo;
 @property (nonatomic) LoopMeVastLinearTrackingLinks *linearTrackingLinks;
 @property (nonatomic) LoopMeVASTViewableImpression *viewableImpression;
 @property (nonatomic) LoopMeVastCompanionAdsTrackingLinks *companionTrackingLinks;
+
+@property (nonatomic) NSArray *adVerification;
 
 @end
 
@@ -64,3 +67,10 @@
 
 @end
 
+@interface LoopMeVerification : NSObject
+
+@property (nonatomic, strong) NSString *vendorKey;
+@property (nonatomic, strong) NSString *resource;
+@property (nonatomic, strong) NSString *params;
+
+@end

@@ -190,7 +190,7 @@
 
     mraid.createCalendarEvent = function (parameters) {
         log.i("mraid.createCalendarEvent with " + parameters);
-        callNative("createCalendarEvent?eventJSON=" + JSON.stringify(parameters));
+        callNative("createCalendarEvent", { "eventJSON" : JSON.stringify(parameters)});
     };
 
     mraid.close = function () {
@@ -207,13 +207,13 @@
         // The only time it is valid to call expand is when the ad is
         // a banner currently in either default or resized state.
         if (placementType !== PLACEMENT_TYPES.INLINE ||
-            (state !== STATES.DEFAULT && state !== STAES.RESIZED)) {
+            (state !== STATES.DEFAULT && state !== STATES.RESIZED)) {
             return;
         }
         if (url === undefined) {
-            callNative("expand");
+            callNative("expand", { "expandProperties" : expandProperties });
         } else {
-            callNative("expand?url=" + encodeURIComponent(url));
+            callNative("expand", { "url" : encodeURIComponent(url), "expandProperties" : expandProperties });
         }
     };
 
@@ -289,12 +289,12 @@
 
     mraid.open = function (url) {
         log.i("mraid.open " + url);
-        callNative("open?url=" + encodeURIComponent(url));
+        callNative("open", { "url" : encodeURIComponent(url) });
     };
 
     mraid.playVideo = function (url) {
         log.i("mraid.playVideo " + url);
-        callNative("playVideo?url=" + encodeURIComponent(url));
+        callNative("playVideo", { "url" : encodeURIComponent(url) });
     };
 
     mraid.removeEventListener = function (event, listener) {
@@ -353,7 +353,7 @@
             mraid.fireErrorEvent("mraid.resize is not ready to be called", "mraid.resize");
             return;
         }
-        callNative("resize");
+        callNative("resize", { "resizeProperties" : resizeProperties });
     };
 
     mraid.setExpandProperties = function (properties) {
@@ -418,11 +418,12 @@
         orientationProperties.allowOrientationChange = newOrientationProperties.allowOrientationChange;
         orientationProperties.forceOrientation = newOrientationProperties.forceOrientation;
 
-        var params =
-            "allowOrientationChange=" + orientationProperties.allowOrientationChange +
-            "&forceOrientation=" + orientationProperties.forceOrientation;
+        var params = {
+            "allowOrientationChange" : orientationProperties.allowOrientationChange.toString(),
+            "forceOrientation" : orientationProperties.forceOrientation
+        }
 
-        callNative("setOrientationProperties?" + params);
+        callNative("setOrientationProperties", params);
     };
 
     mraid.setResizeProperties = function (properties) {
@@ -476,22 +477,23 @@
             }
         }
 
-        var params =
-            "width=" + resizeProperties.width +
-            "&height=" + resizeProperties.height +
-            "&offsetX=" + (resizeProperties.offsetX + adjustments.x) +
-            "&offsetY=" + (resizeProperties.offsetY + adjustments.y) +
-            "&customClosePosition=" + resizeProperties.customClosePosition +
-            "&allowOffscreen=" + resizeProperties.allowOffscreen;
+        var params = {
+            "width" : resizeProperties.width,
+            "height" : resizeProperties.height,
+            "offsetX" : (resizeProperties.offsetX + adjustments.x),
+            "offsetY" : (resizeProperties.offsetY + adjustments.y),
+            "customClosePosition" : resizeProperties.customClosePosition,
+            "allowOffscreen" : resizeProperties.allowOffscreen
+        }
 
-        callNative("setResizeProperties?" + params);
+        callNative("setResizeProperties" + params);
 
         isResizeReady = true;
     };
 
     mraid.storePicture = function (url) {
         log.i("mraid.storePicture " + url);
-        callNative("storePicture?url=" + encodeURIComponent(url));
+        callNative("storePicture", { "url" : encodeURIComponent(url) });
     };
 
     mraid.supports = function (feature) {
@@ -506,7 +508,7 @@
     mraid.useCustomClose = function (isCustomClose) {
         log.i("mraid.useCustomClose " + isCustomClose);
         if (expandProperties.useCustomClose !== isCustomClose) {
-            callNative("useCustomClose?useCustomClose=" + isCustomClose);
+            callNative("useCustomClose", {"useCustomClose" : isCustomClose});
         }
     };
 
@@ -611,12 +613,12 @@
      * internal helper methods
      **************************************************************************/
 
-    var callNative = function (command) {
-        var iframe = document.createElement("IFRAME");
-        iframe.setAttribute("src", "mraid://" + command);
-        document.documentElement.appendChild(iframe);
-        iframe.parentNode.removeChild(iframe);
-        iframe = null;
+    var callNative = function (command, params) {
+        var message = { };
+        message.command = command;
+        message.params = params;
+        window.webkit.messageHandlers.mraid.postMessage(message);
+ 
     };
 
     var fireEvent = function (event) {

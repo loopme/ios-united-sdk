@@ -22,6 +22,7 @@
 @property (nonatomic, weak) LoopMeVASTEventTracker *eventSender;
 @property (nonatomic, weak) LoopMeAdConfiguration *configuration;
 @property (nonatomic, readonly, strong) LoopMeVASTPlayerUIView *vastUIView;
+@property (nonatomic, readonly, strong) UIView *videoView;
 
 - (instancetype)initWithDelegate:(id<LoopMeVPAIDVideoClientDelegate>)delegate;
 - (void)cancel;
@@ -42,6 +43,7 @@
 - (void)videoClientDidEndCardTap;
 - (void)videoClientDidVideoTap;
 - (LoopMeSkipOffset)skipOffset;
+- (void)currentTime:(NSTimeInterval) currentTime percent:(double)percent;
 @optional
 - (LoopMeAdConfiguration *)adConfiguration;
 

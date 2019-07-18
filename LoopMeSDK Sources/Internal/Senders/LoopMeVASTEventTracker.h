@@ -37,11 +37,10 @@ typedef enum : NSUInteger {
 @protocol LoopMeViewabilityProtocol;
 @interface LoopMeVASTEventTracker : NSObject
 
-@property (nonatomic, weak) id<LoopMeViewabilityProtocol> viwableManager;
-
 - (instancetype)initWithTrackingLinks:(LoopMeVASTTrackingLinks *)trackingLinks;
 - (void)trackEvent:(LoopMeVASTEventType)type;
 - (void)trackError:(NSInteger)code;
+- (void)trackAdVerificationNonExecuted;
 
 - (void)setCurrentTime:(double)currentTime;
 

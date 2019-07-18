@@ -12,6 +12,7 @@
 #import "LoopMeError.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeVPAIDError.h"
+#import "LoopMeGlobalSettings.h"
 
 const NSTimeInterval kLoopMeAdRequestTimeOutInterval = 20.0;
 const NSInteger kLoopMeMaxWrapperNodes = 5;
@@ -26,7 +27,6 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
 @property (nonatomic, copy) NSURL *URL;
 @property (nonatomic, strong) NSURLSessionDataTask *sessionDataTask;
 @property (nonatomic, strong) NSURLSession *session;
-@property (nonatomic, strong) NSString *userAgent;
 
 @property (nonatomic, strong) NSMutableData *data;
 @property (nonatomic, strong) LoopMeAdConfiguration *configuration;
@@ -37,15 +37,6 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
 @end
 
 @implementation LoopMeServerCommunicator
-
-#pragma mark - Properties
-
-- (NSString *)userAgent {
-    if (_userAgent == nil) {
-        _userAgent = [[[UIWebView alloc] init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    }
-    return _userAgent;
-}
 
 #pragma mark - Life Cycle
 
@@ -68,7 +59,7 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         configuration.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
         configuration.timeoutIntervalForRequest = kLoopMeAdRequestTimeOutInterval;
-        configuration.HTTPAdditionalHeaders = @{@"User-Agent" : self.userAgent, @"x-openrtb-version" : @"2.5"};
+        configuration.HTTPAdditionalHeaders = @{@"User-Agent" : [[LoopMeGlobalSettings sharedInstance] userAgent], @"x-openrtb-version" : @"2.5"};
         _session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     }
     return _session;
@@ -109,7 +100,7 @@ const NSInteger kLoopMeMaxWrapperNodes = 5;
         [request setHTTPBody:body];
     }
     
-    [request setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
+    [request setValue:[[LoopMeGlobalSettings sharedInstance] userAgent] forHTTPHeaderField:@"User-Agent"];
     
     self.sessionDataTask = [self.session dataTaskWithRequest:request];
     [self.sessionDataTask resume];

@@ -18,7 +18,8 @@
 
 @property (nonatomic, weak) LoopMeVASTTrackingLinks *links;
 @property (nonatomic, strong) NSMutableSet *sentEvents;
-@property (nonatomic) double currentTime;
+@property (nonatomic) NSTimeInterval currentTime;
+
 
 @end
 
@@ -57,6 +58,7 @@
                 eventURLs = self.links.linearTrackingLinks.complete;
                 break;
             case LoopMeVASTEventTypeLinearClose:
+                [self trackEvent: LoopMeVASTEventTypeViewable];
                 eventURLs = self.links.linearTrackingLinks.closeLinear;
                 break;
             case LoopMeVASTEventTypeLinearPause:
@@ -132,11 +134,19 @@
     }
 }
 
-- (void)setCurrentTime:(double)currentTime {
-    _currentTime = currentTime;
-    if (currentTime >= 2) {
-        [self.viwableManager checkViwabilityCriteria];
+- (void)trackAdVerificationNonExecuted {
+    NSSet *templates = self.links.adVerificationErrorLinkTemplates;
+    NSInteger reason = 2;
+    for (NSString *template in templates) {
+        NSURL *URL = [LoopMeVASTMacroProcessor macroExpandedURLForURL:[NSURL URLWithString:template] errorCode:reason];
+        [[[NSURLSession sharedSession] dataTaskWithURL:URL] resume];
     }
+}
+
+
+- (void)setCurrentTime:(NSTimeInterval)currentTime {
+    _currentTime = currentTime;
+
     NSSet *events = self.links.linearTrackingLinks.progress;
     for (LoopMeVASTProgressEvent *e in events) {
         if (![self.sentEvents containsObject:@(e.offset.value+60)]) {

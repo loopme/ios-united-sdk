@@ -9,6 +9,7 @@
 #import "LoopMeJSCommunicatorProtocol.h"
 
 @class LoopMeJSClient;
+@class WKWebView;
 
 @protocol LoopMeVideoCommunicatorProtocol;
 @protocol LoopMeJSClientDelegate;
@@ -57,7 +58,7 @@ extern const struct LoopMeWebViewStateStruct {
 
 @protocol LoopMeJSClientDelegate <NSObject>
 
-- (UIWebView *)webViewTransport;
+- (WKWebView *)webViewTransport;
 - (id<LoopMeVideoCommunicatorProtocol>)videoCommunicator;
 - (void)JSClientDidReceiveSuccessCommand:(LoopMeJSClient *)client;
 - (void)JSClientDidReceiveFailCommand:(LoopMeJSClient *)client;

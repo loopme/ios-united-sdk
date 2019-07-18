@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 
 @class LoopMeMRAIDClient;
+@class WKWebView;
+
 @protocol LoopMeMRAIDClientDelegate;
 
 extern const struct LoopMeMRAIDFunctionsStruct {
@@ -48,21 +50,25 @@ extern const struct LoopMeMRAIDStateStruct {
 
 @interface LoopMeMRAIDClient : NSObject
 
+@property (nonatomic) NSDictionary *expandProperties;
+@property (nonatomic) NSDictionary *resizeProperties;
+@property (nonatomic) NSString *state;
+
 - (instancetype)initWithDelegate:(id<LoopMeMRAIDClientDelegate>)deleagate;
 - (BOOL)shouldInterceptURL:(NSURL *)URL;
-- (void)processURL:(NSURL *)URL;
+- (void)processCommand:(NSString *)command withParams:(NSDictionary *)params;
 - (void)executeEvent:(NSString *)event params:(NSArray *)params;
 - (void)setSupports;
-- (NSDictionary *)getOrientationProperties;
-- (NSDictionary *)getExpandProperties;
-- (NSDictionary *)getResizeProperties;
-- (NSString *)getState;
+//- (void)getOrientationProperties:(void (^)(NSDictionary *))completion;
+//- (void)getExpandProperties:(void (^)(NSDictionary *))completion;
+//- (void)getResizeProperties:(void (^)(NSDictionary *))completion;
+//- (void)getState:(void (^)(NSString *))completion;
 
 @end
 
 @protocol LoopMeMRAIDClientDelegate <NSObject>
 
-- (UIWebView *)webViewTransport;
+- (WKWebView *)webViewTransport;
 - (void)mraidClient:(LoopMeMRAIDClient *)client shouldOpenURL:(NSURL *)URL;
 - (void)mraidClientDidReceiveCloseCommand:(LoopMeMRAIDClient *)client;
 - (void)mraidClientDidReceiveExpandCommand:(LoopMeMRAIDClient *)client;

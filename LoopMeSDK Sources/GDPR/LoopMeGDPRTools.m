@@ -65,13 +65,17 @@ static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABConsent_Co
 }
 
 - (void)showGDPRWindowFromViewController:(UIViewController *)viewController {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (![LoopMeIdentityProvider advertisingTrackingEnabled]) {
             self.consentType = LoopMeConsentTypeUserRestricted;
             return;
         }
         
         if (self.consentType != LoopMeConsentTypeDidNotSet) {
+            return;
+        }
+        
+        if (self.userConsentString) {
             return;
         }
         

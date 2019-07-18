@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LoopMeVASTImageDownloader.h"
-#import "LoopMeVASTDiskURLCache.h"
+#import "LoopMeDiscURLCache.h"
 #import "LoopMeLogging.h"
 #import "LoopMeVPAIDError.h"
 
@@ -39,8 +39,8 @@
     if (imageURL) {
         [self.downloadQueue addOperationWithBlock:^{
             NSError *error = nil;
-            if ([[LoopMeVASTDiskURLCache sharedDiskCache] cachedDataExistsForKey:imageURL.absoluteString]) {
-                NSData *cachedImageData = [[LoopMeVASTDiskURLCache sharedDiskCache] retrieveDataForKey:imageURL.absoluteString];
+            if ([[LoopMeDiscURLCache sharedDiscCache] cachedDataExistsForKey:imageURL.absoluteString]) {
+                NSData *cachedImageData = [[LoopMeDiscURLCache sharedDiscCache] retrieveDataForKey:imageURL.absoluteString];
                 UIImage *image = [UIImage imageWithData:cachedImageData];
                 if (image) {
                     // By default, the image data isn't decompressed until set on a UIImageView, on the main thread. This
@@ -60,7 +60,7 @@
                 if (validImage) {
                     self.downloadedImage = [UIImage imageWithData:imageData];
                     if (self.downloadedImage) {
-                        [[LoopMeVASTDiskURLCache sharedDiskCache] storeData:imageData forKey:imageURL.absoluteString];
+                        [[LoopMeDiscURLCache sharedDiscCache] storeData:imageData forKey:imageURL.absoluteString];
                     } else {
                         LoopMeLogDebug(@"Error: invalid image data.");
                         if (!error) {

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "LoopMeVideoCommunicatorProtocol.h"
 #import "LoopMeDestinationDisplayController.h"
 
@@ -34,9 +35,9 @@
 @property (nonatomic, assign) BOOL isEndCardClicked;
 
 
-- (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate jsController:(WKUserContentController *)controller;
 - (BOOL)shouldIntercept:(NSURL *)URL
-         navigationType:(UIWebViewNavigationType)navigationType;
+         navigationType:(WKNavigationType)navigationType;
 - (void)setAdConfiguration:(LoopMeAdConfiguration *)configuration;
 - (void)loadAdConfiguration;
 - (void)displayAd;

@@ -2,16 +2,15 @@
 //  main.m
 //  Demo
 //
-//  Copyright (c) 2014 loopmemedia. All rights reserved.
+//  Created by Bohdan on 4/9/19.
+//  Copyright © 2019 LoopMe. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-#import "LDAppDelegate.h"
-
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([LDAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }

@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, LoopMeConsentType) {
  */
 @interface LoopMeGDPRTools : NSObject
 
-+ (instancetype)sharedInstance;
++ (instancetype _Nonnull )sharedInstance;
 
 /**
  * Indicates if user agree or does not in LoopMe GDPR window or was set by publisher.
@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, LoopMeConsentType) {
 /**
  * User Consent string set by Consent Framework
  */
-@property (nonatomic, strong, readonly) NSString *userConsentString;
+@property (nonatomic, strong, readonly) NSString * _Nullable userConsentString;
 
 /**
  * Show LoopMe GDPR window to ask user consent.
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, LoopMeConsentType) {
  * Read more: https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Mobile%20In-App%20Consent%20APIs%20v1.0%20Final.md
  */
 - (BOOL)cmpPresent;
-- (NSString *)subjectToGDPR;
-- (NSString *)consentString;
+- (NSString *_Nullable)subjectToGDPR;
+- (NSString *_Nullable)consentString;
 
 @end

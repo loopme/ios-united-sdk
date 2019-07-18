@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 LoopMe. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface LoopMeAdWebView : UIWebView
+@interface LoopMeAdWebView : WKWebView
+
+- (id)initWithFrame:(CGRect)frame contentController:(WKUserContentController *)controller;
 
 @end

@@ -21,6 +21,8 @@
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAnalyticsProvider.h"
 #import "LoopMeGDPRTools.h"
+#import "LoopMeViewabilityManager.h"
+#import "LoopMeSDK.h"
 
 @interface LoopMeAdView ()
 <
@@ -42,6 +44,9 @@
 @property (nonatomic, strong) NSTimer *timeoutTimer;
 @property (nonatomic, weak) LoopMeAdConfiguration *adConfiguration;
 
+@property (nonatomic, strong) NSLayoutConstraint *expandedWidth;
+@property (nonatomic, strong) NSLayoutConstraint *expandedHeight;
+
 /*
  * Update webView "visible" state is required on JS first time when ad appears on the screen,
  * further, we're ommiting sending "webView" states to JS but managing video ad. playback in-SDK
@@ -57,11 +62,8 @@
     [self unRegisterObservers];
     [_minimizedView removeFromSuperview];
     [_maximizedController hide];
-    //-------------NORMAL--------------
     [_adDisplayController stopHandlingRequests];
-    //--------------VPAID----------
     [_adDisplayControllerVPAID stopHandlingRequests];
-    //--------------------------
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
@@ -72,6 +74,11 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                       delegate:(id<LoopMeAdViewDelegate>)delegate {
     self = [super init];
     if (self) {
+        
+        if (![[LoopMeSDK shared] isReady]) {
+            LoopMeLogError(@"SDK is not inited");
+            return nil;
+        }
         
         if (!appKey) {
             LoopMeLogError(@"AppKey cann't be nil");
@@ -102,7 +109,6 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
         self.backgroundColor = [UIColor clearColor];
         [self registerObservers];
         LoopMeLogInfo(@"Ad view initialized with appKey: %@", appKey);
-        
         [LoopMeAnalyticsProvider sharedInstance];
     }
     return self;
@@ -206,8 +212,14 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
     
-    if (self.superview && self.isReady)
-        [self performSelector:@selector(displayAd) withObject:nil afterDelay:0.0];
+    if (self.superview && self.isReady) {
+        [self performSelector:@selector(displayAd) withObject:nil afterDelay:0.00];
+    }
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
 }
 
 #pragma mark - Observering
@@ -291,10 +303,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     self.loading = YES;
     self.ready = NO;
     self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.adManager loadURL:url];
-    });
+    [self.adManager loadURL:url];
 }
 
 - (void)setAdVisible:(BOOL)visible {
@@ -321,7 +330,6 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
         return;
     }
     
-    //-------------NORMAL----------------
     if ([self.maximizedController isBeingPresented]) {
         self.adDisplayController.visibleNoJS = YES;
         return;
@@ -330,31 +338,34 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     if (self.adDisplayController.destinationIsPresented) {
         return;
     }
-    //--------------------------
-
-    CGRect relativeToScrollViewAdRect = [self convertRect:self.bounds toView:self.scrollView];
-    CGRect visibleScrollViewRect = CGRectMake(self.scrollView.contentOffset.x, self.scrollView.contentOffset.y, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height);
     
-    if (![self isRect:relativeToScrollViewAdRect outOfRect:visibleScrollViewRect]) {
-        if (self.isMinimizedModeEnabled && self.minimizedView.superview) {
+    CGRect relativeToScrollViewAdRect = [self convertRect:self.bounds toView:self.scrollView];
+    relativeToScrollViewAdRect.origin.y -= (self.scrollView.contentOffset.y);
+    if (@available(iOS 11.0, *)) {
+        CGRect visibleScrollViewRect = CGRectMake(self.scrollView.contentOffset.x, self.scrollView.adjustedContentInset.top, self.scrollView.bounds.size.width, self.scrollView.bounds.size.height - self.scrollView.adjustedContentInset.top - self.scrollView.adjustedContentInset.bottom);
+        
+        if (![self isRect:relativeToScrollViewAdRect outOfRect:visibleScrollViewRect]) {
+            if (self.isMinimizedModeEnabled && self.minimizedView.superview) {
+                [self updateAdVisibilityWhenScroll];
+                [self minimize];
+            }
+        } else {
+            [self toOriginalSize];
+        }
+        
+        if (self.isMinimized) {
+            return;
+        }
+        
+        if ([self moreThenHalfOfRect:relativeToScrollViewAdRect visibleInRect:visibleScrollViewRect]) {
             [self updateAdVisibilityWhenScroll];
-            [self minimize];
+        } else {
+            self.adDisplayController.visibleNoJS = NO;
+            self.adDisplayControllerVPAID.visible = NO;
         }
     } else {
-        [self toOriginalSize];
+        // Fallback on earlier versions
     }
-    
-    if (self.isMinimized) {
-        return;
-    }
-    
-    if ([self moreThenHalfOfRect:relativeToScrollViewAdRect visibleInRect:visibleScrollViewRect]) {
-        [self updateAdVisibilityWhenScroll];
-    //-----------NORMAL----------
-    } else {
-        self.adDisplayController.visibleNoJS = NO;
-    }
-    //------------------------------
 }
 
 #pragma mark - Private
@@ -432,8 +443,6 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
             self.adDisplayController.visible = YES;
         } else {
             self.adDisplayControllerVPAID.visible = YES;
-            [self.adConfiguration.eventTracker trackEvent:LoopMeVASTEventTypeImpression];
-            [self.adConfiguration.eventTracker trackEvent:LoopMeVASTEventTypeLinearCreativeView];
             [self.adDisplayControllerVPAID startAd];
         }
     } else {
@@ -447,14 +456,13 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
             self.adDisplayController.visible = YES;
         } else {
             self.adDisplayControllerVPAID.visible = YES;
-            [self.adConfiguration.eventTracker trackEvent:LoopMeVASTEventTypeImpression];
-            [self.adConfiguration.eventTracker trackEvent:LoopMeVASTEventTypeLinearCreativeView];
             [self.adDisplayControllerVPAID startAd];
         }
     
         self.visibilityUpdated = YES;
     } else {
         self.adDisplayController.visibleNoJS = YES;
+        self.adDisplayControllerVPAID.visible = YES;
     }
 }
 
@@ -481,6 +489,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         return;
     }
+    [self.adDisplayControllerVPAID startAd];
     [self updateVisibility];
 }
 
@@ -698,11 +707,27 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
 }
 
 - (void)adDisplayController:(LoopMeAdDisplayController *)adDisplayController willResizeAd:(CGSize)size {
+    
     float x = self.frame.origin.x;
     float y = self.frame.origin.y;
     
     CGRect newFrame = CGRectMake(x, y, size.width, size.height);
-    self.frame = newFrame;
+    
+    if (self.translatesAutoresizingMaskIntoConstraints) {
+        self.frame = newFrame;
+    } else {
+        
+        if (self.expandedWidth.isActive && self.expandedHeight.isActive) {
+            self.expandedHeight.active = NO;
+            self.expandedWidth.active = NO;
+        } else {
+            self.expandedHeight = [self.heightAnchor constraintEqualToConstant:size.height];
+            self.expandedHeight.active = YES;
+            
+            self.expandedWidth = [self.widthAnchor constraintEqualToConstant:size.width];
+            self.expandedWidth.active = YES;
+        }
+    }
 }
 
 

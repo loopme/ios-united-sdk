@@ -9,4 +9,6 @@
 
 @interface LDBannerViewController : UIViewController
 
+@property (nonatomic) NSString *appKey;
+
 @end

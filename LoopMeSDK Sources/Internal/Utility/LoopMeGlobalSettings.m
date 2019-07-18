@@ -7,6 +7,7 @@
 //
 
 #import "LoopMeGlobalSettings.h"
+#import <UIKit/UIKit.h>
 
 @implementation LoopMeGlobalSettings
 
@@ -17,6 +18,15 @@
         instance = [[LoopMeGlobalSettings alloc] init];
     });
     return instance;
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.userAgent = [[[UIWebView alloc] init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+        });
+    }
+    return self;
 }
 
 @end

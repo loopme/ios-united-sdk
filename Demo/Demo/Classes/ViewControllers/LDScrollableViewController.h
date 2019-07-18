@@ -7,7 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LDScrollableViewController : UIViewController
+@interface LDScrollableViewController : UITableViewController
+
+@property (nonatomic) NSString *appKey;
 
 @end
 

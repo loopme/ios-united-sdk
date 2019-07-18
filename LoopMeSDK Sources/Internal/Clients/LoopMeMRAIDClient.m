@@ -7,6 +7,7 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
+#import <WebKit/WebKit.h>
 
 #import "LoopMeAdWebView.h"
 #import "LoopMeDefinitions.h"
@@ -62,7 +63,7 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
 @interface LoopMeMRAIDClient ()
 
 @property (nonatomic, weak) id<LoopMeMRAIDClientDelegate> delegate;
-@property (nonatomic, weak, readonly) UIWebView *webViewClient;
+@property (nonatomic, weak, readonly) WKWebView *webViewClient;
 
 @end
 
@@ -79,7 +80,7 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
 
 #pragma mark - Properties
 
-- (UIWebView *)webViewClient {
+- (WKWebView *)webViewClient {
     return [self.delegate webViewTransport];
 }
 
@@ -88,12 +89,15 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
 #pragma mark JS Commands
 
 - (void)processCommand:(NSString *)command withParams:(NSDictionary *)params {
+    LoopMeLogDebug(@"Processing MRAID command: %@, params: %@", command, params);
     
     if ([command isEqualToString:_kLoopMeMRAIDOpenCommand]) {
         [self.delegate mraidClient:self shouldOpenURL:[NSURL lm_urlWithEncodedString:params[@"url"]]];
     } else if ([command isEqualToString:_kLoopMeMRAIDPlayVideoCommand]) {
         [self.delegate mraidClient:self sholdPlayVideo:[NSURL lm_urlWithEncodedString:params[@"url"]]];
     } else if ([command isEqualToString:_kLoopMeMRAIDResizeCommand]) {
+        NSDictionary *resizeProperties = params[@"resizeProperties"];
+        self.resizeProperties = resizeProperties;
         [self.delegate mraidClientDidResizeAd:self];
     } else if ([command isEqualToString:_kLoopMeMRAIDCustomCloseCommand]) {
         [self.delegate mraidClient:self useCustomClose:[params[@"useCustomClose"] boolValue]];
@@ -109,6 +113,8 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
     } else if ([command isEqualToString:_kLoopMeMRAIDCloseCommand]) {
         [self.delegate mraidClientDidReceiveCloseCommand:self];
     } else if ([command isEqualToString:_kLoopMeMRAIDExpandCommand]) {
+        NSDictionary *expandProperties = params[@"expandProperties"];
+        self.expandProperties = expandProperties;
         [self.delegate mraidClientDidReceiveExpandCommand:self];
     } else {
         LoopMeLogDebug(@"JS command: %@ is not supported", command);
@@ -124,26 +130,79 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
 
 #pragma mark - Public
 
-- (NSDictionary *)getOrientationProperties {
-    NSString *stringOrientationProperties = [self.webViewClient stringByEvaluatingJavaScriptFromString:@"mraid.getStringOrientationProperties()"];
-    return [NSJSONSerialization JSONObjectWithData:[stringOrientationProperties dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-}
+//- (void)getOrientationProperties:(void (^)(NSDictionary *))completion {
+//    [self.webViewClient evaluateJavaScript:@"mraid.getStringOrientationProperties()" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//
+//        NSString *stringOrientationProperties;
+//
+//        if (!error) {
+//            stringOrientationProperties = [result string];
+//        } else {
+////            completion(@{});
+//            return;
+//        }
+//
+//        NSDictionary *orientationProperties = [NSJSONSerialization JSONObjectWithData:[stringOrientationProperties dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+//
+//        completion(orientationProperties);
+//    }];
+//}
+//
+//- (void)getExpandProperties:(void (^)(NSDictionary *))completion {
+//    [self.webViewClient evaluateJavaScript:@"mraid.getStringExpandProperties()" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//
+//        NSString *stringExpandProperties;
+//
+//        if (!error) {
+//            stringExpandProperties = [result string];
+//        } else {
+//            return;
+//        }
+//
+//        NSDictionary *expandProperties = [NSJSONSerialization JSONObjectWithData:[stringExpandProperties dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+//
+//        completion(expandProperties);
+//    }];
+//}
 
-- (NSDictionary *)getResizeProperties {
-    NSString *stringOrientationProperties = [self.webViewClient stringByEvaluatingJavaScriptFromString:@"mraid.getStringResizeProperties()"];
-    return [NSJSONSerialization JSONObjectWithData:[stringOrientationProperties dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-}
-
-- (NSDictionary *)getExpandProperties {
-    NSString *stringExpandProperties = [self.webViewClient stringByEvaluatingJavaScriptFromString:@"mraid.getStringExpandProperties()"];
-    return [NSJSONSerialization JSONObjectWithData:[stringExpandProperties dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-}
-
-- (NSString *)getState {
-    return [self.webViewClient stringByEvaluatingJavaScriptFromString:@"mraid.getStateString()"];
-}
+//- (void)getResizeProperties:(void (^)(NSDictionary *))completion {
+//    [self.webViewClient evaluateJavaScript:@"mraid.getStringResizeProperties()" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//        
+//        NSString *stringResizeProperties;
+//        
+//        if (!error) {
+//            stringResizeProperties = [result string];
+//        } else {
+//            return;
+//        }
+//        
+//        NSDictionary *resizeProperties = [NSJSONSerialization JSONObjectWithData:[stringResizeProperties dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+//        
+//        completion(resizeProperties);
+//    }];
+//}
+//
+//- (void)getState:(void (^)(NSString *))completion {
+//    [self.webViewClient evaluateJavaScript:@"mraid.getStateString()" completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//        
+//        NSString *state;
+//        
+//        if (!error) {
+//            state = [result string];
+//        } else {
+//            return;
+//        }
+//        
+//        completion(state);
+//    }];
+//}
 
 - (void)executeEvent:(NSString *)event params:(NSArray *)params {
+    
+    if ([event isEqualToString:LoopMeMRAIDFunctions.stateChange]) {
+        self.state = params.firstObject;
+    }
+    
     NSMutableString *stringParams = [NSMutableString new];
     if (params.count) {
         for (id param in params) {
@@ -165,7 +224,7 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
     }
     
     NSString *eventString = [self makeEventStringForEvent:event params:stringParams];
-    [self.webViewClient stringByEvaluatingJavaScriptFromString:eventString];
+    [self.webViewClient evaluateJavaScript:eventString completionHandler:nil];
 }
 
 - (void)setSupports {
@@ -193,7 +252,7 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
 - (void)processURL:(NSURL *)URL {
     NSString *command = URL.host;
     NSDictionary *params = [URL lm_toDictionary];
-    LoopMeLogDebug(@"Processing MRAID command: %@, params: %@", command, params);
+    
     [self processCommand:command withParams:params];
 }
 

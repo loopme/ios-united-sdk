@@ -1,3 +1,9 @@
+## Version 7.1.0 (18.07.2019)
+
+- Added Open Measurement SDK (OM SDK) for viewability measurement
+- Added VAST 4.1 support
+- Replaced deprecated UIWebView with WKWebView
+
 
 ## Version 7.0.4 (24.01.2019)
 

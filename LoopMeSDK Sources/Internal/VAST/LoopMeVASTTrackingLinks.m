@@ -16,6 +16,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         _errorLinkTemplates = [NSMutableSet new];
+        _adVerificationErrorLinkTemplates = [NSMutableSet new];
         _impressionLinks = [NSMutableSet new];
         _linearTrackingLinks = [[LoopMeVastLinearTrackingLinks alloc] init];
         _companionTrackingLinks = [[LoopMeVastCompanionAdsTrackingLinks alloc] init];
@@ -114,5 +115,10 @@
     [self.notViewable addObjectsFromArray:[links.notViewable allObjects]];
     [self.viewUndetermined addObjectsFromArray:[links.viewUndetermined allObjects]];
 }
+
+@end
+
+@implementation LoopMeVerification : NSObject
+
 
 @end

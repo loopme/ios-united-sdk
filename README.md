@@ -2,9 +2,11 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.0.4**
+**Version 7.1.0**
 
-- IAS measurement support improvements
+- Added Open Measurement SDK (OM SDK) for viewability measurement
+- Added VAST 4.1 support
+- Replaced deprecated UIWebView with WKWebView
 
 
 Please view the [changelog](CHANGELOG.md) for details.

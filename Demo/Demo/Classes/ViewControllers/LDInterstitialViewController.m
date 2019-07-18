@@ -6,17 +6,12 @@
 //
 
 #import "LDInterstitialViewController.h"
-#import "UIImage+iphone5.h"
 
 #import <LoopMeUnitedSDK/LoopMeInterstitial.h>
 
-@interface LDInterstitialViewController ()
-<
-    LoopMeInterstitialDelegate
->
+@interface LDInterstitialViewController ()<LoopMeInterstitialDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *showButton;
-@property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (nonatomic, strong) LoopMeInterstitial *interstitial;
 
 @end
@@ -25,22 +20,18 @@
 
 #pragma mark - Life Cycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        _background.image = [UIImage imageNamedForDevice:@"bg_new_main"];
-    }
-    [self setTitle:@"Interstitial"];
+    // Intializing `LoopMeInterstitial`
+    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:self.appKey delegate:self];
+    [self.interstitial setAutoLoadingEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    // Intializing `LoopMeInterstitial`
-    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:TEST_APP_KEY_INTERSTITIAL_LANDSCAPE viewControllerForPresentationGDPRWindow: self delegate:self];
+    
     if ([self.interstitial isReady]) {
         [self togglePreloadingProgress:LDButtonStateShow];
     } else {
@@ -55,7 +46,11 @@
     switch (state) {
         case LDButtonStateLoad:
             self.showButton.enabled = YES;
-            [self.showButton setTitle:@"LOAD" forState:UIControlStateNormal];
+            if (self.loadStyle == LDLoadStyleSame) {
+                [self.showButton setTitle:@"LOAD/SHOW" forState:UIControlStateNormal];
+            } else {
+                [self.showButton setTitle:@"LOAD" forState:UIControlStateNormal];
+            }
             [self.showButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             break;
         
@@ -105,6 +100,11 @@
 
 - (void)loopMeInterstitialDidLoadAd:(LoopMeInterstitial *)interstitial
 {
+    if (self.loadStyle == LDLoadStyleSame) {
+//        [self.interstitial showFromViewController:self animated:YES];
+        [self.showButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+    
     [self togglePreloadingProgress:LDButtonStateShow];
 }
 
@@ -119,10 +119,12 @@
     [interstitial loadAd];
 }
 
-- (void)loopMeInterstitialDidDisappear:(LoopMeInterstitial *)interstitial
-{
-    [self.interstitial loadAd];
-    [self togglePreloadingProgress:LDButtonStateLoading];
+- (void)loopMeInterstitialDidDisappear:(LoopMeInterstitial *)interstitial {
+    [self togglePreloadingProgress:LDButtonStateLoad];
+}
+
+- (void)loopMeInterstitialWillAppear:(LoopMeInterstitial *)interstitial {
+
 }
 
 @end

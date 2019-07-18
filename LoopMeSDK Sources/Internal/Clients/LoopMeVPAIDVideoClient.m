@@ -22,6 +22,7 @@
 #import "LoopMeAdView.h"
 #import "LoopMeIASWrapper.h"
 #import "NSString+Encryption.h"
+#import "LoopMeOMIDWrapper.h"
 
 static void *VPAIDvideoControllerStatusObservationContext = &VPAIDvideoControllerStatusObservationContext;
 NSString * const kLoopMeVPAIDVideoStatusKey = @"status";
@@ -41,6 +42,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) AVPlayer *player;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong) AVAudioSession *audioSession;
+
+
 @property (nonatomic, readwrite, strong) LoopMeVASTPlayerUIView *vastUIView;
 
 @property (nonatomic, strong) UIView *videoView;
@@ -56,6 +60,13 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) NSURL *videoURL;
 
 @property (nonatomic, strong) LOOMoatVideoTracker *moatVideoTracker;
+@property (nonatomic, weak) OMIDLoopmeVideoEvents *omidVideoEvents;
+
+
+@property (nonatomic, strong) NSLayoutConstraint *topVideoUIConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *bottomVideoUIConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *leftVideoUIConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *rightVideoUIConstraint;
 
 - (NSURL *)currentAssetURLForPlayer:(AVPlayer *)player;
 - (void)setupPlayerWithFileURL:(NSURL *)URL;
@@ -74,6 +85,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (UIView *)vastUIView {
     if (!_vastUIView) {
         _vastUIView = [[LoopMeVASTPlayerUIView alloc] initWithDelegate:self];
+        _vastUIView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _vastUIView;
 }
@@ -92,6 +104,18 @@ const NSInteger kResizeOffsetVPAID = 11;
          [self.delegate videoClient:self setupView:_videoView];
         [_videoView.layer addSublayer:_playerLayer];
         [_videoView addSubview:self.vastUIView];
+        
+        self.leftVideoUIConstraint =  [self.vastUIView.leadingAnchor constraintEqualToAnchor:_videoView.leadingAnchor];
+        self.leftVideoUIConstraint.active = YES;
+        
+        self.rightVideoUIConstraint = [self.vastUIView.trailingAnchor constraintEqualToAnchor:_videoView.trailingAnchor];
+        self.rightVideoUIConstraint.active = YES;
+        
+        self.topVideoUIConstraint = [self.vastUIView.topAnchor constraintEqualToAnchor:_videoView.topAnchor];
+        self.topVideoUIConstraint.active = YES;
+        
+        self.bottomVideoUIConstraint = [self.vastUIView.bottomAnchor constraintEqualToAnchor:_videoView.bottomAnchor];
+        self.bottomVideoUIConstraint.active = YES;
     }
     return _videoView;
 }
@@ -99,6 +123,14 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (LoopMeIASWrapper *)iasWrapper {
     if ([self.delegate respondsToSelector:@selector(iasWarpper)]) {
         return [self.delegate performSelector:@selector(iasWarpper)];
+    }
+    
+    return nil;
+}
+
+- (LoopMeOMIDVideoEventsWrapper *)omidVideoEvents {
+    if ([self.delegate respondsToSelector:@selector(omidVideoEvents)]) {
+        return [self.delegate performSelector:@selector(omidVideoEvents)];
     }
     
     return nil;
@@ -161,7 +193,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         
         if (_player) {
             [self.playbackTimeObserver invalidate];
-            
+//            [self.audioSession setActive:YES error:nil];
             [self addTimerForCurrentTime];
             [self videoView];
             self.shouldPlay = NO;
@@ -179,6 +211,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (instancetype)initWithDelegate:(id<LoopMeVPAIDVideoClientDelegate>)delegate {
     if (self = [super init]) {
         _delegate = delegate;
+        _audioSession = [AVAudioSession sharedInstance];
         [self registerObservers];
     }
     return self;
@@ -226,6 +259,9 @@ const NSInteger kResizeOffsetVPAID = 11;
                                              selector:@selector(didEnterBackground:)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
+    
+//    [self.audioSession addObserver:self forKeyPath:@"outputVolume" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:VPAIDvideoControllerStatusObservationContext];
+    
 }
 
 - (void)unregisterObservers {
@@ -248,18 +284,8 @@ const NSInteger kResizeOffsetVPAID = 11;
                                               queue:NULL
                                          usingBlock:^(CMTime time) {
                                              float currentTime = (float)CMTimeGetSeconds(time);
-                                             double percent = currentTime / CMTimeGetSeconds(selfWeak.playerItem.duration);
-                                             if (percent >= 0.25 && percent < 0.5) {
-                                                 [selfWeak.eventSender trackEvent:LoopMeVASTEventTypeLinearFirstQuartile];
-                                                 [selfWeak.iasWrapper recordAdVideoFirstQuartileEvent];
-                                             } else if (percent >= 0.5 && percent < 0.75) {
-                                                 [selfWeak.eventSender trackEvent:LoopMeVASTEventTypeLinearMidpoint];
-                                                 [selfWeak.iasWrapper recordAdVideoMidpointEvent];
-                                             } else if (percent >= 0.75) {
-                                                 [selfWeak.eventSender trackEvent:LoopMeVASTEventTypeLinearThirdQuartile];
-                                                 [selfWeak.iasWrapper recordAdVideoThirdQuartileEvent];
-                                             }
-                                             [selfWeak.eventSender setCurrentTime:currentTime];
+                                             double percent = currentTime / CMTimeGetSeconds(self.playerItem.duration);
+                                             [selfWeak.delegate currentTime:currentTime percent:percent];
                                              if (currentTime > 0 && selfWeak.isShouldPlay) {
                                                  [selfWeak.vastUIView setVideoCurrentTime:currentTime];
                                              }
@@ -287,6 +313,10 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)didEnterBackground:(NSNotification*)notification {
+    
+    //OMID
+    [self.omidVideoEvents pause];
+    
     [self.player pause];
 }
 #pragma mark Player state notification
@@ -296,11 +326,17 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearComplete];
     [self.delegate videoClientDidReachEnd:self];
     
+    [self.omidVideoEvents complete];
+    
     if ([self.vastUIView endCardImage]) {
         [self showEndCard];
     } else {
         [self.delegate videoClientShouldCloseAd:self];
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AVPlayerItemDidPlayToEndTimeNotification
+                                                  object:_playerItem];
 }
 
 - (void)playerItemDidFailedToPlayToEndTime:(id)object {
@@ -321,7 +357,10 @@ const NSInteger kResizeOffsetVPAID = 11;
                 }
             }
         }
-    }
+    } //else if (object == self.audioSession) {
+//        NSNumber * newValue = [change objectForKey:NSKeyValueChangeNewKey];
+//        [self.omidVideoEvents volumeChangeTo:newValue.floatValue];
+   // }
 }
 
 #pragma mark - Public
@@ -330,6 +369,12 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.videoView.frame = frame;
     
     self.vastUIView.frame = frame;
+    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
+    volumeView.showsVolumeSlider = YES;
+    volumeView.showsRouteButton = NO;
+    volumeView.alpha = 0.01;
+    
+//    [self.vastUIView addSubview:volumeView];
 
     if (self.playerLayer) {
         self.playerLayer.frame = frame;
@@ -353,7 +398,11 @@ const NSInteger kResizeOffsetVPAID = 11;
     }
     
     if  ([[self.delegate performSelector:@selector(delegate)] isKindOfClass:[LoopMeAdView class]]) {
-        self.vastUIView.frame = self.playerLayer.videoRect;
+        self.leftVideoUIConstraint.constant = self.playerLayer.videoRect.origin.x;
+        self.rightVideoUIConstraint.constant = self.playerLayer.bounds.size.width - self.playerLayer.videoRect.size.width - self.playerLayer.videoRect.origin.x;
+        self.topVideoUIConstraint.constant = self.playerLayer.videoRect.origin.y;
+        self.bottomVideoUIConstraint.constant = -(self.playerLayer.bounds.size.height - self.playerLayer.videoRect.size.height - self.playerLayer.videoRect.origin.y);
+//        self.vastUIView.frame = self.playerLayer.videoRect;
     }
 }
 
@@ -378,20 +427,22 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)willAppear {
-    [self.delegate videoClient:self setupView:self.videoView];
-    if (!self.skipped) {
-        [self play];
-        
-        LoopMeSkipOffset skipOffset = [self.delegate skipOffset];
-        CMTime skipOffsetTime;
-        if (skipOffset.type == LoopMeSkipOffsetTypeSec) {
-            skipOffsetTime = CMTimeMake(skipOffset.value, 1);
-        } else {
-            int sec = CMTimeGetSeconds(self.playerItem.duration) * skipOffset.value / 100;
-            skipOffsetTime = CMTimeMake(sec, 1);
+        [self.delegate videoClient:self setupView:self.videoView];
+        if (!self.skipped) {
+            LoopMeSkipOffset skipOffset = [self.delegate skipOffset];
+            CMTime skipOffsetTime;
+            if (skipOffset.type == LoopMeSkipOffsetTypeSec) {
+                skipOffsetTime = CMTimeMake(skipOffset.value, 1);
+            } else {
+                int sec = CMTimeGetSeconds(self.playerItem.duration) * skipOffset.value / 100;
+                skipOffsetTime = CMTimeMake(sec, 1);
+            }
+            [self.vastUIView setSkipOffset:skipOffsetTime];
+            
+            [self play];
+            //OMID
+            [self.omidVideoEvents startWithDuration:CMTimeGetSeconds(self.playerItem.duration) videoPlayerVolume:self.player.volume];
         }
-        [self.vastUIView setSkipOffset:skipOffsetTime];
-    }
 }
 
 - (BOOL)playerReachedEnd {
@@ -429,6 +480,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)setMute:(BOOL)mute {
     self.player.volume = (mute) ? 0.0f : 1.0f;
+    
+    [self.omidVideoEvents volumeChangeTo:self.player.volume];
     [self.iasWrapper recordAdVolumeChangeEvent:self.player.volume];
 }
 
@@ -450,17 +503,29 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self play];
 }
 
+- (void)resume {
+    [self.omidVideoEvents resume];
+    [self play];
+    [self.eventSender trackEvent:LoopMeVASTEventTypeLinearResume];
+}
+
 - (void)play {
-    self.shouldPlay = YES;
     [self.player play];
-    [self.vastUIView showEndCard:NO];
+    if (self.shouldPlay) {
+        [self.vastUIView showEndCard:NO];
+    }
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearStart];
+    
     [self.iasWrapper recordAdPlayingEvent];
+    self.shouldPlay = YES;
 }
 
 - (void)pause {
     self.shouldPlay = NO;
     [self.player pause];
+    
+    //OMID
+    [self.omidVideoEvents pause];
     
     [self.iasWrapper recordAdPausedEvent];
 }
@@ -470,6 +535,10 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.skipped = YES;
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearSkip];
     [self pause];
+    
+    //OMID
+    [self.omidVideoEvents skipped];
+    
     if ([self.vastUIView endCardImage]) {
         [self showEndCard];
     } else {
@@ -492,6 +561,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)uiViewClose {
+    [_audioSession setActive:NO error:nil];
     [self.delegate videoClientShouldCloseAd:self];
 }
 
@@ -509,6 +579,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)uiViewVideoTapped {
     [self.delegate videoClientDidVideoTap];
+    
+    [self.omidVideoEvents adUserInteractionWithType:OMIDInteractionTypeClick];
 }
 
 - (void)uiViewExpand:(BOOL)expand {

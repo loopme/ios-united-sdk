@@ -34,13 +34,13 @@
     [self stopHandlingRequests];
 }
 
-- (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate jsController:(WKUserContentController *)controller {
     self = [super init];
     if (self) {
         _delegate = delegate;
         _destinationDisplayClient = [LoopMeDestinationDisplayController controllerWithDelegate:self];
         //if frame is zero WebView display content incorrect
-        _webView = [[LoopMeAdWebView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        _webView = [[LoopMeAdWebView alloc] initWithFrame:CGRectMake(0, 0, 1, 1) contentController:controller];
         _webView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
@@ -49,8 +49,9 @@
 #pragma mark - Private
 
 - (BOOL)shouldIntercept:(NSURL *)URL
-         navigationType:(UIWebViewNavigationType)navigationType {
-    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+         navigationType:(WKNavigationType)navigationType {
+    if (navigationType == WKNavigationTypeLinkActivated) {
+        //OMID CLICK
         if ([self.delegate respondsToSelector:@selector(adDisplayControllerDidReceiveTap:)]) {
             [self.delegate adDisplayControllerDidReceiveTap:self];
         }

@@ -9,10 +9,13 @@
 @class LoopMeBrowserViewController;
 
 @protocol LoopMeBrowserControllerDelegate;
+@protocol WKNavigationDelegate;
+@protocol WKUIDelegate;
 
 @interface LoopMeBrowserViewController : UIViewController
 <
-    UIWebViewDelegate,
+    WKNavigationDelegate,
+    WKUIDelegate,
     UIActionSheetDelegate
 >
 

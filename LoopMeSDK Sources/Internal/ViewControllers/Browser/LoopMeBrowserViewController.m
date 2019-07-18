@@ -7,6 +7,7 @@
 //
 
 #import <MessageUI/MessageUI.h>
+#import <WebKit/WebKit.h>
 
 #import "LoopMeBrowserViewController.h"
 #import "LoopMeDefinitions.h"
@@ -20,7 +21,7 @@
 @property (nonatomic, strong) UIAlertController *actionSheet;
 @property (nonatomic, strong) NSString *HTMLString;
 @property (nonatomic, assign) int webViewLoadCount;
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) UIBarButtonItem *backButton;
@@ -45,11 +46,18 @@
 
 #pragma mark - Properties
 
-- (UIWebView *)createWebView {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+- (WKWebView *)createWebView {
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    configuration.allowsAirPlayForMediaPlayback = NO;
+    
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, 1, 1) configuration:configuration];
     webView.translatesAutoresizingMaskIntoConstraints = NO;
-    webView.delegate = self;
-    webView.scalesPageToFit = YES;
+    
+    webView.navigationDelegate = self;
+    webView.UIDelegate = self;
+    
+//    webView.scalesPageToFit = YES;
+    
     webView.backgroundColor = [UIColor whiteColor];
     self.webViewLoadCount = 0;
     
@@ -180,9 +188,10 @@
 }
 
 - (void)cleanUp {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"document.body.innerHTML = \"\";"];
+    [self.webView evaluateJavaScript:@"document.body.innerHTML = \"\";" completionHandler:nil];
     [self.webView removeFromSuperview];
-    self.webView.delegate = nil;
+    self.webView.navigationDelegate = nil;
+    self.webView.UIDelegate = nil;
     [self.webView stopLoading];
 }
 
@@ -215,7 +224,7 @@
 - (void)refresh {
     [self dismissActionSheetAnimated:YES];
     
-    if (!self.webView.request.URL.absoluteString || [self.webView.request.URL.absoluteString isEqualToString:@"about:blank"]) {
+    if (!self.webView.URL.absoluteString || [self.webView.URL.absoluteString isEqualToString:@"about:blank"]) {
         [self.webView loadHTMLString:self.HTMLString baseURL:nil];
     } else {
         [self.webView reload];
@@ -235,19 +244,14 @@
 }
 
 - (void)back:(id)sender {
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
-        UIButton *b = (UIButton *)sender;
-        b.highlighted = NO;
-    }
-
     [self dismissActionSheetAnimated:YES];
  
     if ([self.webView canGoBack]) {
         [self.webView goBack];
     } else if (!self.webView.canGoBack && self.isBrowserWasClicked) {
-        [self.webView removeFromSuperview];
-        self.webView.delegate = self;
-        self.webView = nil;
+//        [self.webView removeFromSuperview];
+//        self.webView.UIDelegate = nil;
+//        self.webView = nil;
         
         [self.webView loadHTMLString:self.HTMLString baseURL:nil];
         self.browserWasClicked = NO;
@@ -288,7 +292,7 @@
         [displayController showStoreKitProductWithParameter:[LoopMeURLResolver storeItemIdentifierForURL:URL] fallbackURL:URL];
     } else {
         if ([[UIApplication sharedApplication] canOpenURL:self.URL]) {
-            [[UIApplication sharedApplication] openURL:self.URL];
+            [[UIApplication sharedApplication] openURL:URL options:@{} completionHandler:nil];
         }
     }
 }
@@ -298,33 +302,33 @@
     return UIInterfaceOrientationMaskAll;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotate {
     return YES;
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKDelegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType {
-    LoopMeLogDebug(@"Ad browser loads URL: %@", request.URL.absoluteString);
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
-    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+    LoopMeLogDebug(@"Ad browser loads URL: %@", navigationAction.request.URL.absoluteString);
+    
+    if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
         self.browserWasClicked = YES;
     }
     
-    if (navigationType != UIWebViewNavigationTypeOther) {
-        self.URL = request.URL;
+    if (navigationAction.navigationType != WKNavigationTypeOther) {
+        self.URL = navigationAction.request.URL;
     }
     
-    if ([self canHandleURL:request.URL]) {
-        [self handleURL:request.URL];
-        return NO;
+    if ([self canHandleURL:navigationAction.request.URL]) {
+        [self handleURL:navigationAction.request.URL];
+        decisionHandler(WKNavigationActionPolicyCancel);
     }
     
-    return YES;
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
     self.refreshButton.enabled = YES;
     self.safariButton.enabled = YES;
     
@@ -333,7 +337,7 @@
     self.webViewLoadCount++;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     self.webViewLoadCount--;
     [self refreshBackButtonState];
     
@@ -345,7 +349,7 @@
     [self.spinner stopAnimating];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     self.webViewLoadCount--;
     
     self.refreshButton.enabled = YES;

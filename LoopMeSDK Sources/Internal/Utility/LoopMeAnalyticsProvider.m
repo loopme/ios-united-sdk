@@ -89,7 +89,9 @@ static NSTimeInterval const kLoopMeAnalyticsSendInterval = 900;
     NSString *params = [LoopMeServerURLBuilder packageIDs];
     [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [[self.session dataTaskWithRequest:request] resume];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[self.session dataTaskWithRequest:request] resume];
+    });
 }
 
 @end

@@ -57,7 +57,6 @@
     NSBundle *resourcesBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"]];
     
     self.muteButton = [[UIButton alloc] init];
-    UIEdgeInsets insets = UIEdgeInsetsMake(10, 10, 10, 10);
 
     [self.muteButton setImage:[UIImage imageNamed:@"loopmemute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
     [self.muteButton setImage:[UIImage imageNamed:@"loopmeunmute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];

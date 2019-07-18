@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 @class LoopMeVPAIDClient;
-@class JSContext;
+@class WKWebView;
 
 @protocol LoopMeVpaidProtocol;
 
@@ -21,10 +21,10 @@ extern const struct LoopMeVPAIDViewModeStruct {
 
 @interface LoopMeVPAIDClient : NSObject
 
-- (instancetype)initWithDelegate:(id<LoopMeVpaidProtocol>)deleagate jsContext:(JSContext *)context;
+- (instancetype)initWithDelegate:(id<LoopMeVpaidProtocol>)deleagate webView:(WKWebView *)webView;
 
 - (double)handshakeVersion;
-- (void)initAdWithWidth:(int)width height:(int)height viewMode:(NSString *)viewMode desiredBitrate:(double)desiredBitrate creativeData:(NSDictionary *)creativeData environmentVars:(NSDictionary *)environmentVars;
+- (void)initAdWithWidth:(int)width height:(int)height viewMode:(NSString *)viewMode desiredBitrate:(double)desiredBitrate creativeData:(NSDictionary *)creativeData;
 - (void)resizeAdWithWidth:(int)width height:(int)height viewMode:(NSString *)viewMode;
 - (void)startAd;
 - (void)stopAd;
@@ -33,36 +33,26 @@ extern const struct LoopMeVPAIDViewModeStruct {
 - (void)expandAd;
 - (void)collapseAd;
 - (void)skipAd;
-- (BOOL)getAdExpanded;
-- (BOOL)getAdSkippableState;
-- (BOOL)getAdLinear;
-- (NSInteger)getAdWidth;
-- (NSInteger)getAdHeight;
-- (NSInteger)getAdRemainingTime;
-- (NSInteger)getAdDuration;
-- (double)getAdVolume;
 - (void)setAdVolume:(double)volume;
-- (NSString *)getAdCompanions;
-- (BOOL)getAdIcons;
 - (void)stopActionTimeOutTimer;
 
 @end
 
-@protocol LoopMeVpaidProtocol <JSExport>
+@protocol LoopMeVpaidProtocol
 
-- (void)vpaidAdLoaded;
-- (void)vpaidAdSizeChange;
+- (void)vpaidAdLoaded:(double)volume;
+- (void)vpaidAdSizeChange:(CGSize)size;
 - (void)vpaidAdStarted;
 - (void)vpaidAdStopped;
 - (void)vpaidAdPaused;
 - (void)vpaidAdPlaying;
-- (void)vpaidAdExpandedChange;
+- (void)vpaidAdExpandedChange:(BOOL)expanded;
 - (void)vpaidAdSkipped;
-- (void)vpaidAdVolumeChanged;
+- (void)vpaidAdVolumeChanged:(double)volume;
 - (void)vpaidAdSkippableStateChange;
 - (void)vpaidAdLinearChange;
 - (void)vpaidAdDurationChange;
-- (void)vpaidAdRemainingTimeChange;
+- (void)vpaidAdRemainingTimeChange:(double)time;
 - (void)vpaidAdImpression;
 
 - (void)vpaidAdVideoStart;

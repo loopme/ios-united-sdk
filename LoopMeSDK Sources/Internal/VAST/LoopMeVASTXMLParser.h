@@ -18,8 +18,9 @@
 - (instancetype)initXMLWithData:(NSData *)data error:(NSError **)error;
 
 - (void)initializeVastTrackingLinks:(LoopMeVASTTrackingLinks *)vastLinks;
-
 - (void)initializeVastAssetLinks:(LoopMeVASTAssetLinks *)vastLinks error:(NSError **)error;
+- (void)initializeAdVerifications:(LoopMeVASTTrackingLinks *)trackingLinks;
+
 - (NSString *)vastFileContent;
 - (NSString *)adTagURL:(NSError **)error;
 - (NSString *)videoClickThrough;

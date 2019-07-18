@@ -21,6 +21,7 @@
 - (void)setGravity:(NSString *)gravity;
 
 - (void)play;
+- (void)resume;
 - (void)pause;
 
 @optional

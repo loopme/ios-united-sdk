@@ -17,6 +17,7 @@
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAnalyticsProvider.h"
 #import "LoopMeGDPRTools.h"
+#import "LoopMeSDK.h"
 
 static NSString * const kLoopMeIntegrationTypeNormal = @"normal";
 static const NSTimeInterval kLoopMeTimeToReload = 900;
@@ -58,15 +59,18 @@ static const int kLoopMeLoadCounter = 3;
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                       delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [self initWithAppKey:appKey viewControllerForPresentationGDPRWindow:viewController  preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
               preferredAdTypes:(LoopMeAdType)adTypes
                       delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    if (![[LoopMeSDK shared] isReady]) {
+        LoopMeLogError(@"SDK is not inited");
+        return nil;
+    }
+    
     if (!appKey) {
         LoopMeLogError(@"AppKey cann't be nil");
         return nil;
@@ -76,13 +80,6 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
         LoopMeLogDebug(@"Block iOS versions less then 10.0");
         return nil;
     }
-    
-    if (!viewController) {
-        LoopMeLogError(@"viewController cann't be nil");
-        return nil;
-    }
-    
-    [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:viewController];
     
     if (self = [super init]) {
         _interstitial1 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self];
@@ -94,10 +91,6 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     return self;
 }
 
-- (void)setDoNotLoadVideoWithoutWiFi:(BOOL)doNotLoadVideoWithoutWiFi {
-    [LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi = doNotLoadVideoWithoutWiFi;
-}
-
 - (void)setAutoLoadingEnabled:(BOOL)autoLoadingEnabled {
     _autoLoadingEnabled = autoLoadingEnabled;
     self.failCount = 0;
@@ -106,16 +99,14 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
 #pragma mark - Class Methods
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                                             delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey viewControllerForPresentationGDPRWindow:viewController delegate:delegate];
+                    delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
 }
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
                       preferredAdTypes:(LoopMeAdType)adTypes
                               delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey viewControllerForPresentationGDPRWindow:viewController preferredAdTypes:adTypes delegate:delegate];
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate];
 }
 
 #pragma mark - Private

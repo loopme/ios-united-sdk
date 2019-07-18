@@ -90,7 +90,6 @@
     
     [self initStaticResources:vastAssets];
     [self initAdParameters:vastAssets];
-    [self initAdVerifications:vastAssets];
 }
 
 - (NSString *)adTagURL:(NSError **)error {
@@ -196,14 +195,63 @@
     }
 }
 
-- (void)initAdVerifications:(LoopMeVASTAssetLinks *)vastAssets {
-    NSArray *jsresources = [self.xmlDoc nodesForXPath:@"//VAST/Ad/InLine/AdVerifications/Verification/JavaScriptResource" error:nil];
+- (void)initializeAdVerifications:(LoopMeVASTTrackingLinks *)trackingLinks {
+    NSArray *resources = [self.xmlDoc nodesForXPath:@"//VAST/Ad/InLine/AdVerifications/Verification" error:nil];
     
-    NSMutableArray *links = [[NSMutableArray alloc] init];
-    for (DDXMLElement *element in jsresources) {
-        [links addObject:[element stringValue]];
+    NSMutableArray *verifications = [[NSMutableArray alloc] init];
+    
+    for (DDXMLNode *element in resources) {
+        DDXMLElement *jsResource = [self getJSResourceromVerificationNode:element];
+        
+        if ([self isOMID:jsResource]) {
+            LoopMeVerification *verification = [LoopMeVerification new];
+            verification.resource = [jsResource stringValue];
+            verification.params = [self verificationParamsFrom: element];
+            verification.vendorKey = [self verificationVendorKey:element];
+            [verifications addObject:verification];
+        } else {
+            NSString *trackingEvent = [self varificationNotExecutedTrackingEvent:element];
+            if (trackingEvent) {
+                [trackingLinks.adVerificationErrorLinkTemplates addObject:trackingEvent];
+            }
+        }
     }
-    vastAssets.adVerification = links;
+    
+    //OMID TEST
+//    LoopMeVerification *verification = [LoopMeVerification new];
+//    verification.resource = @"https://dl.dropboxusercontent.com/s/youaqz001p0x2vq/omid-validation-verification-script-v1.js";
+//
+//    verification.params = @"{\"k\":\"v\"}";
+//    verification.vendorKey = @"dummyVendor";
+//    [verifications addObject:verification];
+    
+    
+    trackingLinks.adVerification = verifications;
+}
+
+- (NSString *)verificationVendorKey:(DDXMLNode *)verificationNode {
+    DDXMLElement *element = (DDXMLElement *)verificationNode;
+    return [[element attributeForName:@"vendor"] stringValue];
+}
+
+- (NSString *)varificationNotExecutedTrackingEvent:(DDXMLNode *)verificationNode {
+    NSArray *trackingEvents = [verificationNode nodesForXPath:@"TrackingEvents/Tracking[@event=\"verificationNotExecuted\"]" error:nil];
+    return [[trackingEvents firstObject] stringValue];
+}
+
+- (NSString *)verificationParamsFrom:(DDXMLNode *)verificationNode {
+    NSArray *paramsElements = [verificationNode nodesForXPath:@"VerificationParameters" error:nil];
+    DDXMLNode *node = [paramsElements firstObject];
+    return [[node stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+- (DDXMLElement *)getJSResourceromVerificationNode:(DDXMLNode *)verificationNode {
+    NSArray *jsResources = [verificationNode nodesForXPath:@"JavaScriptResource" error:nil];
+    return [jsResources firstObject];
+}
+
+- (BOOL)isOMID:(DDXMLElement *)element {
+    return [[[element attributeForName:@"apiFramework"] stringValue] isEqualToString:@"omid"];
 }
 
 - (BOOL)isWrapper {
@@ -265,7 +313,7 @@
         return nil;
     }
     DDXMLNode *node = videoClickThrough[0];
-    return [self trim:[node stringValue]];
+    return [self removeEncodeBadSymbols:[self trim:[node stringValue]]];
 }
 
 - (NSString *)companionClickThrough {
@@ -274,7 +322,7 @@
         return nil;
     }
     DDXMLNode *node = companionClickThrough[0];
-    return [self trim:[node stringValue]];
+    return [self removeEncodeBadSymbols:[self trim:[node stringValue]]];
 }
 
 - (NSArray *)errorLinkTemplates {
@@ -389,7 +437,7 @@
     }
     [viewableImpressionLinks.notViewable addObjectsFromArray:notViewableLinks];
     
-    //NotViewable
+    //viewUndetermined
     NSMutableArray *viewUndeterminedLinks = [[NSMutableArray alloc] init];
     NSArray *viewUndetermined = nil;
     if (self.isWrapper) {

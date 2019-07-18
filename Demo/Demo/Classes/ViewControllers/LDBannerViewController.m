@@ -6,20 +6,21 @@
 //
 
 #import "LDBannerViewController.h"
-#import "UIImage+iphone5.h"
-
 #import <LoopMeUnitedSDK/LoopMeAdView.h>
 
-const float kLDAdViewHeight = 168.75; // Video dimension 16x9
-const float kLDAdViewWidth = 300.0f;
+const float kLDAdViewWidth = 320.0f;
+const float kLDAdViewHeight = 50.0f;
 
 @interface LDBannerViewController ()
 <
     LoopMeAdViewDelegate
 >
 @property (nonatomic, strong) LoopMeAdView *adView;
-@property (weak, nonatomic) IBOutlet UIImageView *background;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *progressView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIView *bannerPlacement;
+
+@property (nonatomic) CGPoint initialCenter;
 
 @end
 
@@ -29,8 +30,9 @@ const float kLDAdViewWidth = 300.0f;
     if (_adView == nil) {
         CGRect adFrame = CGRectMake(0, 0, kLDAdViewWidth, kLDAdViewHeight);
 
+        self.appKey = @"31d9f96d32";
         // Intializing `LoopMeAdView`
-        _adView = [LoopMeAdView adViewWithAppKey:TEST_APP_KEY_MPU
+        _adView = [LoopMeAdView adViewWithAppKey:self.appKey
                                            frame:adFrame viewControllerForPresentationGDPRWindow: self 
                                         delegate:self];
     }
@@ -42,12 +44,11 @@ const float kLDAdViewWidth = 300.0f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.background.image = [UIImage imageNamedForDevice:@"bg_new_main"];
-    }    
-    [self.view addSubview:self.progressView];
     [self setTitle:@"Ad View"];
+    [self.progressView setHidesWhenStopped:true];
+    [self.progressView startAnimating];
+    [self.bannerPlacement addSubview:self.adView];
+    [self.adView loadAd];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -75,14 +76,13 @@ const float kLDAdViewWidth = 300.0f;
 
 - (void)loopMeAdViewDidLoadAd:(LoopMeAdView *)adView
 {
-    adView.center = self.progressView.center;
-    [self.view addSubview:adView];
     [self.progressView stopAnimating];
 }
 
 - (void)loopMeAdView:(LoopMeAdView *)adView didFailToLoadAdWithError:(NSError *)error
 {
     [self.progressView stopAnimating];
+    [adView loadAd];
 }
 
 - (UIViewController *)viewControllerForPresentation

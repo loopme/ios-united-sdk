@@ -15,7 +15,7 @@
 @implementation LoopMeErrorEventSender
 
 + (void)sendError:(LoopMeEventErrorType)errorType
-     errorMessage:(NSString *)errorMessage appkey:(NSString *)appkey {
+     errorMessage:(NSString * _Nonnull)errorMessage appkey:(NSString * _Nonnull)appkey {
     
     NSString *errorTypeParameter;
     switch (errorType) {
@@ -39,7 +39,7 @@
             break;
     }
     
-    NSURL *url = [NSURL URLWithString:@"https://track.loopme.me/api/errors"];
+    NSURL *url = [NSURL URLWithString:@"https://tk0x1.com/api/errors"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
@@ -49,7 +49,7 @@
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 
     
-    NSString *params = [NSString stringWithFormat:@"device_os=ios&sdk_type=loopme&sdk_version=%@&device_id=%@&package=%@&app_key=%@&msg=sdk_error&error_type=%@&error_msg=\"%@\"", LOOPME_SDK_VERSION, [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier], [NSBundle mainBundle].bundleIdentifier, appkey, errorTypeParameter, errorMessage];
+    NSString *params = [NSString stringWithFormat:@"device_os=ios&sdk_type=loopme&sdk_version=%@&device_id=%@&package=%@&msg=sdk_error&error_type=%@&error_msg=\"%@\"&app_key=%@", LOOPME_SDK_VERSION, [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier], [NSBundle mainBundle].bundleIdentifier, errorTypeParameter, errorMessage, appkey];
 
     [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     

@@ -11,22 +11,6 @@
 static NSString * const kLoopMeIASLoggingJSPath = @"https://mobile-static.adsafeprotected.com/static/creative/avid-certification/scripts/placement-avid-logging.js?placementId=%@";
 static NSString * const kLoopMeIASCMTagPath = @"https://pixel.adsafeprotected.com/jload?anId=927083&advId=%@&campId=%@&pubId=%@&chanId=%@&placementId=%@&adsafe_par=1&bundleId=%@";
 
-static NSString * const kLoopMeHTMLGWDLink = @"https://pixel.adsafeprotected.com/rjss/st/159937/24487906/skeleton.js";
-static NSString * const kLoopMeHTMLNoGWDLink = @"https://pixel.adsafeprotected.com/rjss/st/159937/24487908/skeleton.js";
-static NSString * const kLoopMeHTMLBannerLink = @"https://pixel.adsafeprotected.com/rjss/st/159937/24487910/skeleton.js";
-static NSString * const kLoopMeNativeMPULink = @"https://pixel.adsafeprotected.com/rjss/st/159937/24487912/skeleton.js";
-static NSString * const kLoopMeImageFullscreenLink = @"https://pixel.adsafeprotected.com/rjss/st/159937/24487914/skeleton.js";
-static NSString * const kLoopMeImage320x50Link = @"https://pixel.adsafeprotected.com/rjss/st/159937/24487916/skeleton.js";
-static NSString * const kLoopMeNativeVideoLink = @"https://pixel.adsafeprotected.com/rjss/st/159937/24487918/skeleton.js";
-
-static NSString * const kLoopMeAppKeyNativeVideo = @"test_interstitial_l";
-static NSString * const kLoopMeAppKeyHTMLGWD = @"1f4c1721d1";
-static NSString * const kLoopMeAppKeyHTMLNoGWD = @"cf3774483d";
-static NSString * const kLoopMeAppKeyHTMLBanner = @"568dbc4fa1";
-static NSString * const kLoopMeAppKeyNativeMPU = @"test_mpu";
-static NSString * const kLoopMeAppKeyImageFullscreen = @"a878d378cb";
-static NSString * const kLoopMeAppKeyImage320x50 = @"3ba34e8f85";
-
 
 extern const struct LoopMeIASEventsStruct {
     __unsafe_unretained NSString *adImp;
@@ -110,7 +94,7 @@ const struct LoopMeIASEventsStruct LoopMeIASEvents =
     
     NSDictionary *adIds = configuration.adIdsForIAS;
     
-    NSString *loggingJSPath = [NSString stringWithFormat:kLoopMeIASLoggingJSPath, spotName];
+//    NSString *loggingJSPath = [NSString stringWithFormat:kLoopMeIASLoggingJSPath, spotName];
     
     NSString *cmPath = [NSString stringWithFormat:kLoopMeIASCMTagPath, [adIds objectForKey:@"advId"], [adIds objectForKey:@"campId"], [adIds objectForKey:@"pubId"], [adIds objectForKey:@"chanId"], spotName, [adIds objectForKey:@"bundleId"]];
     
@@ -120,14 +104,8 @@ const struct LoopMeIASEventsStruct LoopMeIASEvents =
         case LoopMeCreativeTypeVAST:
             self.iasAdSession = [LoopMe_AvidAdSessionManager startAvidManagedVideoAdSessionWithContext:self.iasContext];
             self.avidVideoListener = [(LoopMe_AvidManagedVideoAdSession *)self.iasAdSession avidVideoPlaybackListener];
-            //            [(LoopMe_AvidManagedVideoAdSession *)self.iasAdSession injectJavaScriptResource:loggingJSPath];
+//            [(LoopMe_AvidManagedVideoAdSession *)self.iasAdSession injectJavaScriptResource:loggingJSPath];
             [(LoopMe_AvidManagedVideoAdSession *)self.iasAdSession injectJavaScriptResource:cmPath];
-            
-            if ([configuration.appKey isEqualToString:kLoopMeAppKeyNativeVideo]) {
-                [(LoopMe_AvidManagedVideoAdSession *)self.iasAdSession injectJavaScriptResource:kLoopMeNativeVideoLink];
-            } else if ([configuration.appKey isEqualToString:kLoopMeAppKeyNativeMPU]) {
-                [(LoopMe_AvidManagedVideoAdSession *)self.iasAdSession injectJavaScriptResource:kLoopMeNativeMPULink];
-            }
             
             break;
         case LoopMeCreativeTypeMRAID:
@@ -136,18 +114,6 @@ const struct LoopMeIASEventsStruct LoopMeIASEvents =
             
             //            configuration.adResponseHTMLString = [self injectJS:loggingJSPath intoHTML:configuration.adResponseHTMLString];
             configuration.creativeContent = [self injectJS:cmPath intoHTML:configuration.creativeContent];
-            if ([configuration.appKey isEqualToString:kLoopMeAppKeyImageFullscreen]) {
-                configuration.creativeContent = [self injectFWMonitoringTag:kLoopMeImageFullscreenLink intoHTML:configuration.creativeContent];
-            } else if ([configuration.appKey isEqualToString:kLoopMeAppKeyImage320x50]) {
-                configuration.creativeContent = [self injectFWMonitoringTag:kLoopMeImage320x50Link intoHTML:configuration.creativeContent];
-            } else if ([configuration.appKey isEqualToString:kLoopMeAppKeyHTMLBanner]) {
-                configuration.creativeContent = [self injectFWMonitoringTag:kLoopMeHTMLBannerLink intoHTML:configuration.creativeContent];
-            } else if ([configuration.appKey isEqualToString:kLoopMeAppKeyHTMLGWD]) {
-                configuration.creativeContent = [self injectFWMonitoringTag:kLoopMeHTMLGWDLink intoHTML:configuration.creativeContent];
-            } else if ([configuration.appKey isEqualToString:kLoopMeAppKeyHTMLNoGWD]) {
-                configuration.creativeContent = [self injectFWMonitoringTag:kLoopMeHTMLNoGWDLink intoHTML:configuration.creativeContent];
-            }
-            
             break;
         default:
             break;

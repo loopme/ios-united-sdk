@@ -85,17 +85,14 @@ const NSInteger kLoopMeRequestTimeout = 180;
         self.adDisplayControllerVPAID = [[LoopMeVPAIDAdDisplayController alloc] initWithDelegate:self];
         self.adDisplayControllerVPAID.isInterstitial = YES;
         
-        _adInterstitialViewController = [[LoopMeInterstitialViewController alloc] init];
+        _adInterstitialViewController = [[LoopMeInterstitialViewController alloc] initWithNibName:nil bundle:nil];
         _adInterstitialViewController.delegate = self;
+        _adInterstitialViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         LoopMeLogInfo(@"Interstitial is initialized with appKey %@", appKey);
         
         [LoopMeAnalyticsProvider sharedInstance];
     }
     return self;
-}
-
-- (void)setDoNotLoadVideoWithoutWiFi:(BOOL)doNotLoadVideoWithoutWiFi {
-    [LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi = doNotLoadVideoWithoutWiFi;
 }
 
 #pragma mark - Class Methods
@@ -175,7 +172,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)startAd {
-    [self.adConfiguration.eventTracker trackEvent:LoopMeVASTEventTypeLinearCreativeView];
     [self.adDisplayControllerVPAID startAd];
 }
 #pragma mark - Public Mehtods
@@ -261,11 +257,11 @@ const NSInteger kLoopMeRequestTimeout = 180;
                 } else {
                     [self startAd];
                 }
-                
+
                 LoopMeLogDebug(@"Interstitial ad did appear");
                 if ([self.delegate respondsToSelector:@selector(loopMeInterstitialDidAppear:)]) {
                         [self.delegate loopMeInterstitialDidAppear:self];
-                    
+
                 }
             });
         }];

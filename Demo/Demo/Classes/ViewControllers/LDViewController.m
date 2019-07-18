@@ -6,10 +6,8 @@
 //
 
 #import "LDViewController.h"
-#import "UIImage+iphone5.h"
 
 @interface LDViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *background;
 
 @end
 
@@ -20,10 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        _background.image = [UIImage imageNamedForDevice:@"bg_new_main"];
-    }
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 30)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;

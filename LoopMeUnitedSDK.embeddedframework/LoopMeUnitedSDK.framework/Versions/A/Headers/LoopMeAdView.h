@@ -63,11 +63,6 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
 @property (nonatomic, weak) UIScrollView *scrollView;
 
 /**
- * Set YES if you want to disable loading video when Wi-Fi turned off. Default value NO.
- */
-@property (nonatomic, assign, getter = isDoNotLoadVideoWithoutWiFi) BOOL doNotLoadVideoWithoutWiFi;
-
-/**
  * Indicates whether ad content was loaded succesfully and ready to be displayed.
  * After you initialized a `LoopMeAdView` object and triggered the `loadAd` method,
  * this property will be set to YES on it's successful completion.

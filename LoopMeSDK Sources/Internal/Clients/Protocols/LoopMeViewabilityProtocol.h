@@ -11,7 +11,7 @@
 
 @protocol LoopMeViewabilityProtocol
 
-- (void)checkViwabilityCriteria;
+- (BOOL)checkViwabilityCriteria;
 
 @end
 

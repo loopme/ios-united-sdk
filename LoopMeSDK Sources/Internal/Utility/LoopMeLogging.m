@@ -125,7 +125,7 @@ static dispatch_once_t onceToken;
 
 - (NSString *)logFilePath {
     if (!_logFilePath) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"lm_assets/"];
         _logFilePath = [documentsDirectory stringByAppendingPathComponent:@"loopmelog.lm"];
@@ -165,7 +165,7 @@ static dispatch_once_t onceToken;
 }
 
 - (void)startSendingTask {
-    NSURL *url = [NSURL URLWithString:@"https://track.loopme.me/api/errors"];
+    NSURL *url = [NSURL URLWithString:@"https://tk0x1.com/api/errors"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];

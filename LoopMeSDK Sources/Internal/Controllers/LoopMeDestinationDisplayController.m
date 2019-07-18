@@ -138,7 +138,7 @@
         [application openURL:URL options:@{}
            completionHandler:nil];
     } else {
-        [application openURL:URL];
+        [application openURL:URL options:@{} completionHandler:nil];
     }
     self.loadingDestination = NO;
 }

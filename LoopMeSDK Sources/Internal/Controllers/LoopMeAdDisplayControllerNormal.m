@@ -29,12 +29,15 @@
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAdView.h"
+#import "LoopMeOMIDWrapper.h"
 
 NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 @interface LoopMeAdDisplayControllerNormal ()
 <
-    UIWebViewDelegate,
+    WKNavigationDelegate,
+    WKUIDelegate,
+    WKScriptMessageHandler,
     LoopMeVideoClientDelegate,
     LoopMeJSClientDelegate,
     LoopMeMRAIDClientDelegate
@@ -57,6 +60,10 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 @property (nonatomic, assign) BOOL adDisplayed;
 @property (nonatomic, strong) LOOMoatWebTracker *moatTracker;
 @property (nonatomic, strong) LoopMeIASWrapper *iasWarpper;
+
+@property (nonatomic, strong) OMIDLoopmeAdSession* omidSession;
+@property (nonatomic, strong) OMIDLoopmeAdEvents *omidAdEvents;
+@property (nonatomic, strong) LoopMeOMIDWrapper *omidWrapper;
 
 - (void)deviceShaken;
 - (void)interceptURL:(NSURL *)URL;
@@ -131,18 +138,36 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 #pragma mark - Life Cycle
 
 - (void)dealloc {
+    [self.omidSession finish];
+    [self removeWebView];
     [self invalidateTimer];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kLoopMeShakeNotificationName object:nil];
 }
 
 - (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate {
-    self = [super initWithDelegate:delegate];
+    
+    WKUserContentController *controller = [[WKUserContentController alloc] init];
+    [controller addScriptMessageHandler:self name:@"mraid"];
+    
+    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+    if (!bundleURL) {
+        @throw [NSException exceptionWithName:@"NoBundleResource" reason:@"No loopme resourse bundle" userInfo:nil];
+    }
+    NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+    NSString *jsPath = [resourcesBundle pathForResource:@"mraid" ofType:@"js"];
+    NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
+    
+    WKUserScript *script = [[WKUserScript alloc] initWithSource:mraidjs injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
+    [controller addUserScript:script];
+    
+    self = [super initWithDelegate:delegate jsController:controller];
+    
     if (self) {
-        
         self.delegate = delegate;
         _JSClient = [[LoopMeJSClient alloc] initWithDelegate:self];
         _mraidClient = [[LoopMeMRAIDClient alloc] initWithDelegate:self];
         _iasWarpper = [[LoopMeIASWrapper alloc] init];
+        _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
         
         if ([self.adConfiguration useTracking:LoopMeTrackerName.moat]) {
             //if frame is zero WebView display content incorrect
@@ -154,7 +179,8 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(deviceShaken) name:kLoopMeShakeNotificationName object:nil];
-        self.webView.delegate = self;
+        self.webView.UIDelegate = self;
+        self.webView.navigationDelegate = self;
         
         _firstCallToExpand = YES;
     }
@@ -250,7 +276,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 #pragma mark - Public
 
 - (void)setExpandProperties:(LoopMeAdConfiguration *)configuration {
-    [self setExpandProperties:[self.mraidClient getExpandProperties] forConfiguration:configuration];
+    [self setExpandProperties:self.mraidClient.expandProperties forConfiguration:configuration];
 }
 
 - (void)loadAdConfiguration {
@@ -269,32 +295,10 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
                 self.moatTracker = [LOOMoatWebTracker trackerWithWebComponent:self.webView];
             }
         }
-
-        if (self.adConfiguration.creativeType == LoopMeCreativeTypeMRAID) {
-            NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
-            if (!bundleURL) {
-                [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeError errorForStatusCode:LoopMeErrorCodeNoResourceBundle]];
-                return;
-            }
-            NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
-            NSString *jsPath = [resourcesBundle pathForResource:@"mraid" ofType:@"js"];
-            NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
-            
-            if (mraidjs) {
-                mraidjs = [mraidjs stringByAppendingString:@"</script>"];
-                mraidjs = [@"<script>" stringByAppendingString:mraidjs];
-                
-                NSMutableString *html = [self.adConfiguration.creativeContent mutableCopy];
-                
-                NSRange range = [html rangeOfString:@"<script>"];
-                [html insertString:mraidjs atIndex:range.location];
-                self.adConfiguration.creativeContent = html;
-            } else {
-                [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeError errorForStatusCode:LoopMeErrorCodeNoResourceBundle]];
-                return;
-            }
-        }
     
+        NSError *error;
+        self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML:self.adConfiguration.creativeContent error:&error];
+        
         [self.webView loadHTMLString:self.adConfiguration.creativeContent
                              baseURL:[NSURL URLWithString:kLoopMeBaseURL]];
     
@@ -315,9 +319,15 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     
     self.adDisplayed = YES;
     ((LoopMeVideoClientNormal *)self.videoClient).viewController = [self.delegate viewControllerForPresentation];
-    self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//    self.webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     CGRect adjustedFrame = [self adjustFrame:self.delegate.containerView.bounds];
     [self.videoClient adjustViewToFrame:adjustedFrame];
+    
+    self.webView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    if ([self.delegate.containerView isKindOfClass:[LoopMeAdView class]]) {
+        self.delegate.containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
     
     [self.delegate.containerView addSubview:self.webView];
     [self.delegate.containerView bringSubviewToFront:self.webView];
@@ -339,15 +349,22 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         [self.mraidClient executeEvent:LoopMeMRAIDFunctions.setMaxSize params:@[@(windowSize.width),@(windowSize.height)]];
         [self.mraidClient executeEvent:LoopMeMRAIDFunctions.setScreenSize params:@[@(windowSize.width), @(windowSize.height)]];
 
-        
         [self.mraidClient executeEvent:LoopMeMRAIDFunctions.stateChange params:@[LoopMeMRAIDState.defaultt]];
         [self.mraidClient executeEvent:LoopMeMRAIDFunctions.ready params:nil];
         
         self.closeButton.frame = [self frameForCloseButton:adjustedFrame];
         [self.delegate.containerView addSubview:self.closeButton];
         
+        if (@available(iOS 11.0, *)) {
+            self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
+            UILayoutGuide *guide = [self.delegate.containerView safeAreaLayoutGuide];
+            [[[guide topAnchor] constraintEqualToAnchor:self.closeButton.topAnchor constant:-8] setActive:YES];
+            [[[guide trailingAnchor] constraintEqualToSystemSpacingAfterAnchor:self.closeButton.trailingAnchor multiplier:1] setActive:YES];
+        }
+        
+        
         if ([self.delegate isKindOfClass:[LoopMeAdView class]]) {
-            self.closeButton.alpha = 0.011;
+            self.closeButton.alpha = 0.0;
         }
     }
 
@@ -359,9 +376,16 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     
     //AVID
     [self.iasWarpper recordAdImpressionEvent];
+    //OMSDK
+    NSError *impError;
+    [self.omidAdEvents impressionOccurredWithError:&impError];
 }
 
 - (void)closeAd {
+    //OMSDK
+    [self.omidSession finish];
+    self.omidSession = nil;
+    ///
     if ([self.adConfiguration useTracking:LoopMeTrackerName.ias]) {
         [self.iasWarpper clean];
         [self.iasWarpper unregisterAdView:self.webView];
@@ -376,8 +400,14 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     self.visible = NO;
     self.adDisplayed = NO;
     [self.videoClient cancel];
+    [self removeWebView];
+}
+
+- (void)removeWebView {
     [self.webView removeGestureRecognizer:self.panWebView];
     [self.webView removeGestureRecognizer:self.pinchWebView];
+    [self.webView loadHTMLString:@"about:blank" baseURL:nil];
+    [self.webView stopLoading];
     [self.webView removeFromSuperview];
 }
 
@@ -401,7 +431,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 - (void)collapseReporting {
     self.expanded = NO;
-    self.closeButton.alpha = self.isUseCustomClose ? 0.011 : 1;
+    self.closeButton.alpha = self.isUseCustomClose ? 0.0 : 1;
     [self.mraidClient executeEvent:LoopMeMRAIDFunctions.stateChange params:@[LoopMeMRAIDState.defaultt]];
     [self.JSClient setFullScreenModeEnabled:NO];
 }
@@ -409,9 +439,13 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 - (void)resizeTo:(CGSize)size {
     if (self.adConfiguration.creativeType == LoopMeCreativeTypeMRAID) {
         [self.mraidClient executeEvent:LoopMeMRAIDFunctions.sizeChange params:@[@(size.width),@(size.height)]];
-        if ([[self.mraidClient getState] isEqualToString:LoopMeMRAIDState.defaultt]) {
+        
+        NSString *state = self.mraidClient.state;
+        
+        if ([state isEqualToString:LoopMeMRAIDState.defaultt]) {
             [self.mraidClient executeEvent:LoopMeMRAIDFunctions.stateChange params:@[LoopMeMRAIDState.resized]];
         }
+        
         if ([self.delegate respondsToSelector:@selector(adDisplayController:willResizeAd:)]) {
             [self.delegate adDisplayController:self willResizeAd:size];
         }
@@ -462,33 +496,56 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     (self.adConfiguration.isPortrait && ![self isVertical:frame]);
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKDelegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType {
-    NSURL *URL = [request URL];
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+
+    NSURL *URL = [[navigationAction request] URL];
+    
     if ([self.JSClient shouldInterceptURL:URL]) {
         [self.JSClient executeEvent:LoopMeEvent.isNativeCallFinished forNamespace:kLoopMeNamespaceWebview param:@YES paramBOOL:YES];
         [self.JSClient processURL:URL];
-        return NO;
+        decisionHandler(NO);
+        return;
     } else if ([self.mraidClient shouldInterceptURL:URL]){
-        [self.mraidClient processURL:URL];
-        return NO;
-    } else if ([self shouldIntercept:URL navigationType:navigationType]) {
+//        [self.mraidClient processURL:URL];
+        decisionHandler(NO);
+        return;
+    } else if ([self shouldIntercept:URL navigationType:navigationAction.navigationType]) {
         [self interceptURL:URL];
-        return NO;
+        decisionHandler(NO);
+        return;
     }
-    return YES;
+    decisionHandler(YES);
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     if (self.adConfiguration.creativeType == LoopMeCreativeTypeMRAID) {
         [self.mraidClient setSupports];
-        [self setOrientation:[self.mraidClient getOrientationProperties] forConfiguration:self.adConfiguration];
+//        [self.mraidClient getOrientationProperties:^(NSDictionary *properties) {
+//            [self setOrientation:properties forConfiguration:self.adConfiguration];
+//        }];
     }
+    
+    //OMSDK
+    
+    if (self.omidSession != nil) return;
+    
+    NSError *error;
+    self.omidSession = [self.omidWrapper sessionForType:OMIDLoopmeCreativeTypeHTML resources:nil webView:webView error:&error];
+    // Set the view on which to track viewability
+    self.omidSession.mainAdView = webView;
+    [self.omidSession addFriendlyObstruction:self.closeButton];
+    // Start session
+    [self.omidSession start];
+    
+    NSError *adEvtsError;
+    self.omidAdEvents = [[OMIDLoopmeAdEvents alloc] initWithAdSession:self.omidSession error:&adEvtsError];
+    
+    [self.delegate adDisplayControllerDidFinishLoadingAd:self];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     LoopMeLogDebug(@"WebView received an error %@", error);
     if (error.code == -1004) {
         if ([self.delegate respondsToSelector:@selector(adDisplayController:didFailToLoadAdWithError:)]) {
@@ -497,9 +554,18 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     }
 }
 
+#pragma mark - WKScriptMessageHandler
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    if ([[message name] isEqualToString:@"mraid"]) {
+        NSLog(@"MRAID: %@", [message body]);
+        [self.mraidClient processCommand:[[message body] objectForKey:@"command"] withParams:[[message body] objectForKey:@"params"]];
+    }
+}
+
 #pragma mark - JSClientDelegate 
 
-- (UIWebView *)webViewTransport {
+- (WKWebView *)webViewTransport {
     return self.webView;
 }
 
@@ -579,12 +645,30 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 - (void)mraidClientDidReceiveCloseCommand:(LoopMeMRAIDClient *)client {
-    if ([[self.mraidClient getState] isEqualToString:LoopMeMRAIDState.resized]) {
+    NSString *state = self.mraidClient.state;
+    
+    if ([state isEqualToString:LoopMeMRAIDState.resized]) {
         [self resizeTo:self.originalSize];
         [self.mraidClient executeEvent:LoopMeMRAIDFunctions.stateChange params:@[LoopMeMRAIDState.defaultt]];
+
         return;
     }
+
     [self.iasWarpper recordAdUserCloseEvent];
+
+    if ([self.delegate respondsToSelector:@selector(adDisplayControllerShouldCloseAd:)]) {
+        [self.delegate adDisplayControllerShouldCloseAd:self];
+    }
+    
+    if ([state isEqualToString:LoopMeMRAIDState.resized]) {
+        [self resizeTo:self.originalSize];
+        [self.mraidClient executeEvent:LoopMeMRAIDFunctions.stateChange params:@[LoopMeMRAIDState.defaultt]];
+
+        return;
+    }
+
+    [self.iasWarpper recordAdUserCloseEvent];
+    
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerShouldCloseAd:)]) {
         [self.delegate adDisplayControllerShouldCloseAd:self];
     }
@@ -597,11 +681,10 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 - (void)mraidClientDidResizeAd:(LoopMeMRAIDClient *)client {
-    NSDictionary *resizeProperties = [self.mraidClient getResizeProperties];
+    NSDictionary *resizeProperties = self.mraidClient.resizeProperties;
     CGFloat width = [[resizeProperties objectForKey:@"width"] floatValue];
     CGFloat height = [[resizeProperties objectForKey:@"height"] floatValue];
     CGSize newSize = CGSizeMake(width, height);
-    
     [self resizeTo:newSize];
 }
 

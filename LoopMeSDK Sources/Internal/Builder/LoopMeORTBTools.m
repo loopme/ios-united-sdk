@@ -112,8 +112,6 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     
     NSMutableDictionary *ext = [[NSMutableDictionary alloc] init];
     
-    ext[@"consent_type"] = @([[LoopMeGDPRTools sharedInstance] consentType]);
-    
     if ([[LoopMeGDPRTools sharedInstance] userConsentString]) {
         ext[@"consent"] = [[LoopMeGDPRTools sharedInstance] userConsentString];
     } else {
@@ -122,6 +120,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
             gdpr = [[LoopMeGDPRTools sharedInstance] isUserConsent] ? 1 : 0;
         }
         ext[@"consent"] = @(gdpr);
+        ext[@"consent_type"] = @([[LoopMeGDPRTools sharedInstance] consentType]);
     }
     
     user[@"ext"] = ext;

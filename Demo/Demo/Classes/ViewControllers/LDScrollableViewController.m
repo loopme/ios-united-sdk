@@ -10,18 +10,12 @@
 
 #import <LoopMeUnitedSDK/LoopMeAdView.h>
 
-const float kLDAdCellHeight = 168.75; // Video dimension 16x9
+const float kLDAdCellHeight = 250.0f; // Video dimension 16x9
 const float kLDAdCellWidth = 300.0f;
 
 const int kLDAdIndex = 5;
 
-@interface LDScrollableViewController ()
-<
-    UITableViewDataSource,
-    UITableViewDelegate,
-    LoopMeAdViewDelegate
->
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface LDScrollableViewController () <LoopMeAdViewDelegate>
 @property (nonatomic, strong) LoopMeAdView *mpuVideo;
 @property (nonatomic, strong) NSMutableArray *cities;
 
@@ -35,16 +29,15 @@ const int kLDAdIndex = 5;
 {
     [super viewDidLoad];
 
-    [self setTitle:@"Ad View in scrollable container"];
-
     // Pre-defined data to be displayed as a content for UITableView
     self.cities = [self dictionaryWithContentsOfJSONString:@"source.json"];
     
     // Intializing `LoopMeAdView`
-    self.mpuVideo = [LoopMeAdView adViewWithAppKey:TEST_APP_KEY_MPU
+    self.appKey = @"9584545777";
+    self.mpuVideo = [LoopMeAdView adViewWithAppKey:self.appKey
                                              frame:(CGRect){10, 0, kLDAdCellWidth, kLDAdCellHeight}
            viewControllerForPresentationGDPRWindow: self
-                                        scrollView:nil
+                                        scrollView:self.tableView
                                           delegate:self];
     
     
@@ -120,11 +113,16 @@ const int kLDAdIndex = 5;
         return cell;
     } else {
         static NSString *CityCellIdentifier = @"CityCell";
-        TableCityCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CityCellIdentifier];
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CityCellIdentifier];
         if (!cell) {
-            cell = [[TableCityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CityCellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CityCellIdentifier];
         }
-        cell.data = self.cities[indexPath.row];
+        
+        NSDictionary *data = self.cities[indexPath.row];
+        cell.textLabel.text = data[@"name"];
+        cell.detailTextLabel.text = data[@"country"];
+//        cell.labArea.text = data[@"area"];
+//        cell.data = self.cities[indexPath.row];
         
         return cell;
     }
@@ -135,7 +133,7 @@ const int kLDAdIndex = 5;
     /*
      * Updating ad visibility in order to manage video ad playback
      */
-//    [self.mpuVideo updateAdVisibilityInScrollView];
+    [self.mpuVideo updateAdVisibilityInScrollView];
 }
 
 #pragma mark - LoopMeAdViewDelegate

@@ -141,6 +141,7 @@ const struct LoopMeTrackerNameStruct LoopMeTrackerName = {
     LoopMeVASTXMLParser *parser = [[LoopMeVASTXMLParser alloc] initXMLWithData:data error:error];
     [parser initializeVastTrackingLinks:self.trackingLinks];
     [parser initializeVastAssetLinks:self.assetLinks error:error];
+    [parser initializeAdVerifications:self.trackingLinks];
     
     self.adIDVAST = parser.adID;
     if (!self.adIDVAST) {

@@ -24,6 +24,10 @@
     if ([trimmedErrorCode length]) {
         [URLString replaceOccurrencesOfString:@"[ERRORCODE]" withString:stringErrorCode options:0 range:NSMakeRange(0, [URLString length])];
         [URLString replaceOccurrencesOfString:@"%5BERRORCODE%5D" withString:stringErrorCode options:0 range:NSMakeRange(0, [URLString length])];
+        
+        //AdVerificationNotExecuted URL
+        [URLString replaceOccurrencesOfString:@"[REASON]" withString:stringErrorCode options:0 range:NSMakeRange(0, [URLString length])];
+        [URLString replaceOccurrencesOfString:@"%5BREASON%5D" withString:stringErrorCode options:0 range:NSMakeRange(0, [URLString length])];
     }
 
     if (timeOffset >= 0) {

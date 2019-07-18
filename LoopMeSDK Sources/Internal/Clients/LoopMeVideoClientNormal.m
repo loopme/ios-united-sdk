@@ -442,8 +442,8 @@ const CGFloat kOneFrameDuration = 0.03;
     [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
     [self.videoView removeFromSuperview];
-    self.player = nil;
-    self.playerItem = nil;
+//    self.player = nil;
+//    self.playerItem = nil;
     self.shouldPlay = NO;
 }
 
@@ -535,6 +535,11 @@ const CGFloat kOneFrameDuration = 0.03;
     self.shouldPlay = NO;
     [self.iasWrapper recordAdPausedEvent];
     [self.player pause];
+}
+
+- (void)resume {
+    self.shouldPlay = YES;
+    [self.player play];
 }
 
 - (void)pauseOnTime:(double)time {
