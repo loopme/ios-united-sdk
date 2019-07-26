@@ -3,9 +3,8 @@
 //  Bridge
 //
 
-
 #import "MPInterstitialCustomEvent.h"
-#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
+#import "LoopMeInterstitial.h"
 
 @interface MopubLoopMeInterstitialAdapter : MPInterstitialCustomEvent
 <

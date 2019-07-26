@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fJW-pu-JZ2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fJW-pu-JZ2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -56,22 +55,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B93-qH-681">
-                                <rect key="frame" x="237.5" y="318" width="100" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="yBR-5F-OIK"/>
-                                </constraints>
-                                <state key="normal" title="Show"/>
-                                <connections>
-                                    <action selector="showClick:" destination="LF4-uq-5Nv" eventType="touchUpInside" id="aBV-ur-2Gf"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qb7-Og-6Xz">
-                                <rect key="frame" x="37.5" y="318" width="100" height="30"/>
+                                <rect key="frame" x="137.5" y="318.5" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="5aA-bk-AMx"/>
                                 </constraints>
-                                <state key="normal" title="Load"/>
+                                <state key="normal" title="Load/Show"/>
                                 <connections>
                                     <action selector="loadClick:" destination="LF4-uq-5Nv" eventType="touchUpInside" id="LaY-hK-8JS"/>
                                 </connections>
@@ -79,16 +68,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qb7-Og-6Xz" firstAttribute="centerX" secondItem="wc4-vT-CZi" secondAttribute="centerX" constant="-100" id="D34-ND-3SF"/>
-                            <constraint firstItem="qb7-Og-6Xz" firstAttribute="centerY" secondItem="wc4-vT-CZi" secondAttribute="centerY" id="GB5-OU-C2f"/>
-                            <constraint firstItem="B93-qH-681" firstAttribute="centerY" secondItem="wc4-vT-CZi" secondAttribute="centerY" id="HPK-9X-c1n"/>
-                            <constraint firstItem="B93-qH-681" firstAttribute="centerX" secondItem="wc4-vT-CZi" secondAttribute="centerX" constant="100" id="oJU-PT-D3e"/>
+                            <constraint firstItem="qb7-Og-6Xz" firstAttribute="centerX" secondItem="wc4-vT-CZi" secondAttribute="centerX" id="F9h-ok-G0k"/>
+                            <constraint firstItem="qb7-Og-6Xz" firstAttribute="centerY" secondItem="wc4-vT-CZi" secondAttribute="centerY" id="lAZ-Fi-vHa"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="loadButton" destination="qb7-Og-6Xz" id="IbM-VE-Iqq"/>
-                        <outlet property="showButton" destination="B93-qH-681" id="Gcd-pz-BOH"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEn-O8-mOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,7 +82,7 @@
             <objects>
                 <navigationController id="fJW-pu-JZ2" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="si9-Jw-KON">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="si9-Jw-KON">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -170,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddP-9m-c5s">
-                                <rect key="frame" x="137.5" y="319" width="100" height="30"/>
+                                <rect key="frame" x="137.5" y="318.5" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="03a-oO-xBz"/>
                                 </constraints>

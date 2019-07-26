@@ -3,12 +3,12 @@
 //  Bridge
 //
 //
-#import "Mopub.h"
+
 #import "MopubLoopMeRewardedVideoAdapter.h"
 #import "MPRewardedVideoReward.h"
 #import "MPLogging.h"
 #import "MPError.h"
-#import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
+#import "LMInstanceProvider.h"
 
 @interface MopubLoopMeRewardedVideoAdapter ()
 
@@ -23,20 +23,19 @@
 - (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
     if (![info objectForKey:@"app_key"]) {
         // MPError with invalid error code, in fact wrong json format
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:[MOPUBError errorWithCode:MOPUBErrorAdapterInvalid]];
+        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
         return;
     }
     
-    [[LoopMeGDPRTools sharedInstance] setCustomUserConsent:[[MoPub sharedInstance] canCollectPersonalInfo]];
-    
     NSString *appKey = [info objectForKey:@"app_key"];
     if (!self.loopmeInterstitial) {
-        self.loopmeInterstitial = [LoopMeInterstitial interstitialWithAppKey:appKey viewControllerForPresentationGDPRWindow:[UIViewController new] delegate:self];
+        self.loopmeInterstitial = [[LMInstanceProvider sharedProvider] buildLoopMeInterstitialWithAppKey:appKey
+                                                                                            delegate:self];
     }
     
     if (!self.loopmeInterstitial) {
         // MPError with invalid error code, in fact old iOS version
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:[MOPUBError errorWithCode:MOPUBErrorAdapterInvalid]];
+        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
         return;
     }
     

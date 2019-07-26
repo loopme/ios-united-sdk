@@ -7,7 +7,8 @@
 //
 
 #import "LDTableViewController.h"
-#import "Mopub.h"
+#import "LoopMeAdapterConfiguration.h"
+#import <MoPub/MoPub.h>
 
 @interface LDTableViewController ()
 
@@ -19,11 +20,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"e0f79a7b925b424e9159e2e1d2a0777b"];
-    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:nil];
-    
     self.menuItems = [NSArray arrayWithObjects:@"Native Ads (Ad Request)", @"Interstitial Ad",  @"Rewarded Video Ad", nil];
     //TODO: bridge for MPTableViewPlacer
+    
+    MPMoPubConfiguration *mopubConfiguration = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"4c2678be84404c7184f8aa1947f8b8fb"];
+    
+    LoopMeAdapterConfiguration *loopMeConf = [[LoopMeAdapterConfiguration alloc] init];
+
+    mopubConfiguration.globalMediationSettings = @[loopMeConf];
+    mopubConfiguration.additionalNetworks = @[loopMeConf];
+    [mopubConfiguration setNetworkConfiguration:@{ @"viewController" : self } forMediationAdapter:@"LoopMeAdapterConfiguration"];
+    mopubConfiguration.loggingLevel = MPBLogLevelInfo;
+    mopubConfiguration.allowLegitimateInterest = YES;
+    
+    [[MoPub sharedInstance] initializeSdkWithConfiguration:mopubConfiguration completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

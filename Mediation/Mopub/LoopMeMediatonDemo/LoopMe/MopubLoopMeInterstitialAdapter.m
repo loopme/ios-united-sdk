@@ -4,11 +4,10 @@
 //
 //
 
-#import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
-#import "Mopub.h"
 #import "MopubLoopMeInterstitialAdapter.h"
 #import "MPLogging.h"
 #import "MPError.h"
+#import "LMInstanceProvider.h"
 
 @implementation MopubLoopMeInterstitialAdapter
 
@@ -17,19 +16,18 @@
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info {
     if (![info objectForKey:@"app_key"]) {
         // MPError with invalid error code, in fact wrong json format
-        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:[MOPUBError errorWithCode:MOPUBErrorAdapterInvalid]];
+        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
         return;
     }
     
-    [[LoopMeGDPRTools sharedInstance] setCustomUserConsent:[[MoPub sharedInstance] canCollectPersonalInfo]];
     NSString *appKey = [info objectForKey:@"app_key"];
     if (!self.loopmeInterstitial) {
-        self.loopmeInterstitial = [LoopMeInterstitial interstitialWithAppKey:appKey viewControllerForPresentationGDPRWindow:[UIViewController new] delegate:self];
+        self.loopmeInterstitial = [[LMInstanceProvider sharedProvider] buildLoopMeInterstitialWithAppKey:appKey delegate:self];
     }
         
     if (!self.loopmeInterstitial) {
         // MPError with invalid error code, in fact old iOS version
-        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:[MOPUBError errorWithCode:MOPUBErrorAdapterInvalid]];
+        [self.delegate interstitialCustomEvent:self didFailToLoadAdWithError:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
         return;
     }
     

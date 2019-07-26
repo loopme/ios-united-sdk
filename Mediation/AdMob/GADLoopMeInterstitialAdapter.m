@@ -31,12 +31,18 @@
         }
     }
     
-    self.loopMeInterstitial = [LoopMeInterstitial interstitialWithAppKey:serverParameter viewControllerForPresentationGDPRWindow:[UIViewController new] delegate:self];
-    [self.loopMeInterstitial loadAdWithTargeting:nil integrationType:@"admob"];
+    
+    if ([[LoopMeSDK shared] isReady]) {
+        self.loopMeInterstitial = [LoopMeInterstitial interstitialWithAppKey:serverParameter
+                                                                    delegate:self];
+        [self.loopMeInterstitial loadAdWithTargeting:nil integrationType:@"admob"];
+    }
 }
 
 - (void)presentFromRootViewController:(UIViewController *)rootViewController {
-    [self.loopMeInterstitial showFromViewController:rootViewController animated:YES];
+    if (self.loopMeInterstitial.isReady) {
+        [self.loopMeInterstitial showFromViewController:rootViewController animated:YES];
+    }
 }
 
 #pragma mark -
