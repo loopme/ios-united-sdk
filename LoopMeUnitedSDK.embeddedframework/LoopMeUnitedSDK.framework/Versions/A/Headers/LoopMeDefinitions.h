@@ -9,7 +9,7 @@
 #ifndef LoopMeDefinitions_h
 #define LoopMeDefinitions_h
 
-#define LOOPME_SDK_VERSION @"7.1.0"
+#define LOOPME_SDK_VERSION @"7.1.1"
 
 #define LOOPME_MOAT_PARTNER_CODE @"loopmeinappvideo302333386816"
 #define kLoopMeIASAnID @"927083"

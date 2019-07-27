@@ -1,3 +1,7 @@
+## Version 7.1.1 (27.07.2019)
+
+- Fixed bug when `init callback` called twice
+
 ## Version 7.1.0 (18.07.2019)
 
 - Added Open Measurement SDK (OM SDK) for viewability measurement

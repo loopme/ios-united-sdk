@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, LoopMeConsentType) {
+typedef NS_ENUM(NSInteger, LoopMeConsentType) {
     LoopMeConsentTypeDidNotSet = -1,
     LoopMeConsentTypeLoopMe = 0,
     LoopMeConsentTypePublisher = 1,

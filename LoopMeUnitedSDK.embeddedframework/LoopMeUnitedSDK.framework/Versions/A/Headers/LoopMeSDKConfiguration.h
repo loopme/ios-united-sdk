@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)defaultConfiguration;
 
 /**
- * Consent string in known (https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Consent%20string%20and%20vendor%20list%20formats%20v1.1%20Final.md#vendor-consent-string-format)
+    Set if you know GDPR user consent in bool format
  */
-- (void)setUserConsent:(NSString *)consent;
+- (void)setUserConsent:(BOOL)consent;
 
 @end
 

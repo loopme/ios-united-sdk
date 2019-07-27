@@ -15,7 +15,7 @@
     return [[LoopMeSDKConfiguration alloc] init];
 }
 
-- (void)setUserConsent:(NSString *)consent {
+- (void)setUserConsent:(BOOL)consent {
     [[LoopMeGDPRTools sharedInstance] setCustomUserConsent:consent];
 }
 

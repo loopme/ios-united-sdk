@@ -43,11 +43,15 @@
         NSString *description = @"Block iOS versions less then 10.0";
         NSError *error = [NSError errorWithDomain:@"loopme.com" code:0 userInfo:@{ NSLocalizedDescriptionKey : description }];
         completionBlock(false, error);
+        return;
     }
     
     [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:rootViewController];
     [LoopMeGlobalSettings sharedInstance];
     [LoopMeOMIDWrapper initOMIDWithCompletionBlock:^(BOOL ready) {
+        if (self.isReady && ready) {
+            return;
+        }
         self.isReady = ready;
         NSError *error;
         NSString *description = @"LoopMe OMID fail to initialize";
