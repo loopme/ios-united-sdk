@@ -54,6 +54,7 @@ const float kLDAdViewHeight = 50.0f;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self.adView removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

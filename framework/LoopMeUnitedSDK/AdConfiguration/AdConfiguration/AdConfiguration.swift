@@ -1,0 +1,169 @@
+//
+//  LoopMeAdConfiguration.swift
+//  LoopMeServerCommuniator
+//
+//  Created by Bohdan on 8/12/19.
+//  Copyright © 2019 LoopMe. All rights reserved.
+//
+
+import Foundation
+
+public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING = "loopmeautoloading"
+
+enum AdOrientation: String, Codable {
+    case undefined
+    case portrait
+    case landscape
+}
+
+enum CreativeType: String, Codable {
+    case vpaid = "VPAID"
+    case vast = "VAST"
+    case loopme = "HTML"
+    case mraid = "MRAID"
+}
+
+enum TrackerName: String {
+    case ias
+    case moat
+    
+    init(intValue: Int) {
+        switch intValue {
+        case 0: self = .ias
+        case 1: self = .moat
+        default: self = .ias
+        }
+    }
+}
+
+public struct AdConfiguration {
+    enum CodingKeys: String, CodingKey {
+        case seatbid
+        case bid
+        case ext
+        case adm
+        case id
+    }
+    
+    enum ExtKeys: String, CodingKey {
+        case v360
+        case orientation
+        case debug
+        case crtype
+        case adm
+        case preload25
+        case autoloading
+        case measure_partners
+        
+        case advertiser
+        case campaign
+        case lineitem
+        case id
+        case appname
+        case developer
+        case company
+    }
+    
+    let id: String
+    let v360: Bool
+    let debug: Bool
+    let preload25: Bool
+    let autoloading: Bool
+    let adOrientation: AdOrientation
+    let creativeType: CreativeType
+    let measurePartners: [String]
+    
+    var creativeContent: String
+    var adIDsForMoat: Dictionary<String, Any>
+    var adIDsForIAS: Dictionary<String, Any>
+    var expandProperties: MRAIDExpandProperties
+    var appKey: String = "" {
+        didSet {
+//            var iasIds = adIDsForIAS
+            var placementId: String = adIDsForIAS["placementId"] as? String ?? ""
+            placementId += "_\(appKey)"
+            adIDsForIAS["placementId"] = placementId
+        }
+    }
+    
+    public var vastProperties: VastProperties?
+    
+    func useTracking(trackerName: TrackerName) -> Bool {
+        return self.measurePartners.contains(trackerName.rawValue)
+    }
+}
+
+extension AdConfiguration: Decodable {
+    public init(from decoder: Decoder) throws {
+        
+        expandProperties = .empty
+        
+        let response = try decoder.container(keyedBy: CodingKeys.self)
+        var seatbidContainer = try response.nestedUnkeyedContainer(forKey: .seatbid)
+        let bidContainer = try seatbidContainer.nestedContainer(keyedBy: CodingKeys.self)
+        //get bid element
+        var bidValue = try bidContainer.nestedUnkeyedContainer(forKey: .bid)
+        let bid = try bidValue.nestedContainer(keyedBy: CodingKeys.self)
+        
+        let id = try bid.decode(String.self, forKey: .id)
+        self.id = id
+        self.creativeContent = try bid.decode(String.self, forKey: .adm)
+        
+        // parse ext section
+        let ext = try bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
+        self.v360 = try ext.decode(Int.self, forKey: .v360) == 1
+        self.debug = try ext.decode(Int.self, forKey: .debug) == 1
+        if let preload25 = try? ext.decode(Int.self, forKey: .preload25) {
+            self.preload25 = preload25 == 1
+        } else {
+            self.preload25 = false
+        }
+        self.adOrientation = try ext.decode(AdOrientation.self, forKey: .orientation)
+        self.creativeType = try ext.decode(CreativeType.self, forKey: .crtype)
+        
+        self.adIDsForIAS =  try AdConfiguration.initAdIDs(for: .ias, decoder: ext, id: id)
+        self.adIDsForMoat = try AdConfiguration.initAdIDs(for: .moat, decoder: ext)
+        
+        if let autoloading = try? ext.decode(Int.self, forKey: .autoloading) {
+            self.autoloading = autoloading == 1
+        } else {
+            self.autoloading = true
+        }
+        
+        UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
+        
+        self.measurePartners = try ext.decode([String].self, forKey: .measure_partners)
+        
+        if self.creativeType == .vast || self.creativeType == .vpaid {
+            guard let data = creativeContent.data(using: .utf8) else { fatalError() }
+            
+            vastProperties = VastProperties(data: data)
+        }
+    }
+    
+    static func initAdIDs(for tracker: TrackerName, decoder: KeyedDecodingContainer<ExtKeys>, id: String = "") throws -> Dictionary<String, Any> {
+        let advertiser = try decoder.decode(String.self, forKey: .advertiser)
+        let campaign = try decoder.decode(String.self, forKey: .campaign)
+        let level3 = try decoder.decode(String.self, forKey: .lineitem)
+        let level4 = id
+        let level5 = try decoder.decode(String.self, forKey: .appname)
+        
+        if tracker == .moat {
+            let _adIdsForMOAT = ["level1" : advertiser, "level2" : campaign, "level3" : level3, "level4" : level4, "level5" : level5, "slicer1" : "", "clicer2" : ""]
+            return _adIdsForMOAT
+        }
+        
+        let placemantid = "\(level5)"
+        let bundleIdentifier = Bundle.main.bundleIdentifier ?? "unknown"
+        
+        let anId = InfoPlisReader.iasID
+        
+        let company = try decoder.decode(String.self, forKey: .company)
+        let developer = try decoder.decode(String.self, forKey: .developer)
+        let pubId = "\(company)_\(developer)"
+        
+        let _adIdsForIAS = [ "anId" : anId, "advId" : advertiser, "campId" : campaign, "pubId" : pubId, "chanId" : bundleIdentifier, "placementId" : placemantid, "bundleId" : bundleIdentifier];
+        
+        return _adIdsForIAS
+    }
+}

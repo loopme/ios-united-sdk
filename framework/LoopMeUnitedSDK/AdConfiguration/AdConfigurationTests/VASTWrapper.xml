@@ -1,0 +1,50 @@
+<VAST version="3.0">
+    <Ad id="20011">
+        <Wrapper>
+            <AdSystem version="4.0">iabtechlab</AdSystem> 
+            <VASTAdTagURI>
+                <![CDATA[https://raw.githubusercontent.com/InteractiveAdvertisingBureau/VAST_Samples/master/VAST%203.0%20Samples/Inline_Companion_Tag-test.xml]]>
+            </VASTAdTagURI>
+            <Error>http://example.com/error</Error> 
+            <Impression>http://example.com/track/impression</Impression>
+            <Creatives>
+                <Creative id="5480" sequence="1">
+                    <CompanionAds>
+                        <Companion id="1232" width="100" height="150" assetWidth="250" assetHeight="200" expandedWidth="350" expandedHeight="250">
+                            <StaticResource creativeType="image/png">
+                                <![CDATA[https://www.iab.com/wp-content/uploads/2014/09/iab-tech-lab-6-644x290.png]]>
+                            </StaticResource> 
+                            <CompanionClickThrough>
+                                <![CDATA[https://iabtechlab.com]]>
+                            </CompanionClickThrough> 
+                        </Companion>
+                    </CompanionAds>
+                </Creative>
+            </Creatives>
+            <AdVerifications>
+                <Verification vendor="moat.com-omsdkloopme332977896616">
+                    <JavaScriptResource apiFramework="omid" browserOptional="true">
+                        <![CDATA[
+                            https://z.moatads.com/omsdkloopme332977896616/moatvideo.js
+                        ]]>
+                    </JavaScriptResource>
+                    <VerificationParameters>
+                        <![CDATA[
+                            {"moatClientLevel1":"B_and_J","moatClientLevel2":"B_and_J_Dough_Cores","moatClientLevel3":"%%LI_NAME%%","moatClientLevel4":"VAST_-_Phone_-_Pre-Roll_-_Behavioral_-_Inapp","moatClientSlicer1":"com.king.farmheroessaga_721460","moatClientSlicer2":"VAST"}
+                        ]]>
+                    </VerificationParameters>
+                </Verification>
+                    <Verification vendor="loopme.com-omid">
+                        <JavaScriptResource apiFramework="omid" browserOptional="true">
+                            <![CDATA[ https://i.loopme.me/html/omid/omid.js ]]>
+                        </JavaScriptResource>
+                        <VerificationParameters>
+                            <![CDATA[
+                                {"measurable":"https://tk0x1.com/sj/tr?et=MEASURABLE&meta=MjA1NDI1Nzo2OTg1MjQ6MzAxNTE0ZDItOTNlMC00OGRhLWI5NTktOGRiYWM4MGQ3OTI3&ctx=CiQzMDE1MTRkMi05M2UwLTQ4ZGEtYjk1OS04ZGJhYzgwZDc5MjcSAlVBGJzRKiDxsH0qBwgDGAEg6Ac48bB9QAHa&id=5d8df5ce1f9fb0e4624ec0d3&omid=1", "viewable":"https://tk0x1.com/sj/tr?et=AD_VIEWABLE&meta=MjA1NDI1Nzo2OTg1MjQ6MzAxNTE0ZDItOTNlMC00OGRhLWI5NTktOGRiYWM4MGQ3OTI3&ctx=CiQzMDE1MTRkMi05M2UwLTQ4ZGEtYjk1OS04ZGJhYzgwZDc5MjcSAlVBGJzRKiDxsH0qBwgDGAEg6Ac48bB9QAHa&id=5d8df5ce1f9fb0e4624ec0d3&omid=1"}
+                            ]]>
+                        </VerificationParameters>
+                    </Verification>
+            </AdVerifications>
+        </Wrapper> 
+    </Ad>
+</VAST>

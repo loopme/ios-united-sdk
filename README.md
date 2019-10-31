@@ -2,11 +2,14 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.1.0**
+**Version 7.2.0**
 
-- Added Open Measurement SDK (OM SDK) for viewability measurement
-- Added VAST 4.1 support
-- Replaced deprecated UIWebView with WKWebView
+- Part of architecture was moved to Swift
+- Ad Response parsing covered with unit tests
+- Fixed double triggered events
+- Removed invisible close area for MRAID banners
+- Fixed bug with disappearing end card after the video creative
+- A number of additional changes and improvements
 
 
 Please view the [changelog](CHANGELOG.md) for details.

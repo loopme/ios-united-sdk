@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LoopMeUnitedSDK"
-  s.version      = "7.1.1"
+  s.version      = "7.2.0"
   s.summary      = "LoopMe is the largest mobile video DSP and Ad Network, reaching over 1 billion consumers world-wide."
 
   # This description is used to generate tags and improve search results.
@@ -70,7 +70,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "10.0"
+  s.platform     = :ios, "11.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -85,7 +85,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "7.1.1" }
+  s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "7.2.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -112,7 +112,7 @@ Pod::Spec.new do |s|
 
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
-  s.resource = 'LoopMeUnitedSDK.embeddedframework/Resources/LoopMeResources.bundle'
+  s.resource = 'LoopMeUnitedSDK.embeddedframework/LoopMeResources.bundle'
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 

@@ -1,3 +1,12 @@
+## Version 7.2.0 (31.10.2019)
+
+- Part of architecture was moved to Swift
+- Ad Response parsing covered with unit tests
+- Fixed double triggered events
+- Removed invisible close area for MRAID banners
+- Fixed bug with disappearing end card after the video creative
+- A number of additional changes and improvements
+
 ## Version 7.1.1 (27.07.2019)
 
 - Fixed bug when `init callback` called twice

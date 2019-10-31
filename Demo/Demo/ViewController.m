@@ -25,6 +25,15 @@
             LoopMeLogDebug(@"%@", error);
         }
     }];
+    
+    
+//    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+//    if (!bundleURL) {
+//        @throw [NSException exceptionWithName:@"NoBundleResource" reason:@"No loopme resourse bundle" userInfo:nil];
+//    }
+//    NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+//    NSString *jsPath = [resourcesBundle pathForResource:@"mraid" ofType:@"js"];
+//    NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
 
     
     // Do any additional setup after loading the view.
