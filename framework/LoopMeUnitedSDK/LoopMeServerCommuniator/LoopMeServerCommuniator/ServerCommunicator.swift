@@ -40,6 +40,9 @@ open class ServerCommunicator: NSObject {
     }
     
     @objc public func load(url: URL, requestBody: Data?, method: String?) {
+        if let properties = self.configuration?.vastProperties, !properties.isWrapper {
+            self.configuration = nil;
+        }
         cancel()
         
         self.url = url
@@ -74,9 +77,26 @@ open class ServerCommunicator: NSObject {
                        
                 do {
                     guard let data = data else { return }
-                    let configuration = try JSONDecoder().decode(AdConfiguration.self, from: data)
-                    self.configuration = configuration
+                    
+                    if self.configuration == nil {
+                        let configuration = try JSONDecoder().decode(AdConfiguration.self, from: data)
+                        self.configuration = configuration
+                    } else {
+                        guard let xmlStrimg = String(data: data, encoding: .utf8) else {
+                            self.taskCompleted(success: false, error: ServerError.parsingError)
+                            return
+                        }
+                        let vastPorps = try VastProperties(xmlString: xmlStrimg)
+                        self.configuration?.vastProperties = vastPorps
+                    }
+                    
+                    guard let configuration = self.configuration else {
+                        self.taskCompleted(success: false, error: ServerError.parsingError)
+                        return
+                    }
+                    
                     self.configurationWrapper = AdConfigurationWrapper(adConfiguration: configuration)
+                    
                     if let vastProperties = configuration.vastProperties,  vastProperties.isWrapper {
                         if self.wrapperRequestCounter >= self.maxWrapperNodes {
                             self.taskCompleted(success: false, error: ServerError.vastWrapperLimit)
@@ -106,10 +126,6 @@ open class ServerCommunicator: NSObject {
             }
         })
         dataTask.resume()
-        
-        if let properties = self.configuration?.vastProperties, properties.isWrapper {
-            self.configuration = nil;
-        }
         
         self.isLoading = true
     }

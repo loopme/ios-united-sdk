@@ -2,7 +2,7 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.2.0**
+**Version 7.2.1**
 
 - Part of architecture was moved to Swift
 - Ad Response parsing covered with unit tests

@@ -1307,7 +1307,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = 7.2.0;
+				MARKETING_VERSION = 7.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1347,7 +1347,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = 7.2.0;
+				MARKETING_VERSION = 7.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

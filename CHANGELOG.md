@@ -1,4 +1,4 @@
-## Version 7.2.0 (31.10.2019)
+## Version 7.2.1 (31.10.2019)
 
 - Part of architecture was moved to Swift
 - Ad Response parsing covered with unit tests
