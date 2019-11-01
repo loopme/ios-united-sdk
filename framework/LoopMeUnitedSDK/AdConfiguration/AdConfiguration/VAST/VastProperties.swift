@@ -19,9 +19,22 @@ public class VastProperties: NSObject {
     
     public var isWrapper: Bool = false
     
-    var lastParent: Node?
-    var currentXmlNode: Node?
-    var tempMediaFiles: [Node] = []
+    private var lastParent: Node?
+    private var currentXmlNode: Node?
+    private var tempMediaFiles: [Node] = []
+    
+    public func append(vastProperties: VastProperties) {
+        self.trackingLinks += vastProperties.trackingLinks
+        self.assetLinks = vastProperties.assetLinks
+        
+        self.adId = vastProperties.adId
+        self.duration = vastProperties.duration
+        self.skipOffset = vastProperties.skipOffset
+        self.adTagURI = vastProperties.adTagURI
+        self.adVerifications.append(contentsOf: vastProperties.adVerifications)
+        
+        self.isWrapper = vastProperties.isWrapper
+    }
 }
 
 extension VastProperties: XMLParserDelegate {

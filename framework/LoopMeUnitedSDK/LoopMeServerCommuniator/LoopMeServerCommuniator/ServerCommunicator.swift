@@ -87,7 +87,7 @@ open class ServerCommunicator: NSObject {
                             return
                         }
                         let vastPorps = try VastProperties(xmlString: xmlStrimg)
-                        self.configuration?.vastProperties = vastPorps
+                        self.configuration?.vastProperties?.append(vastProperties: vastPorps) 
                     }
                     
                     guard let configuration = self.configuration else {

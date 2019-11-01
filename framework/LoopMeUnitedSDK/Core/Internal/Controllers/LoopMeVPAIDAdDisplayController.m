@@ -691,6 +691,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 - (void)vpaidAdError:(NSString *)error {
     LoopMeLogDebug(@"%@ Vpaid Ad error: ", error);
     [self.vastEventTracker trackErrorCode:LoopMeVPAIDErrorCodeVPAIDError];
+    
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerShouldCloseAd:)]) {
         [self.delegate adDisplayControllerShouldCloseAd:self];
     }
@@ -922,7 +923,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         double time = [[params objectForKey:@"time"] doubleValue];
         [self vpaidAdRemainingTimeChange:time];
     } else if ([command isEqualToString:_kLoopMeVPAIDAdInteractionCommand]) {
-        NSString *identifier = [[params objectForKey:@"id"] string];
+        NSString *identifier = [[params objectForKey:@"id"] stringValue];
         [self vpaidAdInteraction:identifier];
     } else if ([command isEqualToString:_kLoopMeVPAIDAdUserAcceptInvitationCommand]) {
         [self vpaidAdUserAcceptInvitation];
@@ -931,10 +932,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     } else if ([command isEqualToString:_kLoopMeVPAIDAdUserAdUserCloseCommand]) {
         [self vpaidAdUserClose];
     } else if ([command isEqualToString:_kLoopMeVPAIDAdLogCommand]) {
-        NSString *message = [[params objectForKey:@"message"] string];
+        NSString *message = [[params objectForKey:@"message"] stringValue];
         [self vpaidAdLog:message];
     } else if ([command isEqualToString:_kLoopMeVPAIDAdErrorCommand]) {
-        NSString *error = [[params objectForKey:@"error"] string];
+        NSString *error = [[params objectForKey:@"error"] stringValue];
         [self vpaidAdError:error];
     } else {
         LoopMeLogDebug(@"VPAID command: %@ is not supported", command);
