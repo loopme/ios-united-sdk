@@ -2,6 +2,10 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
+**Version 7.2.3**
+
+- Fixed LoopMeError enum type from NSUInteger to NSInteger
+
 **Version 7.2.2**
 
 - Part of architecture was moved to Swift

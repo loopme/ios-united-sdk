@@ -16,7 +16,7 @@
 
 @end
 
-typedef NS_ENUM(NSUInteger, LoopMeErrorCode) {
+typedef NS_ENUM(NSInteger, LoopMeErrorCode) {
     LoopMeErrorCodeNoAdsFound = 204,
     LoopMeErrorCodeInvalidAppKey = 404,
     LoopMeErrorCodeVideoDownloadTimeout = 408,

@@ -14,11 +14,38 @@
 		473B9C191D65BFB200DDD20A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473B9C181D65BFB200DDD20A /* Assets.xcassets */; };
 		473B9C1C1D65BFB200DDD20A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473B9C1A1D65BFB200DDD20A /* LaunchScreen.storyboard */; };
 		476677651D8AA2B400A5D509 /* GADLoopMeInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 476677641D8AA2B400A5D509 /* GADLoopMeInterstitialAdapter.m */; };
-		478AB80F22E5F87200054BC6 /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 478AB80D22E5F87200054BC6 /* LoopMeResources.bundle */; };
-		478AB81022E5F87200054BC6 /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478AB80E22E5F87200054BC6 /* LoopMeUnitedSDK.framework */; };
+		477ED39823706C260093FD63 /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 477ED39723706C260093FD63 /* LoopMeResources.bundle */; };
+		477ED39923706C480093FD63 /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478AB80E22E5F87200054BC6 /* LoopMeUnitedSDK.framework */; };
+		477ED39A23706C480093FD63 /* LoopMeUnitedSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 478AB80E22E5F87200054BC6 /* LoopMeUnitedSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		477ED39C23706C4C0093FD63 /* LoopMeResources.bundle in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 477ED39723706C260093FD63 /* LoopMeResources.bundle */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		478AB81222E5F96E00054BC6 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 478AB81122E5F96E00054BC6 /* libxml2.tbd */; };
 		C065B0CD96389E571B940A3F /* Pods_AdMobAdapterDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA43C44227E07D789A00E99 /* Pods_AdMobAdapterDemo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		477ED39B23706C480093FD63 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				477ED39A23706C480093FD63 /* LoopMeUnitedSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		477ED39D23706C4C0093FD63 /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				477ED39C23706C4C0093FD63 /* LoopMeResources.bundle in Embed PlugIns */,
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1B7B933FE09BFE606ABE8BDE /* Pods-AdMobAdapter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdMobAdapter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AdMobAdapter/Pods-AdMobAdapter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -35,7 +62,7 @@
 		473B9C1D1D65BFB200DDD20A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		476677631D8AA2B400A5D509 /* GADLoopMeInterstitialAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADLoopMeInterstitialAdapter.h; path = ../GADLoopMeInterstitialAdapter.h; sourceTree = "<group>"; };
 		476677641D8AA2B400A5D509 /* GADLoopMeInterstitialAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GADLoopMeInterstitialAdapter.m; path = ../GADLoopMeInterstitialAdapter.m; sourceTree = "<group>"; };
-		478AB80D22E5F87200054BC6 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
+		477ED39723706C260093FD63 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
 		478AB80E22E5F87200054BC6 /* LoopMeUnitedSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoopMeUnitedSDK.framework; sourceTree = "<group>"; };
 		478AB81122E5F96E00054BC6 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		9FA43C44227E07D789A00E99 /* Pods_AdMobAdapterDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdMobAdapterDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,8 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				477ED39923706C480093FD63 /* LoopMeUnitedSDK.framework in Frameworks */,
 				478AB81222E5F96E00054BC6 /* libxml2.tbd in Frameworks */,
-				478AB81022E5F87200054BC6 /* LoopMeUnitedSDK.framework in Frameworks */,
 				C065B0CD96389E571B940A3F /* Pods_AdMobAdapterDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,19 +139,11 @@
 		478AB80B22E5F87200054BC6 /* LoopMeUnitedSDK.embeddedframework */ = {
 			isa = PBXGroup;
 			children = (
-				478AB80C22E5F87200054BC6 /* Resources */,
+				477ED39723706C260093FD63 /* LoopMeResources.bundle */,
 				478AB80E22E5F87200054BC6 /* LoopMeUnitedSDK.framework */,
 			);
 			name = LoopMeUnitedSDK.embeddedframework;
 			path = ../../../LoopMeUnitedSDK.embeddedframework;
-			sourceTree = "<group>";
-		};
-		478AB80C22E5F87200054BC6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				478AB80D22E5F87200054BC6 /* LoopMeResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		4D291889D6B2ED6D876C131D /* Frameworks */ = {
@@ -160,6 +179,8 @@
 				473B9C061D65BFB200DDD20A /* Frameworks */,
 				473B9C071D65BFB200DDD20A /* Resources */,
 				1376E96D55F6F0A9C8F784E7 /* [CP] Embed Pods Frameworks */,
+				477ED39B23706C480093FD63 /* Embed Frameworks */,
+				477ED39D23706C4C0093FD63 /* Embed PlugIns */,
 			);
 			buildRules = (
 			);
@@ -210,7 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				473B9C1C1D65BFB200DDD20A /* LaunchScreen.storyboard in Resources */,
-				478AB80F22E5F87200054BC6 /* LoopMeResources.bundle in Resources */,
+				477ED39823706C260093FD63 /* LoopMeResources.bundle in Resources */,
 				473B9C191D65BFB200DDD20A /* Assets.xcassets in Resources */,
 				473B9C171D65BFB200DDD20A /* Main.storyboard in Resources */,
 			);

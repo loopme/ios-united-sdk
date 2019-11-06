@@ -1,3 +1,7 @@
+## Version 7.2.3 (06.11.2019)
+
+- Fixed LoopMeError enum type from NSUInteger to NSInteger
+
 ## Version 7.2.2 (01.11.2019)
 
 - Part of architecture was moved to Swift
