@@ -48,7 +48,7 @@ open class ServerCommunicator: NSObject {
         self.url = url
         self.data = Data()
         
-        var request = URLRequest(url: url, cachePolicy: .reloadRevalidatingCacheData, timeoutInterval: 60)
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60)
         request.httpMethod = method
         
         if let body = requestBody {
@@ -139,6 +139,7 @@ open class ServerCommunicator: NSObject {
     
     func taskCompleted(success: Bool, error: Error?) {
         self.isLoading = false
+        self.configuration = nil
         if let configuration = self.configurationWrapper {
             self.delegate?.serverCommunicator(self, didReceive: configuration)
         }

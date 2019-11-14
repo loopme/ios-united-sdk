@@ -2,9 +2,9 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.2.3**
+**Version 7.2.4**
 
-- Fixed LoopMeError enum type from NSUInteger to NSInteger
+- Fixed incorrect ad response cache
 
 **Version 7.2.2**
 

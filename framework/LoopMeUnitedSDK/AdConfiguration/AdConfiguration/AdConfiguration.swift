@@ -111,8 +111,8 @@ extension AdConfiguration: Decodable {
         
         // parse ext section
         let ext = try bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
-        self.v360 = try ext.decode(Int.self, forKey: .v360) == 1
-        self.debug = try ext.decode(Int.self, forKey: .debug) == 1
+        self.v360 = (try? ext.decode(Int.self, forKey: .v360) == 1) ?? false
+        self.debug = (try? ext.decode(Int.self, forKey: .debug) == 1) ?? false
         if let preload25 = try? ext.decode(Int.self, forKey: .preload25) {
             self.preload25 = preload25 == 1
         } else {
@@ -142,11 +142,13 @@ extension AdConfiguration: Decodable {
     }
     
     static func initAdIDs(for tracker: TrackerName, decoder: KeyedDecodingContainer<ExtKeys>, id: String = "") throws -> Dictionary<String, Any> {
-        let advertiser = try decoder.decode(String.self, forKey: .advertiser)
-        let campaign = try decoder.decode(String.self, forKey: .campaign)
-        let level3 = try decoder.decode(String.self, forKey: .lineitem)
+        
+        guard let advertiser = try? decoder.decode(String.self, forKey: .advertiser),
+        let campaign = try? decoder.decode(String.self, forKey: .campaign),
+            let level3 = try? decoder.decode(String.self, forKey: .lineitem),
+            let level5 = try? decoder.decode(String.self, forKey: .appname) else { return [:] }
+        
         let level4 = id
-        let level5 = try decoder.decode(String.self, forKey: .appname)
         
         if tracker == .moat {
             let _adIdsForMOAT = ["level1" : advertiser, "level2" : campaign, "level3" : level3, "level4" : level4, "level5" : level5, "slicer1" : "", "clicer2" : ""]
@@ -158,8 +160,9 @@ extension AdConfiguration: Decodable {
         
         let anId = InfoPlisReader.iasID
         
-        let company = try decoder.decode(String.self, forKey: .company)
-        let developer = try decoder.decode(String.self, forKey: .developer)
+        guard let company = try? decoder.decode(String.self, forKey: .company),
+            let developer = try? decoder.decode(String.self, forKey: .developer) else { return [:] }
+            
         let pubId = "\(company)_\(developer)"
         
         let _adIdsForIAS = [ "anId" : anId, "advId" : advertiser, "campId" : campaign, "pubId" : pubId, "chanId" : bundleIdentifier, "placementId" : placemantid, "bundleId" : bundleIdentifier];
