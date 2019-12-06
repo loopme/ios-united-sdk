@@ -343,10 +343,18 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [self.delegate.containerView bringSubviewToFront:self.webView];
     [(LoopMeVideoClientNormal *)self.videoClient willAppear];
     
-    NSArray *constraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
-    NSArray *constraintsV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
-    [self.delegate.containerView addConstraints:constraintsH];
-    [self.delegate.containerView addConstraints:constraintsV];
+    if (@available(iOS 11.0, *)) {
+        [[[self.webView leadingAnchor] constraintEqualToAnchor:self.delegate.containerView.safeAreaLayoutGuide.leadingAnchor] setActive:YES];
+        [[[self.webView trailingAnchor] constraintEqualToAnchor:self.delegate.containerView.safeAreaLayoutGuide.trailingAnchor] setActive:YES];
+        [[[self.webView topAnchor] constraintEqualToAnchor:self.delegate.containerView.safeAreaLayoutGuide.topAnchor] setActive:YES];
+        [[[self.webView bottomAnchor] constraintEqualToAnchor:self.delegate.containerView.safeAreaLayoutGuide.bottomAnchor] setActive:YES];
+    } else {
+        // Fallback on earlier versions
+        [[[self.webView leadingAnchor] constraintEqualToAnchor:self.delegate.containerView.leadingAnchor] setActive:YES];
+        [[[self.webView trailingAnchor] constraintEqualToAnchor:self.delegate.containerView.trailingAnchor] setActive:YES];
+        [[[self.webView topAnchor] constraintEqualToAnchor:self.delegate.containerView.topAnchor] setActive:YES];
+        [[[self.webView bottomAnchor] constraintEqualToAnchor:self.delegate.containerView.bottomAnchor] setActive:YES];
+    }
     
     
     if (self.adConfiguration.creativeType == LoopMeCreativeTypeMraid) {

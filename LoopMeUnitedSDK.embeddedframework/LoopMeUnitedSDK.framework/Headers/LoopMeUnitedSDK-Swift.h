@@ -271,6 +271,14 @@ SWIFT_CLASS_NAMED("AssetLinksWrapper")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+SWIFT_CLASS_NAMED("CCPATools")
+@interface LoopMeCCPATools : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull ccpaString;)
++ (NSString * _Nonnull)ccpaString SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeCreativeType, "CreativeTypWrapper", closed) {
   LoopMeCreativeTypeVpaid = 0,
   LoopMeCreativeTypeVast = 1,
@@ -695,6 +703,14 @@ SWIFT_CLASS_NAMED("AssetLinksWrapper")
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull endCard;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("CCPATools")
+@interface LoopMeCCPATools : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull ccpaString;)
++ (NSString * _Nonnull)ccpaString SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeCreativeType, "CreativeTypWrapper", closed) {

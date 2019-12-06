@@ -1,3 +1,11 @@
+## Version 7.2.5 (06.12.2019)
+
+- Added support of California Consumer Privacy Act (CCPA)
+
+## Version 7.2.4 (14.11.2019)
+
+- Fixed incorrect ad response cache
+
 ## Version 7.2.3 (06.11.2019)
 
 - Fixed LoopMeError enum type from NSUInteger to NSInteger

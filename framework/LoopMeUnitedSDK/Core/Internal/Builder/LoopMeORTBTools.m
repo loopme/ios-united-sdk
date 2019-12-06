@@ -105,6 +105,10 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
             regs[@"ext"] = @{@"gdpr" : subject};
         }
     }
+    NSString *ccpaString = [LoopMeCCPATools ccpaString];
+    if (ccpaString) {
+        regs[@"ext"] = @{@"us_privacy" : ccpaString};
+    }
     
     return regs;
 }

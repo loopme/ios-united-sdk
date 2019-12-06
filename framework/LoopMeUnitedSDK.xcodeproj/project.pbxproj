@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		47403417239568FD00CC14EF /* CCPATools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47403416239568FD00CC14EF /* CCPATools.swift */; };
 		47500F4C234C8B760099AD1E /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47500F4B234C8B760099AD1E /* UserAgent.swift */; };
 		47714E3822FAF9CF00DF0D55 /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47714E2E22FAF9CE00DF0D55 /* LoopMeUnitedSDK.framework */; };
 		47714E3D22FAF9CF00DF0D55 /* LoopMeSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714E3C22FAF9CF00DF0D55 /* LoopMeSDKTests.m */; };
@@ -194,6 +195,7 @@
 
 /* Begin PBXFileReference section */
 		470E2B3D23215B2800870EB1 /* AdConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdConfiguration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47403416239568FD00CC14EF /* CCPATools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCPATools.swift; sourceTree = "<group>"; };
 		47500F4B234C8B760099AD1E /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		47714E2E22FAF9CE00DF0D55 /* LoopMeUnitedSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LoopMeUnitedSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47714E3122FAF9CE00DF0D55 /* LoopMeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoopMeSDK.h; path = Core/LoopMeSDK.h; sourceTree = "<group>"; };
@@ -382,6 +384,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47403414239568D100CC14EF /* UserPrivacy */ = {
+			isa = PBXGroup;
+			children = (
+				47403415239568E500CC14EF /* CCPA */,
+				47A57C34233E31C8001F7DA3 /* GDPR */,
+			);
+			path = UserPrivacy;
+			sourceTree = "<group>";
+		};
+		47403415239568E500CC14EF /* CCPA */ = {
+			isa = PBXGroup;
+			children = (
+				47403416239568FD00CC14EF /* CCPATools.swift */,
+			);
+			path = CCPA;
+			sourceTree = "<group>";
+		};
 		47714E2422FAF9CE00DF0D55 = {
 			isa = PBXGroup;
 			children = (
@@ -499,7 +518,6 @@
 			children = (
 				47A57B8C233E31C7001F7DA3 /* Viewability */,
 				47A57BA6233E31C8001F7DA3 /* Internal */,
-				47A57C34233E31C8001F7DA3 /* GDPR */,
 				47A57B8B233E31C7001F7DA3 /* LoopMeTargeting.h */,
 				47A57BA5233E31C8001F7DA3 /* LoopMeAdView.h */,
 				47A57C3C233E31C8001F7DA3 /* LoopMeInterstitial.h */,
@@ -555,6 +573,7 @@
 		47A57BA6233E31C8001F7DA3 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				47403414239568D100CC14EF /* UserPrivacy */,
 				47A57BA7233E31C8001F7DA3 /* LoopMeSDKConfiguration.h */,
 				47A57BA8233E31C8001F7DA3 /* Clients */,
 				47A57BB7233E31C8001F7DA3 /* Interstitial */,
@@ -1078,6 +1097,7 @@
 				47A57C57233E31C8001F7DA3 /* LoopMeJSClient.m in Sources */,
 				47A57CB6233E31C8001F7DA3 /* LoopMeGlobalSettings.m in Sources */,
 				47A57CCF233E31C8001F7DA3 /* LoopMeGDPRTools.m in Sources */,
+				47403417239568FD00CC14EF /* CCPATools.swift in Sources */,
 				47A57C4C233E31C8001F7DA3 /* LoopMeOMIDWrapper.m in Sources */,
 				47A57CCA233E31C8001F7DA3 /* LoopMeGDPRViewController.m in Sources */,
 				47A57C56233E31C8001F7DA3 /* LoopMeVPAIDClient.m in Sources */,
@@ -1285,7 +1305,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Q876VLK88R;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1309,7 +1329,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = 7.2.4;
+				MARKETING_VERSION = 7.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1326,7 +1346,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Q876VLK88R;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1350,7 +1370,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = 7.2.4;
+				MARKETING_VERSION = 7.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

@@ -22,7 +22,6 @@
     
     self = [super initWithFrame:frame configuration:conf];
     if (self) {
-        self.scrollView.delegate = self;
         self.backgroundColor = [UIColor clearColor];
         self.opaque = NO;
         self.userInteractionEnabled = YES;
