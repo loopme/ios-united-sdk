@@ -1,3 +1,7 @@
+## Version 7.2.6 (23.12.2019)
+
+- Fixed click URL issues
+
 ## Version 7.2.5 (06.12.2019)
 
 - Added support of California Consumer Privacy Act (CCPA)

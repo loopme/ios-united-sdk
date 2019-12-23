@@ -323,6 +323,7 @@
     if ([self canHandleURL:navigationAction.request.URL]) {
         [self handleURL:navigationAction.request.URL];
         decisionHandler(WKNavigationActionPolicyCancel);
+        return;
     }
     
     decisionHandler(WKNavigationActionPolicyAllow);

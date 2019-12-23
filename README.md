@@ -2,9 +2,9 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.2.5**
-
-- Added support of California Consumer Privacy Act (CCPA)
+**Version 7.2.6**
+ 
+- Fixed click URL issues
 
 **Version 7.2.2**
 

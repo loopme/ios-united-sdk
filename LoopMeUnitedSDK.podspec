@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LoopMeUnitedSDK"
-  s.version      = "7.2.5"
+  s.version      = "7.2.6"
   s.summary      = "LoopMe is the largest mobile video DSP and Ad Network, reaching over 1 billion consumers world-wide."
 
   # This description is used to generate tags and improve search results.
