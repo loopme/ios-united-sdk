@@ -85,7 +85,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "7.2.5" }
+  s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "7.2.6" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
