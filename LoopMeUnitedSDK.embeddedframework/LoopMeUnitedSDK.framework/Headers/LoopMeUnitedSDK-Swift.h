@@ -346,6 +346,14 @@ typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeTrackerName, "TrackerNameWrapper", clo
   LoopMeTrackerNameMoat = 1,
 };
 
+
+SWIFT_CLASS("_TtC15LoopMeUnitedSDK9UserAgent")
+@interface UserAgent : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultUserAgent;)
++ (NSString * _Nonnull)defaultUserAgent SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeVASTEventType, "VASTEventType", closed) {
   LoopMeVASTEventTypeImpression = 0,
   LoopMeVASTEventTypeLinearStart = 1,
@@ -779,6 +787,14 @@ typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeTrackerName, "TrackerNameWrapper", clo
   LoopMeTrackerNameIas = 0,
   LoopMeTrackerNameMoat = 1,
 };
+
+
+SWIFT_CLASS("_TtC15LoopMeUnitedSDK9UserAgent")
+@interface UserAgent : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultUserAgent;)
++ (NSString * _Nonnull)defaultUserAgent SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeVASTEventType, "VASTEventType", closed) {
   LoopMeVASTEventTypeImpression = 0,

@@ -451,7 +451,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
      (self.adConfiguration.isPortrait && ![self isVertical:frame]);
 }
 
-#pragma mark - UIWebViewDelegate
+#pragma mark - WKWebViewDelegate
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
@@ -485,7 +485,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    // UIWebView object has fully loaded.
     if (self.isNeedJSInject) {
         self.isNeedJSInject = NO;
         

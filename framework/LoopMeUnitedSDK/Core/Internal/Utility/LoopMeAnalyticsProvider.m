@@ -8,6 +8,8 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
+#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
+
 #import "LoopMeAnalyticsProvider.h"
 #import "LoopMeLogging.h"
 #import "LoopMeServerURLBuilder.h"
@@ -67,13 +69,7 @@ static NSTimeInterval const kLoopMeAnalyticsSendInterval = 900;
 }
 
 - (NSString *)userAgent {
-    if (_userAgent == nil) {
-        __weak LoopMeAnalyticsProvider *weakSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.userAgent = [[[UIWebView alloc] init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-        });
-    }
-    return _userAgent;
+    return [UserAgent defaultUserAgent];
 }
 
 - (void)sendData {

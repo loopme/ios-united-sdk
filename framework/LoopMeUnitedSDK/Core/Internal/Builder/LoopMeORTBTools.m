@@ -311,10 +311,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 }
 
 - (NSString *)userAgent {
-    if (_userAgent == nil) {
-        _userAgent = [[[UIWebView alloc] init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    }
-    return _userAgent;
+    return [UserAgent defaultUserAgent];
 }
 
 - (NSArray *)parameterForAvailableTrackers {

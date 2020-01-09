@@ -2,9 +2,9 @@ You can find integration guide in our github [wiki](https://github.com/loopme/io
 
 ## What's new ##
 
-**Version 7.2.6**
+**Version 7.2.7**
  
-- Fixed click URL issues
+- Totally removed UIWebView from SDK
 
 **Version 7.2.2**
 

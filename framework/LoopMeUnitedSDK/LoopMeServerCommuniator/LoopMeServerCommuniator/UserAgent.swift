@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserAgent {
+public class UserAgent: NSObject {
     private static var defaults = UserDefaults.standard
 
     private static func clientUserAgent(prefix: String) -> String {
@@ -53,7 +53,7 @@ class UserAgent {
         return "CPU iPhone"
     }
 
-    public static var defaultUserAgent: String {
+    @objc public static var defaultUserAgent: String {
         clientUserAgent(prefix: "Mozilla/5.0")
     }
 }

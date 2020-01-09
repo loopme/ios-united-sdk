@@ -8,6 +8,7 @@
 
 #import "LoopMeGlobalSettings.h"
 #import <UIKit/UIKit.h>
+#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 @implementation LoopMeGlobalSettings
 
@@ -22,9 +23,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.userAgent = [[[UIWebView alloc] init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-        });
+        self.userAgent = [UserAgent defaultUserAgent];
     }
     return self;
 }

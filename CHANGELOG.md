@@ -1,3 +1,7 @@
+## Version 7.2.7 (09.01.2020)
+
+- Totally removed UIWebView from SDK
+
 ## Version 7.2.6 (23.12.2019)
 
 - Fixed click URL issues

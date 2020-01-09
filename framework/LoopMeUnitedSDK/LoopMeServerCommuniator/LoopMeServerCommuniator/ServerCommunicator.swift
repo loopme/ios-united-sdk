@@ -1,3 +1,4 @@
+
 //
 //  ServerCommunicator.swift
 //  LoopMeServerCommuniator
