@@ -7,6 +7,7 @@
 //
 
 #import <StoreKit/StoreKit.h>
+#import <SafariServices/SafariServices.h>
 
 #import "LoopMeBrowserViewController.h"
 #import "LoopMeDestinationDisplayController.h"
@@ -18,14 +19,15 @@
 <
     LoopMeProgressOverlayViewDelegate,
     LoopMeBrowserControllerDelegate,
-    SKStoreProductViewControllerDelegate
+    SKStoreProductViewControllerDelegate,
+    SFSafariViewControllerDelegate
 >
 
 @property (nonatomic, strong) LoopMeURLResolver *resolver;
 @property (nonatomic, strong) LoopMeProgressOverlayView *overlayView;
 @property (nonatomic, assign, getter = isLoadingDestination) BOOL loadingDestination;
 @property (nonatomic, strong) SKStoreProductViewController *storeKitController;
-@property (nonatomic, strong) LoopMeBrowserViewController *browserController;
+@property (nonatomic, strong) SFSafariViewController *browserController;
 
 @property (nonatomic, strong) NSURL *resorvingURL;
 
@@ -113,11 +115,14 @@
 - (void)showWebViewWithHTMLString:(NSString *)HTMLString
                           baseURL:(NSURL *)URL {
     [self hideOverlay];
-    self.browserController = [[LoopMeBrowserViewController alloc] initWithURL:URL
-                                                                   HTMLString:HTMLString
-                                                                     delegate:self];
+    
+    self.browserController = [[SFSafariViewController alloc] initWithURL:URL];
+    self.browserController.delegate = self;
+    self.browserController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    self.browserController.modalPresentationStyle = UIModalPresentationFullScreen;
+    
     [[self.delegate viewControllerForPresentingModalView] presentViewController:self.browserController
-                                                                       animated:NO
+                                                                       animated:YES
                                                                      completion:nil];
 }
 
@@ -156,6 +161,13 @@
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
     self.loadingDestination = NO;
     [self dismissStoreKitController];
+}
+
+#pragma mark - <SFSafariViewControllerDelegate>
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    self.loadingDestination = NO;
+    [self.delegate destinationDisplayControllerDidDismissModal:self];
 }
 
 #pragma mark - LoopMeBrowserControllerDelegate

@@ -1,3 +1,9 @@
+## Version 7.3.0 (27.03.2020)
+
+- Updated OMSDK to 1.3
+- Vast wrapper and mediafile fixes
+- New click browser
+
 ## Version 7.2.7 (09.01.2020)
 
 - Totally removed UIWebView from SDK

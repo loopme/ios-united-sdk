@@ -8,27 +8,11 @@
 #import <Foundation/Foundation.h>
 #import "OMIDAdSession.h"
 #import "OMIDVASTProperties.h"
+#import "OMIDMediaEvents.h"
 
 /**
- *  List of supported video event player states.
- */
-typedef NS_ENUM(NSUInteger, OMIDPlayerState) {
-    OMIDPlayerStateMinimized,
-    OMIDPlayerStateCollapsed,
-    OMIDPlayerStateNormal,
-    OMIDPlayerStateExpanded,
-    OMIDPlayerStateFullscreen
-};
-
-/**
- *  List of supported video event user interaction types.
- */
-typedef NS_ENUM(NSUInteger, OMIDInteractionType) {
-    OMIDInteractionTypeClick,
-    OMIDInteractionTypeAcceptInvitation
-};
-
-/**
+ * Note: Planned to be deprecated in OM SDK 1.3.2.
+ *
  *  This provides a complete list of native video events supported by OMID.
  * Using this event API assumes the video player is fully responsible for communicating all video events at the appropriate times.
  * Only one video events implementation can be associated with the ad session and any attempt to create multiple instances will result in an error.
@@ -46,6 +30,8 @@ typedef NS_ENUM(NSUInteger, OMIDInteractionType) {
 - (nullable instancetype)initWithAdSession:(nonnull OMIDLoopmeAdSession *)session error:(NSError *_Nullable *_Nullable)error;
 
 /**
+ * Note: Planned to be deprecated in OM SDK 1.3.2.
+ *
  *  Notifies all video listeners that video content has been loaded and ready to start playing.
  *
  * @param vastProperties The parameters containing static information about the video placement.

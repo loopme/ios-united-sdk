@@ -56,10 +56,10 @@ typedef NS_ENUM(NSInteger, LoopMeConsentType) {
 
  /**
  * Methods provides by IAB In-App CMP API.
- * Read more: https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/Mobile%20In-App%20Consent%20APIs%20v1.0%20Final.md
+ * Read more: https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#what-does-the-gdprapplies-value-mean
  */
-- (BOOL)cmpPresent;
-- (NSString *_Nullable)subjectToGDPR;
+- (NSInteger)GDRRApplies;
 - (NSString *_Nullable)consentString;
+- (NSString *_Nullable)cmpSdkID;
 
 @end

@@ -99,11 +99,9 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 - (NSDictionary *)regsObject {
     NSMutableDictionary *regs = [[NSMutableDictionary alloc] init];
     regs[@"coppa"] = @0;
-    if ([[LoopMeGDPRTools sharedInstance] cmpPresent]) {
-        NSString *subject = [[LoopMeGDPRTools sharedInstance] subjectToGDPR];
-        if (subject) {
-            regs[@"ext"] = @{@"gdpr" : subject};
-        }
+    if ([[LoopMeGDPRTools sharedInstance] cmpSdkID] && [[LoopMeGDPRTools sharedInstance] GDRRApplies] != -1) {
+        NSInteger applies = [[LoopMeGDPRTools sharedInstance] GDRRApplies];
+        regs[@"ext"] = @{@"gdpr" : @(applies)};
     }
     NSString *ccpaString = [LoopMeCCPATools ccpaString];
     if (ccpaString) {

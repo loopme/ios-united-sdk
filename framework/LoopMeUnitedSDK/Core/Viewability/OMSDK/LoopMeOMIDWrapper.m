@@ -60,7 +60,7 @@ static OMIDLoopmePartner *_partner;
 
 + (BOOL)initOMIDWithCompletionBlock:(void (^)(BOOL))completionBlock {
     NSError *error;
-    BOOL sdkStarted = [[OMIDLoopmeSDK sharedInstance] activateWithOMIDAPIVersion:OMIDSDKAPIVersionString error:&error];
+    BOOL sdkStarted = [[OMIDLoopmeSDK sharedInstance] activate];
     
     if (!sdkStarted || error) {
         completionBlock(false);
@@ -137,7 +137,14 @@ static OMIDLoopmePartner *_partner;
             NSString *vendorKey = [verification vendor] != nil ? [verification vendor] : @"";
             NSString *params = [verification verificationParameters] != nil ? [verification verificationParameters] : @"";
             
-            OMIDLoopmeVerificationScriptResource *omidResource = [[OMIDLoopmeVerificationScriptResource alloc] initWithURL:respurceURL vendorKey:vendorKey parameters:params];
+            OMIDLoopmeVerificationScriptResource *omidResource;
+            
+            if (params && ![params isEqualToString:@""]) {
+                omidResource = [[OMIDLoopmeVerificationScriptResource alloc] initWithURL:respurceURL vendorKey:vendorKey parameters:params];
+            } else {
+                omidResource = [[OMIDLoopmeVerificationScriptResource alloc] initWithURL:respurceURL];
+            }
+            
             if (omidResource) {
                 [omidResources addObject:omidResource];
             }
@@ -148,14 +155,15 @@ static OMIDLoopmePartner *_partner;
     switch (creativeType) {
         case OMIDLoopmeCreativeTypeHTML:
             context = [[OMIDLoopmeAdSessionContext alloc] initWithPartner:self.class.partner
-                                                                    webView:webView customReferenceIdentifier:customRefId error:error];
+                                                                    webView:webView
+                                                               contentUrl:nil customReferenceIdentifier:customRefId error:error];
             break;
         case OMIDLoopmeCreativeTypeNativeVideo:
             
             
             context = [[OMIDLoopmeAdSessionContext alloc]
                        initWithPartner:self.class.partner
-                       script:self.class.omidJS resources:omidResources customReferenceIdentifier:customRefId error:error];
+                       script:self.class.omidJS resources:omidResources contentUrl:nil customReferenceIdentifier:customRefId error:error];
             break;
         default:
             break;
@@ -170,20 +178,14 @@ static OMIDLoopmePartner *_partner;
     NSError *cfgError;
     switch (creativeType) {
         case OMIDLoopmeCreativeTypeHTML:
-            config = [[OMIDLoopmeAdSessionConfiguration alloc]
-                        initWithImpressionOwner:OMIDNativeOwner videoEventsOwner:OMIDNoneOwner
-                        isolateVerificationScripts:NO error:&cfgError];
+            config = [[OMIDLoopmeAdSessionConfiguration alloc] initWithCreativeType:OMIDCreativeTypeHtmlDisplay impressionType:OMIDImpressionTypeBeginToRender impressionOwner:OMIDNativeOwner mediaEventsOwner:OMIDNoneOwner isolateVerificationScripts:NO error:&cfgError];
             break;
         case OMIDLoopmeCreativeTypeNativeVideo:
-            config = [[OMIDLoopmeAdSessionConfiguration alloc]
-                                                  initWithImpressionOwner:OMIDNativeOwner videoEventsOwner:OMIDNativeOwner
-                                                  isolateVerificationScripts:NO error:&cfgError];
+            config = [[OMIDLoopmeAdSessionConfiguration alloc] initWithCreativeType:OMIDCreativeTypeVideo impressionType:OMIDImpressionTypeBeginToRender impressionOwner:OMIDNativeOwner mediaEventsOwner:OMIDNativeOwner isolateVerificationScripts:NO error:&cfgError];
             break;
         default:
             break;
     }
-    
-    
     
     return config;
 }

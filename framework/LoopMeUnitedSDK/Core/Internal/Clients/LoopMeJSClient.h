@@ -23,7 +23,6 @@ extern const struct LoopMeEventStruct {
     __unsafe_unretained NSString *duration;
     __unsafe_unretained NSString *currentTime;
     __unsafe_unretained NSString *shake;
-    __unsafe_unretained NSString *isNativeCallFinished;
     __unsafe_unretained NSString *fullscreenMode;    
 } LoopMeEvent;
 

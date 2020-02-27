@@ -42,7 +42,7 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
 @interface LoopMeOMIDVideoEventsWrapper()
 
 @property (nonatomic, strong) NSMutableSet *sentEvents;
-@property (nonatomic, strong) OMIDLoopmeVideoEvents *videoEvents;
+@property (nonatomic, strong) OMIDLoopmeMediaEvents *videoEvents;
 
 @end
 
@@ -52,7 +52,7 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
     
     if (self = [super init]) {
         _sentEvents = [NSMutableSet new];
-        self.videoEvents = [[OMIDLoopmeVideoEvents alloc] initWithAdSession:session error:error];
+        self.videoEvents = [[OMIDLoopmeMediaEvents alloc] initWithAdSession:session error:error];
     }
     return self;
 }
@@ -69,7 +69,7 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
         videoPlayerVolume:(CGFloat)videoPlayerVolume {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adStarted]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adStarted];
-        [self.videoEvents startWithDuration:duration videoPlayerVolume:videoPlayerVolume];
+        [self.videoEvents startWithDuration:duration mediaPlayerVolume:videoPlayerVolume];
     }
 }
 

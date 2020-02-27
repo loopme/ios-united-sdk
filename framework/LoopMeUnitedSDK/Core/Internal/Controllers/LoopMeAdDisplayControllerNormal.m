@@ -524,7 +524,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     NSURL *URL = [[navigationAction request] URL];
     
     if ([self.JSClient shouldInterceptURL:URL]) {
-        [self.JSClient executeEvent:LoopMeEvent.isNativeCallFinished forNamespace:kLoopMeNamespaceWebview param:@YES paramBOOL:YES];
         [self.JSClient processURL:URL];
         decisionHandler(NO);
         return;
@@ -546,6 +545,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 //        [self.mraidClient getOrientationProperties:^(NSDictionary *properties) {
 //            [self setOrientation:properties forConfiguration:self.adConfiguration];
 //        }];
+        [self.delegate adDisplayControllerDidFinishLoadingAd:self];
     }
     
     //OMSDK
@@ -556,14 +556,12 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     self.omidSession = [self.omidWrapper sessionForType:OMIDLoopmeCreativeTypeHTML resources:nil webView:webView error:&error];
     // Set the view on which to track viewability
     self.omidSession.mainAdView = webView;
-    [self.omidSession addFriendlyObstruction:self.closeButton];
+    [self.omidSession addFriendlyObstruction:self.closeButton purpose:OMIDFriendlyObstructionCloseAd detailedReason:nil error:&error];
     // Start session
     [self.omidSession start];
     
     NSError *adEvtsError;
     self.omidAdEvents = [[OMIDLoopmeAdEvents alloc] initWithAdSession:self.omidSession error:&adEvtsError];
-    
-    [self.delegate adDisplayControllerDidFinishLoadingAd:self];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
@@ -597,6 +595,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 - (void)JSClientDidReceiveSuccessCommand:(LoopMeJSClient *)client {
     LoopMeLogInfo(@"Ad was successfully loaded");
     [self invalidateTimer];
+    
+    [self.omidAdEvents loadedWithError:nil];
+    
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd:self];
     }

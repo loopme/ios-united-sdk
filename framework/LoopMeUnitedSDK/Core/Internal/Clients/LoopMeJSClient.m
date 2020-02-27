@@ -45,7 +45,6 @@ const struct LoopMeEventStruct LoopMeEvent = {
     .duration = @"duration",
     .currentTime = @"currentTime",
     .shake = @"shake",
-    .isNativeCallFinished = @"isNativeCallFinished",
     .fullscreenMode = @"fullscreenMode"
 };
 

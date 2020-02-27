@@ -14,9 +14,9 @@
 static NSString * const kLoopMeUserDefaultsGDPRKey = @"LoopMeGDPRFlag";
 static NSString * const kLoopMeUserDefaultsGDPRWindowKey = @"LoopMeGDPRWindowFlag";
 
-static NSString * const kLoopMeIABUserDefaultsKeyCMPPresent = @"IABConsent_CMPPresent";
-static NSString * const kLoopMeIABUserDefaultsKeySubjectToGDPR = @"IABConsent_SubjectToGDPR";
-static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABConsent_ConsentString";
+static NSString * const kLoopMeIABUserDefaultsKeyCMPSdkId = @"IABTCF_CmpSdkID";
+static NSString * const kLoopMeIABUserDefaultsKeyGdprApplies = @"IABTCF_gdprApplies";
+static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCString";
 
 @interface LoopMeGDPRTools() <LoopMeGDPRViewControllerDelegate>
 
@@ -47,7 +47,7 @@ static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABConsent_Co
 
 - (NSString *)userConsentString {
     if (!_userConsentString) {
-        if ([self cmpPresent] && [self subjectToGDPR]) {
+        if ([self cmpSdkID] && [self GDRRApplies]) {
             _userConsentString = [self consentString];
         }
     }
@@ -105,17 +105,19 @@ static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABConsent_Co
 
 #pragma mark CMP tools
 
-
-- (BOOL)cmpPresent {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kLoopMeIABUserDefaultsKeyCMPPresent];
-}
-
-- (NSString *)subjectToGDPR {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:kLoopMeIABUserDefaultsKeySubjectToGDPR];
+- (NSInteger)GDRRApplies {
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:kLoopMeIABUserDefaultsKeyGdprApplies]) {
+        return [[NSUserDefaults standardUserDefaults] integerForKey:kLoopMeIABUserDefaultsKeyGdprApplies];
+    }
+    return -1;
 }
 
 - (NSString *)consentString {
     return [[NSUserDefaults standardUserDefaults] stringForKey:kLoopMeIABUserDefaultsKeyConsentString];
+}
+
+- (NSString *)cmpSdkID {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kLoopMeIABUserDefaultsKeyCMPSdkId];
 }
 
 @end

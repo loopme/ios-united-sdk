@@ -10,6 +10,7 @@ import Foundation
 
 public struct AssetLinks {
     //Array because it needs to be sorted
+    var video360URL: Array<String> = []
     var videoURL: Array<String> = []
     var vpaidURL: String = ""
     var adParameters: String = ""

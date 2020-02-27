@@ -8,10 +8,12 @@
 #import <UIKit/UIKit.h>
 #import "OMIDAdSessionContext.h"
 #import "OMIDAdSessionConfiguration.h"
+#import "OMIDFriendlyObstructionType.h"
 
 typedef NS_ENUM(NSUInteger, OMIDErrorType) {
     OMIDErrorGeneric = 1, // will translate into "GENERIC" when published to the OMID JS service.
-    OMIDErrorVideo = 2 // will translate into "VIDEO" when published to the OMID JS service.
+    OMIDErrorMedia = 2, // will translate into "VIDEO" when published to the OMID JS service.
+    OMIDErrorVideo = 2 // Note: Planned to be deprecated  in OM SDK 1.3.2.
 };
 
 /**
@@ -76,8 +78,33 @@ typedef NS_ENUM(NSUInteger, OMIDErrorType) {
  *  This method will have no affect if called after the ad session has finished.
  *
  * @param friendlyObstruction The view to be excluded from all ad session viewability calculations.
+ *
+ * @note This will just call -[OMIDAdSession addFriendlyObstruction:purpose:detailedReason:error:] with the
+ * additional arguments OMIDFriendlyObstructionOther, nil, and nil respectfully. This will be deprecated in future
+ * versions.
  */
 - (void)addFriendlyObstruction:(nonnull UIView *)friendlyObstruction;
+
+/**
+ *  Adds friendly obstruction which should then be excluded from all ad session viewability calculations.
+ * It also provides a purpose and detailed reason string to pass forward to the measurement vendors.
+ *
+ *  This method will have no affect if called after the ad session has finished.
+ *
+ * @param friendlyObstruction The view to be excluded from all ad session viewability calculations.
+ * @param purpose The purpose of why this obstruction was necessary.
+ * @param detailedReason An explanation for why this obstruction is part of the ad experience if not already
+ * obvious from the purpose. Can be nil. If not nil, must be 50 characters or less and only contain characers
+ * `A-z`, `0-9`, or spaces.
+ * @return Whether this friendly obstruction was successfully added. If the session has finished or the
+ * friendlyObstruction has already been added for this session, this method will return NO with no associated
+ * error object. However, if one or more arguments are against requirements, it will return NO with an error
+ * object assigned.
+ */
+- (BOOL)addFriendlyObstruction:(nonnull UIView *)friendlyObstruction
+                       purpose:(OMIDFriendlyObstructionType)purpose
+                detailedReason:(nullable NSString *)detailedReason
+                         error:(NSError *_Nullable *_Nullable)error;
 
 /**
  *  Removes registered friendly obstruction.

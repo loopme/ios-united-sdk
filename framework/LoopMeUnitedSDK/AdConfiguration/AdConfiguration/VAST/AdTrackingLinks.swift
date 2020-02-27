@@ -15,6 +15,8 @@ struct AdTrackingLinks {
         lhs.verificationNotExecuted.formUnion(rhs.verificationNotExecuted)
         lhs.impression.formUnion(rhs.impression)
         lhs.creativeViewCompanion.formUnion(rhs.creativeViewCompanion)
+        lhs.clickVideo = rhs.clickVideo
+        lhs.clickCompanion = rhs.clickCompanion
     }
     
     public var errorTemplates: Set<String> = []
