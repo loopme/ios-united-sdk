@@ -1,4 +1,4 @@
-## Version 7.3.0 (27.03.2020)
+## Version 7.3.0 (27.02.2020)
 
 - Updated OMSDK to 1.3
 - Vast wrapper and mediafile fixes
