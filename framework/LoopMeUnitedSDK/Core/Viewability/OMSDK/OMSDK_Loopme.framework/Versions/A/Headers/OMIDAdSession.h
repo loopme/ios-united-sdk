@@ -10,10 +10,22 @@
 #import "OMIDAdSessionConfiguration.h"
 #import "OMIDFriendlyObstructionType.h"
 
+/**
+ * List of supported error types.
+ */
 typedef NS_ENUM(NSUInteger, OMIDErrorType) {
-    OMIDErrorGeneric = 1, // will translate into "GENERIC" when published to the OMID JS service.
-    OMIDErrorMedia = 2, // will translate into "VIDEO" when published to the OMID JS service.
-    OMIDErrorVideo = 2 // Note: Planned to be deprecated  in OM SDK 1.3.2.
+    /**
+     * The integration is publishing a "generic" error to verification scripts.
+     */
+    OMIDErrorGeneric = 1,
+    /**
+     * The integration is publishing a "video" error to verification scripts.
+     */
+    OMIDErrorMedia = 2,
+    /**
+     * Same as `OMIDErrorMedia`.  Will be removed in OM SDK 1.3.4.
+     */
+    OMIDErrorVideo __deprecated_msg("Use OMIDErrorMedia") = 2
 };
 
 /**
@@ -73,17 +85,22 @@ typedef NS_ENUM(NSUInteger, OMIDErrorType) {
 - (void)finish;
 
 /**
- *  Adds friendly obstruction which should then be excluded from all ad session viewability calculations.
+ * DEPRECATED.  Adds friendly obstruction which should then be excluded from all ad session
+ * viewability calculations.
  *
- *  This method will have no affect if called after the ad session has finished.
+ * This method will have no affect if called after the ad session has finished.
  *
  * @param friendlyObstruction The view to be excluded from all ad session viewability calculations.
  *
- * @note This will just call -[OMIDAdSession addFriendlyObstruction:purpose:detailedReason:error:] with the
- * additional arguments OMIDFriendlyObstructionOther, nil, and nil respectfully. This will be deprecated in future
- * versions.
+ * @note This will just call `-[OMIDAdSession addFriendlyObstruction:purpose:detailedReason:error:]`
+ * with the additional arguments OMIDFriendlyObstructionOther, nil, and nil respectfully.
+ *
+ * Warning:
+ *  * This method will be fully removed in OM SDK 1.3.4 or later. Use `-[OMIDAdSession
+ * addFriendlyObstruction:purpose:detailedReason:error:]` instead.
  */
-- (void)addFriendlyObstruction:(nonnull UIView *)friendlyObstruction;
+- (void)addFriendlyObstruction:(nonnull UIView *)friendlyObstruction
+    __deprecated_msg("Use -[OMIDAdSession addFriendlyObstruction:purpose:detailedReason:error:]");
 
 /**
  *  Adds friendly obstruction which should then be excluded from all ad session viewability calculations.

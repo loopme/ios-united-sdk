@@ -1,3 +1,8 @@
+## Version 7.3.1 (14.04.2020)
+
+- Updated OMSDK to 1.3.3
+- Memory management improvements
+
 ## Version 7.3.0 (27.03.2020)
 
 - Updated OMSDK to 1.3

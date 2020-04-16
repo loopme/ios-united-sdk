@@ -8,12 +8,24 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  List of supported media player positions.
+ * List of supported media player positions.
  */
 typedef NS_ENUM(NSUInteger, OMIDPosition) {
+    /**
+     * The ad plays preceding video content.
+     */
     OMIDPositionPreroll,
+    /**
+     * The ad plays in the middle of video content, or between two separate content videos.
+     */
     OMIDPositionMidroll,
+    /**
+     * The ad plays following video content.
+     */
     OMIDPositionPostroll,
+    /**
+     * The ad plays independently of any video content.
+     */
     OMIDPositionStandalone
 };
 
@@ -52,7 +64,7 @@ typedef NS_ENUM(NSUInteger, OMIDPosition) {
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 
 /**
- * This method should not be called by the integration
+ * For OM SDK internal use only.
  */
 - (NSDictionary *_Nonnull)toJSON;
 

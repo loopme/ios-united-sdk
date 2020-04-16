@@ -22,6 +22,8 @@
 
 /* Begin PBXBuildFile section */
 		47403417239568FD00CC14EF /* CCPATools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47403416239568FD00CC14EF /* CCPATools.swift */; };
+		474545D52435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 474545D32435F84C00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h */; };
+		474545D62435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 474545D42435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m */; };
 		47500F4C234C8B760099AD1E /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47500F4B234C8B760099AD1E /* UserAgent.swift */; };
 		47714E3822FAF9CF00DF0D55 /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47714E2E22FAF9CE00DF0D55 /* LoopMeUnitedSDK.framework */; };
 		47714E3D22FAF9CF00DF0D55 /* LoopMeSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714E3C22FAF9CF00DF0D55 /* LoopMeSDKTests.m */; };
@@ -181,6 +183,8 @@
 		47A57CD1233E31C8001F7DA3 /* LoopMeInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C3C233E31C8001F7DA3 /* LoopMeInterstitial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57CD3233E3412001F7DA3 /* LoopMeAdType.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57CD2233E3412001F7DA3 /* LoopMeAdType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47CE39DF236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE39DE236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift */; };
+		47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */; };
+		47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +200,8 @@
 /* Begin PBXFileReference section */
 		470E2B3D23215B2800870EB1 /* AdConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdConfiguration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47403416239568FD00CC14EF /* CCPATools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCPATools.swift; sourceTree = "<group>"; };
+		474545D32435F84C00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoopMeMRAIDScriptMessageHandler.h; sourceTree = "<group>"; };
+		474545D42435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoopMeMRAIDScriptMessageHandler.m; sourceTree = "<group>"; };
 		47500F4B234C8B760099AD1E /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
 		47714E2E22FAF9CE00DF0D55 /* LoopMeUnitedSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LoopMeUnitedSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47714E3122FAF9CE00DF0D55 /* LoopMeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoopMeSDK.h; path = Core/LoopMeSDK.h; sourceTree = "<group>"; };
@@ -359,6 +365,8 @@
 		47A57C3C233E31C8001F7DA3 /* LoopMeInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeInterstitial.h; sourceTree = "<group>"; };
 		47A57CD2233E3412001F7DA3 /* LoopMeAdType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdType.h; sourceTree = "<group>"; };
 		47CE39DE236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoopMeServerCommunicatorTests.swift; path = LoopMeUnitedSDK/LoopMeServerCommuniator/LoopMeServerCommuniatorTests/LoopMeServerCommunicatorTests.swift; sourceTree = SOURCE_ROOT; };
+		47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVpaidScriptMessageHandler.m; sourceTree = "<group>"; };
+		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -733,6 +741,10 @@
 				47A57BED233E31C8001F7DA3 /* LoopMeDestinationDisplayController.m */,
 				47A57BEE233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h */,
 				47A57BEF233E31C8001F7DA3 /* LoopMeAdDisplayController.m */,
+				474545D32435F84C00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h */,
+				474545D42435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m */,
+				47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */,
+				47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -877,6 +889,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47A57C55233E31C8001F7DA3 /* LoopMeSDKConfiguration.h in Headers */,
+				47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */,
 				47A57CD3233E3412001F7DA3 /* LoopMeAdType.h in Headers */,
 				47A57CB2233E31C8001F7DA3 /* LoopMeDefinitions.h in Headers */,
 				47A57C4E233E31C8001F7DA3 /* LoopMeOMIDWrapper.h in Headers */,
@@ -941,6 +954,7 @@
 				47A57CC0233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h in Headers */,
 				47A57C62233E31C8001F7DA3 /* LoopMeViewabilityProtocol.h in Headers */,
 				47A57C82233E31C8001F7DA3 /* LoopMe360ViewController.h in Headers */,
+				474545D52435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h in Headers */,
 				47A57C93233E31C8001F7DA3 /* LoopMeServerURLBuilder.h in Headers */,
 				47A57C9A233E31C8001F7DA3 /* LoopMeAdWebView.h in Headers */,
 				47A57CBD233E31C8001F7DA3 /* NSString+Encryption.h in Headers */,
@@ -1114,6 +1128,7 @@
 				47A57C81233E31C8001F7DA3 /* LoopMeBrowserViewController.m in Sources */,
 				47A57C5E233E31C8001F7DA3 /* LoopMeVPAIDVideoClient.m in Sources */,
 				47A57C9D233E31C8001F7DA3 /* LoopMeCancelView.m in Sources */,
+				47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */,
 				47A57C7F233E31C8001F7DA3 /* LoopMeInterstitialViewController.m in Sources */,
 				47A57CBC233E31C8001F7DA3 /* NSDictionary+JSONPrint.m in Sources */,
 				47500F4C234C8B760099AD1E /* UserAgent.swift in Sources */,
@@ -1153,6 +1168,7 @@
 				47A57C66233E31C8001F7DA3 /* LoopMeDiscURLCache.m in Sources */,
 				47A57CA8233E31C8001F7DA3 /* LoopMeAnalyticsProvider.m in Sources */,
 				47A57C8C233E31C8001F7DA3 /* LoopMeVPAIDAdDisplayController.m in Sources */,
+				474545D62435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m in Sources */,
 				47A57C83233E31C8001F7DA3 /* LoopMeGLProgram.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1329,7 +1345,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = 7.3.0;
+				MARKETING_VERSION = 7.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1370,7 +1386,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = 7.3.0;
+				MARKETING_VERSION = 7.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

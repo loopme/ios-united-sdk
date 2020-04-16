@@ -40,6 +40,8 @@ extern const struct LoopMeVPAIDViewModeStruct {
 
 @protocol LoopMeVpaidProtocol
 
+- (void)processCommand:(NSString *)command withParams:(NSDictionary *)params;
+
 - (void)vpaidAdLoaded:(double)volume;
 - (void)vpaidAdSizeChange:(CGSize)size;
 - (void)vpaidAdStarted;

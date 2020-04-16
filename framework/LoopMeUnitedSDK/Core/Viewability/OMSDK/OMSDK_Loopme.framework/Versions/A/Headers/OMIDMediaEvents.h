@@ -10,21 +10,46 @@
 #import "OMIDVASTProperties.h"
 
 /**
- *  List of supported media event player states.
+ * List of supported media event player states.
  */
 typedef NS_ENUM(NSUInteger, OMIDPlayerState) {
+    /**
+     * The player is collapsed in such a way that the video is hidden.
+     * The video may or may not still be progressing in this state, and sound may be audible.
+     * This refers specifically to the video player state on the page, and not the state of
+     * the browser window.
+     */
     OMIDPlayerStateMinimized,
+    /**
+     * The player has been reduced from its original size.
+     * The video is still potentially visible.
+     */
     OMIDPlayerStateCollapsed,
+    /**
+     * The player's default playback size.
+     */
     OMIDPlayerStateNormal,
+    /**
+     * The player has expanded from its original size.
+     */
     OMIDPlayerStateExpanded,
+    /**
+     * The player has entered fullscreen mode.
+     */
     OMIDPlayerStateFullscreen
 };
 
 /**
- *  List of supported media event user interaction types.
+ * List of supported media event user interaction types.
  */
 typedef NS_ENUM(NSUInteger, OMIDInteractionType) {
+    /**
+     * The user clicked to load the ad's landing page.
+     */
     OMIDInteractionTypeClick,
+    /**
+     * The user engaged with ad content to load a separate experience.
+     */
     OMIDInteractionTypeAcceptInvitation
 };
 
@@ -46,12 +71,18 @@ typedef NS_ENUM(NSUInteger, OMIDInteractionType) {
 - (nullable instancetype)initWithAdSession:(nonnull OMIDLoopmeAdSession *)session error:(NSError *_Nullable *_Nullable)error;
 
 /**
- *  Notifies all media listeners that media content has been loaded and ready to start playing.
+ * DEPRECATED. Notifies all media listeners that media content has been loaded and ready to start
+ * playing.
  *
  * @param vastProperties The parameters containing static information about the media placement.
  * @see OMIDVASTProperties
+ *
+ * Warning:
+ *  * This method will be fully removed in OM SDK 1.3.4 or later. Use
+ *    `-[OMIDAdEvents loadedWithVastProperties:error:]` instead.
  */
-- (void)loadedWithVastProperties:(nonnull OMIDLoopmeVASTProperties *)vastProperties;
+- (void)loadedWithVastProperties:(nonnull OMIDLoopmeVASTProperties *)vastProperties
+    __deprecated_msg("Use -[OMIDAdEvents loadedWithVastProperties:error:]");
 
 /**
  *  Notifies all media listeners that media content has started playing.
@@ -88,13 +119,13 @@ typedef NS_ENUM(NSUInteger, OMIDInteractionType) {
 - (void)pause;
 
 /**
- *  Notifies all media listeners that media playback has resumed (after being paused) after a user interaction.
+ *  Notifies all media listeners that media playback has resumed after being paused.
  */
 - (void)resume;
 
 /**
  *  Notifies all media listeners that media playback has stopped as a user skip interaction.
- *  Once skipped media it should not be possible for the media to resume playing content.
+ *  Once skipped, it should not be possible for the media to resume playing content.
  */
 - (void)skipped;
 
@@ -116,7 +147,8 @@ typedef NS_ENUM(NSUInteger, OMIDInteractionType) {
 - (void)volumeChangeTo:(CGFloat)playerVolume;
 
 /**
- *  Notifies all media listeners that media player state has changed. See {@link OMIDPlayerState} for list of supported states.
+ *  Notifies all media listeners that media player state has changed.
+ *  See `OMIDPlayerState` for list of supported states.
  *
  * @param playerState The latest media player state.
  * @see OMIDPlayerState
@@ -124,7 +156,8 @@ typedef NS_ENUM(NSUInteger, OMIDInteractionType) {
 - (void)playerStateChangeTo:(OMIDPlayerState)playerState;
 
 /**
- *  Notifies all media listeners that the user has performed an ad interaction. See {@link OMIDInteractionType} fro list of supported types.
+ *  Notifies all media listeners that the user has performed an ad interaction.
+ *  See `OMIDInteractionType` for a list of supported types.
  *
  * @param interactionType The latest user integration.
  * @see OMIDInteractionType

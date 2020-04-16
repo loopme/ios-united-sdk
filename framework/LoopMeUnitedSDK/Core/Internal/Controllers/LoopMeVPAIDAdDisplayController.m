@@ -30,6 +30,7 @@
 #import "LoopMeViewabilityManager.h"
 #import "LoopMeOMIDWrapper.h"
 #import "LoopMeOMIDVideoEventsWrapper.h"
+#import "LoopMeVpaidScriptMessageHandler.h"
 
 NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
@@ -69,8 +70,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     LoopMeVASTImageDownloaderDelegate,
     LoopMeVpaidProtocol,
     WKUIDelegate,
-    WKNavigationDelegate,
-    WKScriptMessageHandler
+    WKNavigationDelegate
 >
 
 @property (nonatomic, strong) LoopMeCloseButton *closeButton;
@@ -85,6 +85,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 @property (nonatomic, strong) NSTimer *showCloseButtonTimer;
 
 @property (nonatomic, strong) LoopMeVASTEventTracker *vastEventTracker;
+@property (nonatomic, strong) LoopMeVpaidScriptMessageHandler *vpaidMessageHandler;
 @property (nonatomic, strong) LOOMoatWebTracker *moatTracker;
 
 @property (nonatomic, assign) BOOL needCloseCallback;
@@ -170,14 +171,9 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 - (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate {
     
-    WKUserContentController *controller = [[WKUserContentController alloc] init];
-    [controller addScriptMessageHandler:self name:@"vpaid"];
-    
-    self = [super initWithDelegate:delegate jsController:controller];
+    self = [super initWithDelegate:delegate];
     
     if (self) {
-        self.webView.navigationDelegate = self;
-        self.webView.UIDelegate = self;
         _iasWrapper = [[LoopMeIASWrapper alloc] init];
         _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
         
@@ -230,7 +226,21 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     }
 }
 
+- (void)initWebView {
+    self.vpaidMessageHandler = [[LoopMeVpaidScriptMessageHandler alloc] init];
+    self.vpaidMessageHandler.vpaidCommandProcessor = self;
+    
+    WKUserContentController *controller = [[WKUserContentController alloc] init];
+    [controller addScriptMessageHandler:self.vpaidMessageHandler name:@"vpaid"];
+    
+    [self initializeWebViewWithContentController:controller];
+    self.webView.navigationDelegate = self;
+    self.webView.UIDelegate = self;
+}
+
 - (void)loadAdConfiguration {
+    [self initWebView];
+    
     self.loadImageCounter = 0;
     self.loadVideoCounter = 0;
     self.needCloseCallback = YES;
@@ -316,8 +326,16 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.webView loadHTMLString:@"about:blank" baseURL:nil];
         [self closeAdPrivate];
-        [self.webView removeFromSuperview];
+        [self removeWebView];
     });
+}
+
+- (void)removeWebView {
+    [self.webView loadHTMLString:@"about:blank" baseURL:nil];
+    [self.webView stopLoading];
+    [self.webView removeFromSuperview];
+    [self.webView.configuration.userContentController removeAllUserScripts];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"mraid"];
 }
 
 - (void)closeAdPrivate {
@@ -857,15 +875,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     return [self.delegate viewControllerForPresentation];
 }
 
-#pragma mark -- WKScriptHandler
-
-- (void)userContentController:(nonnull WKUserContentController *)userContentController didReceiveScriptMessage:(nonnull WKScriptMessage *)message {
-    
-    if ([[message name] isEqualToString:@"vpaid"]) {
-        NSLog(@"VPAID: %@", [message body]);
-        [self processCommand:[[message body] objectForKey:@"command"] withParams:[[message body] objectForKey:@"params"]];
-    }
-}
+#pragma mark -- VPAID Commands
 
 - (void)processCommand:(NSString *)command withParams:(NSDictionary *)params {
 //    LoopMeLogDebug(@"Processing VPAID command: %@, params: %@", command, params);
@@ -934,7 +944,12 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         NSString *message = [[params objectForKey:@"message"] stringValue];
         [self vpaidAdLog:message];
     } else if ([command isEqualToString:_kLoopMeVPAIDAdErrorCommand]) {
-        NSString *error = [[params objectForKey:@"error"] stringValue];
+        NSString *error;
+        if ([[params objectForKey:@"error"] isKindOfClass:NSString.class]) {
+            error = [params objectForKey:@"error"];
+        } else {
+            error = [[params objectForKey:@"error"] stringValue];
+        }
         [self vpaidAdError:error];
     } else {
         LoopMeLogDebug(@"VPAID command: %@ is not supported", command);

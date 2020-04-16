@@ -32,6 +32,7 @@
 #import "LoopMeAdView.h"
 #import "LoopMeOMIDWrapper.h"
 #import "LoopMeSDK.h"
+#import "LoopMeMRAIDScriptMessageHandler.h"
 
 NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
@@ -39,7 +40,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 <
     WKNavigationDelegate,
     WKUIDelegate,
-    WKScriptMessageHandler,
     LoopMeVideoClientDelegate,
     LoopMeJSClientDelegate,
     LoopMeMRAIDClientDelegate
@@ -48,6 +48,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 @property (nonatomic, strong) LoopMeCloseButton *closeButton;
 @property (nonatomic, strong) LoopMeJSClient *JSClient;
 @property (nonatomic, strong) LoopMeMRAIDClient *mraidClient;
+@property (nonatomic, strong) LoopMeMRAIDScriptMessageHandler *mraidScriptMessageHandler;
 @property (nonatomic, strong) NSDictionary *orientationProperties;
 @property (nonatomic, assign) CGSize originalSize;
 
@@ -153,32 +154,16 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 - (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate {
-    
-    WKUserContentController *controller = [[WKUserContentController alloc] init];
-    [controller addScriptMessageHandler:self name:@"mraid"];
-    
-    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
-    if (!bundleURL) {
-        @throw [NSException exceptionWithName:@"NoBundleResource" reason:@"No loopme resourse bundle" userInfo:nil];
-    }
-    NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
-    NSString *jsPath = [resourcesBundle pathForResource:@"mraid.js" ofType:@"ignore"];
-    NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
-    
-    WKUserScript *script = [[WKUserScript alloc] initWithSource:mraidjs injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
-    [controller addUserScript:script];
-    
-    self = [super initWithDelegate:delegate jsController:controller];
-    
+    self = [super initWithDelegate:delegate];
     if (self) {
         self.delegate = delegate;
         _JSClient = [[LoopMeJSClient alloc] initWithDelegate:self];
         _mraidClient = [[LoopMeMRAIDClient alloc] initWithDelegate:self];
         _iasWarpper = [[LoopMeIASWrapper alloc] init];
         _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
-        
+
         if ([self.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
-            //if frame is zero WebView display content incorrect
+//            if frame is zero WebView display content incorrect
             LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
             options.debugLoggingEnabled = true;
             [[LOOMoatAnalytics sharedInstance] startWithOptions:options];
@@ -187,8 +172,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(deviceShaken) name:kLoopMeShakeNotificationName object:nil];
-        self.webView.UIDelegate = self;
-        self.webView.navigationDelegate = self;
         
         _firstCallToExpand = YES;
     }
@@ -196,6 +179,29 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 #pragma mark - Private
+
+- (void)initWebView {
+    self.mraidScriptMessageHandler = [[LoopMeMRAIDScriptMessageHandler alloc] init];
+    self.mraidScriptMessageHandler.mraidClient = self.mraidClient;
+       
+    WKUserContentController *controller = [[WKUserContentController alloc] init];
+    [controller addScriptMessageHandler:self.mraidScriptMessageHandler name:@"mraid"];
+
+    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+    if (!bundleURL) {
+       @throw [NSException exceptionWithName:@"NoBundleResource" reason:@"No loopme resourse bundle" userInfo:nil];
+    }
+    NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+    NSString *jsPath = [resourcesBundle pathForResource:@"mraid.js" ofType:@"ignore"];
+    NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
+
+    WKUserScript *script = [[WKUserScript alloc] initWithSource:mraidjs injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO];
+    [controller addUserScript:script];
+
+    [self initializeWebViewWithContentController:controller];
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
+}
 
 - (void)deviceShaken {
     [self.JSClient setShake];
@@ -291,6 +297,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 - (void)loadAdConfiguration {
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self initWebView];
         if ([self.adConfiguration useTracking:LoopMeTrackerNameIas]) {
                 [self.iasWarpper initWithPartnerVersion:LOOPME_SDK_VERSION creativeType:self.adConfiguration.creativeType adConfiguration:self.adConfiguration];
                 [self.iasWarpper registerAdView:self.webView];
@@ -422,6 +429,8 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [self.webView loadHTMLString:@"about:blank" baseURL:nil];
     [self.webView stopLoading];
     [self.webView removeFromSuperview];
+    [self.webView.configuration.userContentController removeAllUserScripts];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"mraid"];
 }
 
 - (void)moveView:(BOOL)hideWebView {
@@ -554,6 +563,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     
     NSError *error;
     self.omidSession = [self.omidWrapper sessionForType:OMIDLoopmeCreativeTypeHTML resources:nil webView:webView error:&error];
+    if (error) {
+        
+    }
     // Set the view on which to track viewability
     self.omidSession.mainAdView = webView;
     [self.omidSession addFriendlyObstruction:self.closeButton purpose:OMIDFriendlyObstructionCloseAd detailedReason:nil error:&error];
@@ -570,15 +582,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         if ([self.delegate respondsToSelector:@selector(adDisplayController:didFailToLoadAdWithError:)]) {
             [self.delegate adDisplayController:self didFailToLoadAdWithError:error];
         }
-    }
-}
-
-#pragma mark - WKScriptMessageHandler
-
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    if ([[message name] isEqualToString:@"mraid"]) {
-        NSLog(@"MRAID: %@", [message body]);
-        [self.mraidClient processCommand:[[message body] objectForKey:@"command"] withParams:[[message body] objectForKey:@"params"]];
     }
 }
 

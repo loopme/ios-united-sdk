@@ -64,6 +64,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
     _adDisplayControllerVPAID = nil;
     _adInterstitialViewController = nil;
     [self invalidateTimer];
+    [self unRegisterObserver];
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
@@ -232,41 +233,38 @@ const NSInteger kLoopMeRequestTimeout = 180;
         return;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    LoopMeLogDebug(@"Interstitial ad will appear");
+    if ([self.delegate respondsToSelector:@selector(loopMeInterstitialWillAppear:)]) {
+            [self.delegate loopMeInterstitialWillAppear:self];
+       
+    }
+    [self.adManager invalidateTimers];
+    [self.adInterstitialViewController setOrientation:self.adConfiguration.adOrientation];
+    [self.adInterstitialViewController setAllowOrientationChange:self.adConfiguration.allowOrientationChange];
     
-        LoopMeLogDebug(@"Interstitial ad will appear");
-        if ([self.delegate respondsToSelector:@selector(loopMeInterstitialWillAppear:)]) {
-                [self.delegate loopMeInterstitialWillAppear:self];
-           
-        }
-        [self.adManager invalidateTimers];
-        [self.adInterstitialViewController setOrientation:self.adConfiguration.adOrientation];
-        [self.adInterstitialViewController setAllowOrientationChange:self.adConfiguration.allowOrientationChange];
-        
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-            [self.adDisplayController displayAd];
-            self.adDisplayController.visible = YES;
-        } else {
-            [self.adDisplayControllerVPAID displayAd];
-            self.adDisplayControllerVPAID.visible = YES;
-        }
-        
-        [viewController presentViewController:self.adInterstitialViewController animated:animated completion:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-                    [self.adDisplayController layoutSubviews];
-                } else {
-                    [self startAd];
-                }
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+        [self.adDisplayController displayAd];
+        self.adDisplayController.visible = YES;
+    } else {
+        [self.adDisplayControllerVPAID displayAd];
+        self.adDisplayControllerVPAID.visible = YES;
+    }
+    
+    [viewController presentViewController:self.adInterstitialViewController animated:animated completion:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+                [self.adDisplayController layoutSubviews];
+            } else {
+                [self startAd];
+            }
 
-                LoopMeLogDebug(@"Interstitial ad did appear");
-                if ([self.delegate respondsToSelector:@selector(loopMeInterstitialDidAppear:)]) {
-                        [self.delegate loopMeInterstitialDidAppear:self];
+            LoopMeLogDebug(@"Interstitial ad did appear");
+            if ([self.delegate respondsToSelector:@selector(loopMeInterstitialDidAppear:)]) {
+                    [self.delegate loopMeInterstitialDidAppear:self];
 
-                }
-            });
-        }];
-    });
+            }
+        });
+    }];
 }
 
 - (void)dismissAnimated:(BOOL)animated {

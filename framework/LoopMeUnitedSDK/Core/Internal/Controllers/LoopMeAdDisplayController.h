@@ -35,7 +35,8 @@
 @property (nonatomic, assign) BOOL isEndCardClicked;
 
 
-- (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate jsController:(WKUserContentController *)controller;
+- (instancetype)initWithDelegate:(id<LoopMeAdDisplayControllerDelegate>)delegate;
+- (void)initializeWebViewWithContentController:(WKUserContentController *)controller;
 - (BOOL)shouldIntercept:(NSURL *)URL
          navigationType:(WKNavigationType)navigationType;
 - (void)setAdConfiguration:(LoopMeAdConfiguration *)configuration;

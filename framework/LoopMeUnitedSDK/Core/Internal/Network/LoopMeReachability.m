@@ -203,7 +203,7 @@ typedef NS_ENUM(NSUInteger, LoopMeReachabilityNetworkStatus) {
 - (NSString *)getSSID {
     NSDictionary *info = [self fetchSSIDInfo];
     if (info) {
-        return [self fetchSSIDInfo][@"SSID"];
+        return info[@"SSID"];
     }
     return @"unknown";
 }

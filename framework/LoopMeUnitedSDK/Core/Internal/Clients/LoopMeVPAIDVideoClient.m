@@ -192,11 +192,13 @@ const NSInteger kResizeOffsetVPAID = 11;
         
         if (_player) {
             [_player removeTimeObserver:self.playbackTimeObserver];
+            [self.playbackTimeObserver invalidate];
+            self.playbackTimeObserver = nil;
         }
         _player = player;
         
         if (_player) {
-            [self.playbackTimeObserver invalidate];
+            
 //            [self.audioSession setActive:YES error:nil];
             [self addTimerForCurrentTime];
             [self videoView];

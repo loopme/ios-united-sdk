@@ -28,6 +28,7 @@ static NSString* const CACHE_KEY = @"OMID_JS";
 
 @implementation LoopMeOMIDWrapper
 static NSString *_omidJS;
+static BOOL _activatedBlockCalled;
 static OMIDLoopmePartner *_partner;
 
 @dynamic omidJS;
@@ -63,12 +64,16 @@ static OMIDLoopmePartner *_partner;
     BOOL sdkStarted = [[OMIDLoopmeSDK sharedInstance] activate];
     
     if (!sdkStarted || error) {
-        completionBlock(false);
+        completionBlock(NO);
+        _activatedBlockCalled = YES;
         return NO;
     }
     
     [self loadJSWithCompletionBlock:^(BOOL completed) {
-        completionBlock(completed);
+        if (!_activatedBlockCalled) {
+            completionBlock(completed);
+        }
+        _activatedBlockCalled = YES;
     }];
     
     [self initPartner];
@@ -79,7 +84,9 @@ static OMIDLoopmePartner *_partner;
 + (void)loadJSWithCompletionBlock:(void (^)(BOOL))completionBlock {
     if (!self.class.omidJS) {
         NSData *data = [[LoopMeDiscURLCache sharedDiscCache] retrieveDataForKey:CACHE_KEY];
-        self.class.omidJS = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (data) {
+            self.class.omidJS = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        }
         
         if (self.class.omidJS) {
             completionBlock(true);
