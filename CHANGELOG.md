@@ -1,3 +1,7 @@
+## Version 7.3.2 (06.05.2020)
+
+- Fixed non replaceable macroses issue in VAST URL
+
 ## Version 7.3.1 (14.04.2020)
 
 - Updated OMSDK to 1.3.3

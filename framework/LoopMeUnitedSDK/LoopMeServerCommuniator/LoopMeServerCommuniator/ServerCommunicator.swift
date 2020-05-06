@@ -107,8 +107,12 @@ open class ServerCommunicator: NSObject {
                         }
                        
                         self.wrapperRequestCounter += 1
-                        guard let uri = configuration.vastProperties?.adTagURI, let url = URL(string: uri) else { return }
-                        self.load(url: url, requestBody: nil, method: nil)
+                        if let uri = configuration.vastProperties?.adTagURI, let url = URL(string: uri) {
+                            self.load(url: url, requestBody: nil, method: nil)
+                        } else if let uri = configuration.vastProperties?.adTagURI, let encodedUri = uri.addingPercentEncodingForRFC3986(), let url = URL(string: encodedUri) {
+                            self.load(url: url, requestBody: nil, method: nil)
+                        }
+                        
                     } else {
                         self.wrapperRequestCounter = 0;
                         self.taskCompleted(success: true, error: nil)
