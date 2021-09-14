@@ -180,7 +180,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 }
 
 - (NSDictionary *)extForDevice {
-    NSMutableDictionary *ext = [[NSMutableDictionary alloc] initWithDictionary:@{@"phonename" : [LoopMeIdentityProvider phoneName], @"plugin" : @([self parameterForBatteryState]), @"chargelevel" : [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel], @"wifiname" : [self parameterForWiFiName], @"orientation" : [self parameterForOrientation], @"timezone" : [self parameterForTimeZone]}];
+    NSMutableDictionary *ext = [[NSMutableDictionary alloc] initWithDictionary:@{@"ifv" : [[UIDevice currentDevice] identifierForVendor].UUIDString, @"phonename" : [LoopMeIdentityProvider phoneName], @"plugin" : @([self parameterForBatteryState]), @"chargelevel" : [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel], @"wifiname" : [self parameterForWiFiName], @"orientation" : [self parameterForOrientation], @"timezone" : [self parameterForTimeZone]}];
     
     if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled) {
         [ext setObject:[[LoopMeAudioCheck shared] currentOutputs] forKey:@"audio_outputs"]; //

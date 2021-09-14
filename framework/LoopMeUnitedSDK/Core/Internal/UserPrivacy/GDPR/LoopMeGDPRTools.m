@@ -20,8 +20,6 @@ static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCStri
 
 @interface LoopMeGDPRTools() <LoopMeGDPRViewControllerDelegate>
 
-@property (nonatomic) NSString *userConsentString;
-
 @property (nonatomic, assign) BOOL userConsent;
 
 @property (nonatomic) LoopMeGDPRViewController *gdprVC;

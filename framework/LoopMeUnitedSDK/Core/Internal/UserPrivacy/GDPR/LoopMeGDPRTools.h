@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, LoopMeConsentType) {
 /**
  * User Consent string set by Consent Framework
  */
-@property (nonatomic, strong, readonly) NSString * _Nullable userConsentString;
+@property (nonatomic, strong) NSString * _Nullable userConsentString;
 
 /**
  * Show LoopMe GDPR window to ask user consent.

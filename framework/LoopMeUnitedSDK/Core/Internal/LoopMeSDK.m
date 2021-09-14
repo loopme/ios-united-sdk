@@ -70,6 +70,7 @@
             completionBlock(ready, error);
         }
     }];
+    
 }
 
 - (void)initSDKFromRootViewController:(UIViewController *)rootViewController

@@ -19,4 +19,8 @@
     [[LoopMeGDPRTools sharedInstance] setCustomUserConsent:consent];
 }
 
+- (void)setUserConsentString:(NSString *)consent {
+    [[LoopMeGDPRTools sharedInstance] setUserConsentString:consent];
+}
+
 @end
