@@ -8,6 +8,7 @@
 
 #import "LoopMeSDKConfiguration.h"
 #import "LoopMeGDPRTools.h"
+#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 @implementation LoopMeSDKConfiguration
 
@@ -21,6 +22,10 @@
 
 - (void)setUserConsentString:(NSString *)consent {
     [[LoopMeGDPRTools sharedInstance] setUserConsentString:consent];
+}
+
+- (void)setCCPA:(NSString *)ccpa{
+    [LoopMeCCPATools setCcpaString:ccpa];
 }
 
 @end

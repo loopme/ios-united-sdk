@@ -24,6 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setUserConsent:(BOOL)consent;
 
+/**
+    Set if you know GDPR user consent in string format
+ */
+- (void)setUserConsentString:(NSString *)consent;
+
+- (void)setCCPA:(NSString *)ccpa;
+
 @end
 
 NS_ASSUME_NONNULL_END
