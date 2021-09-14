@@ -7,7 +7,7 @@
 //
 
 #import "LMInstanceProvider.h"
-#import "LoopMeInterstitial.h"
+#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
 
 @implementation LMInstanceProvider
 

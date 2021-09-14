@@ -3,12 +3,12 @@
 //  Bridge
 //
 
-#import "MPInterstitialCustomEvent.h"
-#import "LoopMeInterstitial.h"
+#import "MPFullscreenAdAdapter.h"
+#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
 
-@interface MopubLoopMeInterstitialAdapter : MPInterstitialCustomEvent
+@interface MopubLoopMeInterstitialAdapter : MPFullscreenAdAdapter
 <
-    LoopMeInterstitialDelegate
+    MPThirdPartyFullscreenAdAdapter
 >
 
 @property (nonatomic, strong) LoopMeInterstitial *loopmeInterstitial;

@@ -4,12 +4,12 @@
 //
 
 
-#import "MPRewardedVideoCustomEvent.h"
-#import "LoopMeInterstitial.h"
+#import <MPFullscreenAdAdapter.h>
+#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
 
-@interface MopubLoopMeRewardedVideoAdapter : MPRewardedVideoCustomEvent
+@interface MopubLoopMeRewardedVideoAdapter : MPFullscreenAdAdapter
 <
-    LoopMeInterstitialDelegate
+    MPThirdPartyFullscreenAdAdapter
 >
 
 @property (nonatomic, strong) LoopMeInterstitial *loopmeInterstitial;

@@ -12,7 +12,7 @@
 
 @interface MopubLoopMeRewardedVideoAdapter ()
 
-@property (nonatomic) MPRewardedVideoReward *reward;
+@property (nonatomic) MPReward *reward;
 
 @end
 
@@ -20,10 +20,10 @@
 
 #pragma mark - Custom Event delegates
 
-- (void)requestRewardedVideoWithCustomEventInfo:(NSDictionary *)info {
+- (void)requestAdWithAdapterInfo:(NSDictionary *)info adMarkup:(NSString *)adMarkup {
     if (![info objectForKey:@"app_key"]) {
         // MPError with invalid error code, in fact wrong json format
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
+        [self.delegate fullscreenAdAdapter:self didFailToLoadAdWithError:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
         return;
     }
     
@@ -35,7 +35,7 @@
     
     if (!self.loopmeInterstitial) {
         // MPError with invalid error code, in fact old iOS version
-        [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
+        [self.delegate fullscreenAdAdapter:self didFailToLoadAdWithError:[NSError errorWithCode:MOPUBErrorAdapterInvalid]];
         return;
     }
     
@@ -44,16 +44,16 @@
     if ([info objectForKey:@"currency_type"]) {
         currencyType = [info objectForKey:@"currency_type"];
     } else {
-        currencyType = kMPRewardedVideoRewardCurrencyTypeUnspecified;
+        currencyType = kMPRewardCurrencyTypeUnspecified;
     }
     
     if ([info objectForKey:@"amount"]) {
         amount = [NSNumber numberWithDouble:[[info objectForKey:@"amount"] doubleValue]];
     } else {
-        amount = [NSNumber numberWithInteger:kMPRewardedVideoRewardCurrencyAmountUnspecified];
+        amount = [NSNumber numberWithInteger:kMPRewardCurrencyAmountUnspecified];
     }
     
-    _reward = [[MPRewardedVideoReward alloc] initWithCurrencyType:currencyType amount:amount];
+    _reward = [[MPReward alloc] initWithCurrencyType:currencyType amount:amount];
     [self.loopmeInterstitial loadAdWithTargeting:nil integrationType:@"mopub"];
 }
 
@@ -74,51 +74,52 @@
 
 - (void)loopMeInterstitialDidLoadAd:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial did load");
-    [self.delegate rewardedVideoDidLoadAdForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterDidLoadAd:self];
 }
 
 - (void)loopMeInterstitial:(LoopMeInterstitial *)interstitial didFailToLoadAdWithError:(NSError *)error {
     MPLogInfo(@"LoopMe interstitial did fail with error: %@", [error localizedDescription]);
-    [self.delegate rewardedVideoDidFailToLoadAdForCustomEvent:self error:error];
+    [self.delegate fullscreenAdAdapter:self didFailToLoadAdWithError:error];
 }
 
 - (void)loopMeInterstitialWillAppear:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial will present");
-    [self.delegate rewardedVideoWillAppearForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterAdWillAppear:self];
 }
 
 - (void)loopMeInterstitialDidAppear:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial did present");
-    [self.delegate rewardedVideoWillAppearForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterAdDidAppear:self];
 }
 
 - (void)loopMeInterstitialWillDisappear:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial will dismiss");
-    [self.delegate rewardedVideoWillDisappearForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterAdWillDisappear:self];
 }
 
 - (void)loopMeInterstitialDidDisappear:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial did dismiss");
-    [self.delegate rewardedVideoDidDisappearForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterAdDidDisappear:self];
 }
 
 - (void)loopMeInterstitialDidReceiveTap:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial was tapped");
-    [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterDidReceiveTap:self];
 }
 
 - (void)loopMeInterstitialWillLeaveApplication:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial will leave application");
-    [self.delegate rewardedVideoWillLeaveApplicationForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterWillLeaveApplication:self];
 }
 
 - (void)loopMeInterstitialDidExpire:(LoopMeInterstitial *)interstitial {
     MPLogInfo(@"LoopMe interstitial did expire");
-    [self.delegate rewardedVideoDidExpireForCustomEvent:self];
+    [self.delegate fullscreenAdAdapterDidExpire:self];
 }
 
 - (void)loopMeInterstitialVideoDidReachEnd:(LoopMeInterstitial *)interstitial{
     MPLogInfo(@"LoopMe interstitial video did reach end.");
-    [self.delegate rewardedVideoShouldRewardUserForCustomEvent:self reward:self.reward];
+    [self.delegate fullscreenAdAdapter:self willRewardUser:self.reward];
 }
+
 @end

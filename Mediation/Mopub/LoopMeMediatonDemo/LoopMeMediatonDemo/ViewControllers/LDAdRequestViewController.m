@@ -51,7 +51,7 @@ NSString *const kLDLoopMeAdCellIdentifier = @"LoopMeAdCellIdentifier";
     [self.tableView registerClass:[LDContentTableViewCell class]
            forCellReuseIdentifier:kLDContentCellIdentifier];
     
-    [self triggerAds];
+    //[self triggerAds];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -93,7 +93,7 @@ NSString *const kLDLoopMeAdCellIdentifier = @"LoopMeAdCellIdentifier";
     MPNativeAdRendererConfiguration *config = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
     config.supportedCustomEvents = @[@"MopubLoopMeNativeEvent"];
     
-    MPNativeAdRequest *adRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:@"04673feb805c44589fbe43380ba90f19" rendererConfigurations:@[config]];
+    MPNativeAdRequest *adRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:@"24534e1901884e398f1253216226017e" rendererConfigurations:@[config]];
     [adRequest startWithCompletionHandler:^(MPNativeAdRequest *request, MPNativeAd *response, NSError *error) {
         if (!error) {
             response.delegate = self;

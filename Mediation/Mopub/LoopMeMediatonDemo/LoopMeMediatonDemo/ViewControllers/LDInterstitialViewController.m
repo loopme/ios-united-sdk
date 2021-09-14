@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.interstitial = [MPInterstitialAdController interstitialAdControllerForAdUnitId:@"e0f79a7b925b424e9159e2e1d2a0777b"];
+    self.interstitial = [MPInterstitialAdController interstitialAdControllerForAdUnitId:@"725d995a3ce44472af81272e3b79cf54"];
     self.interstitial.delegate = self;
 }
 

@@ -17,105 +17,20 @@
 		01EDDB801B6B7B9D003BF9BE /* LDAdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDDB7F1B6B7B9D003BF9BE /* LDAdTableViewCell.m */; };
 		01EDDB8A1B6B82B8003BF9BE /* LDAdRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDDB891B6B82B8003BF9BE /* LDAdRequestViewController.m */; };
 		01EDDB901B6B8404003BF9BE /* LDTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDDB8F1B6B8404003BF9BE /* LDTableViewController.m */; };
-		0586F64B193CD032FE1FA0DD /* Pods_LoopMeMediatonDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3574024539DABA8361554 /* Pods_LoopMeMediatonDemo.framework */; };
 		472CEB1B1E9FC60500C0E86E /* MopubLoopMeInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 472CEB1A1E9FC60500C0E86E /* MopubLoopMeInterstitialAdapter.m */; };
 		472CEB1E1E9FC61E00C0E86E /* LDInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472CEB1D1E9FC61E00C0E86E /* LDInterstitialViewController.m */; };
-		477CDEB722DCC76000D909F9 /* libAvid-loopme-3.6.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDDFA22DCC76000D909F9 /* libAvid-loopme-3.6.8.a */; };
-		477CDEB822DCC76000D909F9 /* OMSDK_Loopme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDDFD22DCC76000D909F9 /* OMSDK_Loopme.framework */; };
-		477CDEB922DCC76000D909F9 /* LoopMeOMIDWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDDFE22DCC76000D909F9 /* LoopMeOMIDWrapper.m */; };
-		477CDEBA22DCC76000D909F9 /* LoopMeOMIDVideoEventsWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDDFF22DCC76000D909F9 /* LoopMeOMIDVideoEventsWrapper.m */; };
-		477CDEBB22DCC76000D909F9 /* LoopMeViewabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE0222DCC76000D909F9 /* LoopMeViewabilityManager.m */; };
-		477CDEBC22DCC76000D909F9 /* LOOMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDE0322DCC76000D909F9 /* LOOMoatMobileAppKit.framework */; };
-		477CDEBD22DCC76000D909F9 /* LoopMeIASWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE0422DCC76000D909F9 /* LoopMeIASWrapper.m */; };
-		477CDEBE22DCC76000D909F9 /* LoopMeVPAIDClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE0A22DCC76000D909F9 /* LoopMeVPAIDClient.m */; };
-		477CDEBF22DCC76000D909F9 /* LoopMeJSClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE0B22DCC76000D909F9 /* LoopMeJSClient.m */; };
-		477CDEC022DCC76000D909F9 /* LoopMeVideoClientNormal.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE0C22DCC76000D909F9 /* LoopMeVideoClientNormal.m */; };
-		477CDEC122DCC76000D909F9 /* LoopMeMRAIDClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE1122DCC76000D909F9 /* LoopMeMRAIDClient.m */; };
-		477CDEC222DCC76000D909F9 /* LoopMeVPAIDVideoClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE1222DCC76000D909F9 /* LoopMeVPAIDVideoClient.m */; };
-		477CDEC322DCC76000D909F9 /* LoopMeInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE1A22DCC76000D909F9 /* LoopMeInterstitial.m */; };
-		477CDEC422DCC76000D909F9 /* LoopMeInterstitialGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE1B22DCC76000D909F9 /* LoopMeInterstitialGeneral.m */; };
-		477CDEC522DCC76000D909F9 /* LoopMeDiscURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE1D22DCC76000D909F9 /* LoopMeDiscURLCache.m */; };
-		477CDEC622DCC76000D909F9 /* LoopMeTargeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2022DCC76000D909F9 /* LoopMeTargeting.m */; };
-		477CDEC722DCC76000D909F9 /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 477CDE2222DCC76000D909F9 /* LoopMeResources.bundle */; };
-		477CDEC822DCC76000D909F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 477CDE2322DCC76000D909F9 /* Assets.xcassets */; };
-		477CDEC922DCC76000D909F9 /* LoopMeVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2722DCC76000D909F9 /* LoopMeVideoManager.m */; };
-		477CDECA22DCC76000D909F9 /* LoopMeReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2822DCC76000D909F9 /* LoopMeReachability.m */; };
-		477CDECB22DCC76000D909F9 /* LoopMeVASTImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2922DCC76000D909F9 /* LoopMeVASTImageDownloader.m */; };
-		477CDECC22DCC76000D909F9 /* LoopMeAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2A22DCC76000D909F9 /* LoopMeAdManager.m */; };
-		477CDECD22DCC76000D909F9 /* LoopMeAdConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2C22DCC76000D909F9 /* LoopMeAdConfiguration.m */; };
-		477CDECE22DCC76000D909F9 /* LoopMeServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2D22DCC76000D909F9 /* LoopMeServerCommunicator.m */; };
-		477CDECF22DCC76000D909F9 /* LoopMeURLResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE2E22DCC76000D909F9 /* LoopMeURLResolver.m */; };
-		477CDED022DCC76000D909F9 /* LoopMeErrorEventSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE3622DCC76000D909F9 /* LoopMeErrorEventSender.m */; };
-		477CDED122DCC76000D909F9 /* LoopMeVASTEventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE3722DCC76000D909F9 /* LoopMeVASTEventTracker.m */; };
-		477CDED222DCC76000D909F9 /* LoopMeInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE3C22DCC76000D909F9 /* LoopMeInterstitialViewController.m */; };
-		477CDED322DCC76000D909F9 /* LoopMeBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE3F22DCC76000D909F9 /* LoopMeBrowserViewController.m */; };
-		477CDED422DCC76000D909F9 /* LoopMeGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE4322DCC76000D909F9 /* LoopMeGLProgram.m */; };
-		477CDED522DCC76000D909F9 /* LoopMe360ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE4522DCC76000D909F9 /* LoopMe360ViewController.m */; };
-		477CDED622DCC76000D909F9 /* LoopMeSDKConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE4722DCC76000D909F9 /* LoopMeSDKConfiguration.m */; };
-		477CDED722DCC76000D909F9 /* LoopMeAdDisplayControllerNormal.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE4C22DCC76000D909F9 /* LoopMeAdDisplayControllerNormal.m */; };
-		477CDED822DCC76000D909F9 /* LoopMeVPAIDAdDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE4D22DCC76000D909F9 /* LoopMeVPAIDAdDisplayController.m */; };
-		477CDED922DCC76000D909F9 /* LoopMeDestinationDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE4E22DCC76000D909F9 /* LoopMeDestinationDisplayController.m */; };
-		477CDEDA22DCC76000D909F9 /* LoopMeAdDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE5022DCC76000D909F9 /* LoopMeAdDisplayController.m */; };
-		477CDEDB22DCC76000D909F9 /* LoopMeORTBTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE5222DCC76000D909F9 /* LoopMeORTBTools.m */; };
-		477CDEDC22DCC76000D909F9 /* LoopMeServerURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE5322DCC76000D909F9 /* LoopMeServerURLBuilder.m */; };
-		477CDEDD22DCC76000D909F9 /* LoopMeActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE5922DCC76000D909F9 /* LoopMeActivityIndicatorView.m */; };
-		477CDEDE22DCC76000D909F9 /* LoopMeProgressOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE5C22DCC76000D909F9 /* LoopMeProgressOverlayView.m */; };
-		477CDEDF22DCC76000D909F9 /* LoopMeAdWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6022DCC76000D909F9 /* LoopMeAdWebView.m */; };
-		477CDEE022DCC76000D909F9 /* LoopMeVASTPlayerUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6122DCC76000D909F9 /* LoopMeVASTPlayerUIView.m */; };
-		477CDEE122DCC76000D909F9 /* LoopMeCancelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6222DCC76000D909F9 /* LoopMeCancelView.m */; };
-		477CDEE222DCC76000D909F9 /* LoopMeCloseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6322DCC76000D909F9 /* LoopMeCloseButton.m */; };
-		477CDEE322DCC76000D909F9 /* LoopMeBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6422DCC76000D909F9 /* LoopMeBackView.m */; };
-		477CDEE422DCC76000D909F9 /* LoopMeMinimizedAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6A22DCC76000D909F9 /* LoopMeMinimizedAdView.m */; };
-		477CDEE522DCC76000D909F9 /* LoopMeAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6B22DCC76000D909F9 /* LoopMeAdView.m */; };
-		477CDEE622DCC76000D909F9 /* LoopMeMaximizedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6D22DCC76000D909F9 /* LoopMeMaximizedViewController.m */; };
-		477CDEE722DCC76000D909F9 /* LoopMeSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE6F22DCC76000D909F9 /* LoopMeSDK.m */; };
-		477CDEE822DCC76000D909F9 /* LoopMeAnalyticsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE7122DCC76000D909F9 /* LoopMeAnalyticsProvider.m */; };
-		477CDEE922DCC76000D909F9 /* LoopMeError.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE7322DCC76000D909F9 /* LoopMeError.m */; };
-		477CDEEA22DCC76000D909F9 /* LoopMeVPAIDError.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE7722DCC76000D909F9 /* LoopMeVPAIDError.m */; };
-		477CDEEB22DCC76000D909F9 /* LoopMeAudioCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE7F22DCC76000D909F9 /* LoopMeAudioCheck.m */; };
-		477CDEEC22DCC76000D909F9 /* LoopMeGlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8022DCC76000D909F9 /* LoopMeGlobalSettings.m */; };
-		477CDEED22DCC76000D909F9 /* NSData+LoopMeAES128.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8322DCC76000D909F9 /* NSData+LoopMeAES128.m */; };
-		477CDEEE22DCC76000D909F9 /* NSString+Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8422DCC76000D909F9 /* NSString+Encryption.m */; };
-		477CDEEF22DCC76000D909F9 /* NSURL+LoopMeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8522DCC76000D909F9 /* NSURL+LoopMeAdditions.m */; };
-		477CDEF022DCC76000D909F9 /* NSDictionary+JSONPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8722DCC76000D909F9 /* NSDictionary+JSONPrint.m */; };
-		477CDEF122DCC76000D909F9 /* UIImage+LoopMeBinaryImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8A22DCC76000D909F9 /* UIImage+LoopMeBinaryImage.m */; };
-		477CDEF222DCC76000D909F9 /* LoopMeIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8C22DCC76000D909F9 /* LoopMeIdentityProvider.m */; };
-		477CDEF322DCC76000D909F9 /* LoopMeLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8D22DCC76000D909F9 /* LoopMeLogging.m */; };
-		477CDEF422DCC76000D909F9 /* LoopMeGeoLocationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE8E22DCC76000D909F9 /* LoopMeGeoLocationProvider.m */; };
-		477CDEF522DCC76000D909F9 /* LoopMeVPAIDConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9022DCC76000D909F9 /* LoopMeVPAIDConverter.m */; };
-		477CDEF622DCC76000D909F9 /* LoopMeVASTXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9622DCC76000D909F9 /* LoopMeVASTXMLParser.m */; };
-		477CDEF722DCC76000D909F9 /* LoopMeVASTAssetLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9722DCC76000D909F9 /* LoopMeVASTAssetLinks.m */; };
-		477CDEF822DCC76000D909F9 /* LoopMeVASTProgressEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9822DCC76000D909F9 /* LoopMeVASTProgressEvent.m */; };
-		477CDEF922DCC76000D909F9 /* LoopMeVASTMacroProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9922DCC76000D909F9 /* LoopMeVASTMacroProcessor.m */; };
-		477CDEFA22DCC76000D909F9 /* LoopMeSkipOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9A22DCC76000D909F9 /* LoopMeSkipOffset.m */; };
-		477CDEFB22DCC76000D909F9 /* LoopMeVASTTrackingLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9B22DCC76000D909F9 /* LoopMeVASTTrackingLinks.m */; };
-		477CDEFC22DCC76000D909F9 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDE9F22DCC76000D909F9 /* DDXMLElement.m */; };
-		477CDEFD22DCC76000D909F9 /* DDXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDEA322DCC76000D909F9 /* DDXMLElementAdditions.m */; };
-		477CDEFE22DCC76000D909F9 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDEA422DCC76000D909F9 /* DDXMLNode.m */; };
-		477CDEFF22DCC76000D909F9 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDEA522DCC76000D909F9 /* DDXMLDocument.m */; };
-		477CDF0022DCC76000D909F9 /* NSString+DDXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDEAB22DCC76000D909F9 /* NSString+DDXML.m */; };
-		477CDF0122DCC76000D909F9 /* LoopMeGDPRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDEB022DCC76000D909F9 /* LoopMeGDPRViewController.m */; };
-		477CDF0222DCC76000D909F9 /* LoopMeGDPRAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDEB322DCC76000D909F9 /* LoopMeGDPRAPIService.m */; };
-		477CDF0322DCC76000D909F9 /* LoopMeGDPRTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDEB522DCC76000D909F9 /* LoopMeGDPRTools.m */; };
 		477CDF0622DCCDC200D909F9 /* LMInstanceProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDF0522DCCDC100D909F9 /* LMInstanceProvider.m */; };
 		477CDF0922DDC5B300D909F9 /* LoopMeAdapterConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 477CDF0822DDC5B300D909F9 /* LoopMeAdapterConfiguration.m */; };
 		477CDF0B22DDF1E200D909F9 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF0A22DDF1E200D909F9 /* libxml2.tbd */; };
-		477CDF0D22DDFE5B00D909F9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF0C22DDFE5B00D909F9 /* CoreTelephony.framework */; };
-		477CDF0F22DDFE6500D909F9 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF0E22DDFE6500D909F9 /* AdSupport.framework */; };
-		477CDF1122DDFE6D00D909F9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1022DDFE6D00D909F9 /* WebKit.framework */; };
-		477CDF1322DDFE7500D909F9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1222DDFE7500D909F9 /* CoreGraphics.framework */; };
-		477CDF1522DDFE8100D909F9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1422DDFE8100D909F9 /* CoreLocation.framework */; };
-		477CDF1722DDFE8C00D909F9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1622DDFE8C00D909F9 /* CoreMedia.framework */; };
-		477CDF1922DDFE9300D909F9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1822DDFE9300D909F9 /* MediaPlayer.framework */; };
-		477CDF1B22DDFE9800D909F9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1A22DDFE9800D909F9 /* MessageUI.framework */; };
-		477CDF1D22DDFEA000D909F9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1C22DDFEA000D909F9 /* QuartzCore.framework */; };
-		477CDF1F22DDFEA900D909F9 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF1E22DDFEA900D909F9 /* SafariServices.framework */; };
-		477CDF2122DDFEAD00D909F9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF2022DDFEAD00D909F9 /* StoreKit.framework */; };
-		477CDF2322DDFEB100D909F9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 477CDF2222DDFEB100D909F9 /* SystemConfiguration.framework */; };
 		47A78E471D76FFF900937065 /* MopubLoopMeNativeAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A78E441D76FFF900937065 /* MopubLoopMeNativeAd.m */; };
 		47A78E481D76FFF900937065 /* MopubLoopMeNativeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A78E461D76FFF900937065 /* MopubLoopMeNativeEvent.m */; };
 		47C5689A1F1DECE10048B0CC /* MopubLoopMeRewardedVideoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C568991F1DECE10048B0CC /* MopubLoopMeRewardedVideoAdapter.m */; };
 		47C5689D1F1DEF020048B0CC /* LDRewardedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C5689C1F1DEF020048B0CC /* LDRewardedViewController.m */; };
+		81EB33C12696E1F90079CD86 /* LoopMeUnitedSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 81EB33BC2696E1A50079CD86 /* LoopMeUnitedSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		81EB33C22696E2080079CD86 /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81EB33BC2696E1A50079CD86 /* LoopMeUnitedSDK.framework */; };
+		81EB33C72696F2290079CD86 /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 81EB33C42696F2290079CD86 /* LoopMeResources.bundle */; };
+		81F9EB2C267E79DE0035ED56 /* Pods_LoopMeMediatonDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3574024539DABA8361554 /* Pods_LoopMeMediatonDemo.framework */; };
+		81F9EB2D267E79DE0035ED56 /* Pods_LoopMeMediatonDemo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3574024539DABA8361554 /* Pods_LoopMeMediatonDemo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +41,43 @@
 			remoteGlobalIDString = 014D6C751B690C3D006F3F62;
 			remoteInfo = LoopMeMediatonDemo;
 		};
+		81EB33BB2696E1A50079CD86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81EB33B52696E1A50079CD86 /* LoopMeUnitedSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 47714E2E22FAF9CE00DF0D55;
+			remoteInfo = LoopMeUnitedSDK;
+		};
+		81EB33BD2696E1A50079CD86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81EB33B52696E1A50079CD86 /* LoopMeUnitedSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 47714E3722FAF9CF00DF0D55;
+			remoteInfo = LoopMeUnitedSDKTests;
+		};
+		81EB33BF2696E1EA0079CD86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81EB33B52696E1A50079CD86 /* LoopMeUnitedSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 47714E2D22FAF9CE00DF0D55;
+			remoteInfo = LoopMeUnitedSDK;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		81F9EB28267A29880035ED56 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				81EB33C12696E1F90079CD86 /* LoopMeUnitedSDK.framework in Embed Frameworks */,
+				81F9EB2D267E79DE0035ED56 /* Pods_LoopMeMediatonDemo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		014D6C761B690C3D006F3F62 /* LoopMeMediatonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoopMeMediatonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,176 +103,6 @@
 		472CEB1A1E9FC60500C0E86E /* MopubLoopMeInterstitialAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MopubLoopMeInterstitialAdapter.m; sourceTree = "<group>"; };
 		472CEB1C1E9FC61E00C0E86E /* LDInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDInterstitialViewController.h; sourceTree = "<group>"; };
 		472CEB1D1E9FC61E00C0E86E /* LDInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDInterstitialViewController.m; sourceTree = "<group>"; };
-		477CDDEC22DCC76000D909F9 /* LoopMeTargeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeTargeting.h; sourceTree = "<group>"; };
-		477CDDEF22DCC76000D909F9 /* LoopMe_AbstractAvidAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AbstractAvidAdSession.h; sourceTree = "<group>"; };
-		477CDDF022DCC76000D909F9 /* LoopMe_AvidDeferredAdSessionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidDeferredAdSessionListener.h; sourceTree = "<group>"; };
-		477CDDF122DCC76000D909F9 /* LoopMe_AvidAdSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidAdSessionManager.h; sourceTree = "<group>"; };
-		477CDDF222DCC76000D909F9 /* LoopMe_Avid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_Avid.h; sourceTree = "<group>"; };
-		477CDDF322DCC76000D909F9 /* LoopMe_AvidDisplayAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidDisplayAdSession.h; sourceTree = "<group>"; };
-		477CDDF422DCC76000D909F9 /* LoopMe_AvidVideoAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidVideoAdSession.h; sourceTree = "<group>"; };
-		477CDDF522DCC76000D909F9 /* LoopMe_AvidVideoPlaybackListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidVideoPlaybackListener.h; sourceTree = "<group>"; };
-		477CDDF622DCC76000D909F9 /* LoopMe_AvidManagedVideoAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidManagedVideoAdSession.h; sourceTree = "<group>"; };
-		477CDDF722DCC76000D909F9 /* LoopMe_ExternalAvidAdSessionContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_ExternalAvidAdSessionContext.h; sourceTree = "<group>"; };
-		477CDDF822DCC76000D909F9 /* LoopMe_AbstractAvidManagedAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AbstractAvidManagedAdSession.h; sourceTree = "<group>"; };
-		477CDDF922DCC76000D909F9 /* LoopMe_AvidManagedDisplayAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidManagedDisplayAdSession.h; sourceTree = "<group>"; };
-		477CDDFA22DCC76000D909F9 /* libAvid-loopme-3.6.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libAvid-loopme-3.6.8.a"; sourceTree = "<group>"; };
-		477CDDFB22DCC76000D909F9 /* LoopMeIASWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeIASWrapper.h; sourceTree = "<group>"; };
-		477CDDFD22DCC76000D909F9 /* OMSDK_Loopme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OMSDK_Loopme.framework; sourceTree = "<group>"; };
-		477CDDFE22DCC76000D909F9 /* LoopMeOMIDWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeOMIDWrapper.m; sourceTree = "<group>"; };
-		477CDDFF22DCC76000D909F9 /* LoopMeOMIDVideoEventsWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeOMIDVideoEventsWrapper.m; sourceTree = "<group>"; };
-		477CDE0022DCC76000D909F9 /* LoopMeOMIDWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOMIDWrapper.h; sourceTree = "<group>"; };
-		477CDE0122DCC76000D909F9 /* LoopMeOMIDVideoEventsWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOMIDVideoEventsWrapper.h; sourceTree = "<group>"; };
-		477CDE0222DCC76000D909F9 /* LoopMeViewabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeViewabilityManager.m; sourceTree = "<group>"; };
-		477CDE0322DCC76000D909F9 /* LOOMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LOOMoatMobileAppKit.framework; sourceTree = "<group>"; };
-		477CDE0422DCC76000D909F9 /* LoopMeIASWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeIASWrapper.m; sourceTree = "<group>"; };
-		477CDE0522DCC76000D909F9 /* LoopMeViewabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeViewabilityManager.h; sourceTree = "<group>"; };
-		477CDE0622DCC76000D909F9 /* LoopMeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdView.h; sourceTree = "<group>"; };
-		477CDE0822DCC76000D909F9 /* LoopMeSDKConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeSDKConfiguration.h; sourceTree = "<group>"; };
-		477CDE0A22DCC76000D909F9 /* LoopMeVPAIDClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVPAIDClient.m; sourceTree = "<group>"; };
-		477CDE0B22DCC76000D909F9 /* LoopMeJSClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeJSClient.m; sourceTree = "<group>"; };
-		477CDE0C22DCC76000D909F9 /* LoopMeVideoClientNormal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVideoClientNormal.m; sourceTree = "<group>"; };
-		477CDE0D22DCC76000D909F9 /* LoopMeVPAIDVideoClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDVideoClient.h; sourceTree = "<group>"; };
-		477CDE0E22DCC76000D909F9 /* LoopMeMRAIDClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeMRAIDClient.h; sourceTree = "<group>"; };
-		477CDE0F22DCC76000D909F9 /* LoopMeJSClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeJSClient.h; sourceTree = "<group>"; };
-		477CDE1022DCC76000D909F9 /* LoopMeVPAIDClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDClient.h; sourceTree = "<group>"; };
-		477CDE1122DCC76000D909F9 /* LoopMeMRAIDClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeMRAIDClient.m; sourceTree = "<group>"; };
-		477CDE1222DCC76000D909F9 /* LoopMeVPAIDVideoClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVPAIDVideoClient.m; sourceTree = "<group>"; };
-		477CDE1322DCC76000D909F9 /* LoopMeVideoClientNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVideoClientNormal.h; sourceTree = "<group>"; };
-		477CDE1522DCC76000D909F9 /* LoopMeVideoCommunicatorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVideoCommunicatorProtocol.h; sourceTree = "<group>"; };
-		477CDE1622DCC76000D909F9 /* LoopMeJSCommunicatorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeJSCommunicatorProtocol.h; sourceTree = "<group>"; };
-		477CDE1722DCC76000D909F9 /* LoopMeViewabilityProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeViewabilityProtocol.h; sourceTree = "<group>"; };
-		477CDE1922DCC76000D909F9 /* LoopMeInterstitialGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeInterstitialGeneral.h; sourceTree = "<group>"; };
-		477CDE1A22DCC76000D909F9 /* LoopMeInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeInterstitial.m; sourceTree = "<group>"; };
-		477CDE1B22DCC76000D909F9 /* LoopMeInterstitialGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeInterstitialGeneral.m; sourceTree = "<group>"; };
-		477CDE1D22DCC76000D909F9 /* LoopMeDiscURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeDiscURLCache.m; sourceTree = "<group>"; };
-		477CDE1E22DCC76000D909F9 /* LoopMeDiscURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeDiscURLCache.h; sourceTree = "<group>"; };
-		477CDE2022DCC76000D909F9 /* LoopMeTargeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeTargeting.m; sourceTree = "<group>"; };
-		477CDE2222DCC76000D909F9 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
-		477CDE2322DCC76000D909F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		477CDE2522DCC76000D909F9 /* LoopMeServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeServerCommunicator.h; sourceTree = "<group>"; };
-		477CDE2622DCC76000D909F9 /* LoopMeAdConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdConfiguration.h; sourceTree = "<group>"; };
-		477CDE2722DCC76000D909F9 /* LoopMeVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVideoManager.m; sourceTree = "<group>"; };
-		477CDE2822DCC76000D909F9 /* LoopMeReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeReachability.m; sourceTree = "<group>"; };
-		477CDE2922DCC76000D909F9 /* LoopMeVASTImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTImageDownloader.m; sourceTree = "<group>"; };
-		477CDE2A22DCC76000D909F9 /* LoopMeAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdManager.m; sourceTree = "<group>"; };
-		477CDE2B22DCC76000D909F9 /* LoopMeURLResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeURLResolver.h; sourceTree = "<group>"; };
-		477CDE2C22DCC76000D909F9 /* LoopMeAdConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdConfiguration.m; sourceTree = "<group>"; };
-		477CDE2D22DCC76000D909F9 /* LoopMeServerCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeServerCommunicator.m; sourceTree = "<group>"; };
-		477CDE2E22DCC76000D909F9 /* LoopMeURLResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeURLResolver.m; sourceTree = "<group>"; };
-		477CDE2F22DCC76000D909F9 /* LoopMeVASTImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTImageDownloader.h; sourceTree = "<group>"; };
-		477CDE3022DCC76000D909F9 /* LoopMeAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdManager.h; sourceTree = "<group>"; };
-		477CDE3122DCC76000D909F9 /* LoopMeReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeReachability.h; sourceTree = "<group>"; };
-		477CDE3222DCC76000D909F9 /* LoopMeVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVideoManager.h; sourceTree = "<group>"; };
-		477CDE3322DCC76000D909F9 /* LoopMeSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeSDK.h; sourceTree = "<group>"; };
-		477CDE3522DCC76000D909F9 /* LoopMeVASTEventTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTEventTracker.h; sourceTree = "<group>"; };
-		477CDE3622DCC76000D909F9 /* LoopMeErrorEventSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeErrorEventSender.m; sourceTree = "<group>"; };
-		477CDE3722DCC76000D909F9 /* LoopMeVASTEventTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTEventTracker.m; sourceTree = "<group>"; };
-		477CDE3822DCC76000D909F9 /* LoopMeErrorEventSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeErrorEventSender.h; sourceTree = "<group>"; };
-		477CDE3B22DCC76000D909F9 /* LoopMeInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeInterstitialViewController.h; sourceTree = "<group>"; };
-		477CDE3C22DCC76000D909F9 /* LoopMeInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeInterstitialViewController.m; sourceTree = "<group>"; };
-		477CDE3E22DCC76000D909F9 /* LoopMeBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeBrowserViewController.h; sourceTree = "<group>"; };
-		477CDE3F22DCC76000D909F9 /* LoopMeBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeBrowserViewController.m; sourceTree = "<group>"; };
-		477CDE4122DCC76000D909F9 /* LoopMe360ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe360ViewController.h; sourceTree = "<group>"; };
-		477CDE4322DCC76000D909F9 /* LoopMeGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGLProgram.m; sourceTree = "<group>"; };
-		477CDE4422DCC76000D909F9 /* LoopMeGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGLProgram.h; sourceTree = "<group>"; };
-		477CDE4522DCC76000D909F9 /* LoopMe360ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMe360ViewController.m; sourceTree = "<group>"; };
-		477CDE4622DCC76000D909F9 /* LoopMeOrientationViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOrientationViewControllerProtocol.h; sourceTree = "<group>"; };
-		477CDE4722DCC76000D909F9 /* LoopMeSDKConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeSDKConfiguration.m; sourceTree = "<group>"; };
-		477CDE4922DCC76000D909F9 /* LoopMeDestinationDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeDestinationDisplayController.h; sourceTree = "<group>"; };
-		477CDE4A22DCC76000D909F9 /* LoopMeVPAIDAdDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDAdDisplayController.h; sourceTree = "<group>"; };
-		477CDE4B22DCC76000D909F9 /* LoopMeAdDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdDisplayController.h; sourceTree = "<group>"; };
-		477CDE4C22DCC76000D909F9 /* LoopMeAdDisplayControllerNormal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdDisplayControllerNormal.m; sourceTree = "<group>"; };
-		477CDE4D22DCC76000D909F9 /* LoopMeVPAIDAdDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVPAIDAdDisplayController.m; sourceTree = "<group>"; };
-		477CDE4E22DCC76000D909F9 /* LoopMeDestinationDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeDestinationDisplayController.m; sourceTree = "<group>"; };
-		477CDE4F22DCC76000D909F9 /* LoopMeAdDisplayControllerNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdDisplayControllerNormal.h; sourceTree = "<group>"; };
-		477CDE5022DCC76000D909F9 /* LoopMeAdDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdDisplayController.m; sourceTree = "<group>"; };
-		477CDE5222DCC76000D909F9 /* LoopMeORTBTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeORTBTools.m; sourceTree = "<group>"; };
-		477CDE5322DCC76000D909F9 /* LoopMeServerURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeServerURLBuilder.m; sourceTree = "<group>"; };
-		477CDE5422DCC76000D909F9 /* LoopMeORTBTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeORTBTools.h; sourceTree = "<group>"; };
-		477CDE5522DCC76000D909F9 /* LoopMeServerURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeServerURLBuilder.h; sourceTree = "<group>"; };
-		477CDE5722DCC76000D909F9 /* LoopMeCloseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeCloseButton.h; sourceTree = "<group>"; };
-		477CDE5922DCC76000D909F9 /* LoopMeActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeActivityIndicatorView.m; sourceTree = "<group>"; };
-		477CDE5A22DCC76000D909F9 /* LoopMeProgressOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeProgressOverlayView.h; sourceTree = "<group>"; };
-		477CDE5B22DCC76000D909F9 /* LoopMeActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeActivityIndicatorView.h; sourceTree = "<group>"; };
-		477CDE5C22DCC76000D909F9 /* LoopMeProgressOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeProgressOverlayView.m; sourceTree = "<group>"; };
-		477CDE5D22DCC76000D909F9 /* LoopMeBackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeBackView.h; sourceTree = "<group>"; };
-		477CDE5F22DCC76000D909F9 /* LoopMeAdWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdWebView.h; sourceTree = "<group>"; };
-		477CDE6022DCC76000D909F9 /* LoopMeAdWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdWebView.m; sourceTree = "<group>"; };
-		477CDE6122DCC76000D909F9 /* LoopMeVASTPlayerUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTPlayerUIView.m; sourceTree = "<group>"; };
-		477CDE6222DCC76000D909F9 /* LoopMeCancelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeCancelView.m; sourceTree = "<group>"; };
-		477CDE6322DCC76000D909F9 /* LoopMeCloseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeCloseButton.m; sourceTree = "<group>"; };
-		477CDE6422DCC76000D909F9 /* LoopMeBackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeBackView.m; sourceTree = "<group>"; };
-		477CDE6522DCC76000D909F9 /* LoopMeVASTPlayerUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTPlayerUIView.h; sourceTree = "<group>"; };
-		477CDE6622DCC76000D909F9 /* LoopMeCancelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeCancelView.h; sourceTree = "<group>"; };
-		477CDE6922DCC76000D909F9 /* LoopMeMinimizedAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeMinimizedAdView.h; sourceTree = "<group>"; };
-		477CDE6A22DCC76000D909F9 /* LoopMeMinimizedAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeMinimizedAdView.m; sourceTree = "<group>"; };
-		477CDE6B22DCC76000D909F9 /* LoopMeAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdView.m; sourceTree = "<group>"; };
-		477CDE6D22DCC76000D909F9 /* LoopMeMaximizedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeMaximizedViewController.m; sourceTree = "<group>"; };
-		477CDE6E22DCC76000D909F9 /* LoopMeMaximizedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeMaximizedViewController.h; sourceTree = "<group>"; };
-		477CDE6F22DCC76000D909F9 /* LoopMeSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeSDK.m; sourceTree = "<group>"; };
-		477CDE7122DCC76000D909F9 /* LoopMeAnalyticsProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAnalyticsProvider.m; sourceTree = "<group>"; };
-		477CDE7222DCC76000D909F9 /* LoopMeAudioCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAudioCheck.h; sourceTree = "<group>"; };
-		477CDE7322DCC76000D909F9 /* LoopMeError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeError.m; sourceTree = "<group>"; };
-		477CDE7422DCC76000D909F9 /* LoopMeAdType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdType.h; sourceTree = "<group>"; };
-		477CDE7522DCC76000D909F9 /* LoopMeVPAIDDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDDefinitions.h; sourceTree = "<group>"; };
-		477CDE7622DCC76000D909F9 /* LoopMeGlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGlobalSettings.h; sourceTree = "<group>"; };
-		477CDE7722DCC76000D909F9 /* LoopMeVPAIDError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVPAIDError.m; sourceTree = "<group>"; };
-		477CDE7822DCC76000D909F9 /* LoopMeVPAIDConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDConverter.h; sourceTree = "<group>"; };
-		477CDE7922DCC76000D909F9 /* LoopMeGeoLocationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGeoLocationProvider.h; sourceTree = "<group>"; };
-		477CDE7A22DCC76000D909F9 /* LoopMeLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeLogging.h; sourceTree = "<group>"; };
-		477CDE7B22DCC76000D909F9 /* LoopMeIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeIdentityProvider.h; sourceTree = "<group>"; };
-		477CDE7C22DCC76000D909F9 /* LoopMeDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeDefinitions.h; sourceTree = "<group>"; };
-		477CDE7D22DCC76000D909F9 /* LoopMeAnalyticsProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAnalyticsProvider.h; sourceTree = "<group>"; };
-		477CDE7E22DCC76000D909F9 /* LoopMeError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeError.h; sourceTree = "<group>"; };
-		477CDE7F22DCC76000D909F9 /* LoopMeAudioCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAudioCheck.m; sourceTree = "<group>"; };
-		477CDE8022DCC76000D909F9 /* LoopMeGlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGlobalSettings.m; sourceTree = "<group>"; };
-		477CDE8222DCC76000D909F9 /* NSDictionary+JSONPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSONPrint.h"; sourceTree = "<group>"; };
-		477CDE8322DCC76000D909F9 /* NSData+LoopMeAES128.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+LoopMeAES128.m"; sourceTree = "<group>"; };
-		477CDE8422DCC76000D909F9 /* NSString+Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encryption.m"; sourceTree = "<group>"; };
-		477CDE8522DCC76000D909F9 /* NSURL+LoopMeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+LoopMeAdditions.m"; sourceTree = "<group>"; };
-		477CDE8622DCC76000D909F9 /* UIImage+LoopMeBinaryImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LoopMeBinaryImage.h"; sourceTree = "<group>"; };
-		477CDE8722DCC76000D909F9 /* NSDictionary+JSONPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSONPrint.m"; sourceTree = "<group>"; };
-		477CDE8822DCC76000D909F9 /* NSString+Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Encryption.h"; sourceTree = "<group>"; };
-		477CDE8922DCC76000D909F9 /* NSData+LoopMeAES128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+LoopMeAES128.h"; sourceTree = "<group>"; };
-		477CDE8A22DCC76000D909F9 /* UIImage+LoopMeBinaryImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LoopMeBinaryImage.m"; sourceTree = "<group>"; };
-		477CDE8B22DCC76000D909F9 /* NSURL+LoopMeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+LoopMeAdditions.h"; sourceTree = "<group>"; };
-		477CDE8C22DCC76000D909F9 /* LoopMeIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeIdentityProvider.m; sourceTree = "<group>"; };
-		477CDE8D22DCC76000D909F9 /* LoopMeLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeLogging.m; sourceTree = "<group>"; };
-		477CDE8E22DCC76000D909F9 /* LoopMeGeoLocationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGeoLocationProvider.m; sourceTree = "<group>"; };
-		477CDE8F22DCC76000D909F9 /* LoopMeVPAIDError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDError.h; sourceTree = "<group>"; };
-		477CDE9022DCC76000D909F9 /* LoopMeVPAIDConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVPAIDConverter.m; sourceTree = "<group>"; };
-		477CDE9222DCC76000D909F9 /* LoopMeSkipOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeSkipOffset.h; sourceTree = "<group>"; };
-		477CDE9322DCC76000D909F9 /* LoopMeVASTTrackingLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTTrackingLinks.h; sourceTree = "<group>"; };
-		477CDE9422DCC76000D909F9 /* LoopMeVASTMacroProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTMacroProcessor.h; sourceTree = "<group>"; };
-		477CDE9522DCC76000D909F9 /* LoopMeVASTProgressEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTProgressEvent.h; sourceTree = "<group>"; };
-		477CDE9622DCC76000D909F9 /* LoopMeVASTXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTXMLParser.m; sourceTree = "<group>"; };
-		477CDE9722DCC76000D909F9 /* LoopMeVASTAssetLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTAssetLinks.m; sourceTree = "<group>"; };
-		477CDE9822DCC76000D909F9 /* LoopMeVASTProgressEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTProgressEvent.m; sourceTree = "<group>"; };
-		477CDE9922DCC76000D909F9 /* LoopMeVASTMacroProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTMacroProcessor.m; sourceTree = "<group>"; };
-		477CDE9A22DCC76000D909F9 /* LoopMeSkipOffset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeSkipOffset.m; sourceTree = "<group>"; };
-		477CDE9B22DCC76000D909F9 /* LoopMeVASTTrackingLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTTrackingLinks.m; sourceTree = "<group>"; };
-		477CDE9D22DCC76000D909F9 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
-		477CDE9E22DCC76000D909F9 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
-		477CDE9F22DCC76000D909F9 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
-		477CDEA022DCC76000D909F9 /* KissXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KissXML.h; sourceTree = "<group>"; };
-		477CDEA222DCC76000D909F9 /* DDXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElementAdditions.h; sourceTree = "<group>"; };
-		477CDEA322DCC76000D909F9 /* DDXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElementAdditions.m; sourceTree = "<group>"; };
-		477CDEA422DCC76000D909F9 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
-		477CDEA522DCC76000D909F9 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
-		477CDEA722DCC76000D909F9 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
-		477CDEA822DCC76000D909F9 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
-		477CDEAA22DCC76000D909F9 /* NSString+DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDXML.h"; sourceTree = "<group>"; };
-		477CDEAB22DCC76000D909F9 /* NSString+DDXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDXML.m"; sourceTree = "<group>"; };
-		477CDEAC22DCC76000D909F9 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
-		477CDEAD22DCC76000D909F9 /* LoopMeVASTXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTXMLParser.h; sourceTree = "<group>"; };
-		477CDEAE22DCC76000D909F9 /* LoopMeVASTAssetLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTAssetLinks.h; sourceTree = "<group>"; };
-		477CDEB022DCC76000D909F9 /* LoopMeGDPRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRViewController.m; sourceTree = "<group>"; };
-		477CDEB122DCC76000D909F9 /* LoopMeGDPRAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRAPIService.h; sourceTree = "<group>"; };
-		477CDEB222DCC76000D909F9 /* LoopMeGDPRTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRTools.h; sourceTree = "<group>"; };
-		477CDEB322DCC76000D909F9 /* LoopMeGDPRAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRAPIService.m; sourceTree = "<group>"; };
-		477CDEB422DCC76000D909F9 /* LoopMeGDPRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRViewController.h; sourceTree = "<group>"; };
-		477CDEB522DCC76000D909F9 /* LoopMeGDPRTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRTools.m; sourceTree = "<group>"; };
-		477CDEB622DCC76000D909F9 /* LoopMeInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeInterstitial.h; sourceTree = "<group>"; };
 		477CDF0422DCCDC100D909F9 /* LMInstanceProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMInstanceProvider.h; sourceTree = "<group>"; };
 		477CDF0522DCCDC100D909F9 /* LMInstanceProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMInstanceProvider.m; sourceTree = "<group>"; };
 		477CDF0722DDC5B300D909F9 /* LoopMeAdapterConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoopMeAdapterConfiguration.h; sourceTree = "<group>"; };
@@ -348,6 +129,8 @@
 		47C5689B1F1DEF020048B0CC /* LDRewardedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDRewardedViewController.h; sourceTree = "<group>"; };
 		47C5689C1F1DEF020048B0CC /* LDRewardedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDRewardedViewController.m; sourceTree = "<group>"; };
 		61A8E52A2DF5DB92180A3DFD /* Pods-LoopMeMediatonDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoopMeMediatonDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoopMeMediatonDemo/Pods-LoopMeMediatonDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		81EB33B52696E1A50079CD86 /* LoopMeUnitedSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LoopMeUnitedSDK.xcodeproj; path = "../../../../sdk-ios/loopme-ios-sdk/framework/LoopMeUnitedSDK.xcodeproj"; sourceTree = "<group>"; };
+		81EB33C42696F2290079CD86 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
 		92B881A40A25E4ACFF4AF5B2 /* Pods-LoopMeMediatonDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoopMeMediatonDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoopMeMediatonDemo/Pods-LoopMeMediatonDemo.release.xcconfig"; sourceTree = "<group>"; };
 		BBB3574024539DABA8361554 /* Pods_LoopMeMediatonDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoopMeMediatonDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -357,23 +140,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				477CDF2322DDFEB100D909F9 /* SystemConfiguration.framework in Frameworks */,
-				477CDF2122DDFEAD00D909F9 /* StoreKit.framework in Frameworks */,
-				477CDF1F22DDFEA900D909F9 /* SafariServices.framework in Frameworks */,
-				477CDF1D22DDFEA000D909F9 /* QuartzCore.framework in Frameworks */,
-				477CDF1B22DDFE9800D909F9 /* MessageUI.framework in Frameworks */,
-				477CDF1922DDFE9300D909F9 /* MediaPlayer.framework in Frameworks */,
-				477CDF1722DDFE8C00D909F9 /* CoreMedia.framework in Frameworks */,
-				477CDF1522DDFE8100D909F9 /* CoreLocation.framework in Frameworks */,
-				477CDF1322DDFE7500D909F9 /* CoreGraphics.framework in Frameworks */,
-				477CDF1122DDFE6D00D909F9 /* WebKit.framework in Frameworks */,
-				477CDF0F22DDFE6500D909F9 /* AdSupport.framework in Frameworks */,
-				477CDF0D22DDFE5B00D909F9 /* CoreTelephony.framework in Frameworks */,
+				81EB33C22696E2080079CD86 /* LoopMeUnitedSDK.framework in Frameworks */,
+				81F9EB2C267E79DE0035ED56 /* Pods_LoopMeMediatonDemo.framework in Frameworks */,
 				477CDF0B22DDF1E200D909F9 /* libxml2.tbd in Frameworks */,
-				477CDEBC22DCC76000D909F9 /* LOOMoatMobileAppKit.framework in Frameworks */,
-				477CDEB822DCC76000D909F9 /* OMSDK_Loopme.framework in Frameworks */,
-				477CDEB722DCC76000D909F9 /* libAvid-loopme-3.6.8.a in Frameworks */,
-				0586F64B193CD032FE1FA0DD /* Pods_LoopMeMediatonDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,8 +159,8 @@
 		014D6C6D1B690C3D006F3F62 = {
 			isa = PBXGroup;
 			children = (
+				81EB33C42696F2290079CD86 /* LoopMeResources.bundle */,
 				477CDF2422DE069E00D909F9 /* LoopMe */,
-				477CDDEB22DCC76000D909F9 /* LoopMeSDK Sources */,
 				014D6C781B690C3D006F3F62 /* LoopMeMediatonDemo */,
 				014D6C921B690C3D006F3F62 /* LoopMeMediatonDemoTests */,
 				014D6C771B690C3D006F3F62 /* Products */,
@@ -479,6 +248,7 @@
 		2F4DA869365EEEE6E95249D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				81EB33B52696E1A50079CD86 /* LoopMeUnitedSDK.xcodeproj */,
 				477CDF2222DDFEB100D909F9 /* SystemConfiguration.framework */,
 				477CDF2022DDFEAD00D909F9 /* StoreKit.framework */,
 				477CDF1E22DDFEA900D909F9 /* SafariServices.framework */,
@@ -506,448 +276,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		477CDDEB22DCC76000D909F9 /* LoopMeSDK Sources */ = {
-			isa = PBXGroup;
-			children = (
-				477CDDEC22DCC76000D909F9 /* LoopMeTargeting.h */,
-				477CDDED22DCC76000D909F9 /* Viewability */,
-				477CDE0622DCC76000D909F9 /* LoopMeAdView.h */,
-				477CDE0722DCC76000D909F9 /* Internal */,
-				477CDEAF22DCC76000D909F9 /* GDPR */,
-				477CDEB622DCC76000D909F9 /* LoopMeInterstitial.h */,
-			);
-			name = "LoopMeSDK Sources";
-			path = "../../../LoopMeSDK Sources";
-			sourceTree = "<group>";
-		};
-		477CDDED22DCC76000D909F9 /* Viewability */ = {
-			isa = PBXGroup;
-			children = (
-				477CDDEE22DCC76000D909F9 /* IAS */,
-				477CDDFB22DCC76000D909F9 /* LoopMeIASWrapper.h */,
-				477CDDFC22DCC76000D909F9 /* OMSDK */,
-				477CDE0222DCC76000D909F9 /* LoopMeViewabilityManager.m */,
-				477CDE0322DCC76000D909F9 /* LOOMoatMobileAppKit.framework */,
-				477CDE0422DCC76000D909F9 /* LoopMeIASWrapper.m */,
-				477CDE0522DCC76000D909F9 /* LoopMeViewabilityManager.h */,
-			);
-			path = Viewability;
-			sourceTree = "<group>";
-		};
-		477CDDEE22DCC76000D909F9 /* IAS */ = {
-			isa = PBXGroup;
-			children = (
-				477CDDEF22DCC76000D909F9 /* LoopMe_AbstractAvidAdSession.h */,
-				477CDDF022DCC76000D909F9 /* LoopMe_AvidDeferredAdSessionListener.h */,
-				477CDDF122DCC76000D909F9 /* LoopMe_AvidAdSessionManager.h */,
-				477CDDF222DCC76000D909F9 /* LoopMe_Avid.h */,
-				477CDDF322DCC76000D909F9 /* LoopMe_AvidDisplayAdSession.h */,
-				477CDDF422DCC76000D909F9 /* LoopMe_AvidVideoAdSession.h */,
-				477CDDF522DCC76000D909F9 /* LoopMe_AvidVideoPlaybackListener.h */,
-				477CDDF622DCC76000D909F9 /* LoopMe_AvidManagedVideoAdSession.h */,
-				477CDDF722DCC76000D909F9 /* LoopMe_ExternalAvidAdSessionContext.h */,
-				477CDDF822DCC76000D909F9 /* LoopMe_AbstractAvidManagedAdSession.h */,
-				477CDDF922DCC76000D909F9 /* LoopMe_AvidManagedDisplayAdSession.h */,
-				477CDDFA22DCC76000D909F9 /* libAvid-loopme-3.6.8.a */,
-			);
-			path = IAS;
-			sourceTree = "<group>";
-		};
-		477CDDFC22DCC76000D909F9 /* OMSDK */ = {
-			isa = PBXGroup;
-			children = (
-				477CDDFD22DCC76000D909F9 /* OMSDK_Loopme.framework */,
-				477CDDFE22DCC76000D909F9 /* LoopMeOMIDWrapper.m */,
-				477CDDFF22DCC76000D909F9 /* LoopMeOMIDVideoEventsWrapper.m */,
-				477CDE0022DCC76000D909F9 /* LoopMeOMIDWrapper.h */,
-				477CDE0122DCC76000D909F9 /* LoopMeOMIDVideoEventsWrapper.h */,
-			);
-			path = OMSDK;
-			sourceTree = "<group>";
-		};
-		477CDE0722DCC76000D909F9 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE0822DCC76000D909F9 /* LoopMeSDKConfiguration.h */,
-				477CDE0922DCC76000D909F9 /* Clients */,
-				477CDE1822DCC76000D909F9 /* Interstitial */,
-				477CDE1C22DCC76000D909F9 /* Cache */,
-				477CDE1F22DCC76000D909F9 /* Targeting */,
-				477CDE2122DCC76000D909F9 /* Resources */,
-				477CDE2422DCC76000D909F9 /* Network */,
-				477CDE3322DCC76000D909F9 /* LoopMeSDK.h */,
-				477CDE3422DCC76000D909F9 /* Senders */,
-				477CDE3922DCC76000D909F9 /* ViewControllers */,
-				477CDE4722DCC76000D909F9 /* LoopMeSDKConfiguration.m */,
-				477CDE4822DCC76000D909F9 /* Controllers */,
-				477CDE5122DCC76000D909F9 /* Builder */,
-				477CDE5622DCC76000D909F9 /* Views */,
-				477CDE6722DCC76000D909F9 /* AdView */,
-				477CDE6F22DCC76000D909F9 /* LoopMeSDK.m */,
-				477CDE7022DCC76000D909F9 /* Utility */,
-				477CDE9122DCC76000D909F9 /* VAST */,
-			);
-			path = Internal;
-			sourceTree = "<group>";
-		};
-		477CDE0922DCC76000D909F9 /* Clients */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE0A22DCC76000D909F9 /* LoopMeVPAIDClient.m */,
-				477CDE0B22DCC76000D909F9 /* LoopMeJSClient.m */,
-				477CDE0C22DCC76000D909F9 /* LoopMeVideoClientNormal.m */,
-				477CDE0D22DCC76000D909F9 /* LoopMeVPAIDVideoClient.h */,
-				477CDE0E22DCC76000D909F9 /* LoopMeMRAIDClient.h */,
-				477CDE0F22DCC76000D909F9 /* LoopMeJSClient.h */,
-				477CDE1022DCC76000D909F9 /* LoopMeVPAIDClient.h */,
-				477CDE1122DCC76000D909F9 /* LoopMeMRAIDClient.m */,
-				477CDE1222DCC76000D909F9 /* LoopMeVPAIDVideoClient.m */,
-				477CDE1322DCC76000D909F9 /* LoopMeVideoClientNormal.h */,
-				477CDE1422DCC76000D909F9 /* Protocols */,
-			);
-			path = Clients;
-			sourceTree = "<group>";
-		};
-		477CDE1422DCC76000D909F9 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE1522DCC76000D909F9 /* LoopMeVideoCommunicatorProtocol.h */,
-				477CDE1622DCC76000D909F9 /* LoopMeJSCommunicatorProtocol.h */,
-				477CDE1722DCC76000D909F9 /* LoopMeViewabilityProtocol.h */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		477CDE1822DCC76000D909F9 /* Interstitial */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE1922DCC76000D909F9 /* LoopMeInterstitialGeneral.h */,
-				477CDE1A22DCC76000D909F9 /* LoopMeInterstitial.m */,
-				477CDE1B22DCC76000D909F9 /* LoopMeInterstitialGeneral.m */,
-			);
-			path = Interstitial;
-			sourceTree = "<group>";
-		};
-		477CDE1C22DCC76000D909F9 /* Cache */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE1D22DCC76000D909F9 /* LoopMeDiscURLCache.m */,
-				477CDE1E22DCC76000D909F9 /* LoopMeDiscURLCache.h */,
-			);
-			path = Cache;
-			sourceTree = "<group>";
-		};
-		477CDE1F22DCC76000D909F9 /* Targeting */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE2022DCC76000D909F9 /* LoopMeTargeting.m */,
-			);
-			path = Targeting;
-			sourceTree = "<group>";
-		};
-		477CDE2122DCC76000D909F9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE2222DCC76000D909F9 /* LoopMeResources.bundle */,
-				477CDE2322DCC76000D909F9 /* Assets.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		477CDE2422DCC76000D909F9 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE2522DCC76000D909F9 /* LoopMeServerCommunicator.h */,
-				477CDE2622DCC76000D909F9 /* LoopMeAdConfiguration.h */,
-				477CDE2722DCC76000D909F9 /* LoopMeVideoManager.m */,
-				477CDE2822DCC76000D909F9 /* LoopMeReachability.m */,
-				477CDE2922DCC76000D909F9 /* LoopMeVASTImageDownloader.m */,
-				477CDE2A22DCC76000D909F9 /* LoopMeAdManager.m */,
-				477CDE2B22DCC76000D909F9 /* LoopMeURLResolver.h */,
-				477CDE2C22DCC76000D909F9 /* LoopMeAdConfiguration.m */,
-				477CDE2D22DCC76000D909F9 /* LoopMeServerCommunicator.m */,
-				477CDE2E22DCC76000D909F9 /* LoopMeURLResolver.m */,
-				477CDE2F22DCC76000D909F9 /* LoopMeVASTImageDownloader.h */,
-				477CDE3022DCC76000D909F9 /* LoopMeAdManager.h */,
-				477CDE3122DCC76000D909F9 /* LoopMeReachability.h */,
-				477CDE3222DCC76000D909F9 /* LoopMeVideoManager.h */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		477CDE3422DCC76000D909F9 /* Senders */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE3522DCC76000D909F9 /* LoopMeVASTEventTracker.h */,
-				477CDE3622DCC76000D909F9 /* LoopMeErrorEventSender.m */,
-				477CDE3722DCC76000D909F9 /* LoopMeVASTEventTracker.m */,
-				477CDE3822DCC76000D909F9 /* LoopMeErrorEventSender.h */,
-			);
-			path = Senders;
-			sourceTree = "<group>";
-		};
-		477CDE3922DCC76000D909F9 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE3A22DCC76000D909F9 /* Ad */,
-				477CDE3D22DCC76000D909F9 /* Browser */,
-				477CDE4022DCC76000D909F9 /* 360 */,
-				477CDE4622DCC76000D909F9 /* LoopMeOrientationViewControllerProtocol.h */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		477CDE3A22DCC76000D909F9 /* Ad */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE3B22DCC76000D909F9 /* LoopMeInterstitialViewController.h */,
-				477CDE3C22DCC76000D909F9 /* LoopMeInterstitialViewController.m */,
-			);
-			path = Ad;
-			sourceTree = "<group>";
-		};
-		477CDE3D22DCC76000D909F9 /* Browser */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE3E22DCC76000D909F9 /* LoopMeBrowserViewController.h */,
-				477CDE3F22DCC76000D909F9 /* LoopMeBrowserViewController.m */,
-			);
-			path = Browser;
-			sourceTree = "<group>";
-		};
-		477CDE4022DCC76000D909F9 /* 360 */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE4122DCC76000D909F9 /* LoopMe360ViewController.h */,
-				477CDE4222DCC76000D909F9 /* Shaders */,
-				477CDE4522DCC76000D909F9 /* LoopMe360ViewController.m */,
-			);
-			path = 360;
-			sourceTree = "<group>";
-		};
-		477CDE4222DCC76000D909F9 /* Shaders */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE4322DCC76000D909F9 /* LoopMeGLProgram.m */,
-				477CDE4422DCC76000D909F9 /* LoopMeGLProgram.h */,
-			);
-			path = Shaders;
-			sourceTree = "<group>";
-		};
-		477CDE4822DCC76000D909F9 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE4922DCC76000D909F9 /* LoopMeDestinationDisplayController.h */,
-				477CDE4A22DCC76000D909F9 /* LoopMeVPAIDAdDisplayController.h */,
-				477CDE4B22DCC76000D909F9 /* LoopMeAdDisplayController.h */,
-				477CDE4C22DCC76000D909F9 /* LoopMeAdDisplayControllerNormal.m */,
-				477CDE4D22DCC76000D909F9 /* LoopMeVPAIDAdDisplayController.m */,
-				477CDE4E22DCC76000D909F9 /* LoopMeDestinationDisplayController.m */,
-				477CDE4F22DCC76000D909F9 /* LoopMeAdDisplayControllerNormal.h */,
-				477CDE5022DCC76000D909F9 /* LoopMeAdDisplayController.m */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		477CDE5122DCC76000D909F9 /* Builder */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE5222DCC76000D909F9 /* LoopMeORTBTools.m */,
-				477CDE5322DCC76000D909F9 /* LoopMeServerURLBuilder.m */,
-				477CDE5422DCC76000D909F9 /* LoopMeORTBTools.h */,
-				477CDE5522DCC76000D909F9 /* LoopMeServerURLBuilder.h */,
-			);
-			path = Builder;
-			sourceTree = "<group>";
-		};
-		477CDE5622DCC76000D909F9 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE5722DCC76000D909F9 /* LoopMeCloseButton.h */,
-				477CDE5822DCC76000D909F9 /* ProgressOvelray */,
-				477CDE5D22DCC76000D909F9 /* LoopMeBackView.h */,
-				477CDE5E22DCC76000D909F9 /* WebView */,
-				477CDE6122DCC76000D909F9 /* LoopMeVASTPlayerUIView.m */,
-				477CDE6222DCC76000D909F9 /* LoopMeCancelView.m */,
-				477CDE6322DCC76000D909F9 /* LoopMeCloseButton.m */,
-				477CDE6422DCC76000D909F9 /* LoopMeBackView.m */,
-				477CDE6522DCC76000D909F9 /* LoopMeVASTPlayerUIView.h */,
-				477CDE6622DCC76000D909F9 /* LoopMeCancelView.h */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		477CDE5822DCC76000D909F9 /* ProgressOvelray */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE5922DCC76000D909F9 /* LoopMeActivityIndicatorView.m */,
-				477CDE5A22DCC76000D909F9 /* LoopMeProgressOverlayView.h */,
-				477CDE5B22DCC76000D909F9 /* LoopMeActivityIndicatorView.h */,
-				477CDE5C22DCC76000D909F9 /* LoopMeProgressOverlayView.m */,
-			);
-			path = ProgressOvelray;
-			sourceTree = "<group>";
-		};
-		477CDE5E22DCC76000D909F9 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE5F22DCC76000D909F9 /* LoopMeAdWebView.h */,
-				477CDE6022DCC76000D909F9 /* LoopMeAdWebView.m */,
-			);
-			path = WebView;
-			sourceTree = "<group>";
-		};
-		477CDE6722DCC76000D909F9 /* AdView */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE6822DCC76000D909F9 /* minimized */,
-				477CDE6B22DCC76000D909F9 /* LoopMeAdView.m */,
-				477CDE6C22DCC76000D909F9 /* maximized */,
-			);
-			path = AdView;
-			sourceTree = "<group>";
-		};
-		477CDE6822DCC76000D909F9 /* minimized */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE6922DCC76000D909F9 /* LoopMeMinimizedAdView.h */,
-				477CDE6A22DCC76000D909F9 /* LoopMeMinimizedAdView.m */,
-			);
-			path = minimized;
-			sourceTree = "<group>";
-		};
-		477CDE6C22DCC76000D909F9 /* maximized */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE6D22DCC76000D909F9 /* LoopMeMaximizedViewController.m */,
-				477CDE6E22DCC76000D909F9 /* LoopMeMaximizedViewController.h */,
-			);
-			path = maximized;
-			sourceTree = "<group>";
-		};
-		477CDE7022DCC76000D909F9 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE7122DCC76000D909F9 /* LoopMeAnalyticsProvider.m */,
-				477CDE7222DCC76000D909F9 /* LoopMeAudioCheck.h */,
-				477CDE7322DCC76000D909F9 /* LoopMeError.m */,
-				477CDE7422DCC76000D909F9 /* LoopMeAdType.h */,
-				477CDE7522DCC76000D909F9 /* LoopMeVPAIDDefinitions.h */,
-				477CDE7622DCC76000D909F9 /* LoopMeGlobalSettings.h */,
-				477CDE7722DCC76000D909F9 /* LoopMeVPAIDError.m */,
-				477CDE7822DCC76000D909F9 /* LoopMeVPAIDConverter.h */,
-				477CDE7922DCC76000D909F9 /* LoopMeGeoLocationProvider.h */,
-				477CDE7A22DCC76000D909F9 /* LoopMeLogging.h */,
-				477CDE7B22DCC76000D909F9 /* LoopMeIdentityProvider.h */,
-				477CDE7C22DCC76000D909F9 /* LoopMeDefinitions.h */,
-				477CDE7D22DCC76000D909F9 /* LoopMeAnalyticsProvider.h */,
-				477CDE7E22DCC76000D909F9 /* LoopMeError.h */,
-				477CDE7F22DCC76000D909F9 /* LoopMeAudioCheck.m */,
-				477CDE8022DCC76000D909F9 /* LoopMeGlobalSettings.m */,
-				477CDE8122DCC76000D909F9 /* Categories */,
-				477CDE8C22DCC76000D909F9 /* LoopMeIdentityProvider.m */,
-				477CDE8D22DCC76000D909F9 /* LoopMeLogging.m */,
-				477CDE8E22DCC76000D909F9 /* LoopMeGeoLocationProvider.m */,
-				477CDE8F22DCC76000D909F9 /* LoopMeVPAIDError.h */,
-				477CDE9022DCC76000D909F9 /* LoopMeVPAIDConverter.m */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
-		477CDE8122DCC76000D909F9 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE8222DCC76000D909F9 /* NSDictionary+JSONPrint.h */,
-				477CDE8322DCC76000D909F9 /* NSData+LoopMeAES128.m */,
-				477CDE8422DCC76000D909F9 /* NSString+Encryption.m */,
-				477CDE8522DCC76000D909F9 /* NSURL+LoopMeAdditions.m */,
-				477CDE8622DCC76000D909F9 /* UIImage+LoopMeBinaryImage.h */,
-				477CDE8722DCC76000D909F9 /* NSDictionary+JSONPrint.m */,
-				477CDE8822DCC76000D909F9 /* NSString+Encryption.h */,
-				477CDE8922DCC76000D909F9 /* NSData+LoopMeAES128.h */,
-				477CDE8A22DCC76000D909F9 /* UIImage+LoopMeBinaryImage.m */,
-				477CDE8B22DCC76000D909F9 /* NSURL+LoopMeAdditions.h */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		477CDE9122DCC76000D909F9 /* VAST */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE9222DCC76000D909F9 /* LoopMeSkipOffset.h */,
-				477CDE9322DCC76000D909F9 /* LoopMeVASTTrackingLinks.h */,
-				477CDE9422DCC76000D909F9 /* LoopMeVASTMacroProcessor.h */,
-				477CDE9522DCC76000D909F9 /* LoopMeVASTProgressEvent.h */,
-				477CDE9622DCC76000D909F9 /* LoopMeVASTXMLParser.m */,
-				477CDE9722DCC76000D909F9 /* LoopMeVASTAssetLinks.m */,
-				477CDE9822DCC76000D909F9 /* LoopMeVASTProgressEvent.m */,
-				477CDE9922DCC76000D909F9 /* LoopMeVASTMacroProcessor.m */,
-				477CDE9A22DCC76000D909F9 /* LoopMeSkipOffset.m */,
-				477CDE9B22DCC76000D909F9 /* LoopMeVASTTrackingLinks.m */,
-				477CDE9C22DCC76000D909F9 /* KissXML */,
-				477CDEAD22DCC76000D909F9 /* LoopMeVASTXMLParser.h */,
-				477CDEAE22DCC76000D909F9 /* LoopMeVASTAssetLinks.h */,
-			);
-			path = VAST;
-			sourceTree = "<group>";
-		};
-		477CDE9C22DCC76000D909F9 /* KissXML */ = {
-			isa = PBXGroup;
-			children = (
-				477CDE9D22DCC76000D909F9 /* DDXMLDocument.h */,
-				477CDE9E22DCC76000D909F9 /* DDXML.h */,
-				477CDE9F22DCC76000D909F9 /* DDXMLElement.m */,
-				477CDEA022DCC76000D909F9 /* KissXML.h */,
-				477CDEA122DCC76000D909F9 /* Additions */,
-				477CDEA422DCC76000D909F9 /* DDXMLNode.m */,
-				477CDEA522DCC76000D909F9 /* DDXMLDocument.m */,
-				477CDEA622DCC76000D909F9 /* Private */,
-				477CDEA822DCC76000D909F9 /* DDXMLElement.h */,
-				477CDEA922DCC76000D909F9 /* Categories */,
-				477CDEAC22DCC76000D909F9 /* DDXMLNode.h */,
-			);
-			path = KissXML;
-			sourceTree = "<group>";
-		};
-		477CDEA122DCC76000D909F9 /* Additions */ = {
-			isa = PBXGroup;
-			children = (
-				477CDEA222DCC76000D909F9 /* DDXMLElementAdditions.h */,
-				477CDEA322DCC76000D909F9 /* DDXMLElementAdditions.m */,
-			);
-			path = Additions;
-			sourceTree = "<group>";
-		};
-		477CDEA622DCC76000D909F9 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				477CDEA722DCC76000D909F9 /* DDXMLPrivate.h */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
-		477CDEA922DCC76000D909F9 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				477CDEAA22DCC76000D909F9 /* NSString+DDXML.h */,
-				477CDEAB22DCC76000D909F9 /* NSString+DDXML.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		477CDEAF22DCC76000D909F9 /* GDPR */ = {
-			isa = PBXGroup;
-			children = (
-				477CDEB022DCC76000D909F9 /* LoopMeGDPRViewController.m */,
-				477CDEB122DCC76000D909F9 /* LoopMeGDPRAPIService.h */,
-				477CDEB222DCC76000D909F9 /* LoopMeGDPRTools.h */,
-				477CDEB322DCC76000D909F9 /* LoopMeGDPRAPIService.m */,
-				477CDEB422DCC76000D909F9 /* LoopMeGDPRViewController.h */,
-				477CDEB522DCC76000D909F9 /* LoopMeGDPRTools.m */,
-			);
-			path = GDPR;
-			sourceTree = "<group>";
-		};
 		477CDF2422DE069E00D909F9 /* LoopMe */ = {
 			isa = PBXGroup;
 			children = (
@@ -967,6 +295,15 @@
 			path = LoopMe;
 			sourceTree = "<group>";
 		};
+		81EB33B62696E1A50079CD86 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81EB33BC2696E1A50079CD86 /* LoopMeUnitedSDK.framework */,
+				81EB33BE2696E1A50079CD86 /* LoopMeUnitedSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -979,10 +316,12 @@
 				014D6C731B690C3D006F3F62 /* Frameworks */,
 				014D6C741B690C3D006F3F62 /* Resources */,
 				2923307B1EE9E69317EC71F2 /* [CP] Embed Pods Frameworks */,
+				81F9EB28267A29880035ED56 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				81EB33C02696E1EA0079CD86 /* PBXTargetDependency */,
 			);
 			name = LoopMeMediatonDemo;
 			productName = LoopMeMediatonDemo;
@@ -1013,12 +352,12 @@
 		014D6C6E1B690C3D006F3F62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = injectios;
 				TargetAttributes = {
 					014D6C751B690C3D006F3F62 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = Q876VLK88R;
+						DevelopmentTeam = 4J5DYKYN9Y;
 					};
 					014D6C8E1B690C3D006F3F62 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1038,6 +377,12 @@
 			mainGroup = 014D6C6D1B690C3D006F3F62;
 			productRefGroup = 014D6C771B690C3D006F3F62 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 81EB33B62696E1A50079CD86 /* Products */;
+					ProjectRef = 81EB33B52696E1A50079CD86 /* LoopMeUnitedSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				014D6C751B690C3D006F3F62 /* LoopMeMediatonDemo */,
@@ -1046,16 +391,32 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		81EB33BC2696E1A50079CD86 /* LoopMeUnitedSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LoopMeUnitedSDK.framework;
+			remoteRef = 81EB33BB2696E1A50079CD86 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		81EB33BE2696E1A50079CD86 /* LoopMeUnitedSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LoopMeUnitedSDKTests.xctest;
+			remoteRef = 81EB33BD2696E1A50079CD86 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		014D6C741B690C3D006F3F62 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81EB33C72696F2290079CD86 /* LoopMeResources.bundle in Resources */,
 				014D6C851B690C3D006F3F62 /* Main.storyboard in Resources */,
-				477CDEC722DCC76000D909F9 /* LoopMeResources.bundle in Resources */,
 				014D6C8A1B690C3D006F3F62 /* LaunchScreen.xib in Resources */,
 				014D6C871B690C3D006F3F62 /* Images.xcassets in Resources */,
-				477CDEC822DCC76000D909F9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1074,15 +435,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LoopMeMediatonDemo/Pods-LoopMeMediatonDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/mopub-ios-sdk/MoPub.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoPub.framework",
 			);
@@ -1116,92 +473,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				477CDEE522DCC76000D909F9 /* LoopMeAdView.m in Sources */,
-				477CDEDC22DCC76000D909F9 /* LoopMeServerURLBuilder.m in Sources */,
-				477CDED922DCC76000D909F9 /* LoopMeDestinationDisplayController.m in Sources */,
-				477CDEF822DCC76000D909F9 /* LoopMeVASTProgressEvent.m in Sources */,
 				014D6CA21B690E95006F3F62 /* LDContentTableViewCell.m in Sources */,
 				47A78E481D76FFF900937065 /* MopubLoopMeNativeEvent.m in Sources */,
-				477CDEF422DCC76000D909F9 /* LoopMeGeoLocationProvider.m in Sources */,
-				477CDECF22DCC76000D909F9 /* LoopMeURLResolver.m in Sources */,
 				01EDDB901B6B8404003BF9BE /* LDTableViewController.m in Sources */,
 				47C5689D1F1DEF020048B0CC /* LDRewardedViewController.m in Sources */,
-				477CDEC522DCC76000D909F9 /* LoopMeDiscURLCache.m in Sources */,
-				477CDECB22DCC76000D909F9 /* LoopMeVASTImageDownloader.m in Sources */,
 				472CEB1E1E9FC61E00C0E86E /* LDInterstitialViewController.m in Sources */,
-				477CDEBB22DCC76000D909F9 /* LoopMeViewabilityManager.m in Sources */,
 				014D6C7F1B690C3D006F3F62 /* AppDelegate.m in Sources */,
-				477CDEF922DCC76000D909F9 /* LoopMeVASTMacroProcessor.m in Sources */,
-				477CDEFF22DCC76000D909F9 /* DDXMLDocument.m in Sources */,
-				477CDF0222DCC76000D909F9 /* LoopMeGDPRAPIService.m in Sources */,
-				477CDECE22DCC76000D909F9 /* LoopMeServerCommunicator.m in Sources */,
-				477CDEC022DCC76000D909F9 /* LoopMeVideoClientNormal.m in Sources */,
-				477CDEEB22DCC76000D909F9 /* LoopMeAudioCheck.m in Sources */,
-				477CDED222DCC76000D909F9 /* LoopMeInterstitialViewController.m in Sources */,
-				477CDED022DCC76000D909F9 /* LoopMeErrorEventSender.m in Sources */,
-				477CDEFE22DCC76000D909F9 /* DDXMLNode.m in Sources */,
-				477CDED822DCC76000D909F9 /* LoopMeVPAIDAdDisplayController.m in Sources */,
-				477CDEF122DCC76000D909F9 /* UIImage+LoopMeBinaryImage.m in Sources */,
-				477CDEFA22DCC76000D909F9 /* LoopMeSkipOffset.m in Sources */,
-				477CDEB922DCC76000D909F9 /* LoopMeOMIDWrapper.m in Sources */,
 				47A78E471D76FFF900937065 /* MopubLoopMeNativeAd.m in Sources */,
-				477CDEFC22DCC76000D909F9 /* DDXMLElement.m in Sources */,
 				477CDF0922DDC5B300D909F9 /* LoopMeAdapterConfiguration.m in Sources */,
-				477CDED122DCC76000D909F9 /* LoopMeVASTEventTracker.m in Sources */,
 				01EDDB801B6B7B9D003BF9BE /* LDAdTableViewCell.m in Sources */,
-				477CDECA22DCC76000D909F9 /* LoopMeReachability.m in Sources */,
-				477CDEE922DCC76000D909F9 /* LoopMeError.m in Sources */,
-				477CDEBA22DCC76000D909F9 /* LoopMeOMIDVideoEventsWrapper.m in Sources */,
-				477CDEBE22DCC76000D909F9 /* LoopMeVPAIDClient.m in Sources */,
-				477CDEF322DCC76000D909F9 /* LoopMeLogging.m in Sources */,
-				477CDEED22DCC76000D909F9 /* NSData+LoopMeAES128.m in Sources */,
-				477CDF0022DCC76000D909F9 /* NSString+DDXML.m in Sources */,
-				477CDEDD22DCC76000D909F9 /* LoopMeActivityIndicatorView.m in Sources */,
-				477CDEC222DCC76000D909F9 /* LoopMeVPAIDVideoClient.m in Sources */,
-				477CDF0322DCC76000D909F9 /* LoopMeGDPRTools.m in Sources */,
-				477CDF0122DCC76000D909F9 /* LoopMeGDPRViewController.m in Sources */,
-				477CDEEE22DCC76000D909F9 /* NSString+Encryption.m in Sources */,
-				477CDEF222DCC76000D909F9 /* LoopMeIdentityProvider.m in Sources */,
 				472CEB1B1E9FC60500C0E86E /* MopubLoopMeInterstitialAdapter.m in Sources */,
-				477CDEC322DCC76000D909F9 /* LoopMeInterstitial.m in Sources */,
-				477CDEE722DCC76000D909F9 /* LoopMeSDK.m in Sources */,
-				477CDED322DCC76000D909F9 /* LoopMeBrowserViewController.m in Sources */,
 				47C5689A1F1DECE10048B0CC /* MopubLoopMeRewardedVideoAdapter.m in Sources */,
 				477CDF0622DCCDC200D909F9 /* LMInstanceProvider.m in Sources */,
-				477CDEC922DCC76000D909F9 /* LoopMeVideoManager.m in Sources */,
-				477CDEF022DCC76000D909F9 /* NSDictionary+JSONPrint.m in Sources */,
 				014D6C7C1B690C3D006F3F62 /* main.m in Sources */,
-				477CDEF722DCC76000D909F9 /* LoopMeVASTAssetLinks.m in Sources */,
 				01EDDB8A1B6B82B8003BF9BE /* LDAdRequestViewController.m in Sources */,
-				477CDECD22DCC76000D909F9 /* LoopMeAdConfiguration.m in Sources */,
-				477CDEEC22DCC76000D909F9 /* LoopMeGlobalSettings.m in Sources */,
-				477CDED422DCC76000D909F9 /* LoopMeGLProgram.m in Sources */,
-				477CDEDE22DCC76000D909F9 /* LoopMeProgressOverlayView.m in Sources */,
-				477CDEE322DCC76000D909F9 /* LoopMeBackView.m in Sources */,
-				477CDEE122DCC76000D909F9 /* LoopMeCancelView.m in Sources */,
-				477CDEC622DCC76000D909F9 /* LoopMeTargeting.m in Sources */,
-				477CDED622DCC76000D909F9 /* LoopMeSDKConfiguration.m in Sources */,
-				477CDED522DCC76000D909F9 /* LoopMe360ViewController.m in Sources */,
-				477CDEC422DCC76000D909F9 /* LoopMeInterstitialGeneral.m in Sources */,
-				477CDECC22DCC76000D909F9 /* LoopMeAdManager.m in Sources */,
-				477CDEFD22DCC76000D909F9 /* DDXMLElementAdditions.m in Sources */,
-				477CDEF622DCC76000D909F9 /* LoopMeVASTXMLParser.m in Sources */,
-				477CDEEF22DCC76000D909F9 /* NSURL+LoopMeAdditions.m in Sources */,
-				477CDEEA22DCC76000D909F9 /* LoopMeVPAIDError.m in Sources */,
-				477CDEE622DCC76000D909F9 /* LoopMeMaximizedViewController.m in Sources */,
-				477CDEE822DCC76000D909F9 /* LoopMeAnalyticsProvider.m in Sources */,
-				477CDEDF22DCC76000D909F9 /* LoopMeAdWebView.m in Sources */,
-				477CDEE222DCC76000D909F9 /* LoopMeCloseButton.m in Sources */,
-				477CDEC122DCC76000D909F9 /* LoopMeMRAIDClient.m in Sources */,
-				477CDEBF22DCC76000D909F9 /* LoopMeJSClient.m in Sources */,
-				477CDEDB22DCC76000D909F9 /* LoopMeORTBTools.m in Sources */,
-				477CDEDA22DCC76000D909F9 /* LoopMeAdDisplayController.m in Sources */,
-				477CDEBD22DCC76000D909F9 /* LoopMeIASWrapper.m in Sources */,
-				477CDED722DCC76000D909F9 /* LoopMeAdDisplayControllerNormal.m in Sources */,
-				477CDEFB22DCC76000D909F9 /* LoopMeVASTTrackingLinks.m in Sources */,
-				477CDEE422DCC76000D909F9 /* LoopMeMinimizedAdView.m in Sources */,
-				477CDEE022DCC76000D909F9 /* LoopMeVASTPlayerUIView.m in Sources */,
-				477CDEF522DCC76000D909F9 /* LoopMeVPAIDConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,6 +505,11 @@
 			isa = PBXTargetDependency;
 			target = 014D6C751B690C3D006F3F62 /* LoopMeMediatonDemo */;
 			targetProxy = 014D6C901B690C3D006F3F62 /* PBXContainerItemProxy */;
+		};
+		81EB33C02696E1EA0079CD86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LoopMeUnitedSDK;
+			targetProxy = 81EB33BF2696E1EA0079CD86 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1247,6 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1255,14 +546,17 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1288,7 +582,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1299,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1307,14 +602,17 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1333,7 +631,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1346,7 +644,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				DEVELOPMENT_TEAM = Q876VLK88R;
+				DEVELOPMENT_TEAM = 4J5DYKYN9Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(PROJECT_DIR)/../../../LoopMeSDK Sources/Viewability\"",
 					"\"$(PROJECT_DIR)/../../../LoopMeSDK Sources/Viewability/OMSDK/\"",
@@ -1365,7 +663,7 @@
 					"\"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Viewability/Avid\"",
 					"\"$(PROJECT_DIR)/../../../LoopMeSDK Sources/Viewability/IAS\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.loopmemedia.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopmemedia.LoopMeMediatonDe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1377,7 +675,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				DEVELOPMENT_TEAM = Q876VLK88R;
+				DEVELOPMENT_TEAM = 4J5DYKYN9Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(PROJECT_DIR)/../../../LoopMeSDK Sources/Viewability\"",
 					"\"$(PROJECT_DIR)/../../../LoopMeSDK Sources/Viewability/OMSDK/\"",
@@ -1396,7 +694,7 @@
 					"\"${PODS_ROOT}/mopub-ios-sdk/MoPubSDK/Viewability/Avid\"",
 					"\"$(PROJECT_DIR)/../../../LoopMeSDK Sources/Viewability/IAS\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.loopmemedia.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopmemedia.LoopMeMediatonDe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

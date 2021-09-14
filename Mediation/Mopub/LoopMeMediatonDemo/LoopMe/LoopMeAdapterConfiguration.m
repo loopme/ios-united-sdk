@@ -7,8 +7,8 @@
 //
 
 #import "LoopMeAdapterConfiguration.h"
-#import "LoopMeDefinitions.h"
-#import "LoopMeSDK.h"
+#import "LoopMeUnitedSDK/LoopMeDefinitions.h"
+#import "LoopMeUnitedSDK/LoopMeSDK.h"
 
 
 @implementation LoopMeAdapterConfiguration

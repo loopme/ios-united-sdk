@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 injectios. All rights reserved.
 //
 
-#import "LoopMeAdView.h"
-#import "LoopMeError.h"
-#import "LoopMeLogging.h"
+#import "LoopMeUnitedSDK/LoopMeAdView.h"
+#import "LoopMeUnitedSDK/LoopMeError.h"
+#import "LoopMeUnitedSDK/LoopMeLogging.h"
 #import "MopubLoopMeNativeEvent.h"
 #import "MPNativeAd.h"
 #import "MopubLoopMeNativeAd.h"

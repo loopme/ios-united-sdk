@@ -23,7 +23,7 @@
     self.menuItems = [NSArray arrayWithObjects:@"Native Ads (Ad Request)", @"Interstitial Ad",  @"Rewarded Video Ad", nil];
     //TODO: bridge for MPTableViewPlacer
     
-    MPMoPubConfiguration *mopubConfiguration = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"4c2678be84404c7184f8aa1947f8b8fb"];
+    MPMoPubConfiguration *mopubConfiguration = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"725d995a3ce44472af81272e3b79cf54"];
     
     LoopMeAdapterConfiguration *loopMeConf = [[LoopMeAdapterConfiguration alloc] init];
 
