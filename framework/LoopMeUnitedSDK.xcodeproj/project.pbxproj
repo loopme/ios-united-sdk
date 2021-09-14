@@ -185,6 +185,7 @@
 		47CE39DF236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE39DE236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift */; };
 		47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */; };
 		47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */; };
+		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +368,7 @@
 		47CE39DE236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoopMeServerCommunicatorTests.swift; path = LoopMeUnitedSDK/LoopMeServerCommuniator/LoopMeServerCommuniatorTests/LoopMeServerCommunicatorTests.swift; sourceTree = SOURCE_ROOT; };
 		47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVpaidScriptMessageHandler.m; sourceTree = "<group>"; };
 		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
+		81D36A5226F08F2A0037D160 /* CoppaTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoppaTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -397,6 +399,7 @@
 			children = (
 				47403415239568E500CC14EF /* CCPA */,
 				47A57C34233E31C8001F7DA3 /* GDPR */,
+				81D36A5226F08F2A0037D160 /* CoppaTools.swift */,
 			);
 			path = UserPrivacy;
 			sourceTree = "<group>";
@@ -1158,6 +1161,7 @@
 				47A57CC1233E31C8001F7DA3 /* LoopMeIdentityProvider.m in Sources */,
 				47A57CC2233E31C8001F7DA3 /* LoopMeLogging.m in Sources */,
 				47A57C95233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m in Sources */,
+				81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */,
 				47A57CA5233E31C8001F7DA3 /* LoopMeMaximizedViewController.m in Sources */,
 				47A57CB8233E31C8001F7DA3 /* NSData+LoopMeAES128.m in Sources */,
 				47A57B62233CFAD9001F7DA3 /* AdVerification.swift in Sources */,

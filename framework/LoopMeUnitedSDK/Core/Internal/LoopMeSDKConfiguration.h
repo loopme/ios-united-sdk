@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setCCPA:(NSString *)ccpa;
 
+- (void)setCOPPA:(BOOL)coppa;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -28,4 +28,8 @@
     [LoopMeCCPATools setCcpaString:ccpa];
 }
 
+- (void)setCOPPA:(BOOL)coppa{
+    [LoopMeCOPPATools setCoppa:coppa]
+}
+
 @end
