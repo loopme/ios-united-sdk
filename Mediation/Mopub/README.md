@@ -2,7 +2,7 @@
 
 The `LoopMe` bridge allows you to mediate between `Mopub` interstitial ads and `LoopMe` interstitial ads.
 
-The bridge is compatible with `LoopMe` SDK v5.1.2 and higher and tested with `Mopub` SDK v4.9.1.
+The bridge is compatible with `LoopMe` SDK v5.1.2 and higher and tested with `Mopub` SDK v5.13.0.
 
 ### Create and configure custom native network on Mopub dashboard ###
 
@@ -11,7 +11,9 @@ In order to mediate between Mopub interstitial ads and LoopMe interstitial ads y
 
 * On Mopub dashboard click Networks -> add a network. Choose `Custom Native Network`
 * Configure `Custom Network` in the following way:
-<img src="images/custom_event_int.png"/>
+<p><img src="images/custom event int.png"  /></p>
+<br>Or you can configure custom native network in line item
+<p><img src="images\custom line int.png"  /></p>
 <b>custom event class</b>: MopubLoopMeInterstitialAdapter <br/>
 <b>custom event class data</b>: {"app_key" : "YOUR_APP_KEY"}  <br/>
 <b>NOTE:</b> You will get a unique app_key from the `LoopMe` dashboard when registering your ad spot.
@@ -39,7 +41,9 @@ In order to mediate between Mopub Rewarded Video ads and LoopMe Rewarded Video a
 
 * On Mopub dashboard click Networks -> add a network. Choose `Custom Native Network`
 * Configure `Custom Network` in the following way:
-<img src="images/custom_event_rw.png"/>
+<p><img src="images/custom event rewarded.png"  /></p>
+<br>Or you can configure custom native network in line item
+<p><img src="images\custom line rewarded.png"  /></p>
 <b>custom event class</b>: MopubLoopMeRewardedVideoAdapter <br/>
 <b>custom event class data</b>: {"app_key" : "YOUR_APP_KEY", "currency_type" : "YOUR_CURRENCY_TYPE", "amount" : "YOUR_AMOUNT"}  <br/>
 <b>NOTE:</b> You will get a unique app_key from the `LoopMe` dashboard when registering your ad spot.
@@ -69,8 +73,10 @@ In order to mediate between Mopub native ads and LoopMe video banner you have to
 
 * On Mopub dashboard click Networks -> add a network. Choose `Custom Native Network`
 * Configure `Custom Network` in the following way:
-<img src="images/custom_event_configuration.png"/>
-<b>custom event class</b>: LoopMeNativeEvent <br/>
+<p><img src="images/custom event banner.png"  /></p>
+<br>Or you can configure custom native network in line item
+<p><img src="images\custom line banner.png"  /></p>
+<b>custom event class</b>: MopubLoopMeNativeEvent <br/>
 <b>custom event class data</b>: {"app_key":"your_app_key"} <br/>
 <b>NOTE:</b> You will get a unique app_key from the `LoopMe` dashboard when registering your ad spot.
 <br/>
@@ -101,9 +107,9 @@ Mediation is done by inserting `LoopMe` video ad object to a `UITableView` `data
 * Triggering ads loading
 ```objc
 MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
-settings.renderingViewClass = [MopubMopubLoopMeNativeAd class];
+settings.renderingViewClass = [MopubLoopMeNativeAd class];
 MPNativeAdRendererConfiguration *config = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
-config.supportedCustomEvents = @[@"LoopMeNativeEvent"];
+config.supportedCustomEvents = @[@"MopubLoopMeNativeEvent"];
 MPNativeAdRequest *adRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:APP_ID rendererConfigurations:@[config]];
 [adRequest startWithCompletionHandler:^(MPNativeAdRequest *request, MPNativeAd *response, NSError *error) {
     if (!error) {
