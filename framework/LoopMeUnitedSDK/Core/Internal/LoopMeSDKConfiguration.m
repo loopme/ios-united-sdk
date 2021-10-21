@@ -29,7 +29,7 @@
 }
 
 - (void)setCOPPA:(BOOL)coppa{
-    [LoopMeCOPPATools setCoppa:coppa]
+    [LoopMeCOPPATools setCoppa:coppa];
 }
 
 @end
