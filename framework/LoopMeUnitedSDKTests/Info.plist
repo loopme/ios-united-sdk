@@ -16,6 +16,8 @@
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>To collect your data</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 </dict>

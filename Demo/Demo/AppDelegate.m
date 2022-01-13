@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <LoopMeUnitedSDK/LoopMeLogging.h>
+#import <AppTrackingTransparency/ATTrackingManager.h>
+#import <AdSupport/AdSupport.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +19,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status){}];
+    NSString *ifv = [[UIDevice currentDevice] identifierForVendor].UUIDString;
+    NSString *ifa = [[ASIdentifierManager sharedManager] advertisingIdentifier].UUIDString;
+    NSLog(ifv);
+    NSLog(ifa);
     // Override point for customization after application launch.
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];

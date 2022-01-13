@@ -1,7 +1,5 @@
 platform :ios, '11.0'
 
-use_frameworks!
-
 target 'LoopMeMediatonDemo' do
     pod 'mopub-ios-sdk', '~> 5.13.0'
 end

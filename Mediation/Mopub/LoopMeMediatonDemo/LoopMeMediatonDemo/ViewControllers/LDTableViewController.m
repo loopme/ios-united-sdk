@@ -8,7 +8,7 @@
 
 #import "LDTableViewController.h"
 #import "LoopMeAdapterConfiguration.h"
-#import <MoPub/MoPub.h>
+#import <MoPub.h>
 
 @interface LDTableViewController ()
 

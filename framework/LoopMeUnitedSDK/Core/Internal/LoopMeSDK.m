@@ -35,6 +35,10 @@
     return LOOPME_SDK_VERSION;
 }
 
+- (void)trackingCompletionHandler:(ATTrackingManagerAuthorizationStatus)status{
+
+}
+
 - (void)initSDKFromRootViewController:(UIViewController *)rootViewController
                      sdkConfiguration:(LoopMeSDKConfiguration *)configuration
                      completionBlock :(void(^_Nullable)(BOOL, NSError *))completionBlock {
@@ -50,6 +54,12 @@
             completionBlock(false, error);
         }
         return;
+    }
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14")){
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status){
+            
+        }];
     }
     
     [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:rootViewController];
