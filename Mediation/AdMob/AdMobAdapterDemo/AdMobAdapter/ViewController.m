@@ -12,9 +12,9 @@
 
 @import GoogleMobileAds;
 
-@interface ViewController () <GADInterstitialDelegate>
+@interface ViewController () <GADFullScreenContentDelegate>
 
-@property(nonatomic, strong) GADInterstitial *interstitial;
+@property(nonatomic, strong) GADInterstitialAd *interstitial;
 
 @end
 
@@ -40,24 +40,30 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)load:(id)sender {
-    self.interstitial =
-    [[GADInterstitial alloc] initWithAdUnitID:@"ca-app-pub-1429938838258792/7046510669"];
-    self.interstitial.delegate = self;
-    GADRequest *request = [GADRequest request];
-    
-    [self.interstitial loadRequest:request];
+    [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
+    [GADInterstitialAd loadWithAdUnitID:@"ca-app-pub-1429938838258792/7046510669"
+                                request:[GADRequest request]
+                      completionHandler:^(GADInterstitialAd *ad, NSError *error) {
+      if (error) {
+        NSLog(@"Failed to load an interstitial ad with error: %@", error.localizedDescription);
+        return;
+      }
+      self.interstitial = ad;
+      self.interstitial.fullScreenContentDelegate = self;
+        [self.interstitial presentFromRootViewController:self];
+    }];
 }
 
 
-- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+- (void)interstitialDidReceiveAd:(nonnull id<GADFullScreenPresentingAd>)ad {
     [self.interstitial presentFromRootViewController:self];
 }
 
-- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error {
-    
+- (void)adLoader:(GADAdLoader *)adLoader didFailToReceiveAdWithError:(NSError *)error {
+  NSLog(@"%@ failed with error: %@", adLoader, error.localizedDescription);
 }
 
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
+- (void)interstitialDidDismissScreen:(nonnull id<GADFullScreenPresentingAd>)ad{
 
 }
 
