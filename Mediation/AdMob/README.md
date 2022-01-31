@@ -9,20 +9,20 @@ The bridge is compatible with `LoopMe` SDK v5.1.2 and higher, tested with `AdMob
 
 <b>NOTE:</b> `LoopMe` is not available as a predefine network in the AdMob tool, SDK bridge needs to be manually configured with AdMob "Custom Event" option.
 
-* Sign in to your AdMob account at [https://apps.admob.com](https://apps.admob.com)
-* Click the __Monetize__ tab
-* Under __All apps__ on the left-hand side, select the app you want to update
-* Click the link in the __Mediation__ column to the right of the ad unit you want to modify
+* Click <b>Edit/Create Mediation Group</b>
+<p><img src="images/admob_create_group.png" /></p>
 
-![](https://lh3.googleusercontent.com/FO7qJGdu9mrhaPmhU2LhV08wW2J57D3wzIbDTsS4yQEqQV1DOAZY3L5sHWOKYrM=w762)
+* Click <b>Add Custom Event.</b>
+<p><img src="images/admob_add_event.png" /></p>
+Enter the event name and real eCPM that you have got after LoopMe publisher team approval. Click Continue.<br>
+Note: you find eCPM on the LoopMe Dashboard > Apps & Sites > Ad Spot information.
 
-* Click __+ New ad network__
-* Click __+ Custom event__
-* Provide the following details:
-    * __Class Name__: GADLoopMeInterstitialAdapter
-    * __Label__: LoopMe
-    * __Parameter__: LOOPME_APP_KEY
-* Click __Continue__
+* Enter the <b>Class Name</b> and <b>Parameter</b>. You will get:
+<p><img src="images/ConfigureAdUnits.png"  /></p>
+
+__Class Name__ should be: 'GADLoopMeInterstitialAdapter'. <br>
+__Parameter__: enter the app key value you received after registering your Ad Spot on the LoopMe dashboard. <br>E.g. '298f62c196'.<br>
+* Click __Done__
 * Copy __GADLoopMeInterstitialAdapter.h__ and __GADLoopMeInterstitialAdapter.m__ to Your project
 * Allocate traffic by entering an eCPM value for the custom event. Your allocation options are the same as they are for ad networks
 * Click __Save__
