@@ -26,3 +26,7 @@ Pods/
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
 #
 # Pods/
+.DS_Store
+framework/.DS_Store
+framework/LoopMeUnitedSDK/.DS_Store
+LoopMeUnitedSDK.embeddedframework/.DS_Store

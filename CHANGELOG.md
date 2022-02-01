@@ -10,7 +10,7 @@
 
 - add IronSorce adapter
 
-## Version 7.3.4 (21.11.2021)
+## Version 7.3.4 (21.10.2021)
 
 - Fixes
 - update mopub adapter
