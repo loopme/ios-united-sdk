@@ -1,3 +1,28 @@
+## Version 7.3.6 (26.01.2022)
+
+- update admob adapter
+
+## Version 7.3.6 (26.01.2022)
+
+- add xcframework
+
+## Version 7.3.5 (13.01.2022)
+
+- add IronSorce adapter
+
+## Version 7.3.4 (21.11.2021)
+
+- Fixes
+- update mopub adapter
+
+## Version 7.3.3 (14.09.2021)
+
+- Fixes
+- ios 14 tracking
+- GDPR support the consent string
+- CCPA: Ability to support the US Privacy String
+- Coppa: Ability to support determine the value COPPA flag
+
 ## Version 7.3.2 (06.05.2020)
 
 - Fixed non replaceable macroses issue in VAST URL
