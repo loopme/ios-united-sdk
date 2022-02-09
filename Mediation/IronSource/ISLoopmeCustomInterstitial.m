@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomInterstitial.h"
-#import "LoopMeInterstitial.h"
+#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
 
 @interface ISLoopmeCustomInterstitial()<LoopMeInterstitialDelegate>
 @property (nonatomic, strong) LoopMeInterstitial *interstitial;
@@ -20,7 +20,14 @@
 
 - (void)loadAdWithAdData:(nonnull ISAdData *)adData
                 delegate:(nonnull id<ISAdapterAdDelegate>)delegate {
-    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:YOUR_APPKEY delegate:self];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *appkey = nil;
+
+    if (standardUserDefaults)
+        appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
+    NSLog(@"loopme's appkey - %@", appkey);
+    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
+
     self.delegate = delegate;
     [self.interstitial loadAd];
 }

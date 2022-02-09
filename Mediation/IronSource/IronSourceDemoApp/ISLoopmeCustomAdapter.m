@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomAdapter.h"
-#import "LoopMeSDK.h"
+#import "LoopMeUnitedSDK/LoopMeSDK.h"
 
 @implementation ISLoopmeCustomAdapter
 

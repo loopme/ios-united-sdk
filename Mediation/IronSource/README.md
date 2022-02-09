@@ -21,7 +21,7 @@ If you have questions please contact us at support@loopme.com.
 
 ## Register on LoopMe network ##
 
-To use and setup the SDK bridge, register your app on the LoopMe network via the LoopMe Dashboard to retrieve a unique LoopMe app key for your app. The app key uniquely identifies your app in the LoopMe ad network (Example app key: 51bb33e7cb). To get an appKey visit the **[LoopMe Dashboard](https://app.loopme.com/login/)**, and follow **[instruction](https://docs.google.com/document/d/1No1rVSpD2XLvG6nniwGjRb48Q0kVmYIkSgnlbhRXx5M/edit#)**.<br>
+To use and setup the SDK bridge, register your app on the LoopMe network via the LoopMe Dashboard to retrieve a unique LoopMe app key for your app. The app key uniquely identifies your app in the LoopMe ad network (Example app key: 51bb33e7cb). To get an appKey visit the **[LoopMe Dashboard](https://supply.loopme.com/)**, and follow **[instruction](https://docs.google.com/document/d/1No1rVSpD2XLvG6nniwGjRb48Q0kVmYIkSgnlbhRXx5M/edit#)**.<br>
 You will need the app key during next steps of integration.
 
 ## Adding LoopMe IOS SDK ##
@@ -54,12 +54,19 @@ Class Name should be: 'ISLoopmeCustomAdapter'. <br>
 Parameter: enter the app key value you received after registering your Ad Spot on the LoopMe dashboard. <br>E.g. '298f62c196'.<br><br>
 
 * Load
+You need add Loopme's appkey to standardUserDefaults before __[IronSource loadInterstitial]__
 ```obdjective-c
     [[LoopMeSDK shared] initSDKFromRootViewController:self completionBlock:^(BOOL success, NSError *error) {
         if (!success) {
             NSLog(@"%@", error);
         }
     }];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:LOOPME_APPKEY forKey:@"LOOPME_INTERSTITIAL"];
+        [standardUserDefaults synchronize];
+    }
     [IronSource initWithAppKey:APPKEY];
     [IronSource setInterstitialDelegate:self];
     [IronSource loadInterstitial];
