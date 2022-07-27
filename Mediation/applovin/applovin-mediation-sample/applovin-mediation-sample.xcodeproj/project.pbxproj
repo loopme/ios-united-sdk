@@ -1,0 +1,464 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8114D29E28904073001B747B /* AppLovinSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 8114D29D28904073001B747B /* AppLovinSDK */; };
+		8114D2A62890464D001B747B /* LoopMeUnitedSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114D2A42890464A001B747B /* LoopMeUnitedSDK.xcframework */; };
+		8114D2A72890464D001B747B /* LoopMeUnitedSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8114D2A42890464A001B747B /* LoopMeUnitedSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8140D99A286208B000D4E688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D999286208B000D4E688 /* AppDelegate.swift */; };
+		8140D99C286208B000D4E688 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99B286208B000D4E688 /* SceneDelegate.swift */; };
+		8140D99E286208B000D4E688 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99D286208B000D4E688 /* ViewController.swift */; };
+		8140D9A1286208B000D4E688 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140D99F286208B000D4E688 /* Main.storyboard */; };
+		8140D9A3286208B500D4E688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8140D9A2286208B500D4E688 /* Assets.xcassets */; };
+		8140D9A6286208B500D4E688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */; };
+		8140D9B72862F98E00D4E688 /* ApplovinInter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8140D9B62862F98E00D4E688 /* ApplovinInter.m */; };
+		8140D9BC286C73D400D4E688 /* LoopmeMediationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8140D9BB286C73D400D4E688 /* LoopmeMediationAdapter.m */; };
+		8140D9C0286EE0A200D4E688 /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8140D9BF286EE0A200D4E688 /* LoopMeResources.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		81DE908628742D71001223D1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8114D2A72890464D001B747B /* LoopMeUnitedSDK.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8114D2A42890464A001B747B /* LoopMeUnitedSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LoopMeUnitedSDK.xcframework; path = "../../GitHub/ios-united-sdk/LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework"; sourceTree = "<group>"; };
+		8140D996286208B000D4E688 /* Applovin-mediation-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Applovin-mediation-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8140D999286208B000D4E688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8140D99B286208B000D4E688 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8140D99D286208B000D4E688 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8140D9A0286208B000D4E688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8140D9A2286208B500D4E688 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8140D9A5286208B500D4E688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8140D9A7286208B500D4E688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8140D9B52862F98D00D4E688 /* Applovin-mediation-sample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Applovin-mediation-sample-Bridging-Header.h"; sourceTree = "<group>"; };
+		8140D9B62862F98E00D4E688 /* ApplovinInter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplovinInter.m; sourceTree = "<group>"; };
+		8140D9B82862F9D200D4E688 /* ApplovinInter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplovinInter.h; sourceTree = "<group>"; };
+		8140D9B9286C732C00D4E688 /* LoopmeMediationAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoopmeMediationAdapter.h; sourceTree = "<group>"; };
+		8140D9BB286C73D400D4E688 /* LoopmeMediationAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoopmeMediationAdapter.m; sourceTree = "<group>"; };
+		8140D9BF286EE0A200D4E688 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8140D993286208B000D4E688 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8114D29E28904073001B747B /* AppLovinSDK in Frameworks */,
+				8114D2A62890464D001B747B /* LoopMeUnitedSDK.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8140D98D286208B000D4E688 = {
+			isa = PBXGroup;
+			children = (
+				8140D9AD2862092800D4E688 /* Frameworks */,
+				8140D998286208B000D4E688 /* Applovin-mediation-sample */,
+				8140D997286208B000D4E688 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8140D997286208B000D4E688 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8140D996286208B000D4E688 /* Applovin-mediation-sample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8140D998286208B000D4E688 /* Applovin-mediation-sample */ = {
+			isa = PBXGroup;
+			children = (
+				8140D9BF286EE0A200D4E688 /* LoopMeResources.bundle */,
+				8140D999286208B000D4E688 /* AppDelegate.swift */,
+				8140D99B286208B000D4E688 /* SceneDelegate.swift */,
+				8140D99D286208B000D4E688 /* ViewController.swift */,
+				8140D99F286208B000D4E688 /* Main.storyboard */,
+				8140D9A2286208B500D4E688 /* Assets.xcassets */,
+				8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */,
+				8140D9A7286208B500D4E688 /* Info.plist */,
+				8140D9B62862F98E00D4E688 /* ApplovinInter.m */,
+				8140D9B52862F98D00D4E688 /* Applovin-mediation-sample-Bridging-Header.h */,
+				8140D9B82862F9D200D4E688 /* ApplovinInter.h */,
+				8140D9B9286C732C00D4E688 /* LoopmeMediationAdapter.h */,
+				8140D9BB286C73D400D4E688 /* LoopmeMediationAdapter.m */,
+			);
+			path = "Applovin-mediation-sample";
+			sourceTree = "<group>";
+		};
+		8140D9AD2862092800D4E688 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8114D2A42890464A001B747B /* LoopMeUnitedSDK.xcframework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8140D995286208B000D4E688 /* Applovin-mediation-sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8140D9AA286208B500D4E688 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */;
+			buildPhases = (
+				8140D992286208B000D4E688 /* Sources */,
+				8140D993286208B000D4E688 /* Frameworks */,
+				8140D994286208B000D4E688 /* Resources */,
+				81DE908628742D71001223D1 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Applovin-mediation-sample";
+			packageProductDependencies = (
+				8114D29D28904073001B747B /* AppLovinSDK */,
+			);
+			productName = "Applovin-mediation-sample";
+			productReference = 8140D996286208B000D4E688 /* Applovin-mediation-sample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8140D98E286208B000D4E688 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					8140D995286208B000D4E688 = {
+						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
+					};
+				};
+			};
+			buildConfigurationList = 8140D991286208B000D4E688 /* Build configuration list for PBXProject "Applovin-mediation-sample" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8140D98D286208B000D4E688;
+			packageReferences = (
+				8114D29C28904073001B747B /* XCRemoteSwiftPackageReference "AppLovin-MAX-Swift-Package" */,
+			);
+			productRefGroup = 8140D997286208B000D4E688 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8140D995286208B000D4E688 /* Applovin-mediation-sample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8140D994286208B000D4E688 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8140D9A6286208B500D4E688 /* LaunchScreen.storyboard in Resources */,
+				8140D9C0286EE0A200D4E688 /* LoopMeResources.bundle in Resources */,
+				8140D9A3286208B500D4E688 /* Assets.xcassets in Resources */,
+				8140D9A1286208B000D4E688 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8140D992286208B000D4E688 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8140D9BC286C73D400D4E688 /* LoopmeMediationAdapter.m in Sources */,
+				8140D99E286208B000D4E688 /* ViewController.swift in Sources */,
+				8140D9B72862F98E00D4E688 /* ApplovinInter.m in Sources */,
+				8140D99A286208B000D4E688 /* AppDelegate.swift in Sources */,
+				8140D99C286208B000D4E688 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8140D99F286208B000D4E688 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8140D9A0286208B000D4E688 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8140D9A5286208B500D4E688 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8140D9A8286208B500D4E688 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8140D9A9286208B500D4E688 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8140D9AB286208B500D4E688 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4J5DYKYN9Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Applovin-mediation-sample/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Applovin-mediation-sample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8140D9AC286208B500D4E688 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4J5DYKYN9Y;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Applovin-mediation-sample/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Applovin-mediation-sample-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8140D991286208B000D4E688 /* Build configuration list for PBXProject "Applovin-mediation-sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8140D9A8286208B500D4E688 /* Debug */,
+				8140D9A9286208B500D4E688 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8140D9AA286208B500D4E688 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8140D9AB286208B500D4E688 /* Debug */,
+				8140D9AC286208B500D4E688 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8114D29C28904073001B747B /* XCRemoteSwiftPackageReference "AppLovin-MAX-Swift-Package" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppLovin/AppLovin-MAX-Swift-Package";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8114D29D28904073001B747B /* AppLovinSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8114D29C28904073001B747B /* XCRemoteSwiftPackageReference "AppLovin-MAX-Swift-Package" */;
+			productName = AppLovinSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 8140D98E286208B000D4E688 /* Project object */;
+}

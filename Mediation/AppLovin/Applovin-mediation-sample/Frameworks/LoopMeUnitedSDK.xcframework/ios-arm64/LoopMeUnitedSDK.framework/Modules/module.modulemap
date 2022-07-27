@@ -1,0 +1,4 @@
+framework module LoopMeUnitedSDK {
+  header "LoopMeUnitedSDK-Swift.h"
+  requires objc
+}

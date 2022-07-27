@@ -1,0 +1,385 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-module-flags: -target arm64-apple-ios12.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name LoopMeUnitedSDK
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+public struct ProgressEvent : Swift.Hashable {
+  public var link: Swift.String
+  public var offset: Foundation.TimeInterval
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: LoopMeUnitedSDK.ProgressEvent, b: LoopMeUnitedSDK.ProgressEvent) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class VastProperties : ObjectiveC.NSObject {
+  public var adId: Swift.String?
+  public var duration: Swift.Double
+  public var skipOffset: LoopMeUnitedSDK.VastSkipOffset
+  public var adTagURI: Swift.String?
+  public var isWrapper: Swift.Bool
+  public func append(vastProperties: LoopMeUnitedSDK.VastProperties)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension LoopMeUnitedSDK.VastProperties : Foundation.XMLParserDelegate {
+  @objc dynamic public func parser(_ parser: Foundation.XMLParser, didStartElement elementName: Swift.String, namespaceURI: Swift.String?, qualifiedName qName: Swift.String?, attributes attributeDict: [Swift.String : Swift.String] = [:])
+  @objc dynamic public func parser(_ parser: Foundation.XMLParser, didEndElement elementName: Swift.String, namespaceURI: Swift.String?, qualifiedName qName: Swift.String?)
+  @objc dynamic public func parser(_ parser: Foundation.XMLParser, foundCDATA CDATABlock: Foundation.Data)
+  @objc dynamic public func parser(_ parser: Foundation.XMLParser, foundCharacters string: Swift.String)
+}
+@_inheritsConvenienceInitializers @objc(LoopMeCCPATools) public class CCPATools : ObjectiveC.NSObject {
+  @objc public static var ccpaString: Swift.String {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc(LoopMeVASTEventType) public enum VASTEventType : Swift.Int {
+  case impression
+  case linearStart
+  case linearFirstQuartile
+  case linearMidpoint
+  case linearThirdQuartile
+  case linearComplete
+  case linearClose
+  case linearPause
+  case linearResume
+  case linearExpand
+  case linearCollapse
+  case linearSkip
+  case linearMute
+  case linearUnmute
+  case linearProgress
+  case linearClickTracking
+  case companionCreativeView
+  case companionClickTracking
+  case viewable
+  case notViewable
+  case viewUndetermined
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class UserAgent : ObjectiveC.NSObject {
+  @objc public static var defaultUserAgent: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct AssetLinks {
+}
+@objc(LoopMeServerCommunicator) open class ServerCommunicator : ObjectiveC.NSObject {
+  weak public var delegate: LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?
+  public var isLoading: Swift.Bool {
+    get
+  }
+  @objc public var appKey: Swift.String?
+  @objc public init(delegate: LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?)
+  @objc public func load(url: Foundation.URL, requestBody: Foundation.Data?, method: Swift.String?)
+  @objc public func cancel()
+  @objc deinit
+}
+@objc public protocol LoopMeServerCommunicatorDelegate : ObjectiveC.NSObjectProtocol {
+  @objc func serverCommunicator(_ communicator: LoopMeUnitedSDK.ServerCommunicator, didReceive adConfiguration: LoopMeUnitedSDK.AdConfigurationWrapper)
+  @objc func serverCommunicator(_ communicator: LoopMeUnitedSDK.ServerCommunicator, didFailWith error: Swift.Error?)
+  @objc func serverCommunicatorDidReceiveAd(_ communicator: LoopMeUnitedSDK.ServerCommunicator)
+}
+public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING: Swift.String
+public struct AdConfiguration {
+  public var vastProperties: LoopMeUnitedSDK.VastProperties?
+}
+extension LoopMeUnitedSDK.AdConfiguration : Swift.Decodable {
+  public init(from decoder: Swift.Decoder) throws
+}
+@objc(LoopMeTimeOffsetType) public enum TimeOffsetType : Swift.Int {
+  case percent
+  case seconds
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct VastSkipOffset {
+}
+@objc(LoopMeAdOrientation) public enum AdOrientationWrapper : Swift.Int {
+  case undefined
+  case portrait
+  case landscape
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(LoopMeCreativeType) public enum CreativeTypWrapper : Swift.Int {
+  case vpaid
+  case vast
+  case normal
+  case mraid
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(LoopMeTrackerName) public enum TrackerNameWrapper : Swift.Int {
+  case ias = 0
+  case moat
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(LoopMeAdConfiguration) public class AdConfigurationWrapper : ObjectiveC.NSObject {
+  public init(adConfiguration: LoopMeUnitedSDK.AdConfiguration)
+  @objc public var appKey: Swift.String {
+    @objc get
+    @objc set
+  }
+  @objc public var adId: Swift.String {
+    @objc get
+  }
+  @objc public var isV360: Swift.Bool {
+    @objc get
+  }
+  @objc public var debug: Swift.Bool {
+    @objc get
+  }
+  @objc public var preload25: Swift.Bool {
+    @objc get
+  }
+  @objc public var adOrientation: LoopMeUnitedSDK.AdOrientationWrapper {
+    @objc get
+    @objc set
+  }
+  @objc public var creativeType: LoopMeUnitedSDK.CreativeTypWrapper {
+    @objc get
+  }
+  @objc public var creativeContent: Swift.String {
+    @objc get
+    @objc set
+  }
+  @objc public var isPortrait: Swift.Bool {
+    @objc get
+  }
+  @objc public var adIdsForMoat: Swift.Dictionary<Swift.String, Any> {
+    @objc get
+  }
+  @objc public var adIdsForIAS: Swift.Dictionary<Swift.String, Any> {
+    @objc get
+  }
+  @objc public var expandProperties: LoopMeUnitedSDK.MRAIDExpandPropertiesWrapper?
+  @objc public var vastProperties: LoopMeUnitedSDK.VastPropertiesWrapper?
+  @objc public var allowOrientationChange: Swift.Bool
+  @objc public func useTracking(_ trackerNameWrapped: LoopMeUnitedSDK.TrackerNameWrapper) -> Swift.Bool
+  @objc deinit
+}
+@objc(LoopMeVASTEventTracker) public class VastEventTrackerWrapper : ObjectiveC.NSObject {
+  @objc public init(trackingLinks: LoopMeUnitedSDK.AdTrackingLinksWrapper)
+  @objc public func trackEvent(_ event: LoopMeUnitedSDK.VASTEventType)
+  @objc public func trackErrorCode(_ code: Swift.Int)
+  @objc public func trackAdVerificationNonExecuted()
+  @objc public func setCurrentTime(_ currentTime: Foundation.TimeInterval)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeProgressEvent) public class ProgressEventWrappper : ObjectiveC.NSObject {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeVastProperties) public class VastPropertiesWrapper : ObjectiveC.NSObject {
+  @objc public var adId: Swift.String? {
+    @objc get
+  }
+  @objc public var duration: Foundation.TimeInterval {
+    @objc get
+  }
+  @objc public var skipOffset: LoopMeUnitedSDK.VastSkipOffsetWrapper {
+    @objc get
+  }
+  @objc public var trackingLinks: LoopMeUnitedSDK.AdTrackingLinksWrapper {
+    @objc get
+  }
+  @objc public var assetLinks: LoopMeUnitedSDK.AssetLinksWrapper {
+    @objc get
+  }
+  @objc public var adVerifications: [LoopMeUnitedSDK.AdVerificationWrapper] {
+    @objc get
+  }
+  @objc public var isVpaid: Swift.Bool {
+    @objc get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeAdTrackingLinks) public class AdTrackingLinksWrapper : ObjectiveC.NSObject {
+  @objc public var errorTemplates: Swift.Set<Swift.String> {
+    @objc get
+  }
+  @objc public var impression: Swift.Set<Swift.String> {
+    @objc get
+  }
+  @objc public var clickVideo: Swift.String {
+    @objc get
+  }
+  @objc public var clickCompanion: Swift.String {
+    @objc get
+  }
+  @objc public var viewableImpression: LoopMeUnitedSDK.ViewableImpressionWrapper {
+    @objc get
+  }
+  @objc public var linear: LoopMeUnitedSDK.LinearTrackingWrapper {
+    @objc get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeVastSkipOffset) public class VastSkipOffsetWrapper : ObjectiveC.NSObject {
+  @objc public var value: Swift.Double {
+    @objc get
+  }
+  @objc public var type: LoopMeUnitedSDK.TimeOffsetType {
+    @objc get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeAssetLinks) public class AssetLinksWrapper : ObjectiveC.NSObject {
+  @objc public var videoURL: [Swift.String] {
+    @objc get
+  }
+  @objc public var vpaidURL: Swift.String {
+    @objc get
+  }
+  @objc public var adParameters: Swift.String {
+    @objc get
+  }
+  @objc public var endCard: Swift.Array<Swift.String> {
+    @objc get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeAdVerification) public class AdVerificationWrapper : ObjectiveC.NSObject {
+  @objc public var vendor: Swift.String {
+    @objc get
+  }
+  @objc public var jsResource: Swift.String {
+    @objc get
+  }
+  @objc public var verificationParameters: Swift.String {
+    @objc get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeViewableImpression) public class ViewableImpressionWrapper : ObjectiveC.NSObject {
+  public var viewable: Swift.Set<Swift.String> {
+    get
+  }
+  public var notViewable: Swift.Set<Swift.String> {
+    get
+  }
+  public var viewUndetermined: Swift.Set<Swift.String> {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeLinearTracking) public class LinearTrackingWrapper : ObjectiveC.NSObject {
+  public var start: Swift.Set<Swift.String> {
+    get
+  }
+  public var firstQuartile: Swift.Set<Swift.String> {
+    get
+  }
+  public var midpoint: Swift.Set<Swift.String> {
+    get
+  }
+  public var thirdQuartile: Swift.Set<Swift.String> {
+    get
+  }
+  public var complete: Swift.Set<Swift.String> {
+    get
+  }
+  public var mute: Swift.Set<Swift.String> {
+    get
+  }
+  public var unmute: Swift.Set<Swift.String> {
+    get
+  }
+  public var pause: Swift.Set<Swift.String> {
+    get
+  }
+  public var resume: Swift.Set<Swift.String> {
+    get
+  }
+  public var fullscreen: Swift.Set<Swift.String> {
+    get
+  }
+  public var exitFullscreen: Swift.Set<Swift.String> {
+    get
+  }
+  public var skip: Swift.Set<Swift.String> {
+    get
+  }
+  public var close: Swift.Set<Swift.String> {
+    get
+  }
+  public var progress: Swift.Set<LoopMeUnitedSDK.ProgressEvent> {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(LoopMeProgressEventTracker) public class ProgressEventTrackerWrapper : ObjectiveC.NSObject {
+  public var link: Swift.String {
+    get
+  }
+  public var offset: Foundation.TimeInterval {
+    get
+  }
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc(LoopMeMRAIDExpandProperties) public class MRAIDExpandPropertiesWrapper : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc public var width: Swift.Float {
+    @objc get
+    @objc set
+  }
+  @objc public var height: Swift.Float {
+    @objc get
+    @objc set
+  }
+  @objc public var useCustomClose: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc(LoopMeCOPPATools) public class CoppaTools : ObjectiveC.NSObject {
+  @objc public static var coppa: Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct AdVerification {
+  public static var empty: LoopMeUnitedSDK.AdVerification
+  public var vendor: Swift.String
+  public var jsResource: Swift.String
+  public var verificationParameters: Swift.String
+}
+extension LoopMeUnitedSDK.VASTEventType : Swift.Equatable {}
+extension LoopMeUnitedSDK.VASTEventType : Swift.Hashable {}
+extension LoopMeUnitedSDK.VASTEventType : Swift.RawRepresentable {}
+extension LoopMeUnitedSDK.TimeOffsetType : Swift.Equatable {}
+extension LoopMeUnitedSDK.TimeOffsetType : Swift.Hashable {}
+extension LoopMeUnitedSDK.TimeOffsetType : Swift.RawRepresentable {}
+extension LoopMeUnitedSDK.AdOrientationWrapper : Swift.Equatable {}
+extension LoopMeUnitedSDK.AdOrientationWrapper : Swift.Hashable {}
+extension LoopMeUnitedSDK.AdOrientationWrapper : Swift.RawRepresentable {}
+extension LoopMeUnitedSDK.CreativeTypWrapper : Swift.Equatable {}
+extension LoopMeUnitedSDK.CreativeTypWrapper : Swift.Hashable {}
+extension LoopMeUnitedSDK.CreativeTypWrapper : Swift.RawRepresentable {}
+extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.Equatable {}
+extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.Hashable {}
+extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.RawRepresentable {}
