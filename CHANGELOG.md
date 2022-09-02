@@ -1,3 +1,7 @@
+## Version 7.3.7 (27.07.2022)
+
+- add AppLovin adapter
+
 ## Version 7.3.6 (26.01.2022)
 
 - update admob adapter
