@@ -21,7 +21,7 @@ You will need the app key during next steps of integration.
 
 ## Manual adding LoopMe IOs SDK ##
 Add LoopMeSDK to your unity project and
-Download and add [unitybridge.unitypackage](https://github.com/loopme/ios-united-sdk/raw/master/Mediation/unity/unitybridge.unitypackage) to your unity project
+Download and add [unitybridge.unitypackage](https://github.com/loopme/ios-united-sdk/raw/master/Mediation/untiy/unitybridge.unitypackage) to your unity project
 
 ## Initialization ##
 
