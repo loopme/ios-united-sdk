@@ -47,7 +47,7 @@ Make sure `LoopMeSdk` is [initialized](https://github.com/loopme/ios-united-sdk/
 
 * Click <b>Add Custom Adapter.</b>
 <p><img src="images/custom_adapter_ironsource.png" /></p>
-network key is 15b9d4529
+network key is 15bd4aa9d
 <p><img src="images/create_custom_ironsource.png" /></p>
 
 Class Name should be: 'ISLoopmeCustomAdapter'. <br>

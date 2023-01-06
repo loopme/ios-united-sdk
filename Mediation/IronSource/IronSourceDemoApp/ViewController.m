@@ -8,7 +8,7 @@
 #import "ViewController.h"
 #import <IronSource/IronSource.h>
 #import "ISLoopmeCustomInterstitial.h"
-//#import "LoopMeSDK.h"
+#import "LoopMeUnitedSDK/LoopMeSDK.h"
 
 #define USERID @"demoapp"
 #define APPKEY @"127d76565"

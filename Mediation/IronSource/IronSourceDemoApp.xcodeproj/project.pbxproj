@@ -14,8 +14,9 @@
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
 		72E0D65E1E267513009ABC1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D6541E267513009ABC1B /* ViewController.m */; };
 		72E0D6601E2675C7009ABC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D65F1E2675C7009ABC1B /* main.m */; };
-		8100B13D2766AB760082D776 /* IronSource.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8100B13B2766AB610082D776 /* IronSource.xcframework */; };
-		81079704278F86ED0049095F /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81079703278F86ED0049095F /* LoopMeUnitedSDK.framework */; platformFilter = ios; };
+		812B18612966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */; };
+		812B18632967D7B600027EB3 /* LoopMeUnitedSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812B18622967D7B600027EB3 /* LoopMeUnitedSDK.xcframework */; };
+		812B18652967D80C00027EB3 /* IronSource.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812B18642967D80C00027EB3 /* IronSource.xcframework */; };
 		818BC8F52768592A0043E4CF /* ISLoopmeCustomAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 818BC8F42768592A0043E4CF /* ISLoopmeCustomAdapter.m */; };
 		818BC8F827689BC00043E4CF /* ISLoopmeCustomInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 818BC8F727689BC00043E4CF /* ISLoopmeCustomInterstitial.m */; };
 		818BC8FC27691FF50043E4CF /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 818BC8FB27691FF50043E4CF /* LoopMeResources.bundle */; };
@@ -46,8 +47,10 @@
 		72E0D6541E267513009ABC1B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = IronSourceDemoApp/main.m; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8100B13B2766AB610082D776 /* IronSource.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = IronSource.xcframework; sourceTree = "<group>"; };
-		81079703278F86ED0049095F /* LoopMeUnitedSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoopMeUnitedSDK.framework; sourceTree = "<group>"; };
+		812B185F2966F92400027EB3 /* ISLoopmeCustomRewardedVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomRewardedVideo.h; sourceTree = "<group>"; };
+		812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomRewardedVideo.m; sourceTree = "<group>"; };
+		812B18622967D7B600027EB3 /* LoopMeUnitedSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LoopMeUnitedSDK.xcframework; path = ../../LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework; sourceTree = "<group>"; };
+		812B18642967D80C00027EB3 /* IronSource.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IronSource.xcframework; path = "../../../../../Downloads/IronSource 2/IronSource.xcframework"; sourceTree = "<group>"; };
 		818BC8F3276858C50043E4CF /* ISLoopmeCustomAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomAdapter.h; sourceTree = "<group>"; };
 		818BC8F42768592A0043E4CF /* ISLoopmeCustomAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomAdapter.m; sourceTree = "<group>"; };
 		818BC8F627689B850043E4CF /* ISLoopmeCustomInterstitial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomInterstitial.h; sourceTree = "<group>"; };
@@ -76,18 +79,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				47B0AD2A1CB5252100B8D125 /* WebKit.framework in Frameworks */,
-				81079704278F86ED0049095F /* LoopMeUnitedSDK.framework in Frameworks */,
+				812B18632967D7B600027EB3 /* LoopMeUnitedSDK.xcframework in Frameworks */,
 				E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */,
 				E80C8FCF1C16E4C800CF3C27 /* AdSupport.framework in Frameworks */,
 				E80C8FCD1C16E4C400CF3C27 /* StoreKit.framework in Frameworks */,
 				E80C8FCB1C16E4BC00CF3C27 /* libz.tbd in Frameworks */,
 				E80C8FC91C16E4B700CF3C27 /* MobileCoreServices.framework in Frameworks */,
-				8100B13D2766AB760082D776 /* IronSource.xcframework in Frameworks */,
 				E80C8FC71C16E4B100CF3C27 /* CFNetwork.framework in Frameworks */,
 				E80C8FC51C16E4AC00CF3C27 /* SystemConfiguration.framework in Frameworks */,
 				E80C8FC31C16E4A600CF3C27 /* QuartzCore.framework in Frameworks */,
 				E80C8FBD1C16E4A000CF3C27 /* CoreGraphics.framework in Frameworks */,
 				E80C8FBE1C16E4A000CF3C27 /* CoreLocation.framework in Frameworks */,
+				812B18652967D80C00027EB3 /* IronSource.xcframework in Frameworks */,
 				E80C8FBF1C16E4A000CF3C27 /* CoreMedia.framework in Frameworks */,
 				E80C8FC11C16E4A000CF3C27 /* CoreVideo.framework in Frameworks */,
 				E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */,
@@ -114,6 +117,8 @@
 				818BC8F42768592A0043E4CF /* ISLoopmeCustomAdapter.m */,
 				818BC8F627689B850043E4CF /* ISLoopmeCustomInterstitial.h */,
 				818BC8F727689BC00043E4CF /* ISLoopmeCustomInterstitial.m */,
+				812B185F2966F92400027EB3 /* ISLoopmeCustomRewardedVideo.h */,
+				812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */,
 			);
 			path = IronSourceDemoApp;
 			sourceTree = "<group>";
@@ -148,8 +153,8 @@
 		E80C8FD21C16E52200CF3C27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				81079703278F86ED0049095F /* LoopMeUnitedSDK.framework */,
-				8100B13B2766AB610082D776 /* IronSource.xcframework */,
+				812B18642967D80C00027EB3 /* IronSource.xcframework */,
+				812B18622967D7B600027EB3 /* LoopMeUnitedSDK.xcframework */,
 				47B0AD291CB5252100B8D125 /* WebKit.framework */,
 				E80C8FD01C16E4D200CF3C27 /* Security.framework */,
 				E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */,
@@ -245,6 +250,7 @@
 				72E0D65E1E267513009ABC1B /* ViewController.m in Sources */,
 				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
 				818BC8F52768592A0043E4CF /* ISLoopmeCustomAdapter.m in Sources */,
+				812B18612966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
