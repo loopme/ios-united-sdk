@@ -38,6 +38,12 @@
             NSLog(@"%@", error);
         }
     }];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:@"bdfae122a1" forKey:@"LOOPME_INTERSTITIAL"];
+        [standardUserDefaults synchronize];
+    }
     
     //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
     [ISIntegrationHelper validateIntegration];
@@ -87,7 +93,7 @@
      * Banner integration
      * To finalize your banner integration, you must integrate at least one of our mediation adapters that have banner.
      */
-    [IronSource loadInterstitial];
+    [IronSource loadRewardedVideo];
 }
 
 - (void)didReceiveMemoryWarning {
