@@ -27,6 +27,7 @@
         appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
     NSLog(@"loopme's appkey - %@", appkey);
     self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
+    [self.interstitial setAutoLoadingEnabled:FALSE];
 
     self.delegate = delegate;
     [self.interstitial loadAd];

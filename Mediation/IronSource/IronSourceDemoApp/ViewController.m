@@ -13,16 +13,16 @@
 #define USERID @"demoapp"
 #define APPKEY @"127d76565"
 
-@interface ViewController () <ISRewardedVideoDelegate ,ISInterstitialDelegate ,ISOfferwallDelegate ,ISBannerDelegate,ISImpressionDataDelegate>
+@interface ViewController () <ISRewardedVideoDelegate ,ISInterstitialDelegate ,ISImpressionDataDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *showRVButton;
-@property (weak, nonatomic) IBOutlet UIButton *showOWButton;
+@property (weak, nonatomic) IBOutlet UIButton *loadRVButton;
 @property (weak, nonatomic) IBOutlet UIButton *showISButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
-@property (weak, nonatomic) IBOutlet UILabel  *versionLabel;
+@property (weak, nonatomic) IBOutlet UITextField *rvAppKey;
+@property (weak, nonatomic) IBOutlet UITextField *interstitialAppKey;
 
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
-@property (nonatomic, strong) ISBannerView      *bannerView;
 @end
 
 @implementation ViewController
@@ -38,20 +38,12 @@
             NSLog(@"%@", error);
         }
     }];
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 
-    if (standardUserDefaults) {
-        [standardUserDefaults setObject:@"bdfae122a1" forKey:@"LOOPME_INTERSTITIAL"];
-        [standardUserDefaults synchronize];
-    }
+
+
+
     
-    //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
-    [ISIntegrationHelper validateIntegration];
-    
-    // UI setup
-    self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
-    
-    for (UIButton *button in @[self.showISButton, self.showOWButton, self.showRVButton, self.loadISButton]) {
+    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -68,9 +60,7 @@
     // to be able to enable/disable buttons to match ad availability.
     
     [IronSource setRewardedVideoDelegate:self];
-    [IronSource setOfferwallDelegate:self];
     [IronSource setInterstitialDelegate:self];
-    [IronSource setBannerDelegate:self];
     [IronSource addImpressionDataDelegate:self];
 
     NSString *userId = [IronSource advertiserId];
@@ -104,6 +94,15 @@
 #pragma mark -
 #pragma mark Interface Handling
 
+- (IBAction)loadRVButtonTapped:(id)sender {
+    NSString *appkey = self.rvAppKey.text;
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:appkey forKey:@"LOOPME_INTERSTITIAL"];
+        [standardUserDefaults synchronize];
+    }
+    [IronSource loadRewardedVideo];
+}
 - (IBAction)showRVButtonTapped:(id)sender {
     
     // After calling 'setRVDelegate' and 'initRVWithAppKey:withUserId'
@@ -114,12 +113,6 @@
     [IronSource showRewardedVideoWithViewController:self];
 }
 
-- (IBAction)showOWButtonTapped:(id)sender {
-    
-    // This will present the Offerwall. Unlike Rewarded
-    // Videos there are no placements.
-    [IronSource showOfferwallWithViewController:self];
-}
 
 - (IBAction)showISButtonTapped:(id)sender {
     
@@ -129,35 +122,17 @@
 }
 
 - (IBAction)loadISButtonTapped:(id)sender {
+    NSString *appkey = self.rvAppKey.text;
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:appkey forKey:@"LOOPME_INTERSTITIAL"];
+        [standardUserDefaults synchronize];
+    }
     // This will load the Interstitial. Unlike Rewarded
     // Videos there are no placements.
     [IronSource loadInterstitial];
 }
 
-- (void)loadBanner {
-
-    // We call destroy banner before loading a new banner
-    if (self.bannerView) {
-        [self destroyBanner];
-    }
-    
-    // This will load the Banner. You can supply a placement
-    // by calling 'loadBannerWithViewController:size:placement', or you can simply
-    // call 'loadBannerWithViewController:size'. In this case the SDK will use the default
-    // placement one created for you.
-    // You can pick any banner size : ISBannerSize_BANNER, ISBannerSize_LARGE, IS_AD_SIZE_RECTANGLE
-    [IronSource loadBannerWithViewController:self
-                                        size:ISBannerSize_BANNER];
-}
-
-- (void)destroyBanner {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.bannerView) {
-            [IronSource destroyBanner:self.bannerView];
-            self.bannerView = nil;
-        }
-    });
-}
 #pragma mark - Rewarded Video Delegate Functions
 
 // This method lets you know whether or not there is a video
@@ -220,51 +195,6 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-#pragma mark - Offerwall Delegate Functions
-
-// This method gets invoked after the availability of the Offerwall changes.
-- (void)offerwallHasChangedAvailability:(BOOL)available {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showOWButton setEnabled:available];
-    });
-}
-
-// This method gets invoked each time the Offerwall loaded successfully.
-- (void)offerwallDidShow {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-// This method gets invoked after a failed attempt to load the Offerwall.
-// If it does happen, check out 'error' for more information and consult our
-// Knowledge center.
-- (void)offerwallDidFailToShowWithError:(NSError *)error {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-// This method gets invoked after the user had clicked the little
-// 'x' button at the top-right corner of the screen.
-- (void)offerwallDidClose {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-// This method will be called each time the user has completed an offer.
-// All relative information is stored in 'creditInfo' and it is
-// specified in more detail in 'SupersonicOWDelegate.h'.
-// If you return NO the credit for the last offer will be added to
-// Everytime you return 'NO' we aggragate the credit and return it all
-// at one time when you return 'YES'.
-- (BOOL)didReceiveOfferwallCredits:(NSDictionary *)creditInfo {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    return YES;
-}
-
-// This method get invoked when the ‘-getOWCredits’ fails to retrieve
-// the user's credit balance info.
-- (void)didFailToReceiveOfferwallCreditsWithError:(NSError *)error {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
 #pragma mark - Interstitial Delegate Functions
 
 - (void)interstitialDidLoad {
@@ -305,67 +235,6 @@
 // This method get invoked after the Interstitial window had closed and control
 // returns to your application.
 - (void)interstitialDidClose {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-#pragma mark - Banner Delegate Functions
-
-/**
- Called after a banner ad has been successfully loaded
- */
-- (void)bannerDidLoad:(ISBannerView *)bannerView {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.bannerView = bannerView;
-        if (@available(iOS 11.0, *)) {
-            [self.bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (self.bannerView.frame.size.height/2.0) - self.view.safeAreaInsets.bottom)]; // safeAreaInsets is available from iOS 11.0
-        } else {
-            [self.bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (self.bannerView.frame.size.height/2.0))];
-        }
-        [self.view addSubview:self.bannerView];
-    });
-}
-
-/**
- Called after a banner ad has been successfully shown
- */
-- (void)bannerDidShow {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-/**
- Called after a banner has attempted to load an ad but failed.
-  @param error The reason for the error
- */
-- (void)bannerDidFailToLoadWithError:(NSError *)error {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-/**
- Called after a banner has been clicked.
- */
-- (void)didClickBanner {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-/**
- Called when a banner is about to present a full screen content.
- */
-- (void)bannerWillPresentScreen {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-/**
- Called after a full screen content has been dismissed.
- */
-- (void)bannerDidDismissScreen {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-/**
- Called when a user would be taken out of the application context.
- */
-- (void)bannerWillLeaveApplication {
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
