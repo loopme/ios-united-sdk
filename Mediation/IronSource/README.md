@@ -32,7 +32,7 @@ Copy the LoopMeSDK Sources folder (source code) or LoopMeUnitedSDK.embeddedframe
 
 ## Adding LoopMe's IronSource Bridge ##
 
-Download `ISLoopmeCustomAdapter` and `ISLoopmeCustomInterstitial` classes and move it to `your project`.
+Download `ISLoopmeCustomAdapter`, `ISLoopmeCustomInterstitial` and `ISLoopmeCustomRewardedVideo`  classes and move it to `your project`.
 
 ## Initialization ##
 
