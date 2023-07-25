@@ -41,12 +41,12 @@
                           adData:(nonnull ISAdData *)adData
                         delegate:(nonnull id<ISRewardedVideoAdDelegate>)delegate {
     // check if ad can be displayed
-     //[self.interstitial showFromViewController:self];
     if (![self.interstitial isReady]) {
        [delegate adDidFailToShowWithErrorCode:ISAdapterErrorInternal
                                   errorMessage:nil];
        return;
     }
+     [self.interstitial showFromViewController:viewController animated:YES];
      [delegate adDidShowSucceed];
 }
 

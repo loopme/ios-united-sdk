@@ -14,8 +14,8 @@
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
 		72E0D65E1E267513009ABC1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D6541E267513009ABC1B /* ViewController.m */; };
 		72E0D6601E2675C7009ABC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D65F1E2675C7009ABC1B /* main.m */; };
-		811663612A66E82D00B397AB /* LoopMeUnitedSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811663592A66E7B300B397AB /* LoopMeUnitedSDK.xcframework */; };
-		811663672A66ECDF00B397AB /* IronSource.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811663662A66ECDF00B397AB /* IronSource.xcframework */; };
+		811663922A6FF84100B397AB /* LoopMeUnitedSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811663592A66E7B300B397AB /* LoopMeUnitedSDK.xcframework */; };
+		811663962A6FF88D00B397AB /* IronSource.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811663952A6FF88D00B397AB /* IronSource.xcframework */; };
 		812B18612966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */; };
 		818BC8F52768592A0043E4CF /* ISLoopmeCustomAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 818BC8F42768592A0043E4CF /* ISLoopmeCustomAdapter.m */; };
 		818BC8F827689BC00043E4CF /* ISLoopmeCustomInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 818BC8F727689BC00043E4CF /* ISLoopmeCustomInterstitial.m */; };
@@ -36,19 +36,6 @@
 		E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FD01C16E4D200CF3C27 /* Security.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		811663652A66E86E00B397AB /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		47B0AD291CB5252100B8D125 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		72E0D6441E267513009ABC1B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,7 +48,7 @@
 		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = IronSourceDemoApp/main.m; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		811663592A66E7B300B397AB /* LoopMeUnitedSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LoopMeUnitedSDK.xcframework; path = ../../../LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework; sourceTree = "<group>"; };
-		811663662A66ECDF00B397AB /* IronSource.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IronSource.xcframework; path = "../../../../../../Downloads/IronSource 2/IronSource.xcframework"; sourceTree = "<group>"; };
+		811663952A6FF88D00B397AB /* IronSource.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IronSource.xcframework; path = "../../../../../../Downloads/IronSource 3/IronSource.xcframework"; sourceTree = "<group>"; };
 		812B185F2966F92400027EB3 /* ISLoopmeCustomRewardedVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomRewardedVideo.h; sourceTree = "<group>"; };
 		812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomRewardedVideo.m; sourceTree = "<group>"; };
 		818BC8F3276858C50043E4CF /* ISLoopmeCustomAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomAdapter.h; sourceTree = "<group>"; };
@@ -92,10 +79,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				47B0AD2A1CB5252100B8D125 /* WebKit.framework in Frameworks */,
-				811663612A66E82D00B397AB /* LoopMeUnitedSDK.xcframework in Frameworks */,
+				811663922A6FF84100B397AB /* LoopMeUnitedSDK.xcframework in Frameworks */,
 				E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */,
 				E80C8FCF1C16E4C800CF3C27 /* AdSupport.framework in Frameworks */,
-				811663672A66ECDF00B397AB /* IronSource.xcframework in Frameworks */,
 				E80C8FCD1C16E4C400CF3C27 /* StoreKit.framework in Frameworks */,
 				E80C8FCB1C16E4BC00CF3C27 /* libz.tbd in Frameworks */,
 				E80C8FC91C16E4B700CF3C27 /* MobileCoreServices.framework in Frameworks */,
@@ -104,6 +90,7 @@
 				E80C8FC31C16E4A600CF3C27 /* QuartzCore.framework in Frameworks */,
 				E80C8FBD1C16E4A000CF3C27 /* CoreGraphics.framework in Frameworks */,
 				E80C8FBE1C16E4A000CF3C27 /* CoreLocation.framework in Frameworks */,
+				811663962A6FF88D00B397AB /* IronSource.xcframework in Frameworks */,
 				E80C8FBF1C16E4A000CF3C27 /* CoreMedia.framework in Frameworks */,
 				E80C8FC11C16E4A000CF3C27 /* CoreVideo.framework in Frameworks */,
 				E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */,
@@ -166,7 +153,7 @@
 		E80C8FD21C16E52200CF3C27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				811663662A66ECDF00B397AB /* IronSource.xcframework */,
+				811663952A6FF88D00B397AB /* IronSource.xcframework */,
 				811663592A66E7B300B397AB /* LoopMeUnitedSDK.xcframework */,
 				47B0AD291CB5252100B8D125 /* WebKit.framework */,
 				E80C8FD01C16E4D200CF3C27 /* Security.framework */,
@@ -197,7 +184,6 @@
 				E80C8F941C16E28400CF3C27 /* Sources */,
 				E80C8F951C16E28400CF3C27 /* Frameworks */,
 				E80C8F961C16E28400CF3C27 /* Resources */,
-				811663652A66E86E00B397AB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

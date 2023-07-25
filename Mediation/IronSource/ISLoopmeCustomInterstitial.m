@@ -12,14 +12,14 @@
 
 @interface ISLoopmeCustomInterstitial()<LoopMeInterstitialDelegate>
 @property (nonatomic, strong) LoopMeInterstitial *interstitial;
-@property (nonatomic, strong) id<ISAdapterAdDelegate> delegate;
+@property (nonatomic, strong) id<ISInterstitialAdDelegate> delegate;
 @end
 
 
 @implementation ISLoopmeCustomInterstitial
 
 - (void)loadAdWithAdData:(nonnull ISAdData *)adData
-                delegate:(nonnull id<ISAdapterAdDelegate>)delegate {
+                delegate:(nonnull id<ISInterstitialAdDelegate>)delegate {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     NSString *appkey = nil;
 
@@ -27,6 +27,7 @@
         appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
     NSLog(@"loopme's appkey - %@", appkey);
     self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
+    [self.interstitial setAutoLoadingEnabled:FALSE];
 
     self.delegate = delegate;
     [self.interstitial loadAd];
@@ -34,19 +35,19 @@
 
 
 - (BOOL)isAdAvailableWithAdData:(nonnull ISAdData *)adData {
-   return true;
+    return [self.interstitial isReady];
 }
 
 - (void)showAdWithViewController:(nonnull UIViewController *)viewController
                           adData:(nonnull ISAdData *)adData
-                        delegate:(nonnull id<ISAdapterAdDelegate>)delegate {
+                        delegate:(nonnull id<ISInterstitialAdDelegate>)delegate {
    // check if ad can be displayed
-    //[self.interstitial showFromViewController:self];
-   if (1==2) {
+   if (![self.interstitial isReady]) {
       [delegate adDidFailToShowWithErrorCode:ISAdapterErrorInternal
                                  errorMessage:nil];
       return;
    }
+    [self.interstitial showFromViewController:viewController animated:YES];
     [delegate adDidShowSucceed];
 }
 

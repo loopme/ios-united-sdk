@@ -27,6 +27,7 @@
         appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
     NSLog(@"loopme's appkey - %@", appkey);
     self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
+    [self.interstitial setAutoLoadingEnabled:FALSE];
 
     self.delegate = delegate;
     [self.interstitial loadAd];
@@ -40,12 +41,12 @@
                           adData:(nonnull ISAdData *)adData
                         delegate:(nonnull id<ISRewardedVideoAdDelegate>)delegate {
     // check if ad can be displayed
-     //[self.interstitial showFromViewController:self];
     if (![self.interstitial isReady]) {
        [delegate adDidFailToShowWithErrorCode:ISAdapterErrorInternal
                                   errorMessage:nil];
        return;
     }
+     [self.interstitial showFromViewController:viewController animated:YES];
      [delegate adDidShowSucceed];
 }
 
