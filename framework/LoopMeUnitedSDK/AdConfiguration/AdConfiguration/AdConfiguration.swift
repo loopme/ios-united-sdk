@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING = "loopmeautoloading"
 
@@ -139,7 +140,14 @@ extension AdConfiguration: Decodable {
             self.debug = false
             self.preload25 = false
             
-            self.adOrientation = .portrait
+            switch UIDevice.current.orientation{
+            case .portrait:
+                self.adOrientation = .portrait
+            case .landscapeLeft, .landscapeRight:
+                self.adOrientation = .landscape
+            default:
+                self.adOrientation = .landscape
+            }
             
             let searchString = "<VAST"
             let isVast = self.creativeContent.range(of: searchString, options: .caseInsensitive) != nil

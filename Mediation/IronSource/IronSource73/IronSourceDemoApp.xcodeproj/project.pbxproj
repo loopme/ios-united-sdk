@@ -14,7 +14,6 @@
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
 		72E0D65E1E267513009ABC1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D6541E267513009ABC1B /* ViewController.m */; };
 		72E0D6601E2675C7009ABC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D65F1E2675C7009ABC1B /* main.m */; };
-		811663612A66E82D00B397AB /* LoopMeUnitedSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811663592A66E7B300B397AB /* LoopMeUnitedSDK.xcframework */; };
 		8116638E2A66F2DB00B397AB /* IronSource.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8116638D2A66F2DB00B397AB /* IronSource.xcframework */; };
 		812B18612966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */; };
 		818BC8F52768592A0043E4CF /* ISLoopmeCustomAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 818BC8F42768592A0043E4CF /* ISLoopmeCustomAdapter.m */; };
@@ -35,6 +34,23 @@
 		E80C8FCF1C16E4C800CF3C27 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */; };
 		E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FD01C16E4D200CF3C27 /* Security.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8116639F2A72645300B397AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 811663992A72645300B397AB /* LoopMeUnitedSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 47714E2E22FAF9CE00DF0D55;
+			remoteInfo = LoopMeUnitedSDK;
+		};
+		811663A12A72645300B397AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 811663992A72645300B397AB /* LoopMeUnitedSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 47714E3722FAF9CF00DF0D55;
+			remoteInfo = LoopMeUnitedSDKTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		811663652A66E86E00B397AB /* Embed Frameworks */ = {
@@ -60,8 +76,8 @@
 		72E0D6541E267513009ABC1B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = IronSourceDemoApp/main.m; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		811663592A66E7B300B397AB /* LoopMeUnitedSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LoopMeUnitedSDK.xcframework; path = ../../../LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework; sourceTree = "<group>"; };
 		8116638D2A66F2DB00B397AB /* IronSource.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = IronSource.xcframework; path = "../../../../../../Downloads/IronSource 3/IronSource.xcframework"; sourceTree = "<group>"; };
+		811663992A72645300B397AB /* LoopMeUnitedSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LoopMeUnitedSDK.xcodeproj; path = ../../../framework/LoopMeUnitedSDK.xcodeproj; sourceTree = "<group>"; };
 		812B185F2966F92400027EB3 /* ISLoopmeCustomRewardedVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomRewardedVideo.h; sourceTree = "<group>"; };
 		812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomRewardedVideo.m; sourceTree = "<group>"; };
 		818BC8F3276858C50043E4CF /* ISLoopmeCustomAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomAdapter.h; sourceTree = "<group>"; };
@@ -92,7 +108,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				47B0AD2A1CB5252100B8D125 /* WebKit.framework in Frameworks */,
-				811663612A66E82D00B397AB /* LoopMeUnitedSDK.xcframework in Frameworks */,
 				E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */,
 				E80C8FCF1C16E4C800CF3C27 /* AdSupport.framework in Frameworks */,
 				E80C8FCD1C16E4C400CF3C27 /* StoreKit.framework in Frameworks */,
@@ -136,6 +151,15 @@
 			path = IronSourceDemoApp;
 			sourceTree = "<group>";
 		};
+		8116639A2A72645300B397AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				811663A02A72645300B397AB /* LoopMeUnitedSDK.framework */,
+				811663A22A72645300B397AB /* LoopMeUnitedSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E80C8F8F1C16E28400CF3C27 = {
 			isa = PBXGroup;
 			children = (
@@ -166,8 +190,8 @@
 		E80C8FD21C16E52200CF3C27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				811663992A72645300B397AB /* LoopMeUnitedSDK.xcodeproj */,
 				8116638D2A66F2DB00B397AB /* IronSource.xcframework */,
-				811663592A66E7B300B397AB /* LoopMeUnitedSDK.xcframework */,
 				47B0AD291CB5252100B8D125 /* WebKit.framework */,
 				E80C8FD01C16E4D200CF3C27 /* Security.framework */,
 				E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */,
@@ -234,12 +258,35 @@
 			mainGroup = E80C8F8F1C16E28400CF3C27;
 			productRefGroup = E80C8F991C16E28400CF3C27 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8116639A2A72645300B397AB /* Products */;
+					ProjectRef = 811663992A72645300B397AB /* LoopMeUnitedSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E80C8F971C16E28400CF3C27 /* IronSourceDemoApp */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		811663A02A72645300B397AB /* LoopMeUnitedSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LoopMeUnitedSDK.framework;
+			remoteRef = 8116639F2A72645300B397AB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		811663A22A72645300B397AB /* LoopMeUnitedSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LoopMeUnitedSDKTests.xctest;
+			remoteRef = 811663A12A72645300B397AB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E80C8F961C16E28400CF3C27 /* Resources */ = {
@@ -405,7 +452,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4J5DYKYN9Y;
+				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
 				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -423,7 +470,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ironsrcmobile.IronSourceDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.IronSourceDemoApp;
 				PRODUCT_NAME = IronSourceDemoApp;
 				PROVISIONING_PROFILE = "";
 			};
@@ -437,7 +484,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4J5DYKYN9Y;
+				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,7 +501,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ironsrcmobile.IronSourceDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.IronSourceDemoApp;
 				PRODUCT_NAME = IronSourceDemoApp;
 				PROVISIONING_PROFILE = "";
 			};
