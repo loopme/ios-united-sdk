@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING = "loopmeautoloading"
 
@@ -110,30 +111,57 @@ extension AdConfiguration: Decodable {
         self.creativeContent = try bid.decode(String.self, forKey: .adm)
         
         // parse ext section
-        let ext = try bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
-        self.v360 = (try? ext.decode(Int.self, forKey: .v360) == 1) ?? false
-        self.debug = (try? ext.decode(Int.self, forKey: .debug) == 1) ?? false
-        if let preload25 = try? ext.decode(Int.self, forKey: .preload25) {
-            self.preload25 = preload25 == 1
+        let ext = try? bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
+        if let ext = ext {
+            self.v360 = (try? ext.decode(Int.self, forKey: .v360) == 1) ?? false
+            self.debug = (try? ext.decode(Int.self, forKey: .debug) == 1) ?? false
+            if let preload25 = try? ext.decode(Int.self, forKey: .preload25) {
+                self.preload25 = preload25 == 1
+            } else {
+                self.preload25 = false
+            }
+            self.adOrientation = try ext.decode(AdOrientation.self, forKey: .orientation)
+            self.creativeType = try ext.decode(CreativeType.self, forKey: .crtype)
+            
+            self.adIDsForIAS =  try AdConfiguration.initAdIDs(for: .ias, decoder: ext, id: id)
+            self.adIDsForMoat = try AdConfiguration.initAdIDs(for: .moat, decoder: ext)
+            
+            if let autoloading = try? ext.decode(Int.self, forKey: .autoloading) {
+                self.autoloading = autoloading == 1
+            } else {
+                self.autoloading = true
+            }
+            
+            UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
+            
+            self.measurePartners = try ext.decode([String].self, forKey: .measure_partners)
         } else {
+            self.v360 = false
+            self.debug = false
             self.preload25 = false
+            
+            switch UIDevice.current.orientation{
+            case .portrait:
+                self.adOrientation = .portrait
+            case .landscapeLeft, .landscapeRight:
+                self.adOrientation = .landscape
+            default:
+                self.adOrientation = .landscape
+            }
+            
+            let searchString = "<VAST"
+            let isVast = self.creativeContent.range(of: searchString, options: .caseInsensitive) != nil
+            self.creativeType = isVast ? .vast : .mraid
+            
+            self.adIDsForIAS =  Dictionary()
+            self.adIDsForMoat = Dictionary()
+            
+            self.autoloading = false
+            
+            UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
+            
+            self.measurePartners = []
         }
-        self.adOrientation = try ext.decode(AdOrientation.self, forKey: .orientation)
-        self.creativeType = try ext.decode(CreativeType.self, forKey: .crtype)
-        
-        self.adIDsForIAS =  try AdConfiguration.initAdIDs(for: .ias, decoder: ext, id: id)
-        self.adIDsForMoat = try AdConfiguration.initAdIDs(for: .moat, decoder: ext)
-        
-        if let autoloading = try? ext.decode(Int.self, forKey: .autoloading) {
-            self.autoloading = autoloading == 1
-        } else {
-            self.autoloading = true
-        }
-        
-        UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
-        
-        self.measurePartners = try ext.decode([String].self, forKey: .measure_partners)
-        
         if self.creativeType == .vast || self.creativeType == .vpaid {
             guard let data = creativeContent.data(using: .utf8) else { fatalError() }
             
@@ -151,7 +179,7 @@ extension AdConfiguration: Decodable {
         let level4 = id
         
         if tracker == .moat {
-            let _adIdsForMOAT = ["level1" : advertiser, "level2" : campaign, "level3" : level3, "level4" : level4, "level5" : level5, "slicer1" : "", "clicer2" : ""]
+            let _adIdsForMOAT = ["level1" : advertiser, "level2" : campaign, "level3" : level3, "level4" : level4, "level5" : level5, "slicer1" : "", "slicer2" : ""]
             return _adIdsForMOAT
         }
         
