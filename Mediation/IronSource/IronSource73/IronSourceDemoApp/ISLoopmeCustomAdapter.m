@@ -21,7 +21,7 @@
 }
 
 - (NSString *) networkSDKVersion {
-   return @"7.1.0";
+    return [LoopMeSDK version];
 }
 - (NSString *) adapterVersion {
    return @"1.0.0";
