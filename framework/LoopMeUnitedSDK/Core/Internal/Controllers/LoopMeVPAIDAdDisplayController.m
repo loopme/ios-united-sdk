@@ -464,9 +464,14 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     return frame.size.width < frame.size.height;
 }
 
+- (BOOL)isDeviceInPortrait {
+    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    return orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown;
+}
+
 - (BOOL)adOrientationMatchContainer:(CGRect)frame {
-    return (!self.adConfiguration.isPortrait && [self isVertical:frame]) ||
-     (self.adConfiguration.isPortrait && ![self isVertical:frame]);
+    return ([self isVertical:frame] && [self isDeviceInPortrait]) ||
+     ([self isDeviceInPortrait] && ![self isVertical:frame]);
 }
 
 #pragma mark - WKWebViewDelegate
