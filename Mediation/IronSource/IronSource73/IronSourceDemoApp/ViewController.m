@@ -59,7 +59,7 @@
     // We're passing 'self' to our delegates because we want
     // to be able to enable/disable buttons to match ad availability.
     
-    [IronSource setRewardedVideoDelegate:self];
+    [IronSource setLevelPlayRewardedVideoManualDelegate:self];
     [IronSource setInterstitialDelegate:self];
     [IronSource addImpressionDataDelegate:self];
 
