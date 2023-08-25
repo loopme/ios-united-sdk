@@ -9,10 +9,9 @@
 #ifndef ISLoopmeCustomInterstitial_h
 #define ISLoopmeCustomInterstitial_h
 
-#import "IronSource/ISBaseAdAdapter.h"
-#import "IronSource/ISAdapterErrors.h"
+#import "IronSource/IronSource.h"
 
-@interface ISLoopmeCustomInterstitial : ISBaseAdAdapter
+@interface ISLoopmeCustomInterstitial : ISBaseInterstitial
 
 @end
 
