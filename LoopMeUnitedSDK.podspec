@@ -58,9 +58,9 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Bogdan Korda" => "bogdan@loopme.com" }
+  #s.author             = { "Bogdan Korda" => "bogdan@loopme.com" }
   # Or just: s.author    = "Bogdan Korda"
-  # s.authors            = { "Bogdan Korda" => "bogdan@loopme.com" }
+  s.authors            = { "Bogdan Korda" => "bogdan@loopme.com", "Volodymyr Novikov" => "volodymyr.novikov@loopme.com" }
   # s.social_media_url   = "http://twitter.com/Bogdan Korda"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -139,6 +139,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.xcconfig = { "OTHER_LDFLAGS" => "-ObjC" " -lz"}
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   # s.dependency "JSONKit", "~> 1.4"
 
 end
