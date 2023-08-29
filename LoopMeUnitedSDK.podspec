@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LoopMeUnitedSDK"
-  s.version      = "7.3.1"
+  s.version      = "7.3.8"
   s.summary      = "LoopMe is the largest mobile video DSP and Ad Network, reaching over 1 billion consumers world-wide."
 
   # This description is used to generate tags and improve search results.
@@ -85,7 +85,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "7.3.1" }
+  s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "7.3.8" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -124,7 +124,7 @@ Pod::Spec.new do |s|
 
   # s.framework  = "SomeFramework"
   # s.frameworks = "StoreKit", "CoreLocation", "SystemConfiguration", "CoreTelephony", "CoreGraphics", "CoreMedia", "AudioToolbox", "CoreAudio", "AVFoundation", "AdSupport"
-  s.vendored_frameworks = "LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.framework"
+  s.vendored_frameworks = "LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework"
 
   s.library   = "xml2"
   # s.libraries = "iconv", "xml2"
