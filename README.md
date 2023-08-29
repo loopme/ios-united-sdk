@@ -2,9 +2,9 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.3.2**
+**Version 7.3.8**
 
-- Fixed non replaceable macroses issue in VAST URL
+- Fixed VAST landscape video
 
 Please view the [changelog](CHANGELOG.md) for details.
 

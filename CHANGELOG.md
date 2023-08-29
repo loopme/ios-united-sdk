@@ -1,3 +1,7 @@
+## Version 7.3.8 (29.07.2022)
+
+- Fixed VAST landscape video
+
 ## Version 7.3.7 (27.07.2022)
 
 - add AppLovin adapter
