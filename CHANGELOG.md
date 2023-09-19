@@ -1,12 +1,12 @@
-## Version 7.3.8 (29.07.2022)
+## Version 7.3.9 (29.07.2023)
 
 - Fixed VAST landscape video
 
-## Version 7.3.7 (27.07.2022)
+## Version 7.3.8 (27.07.2023)
 
 - add AppLovin adapter
 
-## Version 7.3.6 (26.01.2022)
+## Version 7.3.7 (26.01.2023)
 
 - update admob adapter
 

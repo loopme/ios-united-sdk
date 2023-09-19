@@ -35,8 +35,9 @@
     
     [[LoopMeSDK shared] initSDKFromRootViewController:self completionBlock:^(BOOL success, NSError *error) {
         if (!success) {
-            NSLog(@"%@", error);
+            NSLog(@"loopme sdk initialization fail: %@", error);
         }
+        NSLog(@"loopme sdk initialization success version : %@", [LoopMeSDK version]);
     }];
 
 

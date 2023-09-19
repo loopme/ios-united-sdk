@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5356BCFE8068495141CF75A5D466DE22"
+               BuildableName = "Pods_IronSourceDemoApp.framework"
+               BlueprintName = "Pods-IronSourceDemoApp"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "E80C8F971C16E28400CF3C27"
                BuildableName = "IronSourceDemoApp.app"
                BlueprintName = "IronSourceDemoApp"
