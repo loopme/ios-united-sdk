@@ -122,7 +122,7 @@
 }
 
 - (IBAction)loadISButtonTapped:(id)sender {
-    NSString *appkey = self.rvAppKey.text;
+    NSString *appkey = self.interstitialAppKey.text;
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
         [standardUserDefaults setObject:appkey forKey:@"LOOPME_INTERSTITIAL"];
