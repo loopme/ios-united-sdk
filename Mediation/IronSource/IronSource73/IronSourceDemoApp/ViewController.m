@@ -141,6 +141,10 @@
 - (void)didLoadWithAdInfo:(ISAdInfo *)adInfo{
     NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
+    if ([adInfo.ad_unit isEqual:@"interstitial"])
+        _showISButton.enabled = YES;
+    else
+        _showRVButton.enabled = YES;
 }
 
 /**
@@ -188,6 +192,10 @@
 - (void)didCloseWithAdInfo:(ISAdInfo *)adInfo{
     NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
+    if ([adInfo.ad_unit isEqual:@"interstitial"])
+        _showISButton.enabled = NO;
+    else
+        _showRVButton.enabled = NO;
 }
 
 /**
