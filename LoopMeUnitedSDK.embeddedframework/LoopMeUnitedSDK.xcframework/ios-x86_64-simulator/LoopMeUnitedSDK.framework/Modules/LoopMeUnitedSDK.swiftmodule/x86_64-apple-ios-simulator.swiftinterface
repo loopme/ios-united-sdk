@@ -1,10 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
 // swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LoopMeUnitedSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import Foundation
 import Swift
 import UIKit
 import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
 public struct ProgressEvent : Swift.Hashable {
   public var link: Swift.String
   public var offset: Foundation.TimeInterval
@@ -76,19 +79,19 @@ extension LoopMeUnitedSDK.VastProperties : Foundation.XMLParserDelegate {
 public struct AssetLinks {
 }
 @objc(LoopMeServerCommunicator) open class ServerCommunicator : ObjectiveC.NSObject {
-  weak public var delegate: LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?
+  weak public var delegate: (any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate)?
   public var isLoading: Swift.Bool {
     get
   }
   @objc public var appKey: Swift.String?
-  @objc public init(delegate: LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?)
+  @objc public init(delegate: (any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate)?)
   @objc public func load(url: Foundation.URL, requestBody: Foundation.Data?, method: Swift.String?)
   @objc public func cancel()
   @objc deinit
 }
 @objc public protocol LoopMeServerCommunicatorDelegate : ObjectiveC.NSObjectProtocol {
   @objc func serverCommunicator(_ communicator: LoopMeUnitedSDK.ServerCommunicator, didReceive adConfiguration: LoopMeUnitedSDK.AdConfigurationWrapper)
-  @objc func serverCommunicator(_ communicator: LoopMeUnitedSDK.ServerCommunicator, didFailWith error: Swift.Error?)
+  @objc func serverCommunicator(_ communicator: LoopMeUnitedSDK.ServerCommunicator, didFailWith error: (any Swift.Error)?)
   @objc func serverCommunicatorDidReceiveAd(_ communicator: LoopMeUnitedSDK.ServerCommunicator)
 }
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING: Swift.String
@@ -96,7 +99,7 @@ public struct AdConfiguration {
   public var vastProperties: LoopMeUnitedSDK.VastProperties?
 }
 extension LoopMeUnitedSDK.AdConfiguration : Swift.Decodable {
-  public init(from decoder: Swift.Decoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @objc(LoopMeTimeOffsetType) public enum TimeOffsetType : Swift.Int {
   case percent
