@@ -68,10 +68,6 @@
     [IronSource setUserId:userId];
     
     [IronSource initWithAppKey:APPKEY];
-    // To initialize specific ad units:
-    // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_OFFERWALL, IS_BANNER]];
-
-    [IronSource loadRewardedVideo];
 }
 
 -(void)showText:(NSString *)message{

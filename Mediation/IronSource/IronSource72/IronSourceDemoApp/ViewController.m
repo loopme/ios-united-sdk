@@ -75,17 +75,6 @@
     [IronSource setUserId:userId];
     
     [IronSource initWithAppKey:APPKEY];
-    // To initialize specific ad units:
-    // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_OFFERWALL, IS_BANNER]];
-    
-    // Scroll down the file to find out what happens when you click a button...
-    
-    /* 
-     * Banner integration
-     * To finalize your banner integration, you must integrate at least one of our mediation adapters that have banner.
-     */
-
-    [IronSource loadRewardedVideo];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -151,6 +140,7 @@
 - (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     self.rvPlacementInfo = placementInfo;
+    _showRVButton.enabled = YES;
 }
 
 // This method gets invoked when there is a problem playing the video.
@@ -179,6 +169,7 @@
                                               otherButtonTitles:nil];
         [alert show];
         self.rvPlacementInfo = nil;
+        _showRVButton.enabled = NO;
     }
 }
 
@@ -238,6 +229,7 @@
 // returns to your application.
 - (void)interstitialDidClose {
     NSLog(@"%s",__PRETTY_FUNCTION__);
+    [self.showISButton setEnabled:NO];
 }
 
 #pragma mark - Impression data Delegate Functions
