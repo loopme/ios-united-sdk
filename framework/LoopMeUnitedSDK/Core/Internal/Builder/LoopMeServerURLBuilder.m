@@ -72,9 +72,22 @@
     return [NSLocale preferredLanguages][0];
 }
 
-+ (NSString *)parameterForOrientation {
++ (NSString *)parameterForOrientationThreadUnsafe{
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     return UIInterfaceOrientationIsPortrait(orientation) ? @"p" : @"l";
+}
+
++ (NSString *)parameterForOrientation {
+  __block NSString *orientationString;
+    if ([NSThread isMainThread]){
+        orientationString = [self parameterForOrientationThreadUnsafe];
+    }else{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            orientationString = [self parameterForOrientationThreadUnsafe];
+        });
+    }
+
+  return orientationString;
 }
 
 + (NSString *)parameterForTimeZone {

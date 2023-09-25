@@ -2,9 +2,9 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.3.9**
+**Version 7.4.0**
 
-- Fixed VAST landscape video
+- Fix and improvement
 
 Please view the [changelog](CHANGELOG.md) for details.
 

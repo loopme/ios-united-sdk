@@ -1,3 +1,7 @@
+## Version 7.4.0 (25.09.2023)
+
+- Fix and improvement
+
 ## Version 7.3.9 (29.07.2023)
 
 - Fixed VAST landscape video

@@ -49,8 +49,10 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 - (void)dealloc {
     if (self.adInterstitialViewController.presentingViewController) {
-        [self.adInterstitialViewController.presentingViewController
-         dismissViewControllerAnimated:NO completion:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.adInterstitialViewController.presentingViewController
+             dismissViewControllerAnimated:NO completion:nil];
+        });
     }
     
     [_adManager invalidateTimers];
@@ -87,9 +89,13 @@ const NSInteger kLoopMeRequestTimeout = 180;
         self.adDisplayControllerVPAID = [[LoopMeVPAIDAdDisplayController alloc] initWithDelegate:self];
         self.adDisplayControllerVPAID.isInterstitial = YES;
         
-        _adInterstitialViewController = [[LoopMeInterstitialViewController alloc] initWithNibName:nil bundle:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self->_adInterstitialViewController = [[LoopMeInterstitialViewController alloc] initWithNibName:nil bundle:nil];
+            self->_adInterstitialViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        });
         _adInterstitialViewController.delegate = self;
-        _adInterstitialViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+
         LoopMeLogInfo(@"Interstitial is initialized with appKey %@", appKey);
         
         [LoopMeAnalyticsProvider sharedInstance];
