@@ -49,7 +49,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 - (void)dealloc {
     if (self.adInterstitialViewController.presentingViewController) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
             [self.adInterstitialViewController.presentingViewController
              dismissViewControllerAnimated:NO completion:nil];
         });

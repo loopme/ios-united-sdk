@@ -1,3 +1,7 @@
+## Version 7.4.1 (26.09.2023)
+
+- Fix and improvement
+
 ## Version 7.4.0 (25.09.2023)
 
 - Fix and improvement

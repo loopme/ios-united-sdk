@@ -210,8 +210,15 @@ const NSInteger kResizeOffsetVPAID = 11;
 #pragma mark - Life Cycle
 
 - (void)dealloc {
-    [self unregisterObservers];
-    [self cancel];
+    if (![NSThread isMainThread]) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self unregisterObservers];
+            [self cancel];
+        });
+    } else {
+        [self unregisterObservers];
+        [self cancel];
+    }
 }
 
 - (instancetype)initWithDelegate:(id<LoopMeVPAIDVideoClientDelegate>)delegate {
