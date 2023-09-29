@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *interstitialAppKey;
 
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
+@property (nonatomic, strong) ISBannerView   *bannerView;
 @end
 
 @implementation ViewController
@@ -73,8 +74,26 @@
     
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
-    
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:@"15ddef01d6" forKey:@"LOOPME_BANNER"];
+        [standardUserDefaults synchronize];
+    }
     [IronSource initWithAppKey:APPKEY];
+    [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
+}
+
+- (void)didLoad:(ISBannerView *)bannerView withAdInfo:(ISAdInfo *)adInfo{
+   NSLog(@"%s",__PRETTY_FUNCTION__);
+   dispatch_async(dispatch_get_main_queue(), ^{
+       self.bannerView = bannerView;
+       if (@available(iOS 11.0, *)) {
+           [self.bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (self.bannerView.frame.size.height/2.0) - self.view.safeAreaInsets.bottom)]; // safeAreaInsets is available from iOS 11.0
+       } else {
+           [self.bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (self.bannerView.frame.size.height/2.0))];
+       }
+       [self.view addSubview:self.bannerView];
+   });
 }
 
 - (void)didReceiveMemoryWarning {
