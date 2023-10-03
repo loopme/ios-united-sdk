@@ -23,15 +23,18 @@
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     NSString *appkey = nil;
 
-    if (standardUserDefaults)
-        appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
     NSLog(@"loopme's appkey - %@", appkey);
-    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
-    [self.interstitial setAutoLoadingEnabled:FALSE];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
+        self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
+        [self.interstitial setAutoLoadingEnabled:FALSE];
+        self.delegate = delegate;
+        [self.interstitial loadAd];
 
-    self.delegate = delegate;
-    [self.interstitial loadAd];
+    });
+
 }
+
 
 
 - (BOOL)isAdAvailableWithAdData:(nonnull ISAdData *)adData {
@@ -81,4 +84,5 @@
     NSLog(@"LoopMe interstitial video did reach end.");
     [self.delegate adDidShowSucceed];
 }
+
 @end

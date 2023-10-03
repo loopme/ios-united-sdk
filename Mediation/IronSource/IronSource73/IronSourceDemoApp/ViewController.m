@@ -21,6 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
 @property (weak, nonatomic) IBOutlet UITextField *rvAppKey;
 @property (weak, nonatomic) IBOutlet UITextField *interstitialAppKey;
+@property (weak, nonatomic) IBOutlet UITextField *banerTextfield;
+@property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
+@property (weak, nonatomic) IBOutlet UIButton *showBannerButton;
+@property (nonatomic, strong) ISBannerView   *bannerView;
 
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
 @end
@@ -38,7 +42,7 @@
         }
     }];
 
-    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton]) {
+    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton, self.showBannerButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -56,6 +60,7 @@
     
     [IronSource setLevelPlayRewardedVideoManualDelegate:self];
     [IronSource setLevelPlayInterstitialDelegate:self];
+    [IronSource setLevelPlayBannerDelegate:self];
 
     NSString *userId = [IronSource advertiserId];
     
@@ -126,7 +131,36 @@
     }
     // This will load the Interstitial. Unlike Rewarded
     // Videos there are no placements.
-    [IronSource loadInterstitial];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [IronSource loadInterstitial];
+    });
+
+}
+- (IBAction)loadBannerButtonTapped:(UIButton *)sender {
+    NSString *appkey = self.banerTextfield.text;
+
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:appkey forKey:@"LOOPME_BANNER"];
+        [standardUserDefaults synchronize];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
+    });
+
+}
+- (IBAction)showBannerBurronTapped:(UIButton *)sender {
+}
+
+
+- (void)didLoad:(ISBannerView *)bannerView withAdInfo:(ISAdInfo *)adInfo{
+   NSLog(@"%s",__PRETTY_FUNCTION__);
+   dispatch_async(dispatch_get_main_queue(), ^{
+       self.bannerView = bannerView;
+           [self.bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (self.bannerView.frame.size.height/2.0))];
+       [self.view addSubview:self.bannerView];
+       
+   });
 }
 
 #pragma mark - LevelPlayRewardedVideoManualDelegate
@@ -141,7 +175,10 @@
         _showISButton.enabled = YES;
     else
         _showRVButton.enabled = YES;
+    _showBannerButton.enabled = YES;
 }
+
+
 
 /**
  Called after a rewarded video has attempted to load but failed in manual mode
@@ -192,6 +229,9 @@
         _showISButton.enabled = NO;
     else
         _showRVButton.enabled = NO;
+    
+    _showBannerButton.enabled = NO;
+
 }
 
 /**
