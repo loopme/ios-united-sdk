@@ -40,11 +40,6 @@
         LoopMeAdView *bannerView = [LoopMeAdView adViewWithAppKey:appkey frame:adFrame viewControllerForPresentationGDPRWindow:viewController delegate:self];
         self.banner = bannerView;
         self.banner.delegate = self;
-        self.banner.contentMode = UIViewContentModeScaleAspectFill;
-        [NSLayoutConstraint activateConstraints:@[
-            [bannerView.widthAnchor constraintEqualToConstant:size.width],
-            [bannerView.heightAnchor constraintEqualToConstant:size.height],
-        ]];
     });
     self.delegate = delegate;
     dispatch_async(dispatch_get_main_queue(), ^{
