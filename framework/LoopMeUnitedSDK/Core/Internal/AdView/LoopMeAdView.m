@@ -107,6 +107,8 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
         _maximizedController.modalPresentationStyle = UIModalPresentationFullScreen;
         _scrollView = scrollView;
         self.frame = frame;
+        [self addConstraint:[self.widthAnchor constraintEqualToConstant:frame.size.width]];
+        [self addConstraint:[self.heightAnchor constraintEqualToConstant:frame.size.height]];
         self.backgroundColor = [UIColor clearColor];
         [self registerObservers];
         LoopMeLogInfo(@"Ad view initialized with appKey: %@", appKey);

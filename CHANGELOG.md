@@ -1,3 +1,7 @@
+## Version 7.4.2 (09.10.2023)
+
+- Fix constrain (Frame) in LoopMeAdView
+
 ## Version 7.4.1 (26.09.2023)
 
 - Fix and improvement
