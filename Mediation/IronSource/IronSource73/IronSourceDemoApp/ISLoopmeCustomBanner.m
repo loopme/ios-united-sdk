@@ -39,8 +39,13 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         LoopMeAdView *bannerView = [LoopMeAdView adViewWithAppKey:appkey frame:adFrame viewControllerForPresentationGDPRWindow:viewController delegate:self];
         self.banner = bannerView;
+        self.banner.delegate = self;
+        self.banner.contentMode = UIViewContentModeScaleAspectFill;
+        [NSLayoutConstraint activateConstraints:@[
+            [bannerView.widthAnchor constraintEqualToConstant:size.width],
+            [bannerView.heightAnchor constraintEqualToConstant:size.height],
+        ]];
     });
-
     self.delegate = delegate;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.banner loadAd];
@@ -64,38 +69,40 @@
                                   errorMessage:nil];
         return;
     }
-    
     [delegate adDidShowSucceed];
 }
 
 - (void)loopMeAdViewDidLoadAd:(LoopMeAdView *)banner {
     NSLog(@"LoopMe banner did load");
-    [self.delegate adDidLoadWithView:banner];
+    [self.delegate adDidLoadWithView: self.banner];
 }
 
-- (void)loopMeAdView:(LoopMeAdView *)interstitial didFailToLoadAdWithError:(NSError *)error {
+- (void)loopMeAdView:(LoopMeAdView *)banner didFailToLoadAdWithError:(NSError *)error {
     NSLog(@"LoopMe interstitial did fail with error: %@", [error localizedDescription]);
     [self.delegate adDidFailToLoadWithErrorType:ISAdapterErrorTypeInternal
                                       errorCode:[error code] errorMessage:nil];
 }
-
-- (void)loopMeAdViewDidAppear:(LoopMeAdView *)interstitial {
+    
+- (void)loopMeAdViewDidAppear:(LoopMeAdView *)banner {
     NSLog(@"LoopMe interstitial did present");
     [self.delegate adDidOpen];
 }
 
-- (void)loopMeAdViewDidDisappear:(LoopMeAdView *)interstitial {
+- (void)loopMeAdViewDidDisappear:(LoopMeAdView *)banner {
     NSLog(@"LoopMe interstitial did dismiss");
     [self.delegate adDidDismissScreen];
 }
 
-- (void)loopMeAdViewDidReceiveTap:(LoopMeAdView *)interstitial {
+- (void)loopMeAdViewDidReceiveTap:(LoopMeAdView *)banner {
     NSLog(@"LoopMe interstitial was tapped.");
     [self.delegate adDidClick];
 }
 
-- (void)loopMeAdViewVideoDidReachEnd:(LoopMeAdView *)interstitial {
+- (void)loopMeAdViewVideoDidReachEnd:(LoopMeAdView *)banner {
     NSLog(@"LoopMe interstitial video did reach end.");
+}
+- (void)destroyAdWithAdData:(ISAdData *)adData {
+    [self.delegate  adDidDismissScreen];
 }
 
 - (UIViewController *)viewControllerForPresentation {

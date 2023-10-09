@@ -23,9 +23,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *interstitialAppKey;
 @property (weak, nonatomic) IBOutlet UITextField *banerTextfield;
 @property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
-@property (weak, nonatomic) IBOutlet UIButton *showBannerButton;
-@property (nonatomic, strong) ISBannerView   *bannerView;
-
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
 @end
 
@@ -42,7 +39,7 @@
         }
     }];
 
-    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton, self.showBannerButton]) {
+    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -71,7 +68,6 @@
     
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
-    
     [IronSource initWithAppKey:APPKEY];
 }
 
@@ -144,21 +140,20 @@
         [standardUserDefaults setObject:appkey forKey:@"LOOPME_BANNER"];
         [standardUserDefaults synchronize];
     }
+    // This will load the Banner.
     dispatch_async(dispatch_get_main_queue(), ^{
         [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
     });
 
 }
-- (IBAction)showBannerBurronTapped:(UIButton *)sender {
-}
 
 
 - (void)didLoad:(ISBannerView *)bannerView withAdInfo:(ISAdInfo *)adInfo{
    NSLog(@"%s",__PRETTY_FUNCTION__);
+    [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
    dispatch_async(dispatch_get_main_queue(), ^{
-       self.bannerView = bannerView;
-           [self.bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (self.bannerView.frame.size.height/2.0))];
-       [self.view addSubview:self.bannerView];
+           [bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (bannerView.frame.size.height/2.0))];
+       [self.view addSubview:bannerView];
        
    });
 }
@@ -175,10 +170,7 @@
         _showISButton.enabled = YES;
     else
         _showRVButton.enabled = YES;
-    _showBannerButton.enabled = YES;
 }
-
-
 
 /**
  Called after a rewarded video has attempted to load but failed in manual mode
@@ -229,9 +221,6 @@
         _showISButton.enabled = NO;
     else
         _showRVButton.enabled = NO;
-    
-    _showBannerButton.enabled = NO;
-
 }
 
 /**
