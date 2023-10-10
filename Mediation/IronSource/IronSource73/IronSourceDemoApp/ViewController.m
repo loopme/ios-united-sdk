@@ -150,11 +150,10 @@
    NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
     CGFloat viewCenterX = self.view.center.x;
-    CGFloat viewHeight = self.view.frame.size.height;
-    CGFloat bannerViewHeight = bannerView.frame.size.height;
+    CGFloat viewСenterY = self.view.frame.size.height - (bannerView.frame.size.height / 2.0);
 
    dispatch_async(dispatch_get_main_queue(), ^{
-           [bannerView setCenter:CGPointMake(viewCenterX, viewHeight - (bannerViewHeight/2.0))];
+           [bannerView setCenter:CGPointMake(viewCenterX, viewСenterY)];
        [self.view addSubview:bannerView];
    });
 }

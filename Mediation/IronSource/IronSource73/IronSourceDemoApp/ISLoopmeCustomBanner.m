@@ -98,6 +98,7 @@
 - (void)loopMeAdViewVideoDidReachEnd:(LoopMeAdView *)banner {
     NSLog(@"LoopMe interstitial video did reach end.");
 }
+
 - (void)destroyAdWithAdData:(ISAdData *)adData {
     [self.delegate adDidDismissScreen];
 }
