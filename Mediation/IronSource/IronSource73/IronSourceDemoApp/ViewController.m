@@ -68,6 +68,7 @@
     
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
+    
     [IronSource initWithAppKey:APPKEY];
 }
 
@@ -130,8 +131,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [IronSource loadInterstitial];
     });
-
 }
+
 - (IBAction)loadBannerButtonTapped:(UIButton *)sender {
     NSString *appkey = self.banerTextfield.text;
 
@@ -140,21 +141,21 @@
         [standardUserDefaults setObject:appkey forKey:@"LOOPME_BANNER"];
         [standardUserDefaults synchronize];
     }
-    // This will load the Banner.
     dispatch_async(dispatch_get_main_queue(), ^{
         [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
     });
-
 }
 
-
-- (void)didLoad:(ISBannerView *)bannerView withAdInfo:(ISAdInfo *)adInfo{
+- (void)didLoad:(ISBannerView *)bannerView withAdInfo:(ISAdInfo *)adInfo {
    NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
+    CGFloat viewCenterX = self.view.center.x;
+    CGFloat viewHeight = self.view.frame.size.height;
+    CGFloat bannerViewHeight = bannerView.frame.size.height;
+
    dispatch_async(dispatch_get_main_queue(), ^{
-           [bannerView setCenter:CGPointMake(self.view.center.x,self.view.frame.size.height - (bannerView.frame.size.height/2.0))];
+           [bannerView setCenter:CGPointMake(viewCenterX, viewHeight - (bannerViewHeight/2.0))];
        [self.view addSubview:bannerView];
-       
    });
 }
 

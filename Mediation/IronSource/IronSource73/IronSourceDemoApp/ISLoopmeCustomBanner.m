@@ -26,25 +26,30 @@
 - (void)loadAdWithAdData:(nonnull ISAdData *)adData
           viewController:(UIViewController *)viewController
                     size:(ISBannerSize *)size
-                delegate:(nonnull id<ISBannerAdDelegate>)delegate{
+                delegate:(nonnull id<ISBannerAdDelegate>)delegate {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     NSString *appkey = nil;
     self.viewController = viewController;
-
-    if (standardUserDefaults)
-        appkey = [standardUserDefaults objectForKey:@"LOOPME_BANNER"];
-    NSLog(@"loopme's appkey - %@", appkey);
-    CGRect adFrame = CGRectMake(0, 0, size.width, size.height);
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        LoopMeAdView *bannerView = [LoopMeAdView adViewWithAppKey:appkey frame:adFrame viewControllerForPresentationGDPRWindow:viewController delegate:self];
-        self.banner = bannerView;
-        self.banner.delegate = self;
-    });
-    self.delegate = delegate;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.banner loadAd];
-    });
+    if (standardUserDefaults) {
+        appkey = [standardUserDefaults objectForKey:@"LOOPME_BANNER"];
+        NSLog(@"loopme's appkey - %@", appkey);
+        CGRect adFrame = CGRectMake(0, 0, size.width, size.height);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            LoopMeAdView *bannerView = [LoopMeAdView adViewWithAppKey:appkey
+                                                                frame:adFrame
+                              viewControllerForPresentationGDPRWindow:viewController
+                                                             delegate:self];
+            self.banner = bannerView;
+            self.banner.delegate = self;
+        });
+        self.delegate = delegate;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.banner loadAd];
+        });
+    }
 }
 
 - (BOOL)isSupportAdaptiveBanner {
@@ -77,7 +82,7 @@
     [self.delegate adDidFailToLoadWithErrorType:ISAdapterErrorTypeInternal
                                       errorCode:[error code] errorMessage:nil];
 }
-    
+
 - (void)loopMeAdViewDidAppear:(LoopMeAdView *)banner {
     NSLog(@"LoopMe interstitial did present");
     [self.delegate adDidOpen];
@@ -97,7 +102,7 @@
     NSLog(@"LoopMe interstitial video did reach end.");
 }
 - (void)destroyAdWithAdData:(ISAdData *)adData {
-    [self.delegate  adDidDismissScreen];
+    [self.delegate adDidDismissScreen];
 }
 
 - (UIViewController *)viewControllerForPresentation {

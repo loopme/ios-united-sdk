@@ -30,11 +30,8 @@
         [self.interstitial setAutoLoadingEnabled:FALSE];
         self.delegate = delegate;
         [self.interstitial loadAd];
-
     });
-
 }
-
 
 
 - (BOOL)isAdAvailableWithAdData:(nonnull ISAdData *)adData {
