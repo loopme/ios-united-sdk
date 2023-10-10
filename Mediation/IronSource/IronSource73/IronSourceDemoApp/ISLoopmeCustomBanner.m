@@ -15,13 +15,10 @@
 @property (nonatomic, strong) LoopMeAdView *banner;
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) id<ISBannerAdDelegate> delegate;
-
 @end
 
 
 @implementation ISLoopmeCustomBanner
-
-
 
 - (void)loadAdWithAdData:(nonnull ISAdData *)adData
           viewController:(UIViewController *)viewController
