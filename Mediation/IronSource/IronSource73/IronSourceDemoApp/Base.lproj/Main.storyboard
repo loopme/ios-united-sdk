@@ -130,14 +130,22 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="uPQ-eP-LAM">
-                                        <rect key="frame" x="137.5" y="269" width="61.5" height="34.5"/>
+                                        <rect key="frame" x="64" y="269" width="208" height="34.5"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2yk-3B-2Xq">
-                                                <rect key="frame" x="0.0" y="0.0" width="61.5" height="34.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="83.5" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Load"/>
                                                 <connections>
                                                     <action selector="loadBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FEZ-Tl-ieT"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiW-JM-7fb">
+                                                <rect key="frame" x="124.5" y="0.0" width="83.5" height="34.5"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Destroy"/>
+                                                <connections>
+                                                    <action selector="destroyBanner:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Eg-JC-bx9"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -181,6 +189,7 @@
                     </view>
                     <connections>
                         <outlet property="banerTextfield" destination="Cyu-tL-875" id="AOU-wG-8Lh"/>
+                        <outlet property="destroyBannerButton" destination="FiW-JM-7fb" id="c6A-9F-f3s"/>
                         <outlet property="interstitialAppKey" destination="fo2-Tq-VO4" id="EWh-8K-hda"/>
                         <outlet property="loadBannerButton" destination="2yk-3B-2Xq" id="SIE-ew-0Bk"/>
                         <outlet property="loadISButton" destination="cFl-Mk-ITw" id="YJB-Bs-qAH"/>

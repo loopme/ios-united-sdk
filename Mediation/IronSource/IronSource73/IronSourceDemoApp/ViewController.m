@@ -23,7 +23,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *interstitialAppKey;
 @property (weak, nonatomic) IBOutlet UITextField *banerTextfield;
 @property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
+@property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
+@property (nonatomic, strong) ISBannerView *banner;
 @end
 
 @implementation ViewController
@@ -39,7 +41,7 @@
         }
     }];
 
-    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton]) {
+    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton, self.destroyBannerButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -164,12 +166,15 @@
    NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
     CGFloat viewCenterX = self.view.center.x;
-    CGFloat viewСenterY = self.view.frame.size.height - (bannerView.frame.size.height / 2.0);
-
+    CGFloat viewСenterY = (self.view.frame.size.height - (bannerView.frame.size.height/2.0) - self.view.safeAreaInsets.bottom);
+    self.banner = bannerView;
    dispatch_async(dispatch_get_main_queue(), ^{
-           [bannerView setCenter:CGPointMake(viewCenterX, viewСenterY)];
-       [self.view addSubview:bannerView];
+           [self.banner setCenter:CGPointMake(viewCenterX, viewСenterY)];
+       [self.view addSubview:self.banner];
    });
+}
+- (IBAction)destroyBanner:(UIButton *)sender {
+    [IronSource destroyBanner:self.banner];
 }
 
 #pragma mark - LevelPlayRewardedVideoManualDelegate
