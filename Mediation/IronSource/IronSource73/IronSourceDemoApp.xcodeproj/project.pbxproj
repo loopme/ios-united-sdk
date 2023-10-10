@@ -18,6 +18,7 @@
 		812B18612966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */; };
 		818BC8F52768592A0043E4CF /* ISLoopmeCustomAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 818BC8F42768592A0043E4CF /* ISLoopmeCustomAdapter.m */; };
 		818BC8F827689BC00043E4CF /* ISLoopmeCustomInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 818BC8F727689BC00043E4CF /* ISLoopmeCustomInterstitial.m */; };
+		B9F63F3E2AC7060600972E94 /* ISLoopmeCustomBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F63F3D2AC7060600972E94 /* ISLoopmeCustomBanner.m */; };
 		E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */; };
 		E80C8FB71C16E48200CF3C27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB51C16E48200CF3C27 /* Foundation.framework */; };
 		E80C8FBD1C16E4A000CF3C27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB81C16E4A000CF3C27 /* CoreGraphics.framework */; };
@@ -57,7 +58,7 @@
 		72E0D64A1E267513009ABC1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		72E0D6531E267513009ABC1B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		72E0D6541E267513009ABC1B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = IronSourceDemoApp/main.m; sourceTree = SOURCE_ROOT; };
+		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "IronSourceDemoApp/Supporting Files/main.m"; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		812B185F2966F92400027EB3 /* ISLoopmeCustomRewardedVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomRewardedVideo.h; sourceTree = "<group>"; };
 		812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomRewardedVideo.m; sourceTree = "<group>"; };
@@ -66,6 +67,8 @@
 		818BC8F627689B850043E4CF /* ISLoopmeCustomInterstitial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomInterstitial.h; sourceTree = "<group>"; };
 		818BC8F727689BC00043E4CF /* ISLoopmeCustomInterstitial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomInterstitial.m; sourceTree = "<group>"; };
 		AD889FE654A39009B7148BDD /* Pods_IronSourceDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9F63F3D2AC7060600972E94 /* ISLoopmeCustomBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomBanner.m; sourceTree = "<group>"; };
+		B9F63F402AC7083200972E94 /* ISLoopmeCustomBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomBanner.h; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* IronSourceDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IronSourceDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E80C8FB51C16E48200CF3C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -137,6 +140,8 @@
 				818BC8F727689BC00043E4CF /* ISLoopmeCustomInterstitial.m */,
 				812B185F2966F92400027EB3 /* ISLoopmeCustomRewardedVideo.h */,
 				812B18602966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m */,
+				B9F63F402AC7083200972E94 /* ISLoopmeCustomBanner.h */,
+				B9F63F3D2AC7060600972E94 /* ISLoopmeCustomBanner.m */,
 			);
 			path = IronSourceDemoApp;
 			sourceTree = "<group>";
@@ -166,7 +171,7 @@
 				72E0D65F1E2675C7009ABC1B /* main.m */,
 			);
 			name = "Supporting Files";
-			path = SupersoniceDemoApp;
+			path = "IronSourceDemoApp/Supporting Files";
 			sourceTree = "<group>";
 		};
 		E80C8FD21C16E52200CF3C27 /* Frameworks */ = {
@@ -332,6 +337,7 @@
 				818BC8F827689BC00043E4CF /* ISLoopmeCustomInterstitial.m in Sources */,
 				72E0D65E1E267513009ABC1B /* ViewController.m in Sources */,
 				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
+				B9F63F3E2AC7060600972E94 /* ISLoopmeCustomBanner.m in Sources */,
 				818BC8F52768592A0043E4CF /* ISLoopmeCustomAdapter.m in Sources */,
 				812B18612966F95D00027EB3 /* ISLoopmeCustomRewardedVideo.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
@@ -476,8 +482,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
-				ENABLE_BITCODE = YES;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -506,7 +511,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

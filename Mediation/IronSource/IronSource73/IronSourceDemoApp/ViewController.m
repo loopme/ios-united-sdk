@@ -21,7 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
 @property (weak, nonatomic) IBOutlet UITextField *rvAppKey;
 @property (weak, nonatomic) IBOutlet UITextField *interstitialAppKey;
-
+@property (weak, nonatomic) IBOutlet UITextField *banerTextfield;
+@property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
 @end
 
@@ -38,7 +39,7 @@
         }
     }];
 
-    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton]) {
+    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -56,6 +57,7 @@
     
     [IronSource setLevelPlayRewardedVideoManualDelegate:self];
     [IronSource setLevelPlayInterstitialDelegate:self];
+    [IronSource setLevelPlayBannerDelegate:self];
 
     NSString *userId = [IronSource advertiserId];
     
@@ -126,7 +128,34 @@
     }
     // This will load the Interstitial. Unlike Rewarded
     // Videos there are no placements.
-    [IronSource loadInterstitial];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [IronSource loadInterstitial];
+    });
+}
+
+- (IBAction)loadBannerButtonTapped:(UIButton *)sender {
+    NSString *appkey = self.banerTextfield.text;
+
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (standardUserDefaults) {
+        [standardUserDefaults setObject:appkey forKey:@"LOOPME_BANNER"];
+        [standardUserDefaults synchronize];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
+    });
+}
+
+- (void)didLoad:(ISBannerView *)bannerView withAdInfo:(ISAdInfo *)adInfo {
+   NSLog(@"%s",__PRETTY_FUNCTION__);
+    [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
+    CGFloat viewCenterX = self.view.center.x;
+    CGFloat viewСenterY = self.view.frame.size.height - (bannerView.frame.size.height / 2.0);
+
+   dispatch_async(dispatch_get_main_queue(), ^{
+           [bannerView setCenter:CGPointMake(viewCenterX, viewСenterY)];
+       [self.view addSubview:bannerView];
+   });
 }
 
 #pragma mark - LevelPlayRewardedVideoManualDelegate
