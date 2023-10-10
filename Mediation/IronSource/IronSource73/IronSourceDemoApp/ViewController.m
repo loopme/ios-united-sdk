@@ -70,6 +70,20 @@
     [IronSource setUserId:userId];
     
     [IronSource initWithAppKey:APPKEY];
+    
+    [self registerTapGestureRecognizer];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)showText:(NSString *)message{
@@ -252,6 +266,36 @@
 - (void)didShowWithAdInfo:(ISAdInfo *)adInfo{
     NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
+}
+
+#pragma  mark - Functions
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = -keyboardSize.height /2;
+        self.view.frame = f;
+    }];
+}
+
+-(void)keyboardWillHide:(NSNotification *)notification {
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = 0.0f;
+        self.view.frame = f;
+    }];
+}
+
+- (void) registerTapGestureRecognizer {
+    UITapGestureRecognizer *hideKeyboardTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
+    [self.view addGestureRecognizer:hideKeyboardTapRecognizer];
+}
+
+// Hide keyboard by tap on the view
+- (void)hideKeyboard:(UITapGestureRecognizer*)sender {
+    [self.view endEditing:YES];
 }
 
 @end
