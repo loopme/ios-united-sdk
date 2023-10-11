@@ -5,6 +5,6 @@ target 'IronSourceDemoApp' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 pod 'IronSourceSDK', '~> 7.2'
-pod 'LoopMeUnitedSDK' , '~> 7.4'
+pod 'LoopMeUnitedSDK' , '~> 7.4.2'
 
 end

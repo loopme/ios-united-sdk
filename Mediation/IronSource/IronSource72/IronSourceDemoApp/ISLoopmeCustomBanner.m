@@ -29,18 +29,19 @@
     NSString *appkey = nil;
     self.viewController = viewController;
 
-    if (standardUserDefaults)
+    if (standardUserDefaults){
         appkey = [standardUserDefaults objectForKey:@"LOOPME_BANNER"];
-    NSLog(@"loopme's appkey - %@", appkey);
-    CGRect adFrame = CGRectMake(0, 0, size.width, size.height);
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        self.banner = [LoopMeAdView adViewWithAppKey:appkey frame:adFrame viewControllerForPresentationGDPRWindow:viewController delegate:self];
-    });
-
-    self.delegate = delegate;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [self.banner loadAd];
-    });
+        NSLog(@"loopme's appkey - %@", appkey);
+        CGRect adFrame = CGRectMake(0, 0, size.width, size.height);
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.banner = [LoopMeAdView adViewWithAppKey:appkey frame:adFrame viewControllerForPresentationGDPRWindow:viewController delegate:self];
+        });
+        
+        self.delegate = delegate;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.banner loadAd];
+        });
+    }
 }
 
 - (BOOL)isSupportAdaptiveBanner { 
@@ -78,22 +79,22 @@
 }
 
 - (void)loopMeAdViewDidAppear:(LoopMeAdView *)interstitial {
-    NSLog(@"LoopMe interstitial did present");
+    NSLog(@"LoopMe banner did present");
     [self.delegate adDidOpen];
 }
 
 - (void)loopMeAdViewDidDisappear:(LoopMeAdView *)interstitial {
-    NSLog(@"LoopMe interstitial did dismiss");
+    NSLog(@"LoopMe banner did dismiss");
     [self.delegate adDidDismissScreen];
 }
 
 - (void)loopMeAdViewDidReceiveTap:(LoopMeAdView *)interstitial {
-    NSLog(@"LoopMe interstitial was tapped.");
+    NSLog(@"LoopMe banner was tapped.");
     [self.delegate adDidClick];
 }
 
 - (void)loopMeAdViewVideoDidReachEnd:(LoopMeAdView *)interstitial {
-    NSLog(@"LoopMe interstitial video did reach end.");
+    NSLog(@"LoopMe banner video did reach end.");
 }
 
 - (UIViewController *)viewControllerForPresentation { 
