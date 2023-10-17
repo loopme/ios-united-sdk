@@ -17,9 +17,7 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
         super.viewDidLoad()
         
         self.adView.delegate = self
-        
-        
-        
+                
         // Set background or background color for banners to be fully functional
         adView.backgroundColor = .black
         adView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,9 +34,7 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
         // Load the first ad
         self.adView.loadAd()
     }
-    
-    
-    
+        
     func didExpand(_ ad: MAAd) {}
     
     func didCollapse(_ ad: MAAd) {}

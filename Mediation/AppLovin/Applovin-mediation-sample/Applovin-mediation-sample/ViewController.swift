@@ -18,7 +18,6 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 ALSdk.shared()!.initializeSdk { (configuration: ALSdkConfiguration) in
                     ALSdk.shared()!.settings.isVerboseLoggingEnabled = true
-
                 }
             }
         })
