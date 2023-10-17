@@ -8,10 +8,11 @@
 #ifndef LoopMeAdapter_h
 #define LoopMeAdapter_h
 
-#import <AppLovinSDK/ALMediationAdapter.h>
+#import <AppLovinSDK/AppLovinSDK.h>
 #import <LoopMeUnitedSDK/LoopMeInterstitial.h>
+#import "LoopMeUnitedSDK/LoopMeAdView.h"
 
-@interface LoopmeMediationAdapter: ALMediationAdapter<MAInterstitialAdapter, LoopMeInterstitialDelegate>
+@interface LoopmeMediationAdapter: ALMediationAdapter<MAInterstitialAdapter, LoopMeInterstitialDelegate, MAAdViewAdapter, MARewardedAdapter, LoopMeAdViewDelegate>
 
 - (NSString *_Nonnull)SDKVersion;
 - (NSString *_Nonnull)adapterVersion;

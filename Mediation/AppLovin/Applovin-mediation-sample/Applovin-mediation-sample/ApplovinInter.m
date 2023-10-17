@@ -12,10 +12,11 @@
 
 @implementation ApplovinInter
 
-+(void) loadAd:(UIViewController *) controller{
-    [[ALSdk shared] initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
-        
-    }];
+
++ (void)loadAd:(id)controller {
+        [[ALSdk shared] initializeSdkWithCompletionHandler:^(ALSdkConfiguration *configuration) {
+        }];
 }
+
 
 @end
