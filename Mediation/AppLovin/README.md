@@ -22,7 +22,12 @@ To use and setup the SDK bridge, register your app on the LoopMe network via the
 You will need the app key during next steps of integration.
 
 ## Adding LoopMe IOS SDK ##
-use `pod 'LoopMeUnitedSDK'` or 
+Use `CocoaPods`
+Copy the customized CocoaPods script below to your Podfile:
+```java
+interstitialAd.show();
+```
+
 * Download `LoopMeSDK` from this repository
 * Copy `LoopMeUnitedSDK.embeddedframework` to your project (alternatively you can use LoopMeSDK sorce code)
 * Make sure the following frameworks are added in `Xcode` project's `build phases`
@@ -42,7 +47,7 @@ use `pod 'LoopMeUnitedSDK'` or
 ## Initialization ##
 Make sure `LoopMeSdk` is [initialized](https://github.com/loopme/ios-united-sdk/wiki/Initialization) before using AppLovin.
 
-## Mediate from AppLovin Interstitial to LoopMe Interstitial Ad ##
+## Mediate from AppLovin ads to LoopMe ads Ad ##
 
 <b>Configure Ad Network Mediation on AppLovin</b>
 <br><b>NOTE:</b> This page assumes you already have account on AppLovin and Ad unit(s)
@@ -52,6 +57,9 @@ Make sure `LoopMeSdk` is [initialized](https://github.com/loopme/ios-united-sdk/
 <p><img src="images/applovin_manage_networks.png" /></p>
 
 <p><img src="images/applovin_create_custom.png" /></p>
+
+* Choose the iOS platfrom and after the type of advertisement you what to add. 
+<img width="1158" alt="Screenshot 2023-10-17 at 14 03 53" src="https://github.com/loopme/ios-united-sdk/assets/145434188/2816dad6-9f26-4cd4-8b3b-144da706e40c">
 
 * Click <b>In Ad Unit's setting set loopme's appkey in PlacementId field</b>
 Enter the appkey and real eCPM that you have got after LoopMe publisher team approval. Click Continue.<br>
@@ -64,18 +72,45 @@ Note: you find eCPM on the LoopMe Dashboard > Apps & Sites > Ad Spot information
 Parameter: enter the app key value you received after registering your Ad Spot on the LoopMe dashboard. <br>E.g. '
 298f62c196'.<br><br>
 
+## Interstitial ##
+
 * Load
 
 ```java
 interstitialAd = MAInterstitialAd(adUnitIdentifier: "AD_UNIT_ID")
+interstitialAd.load()
 ```
 
 * Show
-
 ```java
 interstitialAd.show();
 ```
 
+## Banner ##
+
+* Load
+```java
+adView = MAAdView(adUnitIdentifier: "AD_UNIT_ID")
+adView.loadAd()
+```
+* Show
+```java
+view.addSubview(adView)
+// You should set the constraints
+```
+## Rewarded Video ##
+
+* Load
+```java
+rewarded = MARewardedInterstitialAd(adUnitIdentifier: "AD_UNIT_ID")
+rewarded.load()
+```
+
+* Show
+```java
+rewarded.show(forPlacement: nil, customData: nil, viewController: self)
+```
+
 ## Sample project ##
 
-Check out our `unity_sample_project` as an integration example.
+Check out our `Applovin-mediation-sample` as an integration example.
