@@ -151,6 +151,7 @@
 
 - (IBAction)loadBannerButtonTapped:(UIButton *)sender {
     NSString *appkey = self.banerTextfield.text;
+    ISBannerSize *leaderboardSize = [[ISBannerSize alloc] initWithWidth:self.view.frame.size.width andHeight:90];
 
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     if (standardUserDefaults) {
