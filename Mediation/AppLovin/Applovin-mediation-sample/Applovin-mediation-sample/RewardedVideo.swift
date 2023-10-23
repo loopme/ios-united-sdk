@@ -15,10 +15,12 @@ class RewardedVideoViewController: UIViewController, MARewardedAdDelegate {
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     
     private var retryAttempt = 0.0
-    private var rewarded = MARewardedInterstitialAd(adUnitIdentifier: "28bd2f0f755d20da")
-    
+    private var rewarded: MARewardedInterstitialAd!
+    private let adUnitIdentifier = "28bd2f0f755d20da"
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        rewarded = MARewardedInterstitialAd(adUnitIdentifier: adUnitIdentifier)
         self.spinnerView.startAnimating()
         
         self.rewarded.delegate = self

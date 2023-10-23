@@ -15,13 +15,14 @@ class InterstitialViewController: UIViewController, MAAdDelegate {
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     
     private var retryAttempt = 0.0
-    var interstitialAd: MAInterstitialAd!
-    
+    private var interstitialAd: MAInterstitialAd!
+    private let adUnitIdentifier = "89f27e85ef66d3db"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.spinnerView.startAnimating()
         
-        self.interstitialAd = MAInterstitialAd(adUnitIdentifier: "89f27e85ef66d3db")
+        self.interstitialAd = MAInterstitialAd(adUnitIdentifier: adUnitIdentifier)
         self.interstitialAd.delegate = self
         self.interstitialAd.load()
     }

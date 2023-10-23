@@ -14,10 +14,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         LoopMeSDK.shared().initSDK(fromRootViewController: self, completionBlock: {
-            (isInti, error) in
+            (_, _) in
             DispatchQueue.main.async {
-                ALSdk.shared()!.initializeSdk { (configuration: ALSdkConfiguration) in
-                    ALSdk.shared()!.settings.isVerboseLoggingEnabled = true
+                guard let alSDK  = ALSdk.shared() else {return }
+                alSDK.initializeSdk { (configuration: _) in
+                    alSDK.settings.isVerboseLoggingEnabled = true
                 }
             }
         })

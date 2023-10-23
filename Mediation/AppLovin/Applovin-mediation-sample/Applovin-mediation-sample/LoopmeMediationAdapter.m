@@ -76,7 +76,10 @@
 - (void)loadAdViewAdForParameters:(id<MAAdapterResponseParameters>)parameters adFormat:(MAAdFormat *)adFormat andNotify:(id<MAAdViewAdapterDelegate>)delegat {
     bannerAdapterDelegate = [[AppLovinMediationLoopmeBannerDelegate alloc] initWithParentAdapter:self andNotify:delegat];
     CGRect adFrame = CGRectMake(0, 0, 250, 50);
-    adView = [LoopMeAdView adViewWithAppKey: parameters.thirdPartyAdPlacementIdentifier frame:adFrame viewControllerForPresentationGDPRWindow:[ALUtils topViewControllerFromKeyWindow] delegate:bannerAdapterDelegate];
+    adView = [LoopMeAdView adViewWithAppKey: parameters.thirdPartyAdPlacementIdentifier 
+                                      frame:adFrame
+                                      viewControllerForPresentationGDPRWindow:[ALUtils topViewControllerFromKeyWindow]
+                                      delegate:bannerAdapterDelegate];
     adView.delegate = bannerAdapterDelegate;
     [adView loadAd];
 }
@@ -127,8 +130,7 @@
 - (instancetype)initWithParentAdapter:(LoopmeMediationAdapter *)parentAdapter andNotify:(id<MARewardedAdapterDelegate>)delegate
 {
     self = [super init];
-    if ( self )
-    {
+    if ( self ) {
         self.parentAdapter = parentAdapter;
         self.delegate = delegate;
     }
@@ -171,8 +173,7 @@
 
 - (instancetype)initWithParentAdapter:(LoopmeMediationAdapter *)parentAdapter andNotify:(id<MAAdViewAdapterDelegate>)delegate {
     self = [super init];
-    if ( self )
-    {
+    if ( self ) {
         self.parentAdapter = parentAdapter;
         self.delegate = delegate;
     }

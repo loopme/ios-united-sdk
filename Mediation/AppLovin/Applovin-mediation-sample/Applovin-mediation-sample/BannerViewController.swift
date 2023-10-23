@@ -11,11 +11,13 @@ import LoopMeUnitedSDK
 
 class BannerViewController: UIViewController, MAAdViewAdDelegate {
     
-    private let adView = MAAdView(adUnitIdentifier: "d52c8c8e298f2206")
-    
+    private var adView: MAAdView!
+    private let iphoneHeight: CGFloat = 50
+    private let ipadHeight: CGFloat = 90
+    private let adUnitIdentifier = "d52c8c8e298f2206"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         adView = MAAdView(adUnitIdentifier: adUnitIdentifier)
         self.adView.delegate = self
                 
         // Set background or background color for banners to be fully functional
@@ -30,7 +32,7 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
         adView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
         
         adView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true;
-        adView.heightAnchor.constraint(equalToConstant: (UIDevice.current.userInterfaceIdiom == .pad) ? 90 : 50).isActive = true // Banner height on iPhone and iPad is 50 and 90, respectively
+        adView.heightAnchor.constraint(equalToConstant: (UIDevice.current.userInterfaceIdiom == .pad) ? iphoneHeight : ipadHeight).isActive = true
         // Load the first ad
         self.adView.loadAd()
     }
