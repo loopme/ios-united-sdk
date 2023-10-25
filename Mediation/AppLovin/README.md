@@ -4,9 +4,12 @@
 2. **[Register on LoopMe network](#register-on-loopme-network)**
 3. **[Adding LoopMe IOS SDK](#adding-loopme-ios-sdk)**
 4. **[Adding LoopMe's AppLovin Bridge](#adding-loopmes-applovin-bridge)**
-5. **[Initialization](#Initialization)**
-6. **[Mediate from AppLovin Interstitial to LoopMe Interstitial Ad](#mediate-from-applovin-interstitial-to-loopme-interstitial-ad)**
-7. **[Sample project](#sample-project)**
+5. **[Initialization](#initialization)**
+6. **[Mediate from AppLovin ads to LoopMe Ad](#mediate-from-applovin-ads-to-loopme-ad)**
+7. **[Interstitial](#interstitial)**
+8. **[Banner](#banner)**
+9. **[Rewarded Video](#rewarded-video)**
+10. **[Sample project](#sample-project)**
 
 ## Overview ##
 
@@ -25,20 +28,16 @@ You will need the app key during next steps of integration.
 Use `CocoaPods`
 Copy the customized CocoaPods script below to your Podfile:
 ```java
-interstitialAd.show();
-```
+target 'Applovin-mediation-sample' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
 
-* Download `LoopMeSDK` from this repository
-* Copy `LoopMeUnitedSDK.embeddedframework` to your project (alternatively you can use LoopMeSDK sorce code)
-* Make sure the following frameworks are added in `Xcode` project's `build phases`
-  * `MessageUI.framework`
-  * `StoreKit.framework`
-  * `AVFoundation.framework`
-  * `CoreMedia.framework`
-  * `AudioToolbox.framework`
-  * `AdSupport.framework`
-  * `CoreTelephony.framework`
-  * `SystemConfiguration.framework` 
+  pod 'AppLovinSDK'
+  pod 'LoopMeUnitedSDK'
+
+end
+```
+Make sure the LoopMeUnitedSDK frameworks are added in Xcode project's build phases
 
 
 ## Adding LoopMe's AppLovin Bridge ##
@@ -46,8 +45,12 @@ interstitialAd.show();
 
 ## Initialization ##
 Make sure `LoopMeSdk` is [initialized](https://github.com/loopme/ios-united-sdk/wiki/Initialization) before using AppLovin.
+```java
+ LoopMeSDK.shared().initSDK(fromRootViewController: ViewController, completionBlock: { }
+```
 
-## Mediate from AppLovin ads to LoopMe ads Ad ##
+
+## Mediate from AppLovin ads to LoopMe Ad ##
 
 <b>Configure Ad Network Mediation on AppLovin</b>
 <br><b>NOTE:</b> This page assumes you already have account on AppLovin and Ad unit(s)
@@ -86,6 +89,17 @@ interstitialAd.load()
 interstitialAd.show();
 ```
 
+* Example of implementation 
+```java
+    override func viewDidLoad() {
+        super.viewDidLoad()        
+      interstitialAd = MAInterstitialAd(adUnitIdentifier: adUnitIdentifier)
+      interstitialAd.delegate = self
+      interstitialAd.load()
+      interstitialAd.show(forPlacement: nil, customData: nil, viewController: self)
+    }
+```
+
 ## Banner ##
 
 * Load
@@ -98,6 +112,31 @@ adView.loadAd()
 view.addSubview(adView)
 // You should set the constraints
 ```
+
+* Example of implementation 
+```java
+    override func viewDidLoad() {
+        super.viewDidLoad()
+         adView = MAAdView(adUnitIdentifier: adUnitIdentifier)
+        self.adView.delegate = self
+                
+        // Set background or background color for banners to be fully functional
+        adView.backgroundColor = .black
+        adView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(adView)
+        
+        // Anchor the banner to the left, right, and top of the screen.
+        adView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true;
+        adView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true;
+        adView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
+        
+        adView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true;
+        adView.heightAnchor.constraint(equalToConstant: (UIDevice.current.userInterfaceIdiom == .pad) ? iphoneHeight : ipadHeight).isActive = true
+        self.adView.loadAd()
+    }
+```
+
 ## Rewarded Video ##
 
 * Load
@@ -109,6 +148,16 @@ rewarded.load()
 * Show
 ```java
 rewarded.show(forPlacement: nil, customData: nil, viewController: self)
+```
+* Example of implementation 
+```java
+    override func viewDidLoad() {
+        super.viewDidLoad()        
+      rewarded = MAInterstitialAd(adUnitIdentifier: adUnitIdentifier)
+      rewarded.delegate = self
+      rewarded.load()
+      rewarded.show(forPlacement: nil, customData: nil, viewController: self)
+    }
 ```
 
 ## Sample project ##
