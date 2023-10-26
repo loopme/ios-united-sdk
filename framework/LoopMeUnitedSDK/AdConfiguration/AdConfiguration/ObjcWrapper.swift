@@ -9,7 +9,7 @@ public enum AdOrientationWrapper: Int {
 }
 
 @objc (LoopMeCreativeType)
-public enum CreativeTypWrapper: Int {
+public enum CreativeTypeWrapper: Int {
     case vpaid
     case vast
     case normal
@@ -76,7 +76,7 @@ public class AdConfigurationWrapper: NSObject {
         }
     }
     
-    @objc public var creativeType: CreativeTypWrapper {
+    @objc public var creativeType: CreativeTypeWrapper {
         switch self.adConfiguration.creativeType {
         case .mraid:
             return .mraid

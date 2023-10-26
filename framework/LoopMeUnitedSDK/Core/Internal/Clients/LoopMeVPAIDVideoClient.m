@@ -398,18 +398,21 @@ const NSInteger kResizeOffsetVPAID = 11;
             self.layerGravity = nil;
             return;
         }
+       
+        //This code was needed for resizable banner ads. I've removed it to fix stretch video bug of fullscreen ads.
+        //If you need banners in future pls take a look here.
         
-        CGRect videoRect = [self.playerLayer videoRect];
-        CGFloat k = 100;
-        if (videoRect.size.width == self.playerLayer.bounds.size.width) {
-            k = videoRect.size.height * 100 / self.playerLayer.bounds.size.height;
-        } else if (videoRect.size.height == self.playerLayer.bounds.size.height) {
-            k = videoRect.size.width * 100 / self.playerLayer.bounds.size.width;
-        }
-        
-        if ((100 - floorf(k)) <= kResizeOffsetVPAID) {
-            [self.playerLayer setVideoGravity:AVLayerVideoGravityResize];
-        }
+//        CGRect videoRect = [self.playerLayer videoRect];
+//        CGFloat k = 100;
+//        if (videoRect.size.width == self.playerLayer.bounds.size.width) {
+//            k = videoRect.size.height * 100 / self.playerLayer.bounds.size.height;
+//        } else if (videoRect.size.height == self.playerLayer.bounds.size.height) {
+//            k = videoRect.size.width * 100 / self.playerLayer.bounds.size.width;
+//        }
+//        
+//        if ((100 - floorf(k)) <= kResizeOffsetVPAID) {
+//            [self.playerLayer setVideoGravity:AVLayerVideoGravityResize];
+//        }
     }
     
     if  ([[self.delegate performSelector:@selector(delegate)] isKindOfClass:[LoopMeAdView class]]) {

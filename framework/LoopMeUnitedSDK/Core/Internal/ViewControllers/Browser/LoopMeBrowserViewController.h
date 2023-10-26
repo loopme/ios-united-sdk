@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 LoopMe. All rights reserved.
 //
 
+#import <WebKit/WebKit.h>
 @class LoopMeBrowserViewController;
 
 @protocol LoopMeBrowserControllerDelegate;

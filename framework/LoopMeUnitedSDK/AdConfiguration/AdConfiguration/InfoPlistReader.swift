@@ -22,5 +22,5 @@ struct InfoPlisReader {
      }
   }
 
-  static let iasID = infoDict[InfoPlistKey.iasID] as! String
+  static let iasID = infoDict[InfoPlistKey.iasID] as? String
 }

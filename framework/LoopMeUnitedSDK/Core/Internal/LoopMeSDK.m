@@ -35,10 +35,6 @@
     return LOOPME_SDK_VERSION;
 }
 
-- (void)trackingCompletionHandler:(ATTrackingManagerAuthorizationStatus)status{
-
-}
-
 - (void)initSDKFromRootViewController:(UIViewController *)rootViewController
                      sdkConfiguration:(LoopMeSDKConfiguration *)configuration
                      completionBlock :(void(^_Nullable)(BOOL, NSError *))completionBlock {
