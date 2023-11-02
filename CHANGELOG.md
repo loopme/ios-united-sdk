@@ -1,3 +1,11 @@
+## Version 7.4.3 (02.11.2023)
+
+- Allow fullscreen ad to rotate (LoopMeSDK)
+- Fix storyboard and add custom size banner (Ironsource)
+- Connected Banner, Interstitial, Rewarded (AppLovin)
+- Create adapter (AppLovin)
+- Fix conflicts with constraints (Ironsource)
+
 ## Version 7.4.2 (09.10.2023)
 
 - Fix constrain (Frame) in LoopMeAdView
