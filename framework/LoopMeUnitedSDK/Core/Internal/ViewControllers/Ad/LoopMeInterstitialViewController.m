@@ -29,6 +29,12 @@
     self.view.backgroundColor = [UIColor blackColor];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    [self.delegate viewWillTransitionToSize:self.view.frame.size];
+}
+
 #pragma mark - Private
 
 - (BOOL)prefersStatusBarHidden {
@@ -43,8 +49,14 @@
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     if (self.adOrientation == LoopMeAdOrientationLandscape) {
-        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            return [UIApplication sharedApplication].statusBarOrientation;
+        if (@available(iOS 13.0, *)) {
+            if (UIInterfaceOrientationIsLandscape([[[self view] window] windowScene].interfaceOrientation)) {
+                return [[[self view] window] windowScene].interfaceOrientation;
+            }
+        } else {
+            if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+                return [UIApplication sharedApplication].statusBarOrientation;
+            }
         }
         return UIInterfaceOrientationLandscapeLeft;
     } else {
@@ -99,9 +111,17 @@
 #pragma mark - Public
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    if ([self.delegate respondsToSelector:@selector(viewWillTransitionToSize:)]) {
-        [self.delegate viewWillTransitionToSize:size];
-    }
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        
+        UIView *container = context.containerView;
+        CGRect containerFrame = container.frame;
+        CGSize authenticSize = containerFrame.size; //use the size from the container view to workaround bogus size.
+        
+        if ([self.delegate respondsToSelector:@selector(viewWillTransitionToSize:)]) {
+            [self.delegate viewWillTransitionToSize:authenticSize];
+        }
+
+    } completion:nil];
 }
 
 @end

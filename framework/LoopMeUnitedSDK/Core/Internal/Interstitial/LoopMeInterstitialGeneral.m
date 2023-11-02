@@ -257,7 +257,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
     }
     
     [viewController presentViewController:self.adInterstitialViewController animated:animated completion:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
             if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
                 [self.adDisplayController layoutSubviews];
             } else {
@@ -266,10 +265,8 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
             LoopMeLogDebug(@"Interstitial ad did appear");
             if ([self.delegate respondsToSelector:@selector(loopMeInterstitialDidAppear:)]) {
-                    [self.delegate loopMeInterstitialDidAppear:self];
-
+                [self.delegate loopMeInterstitialDidAppear:self];
             }
-        });
     }];
 }
 

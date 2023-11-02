@@ -20,7 +20,7 @@
 static NSString *kLoopMeUserDefaultsDateKey = @"loopMeLogWriteDate";
 static LoopMeLogLevel logLevel = LoopMeLogLevelOff;
 
-LoopMeLogLevel getLoopMeLogLevel() {
+LoopMeLogLevel getLoopMeLogLevel(void) {
     return logLevel;
 }
 

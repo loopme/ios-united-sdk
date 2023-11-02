@@ -47,7 +47,7 @@ const NSTimeInterval kLoopMeLocationUpdateLength = 15;
 - (void)setAuthorizedForLocationServices:(BOOL)authorizedForLocationServices {
     _authorizedForLocationServices = authorizedForLocationServices;
     
-    if (_authorizedForLocationServices && [CLLocationManager locationServicesEnabled]) {
+    if (_authorizedForLocationServices) {
         [self startLocationUpdate];
     } else {
         [self stopLocationUpdate];
@@ -102,7 +102,7 @@ const NSTimeInterval kLoopMeLocationUpdateLength = 15;
         return;
     }
     
-    if (![CLLocationManager locationServicesEnabled] || ![self isAuthorizedStatus:[CLLocationManager authorizationStatus]]) {
+    if (![self isAuthorizedStatus:[CLLocationManager authorizationStatus]]) {
         return;
     }
     

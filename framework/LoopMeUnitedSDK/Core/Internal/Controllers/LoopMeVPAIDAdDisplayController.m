@@ -199,6 +199,9 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 //    [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearCreativeView];
     NSError *impError;
     [self.omidAdEvents impressionOccurredWithError:&impError];
+    
+    UIView *containerView = self.delegate.containerView;
+    [self.vpaidClient resizeAdWithWidth:containerView.bounds.size.width height:containerView.bounds.size.height viewMode:LoopMeVPAIDViewMode.fullscreen];
 }
 
 - (void)setAdConfiguration:(LoopMeAdConfiguration *)configuration {
@@ -232,6 +235,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     WKUserContentController *controller = [[WKUserContentController alloc] init];
     [controller addScriptMessageHandler:self.vpaidMessageHandler name:@"vpaid"];
+    
+    NSString *disableZoomScriptString = @"var meta = document.createElement('meta'); meta.name = 'viewport'; meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'; var head = document.getElementsByTagName('head')[0]; head.appendChild(meta);";
+    WKUserScript *disableZoomScript = [[WKUserScript alloc] initWithSource:disableZoomScriptString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    [controller addUserScript:disableZoomScript];
     
     [self initializeWebViewWithContentController:controller];
     self.webView.navigationDelegate = self;
@@ -294,17 +301,18 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     self.viewableTime = 0;
     
     ((LoopMeVPAIDVideoClient *)self.videoClient).viewController = [self.delegate viewControllerForPresentation];
-    CGRect adjustedFrame = [self adjusFrame:self.delegate.containerView.bounds];
-    [self.videoClient adjustViewToFrame:adjustedFrame];
+    CGRect containerViewFrame = self.delegate.containerView.bounds;
+    [self.videoClient adjustViewToFrame:containerViewFrame];
     
     if (self.adConfiguration.vastProperties.isVpaid) {
-        [self.delegate.containerView addSubview:self.webView];
-        [self.delegate.containerView bringSubviewToFront:self.webView];
-    
-        NSArray *constraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
-        NSArray *constraintsV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[webview]-0-|" options:0 metrics:nil views:@{@"webview" : self.webView}];
-        [self.delegate.containerView addConstraints:constraintsH];
-        [self.delegate.containerView addConstraints:constraintsV];
+        UIView *containerView = self.delegate.containerView;
+        [containerView addSubview:self.webView];
+        [containerView bringSubviewToFront:self.webView];
+        
+        [[self.webView.leadingAnchor constraintEqualToAnchor:containerView.leadingAnchor] setActive:YES];
+        [[self.webView.trailingAnchor constraintEqualToAnchor:containerView.trailingAnchor] setActive:YES];
+        [[self.webView.topAnchor constraintEqualToAnchor:containerView.topAnchor] setActive:YES];
+        [[self.webView.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor] setActive:YES];
     }
     
     [(LoopMeVPAIDVideoClient *)self.videoClient willAppear];
@@ -364,13 +372,13 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)layoutSubviews {
-    CGRect adjustedFrame = [self adjusFrame:self.delegate.containerView.bounds];
-    [self.videoClient adjustViewToFrame:adjustedFrame];
+    CGRect containerFrame = self.delegate.containerView.bounds;
+    [self.videoClient adjustViewToFrame:containerFrame];
 }
 
 - (void)layoutSubviewsToFrame:(CGRect)frame {
-    CGRect adjustedFrame = [self adjusFrame:frame];
-    [self.videoClient adjustViewToFrame:adjustedFrame];
+    [self.videoClient adjustViewToFrame:frame];
+    [self.vpaidClient resizeAdWithWidth:frame.size.width height:frame.size.height viewMode:LoopMeVPAIDViewMode.fullscreen];
 }
 
 - (void)stopHandlingRequests {
@@ -451,15 +459,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     return htmlString;
 }
 
-- (CGRect)adjusFrame:(CGRect)frame {
-    CGRect result = frame;
-    if (!self.adConfiguration.vastProperties.isVpaid && self.isInterstitial && [self adOrientationMatchContainer:frame]) {
-        result = CGRectMake(frame.origin.x, frame.origin.y, frame.size.height, frame.size.width);
-    }
-    
-    return result;
-}
-
 - (BOOL)isVertical:(CGRect)frame {
     return frame.size.width < frame.size.height;
 }
@@ -470,8 +469,8 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (BOOL)adOrientationMatchContainer:(CGRect)frame {
-    return ([self isVertical:frame] && [self isDeviceInPortrait]) ||
-     ([self isDeviceInPortrait] && ![self isVertical:frame]);
+    return (!self.adConfiguration.isPortrait && [self isVertical:frame]) ||
+     (self.adConfiguration.isPortrait && ![self isVertical:frame]);
 }
 
 #pragma mark - WKWebViewDelegate
@@ -515,12 +514,8 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
             self.vpaidClient = [[LoopMeVPAIDClient alloc] initWithDelegate:self webView:self.webView];
             
             if ([self.vpaidClient handshakeVersion] > 0) {
-                CGRect windowRect = [UIApplication sharedApplication].keyWindow.bounds;
-                if ([self isVertical:windowRect]) {
-                    [self.vpaidClient initAdWithWidth:windowRect.size.height height:windowRect.size.width viewMode:LoopMeVPAIDViewMode.fullscreen desiredBitrate:720 creativeData:self.adConfiguration.vastProperties.assetLinks.adParameters];
-                } else {
-                    [self.vpaidClient initAdWithWidth:windowRect.size.width height:windowRect.size.height viewMode:LoopMeVPAIDViewMode.fullscreen desiredBitrate:720 creativeData:self.adConfiguration.vastProperties.assetLinks.adParameters];
-                }
+                CGRect windowRect = [[self.delegate containerView] bounds];
+                [self.vpaidClient initAdWithWidth:windowRect.size.width height:windowRect.size.height viewMode:LoopMeVPAIDViewMode.fullscreen desiredBitrate:720 creativeData:self.adConfiguration.vastProperties.assetLinks.adParameters];
             } else {
                 [self.delegate adDisplayController:self didFailToLoadAdWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeMediaNotFound]];
             }
@@ -773,9 +768,17 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)videoClient:(LoopMeVPAIDVideoClient *)client setupView:(UIView *)view {
-    view.frame = [self adjusFrame:self.delegate.containerView.bounds];
+    view.frame = self.delegate.containerView.bounds;
     [self.iasWrapper registerFriendlyObstruction:view];
     [[self.delegate containerView] addSubview:view];
+    
+    UIView *containerView = [self.delegate containerView];
+    
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    [[[view leadingAnchor] constraintEqualToAnchor:containerView.leadingAnchor] setActive:YES];
+    [[[view trailingAnchor] constraintEqualToAnchor:containerView.trailingAnchor] setActive:YES];
+    [[[view topAnchor] constraintEqualToAnchor:containerView.topAnchor] setActive:YES];
+    [[[view bottomAnchor] constraintEqualToAnchor:containerView.bottomAnchor] setActive:YES];
 }
 
 - (void)videoClientShouldCloseAd:(LoopMeVPAIDVideoClient *)client {
