@@ -387,7 +387,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL coppa;)
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeCreativeType, "CreativeTypWrapper", open) {
+typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeCreativeType, "CreativeTypeWrapper", open) {
   LoopMeCreativeTypeVpaid = 0,
   LoopMeCreativeTypeVast = 1,
   LoopMeCreativeTypeNormal = 2,
