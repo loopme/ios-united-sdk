@@ -122,7 +122,7 @@ public struct VastSkipOffset {
     get
   }
 }
-@objc(LoopMeCreativeType) public enum CreativeTypWrapper : Swift.Int {
+@objc(LoopMeCreativeType) public enum CreativeTypeWrapper : Swift.Int {
   case vpaid
   case vast
   case normal
@@ -164,7 +164,7 @@ public struct VastSkipOffset {
     @objc get
     @objc set
   }
-  @objc public var creativeType: LoopMeUnitedSDK.CreativeTypWrapper {
+  @objc public var creativeType: LoopMeUnitedSDK.CreativeTypeWrapper {
     @objc get
   }
   @objc public var creativeContent: Swift.String {
@@ -380,9 +380,9 @@ extension LoopMeUnitedSDK.TimeOffsetType : Swift.RawRepresentable {}
 extension LoopMeUnitedSDK.AdOrientationWrapper : Swift.Equatable {}
 extension LoopMeUnitedSDK.AdOrientationWrapper : Swift.Hashable {}
 extension LoopMeUnitedSDK.AdOrientationWrapper : Swift.RawRepresentable {}
-extension LoopMeUnitedSDK.CreativeTypWrapper : Swift.Equatable {}
-extension LoopMeUnitedSDK.CreativeTypWrapper : Swift.Hashable {}
-extension LoopMeUnitedSDK.CreativeTypWrapper : Swift.RawRepresentable {}
+extension LoopMeUnitedSDK.CreativeTypeWrapper : Swift.Equatable {}
+extension LoopMeUnitedSDK.CreativeTypeWrapper : Swift.Hashable {}
+extension LoopMeUnitedSDK.CreativeTypeWrapper : Swift.RawRepresentable {}
 extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.Equatable {}
 extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.Hashable {}
 extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.RawRepresentable {}

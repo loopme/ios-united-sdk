@@ -1,3 +1,7 @@
+## Version 7.4.4 (08.11.2023)
+
+- Change marketing version
+
 ## Version 7.4.3 (02.11.2023)
 
 - Allow fullscreen ad to rotate (LoopMeSDK)

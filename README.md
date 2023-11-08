@@ -2,9 +2,9 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.4.3**
+**Version 7.4.4**
 
-- Fix constrain (Frame) in LoopMeAdView
+- Change marketing version
 
 Please view the [changelog](CHANGELOG.md) for details.
 
