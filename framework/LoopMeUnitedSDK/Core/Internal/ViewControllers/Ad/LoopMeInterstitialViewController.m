@@ -117,9 +117,9 @@
         CGRect containerFrame = container.frame;
         CGSize authenticSize = containerFrame.size; //use the size from the container view to workaround bogus size.
         
-        if ([self.delegate respondsToSelector:@selector(viewWillTransitionToSize:)]) {
+//        if ([self.delegate respondsToSelector:@selector(viewWillTransitionToSize:)]) {
             [self.delegate viewWillTransitionToSize:authenticSize];
-        }
+//        }
 
     } completion:nil];
 }

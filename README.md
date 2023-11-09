@@ -2,7 +2,7 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.4.4**
+**Version 7.4.5**
 
 - Change marketing version
 
