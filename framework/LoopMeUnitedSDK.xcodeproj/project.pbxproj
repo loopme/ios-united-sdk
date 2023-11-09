@@ -186,7 +186,6 @@
 		47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */; };
 		47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */; };
 		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
-		B9B9F4552AFCE84F00EA4CD6 /* TestVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B9F4542AFCE84F00EA4CD6 /* TestVersion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,7 +369,6 @@
 		47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVpaidScriptMessageHandler.m; sourceTree = "<group>"; };
 		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
 		81D36A5226F08F2A0037D160 /* CoppaTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoppaTools.swift; sourceTree = "<group>"; };
-		B9B9F4542AFCE84F00EA4CD6 /* TestVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVersion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,7 +453,6 @@
 				47CE39DE236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift */,
 				47714E3C22FAF9CF00DF0D55 /* LoopMeSDKTests.m */,
 				47714E3E22FAF9CF00DF0D55 /* Info.plist */,
-				B9B9F4542AFCE84F00EA4CD6 /* TestVersion.swift */,
 			);
 			path = LoopMeUnitedSDKTests;
 			sourceTree = "<group>";
@@ -1186,7 +1183,6 @@
 			files = (
 				47714E3D22FAF9CF00DF0D55 /* LoopMeSDKTests.m in Sources */,
 				4774006C2358BC8B00CE9AD8 /* VASTParserTests.swift in Sources */,
-				B9B9F4552AFCE84F00EA4CD6 /* TestVersion.swift in Sources */,
 				47CE39DF236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
