@@ -1343,6 +1343,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/OMSDK",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability",
@@ -1361,7 +1362,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				MARKETING_VERSION = 7.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1388,6 +1389,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/OMSDK",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability",
@@ -1406,7 +1408,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
-				MARKETING_VERSION = "$(MARKETING_VERSION)";
+				MARKETING_VERSION = 7.4.5;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
