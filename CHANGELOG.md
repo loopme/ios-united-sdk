@@ -1,3 +1,7 @@
+## Version 7.4.5 (08.11.2023)
+
+- Change marketing version
+
 ## Version 7.4.4 (08.11.2023)
 
 - Change marketing version
