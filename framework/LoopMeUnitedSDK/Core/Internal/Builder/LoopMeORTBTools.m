@@ -180,7 +180,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 }
 
 - (NSDictionary *)extForDevice {
-    NSMutableDictionary *ext = [[NSMutableDictionary alloc] initWithDictionary:@{@"ifv" : [[UIDevice currentDevice] identifierForVendor].UUIDString, @"phonename" : [LoopMeIdentityProvider phoneName], @"plugin" : @([self parameterForBatteryState]), @"chargelevel" : [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel], @"wifiname" : [self parameterForWiFiName], @"orientation" : [self parameterForOrientation], @"timezone" : [self parameterForTimeZone]}];
+    NSMutableDictionary *ext = [[NSMutableDictionary alloc] initWithDictionary:@{@"ifv" : [[UIDevice currentDevice] identifierForVendor].UUIDString, @"atts": [LoopMeIdentityProvider customAuthorizationStatus], @"phonename" : [LoopMeIdentityProvider phoneName], @"plugin" : @([self parameterForBatteryState]), @"chargelevel" : [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel], @"wifiname" : [self parameterForWiFiName], @"orientation" : [self parameterForOrientation], @"timezone" : [self parameterForTimeZone]}];
     
     if (![LoopMeIdentityProvider advertisingTrackingEnabled]){
         NSString *ifv = [[UIDevice currentDevice] identifierForVendor].UUIDString;
@@ -193,6 +193,11 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         [ext setObject:@(isAudioPlaying) forKey:@"music"];
     }
     
+    if ([LoopMeIdentityProvider appTrackingTransparencyEnavled]) {
+        NSString *idfa = [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier];
+        [ext setObject:idfa forKey:@"ifa"];
+    }
+    
     return ext;
 }
 
@@ -200,6 +205,8 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
                    integrationType:(NSString *)integrationType {
     
     NSMutableDictionary *impression = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *skadn = [[NSMutableDictionary alloc] init];
+    
     impression[@"id"] = @1;
     impression[@"displaymanager"] = @"LOOPME_SDK";
     impression[@"displaymanagerver"] = [self sdkVersion];
@@ -219,8 +226,22 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         integrationType = @"normal";
     }
     
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSArray *skAdNetworkItems = infoDict[@"SKAdNetworkItems"];
+    NSMutableArray *skAdIdentifiers = [NSMutableArray array];
+    
+    for (NSDictionary *dictionary in skAdNetworkItems) {
+        NSString *skAdNetworkIdentifier = dictionary[@"SKAdNetworkIdentifier"];
+        if (skAdNetworkIdentifier != nil) {
+            [skAdIdentifiers addObject:skAdNetworkIdentifier];
+        }
+    }
+    
+    skadn[@"version"] = @[@"2.0", @"2.1", @"2.2", @"3.0", @"4.0"];
+    skadn[@"sourceapp"] = [self parameterForBundleIdentifier];
+    skadn[@"skadnetids"] = skAdIdentifiers;
     impression[@"metric"] = [self parameterForAvailableTrackers];
-    impression[@"ext"] = @{@"it" : integrationType, @"supported_techs" : @[@"VIDEO - for usual MP4 video", @"VAST2", @"VAST3", @"VAST4", @"VPAID1", @"VPAID2", @"MRAID2", @"V360"]};
+    impression[@"ext"] = @{@"it" : integrationType, @"supported_techs" : @[@"VIDEO - for usual MP4 video", @"VAST2", @"VAST3", @"VAST4", @"VPAID1", @"VPAID2", @"MRAID2", @"V360"], @"skadn": skadn};
 
     return impression;
 }

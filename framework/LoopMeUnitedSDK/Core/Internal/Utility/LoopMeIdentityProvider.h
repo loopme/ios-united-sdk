@@ -9,6 +9,8 @@
 @interface LoopMeIdentityProvider : NSObject
 
 + (BOOL)advertisingTrackingEnabled;
++ (BOOL)appTrackingTransparencyEnavled;
++ (NSNumber *)customAuthorizationStatus;
 + (NSString *)advertisingTrackingDeviceIdentifier;
 + (NSString *)deviceModel;
 + (NSString *)deviceType;
