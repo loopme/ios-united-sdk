@@ -59,15 +59,10 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
 + (BOOL) appTrackingTransparencyEnavled {
     if (@available(iOS 14, *)) {
         ATTrackingManagerAuthorizationStatus trackingStatus = [ATTrackingManager trackingAuthorizationStatus];
-        if (trackingStatus == ATTrackingManagerAuthorizationStatusAuthorized) {
-            return YES;
-        } else {
-            return NO;
-        }
-    } else {
-        // Prior to iOS 14, IDFA is available without explicit user permission
-        return YES;
+        return trackingStatus == ATTrackingManagerAuthorizationStatusAuthorized;
     }
+    // Prior to iOS 14, IDFA is available without explicit user permission
+    return YES;
 }
 
 + (NSString *)deviceType {
@@ -103,26 +98,19 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
 + (NSNumber *)customAuthorizationStatus {
     CLAuthorizationStatus locationManagerStatus = [CLLocationManager authorizationStatus];
     
-    CustomAuthorizationStatus customStatus;
     switch (locationManagerStatus) {
         case kCLAuthorizationStatusNotDetermined:
-            customStatus = CustomAuthorizationStatusNotDetermined;
-            break;
+            return @(CustomAuthorizationStatusNotDetermined);
         case kCLAuthorizationStatusRestricted:
-            customStatus = CustomAuthorizationStatusRestricted;
-            break;
+            return  @(CustomAuthorizationStatusRestricted);
         case kCLAuthorizationStatusDenied:
-            customStatus = CustomAuthorizationStatusDenied;
-            break;
+            return @(CustomAuthorizationStatusDenied);
         case kCLAuthorizationStatusAuthorizedAlways:
         case kCLAuthorizationStatusAuthorizedWhenInUse:
-            customStatus = CustomAuthorizationStatusAuthorized;
-            break;
+            return @(CustomAuthorizationStatusAuthorized);
         default:
-            customStatus = CustomAuthorizationStatusNotDetermined;
-            break;
+            return @(CustomAuthorizationStatusNotDetermined);
     }
-    return @(customStatus);
 }
 
 @end
