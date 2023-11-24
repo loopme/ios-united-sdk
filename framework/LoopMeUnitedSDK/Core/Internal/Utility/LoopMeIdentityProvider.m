@@ -13,10 +13,20 @@
 #import "NSString+Encryption.h"
 #import "LoopMeIdentityProvider.h"
 #import "LoopMeLogging.h"
+#import <AdSupport/ASIdentifierManager.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+#import <CoreLocation/CoreLocation.h>
 
 typedef NS_ENUM(NSUInteger, LoopMeORTBDeviceType) {
     LoopMeORTBDeviceTypePhone = 4,
     LoopMeORTBDeviceTypeTablet = 5,
+};
+
+typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
+    CustomAuthorizationStatusNotDetermined = 0,
+    CustomAuthorizationStatusRestricted = 1 ,
+    CustomAuthorizationStatusDenied = 2,
+    CustomAuthorizationStatusAuthorized = 3
 };
 
 @implementation LoopMeIdentityProvider
@@ -44,6 +54,15 @@ typedef NS_ENUM(NSUInteger, LoopMeORTBDeviceType) {
 
 + (BOOL)deviceHasAdvertisingIdentifier {
     return !!NSClassFromString(@"ASIdentifierManager");
+}
+
++ (BOOL) appTrackingTransparencyEnavled {
+    if (@available(iOS 14, *)) {
+        ATTrackingManagerAuthorizationStatus trackingStatus = [ATTrackingManager trackingAuthorizationStatus];
+        return trackingStatus == ATTrackingManagerAuthorizationStatusAuthorized;
+    }
+    // Prior to iOS 14, IDFA is available without explicit user permission
+    return YES;
 }
 
 + (NSString *)deviceType {
@@ -74,6 +93,24 @@ typedef NS_ENUM(NSUInteger, LoopMeORTBDeviceType) {
 
 + (NSString *)phoneName {
     return [[[UIDevice currentDevice] name] lm_AES128Encrypt];
+}
+
++ (NSNumber *)customAuthorizationStatus {
+    CLAuthorizationStatus locationManagerStatus = [CLLocationManager authorizationStatus];
+    
+    switch (locationManagerStatus) {
+        case kCLAuthorizationStatusNotDetermined:
+            return @(CustomAuthorizationStatusNotDetermined);
+        case kCLAuthorizationStatusRestricted:
+            return  @(CustomAuthorizationStatusRestricted);
+        case kCLAuthorizationStatusDenied:
+            return @(CustomAuthorizationStatusDenied);
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            return @(CustomAuthorizationStatusAuthorized);
+        default:
+            return @(CustomAuthorizationStatusNotDetermined);
+    }
 }
 
 @end
