@@ -11,7 +11,7 @@
 #import "LoopMeUnitedSDK/LoopMeSDK.h"
 
 #define USERID @"demoapp"
-#define APPKEY @"127d76565"
+#define APPKEY @"1c524597d"
 
 @interface ViewController () <LevelPlayRewardedVideoManualDelegate ,LevelPlayInterstitialDelegate>
 
@@ -19,9 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *loadRVButton;
 @property (weak, nonatomic) IBOutlet UIButton *showISButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
-@property (weak, nonatomic) IBOutlet UITextField *rvAppKey;
-@property (weak, nonatomic) IBOutlet UITextField *interstitialAppKey;
-@property (weak, nonatomic) IBOutlet UITextField *banerTextfield;
 @property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
 @property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
@@ -109,12 +106,6 @@
 #pragma mark Interface Handling
 
 - (IBAction)loadRVButtonTapped:(id)sender {
-    NSString *appkey = self.rvAppKey.text;
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if (standardUserDefaults) {
-        [standardUserDefaults setObject:appkey forKey:@"LOOPME_INTERSTITIAL"];
-        [standardUserDefaults synchronize];
-    }
     [IronSource loadRewardedVideo];
 }
 - (IBAction)showRVButtonTapped:(id)sender {
@@ -136,12 +127,7 @@
 }
 
 - (IBAction)loadISButtonTapped:(id)sender {
-    NSString *appkey = self.interstitialAppKey.text;
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if (standardUserDefaults) {
-        [standardUserDefaults setObject:appkey forKey:@"LOOPME_INTERSTITIAL"];
-        [standardUserDefaults synchronize];
-    }
+
     // This will load the Interstitial. Unlike Rewarded
     // Videos there are no placements.
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -150,14 +136,8 @@
 }
 
 - (IBAction)loadBannerButtonTapped:(UIButton *)sender {
-    NSString *appkey = self.banerTextfield.text;
-    ISBannerSize *leaderboardSize = [[ISBannerSize alloc] initWithWidth:self.view.frame.size.width andHeight:90];
+//    ISBannerSize *leaderboardSize = [[ISBannerSize alloc] initWithWidth:self.view.frame.size.width andHeight:90];
 
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    if (standardUserDefaults) {
-        [standardUserDefaults setObject:appkey forKey:@"LOOPME_BANNER"];
-        [standardUserDefaults synchronize];
-    }
     dispatch_async(dispatch_get_main_queue(), ^{
         [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
     });
