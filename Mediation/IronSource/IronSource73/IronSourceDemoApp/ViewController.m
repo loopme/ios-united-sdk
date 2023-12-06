@@ -69,7 +69,6 @@
     [IronSource setUserId:userId];
     
     [IronSource initWithAppKey:APPKEY];
-    
     [self registerTapGestureRecognizer];
 }
 
@@ -136,6 +135,8 @@
 }
 
 - (IBAction)loadBannerButtonTapped:(UIButton *)sender {
+
+    MARK:// custom size
 //    ISBannerSize *leaderboardSize = [[ISBannerSize alloc] initWithWidth:self.view.frame.size.width andHeight:90];
 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -178,7 +179,7 @@
  */
 - (void)didFailToLoadWithError:(NSError *)error{
     NSLog(@"%s",__PRETTY_FUNCTION__);
-    [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
+    [self showText: error.localizedDescription];
 }
 
 /**
