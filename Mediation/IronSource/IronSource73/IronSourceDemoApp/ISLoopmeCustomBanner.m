@@ -24,12 +24,9 @@
           viewController:(UIViewController *)viewController
                     size:(ISBannerSize *)size
                 delegate:(nonnull id<ISBannerAdDelegate>)delegate {
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *appkey = nil;
     self.viewController = viewController;
-    
-    if (standardUserDefaults) {
-        appkey = [standardUserDefaults objectForKey:@"LOOPME_BANNER"];
+    NSString *appkey = adData.configuration[@"instancekey"];
+
         NSLog(@"loopme's appkey - %@", appkey);
         CGRect adFrame = CGRectMake(0, 0, size.width, size.height);
         
@@ -46,7 +43,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.banner loadAd];
         });
-    }
 }
 
 - (BOOL)isSupportAdaptiveBanner {

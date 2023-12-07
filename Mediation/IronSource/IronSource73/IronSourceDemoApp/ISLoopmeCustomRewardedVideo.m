@@ -20,11 +20,8 @@
 
 - (void)loadAdWithAdData:(nonnull ISAdData *)adData
                 delegate:(nonnull id<ISRewardedVideoAdDelegate>)delegate {
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *appkey = nil;
+    NSString *appkey = adData.configuration[@"instancekey"];
 
-    if (standardUserDefaults)
-        appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
     NSLog(@"loopme's appkey - %@", appkey);
     self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
     [self.interstitial setAutoLoadingEnabled:FALSE];

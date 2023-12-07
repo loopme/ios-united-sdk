@@ -20,17 +20,15 @@
 
 - (void)loadAdWithAdData:(nonnull ISAdData *)adData
                 delegate:(nonnull id<ISInterstitialAdDelegate>)delegate {
-    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *appkey = nil;
+    NSString *appkey = adData.configuration[@"instancekey"];
 
-    if (standardUserDefaults)
-        appkey = [standardUserDefaults objectForKey:@"LOOPME_INTERSTITIAL"];
     NSLog(@"loopme's appkey - %@", appkey);
-    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
-    [self.interstitial setAutoLoadingEnabled:FALSE];
-
-    self.delegate = delegate;
-    [self.interstitial loadAd];
+        
+        self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
+        [self.interstitial setAutoLoadingEnabled:FALSE];
+        
+        self.delegate = delegate;
+        [self.interstitial loadAd];
 }
 
 
