@@ -18,8 +18,8 @@
 		B917E44E2ADD555700C6E6A3 /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */; };
 		B959CD8B2ADD8A0200418D0C /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */; };
 		B95BB0F32ADD6A9600C15524 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */; };
-		B9FE87202ADD4015008D9914 /* AppLovinSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B91FA3512ADD3EF400B13D3F /* AppLovinSDK.xcframework */; };
-		B9FE87212ADD4015008D9914 /* AppLovinSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B91FA3512ADD3EF400B13D3F /* AppLovinSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B983B3D92B1F76C900C61EAE /* AppLovinSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B983B3D82B1F76C900C61EAE /* AppLovinSDK.xcframework */; };
+		B983B3DA2B1F76C900C61EAE /* AppLovinSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B983B3D82B1F76C900C61EAE /* AppLovinSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9FE87242ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FE87232ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework */; };
 		B9FE87252ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B9FE87232ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -32,7 +32,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				B9FE87252ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework in Embed Frameworks */,
-				B9FE87212ADD4015008D9914 /* AppLovinSDK.xcframework in Embed Frameworks */,
+				B983B3DA2B1F76C900C61EAE /* AppLovinSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,10 +56,9 @@
 		8140D9BB286C73D400D4E688 /* LoopmeMediationAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoopmeMediationAdapter.m; sourceTree = "<group>"; };
 		8140D9BF286EE0A200D4E688 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
 		B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
-		B91FA34E2ADD3E7200B13D3F /* Applovin-mediation-sample */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = "Applovin-mediation-sample"; path = "../../../../../../../../Documents/ios-united-sdk/Mediation/applovin/applovin-mediation-sample/Applovin-mediation-sample"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B91FA3512ADD3EF400B13D3F /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppLovinSDK.xcframework; path = "Pods/AppLovinSDK/applovin-ios-sdk-11.11.3/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
 		B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
 		B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		B983B3D82B1F76C900C61EAE /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppLovinSDK.xcframework; path = "Pods/AppLovinSDK/applovin-ios-sdk-12.1.0/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
 		B9FE87232ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Applovin_mediation_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF5C3988388C72E1617F7859 /* Pods-Applovin-mediation-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.release.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9FE87242ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework in Frameworks */,
-				B9FE87202ADD4015008D9914 /* AppLovinSDK.xcframework in Frameworks */,
+				B983B3D92B1F76C900C61EAE /* AppLovinSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,9 +129,8 @@
 		B91FA34D2ADD3E7200B13D3F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B983B3D82B1F76C900C61EAE /* AppLovinSDK.xcframework */,
 				B9FE87232ADD4018008D9914 /* Pods_Applovin_mediation_sample.framework */,
-				B91FA3512ADD3EF400B13D3F /* AppLovinSDK.xcframework */,
-				B91FA34E2ADD3E7200B13D3F /* Applovin-mediation-sample */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
