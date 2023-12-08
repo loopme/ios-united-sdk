@@ -28,7 +28,9 @@ class RewardedVideoViewController: UIViewController, MARewardedAdDelegate {
     }
     
     @IBAction func ShowInterstitial(_ sender: UIButton) {
-        self.rewarded.show(forPlacement: nil, customData: nil, viewController: self)
+        DispatchQueue.main.async {
+            self.rewarded.show(forPlacement: nil, customData: nil, viewController: self)
+        }
     }
     
     func didLoad(_ ad: MAAd) {
