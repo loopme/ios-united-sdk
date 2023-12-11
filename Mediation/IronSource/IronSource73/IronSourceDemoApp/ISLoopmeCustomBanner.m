@@ -71,28 +71,28 @@
 }
 
 - (void)loopMeAdView:(LoopMeAdView *)banner didFailToLoadAdWithError:(NSError *)error {
-    NSLog(@"LoopMe interstitial did fail with error: %@", [error localizedDescription]);
+    NSLog(@"LoopMe banner did fail with error: %@", [error localizedDescription]);
     [self.delegate adDidFailToLoadWithErrorType:ISAdapterErrorTypeInternal
                                       errorCode:[error code] errorMessage:nil];
 }
 
 - (void)loopMeAdViewDidAppear:(LoopMeAdView *)banner {
-    NSLog(@"LoopMe interstitial did present");
+    NSLog(@"LoopMe banner did present");
     [self.delegate adDidOpen];
 }
 
 - (void)loopMeAdViewDidDisappear:(LoopMeAdView *)banner {
-    NSLog(@"LoopMe interstitial did dismiss");
+    NSLog(@"LoopMe banner did dismiss");
     [self.delegate adDidDismissScreen];
 }
 
 - (void)loopMeAdViewDidReceiveTap:(LoopMeAdView *)banner {
-    NSLog(@"LoopMe interstitial was tapped.");
+    NSLog(@"LoopMe banner was tapped.");
     [self.delegate adDidClick];
 }
 
 - (void)loopMeAdViewVideoDidReachEnd:(LoopMeAdView *)banner {
-    NSLog(@"LoopMe interstitial video did reach end.");
+    NSLog(@"LoopMe banner video did reach end.");
 }
 
 - (void)destroyAdWithAdData:(ISAdData *)adData {
