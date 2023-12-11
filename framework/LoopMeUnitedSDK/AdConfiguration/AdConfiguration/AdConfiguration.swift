@@ -11,6 +11,18 @@ import UIKit
 
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING = "loopmeautoloading"
 
+
+public struct SKAdNetworkInfo: Codable {
+    let version: String
+    let network: String
+    let campaign: String
+    let itunesitem: String
+    let nonce: String
+    let sourceapp: String
+    let timestamp: String
+    let signature: String
+}
+
 enum AdOrientation: String, Codable {
     case undefined
     case portrait
@@ -63,8 +75,10 @@ public struct AdConfiguration {
         case appname
         case developer
         case company
+        case skadn
     }
-    
+
+    let skAdNetworkInfo: SKAdNetworkInfo?
     let id: String
     let v360: Bool
     let debug: Bool
@@ -135,7 +149,9 @@ extension AdConfiguration: Decodable {
             UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
             
             self.measurePartners = try ext.decode([String].self, forKey: .measure_partners)
+            self.skAdNetworkInfo = try? ext.decode(SKAdNetworkInfo.self, forKey: .skadn)
         } else {
+            self.skAdNetworkInfo = nil
             self.v360 = false
             self.debug = false
             self.preload25 = false
