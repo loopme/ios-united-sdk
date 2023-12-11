@@ -48,33 +48,33 @@
 }
 
 - (void)loopMeInterstitialDidLoadAd:(LoopMeInterstitial *)interstitial {
-    NSLog(@"LoopMe interstitial did load");
+    NSLog(@"LoopMe rewarded video did load");
     [self.delegate adDidLoad];
 }
 
 - (void)loopMeInterstitial:(LoopMeInterstitial *)interstitial didFailToLoadAdWithError:(NSError *)error {
-    NSLog(@"LoopMe interstitial did fail with error: %@", [error localizedDescription]);
+    NSLog(@"LoopMe rewarded video did fail with error: %@", [error localizedDescription]);
     [self.delegate adDidFailToLoadWithErrorType:ISAdapterErrorTypeInternal
      errorCode:[error code] errorMessage:nil];
 }
 
 - (void)loopMeInterstitialDidAppear:(LoopMeInterstitial *)interstitial {
-    NSLog(@"LoopMe interstitial did present");
+    NSLog(@"LoopMe rewarded video did present");
     [self.delegate adDidOpen];
 }
 
 - (void)loopMeInterstitialDidDisappear:(LoopMeInterstitial *)interstitial {
-    NSLog(@"LoopMe interstitial did dismiss");
+    NSLog(@"LoopMe rewarded video did dismiss");
     [self.delegate adDidClose];
 }
 
 - (void)loopMeInterstitialDidReceiveTap:(LoopMeInterstitial *)interstitial {
-    NSLog(@"LoopMe interstitial was tapped.");
+    NSLog(@"LoopMe rewarded video was tapped.");
     [self.delegate adDidClick];
 }
 
 - (void)loopMeInterstitialVideoDidReachEnd:(LoopMeInterstitial *)interstitial {
-    NSLog(@"LoopMe interstitial video did reach end.");
+    NSLog(@"LoopMe rewarded video did reach end.");
     [self.delegate adRewarded];
 }
 
