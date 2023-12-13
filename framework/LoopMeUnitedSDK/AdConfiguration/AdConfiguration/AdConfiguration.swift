@@ -11,16 +11,25 @@ import UIKit
 
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING = "loopmeautoloading"
 
+public struct SKAdNetworkFidelity: Codable {
+    let fidelity: Int
+    let signature: String
+    let nonce: String
+    let timestamp: String
+}
 
 public struct SKAdNetworkInfo: Codable {
     let version: String
     let network: String
-    let campaign: String
-    let itunesitem: String
-    let nonce: String
+    let sourceidentifier: String?
+    let campaign: String?
     let sourceapp: String
-    let timestamp: String
-    let signature: String
+    let nonce: String?
+    let productpageid: String?
+    let itunesitem: String
+    let timestamp: String?
+    let fidelities: [SKAdNetworkFidelity]?
+    let signature: String?
 }
 
 enum AdOrientation: String, Codable {
@@ -77,7 +86,17 @@ public struct AdConfiguration {
         case company
         case skadn
     }
-
+    
+    enum SKAdNetworkKeys: String, CodingKey {
+        case version
+        case network
+        case sourceidentifier
+        case itunesitem
+        case sourceapp
+        case productpageid
+        case fidelities
+    }
+    
     let skAdNetworkInfo: SKAdNetworkInfo?
     let id: String
     let v360: Bool
@@ -149,7 +168,24 @@ extension AdConfiguration: Decodable {
             UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
             
             self.measurePartners = try ext.decode([String].self, forKey: .measure_partners)
-            self.skAdNetworkInfo = try? ext.decode(SKAdNetworkInfo.self, forKey: .skadn)
+            let skAdNetworkExt = try? ext.nestedContainer(keyedBy: SKAdNetworkKeys.self, forKey: .skadn)
+            if let skAdNetworkContainer = skAdNetworkExt {
+                let version = try skAdNetworkContainer.decode(String.self, forKey: .version)
+                let network = try skAdNetworkContainer.decode(String.self, forKey: .network)
+                let sourceidentifier = try skAdNetworkContainer.decode(String.self, forKey: .sourceidentifier)
+                let itunesitem = try skAdNetworkContainer.decode(String.self, forKey: .itunesitem)
+                let sourceapp = try skAdNetworkContainer.decode(String.self, forKey: .sourceapp)
+                let productpageid = try skAdNetworkContainer.decode(String.self, forKey: .productpageid)
+                let fidelities = try? skAdNetworkContainer.decode([SKAdNetworkFidelity].self, forKey: .fidelities)
+                
+                let skAdNetworkInfo = SKAdNetworkInfo(version: version, network: network, sourceidentifier: sourceidentifier, campaign: nil, sourceapp: sourceapp, nonce: nil, productpageid: productpageid,itunesitem: itunesitem , timestamp: nil, fidelities: fidelities, signature: nil)
+                
+                self.skAdNetworkInfo = skAdNetworkInfo
+            } else {
+                let skAdNetworkBasic = try? ext.decode(SKAdNetworkInfo.self, forKey: .skadn)
+                self.skAdNetworkInfo = skAdNetworkBasic
+            }
+            
         } else {
             self.skAdNetworkInfo = nil
             self.v360 = false
