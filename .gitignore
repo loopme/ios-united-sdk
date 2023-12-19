@@ -30,6 +30,9 @@ Pods/
 framework/.DS_Store
 framework/LoopMeUnitedSDK/.DS_Store
 LoopMeUnitedSDK.embeddedframework/.DS_Store
+
+### Directories ###
+[Ll]ibrary
 emp
     [Oo]bj
     [Bb]uild
