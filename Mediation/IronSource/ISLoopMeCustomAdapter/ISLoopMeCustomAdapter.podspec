@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   
     spec.homepage     = "https://github.com/loopme/ios-united-sdk"
   
-    spec.author             = { "Evgen A. Epanchin" => "EpanchinE@gmail.com" }
+    spec.author             = { "Evgen A. Epanchin" => "EpanchinE@gmail.com", "Valerii Roman" => "valeriiroman@loopme.com"  }
     spec.license            = { :type => "BSD", :file => "../../../LICENSE.md" }
 
     spec.platform = :ios, "12.0"
