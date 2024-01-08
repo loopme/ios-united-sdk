@@ -12,7 +12,5 @@ end
 
 target 'IronSourceDemoApp' do
     use_frameworks!
-    pod 'IronSourceSDK'
-    pod 'LoopMeUnitedSDK'
-    pod 'ISLoopMeCustomAdapter' , :path => '../ISLoopMeCustomAdapter/ISLoopMeCustomAdapter.podspec'
+    pod 'ISLoopMeCustomAdapter' , :path => '../../../ISLoopMeCustomAdapter.podspec'
 end

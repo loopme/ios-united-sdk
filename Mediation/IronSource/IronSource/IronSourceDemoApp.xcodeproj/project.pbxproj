@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		229B8E072B3C20AC00FCEFE2 /* ISLoopMeCustomAdapter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 229B8E062B3C20AC00FCEFE2 /* ISLoopMeCustomAdapter.xcframework */; };
 		44AB68A7D38E7AA1AEF96AF7 /* Pods_IronSourceDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD889FE654A39009B7148BDD /* Pods_IronSourceDemoApp.framework */; };
 		47B0AD2A1CB5252100B8D125 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47B0AD291CB5252100B8D125 /* WebKit.framework */; };
 		72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D6451E267513009ABC1B /* AppDelegate.m */; };
@@ -34,7 +33,6 @@
 
 /* Begin PBXFileReference section */
 		1C0198333C424A5FF563886E /* Pods-IronSourceDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
-		229B8E062B3C20AC00FCEFE2 /* ISLoopMeCustomAdapter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ISLoopMeCustomAdapter.xcframework; path = ../ISLoopMeCustomAdapter/ISLoopMeCustomAdapter.embeddedframework/ISLoopMeCustomAdapter.xcframework; sourceTree = "<group>"; };
 		47B0AD291CB5252100B8D125 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		72E0D6441E267513009ABC1B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		72E0D6451E267513009ABC1B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -46,6 +44,7 @@
 		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "IronSourceDemoApp/Supporting Files/main.m"; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD889FE654A39009B7148BDD /* Pods_IronSourceDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9EAE2032B4C367F00092C8B /* LoopMeUnitedSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LoopMeUnitedSDK.xcframework; path = Pods/LoopMeUnitedSDK/LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* IronSourceDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IronSourceDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E80C8FB51C16E48200CF3C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,7 +71,6 @@
 				47B0AD2A1CB5252100B8D125 /* WebKit.framework in Frameworks */,
 				E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */,
 				E80C8FCF1C16E4C800CF3C27 /* AdSupport.framework in Frameworks */,
-				229B8E072B3C20AC00FCEFE2 /* ISLoopMeCustomAdapter.xcframework in Frameworks */,
 				E80C8FCD1C16E4C400CF3C27 /* StoreKit.framework in Frameworks */,
 				E80C8FCB1C16E4BC00CF3C27 /* libz.tbd in Frameworks */,
 				E80C8FC91C16E4B700CF3C27 /* MobileCoreServices.framework in Frameworks */,
@@ -147,7 +145,7 @@
 		E80C8FD21C16E52200CF3C27 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				229B8E062B3C20AC00FCEFE2 /* ISLoopMeCustomAdapter.xcframework */,
+				B9EAE2032B4C367F00092C8B /* LoopMeUnitedSDK.xcframework */,
 				47B0AD291CB5252100B8D125 /* WebKit.framework */,
 				E80C8FD01C16E4D200CF3C27 /* Security.framework */,
 				E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */,
@@ -268,12 +266,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ISLoopMeCustomAdapter/ISLoopMeCustomAdapter.framework/ISLoopMeCustomAdapter",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/LoopMeUnitedSDK/LoopMeUnitedSDK.framework/LoopMeUnitedSDK",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISLoopMeCustomAdapter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LoopMeUnitedSDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,10 +453,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/IronSourceDemoApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -489,10 +482,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/IronSourceDemoApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
