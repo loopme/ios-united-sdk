@@ -1,8 +1,8 @@
 <dependencies>
   <iosPods>
-    <iosPod name="ISLoopMeCustomAdapter" path="../../../ISLoopMeCustomAdapter.podspec">
+    <iosPod name="ISLoopMeCustomAdapter" version="0.0.2">
       <sources>
-        <source>https://github.com/loopme/ios-united-sdk</source>
+        <source>https://github.com/CocoaPods/Specs</source>
       </sources>
     </iosPod>
   </iosPods>
