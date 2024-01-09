@@ -31,6 +31,35 @@
     return instance;
 }
 
++ (NSBundle * )resourcesBundle {
+    
+    static NSBundle *_resourcesBundle;
+    
+    if (_resourcesBundle) {
+        return  _resourcesBundle;
+    }
+    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+    if (bundleURL) {
+        _resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+        return _resourcesBundle;
+    }
+    
+    NSString *bundlePath = nil;
+    NSArray *allBundles = [NSBundle allFrameworks];
+    for (NSBundle *bundle in allBundles) {
+        if ([bundle pathForResource:@"LoopMeResources" ofType:@"bundle"]) {
+            bundlePath = bundle.bundlePath;
+            break;
+        }
+    }
+    if (!bundlePath) {
+        @throw [NSException exceptionWithName:@"NoBundleResource" reason:@"No loopme resource bundle" userInfo:nil];
+    }
+    _resourcesBundle = [NSBundle bundleWithPath:bundlePath];
+    return _resourcesBundle;
+    
+}
+
 + (NSString *)version {
     return LOOPME_SDK_VERSION;
 }

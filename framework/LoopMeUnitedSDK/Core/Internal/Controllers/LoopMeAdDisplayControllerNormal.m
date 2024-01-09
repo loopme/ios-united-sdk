@@ -187,11 +187,10 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     WKUserContentController *controller = [[WKUserContentController alloc] init];
     [controller addScriptMessageHandler:self.mraidScriptMessageHandler name:@"mraid"];
 
-    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
-    if (!bundleURL) {
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+    if (!resourcesBundle) {
        @throw [NSException exceptionWithName:@"NoBundleResource" reason:@"No loopme resourse bundle" userInfo:nil];
     }
-    NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
     NSString *jsPath = [resourcesBundle pathForResource:@"mraid.js" ofType:@"ignore"];
     NSString *mraidjs = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
 

@@ -2,9 +2,9 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.4.5**
+**Version 7.4.6**
 
-- Change marketing version
+- Improve bundle resources link
 
 Please view the [changelog](CHANGELOG.md) for details.
 
