@@ -6,6 +6,7 @@
 //
 
 #import "LoopMeVASTPlayerUIView.h"
+#import "LoopMeSDK.h"
 
 @interface LoopMeVASTPlayerUIView ()
 
@@ -54,8 +55,8 @@
     UITapGestureRecognizer *tapVideo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoTapped)];
     [self addGestureRecognizer:tapVideo];
     
-    NSBundle *resourcesBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"]];
-    
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+
     self.muteButton = [[UIButton alloc] init];
 
     [self.muteButton setImage:[UIImage imageNamed:@"loopmemute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateSelected];

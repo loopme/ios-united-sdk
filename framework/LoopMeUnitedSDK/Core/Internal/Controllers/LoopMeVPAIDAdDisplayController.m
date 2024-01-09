@@ -423,11 +423,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 #pragma mark - Private
 
 - (NSString *)stringFromFile:(NSString *)filename withExtension:(NSString *)extension {
-    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
-    if (!bundleURL) {
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+    if (!resourcesBundle) {
         return nil;
     }
-    NSBundle *resourcesBundle = [NSBundle bundleWithURL:bundleURL];
     NSString *htmlPath = [resourcesBundle pathForResource:filename ofType:extension];
     return [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:NULL];
 }

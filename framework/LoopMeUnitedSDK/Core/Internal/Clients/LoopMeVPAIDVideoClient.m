@@ -15,6 +15,7 @@
 #import "LoopMeLogging.h"
 #import "LoopMeOMIDVideoEventsWrapper.h"
 
+#import "LoopMeSDK.h"
 #import "LoopMeReachability.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
@@ -383,8 +384,7 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.videoView.frame = frame;
     
     if (SYSTEM_VERSION_LESS_THAN(@"13.0")) {
-        
-        NSBundle *resourcesBundle = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"]];
+        NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
         
         self.vastUIView.frame = frame;
         MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
