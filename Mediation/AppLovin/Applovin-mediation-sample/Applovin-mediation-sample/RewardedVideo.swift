@@ -16,7 +16,7 @@ class RewardedVideoViewController: UIViewController, MARewardedAdDelegate {
     
     private var retryAttempt = 0.0
     private var rewarded: MARewardedInterstitialAd!
-    private let adUnitIdentifier = "28bd2f0f755d20da"
+    private let adUnitIdentifier = "cec3d21237e1040f"
 
     override func viewDidLoad() {
         super.viewDidLoad()
