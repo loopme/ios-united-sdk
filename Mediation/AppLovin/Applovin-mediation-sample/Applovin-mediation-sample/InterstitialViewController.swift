@@ -16,7 +16,7 @@ class InterstitialViewController: UIViewController, MAAdDelegate {
     
     private var retryAttempt = 0.0
     private var interstitialAd: MAInterstitialAd!
-    private let adUnitIdentifier = "f8f6750fd3bd5331"
+    private let adUnitIdentifier = "5925a5864197df20"
 
     override func viewDidLoad() {
         super.viewDidLoad()
