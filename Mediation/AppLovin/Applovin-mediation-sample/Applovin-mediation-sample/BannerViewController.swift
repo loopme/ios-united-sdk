@@ -14,7 +14,7 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
     private var adView: MAAdView!
     private let iphoneHeight: CGFloat = 50
     private let ipadHeight: CGFloat = 90
-    private let adUnitIdentifier = "d52c8c8e298f2206"
+    private let adUnitIdentifier = "4000e273b81db3ad"
     override func viewDidLoad() {
         super.viewDidLoad()
          adView = MAAdView(adUnitIdentifier: adUnitIdentifier)
@@ -32,7 +32,7 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
         adView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
         
         adView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true;
-        adView.heightAnchor.constraint(equalToConstant: (UIDevice.current.userInterfaceIdiom == .pad) ? iphoneHeight : ipadHeight).isActive = true
+        adView.heightAnchor.constraint(equalToConstant: (UIDevice.current.userInterfaceIdiom == .pad) ? ipadHeight : iphoneHeight).isActive = true
         // Load the first ad
         self.adView.loadAd()
     }
