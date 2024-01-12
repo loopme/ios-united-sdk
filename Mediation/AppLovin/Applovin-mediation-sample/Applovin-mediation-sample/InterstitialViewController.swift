@@ -35,6 +35,7 @@ class InterstitialViewController: UIViewController, MAAdDelegate {
         retryAttempt = 0
         spinnerView.stopAnimating()
         showButton.isEnabled = true
+        NSLog("CALLBACK - interstitial didLoad ")
     }
     
     func didFailToLoadAd(forAdUnitIdentifier adUnitIdentifier: String, withError error: MAError) {
@@ -43,17 +44,24 @@ class InterstitialViewController: UIViewController, MAAdDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + delaySec) {
             self.interstitialAd.load()
         }
+        NSLog("CALLBACK - interstitial didFailToLoadAd", error)
     }
     
-    func didDisplay(_ ad: MAAd) {}
+    func didDisplay(_ ad: MAAd) {
+        NSLog("CALLBACK - interstitial didDisplay")
+    }
     
     func didHide(_ ad: MAAd) {
         interstitialAd.load()
+        NSLog("CALLBACK - interstitial didHide")
     }
     
-    func didClick(_ ad: MAAd) {}
+    func didClick(_ ad: MAAd) {
+        NSLog("CALLBACK - interstitial didClick")
+    }
     
     func didFail(toDisplay ad: MAAd, withError error: MAError) {
         interstitialAd.load()
+        NSLog("CALLBACK - interstitial didFail", error)
     }
 }

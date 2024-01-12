@@ -37,19 +37,35 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
         self.adView.loadAd()
     }
         
-    func didExpand(_ ad: MAAd) {}
+    func didExpand(_ ad: MAAd) {
+        NSLog("CALLBACK - banner didExpand")
+    }
     
-    func didCollapse(_ ad: MAAd) {}
+    func didCollapse(_ ad: MAAd) {
+        NSLog("CALLBACK - banner didCollapse")
+    }
     
-    func didLoad(_ ad: MAAd) {}
+    func didLoad(_ ad: MAAd) {
+        NSLog("CALLBACK - banner didLoad")
+    }
     
-    func didFailToLoadAd(forAdUnitIdentifier adUnitIdentifier: String, withError error: MAError) {}
+    func didFailToLoadAd(forAdUnitIdentifier adUnitIdentifier: String, withError error: MAError) {
+        NSLog("CALLBACK - banner didFailToLoadAd", error)
+    }
     
-    func didDisplay(_ ad: MAAd) {}
+    func didDisplay(_ ad: MAAd) {
+        NSLog("CALLBACK - banner didDisplay")
+    }
     
-    func didHide(_ ad: MAAd) {}
+    func didHide(_ ad: MAAd) {
+        NSLog("CALLBACK - banner didHide")
+    }
     
-    func didClick(_ ad: MAAd) {}
+    func didClick(_ ad: MAAd) {
+        NSLog("CALLBACK - banner didClick")
+    }
     
-    func didFail(toDisplay ad: MAAd, withError error: MAError) {}
+    func didFail(toDisplay ad: MAAd, withError error: MAError) {
+        NSLog("CALLBACK - banner didFail", error)
+    }
 }
