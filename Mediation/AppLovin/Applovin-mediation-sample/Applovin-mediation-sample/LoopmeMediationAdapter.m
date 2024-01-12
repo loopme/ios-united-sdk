@@ -168,6 +168,12 @@
     [self.delegate didHideRewardedAd];
 }
 
+
+- (void)loopMeInterstitialVideoDidReachEnd:(LoopMeInterstitial *)interstitial{
+  [self.delegate didRewardUserWithReward:[MAReward rewardWithAmount:MAReward.defaultAmount
+                                label:MAReward.defaultLabel]];
+}
+
 @end
 
 //MARK: - AppLovinMediationLoopmeBannerDelegate

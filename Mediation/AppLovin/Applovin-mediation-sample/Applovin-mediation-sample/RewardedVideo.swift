@@ -37,6 +37,7 @@ class RewardedVideoViewController: UIViewController, MARewardedAdDelegate {
         retryAttempt = 0
         spinnerView.stopAnimating()
         showButton.isEnabled = true
+        NSLog("CALLBACK - rewarded didLoad")
     }
     
     func didFailToLoadAd(forAdUnitIdentifier adUnitIdentifier: String, withError error: MAError) {
@@ -46,19 +47,28 @@ class RewardedVideoViewController: UIViewController, MARewardedAdDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + delaySec) {
             self.rewarded.load()
         }
+        NSLog("CALLBACK - rewarded didFailToLoadAd", error)
     }
     
-    func didDisplay(_ ad: MAAd) {}
+    func didDisplay(_ ad: MAAd) {
+        NSLog("CALLBACK - rewarded didDisplay")
+    }
     
     func didHide(_ ad: MAAd) {
         rewarded.load()
+        NSLog("CALLBACK - rewarded didHide")
     }
     
-    func didClick(_ ad: MAAd) {}
+    func didClick(_ ad: MAAd) {
+        NSLog("CALLBACK - rewarded didClick")
+    }
     
     func didFail(toDisplay ad: MAAd, withError error: MAError) {
         rewarded.load()
+        NSLog("CALLBACK - rewarded didFail", error)
     }
     
-    func didRewardUser(for ad: MAAd, with reward: MAReward) {}
+    func didRewardUser(for ad: MAAd, with reward: MAReward) {
+        NSLog("CALLBACK - rewarded didRewardUser", reward)
+    }
 }
