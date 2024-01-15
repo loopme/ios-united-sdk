@@ -38,7 +38,7 @@
 		</data>
 		<key>Headers/LoopMeSDK.h</key>
 		<data>
-		B5N9OfykxQW7ucl17ghdKwkTudw=
+		WCaJ1HyCBrMBdcc6YrFwxgS12Tc=
 		</data>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		i5Qy8PYJP+ZN2HqLfYnP8Q/GbrY=
+		/5R1s33BoxvTLns4zU87AxQHftg=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		wJIJLfCyf+OlOaaf81oXdRPGa6U=
+		XEtbXfTtwLMDDGTlDMkgwAZ3CCo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -143,7 +143,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Wwu8gy80X4UldSOlfiggwhO/rMLxHK076iQLwppNpUA=
+			iH90CIvFUZitHRdKsNj6kQsUsVCga6fEuPi8ozHcCLI=
 			</data>
 		</dict>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
@@ -199,7 +199,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3K1d2Yw5FKRuRpCRsvEnc210hGaIekIQZGkY9Z9DIgY=
+			enED4TEQ4OCzY88diGX+9krWVY3cwlNjCrE+JE91a9E=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

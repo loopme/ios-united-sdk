@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)version;
 
 + (instancetype)shared;
++ (NSBundle *)resourcesBundle;
+
     
 - (void)initSDKFromRootViewController:(UIViewController *)rootViewController
                      sdkConfiguration:(LoopMeSDKConfiguration *) configuration

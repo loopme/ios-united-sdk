@@ -75,8 +75,10 @@
 
 - (void)loadAdViewAdForParameters:(id<MAAdapterResponseParameters>)parameters adFormat:(MAAdFormat *)adFormat andNotify:(id<MAAdViewAdapterDelegate>)delegat {
     bannerAdapterDelegate = [[AppLovinMediationLoopmeBannerDelegate alloc] initWithParentAdapter:self andNotify:delegat];
-    CGRect adFrame = CGRectMake(0, 0, 250, 50);
-    adView = [LoopMeAdView adViewWithAppKey: parameters.thirdPartyAdPlacementIdentifier 
+    NSInteger width = (NSInteger)adFormat.size.width;
+    NSInteger height = (NSInteger)adFormat.size.height;
+    CGRect adFrame = CGRectMake(0, 0, width, height);
+    adView = [LoopMeAdView adViewWithAppKey: parameters.thirdPartyAdPlacementIdentifier
                                       frame:adFrame
                                       viewControllerForPresentationGDPRWindow:[ALUtils topViewControllerFromKeyWindow]
                                       delegate:bannerAdapterDelegate];
@@ -111,7 +113,7 @@
 
 - (void)loopMeInterstitial:(LoopMeInterstitial * _Nonnull)interstitial
   didFailToLoadAdWithError:(NSError * _Nonnull)error{
-    [intersititalDelegate didFailToLoadInterstitialAdWithError:[MAAdapterError errorWithNSError:error]];
+    [intersititalDelegate didFailToLoadInterstitialAdWithError:MAAdapterError.adNotReady];
 }
 
 - (void)loopMeInterstitialDidAppear:(LoopMeInterstitial * _Nonnull)interstitial{
@@ -144,7 +146,7 @@
 
 - (void)loopMeInterstitial:(LoopMeInterstitial *)interstitial didFailToLoadAdWithError:(NSError *)error {
     [self.parentAdapter log: @"Rewarded ad failed to load with error: %@", error];
-    [self.delegate didFailToLoadRewardedAdWithError: error];
+    [self.delegate didFailToLoadRewardedAdWithError: MAAdapterError.adNotReady];
 }
 
 - (void)loopMeInterstitialDidAppear:(LoopMeInterstitial *)interstitial {
@@ -164,6 +166,12 @@
     
     [self.parentAdapter log: @"Rewarded ad hidden"];
     [self.delegate didHideRewardedAd];
+}
+
+
+- (void)loopMeInterstitialVideoDidReachEnd:(LoopMeInterstitial *)interstitial{
+  [self.delegate didRewardUserWithReward:[MAReward rewardWithAmount:MAReward.defaultAmount
+                                label:MAReward.defaultLabel]];
 }
 
 @end
@@ -187,7 +195,7 @@
 }
 - (void)loopMeAdView:(LoopMeAdView *)adView didFailToLoadAdWithError:(NSError *)error {
     [self.parentAdapter log: @"AdView failed to load with error: %@", error];
-    [self.delegate didFailToLoadAdViewAdWithError:error];
+    [self.delegate didFailToLoadAdViewAdWithError:MAAdapterError.adNotReady];
 }
 
 - (void)loopMeAdViewDidReceiveTap:(LoopMeAdView *)adView {
