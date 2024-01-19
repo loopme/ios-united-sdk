@@ -1,3 +1,11 @@
+## Version 7.4.7 (19.01.2024)
+
+- Fix bundle resources issue
+
+## Version 7.4.6 (17.01.2024)
+
+- Improve bundle resources link
+
 ## Version 7.4.5 (08.11.2023)
 
 - Change marketing version
