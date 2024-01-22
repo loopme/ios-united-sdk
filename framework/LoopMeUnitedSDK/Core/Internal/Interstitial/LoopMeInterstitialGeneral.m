@@ -21,6 +21,7 @@
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAnalyticsProvider.h"
+#import <StoreKit/StoreKit.h>
 
 
 const NSInteger kLoopMeRequestTimeout = 180;
@@ -40,6 +41,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
 @property (nonatomic, strong) LoopMeInterstitialViewController *adInterstitialViewController;
 @property (nonatomic, assign) LoopMeAdType preferredAdTypes;
 @property (nonatomic, strong) NSTimer *timeoutTimer;
+@property (nonatomic, strong) SKAdImpression *skAdImpression;
 
 @end
 
@@ -82,7 +84,16 @@ const NSInteger kLoopMeRequestTimeout = 180;
         _delegate = delegate;
         _adManager = [[LoopMeAdManager alloc] initWithDelegate:self];
         _preferredAdTypes = adTypes;
-        
+        if (@available(iOS 14.5, *)) {
+            self.skAdImpression = [[SKAdImpression alloc] init];
+            self.skAdImpression.adNetworkIdentifier = self.adConfiguration.network;
+            self.skAdImpression.signature = self.adConfiguration.signature;
+            if (@available(iOS 16.1, *)) {
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+                self.skAdImpression.sourceIdentifier = [formatter numberFromString:self.adConfiguration.sourceidentifier];
+            }
+        }
+
         self.adDisplayController = [[LoopMeAdDisplayControllerNormal alloc] initWithDelegate:self];
         self.adDisplayController.isInterstitial = YES;
         
@@ -256,6 +267,8 @@ const NSInteger kLoopMeRequestTimeout = 180;
         self.adDisplayControllerVPAID.visible = YES;
     }
     
+    [self startSKAdImpression];
+
     [viewController presentViewController:self.adInterstitialViewController animated:animated completion:^{
             if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
                 [self.adDisplayController layoutSubviews];
@@ -288,7 +301,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
         [self.adDisplayControllerVPAID closeAd];
     }
     [self unRegisterObserver];
-    
+    [self endSKAdImpression];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.adInterstitialViewController.presentingViewController dismissViewControllerAnimated:animated completion:^{
             LoopMeLogDebug(@"Interstitial ad did disappear");
@@ -297,6 +310,44 @@ const NSInteger kLoopMeRequestTimeout = 180;
             }
         }];
     });
+}
+
+#pragma  mark - SkadNetwork func
+
+- (void)startSKAdImpression {
+    // Create an SKAdImpression instance
+    if (@available(iOS 14.5, *)) {
+        
+        [SKAdNetwork startImpression:self.skAdImpression completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
+                // Handle the error as needed
+            } else {
+                NSLog(@"SKAdImpression started successfully");
+                // Handle success
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
+
+- (void)endSKAdImpression {
+    // Create an SKAdImpression instance
+    if (@available(iOS 14.5, *)) {
+        [SKAdNetwork endImpression:self.skAdImpression completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
+                // Handle the error as needed
+            } else {
+                NSLog(@"SKAdImpression started successfully");
+                // Handle success
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 #pragma mark - LoopMeAdManagerDelegate
