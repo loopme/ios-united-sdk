@@ -246,7 +246,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         }
     }
     
-    skadn[@"version"] = @[@"2.0", @"2.1", @"2.2", @"3.0", @"4.0"];
+    skadn[@"versions"] = @[@"2.0", @"2.1", @"2.2", @"3.0", @"4.0"];
     skadn[@"sourceapp"] = [self parameterForBundleIdentifier];
     skadn[@"skadnetids"] = skAdIdentifiers;
     impression[@"metric"] = [self parameterForAvailableTrackers];

@@ -111,16 +111,40 @@ public class AdConfigurationWrapper: NSObject {
         return adConfiguration.adIDsForIAS
     }
     
-    @objc public var sourceidentifier: String? {
-        return skadNetworkInfo?.sourceidentifier
-    }
-    
     @objc public var signature: String? {
-        return skadNetworkInfo?.signature
+        if skadNetworkInfo?.fidelities.count == 2 {
+            return skadNetworkInfo?.fidelities.last?.signature
+        } else {
+            return skadNetworkInfo?.fidelities.first?.signature
+        }
     }
     
     @objc public var network: String? {
         return skadNetworkInfo?.network
+    }
+    
+    @objc public var skadVersion: String? {
+        return skadNetworkInfo?.version
+    }
+    
+    @objc public var skadTimestamp: String? {
+        if skadNetworkInfo?.fidelities.count == 2 {
+            return skadNetworkInfo?.fidelities.last?.timestamp
+        } else {
+            return skadNetworkInfo?.fidelities.first?.timestamp
+        }
+    }
+    
+    @objc public var skadSourceApp: String? {
+        return skadNetworkInfo?.sourceapp
+    }
+    
+    @objc public var skadItunesitem: String? {
+        return skadNetworkInfo?.itunesitem
+    }
+    
+    @objc public var skadCampaign: String? {
+        return skadNetworkInfo?.campaign
     }
     
     @objc public var expandProperties: MRAIDExpandPropertiesWrapper?

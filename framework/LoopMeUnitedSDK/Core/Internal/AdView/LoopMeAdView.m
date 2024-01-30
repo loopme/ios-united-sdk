@@ -23,6 +23,7 @@
 #import "LoopMeGDPRTools.h"
 #import "LoopMeViewabilityManager.h"
 #import "LoopMeSDK.h"
+#import <StoreKit/StoreKit.h>
 
 @interface LoopMeAdView ()
 <
@@ -46,6 +47,7 @@
 
 @property (nonatomic, strong) NSLayoutConstraint *expandedWidth;
 @property (nonatomic, strong) NSLayoutConstraint *expandedHeight;
+@property (nonatomic, strong) SKAdImpression *skAdImpression;
 
 /*
  * Update webView "visible" state is required on JS first time when ad appears on the screen,
@@ -151,6 +153,44 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
             [self.adDisplayControllerVPAID moveView:NO];
             [self.adDisplayControllerVPAID expandReporting];
         }
+    }
+}
+
+#pragma  mark - SkadNetwork func
+
+- (void)startSKAdImpression {
+    // Create an SKAdImpression instance
+    if (@available(iOS 14.5, *)) {
+        
+        [SKAdNetwork startImpression:self.skAdImpression completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
+                // Handle the error as needed
+            } else {
+                NSLog(@"SKAdImpression started successfully");
+                // Handle success
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
+
+- (void)endSKAdImpression {
+    // Create an SKAdImpression instance
+    if (@available(iOS 14.5, *)) {
+        [SKAdNetwork endImpression:self.skAdImpression completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
+                // Handle the error as needed
+            } else {
+                NSLog(@"SKAdImpression started successfully");
+                // Handle success
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
     }
 }
 
@@ -454,6 +494,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
 }
 
 - (void)updateAdVisibilityWhenScroll {
+    [self endSKAdImpression];
     if (!self.isVisibilityUpdated) {
         if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
             self.adDisplayController.visible = YES;
@@ -492,6 +533,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         return;
     }
+    [self startSKAdImpression];
     [self.adDisplayControllerVPAID startAd];
     [self updateVisibility];
 }
@@ -528,6 +570,23 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     }
     
     self.adConfiguration = adConfiguration;
+    
+    if (@available(iOS 14.5, *)) {
+        self.skAdImpression = [[SKAdImpression alloc] init];
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+
+        self.skAdImpression.adNetworkIdentifier = self.adConfiguration.network;
+        self.skAdImpression.signature = self.adConfiguration.signature;
+        self.skAdImpression.version = self.adConfiguration.skadVersion;
+        self.skAdImpression.timestamp = [formatter numberFromString: self.adConfiguration.skadTimestamp];
+        self.skAdImpression.sourceAppStoreItemIdentifier = [formatter numberFromString:self.adConfiguration.skadItunesitem];
+        self.skAdImpression.adCampaignIdentifier = [formatter numberFromString: self.adConfiguration.skadCampaign];
+        
+        if (@available(iOS 16.1, *)) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            self.skAdImpression.sourceIdentifier = [formatter numberFromString:self.adConfiguration.skadSourceApp];
+        }
+    }
     
     if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled ) {
         [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug = self.appKey;

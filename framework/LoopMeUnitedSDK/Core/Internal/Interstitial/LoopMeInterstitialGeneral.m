@@ -84,15 +84,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
         _delegate = delegate;
         _adManager = [[LoopMeAdManager alloc] initWithDelegate:self];
         _preferredAdTypes = adTypes;
-        if (@available(iOS 14.5, *)) {
-            self.skAdImpression = [[SKAdImpression alloc] init];
-            self.skAdImpression.adNetworkIdentifier = self.adConfiguration.network;
-            self.skAdImpression.signature = self.adConfiguration.signature;
-            if (@available(iOS 16.1, *)) {
-                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-                self.skAdImpression.sourceIdentifier = [formatter numberFromString:self.adConfiguration.sourceidentifier];
-            }
-        }
 
         self.adDisplayController = [[LoopMeAdDisplayControllerNormal alloc] initWithDelegate:self];
         self.adDisplayController.isInterstitial = YES;
@@ -238,6 +229,24 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)showFromViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (@available(iOS 14.5, *)) {
+        self.skAdImpression = [[SKAdImpression alloc] init];
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+
+        self.skAdImpression.adNetworkIdentifier = self.adConfiguration.network;
+        self.skAdImpression.signature = self.adConfiguration.signature;
+        self.skAdImpression.version = self.adConfiguration.skadVersion;
+        self.skAdImpression.timestamp = [formatter numberFromString: self.adConfiguration.skadTimestamp];
+        self.skAdImpression.sourceAppStoreItemIdentifier = [formatter numberFromString:self.adConfiguration.skadItunesitem];
+        self.skAdImpression.adCampaignIdentifier = [formatter numberFromString: self.adConfiguration.skadCampaign];
+        
+        if (@available(iOS 16.1, *)) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            self.skAdImpression.sourceIdentifier = [formatter numberFromString:self.adConfiguration.skadSourceApp];
+        }
+    }
+    
+    
     if (!self.isReady) {
         LoopMeLogInfo(@"Ad isn't ready to be displayed");
         [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"Ad isn't ready to be displayed" appkey:self.appKey];
