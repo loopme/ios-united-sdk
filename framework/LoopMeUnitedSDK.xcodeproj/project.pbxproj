@@ -369,6 +369,7 @@
 		47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVpaidScriptMessageHandler.m; sourceTree = "<group>"; };
 		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
 		81D36A5226F08F2A0037D160 /* CoppaTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoppaTools.swift; sourceTree = "<group>"; };
+		B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +440,7 @@
 				47A57B53233CFAD9001F7DA3 /* LoopMeServerCommuniator */,
 				47714E3122FAF9CE00DF0D55 /* LoopMeSDK.h */,
 				47714E3222FAF9CF00DF0D55 /* Info.plist */,
+				B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */,
 			);
 			path = LoopMeUnitedSDK;
 			sourceTree = "<group>";
