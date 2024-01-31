@@ -2,9 +2,9 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.4.8**
+**Version 7.4.7**
 
-- Create privacy manifest
+- Fix bundle resources issue
 
 Please view the [changelog](CHANGELOG.md) for details.
 

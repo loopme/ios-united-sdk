@@ -1,7 +1,3 @@
-## Version 7.4.8 (31.01.2024)
-
-- Create privacy manifest
- 
 ## Version 7.4.7 (19.01.2024)
 
 - Fix bundle resources issue
