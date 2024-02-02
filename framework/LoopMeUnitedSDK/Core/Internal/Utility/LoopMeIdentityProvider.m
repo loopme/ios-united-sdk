@@ -36,9 +36,6 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
 + (NSString *)advertisingTrackingDeviceIdentifier {
     NSString *identifier = nil;
     identifier = [ASIdentifierManager sharedManager].advertisingIdentifier.UUIDString;
-    if (![ASIdentifierManager sharedManager].isAdvertisingTrackingEnabled) {
-        identifier = @"00000000-0000-0000-0000-000000000000";
-    }
     return [identifier uppercaseString];
 }
 

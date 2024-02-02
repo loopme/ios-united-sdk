@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
+#import <AdSupport/ASIdentifierManager.h>
 
 #import "LoopMeDefinitions.h"
 #import "LoopMeReachability.h"
@@ -202,7 +203,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         [ext setObject:@(isAudioPlaying) forKey:@"music"];
     }
     
-    if ([LoopMeIdentityProvider appTrackingTransparencyEnavled]) {
+    if ([LoopMeIdentityProvider appTrackingTransparencyEnavled] && [ASIdentifierManager sharedManager].isAdvertisingTrackingEnabled) {
         NSString *idfa = [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier];
         [ext setObject:idfa forKey:@"ifa"];
     }
