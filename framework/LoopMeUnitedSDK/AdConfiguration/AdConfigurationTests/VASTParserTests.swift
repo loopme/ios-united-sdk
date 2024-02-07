@@ -36,22 +36,6 @@ class VASTParserTests: XCTestCase {
         
         return nil
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
     func testViewableImpressionData() {
         let expected = ViewableImpression(viewable: ["https://tk0x1.com/sj/tr?et=VAST_VIEWABLE&id=5d51644893aaead75ab169df&meta=MjA0NzgyOTo3Mjg2OjQ4RDgzQTFCLUZBMDctNDAyQS1BRTRCLUUwN0FFQUNGMTk0Rg&ctx=CiQ0OEQ4M0ExQi1GQTA3LTQwMkEtQUU0Qi1FMDdBRUFDRjE5NEYSAlVBGPY4INX-fCoMCAMQwIQ9GAMgwM8kONX-fEABOQ"], notViewable: ["https://tk0x1.com/sj/tr?et=VAST_NOT_VIEWABLE&id=5d51644893aaead75ab169df&meta=MjA0NzgyOTo3Mjg2OjQ4RDgzQTFCLUZBMDctNDAyQS1BRTRCLUUwN0FFQUNGMTk0Rg&ctx=CiQ0OEQ4M0ExQi1GQTA3LTQwMkEtQUU0Qi1FMDdBRUFDRjE5NEYSAlVBGPY4INX-fCoMCAMQwIQ9GAMgwM8kONX-fEABOQ"], viewUndetermined: ["https://tk0x1.com/sj/tr?et=VAST_VIEW_UNDETERMINED&id=5d51644893aaead75ab169df&meta=MjA0NzgyOTo3Mjg2OjQ4RDgzQTFCLUZBMDctNDAyQS1BRTRCLUUwN0FFQUNGMTk0Rg&ctx=CiQ0OEQ4M0ExQi1GQTA3LTQwMkEtQUU0Qi1FMDdBRUFDRjE5NEYSAlVBGPY4INX-fCoMCAMQwIQ9GAMgwM8kONX-fEABOQ"])
