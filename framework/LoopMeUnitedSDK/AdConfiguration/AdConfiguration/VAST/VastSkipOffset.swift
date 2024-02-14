@@ -17,6 +17,7 @@ public enum TimeOffsetType: Int {
 public struct VastSkipOffset {
     
     static let empty = VastSkipOffset(type: .seconds, value: 0)
+    static let notExist = VastSkipOffset(type: .percent, value: 100)
     
     var type: TimeOffsetType
     var value: Double

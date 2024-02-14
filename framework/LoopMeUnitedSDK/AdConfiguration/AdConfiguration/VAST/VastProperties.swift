@@ -11,7 +11,7 @@ import UIKit
 public class VastProperties: NSObject {
     public var adId: String?
     public var duration: TimeInterval = 0
-    public var skipOffset: VastSkipOffset = .empty
+    public var skipOffset: VastSkipOffset = .notExist
     public var adTagURI: String?
     var trackingLinks = AdTrackingLinks()
     var assetLinks = AssetLinks()
