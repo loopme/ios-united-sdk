@@ -83,7 +83,7 @@ struct VastEventTracker {
         case .linearUnmute:
             eventURLs = self.links.linear.unmute
         case .linearClickTracking:
-            eventURLs = [self.links.clickVideo]
+            eventURLs = self.links.linear.click
         case .companionCreativeView:
             eventURLs = self.links.creativeViewCompanion
         case .companionClickTracking:
