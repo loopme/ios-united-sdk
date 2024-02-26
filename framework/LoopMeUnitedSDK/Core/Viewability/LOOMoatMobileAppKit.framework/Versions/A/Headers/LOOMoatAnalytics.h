@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "LOOMoatWebTracker.h"
-#import "LOOMoatNativeDisplayTracker.h"
-#import "LOOMoatVideoTracker.h"
+#import <LOOMoatMobileAppKit/LOOMoatWebTracker.h>
+#import <LOOMoatMobileAppKit/LOOMoatNativeDisplayTracker.h>
+#import <LOOMoatMobileAppKit/LOOMoatVideoTracker.h>
 
 @interface LOOMoatOptions : NSObject<NSCopying>
 
