@@ -12,7 +12,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "LOOMoatBaseTracker.h"
+#import <LOOMoatMobileAppKit/LOOMoatBaseTracker.h>
 
 @interface LOOMoatVideoTracker : LOOMoatBaseTracker
 

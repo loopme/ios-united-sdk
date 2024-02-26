@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LoopMeAdType.h"
+#import <LoopMeAdType.h>
 
 /**
  * AppKey for test purposes

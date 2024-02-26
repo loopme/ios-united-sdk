@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "LOOMoatBaseTracker.h"
+#import <LOOMoatMobileAppKit/LOOMoatBaseTracker.h>
 
 @interface LOOMoatWebTracker : LOOMoatBaseTracker
 

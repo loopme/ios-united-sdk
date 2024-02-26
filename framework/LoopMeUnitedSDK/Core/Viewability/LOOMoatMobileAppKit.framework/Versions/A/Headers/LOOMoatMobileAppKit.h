@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LOOMoatAnalytics.h"
+#import <LOOMoatMobileAppKit/LOOMoatAnalytics.h>
 
 @interface LOOMoatMobileAppKit : NSObject
 
