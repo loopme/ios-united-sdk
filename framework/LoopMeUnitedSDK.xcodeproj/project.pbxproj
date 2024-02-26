@@ -1346,6 +1346,11 @@
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/OMSDK",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					GLES_SILENCE_DEPRECATION,
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = LoopMeUnitedSDK/Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1392,6 +1397,7 @@
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/OMSDK",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = LoopMeUnitedSDK/Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
