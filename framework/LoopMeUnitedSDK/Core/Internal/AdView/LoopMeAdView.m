@@ -575,8 +575,8 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
         self.skAdImpression = [[SKAdImpression alloc] init];
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
 
-        self.skAdImpression.adNetworkIdentifier = self.adConfiguration.network;
-        self.skAdImpression.signature = self.adConfiguration.signature;
+        self.skAdImpression.adNetworkIdentifier = self.adConfiguration.skadNetwork;
+        self.skAdImpression.signature = self.adConfiguration.skadSignature;
         self.skAdImpression.version = self.adConfiguration.skadVersion;
         self.skAdImpression.timestamp = [formatter numberFromString: self.adConfiguration.skadTimestamp];
         self.skAdImpression.sourceAppStoreItemIdentifier = [formatter numberFromString:self.adConfiguration.skadItunesitem];

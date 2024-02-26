@@ -111,15 +111,23 @@ public class AdConfigurationWrapper: NSObject {
         return adConfiguration.adIDsForIAS
     }
     
-    @objc public var signature: String? {
+    @objc public var skadSignature: String? {
         if skadNetworkInfo?.fidelities.count == 2 {
-            return skadNetworkInfo?.fidelities.last?.signature
-        } else {
             return skadNetworkInfo?.fidelities.first?.signature
+        } else {
+            return skadNetworkInfo?.fidelities.last?.signature
         }
     }
     
-    @objc public var network: String? {
+    @objc public var skadNonce: String? {
+        if skadNetworkInfo?.fidelities.count == 2 {
+            return skadNetworkInfo?.fidelities.first?.nonce
+        } else {
+            return skadNetworkInfo?.fidelities.last?.nonce
+        }
+    }
+    
+    @objc public var skadNetwork: String? {
         return skadNetworkInfo?.network
     }
     
@@ -127,24 +135,28 @@ public class AdConfigurationWrapper: NSObject {
         return skadNetworkInfo?.version
     }
     
-    @objc public var skadTimestamp: String? {
+    @objc public var skadTimestamp: NSNumber? {
         if skadNetworkInfo?.fidelities.count == 2 {
-            return skadNetworkInfo?.fidelities.last?.timestamp
+            return skadNetworkInfo?.fidelities.first?.timestamp.numberValue
         } else {
-            return skadNetworkInfo?.fidelities.first?.timestamp
+            return skadNetworkInfo?.fidelities.last?.timestamp.numberValue
         }
     }
     
-    @objc public var skadSourceApp: String? {
-        return skadNetworkInfo?.sourceapp
+    @objc public var skadSourceApp: NSNumber? {
+        return skadNetworkInfo?.sourceapp.numberValue
     }
     
-    @objc public var skadItunesitem: String? {
-        return skadNetworkInfo?.itunesitem
+    @objc public var skadItunesitem: NSNumber? {
+        return skadNetworkInfo?.itunesitem.numberValue
     }
     
-    @objc public var skadCampaign: String? {
-        return skadNetworkInfo?.campaign
+    @objc public var skadCampaign: NSNumber? {
+        return skadNetworkInfo?.campaign.numberValue
+    }
+    
+    @objc public var skadSourceidentifier: NSNumber? {
+        return skadNetworkInfo?.sourceidentifier.numberValue
     }
     
     @objc public var expandProperties: MRAIDExpandPropertiesWrapper?

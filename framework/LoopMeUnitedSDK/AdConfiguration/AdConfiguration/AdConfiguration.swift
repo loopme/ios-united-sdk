@@ -18,16 +18,17 @@ public struct SKAdNetworkFidelity: Codable {
     let timestamp: String
 }
 
-public struct SKAdNetworkInfo:  Codable {
+public struct SKAdNetworkInfo: Codable {
     let version: String
     let network: String
     let campaign: String
     let itunesitem: String
     let sourceapp: String
+    let sourceidentifier: String
     let fidelities: [SKAdNetworkFidelity]
 
     enum CodingKeys: String, CodingKey {
-        case version, network, campaign, itunesitem, sourceapp, fidelities
+        case version, network, campaign, itunesitem, sourceapp, fidelities, sourceidentifier
     }
 }
 
@@ -84,19 +85,8 @@ public struct AdConfiguration {
         case developer
         case company
         case skadn
-    }
-    
-    enum SKAdNetworkKeys: String, CodingKey {
         case version
-        case network
-        case campaign
-        case nonce
-        case timestamp
-        case signature
-        case itunesitem
-        case productpageid
-        case sourceapp
-        case skadnetids
+
     }
     
     let skAdNetworkInfo: SKAdNetworkInfo?
@@ -149,9 +139,19 @@ extension AdConfiguration: Decodable {
 //         parse ext section
         let ext = try? bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
         if let ext = ext {
+            
+            if let skAdNetworkContainer = try? ext.nestedContainer(keyedBy: SKAdNetworkInfo.CodingKeys.self, forKey: .skadn){
+                let version = (try? skAdNetworkContainer.decode(String.self, forKey: .version) ) ?? ""
+                let network = (try? skAdNetworkContainer.decode(String.self, forKey: .network)) ?? ""
+                let campaign = (try? skAdNetworkContainer.decode(String.self, forKey: .campaign)) ?? ""
+                let itunesitem = (try? skAdNetworkContainer.decode(String.self, forKey: .itunesitem)) ?? ""
+                let sourceapp = (try? skAdNetworkContainer.decode(String.self, forKey: .sourceapp)) ?? ""
+                let sourceidentifier = (try? skAdNetworkContainer.decode(String.self, forKey: .sourceidentifier)) ?? ""
+                let fidelities = (try? skAdNetworkContainer.decode([SKAdNetworkFidelity].self, forKey: .fidelities)) ?? [SKAdNetworkFidelity(fidelity: 1, signature: "", nonce: "", timestamp: "")]
+                let skAdNetworkInfo = SKAdNetworkInfo(version: version, network: network, campaign: campaign, itunesitem: itunesitem, sourceapp: sourceapp, sourceidentifier: sourceidentifier, fidelities: fidelities)
+                // Do something with skAdNetworkInfo
+                self.skAdNetworkInfo = skAdNetworkInfo
 
-            if let  skAdNetworkBasic = try? ext.decode(SKAdNetworkInfo.self, forKey: .skadn) {
-                self.skAdNetworkInfo = skAdNetworkBasic
             } else {
                 self.skAdNetworkInfo = nil
             }

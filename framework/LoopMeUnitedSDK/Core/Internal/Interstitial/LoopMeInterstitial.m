@@ -224,7 +224,7 @@ static const int kLoopMeLoadCounter = 3;
     
     if (self.isAutoLoadingEnabled && self.failCount < 5) {
         [self loadAdWithTargeting:self.targeting integrationType:self.integrationType];
-    
+        
         if (self.isReady) {
             if ([self.delegate respondsToSelector:@selector(loopMeInterstitialDidLoadAd:)]) {
                 [self.delegate loopMeInterstitialDidLoadAd:self];
