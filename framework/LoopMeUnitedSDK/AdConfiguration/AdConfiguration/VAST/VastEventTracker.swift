@@ -87,7 +87,7 @@ struct VastEventTracker {
         case .companionCreativeView:
             eventURLs = self.links.creativeViewCompanion
         case .companionClickTracking:
-            eventURLs = [self.links.clickCompanion]
+            eventURLs = self.links.linear.companionClick
         case .viewable:
             eventURLs = self.links.viewableImpression.viewable
         case .notViewable:
