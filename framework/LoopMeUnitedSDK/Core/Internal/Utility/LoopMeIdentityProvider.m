@@ -93,20 +93,24 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
 }
 
 + (NSNumber *)customAuthorizationStatus {
-    CLAuthorizationStatus locationManagerStatus = [CLLocationManager authorizationStatus];
-    
-    switch (locationManagerStatus) {
-        case kCLAuthorizationStatusNotDetermined:
-            return @(CustomAuthorizationStatusNotDetermined);
-        case kCLAuthorizationStatusRestricted:
-            return  @(CustomAuthorizationStatusRestricted);
-        case kCLAuthorizationStatusDenied:
-            return @(CustomAuthorizationStatusDenied);
-        case kCLAuthorizationStatusAuthorizedAlways:
-        case kCLAuthorizationStatusAuthorizedWhenInUse:
-            return @(CustomAuthorizationStatusAuthorized);
-        default:
-            return @(CustomAuthorizationStatusNotDetermined);
+    if (@available(iOS 14, *)) {
+        ATTrackingManagerAuthorizationStatus status = [ATTrackingManager trackingAuthorizationStatus];
+        
+        switch (status) {
+            case kCLAuthorizationStatusNotDetermined:
+                return @(CustomAuthorizationStatusNotDetermined);
+            case kCLAuthorizationStatusRestricted:
+                return  @(CustomAuthorizationStatusRestricted);
+            case kCLAuthorizationStatusDenied:
+                return @(CustomAuthorizationStatusDenied);
+            case kCLAuthorizationStatusAuthorizedAlways:
+            case kCLAuthorizationStatusAuthorizedWhenInUse:
+                return @(CustomAuthorizationStatusAuthorized);
+            default:
+                return @(CustomAuthorizationStatusNotDetermined);
+        }
+    } else {
+        return @(CustomAuthorizationStatusNotDetermined);
     }
 }
 
