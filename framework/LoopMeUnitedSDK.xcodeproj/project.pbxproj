@@ -21,12 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		22F75B122B8C9B0900D4B519 /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F75B112B8C9B0900D4B519 /* ConverterTests.swift */; };
 		47403417239568FD00CC14EF /* CCPATools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47403416239568FD00CC14EF /* CCPATools.swift */; };
 		474545D52435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 474545D32435F84C00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h */; };
 		474545D62435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 474545D42435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m */; };
 		47500F4C234C8B760099AD1E /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47500F4B234C8B760099AD1E /* UserAgent.swift */; };
 		47714E3822FAF9CF00DF0D55 /* LoopMeUnitedSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47714E2E22FAF9CE00DF0D55 /* LoopMeUnitedSDK.framework */; };
-		47714E3D22FAF9CF00DF0D55 /* LoopMeSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47714E3C22FAF9CF00DF0D55 /* LoopMeSDKTests.m */; };
 		47714E3F22FAF9CF00DF0D55 /* LoopMeSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 47714E3122FAF9CE00DF0D55 /* LoopMeSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4774006C2358BC8B00CE9AD8 /* VASTParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774006B2358BC8B00CE9AD8 /* VASTParserTests.swift */; };
 		477EFC862350CB4A0060D261 /* InfoPlistReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477EFC852350CB4A0060D261 /* InfoPlistReader.swift */; };
@@ -200,6 +200,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22F75B112B8C9B0900D4B519 /* ConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConverterTests.swift; path = LoopMeUnitedSDK/AdConfiguration/AdConfigurationTests/ConverterTests.swift; sourceTree = SOURCE_ROOT; };
 		470E2B3D23215B2800870EB1 /* AdConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdConfiguration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47403416239568FD00CC14EF /* CCPATools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCPATools.swift; sourceTree = "<group>"; };
 		474545D32435F84C00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoopMeMRAIDScriptMessageHandler.h; sourceTree = "<group>"; };
@@ -209,7 +210,6 @@
 		47714E3122FAF9CE00DF0D55 /* LoopMeSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoopMeSDK.h; path = Core/LoopMeSDK.h; sourceTree = "<group>"; };
 		47714E3222FAF9CF00DF0D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Core/Info.plist; sourceTree = "<group>"; };
 		47714E3722FAF9CF00DF0D55 /* LoopMeUnitedSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoopMeUnitedSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47714E3C22FAF9CF00DF0D55 /* LoopMeSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoopMeSDKTests.m; sourceTree = "<group>"; };
 		47714E3E22FAF9CF00DF0D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4774006B2358BC8B00CE9AD8 /* VASTParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VASTParserTests.swift; path = LoopMeUnitedSDK/AdConfiguration/AdConfigurationTests/VASTParserTests.swift; sourceTree = SOURCE_ROOT; };
 		477EFC852350CB4A0060D261 /* InfoPlistReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistReader.swift; sourceTree = "<group>"; };
@@ -371,6 +371,7 @@
 		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
 		81D36A5226F08F2A0037D160 /* CoppaTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoppaTools.swift; sourceTree = "<group>"; };
 		B918895B2B6009AB006A2A23 /* LoopMeResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LoopMeResources.bundle; sourceTree = "<group>"; };
+		B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,6 +443,7 @@
 				47714E3122FAF9CE00DF0D55 /* LoopMeSDK.h */,
 				47714E3222FAF9CF00DF0D55 /* Info.plist */,
 				B918895B2B6009AB006A2A23 /* LoopMeResources.bundle */,
+				B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */,
 			);
 			path = LoopMeUnitedSDK;
 			sourceTree = "<group>";
@@ -449,12 +451,12 @@
 		47714E3B22FAF9CF00DF0D55 /* LoopMeUnitedSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				22F75B112B8C9B0900D4B519 /* ConverterTests.swift */,
 				47A57B80233CFECB001F7DA3 /* ad.json */,
 				47A57B82233CFECC001F7DA3 /* VAST.xml */,
 				47A57B84233CFECC001F7DA3 /* VASTWrapper.xml */,
 				4774006B2358BC8B00CE9AD8 /* VASTParserTests.swift */,
 				47CE39DE236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift */,
-				47714E3C22FAF9CF00DF0D55 /* LoopMeSDKTests.m */,
 				47714E3E22FAF9CF00DF0D55 /* Info.plist */,
 			);
 			path = LoopMeUnitedSDKTests;
@@ -1185,7 +1187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47714E3D22FAF9CF00DF0D55 /* LoopMeSDKTests.m in Sources */,
+				22F75B122B8C9B0900D4B519 /* ConverterTests.swift in Sources */,
 				4774006C2358BC8B00CE9AD8 /* VASTParserTests.swift in Sources */,
 				47CE39DF236AED7F00899E5D /* LoopMeServerCommunicatorTests.swift in Sources */,
 			);
@@ -1352,6 +1354,11 @@
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/OMSDK",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					GLES_SILENCE_DEPRECATION,
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = LoopMeUnitedSDK/Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1398,6 +1405,7 @@
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/OMSDK",
 					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = GLES_SILENCE_DEPRECATION;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = LoopMeUnitedSDK/Core/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

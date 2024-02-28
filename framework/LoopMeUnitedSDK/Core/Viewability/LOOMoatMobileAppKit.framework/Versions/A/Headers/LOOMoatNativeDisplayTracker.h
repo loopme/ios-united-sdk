@@ -7,7 +7,7 @@
 // viewability-related signals (pertaining to the native ad it is tracking) into that WebView.
 
 #import <UIKit/UIKit.h>
-#import "LOOMoatBaseTracker.h"
+#import <LOOMoatMobileAppKit/LOOMoatBaseTracker.h>
 
 @interface LOOMoatNativeDisplayTracker : LOOMoatBaseTracker
 

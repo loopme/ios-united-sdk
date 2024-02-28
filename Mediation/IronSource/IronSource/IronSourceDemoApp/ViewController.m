@@ -32,11 +32,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[LoopMeSDK shared] initSDKFromRootViewController:self completionBlock:^(BOOL success, NSError *error) {
-        if (!success) {
-            NSLog(@"%@", error);
-        }
-    }];
 
     for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton, self.destroyBannerButton]) {
         button.layer.cornerRadius = 17.0f;

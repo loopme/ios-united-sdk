@@ -242,8 +242,10 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)setupPlayerWithFileURL:(NSURL *)URL {
-    self.playerItem = [AVPlayerItem playerItemWithURL:URL];
-    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.playerItem = [AVPlayerItem playerItemWithURL:URL];
+        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+    });
 }
 
 - (BOOL)playerHasBufferedURL:(NSURL *)URL {
@@ -618,9 +620,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
     NSTimeInterval secondsFromVideoLoadStart = [self.loadingVideoStartDate timeIntervalSinceNow];
     [LoopMeLoggingSender sharedInstance].videoLoadingTimeInterval = fabs(secondsFromVideoLoadStart);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setupPlayerWithFileURL:videoURL];
-    });
+    [self setupPlayerWithFileURL:videoURL];
 }
 
 - (void)videoManager:(LoopMeVideoManager *)videoManager didFailLoadWithError:(NSError *)error {

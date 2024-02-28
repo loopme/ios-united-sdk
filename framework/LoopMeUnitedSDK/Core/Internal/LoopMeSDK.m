@@ -48,8 +48,9 @@
     NSArray *allBundles = [NSBundle allFrameworks];
     for (NSBundle *bundle in allBundles) {
         if ([bundle pathForResource:@"LoopMeResources" ofType:@"bundle"]) {
-            bundlePath = bundle.bundlePath;
-            break;
+            NSURL *bundleURL = [bundle URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+            _resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+            return _resourcesBundle;
         }
     }
     if (!bundlePath) {

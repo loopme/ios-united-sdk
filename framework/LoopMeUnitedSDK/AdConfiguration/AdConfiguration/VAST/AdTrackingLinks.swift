@@ -17,6 +17,7 @@ struct AdTrackingLinks {
         lhs.creativeViewCompanion.formUnion(rhs.creativeViewCompanion)
         lhs.clickVideo = rhs.clickVideo
         lhs.clickCompanion = rhs.clickCompanion
+        lhs.linear += rhs.linear
     }
     
     public var errorTemplates: Set<String> = []

@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
+#import <AdSupport/ASIdentifierManager.h>
 
 #import "LoopMeDefinitions.h"
 #import "LoopMeReachability.h"
@@ -70,10 +71,16 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     request[@"regs"] = [self regsObject];
     request[@"user"] = [self userObject:self.targeting];
     
-    request[@"tmax"] = @250;
+    request[@"tmax"] = @700;
     request[@"bcat"] = @[@"IAB25-3",
                          @"IAB25",
                          @"IAB26"];
+    
+    NSString *consentValue = [self getConsentValue];
+    request[@"consent"] = consentValue;
+    if (![consentValue boolValue]) {
+        request[@"consent_type"] = @([[LoopMeGDPRTools sharedInstance] consentType]);
+    }
     
     NSError *error;
     jsonData = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:&error];
@@ -86,6 +93,18 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     source[@"ext"] = @{ @"omidpn": @"Loopme",
         @"omidpv": [self sdkVersion] };
     return source;
+}
+
+- (NSString *)getConsentValue {
+    if ([[LoopMeGDPRTools sharedInstance] userConsentString]) {
+        return [[LoopMeGDPRTools sharedInstance] userConsentString];
+    } else {
+        int gdpr = 0;
+        if ([LoopMeIdentityProvider advertisingTrackingEnabled]) {
+            gdpr = [[LoopMeGDPRTools sharedInstance] isUserConsent] ? 1 : 0;
+        }
+        return [NSString stringWithFormat:@"%d", gdpr];
+    }
 }
 
 - (NSDictionary *)eventsObject {
@@ -133,17 +152,6 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     
     NSMutableDictionary *ext = [[NSMutableDictionary alloc] init];
     
-    if ([[LoopMeGDPRTools sharedInstance] userConsentString]) {
-        ext[@"consent"] = [[LoopMeGDPRTools sharedInstance] userConsentString];
-    } else {
-        int gdpr = 0;
-        if ([LoopMeIdentityProvider advertisingTrackingEnabled]) {
-            gdpr = [[LoopMeGDPRTools sharedInstance] isUserConsent] ? 1 : 0;
-        }
-        ext[@"consent"] = @(gdpr);
-        ext[@"consent_type"] = @([[LoopMeGDPRTools sharedInstance] consentType]);
-    }
-    
     user[@"ext"] = ext;
 
     return user;
@@ -183,11 +191,9 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     NSMutableDictionary *ext = [[NSMutableDictionary alloc] initWithDictionary:@{
         @"ifv" : [[UIDevice currentDevice] identifierForVendor].UUIDString,
         @"atts": [LoopMeIdentityProvider customAuthorizationStatus],
-        @"phonename" : [LoopMeIdentityProvider phoneName],
         @"plugin" : @([self parameterForBatteryState]),
         @"chargelevel" : [NSString stringWithFormat:
                           @"%f", [UIDevice currentDevice].batteryLevel],
-        @"wifiname" : [self parameterForWiFiName],
         @"orientation" : [self parameterForOrientation],
         @"timezone" : [self parameterForTimeZone]}];
     
@@ -202,7 +208,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         [ext setObject:@(isAudioPlaying) forKey:@"music"];
     }
     
-    if ([LoopMeIdentityProvider appTrackingTransparencyEnavled]) {
+    if ([LoopMeIdentityProvider appTrackingTransparencyEnavled] && [ASIdentifierManager sharedManager].isAdvertisingTrackingEnabled) {
         NSString *idfa = [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier];
         [ext setObject:idfa forKey:@"ifa"];
     }
@@ -246,20 +252,13 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         }
     }
     
-    skadn[@"versions"] = @[@"2.2", @"3.0", @"4.0"];
+
+    skadn[@"versions"] = @[@"2.0", @"2.1", @"2.2", @"3.0", @"4.0"];
     skadn[@"sourceapp"] = [self parameterForBundleIdentifier];
     skadn[@"skadnetids"] = skAdIdentifiers;
     impression[@"metric"] = [self parameterForAvailableTrackers];
     impression[@"ext"] = @{
         @"it" : integrationType,
-        @"supported_techs" : @[@"VIDEO - for usual MP4 video", 
-                               @"VAST2",
-                               @"VAST3",
-                               @"VAST4",
-                               @"VPAID1",
-                               @"VPAID2",
-                               @"MRAID2",
-                               @"V360"],
         @"skadn": skadn};
 
     return impression;
