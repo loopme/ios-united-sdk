@@ -82,10 +82,14 @@
         return;
     }
     
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14")){
-        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status){
-            
-        }];
+    if (@available(iOS 14, *)) {
+          ATTrackingManagerAuthorizationStatus status = [ATTrackingManager trackingAuthorizationStatus];
+
+          if (status == ATTrackingManagerAuthorizationStatusNotDetermined) {
+              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                  [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status){}];
+              });
+          }
     }
     
     [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:rootViewController];
