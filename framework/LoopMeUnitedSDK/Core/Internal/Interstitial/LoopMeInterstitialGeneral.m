@@ -238,8 +238,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 - (void)showFromViewController:(UIViewController *)viewController animated:(BOOL)animated {
     
-    
-    
     if (@available(iOS 14.5, *)) {
         self.skAdImpression = [[SKAdImpression alloc] init];
         
@@ -371,7 +369,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
         // Fallback on earlier versions
     }
 }
-
 
 - (void)endSKAdImpression {
     // Create an SKAdImpression instance

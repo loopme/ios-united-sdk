@@ -176,7 +176,6 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     }
 }
 
-
 - (void)endSKAdImpression {
     // Create an SKAdImpression instance
     if (@available(iOS 14.5, *)) {

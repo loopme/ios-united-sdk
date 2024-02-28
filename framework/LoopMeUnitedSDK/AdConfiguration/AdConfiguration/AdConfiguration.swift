@@ -85,8 +85,6 @@ public struct AdConfiguration {
         case developer
         case company
         case skadn
-        case version
-
     }
     
     let skAdNetworkInfo: SKAdNetworkInfo?
@@ -121,8 +119,6 @@ public struct AdConfiguration {
 
 extension AdConfiguration: Decodable {
     public init(from decoder: Decoder) throws {
-        print("Decoding AdConfiguration")
-
         expandProperties = .empty
         
         let response = try decoder.container(keyedBy: CodingKeys.self)
@@ -136,10 +132,9 @@ extension AdConfiguration: Decodable {
         self.id = id
         self.creativeContent = try bid.decode(String.self, forKey: .adm)
         
-//         parse ext section
+        //parse ext section
         let ext = try? bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
         if let ext = ext {
-            
             if let skAdNetworkContainer = try? ext.nestedContainer(keyedBy: SKAdNetworkInfo.CodingKeys.self, forKey: .skadn){
                 let version = (try? skAdNetworkContainer.decode(String.self, forKey: .version) ) ?? ""
                 let network = (try? skAdNetworkContainer.decode(String.self, forKey: .network)) ?? ""
@@ -151,7 +146,6 @@ extension AdConfiguration: Decodable {
                 let skAdNetworkInfo = SKAdNetworkInfo(version: version, network: network, campaign: campaign, itunesitem: itunesitem, sourceapp: sourceapp, sourceidentifier: sourceidentifier, fidelities: fidelities)
                 // Do something with skAdNetworkInfo
                 self.skAdNetworkInfo = skAdNetworkInfo
-
             } else {
                 self.skAdNetworkInfo = nil
             }
@@ -248,15 +242,4 @@ extension AdConfiguration: Decodable {
         
         return _adIdsForIAS
     }
-}
-
-extension AdConfiguration {
-    
-//    private func returnv360<T>(object: KeyedDecodingContainer<ExtKeys>?, key: ExtKeys, defualtValue: T, type: Decodable) -> T {
-//        if let v360 = try object?.decode(type, forKey: key) {
-//            return v360 as! T
-//        }
-//      return defualtValue
-//        
-//    }
 }
