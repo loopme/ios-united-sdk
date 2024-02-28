@@ -12,5 +12,5 @@ end
 
 target 'IronSourceDemoApp' do
     use_frameworks!
-pod 'IronSourceSDK'
+pod 'ISLoopMeCustomAdapter'
 end

@@ -54,13 +54,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>SKAdNetworkItems</key>
-	<array>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>5lm9lj6jb7.skadnetwork</string>
-		</dict>
-	</array>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>To track your date</string>
 </dict>

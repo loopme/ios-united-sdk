@@ -15,10 +15,6 @@
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
 		72E0D65E1E267513009ABC1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D6541E267513009ABC1B /* ViewController.m */; };
 		72E0D6601E2675C7009ABC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D65F1E2675C7009ABC1B /* main.m */; };
-		B9CABC8B2B5FB3C20004EFEC /* ISLoopmeCustomRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CABC852B5FB3C20004EFEC /* ISLoopmeCustomRewardedVideo.m */; };
-		B9CABC8C2B5FB3C20004EFEC /* ISLoopmeCustomBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CABC862B5FB3C20004EFEC /* ISLoopmeCustomBanner.m */; };
-		B9CABC8D2B5FB3C20004EFEC /* ISLoopmeCustomAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CABC892B5FB3C20004EFEC /* ISLoopmeCustomAdapter.m */; };
-		B9CABC8E2B5FB3C20004EFEC /* ISLoopmeCustomInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CABC8A2B5FB3C20004EFEC /* ISLoopmeCustomInterstitial.m */; };
 		E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */; };
 		E80C8FB71C16E48200CF3C27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB51C16E48200CF3C27 /* Foundation.framework */; };
 		E80C8FBD1C16E4A000CF3C27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB81C16E4A000CF3C27 /* CoreGraphics.framework */; };
@@ -62,14 +58,6 @@
 		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "IronSourceDemoApp/Supporting Files/main.m"; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE12536112A7E060D427D874 /* Pods_IronSourceDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9CABC832B5FB3C20004EFEC /* ISLoopmeCustomInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomInterstitial.h; sourceTree = "<group>"; };
-		B9CABC842B5FB3C20004EFEC /* ISLoopmeCustomAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomAdapter.h; sourceTree = "<group>"; };
-		B9CABC852B5FB3C20004EFEC /* ISLoopmeCustomRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomRewardedVideo.m; sourceTree = "<group>"; };
-		B9CABC862B5FB3C20004EFEC /* ISLoopmeCustomBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomBanner.m; sourceTree = "<group>"; };
-		B9CABC872B5FB3C20004EFEC /* ISLoopmeCustomRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomRewardedVideo.h; sourceTree = "<group>"; };
-		B9CABC882B5FB3C20004EFEC /* ISLoopmeCustomBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISLoopmeCustomBanner.h; sourceTree = "<group>"; };
-		B9CABC892B5FB3C20004EFEC /* ISLoopmeCustomAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomAdapter.m; sourceTree = "<group>"; };
-		B9CABC8A2B5FB3C20004EFEC /* ISLoopmeCustomInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISLoopmeCustomInterstitial.m; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* IronSourceDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IronSourceDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E80C8FB51C16E48200CF3C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,14 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				72E0D6431E267513009ABC1B /* IronSourceDemoApp */,
-				B9CABC842B5FB3C20004EFEC /* ISLoopmeCustomAdapter.h */,
-				B9CABC892B5FB3C20004EFEC /* ISLoopmeCustomAdapter.m */,
-				B9CABC882B5FB3C20004EFEC /* ISLoopmeCustomBanner.h */,
-				B9CABC862B5FB3C20004EFEC /* ISLoopmeCustomBanner.m */,
-				B9CABC832B5FB3C20004EFEC /* ISLoopmeCustomInterstitial.h */,
-				B9CABC8A2B5FB3C20004EFEC /* ISLoopmeCustomInterstitial.m */,
-				B9CABC872B5FB3C20004EFEC /* ISLoopmeCustomRewardedVideo.h */,
-				B9CABC852B5FB3C20004EFEC /* ISLoopmeCustomRewardedVideo.m */,
 				E80C8F9B1C16E28400CF3C27 /* Supporting Files */,
 				E80C8FD21C16E52200CF3C27 /* Frameworks */,
 				E80C8F991C16E28400CF3C27 /* Products */,
@@ -296,13 +276,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9CABC8B2B5FB3C20004EFEC /* ISLoopmeCustomRewardedVideo.m in Sources */,
 				72E0D65E1E267513009ABC1B /* ViewController.m in Sources */,
 				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
-				B9CABC8E2B5FB3C20004EFEC /* ISLoopmeCustomInterstitial.m in Sources */,
-				B9CABC8D2B5FB3C20004EFEC /* ISLoopmeCustomAdapter.m in Sources */,
-				B9CABC8C2B5FB3C20004EFEC /* ISLoopmeCustomBanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
