@@ -55,6 +55,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>To track your dat</string>
+	<string>To track your date</string>
 </dict>
 </plist>
