@@ -573,18 +573,39 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     
     if (@available(iOS 14.5, *)) {
         self.skAdImpression = [[SKAdImpression alloc] init];
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-
-        self.skAdImpression.adNetworkIdentifier = self.adConfiguration.skadNetwork;
-        self.skAdImpression.signature = self.adConfiguration.skadSignature;
-        self.skAdImpression.version = self.adConfiguration.skadVersion;
-        self.skAdImpression.timestamp = [formatter numberFromString: self.adConfiguration.skadTimestamp];
-        self.skAdImpression.sourceAppStoreItemIdentifier = [formatter numberFromString:self.adConfiguration.skadItunesitem];
-        self.skAdImpression.adCampaignIdentifier = [formatter numberFromString: self.adConfiguration.skadCampaign];
         
-        if (@available(iOS 16.1, *)) {
-            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-            self.skAdImpression.sourceIdentifier = [formatter numberFromString:self.adConfiguration.skadSourceApp];
+        // iOS 16.0 and later
+        if (@available(iOS 16.0, *)) {
+            self.skAdImpression = [[SKAdImpression alloc]
+                                   initWithSourceAppStoreItemIdentifier:(NSNumber *)self.adConfiguration.skadSourceApp
+                                   advertisedAppStoreItemIdentifier:(NSNumber *)self.adConfiguration.skadItunesitem
+                                   adNetworkIdentifier:(NSString *)self.adConfiguration.skadNetwork
+                                   adCampaignIdentifier:(NSNumber *)self.adConfiguration.skadCampaign
+                                   adImpressionIdentifier:(NSString *)self.adConfiguration.skadNonce
+                                   timestamp:(NSNumber *)self.adConfiguration.skadTimestamp
+                                   signature:(NSString *)self.adConfiguration.skadSignature
+                                   version:(NSString *)self.adConfiguration.skadVersion];
+            
+            // iOS 16.1 and later
+            if (@available(iOS 16.1, *)) {
+                if  (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
+                    [self.skAdImpression setSourceIdentifier: self.adConfiguration.skadSourceidentifier];
+                }
+            }
+        } else {
+            // iOS versions earlier than 16.0
+            self.skAdImpression.adNetworkIdentifier = self.adConfiguration.skadNetwork;
+            self.skAdImpression.signature = self.adConfiguration.skadSignature;
+            self.skAdImpression.version = self.adConfiguration.skadVersion;
+            self.skAdImpression.timestamp = self.adConfiguration.skadTimestamp;
+            self.skAdImpression.sourceAppStoreItemIdentifier = self.adConfiguration.skadItunesitem;
+            
+            if  (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
+                self.skAdImpression.adCampaignIdentifier = self.adConfiguration.skadCampaign;
+            }
+            
+            self.skAdImpression.advertisedAppStoreItemIdentifier = self.adConfiguration.skadItunesitem;
+            self.skAdImpression.adImpressionIdentifier = self.adConfiguration.skadNonce;
         }
     }
     

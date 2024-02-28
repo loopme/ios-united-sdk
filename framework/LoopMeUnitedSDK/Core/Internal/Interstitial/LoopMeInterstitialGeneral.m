@@ -242,7 +242,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
     
     if (@available(iOS 14.5, *)) {
         self.skAdImpression = [[SKAdImpression alloc] init];
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         
         // iOS 16.0 and later
         if (@available(iOS 16.0, *)) {
