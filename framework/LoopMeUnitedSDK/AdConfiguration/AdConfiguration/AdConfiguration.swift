@@ -143,9 +143,9 @@ extension AdConfiguration: Decodable {
             if let skAdNetworkContainer = try? ext.nestedContainer(keyedBy: SKAdNetworkInfo.CodingKeys.self, forKey: .skadn){
                 let version = (try? skAdNetworkContainer.decode(String.self, forKey: .version) ) ?? ""
                 let network = (try? skAdNetworkContainer.decode(String.self, forKey: .network)) ?? ""
-                let campaign = (try? skAdNetworkContainer.decode(String.self, forKey: .campaign)) ?? ""
+                let campaign = (try? skAdNetworkContainer.decode(String.self, forKey: .campaign)) ?? "1"
                 let itunesitem = (try? skAdNetworkContainer.decode(String.self, forKey: .itunesitem)) ?? ""
-                let sourceapp = (try? skAdNetworkContainer.decode(String.self, forKey: .sourceapp)) ?? ""
+                let sourceapp = (try? skAdNetworkContainer.decode(String.self, forKey: .sourceapp)) ?? "1000"
                 let sourceidentifier = (try? skAdNetworkContainer.decode(String.self, forKey: .sourceidentifier)) ?? ""
                 let fidelities = (try? skAdNetworkContainer.decode([SKAdNetworkFidelity].self, forKey: .fidelities)) ?? [SKAdNetworkFidelity(fidelity: 1, signature: "", nonce: "", timestamp: "")]
                 let skAdNetworkInfo = SKAdNetworkInfo(version: version, network: network, campaign: campaign, itunesitem: itunesitem, sourceapp: sourceapp, sourceidentifier: sourceidentifier, fidelities: fidelities)
