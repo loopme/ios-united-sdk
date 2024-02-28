@@ -28,6 +28,7 @@ public class AdConfigurationWrapper: NSObject {
     
     public init(adConfiguration: AdConfiguration) {
         self.adConfiguration = adConfiguration
+        self.skadNetworkInfo = adConfiguration.skAdNetworkInfo
         if let vastProperties = adConfiguration.vastProperties {
             self.vastProperties = VastPropertiesWrapper(with: vastProperties)
         }
@@ -110,8 +111,57 @@ public class AdConfigurationWrapper: NSObject {
         return adConfiguration.adIDsForIAS
     }
     
+    @objc public var skadSignature: String? {
+        if skadNetworkInfo?.fidelities.count == 2 {
+            return skadNetworkInfo?.fidelities.first?.signature
+        } else {
+            return skadNetworkInfo?.fidelities.last?.signature
+        }
+    }
+    
+    @objc public var skadNonce: String? {
+        if skadNetworkInfo?.fidelities.count == 2 {
+            return skadNetworkInfo?.fidelities.first?.nonce
+        } else {
+            return skadNetworkInfo?.fidelities.last?.nonce
+        }
+    }
+    
+    @objc public var skadNetwork: String? {
+        return skadNetworkInfo?.network
+    }
+    
+    @objc public var skadVersion: String? {
+        return skadNetworkInfo?.version
+    }
+    
+    @objc public var skadTimestamp: NSNumber? {
+        if skadNetworkInfo?.fidelities.count == 2 {
+            return skadNetworkInfo?.fidelities.first?.timestamp.numberValue
+        } else {
+            return skadNetworkInfo?.fidelities.last?.timestamp.numberValue
+        }
+    }
+    
+    @objc public var skadSourceApp: NSNumber? {
+        return skadNetworkInfo?.sourceapp.numberValue
+    }
+    
+    @objc public var skadItunesitem: NSNumber? {
+        return skadNetworkInfo?.itunesitem.numberValue
+    }
+    
+    @objc public var skadCampaign: NSNumber? {
+        return skadNetworkInfo?.campaign.numberValue
+    }
+    
+    @objc public var skadSourceidentifier: NSNumber? {
+        return skadNetworkInfo?.sourceidentifier.numberValue
+    }
+    
     @objc public var expandProperties: MRAIDExpandPropertiesWrapper?
     @objc public var vastProperties: VastPropertiesWrapper?
+    public var skadNetworkInfo: SKAdNetworkInfo?
     @objc public var allowOrientationChange: Bool = false
     
     @objc public func useTracking(_ trackerNameWrapped: TrackerNameWrapper) -> Bool {

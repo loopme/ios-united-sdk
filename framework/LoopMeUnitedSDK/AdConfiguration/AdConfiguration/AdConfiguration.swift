@@ -11,6 +11,27 @@ import UIKit
 
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING = "loopmeautoloading"
 
+public struct SKAdNetworkFidelity: Codable {
+    let fidelity: Int
+    let signature: String
+    let nonce: String
+    let timestamp: String
+}
+
+public struct SKAdNetworkInfo: Codable {
+    let version: String
+    let network: String
+    let campaign: String
+    let itunesitem: String
+    let sourceapp: String
+    let sourceidentifier: String
+    let fidelities: [SKAdNetworkFidelity]
+
+    enum CodingKeys: String, CodingKey {
+        case version, network, campaign, itunesitem, sourceapp, fidelities, sourceidentifier
+    }
+}
+
 enum AdOrientation: String, Codable {
     case undefined
     case portrait
@@ -63,8 +84,10 @@ public struct AdConfiguration {
         case appname
         case developer
         case company
+        case skadn
     }
     
+    let skAdNetworkInfo: SKAdNetworkInfo?
     let id: String
     let v360: Bool
     let debug: Bool
@@ -96,7 +119,6 @@ public struct AdConfiguration {
 
 extension AdConfiguration: Decodable {
     public init(from decoder: Decoder) throws {
-        
         expandProperties = .empty
         
         let response = try decoder.container(keyedBy: CodingKeys.self)
@@ -110,9 +132,23 @@ extension AdConfiguration: Decodable {
         self.id = id
         self.creativeContent = try bid.decode(String.self, forKey: .adm)
         
-        // parse ext section
+        //parse ext section
         let ext = try? bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
         if let ext = ext {
+            if let skAdNetworkContainer = try? ext.nestedContainer(keyedBy: SKAdNetworkInfo.CodingKeys.self, forKey: .skadn){
+                let version = (try? skAdNetworkContainer.decode(String.self, forKey: .version) ) ?? ""
+                let network = (try? skAdNetworkContainer.decode(String.self, forKey: .network)) ?? ""
+                let campaign = (try? skAdNetworkContainer.decode(String.self, forKey: .campaign)) ?? "1"
+                let itunesitem = (try? skAdNetworkContainer.decode(String.self, forKey: .itunesitem)) ?? ""
+                let sourceapp = (try? skAdNetworkContainer.decode(String.self, forKey: .sourceapp)) ?? "1000"
+                let sourceidentifier = (try? skAdNetworkContainer.decode(String.self, forKey: .sourceidentifier)) ?? ""
+                let fidelities = (try? skAdNetworkContainer.decode([SKAdNetworkFidelity].self, forKey: .fidelities)) ?? [SKAdNetworkFidelity(fidelity: 1, signature: "", nonce: "", timestamp: "")]
+                let skAdNetworkInfo = SKAdNetworkInfo(version: version, network: network, campaign: campaign, itunesitem: itunesitem, sourceapp: sourceapp, sourceidentifier: sourceidentifier, fidelities: fidelities)
+                // Do something with skAdNetworkInfo
+                self.skAdNetworkInfo = skAdNetworkInfo
+            } else {
+                self.skAdNetworkInfo = nil
+            }
             self.v360 = (try? ext.decode(Int.self, forKey: .v360) == 1) ?? false
             self.debug = (try? ext.decode(Int.self, forKey: .debug) == 1) ?? false
             if let preload25 = try? ext.decode(Int.self, forKey: .preload25) {
@@ -120,11 +156,18 @@ extension AdConfiguration: Decodable {
             } else {
                 self.preload25 = false
             }
-            self.adOrientation = try ext.decode(AdOrientation.self, forKey: .orientation)
-            self.creativeType = try ext.decode(CreativeType.self, forKey: .crtype)
+            self.adOrientation = (try? ext.decode(AdOrientation.self, forKey: .orientation)) ?? .landscape
             
-            self.adIDsForIAS =  try AdConfiguration.initAdIDs(for: .ias, decoder: ext, id: id)
-            self.adIDsForMoat = try AdConfiguration.initAdIDs(for: .moat, decoder: ext)
+            if let creativeType = try? ext.decode(CreativeType.self, forKey: .crtype) {
+                self.creativeType = creativeType
+            } else {
+                let searchString = "<VAST"
+                let isVast = self.creativeContent.range(of: searchString, options: .caseInsensitive) != nil
+                self.creativeType = isVast ? .vast : .mraid
+            }
+            
+            self.adIDsForIAS =  (try? AdConfiguration.initAdIDs(for: .ias, decoder: ext, id: id)) ?? ["":""]
+            self.adIDsForMoat = (try? AdConfiguration.initAdIDs(for: .moat, decoder: ext)) ?? ["":""]
             
             if let autoloading = try? ext.decode(Int.self, forKey: .autoloading) {
                 self.autoloading = autoloading == 1
@@ -134,8 +177,10 @@ extension AdConfiguration: Decodable {
             
             UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
             
-            self.measurePartners = try ext.decode([String].self, forKey: .measure_partners)
+            self.measurePartners = (try? ext.decode([String].self, forKey: .measure_partners)) ?? [""]
+            
         } else {
+            self.skAdNetworkInfo = nil
             self.v360 = false
             self.debug = false
             self.preload25 = false

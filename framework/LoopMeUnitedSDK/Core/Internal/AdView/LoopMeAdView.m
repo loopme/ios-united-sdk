@@ -23,6 +23,7 @@
 #import "LoopMeGDPRTools.h"
 #import "LoopMeViewabilityManager.h"
 #import "LoopMeSDK.h"
+#import <StoreKit/StoreKit.h>
 
 @interface LoopMeAdView ()
 <
@@ -46,6 +47,7 @@
 
 @property (nonatomic, strong) NSLayoutConstraint *expandedWidth;
 @property (nonatomic, strong) NSLayoutConstraint *expandedHeight;
+@property (nonatomic, strong) SKAdImpression *skAdImpression;
 
 /*
  * Update webView "visible" state is required on JS first time when ad appears on the screen,
@@ -151,6 +153,43 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
             [self.adDisplayControllerVPAID moveView:NO];
             [self.adDisplayControllerVPAID expandReporting];
         }
+    }
+}
+
+#pragma  mark - SkadNetwork func
+
+- (void)startSKAdImpression {
+    // Create an SKAdImpression instance
+    if (@available(iOS 14.5, *)) {
+        
+        [SKAdNetwork startImpression:self.skAdImpression completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
+                // Handle the error as needed
+            } else {
+                NSLog(@"SKAdImpression started successfully");
+                // Handle success
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
+- (void)endSKAdImpression {
+    // Create an SKAdImpression instance
+    if (@available(iOS 14.5, *)) {
+        [SKAdNetwork endImpression:self.skAdImpression completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
+                // Handle the error as needed
+            } else {
+                NSLog(@"SKAdImpression started successfully");
+                // Handle success
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
     }
 }
 
@@ -454,6 +493,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
 }
 
 - (void)updateAdVisibilityWhenScroll {
+    [self endSKAdImpression];
     if (!self.isVisibilityUpdated) {
         if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
             self.adDisplayController.visible = YES;
@@ -492,6 +532,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         return;
     }
+    [self startSKAdImpression];
     [self.adDisplayControllerVPAID startAd];
     [self updateVisibility];
 }
@@ -528,6 +569,44 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     }
     
     self.adConfiguration = adConfiguration;
+    
+    if (@available(iOS 14.5, *)) {
+        self.skAdImpression = [[SKAdImpression alloc] init];
+        
+        // iOS 16.0 and later
+        if (@available(iOS 16.0, *)) {
+            self.skAdImpression = [[SKAdImpression alloc]
+                                   initWithSourceAppStoreItemIdentifier:(NSNumber *)self.adConfiguration.skadSourceApp
+                                   advertisedAppStoreItemIdentifier:(NSNumber *)self.adConfiguration.skadItunesitem
+                                   adNetworkIdentifier:(NSString *)self.adConfiguration.skadNetwork
+                                   adCampaignIdentifier:(NSNumber *)self.adConfiguration.skadCampaign
+                                   adImpressionIdentifier:(NSString *)self.adConfiguration.skadNonce
+                                   timestamp:(NSNumber *)self.adConfiguration.skadTimestamp
+                                   signature:(NSString *)self.adConfiguration.skadSignature
+                                   version:(NSString *)self.adConfiguration.skadVersion];
+            
+            // iOS 16.1 and later
+            if (@available(iOS 16.1, *)) {
+                if  (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
+                    [self.skAdImpression setSourceIdentifier: self.adConfiguration.skadSourceidentifier];
+                }
+            }
+        } else {
+            // iOS versions earlier than 16.0
+            self.skAdImpression.adNetworkIdentifier = self.adConfiguration.skadNetwork;
+            self.skAdImpression.signature = self.adConfiguration.skadSignature;
+            self.skAdImpression.version = self.adConfiguration.skadVersion;
+            self.skAdImpression.timestamp = self.adConfiguration.skadTimestamp;
+            self.skAdImpression.sourceAppStoreItemIdentifier = self.adConfiguration.skadItunesitem;
+            
+            if  (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
+                self.skAdImpression.adCampaignIdentifier = self.adConfiguration.skadCampaign;
+            }
+            
+            self.skAdImpression.advertisedAppStoreItemIdentifier = self.adConfiguration.skadItunesitem;
+            self.skAdImpression.adImpressionIdentifier = self.adConfiguration.skadNonce;
+        }
+    }
     
     if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled ) {
         [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug = self.appKey;

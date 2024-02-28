@@ -85,4 +85,10 @@ extension String {
         allowed.insert(charactersIn: unreserved)
         return self.addingPercentEncoding(withAllowedCharacters: allowed)
     }
+    
+    var numberValue:NSNumber? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter.number(from: self)
+    }
 }
