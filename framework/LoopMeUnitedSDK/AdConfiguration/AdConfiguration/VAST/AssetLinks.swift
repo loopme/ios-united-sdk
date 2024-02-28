@@ -8,7 +8,16 @@
 
 import Foundation
 
-public struct AssetLinks {
+public struct AssetLinks: Equatable {
+    
+    public static func == (lhs: AssetLinks, rhs: AssetLinks) -> Bool {
+        return
+            lhs.vpaidURL == rhs.vpaidURL &&
+            lhs.adParameters == rhs.adParameters &&
+            lhs.endCard == rhs.endCard &&
+            lhs.videoURL == rhs.videoURL
+    }
+    
     //Array because it needs to be sorted
     var video360URL: Array<String> = []
     var videoURL: Array<String> = []

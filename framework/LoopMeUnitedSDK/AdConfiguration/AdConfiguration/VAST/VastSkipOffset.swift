@@ -14,7 +14,11 @@ public enum TimeOffsetType: Int {
     case seconds
 }
 
-public struct VastSkipOffset {
+public struct VastSkipOffset: Equatable {
+    
+    public static func == (lhs: VastSkipOffset, rhs: VastSkipOffset) -> Bool {
+        return lhs.type == rhs.type && lhs.value == rhs.value
+    }
     
     static let empty = VastSkipOffset(type: .seconds, value: 0)
     static let notExist = VastSkipOffset(type: .percent, value: 100)

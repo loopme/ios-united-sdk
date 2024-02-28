@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum XMLError: Error {
+    case notvalid
+    case mediaFilesProperties
+}
+
 protocol Node {
     var name: String { get set }
     var props: Dictionary<String, String> { get set }
