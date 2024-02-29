@@ -8,30 +8,34 @@
 
 import Foundation
 
-struct AdTrackingLinks {
-    
-    static func +=(lhs: inout AdTrackingLinks, rhs: AdTrackingLinks) {
-        lhs.errorTemplates.formUnion(rhs.errorTemplates)
-        lhs.verificationNotExecuted.formUnion(rhs.verificationNotExecuted)
-        lhs.impression.formUnion(rhs.impression)
-        lhs.creativeViewCompanion.formUnion(rhs.creativeViewCompanion)
-        lhs.clickVideo = rhs.clickVideo
-        lhs.clickCompanion = rhs.clickCompanion
-        lhs.linear += rhs.linear
+public struct ProgressEvent: Hashable {
+
+    public static func == (lhs: ProgressEvent, rhs: ProgressEvent) -> Bool {
+        return lhs.link == rhs.link && lhs.offset == rhs.offset
     }
-    
-    public var errorTemplates: Set<String> = []
-    public var verificationNotExecuted: Set<String> = []
-    public var impression: Set<String> = []
-    public var clickVideo: String = ""
-    public var clickCompanion: String = ""
-    public var creativeViewCompanion: Set<String> = []
-    
-    public var viewableImpression = ViewableImpression()
-    public var linear = LinearTracking()
+
+    public var link: String
+    public var offset: TimeInterval
 }
 
-struct ViewableImpression {
+/// Stores VAST [ViewableImpression](https://iabtechlab.com/wp-content/uploads/2022/09/VAST_4.3.pdf#page=45&zoom=100,84,330)
+///
+/// # Example: #
+///  ```swift
+/// var originalVastViewableImpression = ViewableImpression(
+///     viewable: ["https://viewable"],
+///     notViewable: ["https://notViewable"],
+///     viewUndetermined: ["https://viewUndeterminated"]
+/// )
+/// var wrappedVastViewableImpression = ViewableImpression(
+///     viewable: ["https://viewable"],
+///     notViewable: ["https://notViewable"],
+///     viewUndetermined: ["https://viewUndeterminated"]
+/// )
+/// // Concatenates each fields of original and wrapped VAST ViewableImpression
+/// originalVastViewableImpression += wrappedVastViewableImpression
+/// ```
+struct ViewableImpression: Equatable {
     
     static func +=(lhs: inout ViewableImpression, rhs: ViewableImpression) {
         lhs.viewable.formUnion(rhs.viewable)
@@ -39,12 +43,28 @@ struct ViewableImpression {
         lhs.viewUndetermined.formUnion(rhs.viewUndetermined)
     }
     
+    public static func == (lhs: ViewableImpression, rhs: ViewableImpression) -> Bool {
+        return
+            lhs.viewable == rhs.viewable &&
+            lhs.notViewable == rhs.notViewable &&
+            lhs.viewUndetermined == rhs.viewUndetermined
+    }
+    
     public var viewable: Set<String> = []
     public var notViewable: Set<String> = []
     public var viewUndetermined: Set<String> = []
 }
 
-struct LinearTracking {
+/// Stores VAST [Linear Tracking Events](https://iabtechlab.com/wp-content/uploads/2022/09/VAST_4.3.pdf#page=68)
+///
+/// # Example: #
+///  ```swift
+/// var originalVastTracking = LinearTracking()
+/// var wrappedVastTracking = LinearTracking()
+/// // Concatenates each fields of original and wrapped VAST Tracking Events
+/// originalVastTracking += wrappedVastTracking
+/// ```
+struct LinearTracking: Equatable {
     
     static func +=(lhs: inout LinearTracking, rhs: LinearTracking) {
         lhs.loaded.formUnion(rhs.loaded)
@@ -68,6 +88,29 @@ struct LinearTracking {
         lhs.progress.formUnion(rhs.progress)
     }
     
+    public static func == (lhs: LinearTracking, rhs: LinearTracking) -> Bool {
+        return
+            lhs.loaded == rhs.loaded &&
+            lhs.start == rhs.start &&
+            lhs.firstQuartile == rhs.firstQuartile &&
+            lhs.midpoint == rhs.midpoint &&
+            lhs.thirdQuartile == rhs.thirdQuartile &&
+            lhs.complete == rhs.complete &&
+            lhs.mute == rhs.mute &&
+            lhs.unmute == rhs.unmute &&
+            lhs.pause == rhs.pause &&
+            lhs.resume == rhs.resume &&
+            lhs.fullscreen == rhs.fullscreen &&
+            lhs.exitFullscreen == rhs.exitFullscreen &&
+            lhs.skip == rhs.skip &&
+            lhs.close == rhs.close &&
+            lhs.expand == rhs.expand &&
+            lhs.collapse == rhs.collapse &&
+            lhs.click == rhs.click &&
+            lhs.companionClick == rhs.companionClick &&
+            lhs.progress == rhs.progress
+    }
+    
     public var loaded: Set<String> = []
     public var start: Set<String> = []
     public var firstQuartile: Set<String> = []
@@ -89,7 +132,47 @@ struct LinearTracking {
     public var progress: Set<ProgressEvent> = []
 }
 
-public struct ProgressEvent: Hashable {
-    public var link: String
-    public var offset: TimeInterval
+/// Stores all VAST URIs for tracking/redirects
+///
+/// # Example: #
+///  ```swift
+/// var originalAdTracking = AdTrackingLinks()
+/// var wrappedAdTracking = AdTrackingLinks()
+/// // Concatenates each fields of original and wrapped VAST Tracking/Redirect fields
+/// originalAdTracking += wrappedAdTracking
+/// ```
+struct AdTrackingLinks: Equatable {
+    
+    static func += (lhs: inout AdTrackingLinks, rhs: AdTrackingLinks) {
+        lhs.errorTemplates.formUnion(rhs.errorTemplates)
+        lhs.verificationNotExecuted.formUnion(rhs.verificationNotExecuted)
+        lhs.impression.formUnion(rhs.impression)
+        lhs.clickVideo = rhs.clickVideo == "" ? lhs.clickVideo : rhs.clickVideo
+        lhs.clickCompanion = rhs.clickCompanion == "" ? lhs.clickCompanion : rhs.clickCompanion
+        lhs.creativeViewCompanion.formUnion(rhs.creativeViewCompanion)
+        lhs.viewableImpression += rhs.viewableImpression
+        lhs.linear += rhs.linear
+    }
+    
+    public static func == (lhs: AdTrackingLinks, rhs: AdTrackingLinks) -> Bool {
+        return
+            lhs.errorTemplates == rhs.errorTemplates &&
+            lhs.verificationNotExecuted == rhs.verificationNotExecuted &&
+            lhs.impression == rhs.impression &&
+            lhs.clickVideo == rhs.clickVideo &&
+            lhs.clickCompanion == rhs.clickCompanion &&
+            lhs.creativeViewCompanion == rhs.creativeViewCompanion &&
+            lhs.viewableImpression == rhs.viewableImpression &&
+            lhs.linear == rhs.linear
+    }
+    
+    public var errorTemplates: Set<String> = []
+    public var verificationNotExecuted: Set<String> = []
+    public var impression: Set<String> = []
+    public var clickVideo: String = ""
+    public var clickCompanion: String = ""
+    public var creativeViewCompanion: Set<String> = []
+    
+    public var viewableImpression = ViewableImpression()
+    public var linear = LinearTracking()
 }

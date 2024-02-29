@@ -8,7 +8,15 @@
 
 import Foundation
 
-public struct AdVerification {
+public struct AdVerification: Equatable {
+    
+    public static func == (lhs: AdVerification, rhs: AdVerification) -> Bool {
+        return
+            lhs.vendor == rhs.vendor &&
+            lhs.jsResource == rhs.jsResource &&
+            lhs.verificationParameters == rhs.verificationParameters
+    }
+    
     public static var empty = AdVerification(vendor: "", jsResource: "", verificationParameters: "")
     
     public var vendor: String
