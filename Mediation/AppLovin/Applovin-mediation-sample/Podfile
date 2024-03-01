@@ -5,7 +5,6 @@ target 'Applovin-mediation-sample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'AppLovinSDK'
-  pod 'LoopMeUnitedSDK'
+pod 'AppLovinLoopMeCustomAdapter', :path => '/Users/valeriiroman/Documents/GitHub/ios-united-sdk/ApplovinLoopMeCustomAdapter.podspec'
 
 end
