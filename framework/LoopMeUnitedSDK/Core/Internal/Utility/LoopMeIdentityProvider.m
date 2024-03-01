@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
 }
 
 + (BOOL)advertisingTrackingEnabled {
-    return [self.customAuthorizationStatus intValue] == 3;
+    return [[self customAuthorizationStatus] integerValue] == CustomAuthorizationStatusAuthorized;
 }
 
 + (BOOL) appTrackingTransparencyEnavled {
