@@ -40,17 +40,7 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
 }
 
 + (BOOL)advertisingTrackingEnabled {
-    BOOL enabled = YES;
-
-    if ([self deviceHasAdvertisingIdentifier]) {
-        enabled = [[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled];
-    }
-
-    return enabled;
-}
-
-+ (BOOL)deviceHasAdvertisingIdentifier {
-    return !!NSClassFromString(@"ASIdentifierManager");
+    return [self.customAuthorizationStatus intValue] == 3;
 }
 
 + (BOOL) appTrackingTransparencyEnavled {

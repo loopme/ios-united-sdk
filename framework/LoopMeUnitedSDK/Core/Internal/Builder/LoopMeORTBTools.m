@@ -340,7 +340,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 }
 
 - (NSString *)parameterForDNT {
-    return ([LoopMeIdentityProvider advertisingTrackingEnabled] ? @"1" : @"0");
+    return ([LoopMeIdentityProvider advertisingTrackingEnabled] ? @"0" : @"1");
 }
 
 - (NSString *)parameterForWiFiName {
