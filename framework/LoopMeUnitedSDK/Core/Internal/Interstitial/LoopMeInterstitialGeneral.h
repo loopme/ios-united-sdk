@@ -8,7 +8,7 @@
 /**
  * AppKeys for test purposes
  */
-#import "LoopMeAdType.h"
+#import <LoopMeUnitedSDK/LoopMeAdType.h>
 
 @class LoopMeInterstitialGeneral;
 @class LoopMeTargeting;
