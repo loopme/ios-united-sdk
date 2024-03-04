@@ -1,3 +1,7 @@
+## Version 7.4.10 (04.03.2024)
+
+- Fixed Build issue: can't find import path
+
 ## Version 7.4.9 (04.03.2024)
 
 - [SDK-162] Rename value
