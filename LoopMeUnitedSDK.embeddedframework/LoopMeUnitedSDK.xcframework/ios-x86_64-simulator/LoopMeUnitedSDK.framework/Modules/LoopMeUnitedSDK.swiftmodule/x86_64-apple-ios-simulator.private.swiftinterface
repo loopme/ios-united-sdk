@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
 // swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LoopMeUnitedSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import Foundation
@@ -9,10 +9,10 @@ import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 public struct ProgressEvent : Swift.Hashable {
+  public static func == (lhs: LoopMeUnitedSDK.ProgressEvent, rhs: LoopMeUnitedSDK.ProgressEvent) -> Swift.Bool
   public var link: Swift.String
   public var offset: Foundation.TimeInterval
   public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: LoopMeUnitedSDK.ProgressEvent, b: LoopMeUnitedSDK.ProgressEvent) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
@@ -76,7 +76,8 @@ extension LoopMeUnitedSDK.VastProperties : Foundation.XMLParserDelegate {
   @objc override dynamic public init()
   @objc deinit
 }
-public struct AssetLinks {
+public struct AssetLinks : Swift.Equatable {
+  public static func == (lhs: LoopMeUnitedSDK.AssetLinks, rhs: LoopMeUnitedSDK.AssetLinks) -> Swift.Bool
 }
 @objc(LoopMeServerCommunicator) open class ServerCommunicator : ObjectiveC.NSObject {
   weak public var delegate: (any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate)?
@@ -95,6 +96,14 @@ public struct AssetLinks {
   @objc func serverCommunicatorDidReceiveAd(_ communicator: LoopMeUnitedSDK.ServerCommunicator)
 }
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING: Swift.String
+public struct SKAdNetworkFidelity : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct SKAdNetworkInfo : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 public struct AdConfiguration {
   public var vastProperties: LoopMeUnitedSDK.VastProperties?
 }
@@ -110,7 +119,8 @@ extension LoopMeUnitedSDK.AdConfiguration : Swift.Decodable {
     get
   }
 }
-public struct VastSkipOffset {
+public struct VastSkipOffset : Swift.Equatable {
+  public static func == (lhs: LoopMeUnitedSDK.VastSkipOffset, rhs: LoopMeUnitedSDK.VastSkipOffset) -> Swift.Bool
 }
 @objc(LoopMeAdOrientation) public enum AdOrientationWrapper : Swift.Int {
   case undefined
@@ -180,8 +190,36 @@ public struct VastSkipOffset {
   @objc public var adIdsForIAS: Swift.Dictionary<Swift.String, Any> {
     @objc get
   }
+  @objc public var skadSignature: Swift.String? {
+    @objc get
+  }
+  @objc public var skadNonce: Swift.String? {
+    @objc get
+  }
+  @objc public var skadNetwork: Swift.String? {
+    @objc get
+  }
+  @objc public var skadVersion: Swift.String? {
+    @objc get
+  }
+  @objc public var skadTimestamp: Foundation.NSNumber? {
+    @objc get
+  }
+  @objc public var skadSourceApp: Foundation.NSNumber? {
+    @objc get
+  }
+  @objc public var skadItunesitem: Foundation.NSNumber? {
+    @objc get
+  }
+  @objc public var skadCampaign: Foundation.NSNumber? {
+    @objc get
+  }
+  @objc public var skadSourceidentifier: Foundation.NSNumber? {
+    @objc get
+  }
   @objc public var expandProperties: LoopMeUnitedSDK.MRAIDExpandPropertiesWrapper?
   @objc public var vastProperties: LoopMeUnitedSDK.VastPropertiesWrapper?
+  public var skadNetworkInfo: LoopMeUnitedSDK.SKAdNetworkInfo?
   @objc public var allowOrientationChange: Swift.Bool
   @objc public func useTracking(_ trackerNameWrapped: LoopMeUnitedSDK.TrackerNameWrapper) -> Swift.Bool
   @objc deinit
@@ -365,7 +403,8 @@ public struct VastSkipOffset {
   @objc override dynamic public init()
   @objc deinit
 }
-public struct AdVerification {
+public struct AdVerification : Swift.Equatable {
+  public static func == (lhs: LoopMeUnitedSDK.AdVerification, rhs: LoopMeUnitedSDK.AdVerification) -> Swift.Bool
   public static var empty: LoopMeUnitedSDK.AdVerification
   public var vendor: Swift.String
   public var jsResource: Swift.String

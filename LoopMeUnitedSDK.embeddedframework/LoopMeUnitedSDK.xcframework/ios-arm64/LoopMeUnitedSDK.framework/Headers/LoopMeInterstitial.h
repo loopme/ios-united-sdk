@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LoopMeAdType.h"
+#import <LoopMeAdType.h>
 
 /**
  * AppKeys for test purposes
