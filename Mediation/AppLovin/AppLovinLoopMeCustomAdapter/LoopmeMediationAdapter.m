@@ -34,12 +34,14 @@
 }
 
 - (void)initializeWithParameters:(id<MAAdapterInitializationParameters>)parameters completionHandler:(void(^)(MAAdapterInitializationStatus initializationStatus, NSString *_Nullable errorMessage))completionHandler{
-    if ([[LoopMeSDK shared] isReady]){
-        completionHandler(MAAdapterInitializationStatusInitializedSuccess, NULL);
-    } else {
-        completionHandler(MAAdapterInitializationStatusInitializedFailure, @"Loopme sdk has not been initialized!");
-    }
-}
+    [[LoopMeSDK shared] initSDKFromRootViewController:[ALUtils topViewControllerFromKeyWindow] completionBlock:^(BOOL success, NSError *error) {
+         if (!success) {
+             completionHandler(MAAdapterInitializationStatusInitializedFailure, @"Loopme sdk has not been initialized!");
+             return;
+         }
+             // Set the AppLovin mediation provider
+             completionHandler(MAAdapterInitializationStatusInitializedSuccess, nil);
+     }];}
 
 - (NSString *) SDKVersion{
     return @"7.3.1";
