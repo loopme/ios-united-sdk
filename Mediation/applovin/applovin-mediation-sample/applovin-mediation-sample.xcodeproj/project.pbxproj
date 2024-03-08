@@ -3,138 +3,116 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41426491C781B3884DDC5258 /* Pods_Applovin_mediation_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388E8D469EC2AF139454224D /* Pods_Applovin_mediation_sample.framework */; };
-		8140D99A286208B000D4E688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D999286208B000D4E688 /* AppDelegate.swift */; };
-		8140D99C286208B000D4E688 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99B286208B000D4E688 /* SceneDelegate.swift */; };
-		8140D99E286208B000D4E688 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99D286208B000D4E688 /* ViewController.swift */; };
-		8140D9A1286208B000D4E688 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140D99F286208B000D4E688 /* Main.storyboard */; };
-		8140D9A3286208B500D4E688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8140D9A2286208B500D4E688 /* Assets.xcassets */; };
-		8140D9A6286208B500D4E688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */; };
-		B917E44E2ADD555700C6E6A3 /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */; };
-		B949B2C32B8E3C0000276D8A /* AppLovinSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B92983512B8E10EE00B4B177 /* AppLovinSDK.xcframework */; };
-		B949B2C42B8E3C0000276D8A /* AppLovinSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B92983512B8E10EE00B4B177 /* AppLovinSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B959CD8B2ADD8A0200418D0C /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */; };
-		B95BB0F32ADD6A9600C15524 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */; };
+		A801BF408E1CE31E9B92F316 /* Pods_Applovin_mediation_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B29193D8EB4114F76A7855 /* Pods_Applovin_mediation_sample.framework */; };
+		B9CB16982B9A10DF00FBC357 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB16972B9A10DF00FBC357 /* AppDelegate.swift */; };
+		B9CB169A2B9A10DF00FBC357 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB16992B9A10DF00FBC357 /* SceneDelegate.swift */; };
+		B9CB169C2B9A10DF00FBC357 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB169B2B9A10DF00FBC357 /* ViewController.swift */; };
+		B9CB169F2B9A10DF00FBC357 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9CB169D2B9A10DF00FBC357 /* Main.storyboard */; };
+		B9CB16A12B9A10E000FBC357 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9CB16A02B9A10E000FBC357 /* Assets.xcassets */; };
+		B9CB16A42B9A10E000FBC357 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9CB16A22B9A10E000FBC357 /* LaunchScreen.storyboard */; };
+		B9CB16AE2B9A118E00FBC357 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB16AB2B9A118E00FBC357 /* BannerViewController.swift */; };
+		B9CB16AF2B9A118E00FBC357 /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB16AC2B9A118E00FBC357 /* RewardedVideo.swift */; };
+		B9CB16B02B9A118E00FBC357 /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CB16AD2B9A118E00FBC357 /* InterstitialViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		B949B2C52B8E3C0000276D8A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B949B2C42B8E3C0000276D8A /* AppLovinSDK.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		388E8D469EC2AF139454224D /* Pods_Applovin_mediation_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Applovin_mediation_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8140D996286208B000D4E688 /* Applovin-mediation-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Applovin-mediation-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8140D999286208B000D4E688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8140D99B286208B000D4E688 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8140D99D286208B000D4E688 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8140D9A0286208B000D4E688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8140D9A2286208B500D4E688 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8140D9A5286208B500D4E688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8140D9A7286208B500D4E688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
-		B92983512B8E10EE00B4B177 /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppLovinSDK.xcframework; path = "Pods/AppLovinSDK/applovin-ios-sdk-12.2.1/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
-		B949B2CD2B90F24D00276D8A /* Applovin-mediation-sample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Applovin-mediation-sample-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
-		B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
-		BC070DF9620B4306CFEC11D3 /* Pods-Applovin-mediation-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.debug.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.debug.xcconfig"; sourceTree = "<group>"; };
-		C69EFE58A7BAF96B1DC4E754 /* Pods-Applovin-mediation-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.release.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.release.xcconfig"; sourceTree = "<group>"; };
+		2B459A7E89DC76CEF17740A0 /* Pods-Applovin-mediation-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.debug.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.debug.xcconfig"; sourceTree = "<group>"; };
+		31B29193D8EB4114F76A7855 /* Pods_Applovin_mediation_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Applovin_mediation_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73CEAA857C08069FC862DF70 /* Pods-Applovin-mediation-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.release.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.release.xcconfig"; sourceTree = "<group>"; };
+		B9CB16942B9A10DF00FBC357 /* Applovin-mediation-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Applovin-mediation-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9CB16972B9A10DF00FBC357 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B9CB16992B9A10DF00FBC357 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B9CB169B2B9A10DF00FBC357 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B9CB169E2B9A10DF00FBC357 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B9CB16A02B9A10E000FBC357 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9CB16A32B9A10E000FBC357 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B9CB16A52B9A10E000FBC357 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9CB16AB2B9A118E00FBC357 /* BannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		B9CB16AC2B9A118E00FBC357 /* RewardedVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
+		B9CB16AD2B9A118E00FBC357 /* InterstitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8140D993286208B000D4E688 /* Frameworks */ = {
+		B9CB16912B9A10DF00FBC357 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B949B2C32B8E3C0000276D8A /* AppLovinSDK.xcframework in Frameworks */,
-				41426491C781B3884DDC5258 /* Pods_Applovin_mediation_sample.framework in Frameworks */,
+				A801BF408E1CE31E9B92F316 /* Pods_Applovin_mediation_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		355914E673DE4CF20B796736 /* Pods */ = {
+		58805AE33DE1C5C27E00F1E7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BC070DF9620B4306CFEC11D3 /* Pods-Applovin-mediation-sample.debug.xcconfig */,
-				C69EFE58A7BAF96B1DC4E754 /* Pods-Applovin-mediation-sample.release.xcconfig */,
+				2B459A7E89DC76CEF17740A0 /* Pods-Applovin-mediation-sample.debug.xcconfig */,
+				73CEAA857C08069FC862DF70 /* Pods-Applovin-mediation-sample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		8140D98D286208B000D4E688 = {
+		5B2A5B1E5D02AA8E1BDA7705 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8140D998286208B000D4E688 /* Applovin-mediation-sample */,
-				8140D997286208B000D4E688 /* Products */,
-				355914E673DE4CF20B796736 /* Pods */,
-				B91FA34D2ADD3E7200B13D3F /* Frameworks */,
+				31B29193D8EB4114F76A7855 /* Pods_Applovin_mediation_sample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9CB168B2B9A10DF00FBC357 = {
+			isa = PBXGroup;
+			children = (
+				B9CB16962B9A10DF00FBC357 /* Applovin-mediation-sample */,
+				B9CB16952B9A10DF00FBC357 /* Products */,
+				58805AE33DE1C5C27E00F1E7 /* Pods */,
+				5B2A5B1E5D02AA8E1BDA7705 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		8140D997286208B000D4E688 /* Products */ = {
+		B9CB16952B9A10DF00FBC357 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8140D996286208B000D4E688 /* Applovin-mediation-sample.app */,
+				B9CB16942B9A10DF00FBC357 /* Applovin-mediation-sample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8140D998286208B000D4E688 /* Applovin-mediation-sample */ = {
+		B9CB16962B9A10DF00FBC357 /* Applovin-mediation-sample */ = {
 			isa = PBXGroup;
 			children = (
-				B949B2CD2B90F24D00276D8A /* Applovin-mediation-sample-Bridging-Header.h */,
-				8140D999286208B000D4E688 /* AppDelegate.swift */,
-				8140D99B286208B000D4E688 /* SceneDelegate.swift */,
-				8140D99D286208B000D4E688 /* ViewController.swift */,
-				B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */,
-				B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */,
-				B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */,
-				8140D99F286208B000D4E688 /* Main.storyboard */,
-				8140D9A2286208B500D4E688 /* Assets.xcassets */,
-				8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */,
-				8140D9A7286208B500D4E688 /* Info.plist */,
+				B9CB16972B9A10DF00FBC357 /* AppDelegate.swift */,
+				B9CB16992B9A10DF00FBC357 /* SceneDelegate.swift */,
+				B9CB169B2B9A10DF00FBC357 /* ViewController.swift */,
+				B9CB16AB2B9A118E00FBC357 /* BannerViewController.swift */,
+				B9CB16AD2B9A118E00FBC357 /* InterstitialViewController.swift */,
+				B9CB16AC2B9A118E00FBC357 /* RewardedVideo.swift */,
+				B9CB169D2B9A10DF00FBC357 /* Main.storyboard */,
+				B9CB16A02B9A10E000FBC357 /* Assets.xcassets */,
+				B9CB16A22B9A10E000FBC357 /* LaunchScreen.storyboard */,
+				B9CB16A52B9A10E000FBC357 /* Info.plist */,
 			);
 			path = "Applovin-mediation-sample";
-			sourceTree = "<group>";
-		};
-		B91FA34D2ADD3E7200B13D3F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B92983512B8E10EE00B4B177 /* AppLovinSDK.xcframework */,
-				388E8D469EC2AF139454224D /* Pods_Applovin_mediation_sample.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8140D995286208B000D4E688 /* Applovin-mediation-sample */ = {
+		B9CB16932B9A10DF00FBC357 /* Applovin-mediation-sample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8140D9AA286208B500D4E688 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */;
+			buildConfigurationList = B9CB16A82B9A10E000FBC357 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */;
 			buildPhases = (
-				AEA5CA0CE0F5152340761B53 /* [CP] Check Pods Manifest.lock */,
-				8140D992286208B000D4E688 /* Sources */,
-				8140D993286208B000D4E688 /* Frameworks */,
-				8140D994286208B000D4E688 /* Resources */,
-				B949B2C52B8E3C0000276D8A /* Embed Frameworks */,
-				859636BD616CFAABB106F1BE /* [CP] Embed Pods Frameworks */,
-				BA6B7D26812D620DCAE86794 /* [CP] Copy Pods Resources */,
+				C952C98AC424A4350893296D /* [CP] Check Pods Manifest.lock */,
+				B9CB16902B9A10DF00FBC357 /* Sources */,
+				B9CB16912B9A10DF00FBC357 /* Frameworks */,
+				B9CB16922B9A10DF00FBC357 /* Resources */,
+				6899096C0AD706A7C5CB67DF /* [CP] Embed Pods Frameworks */,
+				A859EBD7A6F50C00DC9AD041 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -142,58 +120,57 @@
 			);
 			name = "Applovin-mediation-sample";
 			productName = "Applovin-mediation-sample";
-			productReference = 8140D996286208B000D4E688 /* Applovin-mediation-sample.app */;
+			productReference = B9CB16942B9A10DF00FBC357 /* Applovin-mediation-sample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8140D98E286208B000D4E688 /* Project object */ = {
+		B9CB168C2B9A10DF00FBC357 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					8140D995286208B000D4E688 = {
-						CreatedOnToolsVersion = 13.4.1;
-						LastSwiftMigration = 1340;
+					B9CB16932B9A10DF00FBC357 = {
+						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
 			};
-			buildConfigurationList = 8140D991286208B000D4E688 /* Build configuration list for PBXProject "applovin-mediation-sample" */;
-			compatibilityVersion = "Xcode 13.0";
+			buildConfigurationList = B9CB168F2B9A10DF00FBC357 /* Build configuration list for PBXProject "Applovin-mediation-sample" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 8140D98D286208B000D4E688;
-			productRefGroup = 8140D997286208B000D4E688 /* Products */;
+			mainGroup = B9CB168B2B9A10DF00FBC357;
+			productRefGroup = B9CB16952B9A10DF00FBC357 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8140D995286208B000D4E688 /* Applovin-mediation-sample */,
+				B9CB16932B9A10DF00FBC357 /* Applovin-mediation-sample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8140D994286208B000D4E688 /* Resources */ = {
+		B9CB16922B9A10DF00FBC357 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8140D9A6286208B500D4E688 /* LaunchScreen.storyboard in Resources */,
-				8140D9A3286208B500D4E688 /* Assets.xcassets in Resources */,
-				8140D9A1286208B000D4E688 /* Main.storyboard in Resources */,
+				B9CB16A42B9A10E000FBC357 /* LaunchScreen.storyboard in Resources */,
+				B9CB16A12B9A10E000FBC357 /* Assets.xcassets in Resources */,
+				B9CB169F2B9A10DF00FBC357 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		859636BD616CFAABB106F1BE /* [CP] Embed Pods Frameworks */ = {
+		6899096C0AD706A7C5CB67DF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -210,7 +187,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AEA5CA0CE0F5152340761B53 /* [CP] Check Pods Manifest.lock */ = {
+		A859EBD7A6F50C00DC9AD041 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C952C98AC424A4350893296D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -232,54 +226,37 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BA6B7D26812D620DCAE86794 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8140D992286208B000D4E688 /* Sources */ = {
+		B9CB16902B9A10DF00FBC357 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8140D99E286208B000D4E688 /* ViewController.swift in Sources */,
-				B917E44E2ADD555700C6E6A3 /* InterstitialViewController.swift in Sources */,
-				B959CD8B2ADD8A0200418D0C /* RewardedVideo.swift in Sources */,
-				8140D99A286208B000D4E688 /* AppDelegate.swift in Sources */,
-				8140D99C286208B000D4E688 /* SceneDelegate.swift in Sources */,
-				B95BB0F32ADD6A9600C15524 /* BannerViewController.swift in Sources */,
+				B9CB16AF2B9A118E00FBC357 /* RewardedVideo.swift in Sources */,
+				B9CB169C2B9A10DF00FBC357 /* ViewController.swift in Sources */,
+				B9CB16B02B9A118E00FBC357 /* InterstitialViewController.swift in Sources */,
+				B9CB16982B9A10DF00FBC357 /* AppDelegate.swift in Sources */,
+				B9CB16AE2B9A118E00FBC357 /* BannerViewController.swift in Sources */,
+				B9CB169A2B9A10DF00FBC357 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8140D99F286208B000D4E688 /* Main.storyboard */ = {
+		B9CB169D2B9A10DF00FBC357 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8140D9A0286208B000D4E688 /* Base */,
+				B9CB169E2B9A10DF00FBC357 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */ = {
+		B9CB16A22B9A10E000FBC357 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8140D9A5286208B500D4E688 /* Base */,
+				B9CB16A32B9A10E000FBC357 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -287,14 +264,14 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8140D9A8286208B500D4E688 /* Debug */ = {
+		B9CB16A62B9A10E000FBC357 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -322,10 +299,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -339,26 +316,25 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Bridging-Header.h";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		8140D9A9286208B500D4E688 /* Release */ = {
+		B9CB16A72B9A10E000FBC357 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -386,10 +362,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -397,33 +373,26 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		8140D9AB286208B500D4E688 /* Debug */ = {
+		B9CB16A92B9A10E000FBC357 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC070DF9620B4306CFEC11D3 /* Pods-Applovin-mediation-sample.debug.xcconfig */;
+			baseConfigurationReference = 2B459A7E89DC76CEF17740A0 /* Pods-Applovin-mediation-sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-				);
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applovin-mediation-sample/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -431,38 +400,29 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Applovin-mediation-sample-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		8140D9AC286208B500D4E688 /* Release */ = {
+		B9CB16AA2B9A10E000FBC357 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C69EFE58A7BAF96B1DC4E754 /* Pods-Applovin-mediation-sample.release.xcconfig */;
+			baseConfigurationReference = 73CEAA857C08069FC862DF70 /* Pods-Applovin-mediation-sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-				);
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applovin-mediation-sample/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -470,17 +430,14 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Applovin-mediation-sample/Applovin-mediation-sample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -489,25 +446,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8140D991286208B000D4E688 /* Build configuration list for PBXProject "applovin-mediation-sample" */ = {
+		B9CB168F2B9A10DF00FBC357 /* Build configuration list for PBXProject "Applovin-mediation-sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8140D9A8286208B500D4E688 /* Debug */,
-				8140D9A9286208B500D4E688 /* Release */,
+				B9CB16A62B9A10E000FBC357 /* Debug */,
+				B9CB16A72B9A10E000FBC357 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8140D9AA286208B500D4E688 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */ = {
+		B9CB16A82B9A10E000FBC357 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8140D9AB286208B500D4E688 /* Debug */,
-				8140D9AC286208B500D4E688 /* Release */,
+				B9CB16A92B9A10E000FBC357 /* Debug */,
+				B9CB16AA2B9A10E000FBC357 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 8140D98E286208B000D4E688 /* Project object */;
+	rootObject = B9CB168C2B9A10DF00FBC357 /* Project object */;
 }

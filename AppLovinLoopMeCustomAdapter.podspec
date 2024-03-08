@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
 
     spec.platform = :ios, "12.0"
 
-    spec.source       = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "AppLovinLoopMeCustomAdapter#{spec.version}" }
+    spec.source       = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "AppLovinLoopMeCustomAdapter_#{spec.version}" }
 
     spec.static_framework = true
     spec.source_files  = "Mediation/AppLovin/AppLovinLoopMeCustomAdapter/*.{h,m}"
