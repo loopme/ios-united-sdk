@@ -6,6 +6,7 @@ target 'Applovin-mediation-sample' do
   use_frameworks!
 
   # Pods for Applovin-mediation-sample
-pod 'AppLovinLoopMeCustomAdapter', :path => '/Users/valeriiroman/Documents/GitHub/ios-united-sdk/ApplovinLoopMeCustomAdapter.podspec'
+
+pod 'AppLovinLoopMeCustomAdapter', :path => '../../../ApplovinLoopMeCustomAdapter.podspec'
 
 end
