@@ -1,5 +1,5 @@
 //
-//  LoopMeAdapter.m
+//  LoopmeMediationAdapter.m
 //  Applovin-mediation-sample
 //
 //  Created by Volodymyr Novikov on 29.06.2022.
