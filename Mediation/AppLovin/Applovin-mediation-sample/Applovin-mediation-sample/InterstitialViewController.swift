@@ -34,7 +34,7 @@ class InterstitialViewController: UIViewController, MAAdDelegate {
     func didLoad(_ ad: MAAd) {
         retryAttempt = 0
         spinnerView.stopAnimating()
-        showButton.isEnabled = true
+        showButton.isEnabled = self.interstitialAd.isReady
         NSLog("CALLBACK - interstitial didLoad ")
     }
     
@@ -53,6 +53,8 @@ class InterstitialViewController: UIViewController, MAAdDelegate {
     
     func didHide(_ ad: MAAd) {
         interstitialAd.load()
+        showButton.isEnabled = self.interstitialAd.isReady
+        spinnerView.startAnimating()
         NSLog("CALLBACK - interstitial didHide")
     }
     

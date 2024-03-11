@@ -36,7 +36,7 @@ class RewardedVideoViewController: UIViewController, MARewardedAdDelegate {
     func didLoad(_ ad: MAAd) {
         retryAttempt = 0
         spinnerView.stopAnimating()
-        showButton.isEnabled = true
+        showButton.isEnabled =  self.rewarded.isReady
         NSLog("CALLBACK - rewarded didLoad")
     }
     
@@ -56,6 +56,8 @@ class RewardedVideoViewController: UIViewController, MARewardedAdDelegate {
     
     func didHide(_ ad: MAAd) {
         rewarded.load()
+        showButton.isEnabled = self.rewarded.isReady
+        spinnerView.startAnimating()
         NSLog("CALLBACK - rewarded didHide")
     }
     
