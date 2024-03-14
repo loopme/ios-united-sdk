@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dependencies>
+    <androidPackages>
+        <androidPackage spec="com.applovin:applovin-sdk:12.3.0" />
+    </androidPackages>
+    <iosPods>
+        <iosPod name="AppLovinSDK" version="12.3.0" />
+        <iosPod name="AppLovinLoopMeCustomAdapter" version="0.0.1" />
+    </iosPods>
+</dependencies>

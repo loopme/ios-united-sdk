@@ -1,0 +1,333 @@
+Unity Editor version:    2022.3.15f1 (b58023a2b463)
+Branch:                  2022.3/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 14.4 (Build 23E214)
+Darwin version:          23.4.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        16384 MB
+Using pre-set license
+Pro License: YES
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/MacOS/Unity
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+/Users/valeriiroman/Documents/GitHub/ios-united-sdk/Mediation/AppLovin/UnityDemoApp
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+61765
+Successfully changed project path to: /Users/valeriiroman/Documents/GitHub/ios-united-sdk/Mediation/AppLovin/UnityDemoApp
+/Users/valeriiroman/Documents/GitHub/ios-united-sdk/Mediation/AppLovin/UnityDemoApp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [8632580800] Host "[IP] 192.168.2.196 [Port] 0 [Flags] 2 [Guid] 3603798015 [EditorId] 3603798015 [Version] 1048832 [Id] OSXEditor(0,LPM230302K.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [8632580800] Host "[IP] 192.168.2.196 [Port] 0 [Flags] 2 [Guid] 3603798015 [EditorId] 3603798015 [Version] 1048832 [Id] OSXEditor(0,LPM230302K.local) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 9 workers.
+Refreshing native plugins compatible for Editor in 9.78 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.15f1 (b58023a2b463)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/valeriiroman/Documents/GitHub/ios-united-sdk/Mediation/AppLovin/UnityDemoApp/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+ preferred device: Apple M2 Pro (high power)
+Metal devices available: 1
+0: Apple M2 Pro (high power)
+Using device Apple M2 Pro (high power)
+Initializing Metal device caps: Apple M2 Pro
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56328
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.15f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/2022.3.15f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.003481 seconds.
+- Loaded All Assemblies, in  0.198 seconds
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.159 seconds
+Domain Reload Profiling: 356ms
+	BeginReloadAssembly (66ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (0ms)
+	RebuildCommonClasses (20ms)
+	RebuildNativeTypeToScriptingClass (7ms)
+	initialDomainReloadingComplete (26ms)
+	LoadAllAssembliesAndSetupDomain (79ms)
+		LoadAssemblies (66ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (78ms)
+			TypeCache.Refresh (77ms)
+				TypeCache.ScanAssembly (68ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (159ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (128ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (38ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (1ms)
+			ProcessInitializeOnLoadAttributes (66ms)
+			ProcessInitializeOnLoadMethodAttributes (21ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.325 seconds
+Refreshing native plugins compatible for Editor in 3.05 ms, found 2 plugins.
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.352 seconds
+Domain Reload Profiling: 677ms
+	BeginReloadAssembly (59ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (2ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (9ms)
+	RebuildCommonClasses (18ms)
+	RebuildNativeTypeToScriptingClass (7ms)
+	initialDomainReloadingComplete (18ms)
+	LoadAllAssembliesAndSetupDomain (224ms)
+		LoadAssemblies (188ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (66ms)
+			TypeCache.Refresh (57ms)
+				TypeCache.ScanAssembly (46ms)
+			ScanForSourceGeneratedMonoScriptInfo (7ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (352ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (278ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (11ms)
+			SetLoadedEditorAssemblies (2ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (23ms)
+			ProcessInitializeOnLoadAttributes (160ms)
+			ProcessInitializeOnLoadMethodAttributes (81ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (1ms)
+Launching external process: /Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/Tools/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.02 seconds
+Refreshing native plugins compatible for Editor in 2.87 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2539 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 115 unused Assets / (88.0 KB). Loaded Objects now: 2944.
+Memory consumption went from 116.9 MB to 116.8 MB.
+Total: 4.952917 ms (FindLiveObjects: 0.096417 ms CreateObjectMapping: 0.042250 ms MarkObjects: 4.639333 ms  DeleteObjects: 0.174291 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:AudioImporter_EditorPlatform: 3918e3fc78b5a79bad01e8451be0beb8 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-osx-AVFoundation: e770b220cccbd017edd2c1fefb359320 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:CustomObjectIndexerAttribute: 43b350a4d6e6d1791af0b5038c4bea17 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+========================================================================
+Received Import Request.
+  Time since last request: 93639.909499 seconds.
+  path: Assets/AvenirNext.ttc
+  artifactKey: Guid(ff72041106c504e268ea0ba778b962ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AvenirNext.ttc using Guid(ff72041106c504e268ea0ba778b962ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3a8802694185e772229962597bcb848') in 0.051065 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 12.629637 seconds.
+  path: Assets/Adjust/iOS/AdjustiOS.cs
+  artifactKey: Guid(e0210f5940cff42e699945b0c5aa4c9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Adjust/iOS/AdjustiOS.cs using Guid(e0210f5940cff42e699945b0c5aa4c9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a00926d94fd9ad786a605c2d691adcb8') in 0.000341 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 11.384298 seconds.
+  path: Assets/MaxSdk/AppLovin/Editor/Dependencies.xml
+  artifactKey: Guid(746da98302dc0402aaa37e8f7bd97e77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/AppLovin/Editor/Dependencies.xml using Guid(746da98302dc0402aaa37e8f7bd97e77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a5c438aa8b7dc17d85b63fb9714a24c') in 0.000613 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 4645.858457 seconds.
+  path: Assets/MaxSdk/Scripts/Editor/MaxSdk.Scripts.Editor.asmdef
+  artifactKey: Guid(691e0eb4b7a542dba2219d48c3254f1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Scripts/Editor/MaxSdk.Scripts.Editor.asmdef using Guid(691e0eb4b7a542dba2219d48c3254f1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7d6e480eea37f2271af3242583abeb2') in 0.001925 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.881327 seconds.
+  path: Assets/MaxSdk/Resources/Images/alert_icon.png
+  artifactKey: Guid(572fee4574afa4f6dbf2846e0c152fe8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Resources/Images/alert_icon.png using Guid(572fee4574afa4f6dbf2846e0c152fe8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8abd6158304683792085b925e7da3aad') in 0.040542 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000080 seconds.
+  path: Assets/MaxSdk/Resources/Images/warning_icon.png
+  artifactKey: Guid(b504c956e7ed744b6b0e7f014e1cac5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Resources/Images/warning_icon.png using Guid(b504c956e7ed744b6b0e7f014e1cac5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6bdd80440391916ed53ed15160c32b7c') in 0.005243 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 4.445112 seconds.
+  path: Assets/MaxSdk/Scripts/IntegrationManager/Editor/MaxSdk.IntegrationManager.Editor.asmdef
+  artifactKey: Guid(a10a05a8449c42519fd80f2b8b580de3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Scripts/IntegrationManager/Editor/MaxSdk.IntegrationManager.Editor.asmdef using Guid(a10a05a8449c42519fd80f2b8b580de3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9adac28a6eaa164224dedbbf66c005be') in 0.000633 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.928158 seconds.
+  path: Assets/MaxSdk/Scripts/MaxSdk.Scripts.asmdef
+  artifactKey: Guid(a4cfc1a18fa3a469b96d885db522f42e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Scripts/MaxSdk.Scripts.asmdef using Guid(a4cfc1a18fa3a469b96d885db522f42e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aeebaa7f8cb04c5c2389f895382a1818') in 0.000550 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.867735 seconds.
+  path: Assets/MaxSdk/Scripts/Editor/MaxPostProcessBuildAndroid.cs
+  artifactKey: Guid(75fed160a41749d4990cee871ee618a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Scripts/Editor/MaxPostProcessBuildAndroid.cs using Guid(75fed160a41749d4990cee871ee618a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eef10418b64688558a6fe3a13433fb68') in 0.000293 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.396666 seconds.
+  path: Assets/MaxSdk/Scripts/Editor/MaxInitialization.cs
+  artifactKey: Guid(bc0c5693335e0408a95293c0d7b61137) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Scripts/Editor/MaxInitialization.cs using Guid(bc0c5693335e0408a95293c0d7b61137) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e36146b5e3cfbf0c51b59f43256ddad9') in 0.000389 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 10.707755 seconds.
+  path: Assets/Adjust/Editor/AdjustSettings.asset
+  artifactKey: Guid(7c262a9326ac54a1c9d7af8502fb34e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Adjust/Editor/AdjustSettings.asset using Guid(7c262a9326ac54a1c9d7af8502fb34e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2496b0e673892755acc7b1ff0c7bd1a0') in 0.001906 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.043503 seconds.
+  path: Assets/Adjust/ExampleGUI/ExampleGUI.prefab
+  artifactKey: Guid(50b53da2a7a154d63a33a49ad08c24a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Adjust/ExampleGUI/ExampleGUI.prefab using Guid(50b53da2a7a154d63a33a49ad08c24a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd701fd6d5eb85a563f8d4bac9fa5539') in 0.011192 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 2.134973 seconds.
+  path: Assets/Adjust/Prefab/Adjust.prefab
+  artifactKey: Guid(a3267720e82aa41c1a05ab29824902b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Adjust/Prefab/Adjust.prefab using Guid(a3267720e82aa41c1a05ab29824902b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '760b575dc7f133813fea93e03240a2b1') in 0.001936 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 5
+========================================================================
+Received Import Request.
+  Time since last request: 8.426945 seconds.
+  path: Assets/MaxSdk/Prefabs/BannerBottom.prefab
+  artifactKey: Guid(54c062c0526b148efa2ea2e9489b3aa0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Prefabs/BannerBottom.prefab using Guid(54c062c0526b148efa2ea2e9489b3aa0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c16f35c6d47c32780fab7dffdba45a6') in 0.009610 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 23
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/MaxSdk/Prefabs/Interstitial.prefab
+  artifactKey: Guid(3fc0c2627ce8a4490b8e319326f8a535) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Prefabs/Interstitial.prefab using Guid(3fc0c2627ce8a4490b8e319326f8a535) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84aa89ab78241f6eec2446b05faf875e') in 0.005265 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 29
+========================================================================
+Received Import Request.
+  Time since last request: 0.654362 seconds.
+  path: Assets/MaxSdk/Resources/AppLovinSettings.asset
+  artifactKey: Guid(eb6c1e1bf78a44fcba583d30d648f800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MaxSdk/Resources/AppLovinSettings.asset using Guid(eb6c1e1bf78a44fcba583d30d648f800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2649212aa187bcd806946d798f84f512') in 0.001411 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 12.007130 seconds.
+  path: Assets/Scripts/HomeScreen.cs
+  artifactKey: Guid(19268e4ffbdff4dcba6cd9fbca2d477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/HomeScreen.cs using Guid(19268e4ffbdff4dcba6cd9fbca2d477e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ad3351b00e77682e7caf011d06113eb') in 0.000336 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
