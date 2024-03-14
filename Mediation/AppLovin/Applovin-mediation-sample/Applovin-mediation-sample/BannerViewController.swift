@@ -14,7 +14,7 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
     private var adView: MAAdView!
     private let iphoneHeight: CGFloat = 50
     private let ipadHeight: CGFloat = 90
-    private let adUnitIdentifier = "4000e273b81db3ad"
+    private let adUnitIdentifier = "1ef882e49e5d9430"
     override func viewDidLoad() {
         super.viewDidLoad()
          adView = MAAdView(adUnitIdentifier: adUnitIdentifier)
