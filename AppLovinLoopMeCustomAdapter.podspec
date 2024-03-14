@@ -13,12 +13,12 @@ Pod::Spec.new do |spec|
 
     spec.platform = :ios, "12.0"
 
-    spec.source       = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "AppLovinLoopMeCustomAdapter#{spec.version}" }
+    spec.source       = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "AppLovinLoopMeCustomAdapter_#{spec.version}" }
 
     spec.static_framework = true
     spec.source_files  = "Mediation/AppLovin/AppLovinLoopMeCustomAdapter/*.{h,m}"
     spec.dependency "AppLovinSDK"
-    spec.dependency "LoopMeUnitedSDK"
+    spec.dependency "LoopMeUnitedSDK", "~> 7.4.10"
     spec.requires_arc = true
     spec.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
     spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
