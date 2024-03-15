@@ -195,6 +195,11 @@ extension VastProperties: XMLParserDelegate {
         }
     }
     
+    public func parser(_ parser: XMLParser, validationErrorOccurred validationError: Error) {
+        print("Parser ERROR: \(validationError)")
+        trackingLinks.errorTemplates.insert(validationError.localizedDescription)
+    }
+    
     private func parseTracking(event: String, value: String, offset: String? = "") {
         switch event {
         case "start":
