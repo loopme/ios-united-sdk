@@ -12,6 +12,7 @@ Pod::Spec.new do |spec|
     spec.license            = { :type => "BSD", :file => "./LICENSE.md" }
 
     spec.platform = :ios, "12.0"
+    spec.swift_versions = "5.0"
 
     spec.source       = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "ISLoopMeCustomAdapter_#{spec.version}" }
 
