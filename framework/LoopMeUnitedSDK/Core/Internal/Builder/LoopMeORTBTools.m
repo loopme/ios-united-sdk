@@ -81,6 +81,11 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     if (![consentValue boolValue]) {
         request[@"consent_type"] = @([[LoopMeGDPRTools sharedInstance] consentType]);
     }
+    if (!self.isInterstitial) {
+        request[@"ext"] = @{
+            @"placementType": @"rewarded"
+        };
+    }
     
     NSError *error;
     jsonData = [NSJSONSerialization dataWithJSONObject:request options:NSJSONWritingPrettyPrinted error:&error];
@@ -258,7 +263,9 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     impression[@"metric"] = [self parameterForAvailableTrackers];
     impression[@"ext"] = @{
         @"it" : integrationType,
-        @"skadn": skadn};
+        @"skadn": skadn,
+        @"rewarded": self.isInterstitial ? @0 : @1
+    };
 
     return impression;
 }
@@ -280,8 +287,16 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     video[@"w"] = @(size.width);
     video[@"h"] = @(size.height);
     video[@"api"] = @[@2, @5, @7];
-    video[@"skip"] = @1; // 0 - not, 1 - skippable
-    
+    video[@"skip"] = self.isInterstitial ? @1 : @0;
+    video[@"rwdd"] = self.isInterstitial ? @0 : @1;
+    if (!self.isInterstitial) {
+        video[@"skipmin"] = @0;
+    }
+    video[@"skipafter"] = self.isInterstitial ? @5 : @0;
+    video[@"ext"] = @{
+        @"videotype": @"rewarded"
+    };
+
     return video;
 }
 
