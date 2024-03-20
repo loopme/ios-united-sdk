@@ -288,6 +288,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     video[@"h"] = @(size.height);
     video[@"api"] = @[@2, @5, @7];
     video[@"skip"] = self.isInterstitial ? @1 : @0;
+    video[@"rwdd"] = self.isInterstitial ? @0 : @1;
     if (!self.isInterstitial) {
         video[@"skipmin"] = @0;
     }
