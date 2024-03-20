@@ -86,7 +86,8 @@ static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCStri
         dispatch_async(dispatch_get_main_queue(), ^{
             self.gdprVC = [[LoopMeGDPRViewController alloc] initWithURL:[LoopMeGDPRAPIService consentURL:[LoopMeIdentityProvider advertisingTrackingDeviceIdentifier]]];
             self.gdprVC.delegate = self;
-            [viewController presentViewController:self.gdprVC animated:YES completion:nil];
+            UIViewController *controller = [UIApplication sharedApplication].keyWindow.rootViewController;
+               [controller presentViewController:self.gdprVC animated:YES completion:nil];
         });
     });
 }
