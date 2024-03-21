@@ -1107,6 +1107,42 @@
             ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "parser",
+            "printedName": "parser(_:validationErrorOccurred:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "XMLParser",
+                "printedName": "Foundation.XMLParser",
+                "usr": "c:objc(cs)NSXMLParser"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Error",
+                "printedName": "any Swift.Error",
+                "usr": "s:s5ErrorP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@LoopMeUnitedSDK@objc(cs)VastProperties(im)parser:validationErrorOccurred:",
+            "mangledName": "$s15LoopMeUnitedSDK14VastPropertiesC6parser_23validationErrorOccurredySo11NSXMLParserC_s0I0_ptF",
+            "moduleName": "LoopMeUnitedSDK",
+            "objc_name": "parser:validationErrorOccurred:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Class",
@@ -2630,7 +2666,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "WeakStorage",
-                "printedName": "LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?"
+                "printedName": "(any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate)?"
               }
             ],
             "declKind": "Var",
@@ -2654,12 +2690,12 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Optional",
-                    "printedName": "LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?",
+                    "printedName": "(any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate)?",
                     "children": [
                       {
                         "kind": "TypeNominal",
                         "name": "LoopMeServerCommunicatorDelegate",
-                        "printedName": "LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate",
+                        "printedName": "any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate",
                         "usr": "c:@M@LoopMeUnitedSDK@objc(pl)LoopMeServerCommunicatorDelegate"
                       }
                     ],
@@ -2686,12 +2722,12 @@
                   {
                     "kind": "TypeNominal",
                     "name": "Optional",
-                    "printedName": "LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?",
+                    "printedName": "(any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate)?",
                     "children": [
                       {
                         "kind": "TypeNominal",
                         "name": "LoopMeServerCommunicatorDelegate",
-                        "printedName": "LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate",
+                        "printedName": "any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate",
                         "usr": "c:@M@LoopMeUnitedSDK@objc(pl)LoopMeServerCommunicatorDelegate"
                       }
                     ],
@@ -2901,12 +2937,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate?",
+                "printedName": "(any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "LoopMeServerCommunicatorDelegate",
-                    "printedName": "LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate",
+                    "printedName": "any LoopMeUnitedSDK.LoopMeServerCommunicatorDelegate",
                     "usr": "c:@M@LoopMeUnitedSDK@objc(pl)LoopMeServerCommunicatorDelegate"
                   }
                 ],
@@ -3155,12 +3191,12 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "Swift.Error?",
+                "printedName": "(any Swift.Error)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
                     "name": "Error",
-                    "printedName": "Swift.Error",
+                    "printedName": "any Swift.Error",
                     "usr": "s:s5ErrorP"
                   }
                 ],
@@ -3303,7 +3339,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Decoder",
-                "printedName": "Swift.Decoder",
+                "printedName": "any Swift.Decoder",
                 "usr": "s:s7DecoderP"
               }
             ],
@@ -3328,7 +3364,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Encoder",
-                "printedName": "Swift.Encoder",
+                "printedName": "any Swift.Encoder",
                 "usr": "s:s7EncoderP"
               }
             ],
@@ -3384,7 +3420,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Decoder",
-                "printedName": "Swift.Decoder",
+                "printedName": "any Swift.Decoder",
                 "usr": "s:s7DecoderP"
               }
             ],
@@ -3409,7 +3445,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Encoder",
-                "printedName": "Swift.Encoder",
+                "printedName": "any Swift.Encoder",
                 "usr": "s:s7EncoderP"
               }
             ],
@@ -3575,7 +3611,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "Decoder",
-                "printedName": "Swift.Decoder",
+                "printedName": "any Swift.Decoder",
                 "usr": "s:s7DecoderP"
               }
             ],
@@ -10665,20 +10701,6 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/Converter.swift",
-      "kind": "StringLiteral",
-      "offset": 542,
-      "length": 10,
-      "value": "\"HH:mm:ss\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/Converter.swift",
-      "kind": "IntegerLiteral",
-      "offset": 621,
-      "length": 1,
-      "value": "0"
-    },
-    {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 1751,
@@ -10834,20 +10856,6 @@
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
-      "kind": "StringLiteral",
-      "offset": 5580,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
-      "kind": "StringLiteral",
-      "offset": 5668,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 6490,
       "length": 2,
@@ -10896,13 +10904,6 @@
       "value": "\"IAS_ID\""
     },
     {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/InfoPlistReader.swift",
-      "kind": "StringLiteral",
-      "offset": 418,
-      "length": 27,
-      "value": "\"Info Plist file not found\""
-    },
-    {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "IntegerLiteral",
       "offset": 271,
@@ -10940,630 +10941,14 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "StringLiteral",
-      "offset": 1986,
-      "length": 9,
-      "value": "\"Wrapper\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2026,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2044,
-      "length": 8,
-      "value": "\"InLine\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2083,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2102,
-      "length": 10,
-      "value": "\"Creative\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2212,
-      "length": 4,
-      "value": "\"id\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2245,
-      "length": 8,
-      "value": "\"Linear\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2310,
-      "length": 12,
-      "value": "\"skipoffset\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2394,
-      "length": 3,
-      "value": "\"%\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2506,
-      "length": 14,
-      "value": "\"01234567890.\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2805,
-      "length": 14,
-      "value": "\"Verification\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2868,
-      "length": 17,
-      "value": "\"AdVerifications\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 2990,
-      "length": 8,
-      "value": "\"vendor\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 3427,
-      "length": 11,
-      "value": "\"MediaFile\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 3553,
-      "length": 12,
-      "value": "\"MediaFiles\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 3666,
-      "length": 23,
-      "value": "\"parseMediaFiles error\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4200,
+      "offset": 7410,
       "length": 2,
       "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "Dictionary",
-      "offset": 4211,
-      "length": 3,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4436,
-      "length": 12,
-      "value": "\"Impression\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4480,
-      "length": 8,
-      "value": "\"InLine\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4507,
-      "length": 9,
-      "value": "\"Wrapper\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4602,
-      "length": 7,
-      "value": "\"Error\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4641,
-      "length": 8,
-      "value": "\"InLine\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4668,
-      "length": 9,
-      "value": "\"Wrapper\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4767,
-      "length": 10,
-      "value": "\"Viewable\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4809,
-      "length": 20,
-      "value": "\"ViewableImpression\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4932,
-      "length": 13,
-      "value": "\"NotViewable\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 4977,
-      "length": 20,
-      "value": "\"ViewableImpression\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5103,
-      "length": 18,
-      "value": "\"ViewUndetermined\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5153,
-      "length": 20,
-      "value": "\"ViewableImpression\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5283,
-      "length": 10,
-      "value": "\"Duration\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5373,
-      "length": 10,
-      "value": "\"Tracking\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5415,
-      "length": 16,
-      "value": "\"TrackingEvents\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5467,
-      "length": 7,
-      "value": "\"event\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5506,
-      "length": 10,
-      "value": "\"progress\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5612,
-      "length": 8,
-      "value": "\"offset\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5769,
-      "length": 14,
-      "value": "\"ClickThrough\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5815,
-      "length": 13,
-      "value": "\"VideoClicks\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5908,
-      "length": 15,
-      "value": "\"ClickTracking\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 5992,
-      "length": 24,
-      "value": "\"CompanionClickTracking\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6094,
-      "length": 23,
-      "value": "\"CompanionClickThrough\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6149,
-      "length": 11,
-      "value": "\"Companion\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6244,
-      "length": 11,
-      "value": "\"MediaFile\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6315,
-      "length": 16,
-      "value": "\"StaticResource\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6389,
-      "length": 14,
-      "value": "\"creativeType\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6422,
-      "length": 12,
-      "value": "\"image\/jpeg\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6514,
-      "length": 20,
-      "value": "\"JavaScriptResource\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6703,
-      "length": 24,
-      "value": "\"VerificationParameters\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6908,
-      "length": 14,
-      "value": "\"VASTAdTagURI\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 6972,
-      "length": 14,
-      "value": "\"AdParameters\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7173,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7215,
-      "length": 7,
-      "value": "\"start\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7290,
-      "length": 15,
-      "value": "\"firstQuartile\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7381,
-      "length": 10,
-      "value": "\"midpoint\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7462,
-      "length": 15,
-      "value": "\"thirdQuartile\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7553,
-      "length": 10,
-      "value": "\"complete\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7634,
-      "length": 6,
-      "value": "\"mute\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7707,
-      "length": 8,
-      "value": "\"unmute\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7784,
-      "length": 7,
-      "value": "\"pause\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7859,
-      "length": 8,
-      "value": "\"resume\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 7936,
-      "length": 12,
-      "value": "\"fullscreen\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8021,
-      "length": 16,
-      "value": "\"exitFullscreen\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8114,
-      "length": 6,
-      "value": "\"skip\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8187,
-      "length": 7,
-      "value": "\"close\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8262,
-      "length": 14,
-      "value": "\"playerExpand\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8345,
-      "length": 16,
-      "value": "\"playerCollapse\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8432,
-      "length": 14,
-      "value": "\"creativeView\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8523,
-      "length": 25,
-      "value": "\"verificationNotExecuted\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8627,
-      "length": 8,
-      "value": "\"loaded\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 8704,
-      "length": 10,
-      "value": "\"progress\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "IntegerLiteral",
-      "offset": 8901,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "Array",
-      "offset": 9230,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "Array",
-      "offset": 9270,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 9366,
-      "length": 10,
-      "value": "\"delivery\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 9426,
-      "length": 14,
-      "value": "\"apiFramework\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 9485,
-      "length": 6,
-      "value": "\"type\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 9541,
-      "length": 11,
-      "value": "\"mediaType\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 9638,
-      "length": 13,
-      "value": "\"progressive\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 9663,
-      "length": 11,
-      "value": "\"video\/mp4\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 9713,
-      "length": 5,
-      "value": "\"360\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 10010,
-      "length": 7,
-      "value": "\"VPAID\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 10029,
-      "length": 24,
-      "value": "\"application\/javascript\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 10614,
-      "length": 7,
-      "value": "\"width\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 10722,
-      "length": 7,
-      "value": "\"width\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 10831,
-      "length": 8,
-      "value": "\"height\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
-      "kind": "StringLiteral",
-      "offset": 10943,
-      "length": 8,
-      "value": "\"height\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CCPA\/CCPATools.swift",
       "kind": "StringLiteral",
       "offset": 258,
-      "length": 6,
-      "value": "\"1---\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CCPA\/CCPATools.swift",
-      "kind": "StringLiteral",
-      "offset": 367,
-      "length": 6,
-      "value": "\"1---\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CCPA\/CCPATools.swift",
-      "kind": "StringLiteral",
-      "offset": 459,
-      "length": 21,
-      "value": "\"IABUSPrivacy_String\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CCPA\/CCPATools.swift",
-      "kind": "StringLiteral",
-      "offset": 545,
       "length": 6,
       "value": "\"1---\""
     },
@@ -11869,202 +11254,6 @@
       "value": "0"
     },
     {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "Array",
-      "offset": 2994,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3451,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4250,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4809,
-      "length": 2,
-      "value": "60"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5057,
-      "length": 2,
-      "value": "60"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 345,
-      "length": 160,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 355,
-      "length": 1,
-      "value": "\" (\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 366,
-      "length": 1,
-      "value": "\"; \""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 373,
-      "length": 1,
-      "value": "\" \""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 396,
-      "length": 4,
-      "value": "\" like Mac OS X) AppleWebKit\/605.1.15 (KHTML, like Gecko) Version\/\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 477,
-      "length": 6,
-      "value": "\" Mobile\/15E148 Safari\/604.1\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 659,
-      "length": 3,
-      "value": "\".\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 670,
-      "length": 3,
-      "value": "\"_\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 809,
-      "length": 3,
-      "value": "\".\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 873,
-      "length": 8,
-      "value": "\"13.0.1\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "IntegerLiteral",
-      "offset": 933,
-      "length": 2,
-      "value": "11"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 956,
-      "length": 6,
-      "value": "\"11.0\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "IntegerLiteral",
-      "offset": 976,
-      "length": 2,
-      "value": "12"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 999,
-      "length": 8,
-      "value": "\"12.1.2\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1021,
-      "length": 2,
-      "value": "13"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1044,
-      "length": 8,
-      "value": "\"13.0.1\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1089,
-      "length": 8,
-      "value": "\"13.0.1\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1237,
-      "length": 8,
-      "value": "\"iPhone\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1329,
-      "length": 6,
-      "value": "\"iPad\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1361,
-      "length": 13,
-      "value": "\"unspecified\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1500,
-      "length": 15,
-      "value": "\"CPU iPhone OS\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1541,
-      "length": 12,
-      "value": "\"CPU iPhone\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
-      "kind": "StringLiteral",
-      "offset": 1648,
-      "length": 13,
-      "value": "\"Mozilla\/5.0\""
-    },
-    {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
       "kind": "Array",
       "offset": 561,
@@ -12126,174 +11315,6 @@
       "offset": 800,
       "length": 1,
       "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "StringLiteral",
-      "offset": 1226,
-      "length": 12,
-      "value": "\"User-Agent\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "StringLiteral",
-      "offset": 1270,
-      "length": 19,
-      "value": "\"x-openrtb-version\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "StringLiteral",
-      "offset": 1292,
-      "length": 5,
-      "value": "\"2.5\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1819,
-      "length": 2,
-      "value": "60"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "StringLiteral",
-      "offset": 1933,
-      "length": 18,
-      "value": "\"application\/json\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "StringLiteral",
-      "offset": 1973,
-      "length": 14,
-      "value": "\"Content-Type\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2250,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2424,
-      "length": 3,
-      "value": "408"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2644,
-      "length": 3,
-      "value": "204"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2818,
-      "length": 3,
-      "value": "500"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3499,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 3943,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 4419,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4548,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4691,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5266,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5321,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5434,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5611,
-      "length": 5,
-      "value": "-1001"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5667,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5775,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5933,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6007,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6169,
-      "length": 5,
-      "value": "false"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
@@ -12367,20 +11388,6 @@
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1146,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1174,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
       "offset": 2381,
       "length": 13,
@@ -12424,359 +11431,9 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
-      "offset": 3795,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 3897,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 4001,
-      "length": 3,
-      "value": "\"1\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 4110,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 4216,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 4336,
-      "length": 6,
-      "value": "\"1000\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4494,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 4508,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 4519,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 4534,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5010,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5016,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5093,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5099,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "IntegerLiteral",
-      "offset": 5230,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 5286,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 5619,
-      "length": 7,
-      "value": "\"<VAST\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 5924,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 5927,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 6026,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 6029,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "IntegerLiteral",
-      "offset": 6179,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6237,
-      "length": 4,
-      "value": "true"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "Array",
-      "offset": 6476,
-      "length": 4,
-      "value": "[\"\"]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6574,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6605,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 6640,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 7008,
-      "length": 7,
-      "value": "\"<VAST\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "BooleanLiteral",
-      "offset": 7323,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "Array",
-      "offset": 7486,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
       "offset": 7853,
       "length": 2,
       "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "Dictionary",
-      "offset": 8232,
-      "length": 3,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8343,
-      "length": 8,
-      "value": "\"level1\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8366,
-      "length": 8,
-      "value": "\"level2\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8387,
-      "length": 8,
-      "value": "\"level3\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8406,
-      "length": 8,
-      "value": "\"level4\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8425,
-      "length": 8,
-      "value": "\"level5\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8554,
-      "length": 11,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8564,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8629,
-      "length": 9,
-      "value": "\"unknown\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "Dictionary",
-      "offset": 8872,
-      "length": 3,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8911,
-      "length": 25,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8922,
-      "length": 1,
-      "value": "\"_\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8935,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8975,
-      "length": 6,
-      "value": "\"anId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 8990,
-      "length": 7,
-      "value": "\"advId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 9012,
-      "length": 8,
-      "value": "\"campId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 9033,
-      "length": 7,
-      "value": "\"pubId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 9050,
-      "length": 8,
-      "value": "\"chanId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 9079,
-      "length": 13,
-      "value": "\"placementId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 9108,
-      "length": 10,
-      "value": "\"bundleId\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
@@ -12927,27 +11584,6 @@
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2828,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3087,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3534,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "BooleanLiteral",
       "offset": 4423,
       "length": 5,
@@ -12973,13 +11609,6 @@
       "offset": 5471,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.ProgressEventWrappper\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "Array",
-      "offset": 7165,
-      "length": 2,
-      "value": "[]"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
@@ -13038,230 +11667,6 @@
       "value": "\"LoopMeUnitedSDK.ProgressEventTrackerWrapper\""
     },
     {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 358,
-      "length": 2,
-      "value": "-1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 600,
-      "length": 14,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 613,
-      "length": 49,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 769,
-      "length": 13,
-      "value": "\"[ERRORCODE]\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 866,
-      "length": 17,
-      "value": "\"%5BERRORCODE%5D\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 967,
-      "length": 10,
-      "value": "\"[REASON]\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1061,
-      "length": 14,
-      "value": "\"%5BREASON%5D\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1149,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1277,
-      "length": 19,
-      "value": "\"[CONTENTPLAYHEAD]\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1381,
-      "length": 22,
-      "value": "\"5BCONTENTPLAYHEAD%5D\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1654,
-      "length": 12,
-      "value": "\"[ASSETURI]\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1760,
-      "length": 16,
-      "value": "\"%5BASSETURI%5D\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1866,
-      "length": 41,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1884,
-      "length": 8,
-      "value": "90000000"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1895,
-      "length": 9,
-      "value": "100000000"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1906,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 1972,
-      "length": 16,
-      "value": "\"[CACHEBUSTING]\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 2064,
-      "length": 20,
-      "value": "\"%5BCACHEBUSTING%5D\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 2233,
-      "length": 13,
-      "value": "\"[TIMESTAMP]\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 2326,
-      "length": 17,
-      "value": "\"%5BTIMESTAMP%5D\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2541,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 2564,
-      "length": 14,
-      "value": "\"00:00:00.000\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2692,
-      "length": 4,
-      "value": "3600"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2742,
-      "length": 2,
-      "value": "60"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2748,
-      "length": 2,
-      "value": "60"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2795,
-      "length": 2,
-      "value": "60"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2865,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2871,
-      "length": 4,
-      "value": "1000"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 2916,
-      "length": 25,
-      "value": "\"%0.2d:%0.2d:%0.2d.%0.3d\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 3121,
-      "length": 13,
-      "value": "\"en_US_POSIX\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 3218,
-      "length": 30,
-      "value": "\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VASTMacroProcessor.swift",
-      "kind": "StringLiteral",
-      "offset": 3477,
-      "length": 9,
-      "value": "\":-._~\/?\""
-    },
-    {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CoppaTools.swift",
       "kind": "BooleanLiteral",
       "offset": 281,
@@ -13288,55 +11693,6 @@
       "offset": 573,
       "length": 2,
       "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerError.swift",
-      "kind": "StringLiteral",
-      "offset": 453,
-      "length": 18,
-      "value": "\"Request time out\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerError.swift",
-      "kind": "StringLiteral",
-      "offset": 512,
-      "length": 14,
-      "value": "\"No ads found\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerError.swift",
-      "kind": "StringLiteral",
-      "offset": 574,
-      "length": 24,
-      "value": "\"Response parsing error\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerError.swift",
-      "kind": "StringLiteral",
-      "offset": 650,
-      "length": 19,
-      "value": "\"Too much wrappers\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerError.swift",
-      "kind": "StringLiteral",
-      "offset": 726,
-      "length": 28,
-      "value": "\"Server error code: \""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerError.swift",
-      "kind": "StringLiteral",
-      "offset": 753,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerError.swift",
-      "kind": "StringLiteral",
-      "offset": 794,
-      "length": 15,
-      "value": "\"Unknown error\""
     }
   ]
 }

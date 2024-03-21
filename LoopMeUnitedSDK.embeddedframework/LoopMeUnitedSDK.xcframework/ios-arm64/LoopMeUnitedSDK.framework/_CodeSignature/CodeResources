@@ -46,7 +46,7 @@
 		</data>
 		<key>Headers/LoopMeUnitedSDK-Swift.h</key>
 		<data>
-		67EI2XchJzI2kQ3B/6/ATRidtQk=
+		s2WATEE+zngXfjORKAMAo5nFeMo=
 		</data>
 		<key>Headers/LoopMeVPAIDError.h</key>
 		<data>
@@ -54,27 +54,27 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		NyC8pNG9r321rRbKSx+r3OBB8oU=
+		2EfVTBPxPA/IWz2Mkghab2aKVoM=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		0/GGvBDavdyYjYXqbqn713MRVSI=
+		QILJVwZAin+RwrB7DL5cAm0I6E4=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		z2eFrfiWSdjrvGow4B6G15QU9lI=
+		K+QZaLPzjFsod1vVjTXKnw4mKlY=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		lpCkPWszlm60V4IQTCSxh7M14oI=
+		2IGAntP5ATkrsng7SuRYnWsQlv4=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		z2eFrfiWSdjrvGow4B6G15QU9lI=
+		K+QZaLPzjFsod1vVjTXKnw4mKlY=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		q2aVuKVYjtTE2GL34seXWwW2wXY=
+		yXuQkwxrXHemWPgbU3zD6qqJSaw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -157,7 +157,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			spS7RKtyu92954FemBo5gevpQxkerES6TMq5sS62brQ=
+			20P3vSuLVr9ON24Z71Vhz8rPu773C5dzCMyA+UxpdhA=
 			</data>
 		</dict>
 		<key>Headers/LoopMeVPAIDError.h</key>
@@ -171,35 +171,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zuTkNs7yX7gPGGORGe5naMjJ5DHw4E+qxWOFMNaAJ9U=
+			Io1RlKx7P23zpg69mynz6/JCeDSEhk93zDOQhtauJbg=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+VrCuLdupbnzNsWR/1QYg3il55+Hk0y6A8L897M2XUA=
+			nklbbEhzShH/rEWluZwGeNWWLNB4Mr4p39nXxIDbR9g=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UPeIwkxC6NHV59Stl8ttNPSNKhbM7lJ5plImmQ/ksBo=
+			jpCuZ3SBKsMScdUUEPI2TnDT1Ux9/KGUZnFQy8qggWc=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+VrCuLdupbnzNsWR/1QYg3il55+Hk0y6A8L897M2XUA=
+			nklbbEhzShH/rEWluZwGeNWWLNB4Mr4p39nXxIDbR9g=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			I9ykkSfVSOfr3PMbEuIKjMKjiO2oLTSC/ISbR+jvpAY=
+			/0POLG/lXE6XRkPEYKDVUpiBFC5lJwoyV0iDuhjfdyA=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
