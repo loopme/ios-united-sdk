@@ -17,6 +17,7 @@ static NSString * const kLoopMeUserDefaultsGDPRWindowKey = @"LoopMeGDPRWindowFla
 static NSString * const kLoopMeIABUserDefaultsKeyCMPSdkId = @"IABTCF_CmpSdkID";
 static NSString * const kLoopMeIABUserDefaultsKeyGdprApplies = @"IABTCF_gdprApplies";
 static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCString";
+static NSString * const kLoopMeSourceAppID = @"SourceAppID";
 
 @interface LoopMeGDPRTools() <LoopMeGDPRViewControllerDelegate>
 
@@ -92,6 +93,54 @@ static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCStri
     });
 }
 
+- (void)getAppDetailsFromServer {
+    // Retrieve bundle identifier
+    NSString *bundleIdentifier = [[NSBundle mainBundle] infoDictionary][@"CFBundleIdentifier"];
+    NSString *baseURL = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@", bundleIdentifier];
+    NSString *encodedURL = [baseURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    // Creating URL Object
+    NSURL *url = [NSURL URLWithString:encodedURL];
+    
+    // Creating a Mutable Request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // Setting HTTP values
+    [request setHTTPMethod:@"GET"];
+    [request setTimeoutInterval:120];
+    
+    // Creating URLSession
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    // Creating Data Task
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil && data != nil) {
+            NSError *jsonError = nil;
+            NSDictionary *resultDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            
+            if (jsonError == nil && resultDictionary != nil && resultDictionary.count > 0) {
+                NSArray *resultsArray = resultDictionary[@"results"];
+                if (resultsArray.count > 0) {
+                    NSDictionary *appDetails = resultsArray[0];
+                    NSString *appId = [NSString stringWithFormat:@"%@", appDetails[@"trackId"]];
+                    [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kLoopMeSourceAppID];
+                    NSLog(@"App ID: %@", appId);
+                } else {
+                    NSLog(@"No results found in the response");
+                }
+            } else {
+                NSLog(@"Error parsing JSON: %@", jsonError.localizedDescription);
+            }
+        } else {
+            NSLog(@"Error fetching data: %@", error.localizedDescription);
+        }
+    }];
+    
+    // Resume the data task
+    [dataTask resume];
+}
+
 - (void)loopMeGDPRViewControllerDidDisapper {
     [self checkUserConsent];
 }
@@ -115,8 +164,11 @@ static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCStri
     return [[NSUserDefaults standardUserDefaults] stringForKey:kLoopMeIABUserDefaultsKeyConsentString];
 }
 
+
 - (NSString *)cmpSdkID {
     return [[NSUserDefaults standardUserDefaults] stringForKey:kLoopMeIABUserDefaultsKeyCMPSdkId];
 }
-
+- (NSString *)sourceAppID {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:kLoopMeSourceAppID];
+}
 @end
