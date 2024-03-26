@@ -119,12 +119,10 @@ static NSString * const kLoopMeSourceAppID = @"SourceAppID";
         if (error != nil || data == nil) {
             NSLog(@"Error fetching data: %@", error.localizedDescription);
             return;
-        }
-        NSDictionary *resultDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        
-        NSArray *resultsArray = resultDictionary[@"results"];
-        if (resultsArray.count > 0) {
-            NSDictionary *appDetails = resultsArray[0];
+        }        
+        NSArray *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error][@"results"];
+        if (results.count > 0) {
+            NSDictionary *appDetails = results[0];
             NSString *appId = [NSString stringWithFormat:@"%@", appDetails[@"trackId"]];
             [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kLoopMeSourceAppID];
             NSLog(@"App ID: %@", appId);
