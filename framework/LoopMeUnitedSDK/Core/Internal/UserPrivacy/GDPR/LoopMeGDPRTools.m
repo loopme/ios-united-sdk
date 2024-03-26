@@ -115,25 +115,21 @@ static NSString * const kLoopMeSourceAppID = @"SourceAppID";
     
     // Creating Data Task
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error == nil && data != nil) {
-            NSError *jsonError = nil;
-            NSDictionary *resultDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
-            
-            if (jsonError == nil && resultDictionary != nil && resultDictionary.count > 0) {
-                NSArray *resultsArray = resultDictionary[@"results"];
-                if (resultsArray.count > 0) {
-                    NSDictionary *appDetails = resultsArray[0];
-                    NSString *appId = [NSString stringWithFormat:@"%@", appDetails[@"trackId"]];
-                    [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kLoopMeSourceAppID];
-                    NSLog(@"App ID: %@", appId);
-                } else {
-                    NSLog(@"No results found in the response");
-                }
-            } else {
-                NSLog(@"Error parsing JSON: %@", jsonError.localizedDescription);
-            }
-        } else {
+        
+        if (error != nil || data == nil) {
             NSLog(@"Error fetching data: %@", error.localizedDescription);
+            return;
+        }
+        NSDictionary *resultDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        
+        NSArray *resultsArray = resultDictionary[@"results"];
+        if (resultsArray.count > 0) {
+            NSDictionary *appDetails = resultsArray[0];
+            NSString *appId = [NSString stringWithFormat:@"%@", appDetails[@"trackId"]];
+            [[NSUserDefaults standardUserDefaults] setObject:appId forKey:kLoopMeSourceAppID];
+            NSLog(@"App ID: %@", appId);
+        } else {
+            NSLog(@"No results found in the response");
         }
     }];
     
