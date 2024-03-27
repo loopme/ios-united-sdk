@@ -258,7 +258,11 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     }
     
     skadn[@"versions"] = @[@"2.0", @"2.1", @"2.2", @"3.0", @"4.0"];
-    skadn[@"sourceapp"] = [self parameterForBundleIdentifier];
+    if ([[LoopMeGDPRTools sharedInstance] sourceAppID]) {
+        skadn[@"sourceapp"] = [[LoopMeGDPRTools sharedInstance] sourceAppID];
+    } else {
+        skadn[@"sourceapp"] = [self parameterForBundleIdentifier];
+    }
     skadn[@"skadnetids"] = skAdIdentifiers;
     impression[@"metric"] = [self parameterForAvailableTrackers];
     impression[@"ext"] = @{

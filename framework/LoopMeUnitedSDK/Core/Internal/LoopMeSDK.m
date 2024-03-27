@@ -91,7 +91,7 @@
               });
           }
     }
-    
+    [[LoopMeGDPRTools sharedInstance] getAppDetailsFromServer];
     [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:rootViewController];
     [LoopMeGlobalSettings sharedInstance];
     [LoopMeOMIDWrapper initOMIDWithCompletionBlock:^(BOOL ready) {
