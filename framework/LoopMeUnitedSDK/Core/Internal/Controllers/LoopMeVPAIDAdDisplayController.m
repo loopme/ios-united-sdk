@@ -212,8 +212,8 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         
         if (!configuration.vastProperties.isVpaid) {
             NSError *error;
-            self.omidSession = [self.omidWrapper sessionForType:OMIDLoopmeCreativeTypeNativeVideo resources:configuration.vastProperties.adVerifications webView:nil error:&error];
-            
+            self.omidSession = [self.omidWrapper sessionForNativeVideo: configuration.vastProperties.adVerifications error:&error];
+
             // to signal impression event
             NSError *aErr;
             self.omidAdEvents = [[OMIDLoopmeAdEvents alloc] initWithAdSession:self.omidSession error:&aErr];

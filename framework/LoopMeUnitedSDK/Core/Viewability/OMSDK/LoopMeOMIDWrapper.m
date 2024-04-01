@@ -13,8 +13,11 @@
 #import "LoopMeDiscURLCache.h"
 #import "LoopMeSDK.h"
 
+typedef void (^CompletionHandlerBlock)(NSData *, NSURLResponse *, NSError *);
+
 static NSString* const PARTNER_NAME = @"Loopme";
 static NSString* const CACHE_KEY = @"OMID_JS";
+static NSString* const OMID_JS_URL = @"https://i.loopme.me/html/ios/omsdk-v1.js";
 
 @interface LoopMeOMIDWrapper()
 
@@ -34,8 +37,7 @@ static OMIDLoopmePartner *_partner;
 @dynamic omidJS;
 @dynamic partner;
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _scripts = [NSMutableArray new];
@@ -82,144 +84,122 @@ static OMIDLoopmePartner *_partner;
 }
 
 + (void)loadJSWithCompletionBlock:(void (^)(BOOL))completionBlock {
+    __weak typeof(self) weakSelf = self;
+
     if (!self.class.omidJS) {
-        NSData *data = [[LoopMeDiscURLCache sharedDiscCache] retrieveDataForKey:CACHE_KEY];
+        NSData *data = [[LoopMeDiscURLCache sharedDiscCache] retrieveDataForKey: CACHE_KEY];
         if (data) {
-            self.class.omidJS = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            self.class.omidJS = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
         }
         
         if (self.class.omidJS) {
             completionBlock(true);
         }
     }
-
-    NSURL *url = [NSURL URLWithString:@"https://i.loopme.me/html/ios/omsdk-v1.js"];
-    __weak typeof(self) weakSelf = self;
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5];
-    NSURLSession *defaultSession = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request
-                                                   completionHandler:^(NSData *data, NSURLResponse
-                                                                       *response, NSError *error) {
-                                                       if (error || weakSelf == nil) {
-                                                           completionBlock(false);
-                                                           return;
-                                                       }
+    CompletionHandlerBlock completionHandler = ^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error || weakSelf == nil) {
+            return completionBlock(false);
+        }
 
-                                                       [[LoopMeDiscURLCache sharedDiscCache] storeData:data forKey:CACHE_KEY];
-                                                       if (!weakSelf.class.omidJS) {
-                                                           weakSelf.class.omidJS = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                                       }
-                                                       completionBlock(true);
-                                                   }];
-    [dataTask resume];
+        [[LoopMeDiscURLCache sharedDiscCache] storeData: data forKey: CACHE_KEY];
+        if (!weakSelf.class.omidJS) {
+            weakSelf.class.omidJS = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+        }
+        completionBlock(true);
+    };
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString: OMID_JS_URL]
+                                             cachePolicy: NSURLRequestReloadIgnoringCacheData
+                                         timeoutInterval: 5];
+    [[[NSURLSession sharedSession] dataTaskWithRequest: request completionHandler: completionHandler] resume];
 }
 
 + (void)initPartner {
-    self.partner = [[OMIDLoopmePartner alloc] initWithName:PARTNER_NAME
-                                                 versionString:LOOPME_SDK_VERSION];
+    self.partner = [[OMIDLoopmePartner alloc] initWithName: PARTNER_NAME versionString: LOOPME_SDK_VERSION];
 }
 
 #pragma mark - public
 
-- (NSString *)injectScriptContentIntoHTML:(NSString *)htmlString error:(NSError **)error {
-    NSString *finalString = [OMIDLoopmeScriptInjector injectScriptContent:self.class.omidJS
-                                                        intoHTML:htmlString error:error];
-    
-    return finalString;
+- (NSString *)injectScriptContentIntoHTML: (NSString *)htmlString
+                                    error: (NSError **)error {
+    return [OMIDLoopmeScriptInjector injectScriptContent: self.class.omidJS
+                                                intoHTML: htmlString
+                                                   error: error];
 }
 
-- (OMIDLoopmeAdSessionContext *)contextForType:(OMIDLoopmeCreativeType)creativeType
-                                       webView:(UIView *)webView
-                                     resources:(NSArray<LoopMeAdVerification *> *) resources
-                                         error:(NSError **)error {
-    // the custom reference ID may not be relevant to your integration in which case you may pass an
-    // empty string.
-    NSString *customRefId = @"";
-    NSMutableArray *omidResources;
-    if (resources) {
-        omidResources = [[NSMutableArray alloc] init];
-        for (LoopMeAdVerification *verification in resources) {
-            NSURL *respurceURL = [NSURL URLWithString:[verification jsResource]];
-            NSString *vendorKey = [verification vendor] != nil ? [verification vendor] : @"";
-            NSString *params = [verification verificationParameters] != nil ? [verification verificationParameters] : @"";
-            
-            OMIDLoopmeVerificationScriptResource *omidResource;
-            
-            if (params && ![params isEqualToString:@""]) {
-                omidResource = [[OMIDLoopmeVerificationScriptResource alloc] initWithURL:respurceURL vendorKey:vendorKey parameters:params];
-            } else {
-                omidResource = [[OMIDLoopmeVerificationScriptResource alloc] initWithURL:respurceURL];
-            }
-            
-            if (omidResource) {
-                [omidResources addObject:omidResource];
-            }
-        }
-    }
-    
-    OMIDLoopmeAdSessionContext *context;
-    switch (creativeType) {
-        case OMIDLoopmeCreativeTypeHTML:
-            context = [[OMIDLoopmeAdSessionContext alloc] initWithPartner:self.class.partner
-                                                                    webView:webView
-                                                               contentUrl:nil customReferenceIdentifier:customRefId error:error];
-            break;
-        case OMIDLoopmeCreativeTypeNativeVideo:
-            
-            
-            context = [[OMIDLoopmeAdSessionContext alloc]
-                       initWithPartner:self.class.partner
-                       script:self.class.omidJS resources:omidResources contentUrl:nil customReferenceIdentifier:customRefId error:error];
-            break;
-        default:
-            break;
-    }
-    
-    
-    return context;
+- (OMIDLoopmeAdSessionContext *)contextForHTML: (UIView *)webView
+                                         error: (NSError **)error {
+    return [[OMIDLoopmeAdSessionContext alloc] initWithPartner: self.class.partner
+                                                       webView: webView
+                                                    contentUrl: nil
+                                     customReferenceIdentifier: @""
+                                                         error: error];
 }
 
-- (OMIDLoopmeAdSessionConfiguration *)configurationForType:(OMIDLoopmeCreativeType)creativeType {
-    OMIDLoopmeAdSessionConfiguration *config;
+
+// TODO: Move to more proper place. It's just a converter
+- (NSMutableArray *)toOmidResources: (NSArray<LoopMeAdVerification *> *) resources {
+    NSMutableArray *omidResources = [NSMutableArray new];
+    for (LoopMeAdVerification *verification in resources) {
+        NSURL *resourceURL = [NSURL URLWithString: [verification jsResource]];
+        NSString *params = [verification verificationParameters] ?: @"";
+        
+        OMIDLoopmeVerificationScriptResource *omidResource = [OMIDLoopmeVerificationScriptResource alloc];
+        
+        [omidResources addObject: [params isEqualToString:@""] ?
+         [omidResource initWithURL: resourceURL] :
+         [omidResource initWithURL: resourceURL vendorKey: [verification vendor] ?: @"" parameters: params]];
+    }
+    return omidResources;
+}
+
+- (OMIDLoopmeAdSessionContext *)contextForNativeVideo: (NSArray<LoopMeAdVerification *> *) resources
+                                                error: (NSError **)error {
+    
+    return [[OMIDLoopmeAdSessionContext alloc] initWithPartner: self.class.partner
+                                                        script: self.class.omidJS
+                                                     resources: [self toOmidResources: resources ?: [NSArray array]]
+                                                    contentUrl: nil
+                                     customReferenceIdentifier: @""
+                                                         error: error];
+    
+}
+
+- (OMIDLoopmeAdSessionConfiguration *)configurationFor: (OMIDCreativeType)creativeType {
     NSError *cfgError;
-    switch (creativeType) {
-        case OMIDLoopmeCreativeTypeHTML:
-            config = [[OMIDLoopmeAdSessionConfiguration alloc] initWithCreativeType:OMIDCreativeTypeHtmlDisplay impressionType:OMIDImpressionTypeBeginToRender impressionOwner:OMIDNativeOwner mediaEventsOwner:OMIDNoneOwner isolateVerificationScripts:NO error:&cfgError];
-            break;
-        case OMIDLoopmeCreativeTypeNativeVideo:
-            config = [[OMIDLoopmeAdSessionConfiguration alloc] initWithCreativeType:OMIDCreativeTypeVideo impressionType:OMIDImpressionTypeBeginToRender impressionOwner:OMIDNativeOwner mediaEventsOwner:OMIDNativeOwner isolateVerificationScripts:NO error:&cfgError];
-            break;
-        default:
-            break;
-    }
-    
-    return config;
+    return [[OMIDLoopmeAdSessionConfiguration alloc] initWithCreativeType: creativeType
+                                                           impressionType: OMIDImpressionTypeBeginToRender
+                                                          impressionOwner: OMIDNativeOwner
+                                                         mediaEventsOwner: OMIDNoneOwner
+                                               isolateVerificationScripts: NO
+                                                                    error: &cfgError];
 }
 
-- (OMIDLoopmeAdSession *)sessionForType:(OMIDLoopmeCreativeType)creativeType
-                              resources:(NSArray<LoopMeAdVerification *> *) resources
-                                webView:(UIView *)webView
-                                  error:(NSError **)error {
-    
-    OMIDLoopmeAdSessionContext *context = [self contextForType:creativeType
-                                                       webView:webView
-                                                        resources:resources
-                                                         error:error];
-    
-    self.configuration = [self configurationForType:creativeType];
-    
+- (OMIDLoopmeAdSession *)sessionFor: (OMIDLoopmeAdSessionConfiguration *) configuration
+                            context: (OMIDLoopmeAdSessionContext *)context
+                              error: (NSError **)error {
+    // TODO: Check where self.configuration is used also
+    self.configuration = configuration;
     if (*error != nil) {
         return nil;
     }
-    OMIDLoopmeAdSession *omidSession = [[OMIDLoopmeAdSession alloc] initWithConfiguration:self.configuration
-                                                   adSessionContext:context error:error];
-    
-    if (*error != nil) {
-        return nil;
-    }
-    
-    return omidSession;
+    return [[OMIDLoopmeAdSession alloc] initWithConfiguration: configuration
+                                             adSessionContext: context
+                                                        error: error];
+}
+
+- (OMIDLoopmeAdSession *)sessionForHTML: (UIView *)webView
+                                  error: (NSError **)error {
+    return [self sessionFor: [self configurationFor: OMIDCreativeTypeHtmlDisplay]
+                    context: [self contextForHTML: webView error: error]
+                      error: error];
+}
+
+- (OMIDLoopmeAdSession *)sessionForNativeVideo: (NSArray<LoopMeAdVerification *> *) resources
+                                         error: (NSError **)error {
+    return [self sessionFor: [self configurationFor: OMIDCreativeTypeVideo]
+                    context: [self contextForNativeVideo: resources error: error]
+                      error: error];
 }
 
 @end

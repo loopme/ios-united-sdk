@@ -24,11 +24,12 @@ typedef NS_ENUM(NSUInteger, OMIDLoopmeCreativeType) {
 
 + (BOOL)initOMIDWithCompletionBlock:(void (^)(BOOL))completionBlock;
 
-- (nullable NSString *)injectScriptContentIntoHTML:(nonnull NSString *)htmlString error:(NSError *_Nullable *_Nullable)error;
-- (nullable OMIDLoopmeAdSession *)sessionForType:(OMIDLoopmeCreativeType)creativeType
-                                       resources:(NSArray<LoopMeAdVerification *> * _Nullable)resources
-                                webView:(UIView * _Nullable )webView
-                                           error:(NSError *_Nullable *_Nullable) error;
+- (nullable NSString *)injectScriptContentIntoHTML: (nonnull NSString *)htmlString
+                                             error: (NSError *_Nullable *_Nullable)error;
+- (nullable OMIDLoopmeAdSession *)sessionForHTML: (UIView * _Nullable )webView
+                                           error: (NSError *_Nullable *_Nullable) error;
+- (nullable OMIDLoopmeAdSession *)sessionForNativeVideo: (NSArray<LoopMeAdVerification *> * _Nullable)resources
+                                                  error: (NSError *_Nullable *_Nullable) error;
 @end
 
 NS_ASSUME_NONNULL_END
