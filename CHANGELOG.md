@@ -1,3 +1,8 @@
+
+## Version 7.4.12 (2.04.2024)
+
+- [SDK-176] Avoid auto-invoke ATT pop up 
+
 ## Version 7.4.11 (21.03.2024)
 
 - [SDK-136] Add rwdd key to video object in LoopMeORTBTools
