@@ -82,15 +82,6 @@
         return;
     }
     
-    if (@available(iOS 14, *)) {
-          ATTrackingManagerAuthorizationStatus status = [ATTrackingManager trackingAuthorizationStatus];
-
-          if (status == ATTrackingManagerAuthorizationStatusNotDetermined) {
-              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                  [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status){}];
-              });
-          }
-    }
     [[LoopMeGDPRTools sharedInstance] getAppDetailsFromServer];
     [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:rootViewController];
     [LoopMeGlobalSettings sharedInstance];
