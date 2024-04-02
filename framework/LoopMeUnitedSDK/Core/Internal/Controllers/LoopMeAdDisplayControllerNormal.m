@@ -561,9 +561,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     if (self.omidSession != nil) return;
     
     NSError *error;
-    self.omidSession = [self.omidWrapper sessionForType:OMIDLoopmeCreativeTypeHTML resources:nil webView:webView error:&error];
+    self.omidSession = [self.omidWrapper sessionForHTML: webView error: &error];
     if (error) {
-        
+        // TODO: Fill empty case
     }
     // Set the view on which to track viewability
     self.omidSession.mainAdView = webView;
