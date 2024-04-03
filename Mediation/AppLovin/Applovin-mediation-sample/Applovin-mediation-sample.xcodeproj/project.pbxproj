@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2AFBBE782F8C612A11E7F4F5 /* Pods_Applovin_mediation_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849026A2935873D7DB837858 /* Pods_Applovin_mediation_sample.framework */; };
+		22A1C6492BBD581D001786E9 /* AppLovinSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A1C6482BBD581D001786E9 /* AppLovinSDK.xcframework */; };
+		74EDA8D7F5BFC525A1FBBF50 /* Pods_Applovin_mediation_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDCE3D3F7423B3394880E22 /* Pods_Applovin_mediation_sample.framework */; };
 		8140D99A286208B000D4E688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D999286208B000D4E688 /* AppDelegate.swift */; };
 		8140D99C286208B000D4E688 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99B286208B000D4E688 /* SceneDelegate.swift */; };
 		8140D99E286208B000D4E688 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99D286208B000D4E688 /* ViewController.swift */; };
@@ -17,8 +18,6 @@
 		B917E44E2ADD555700C6E6A3 /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */; };
 		B959CD8B2ADD8A0200418D0C /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */; };
 		B95BB0F32ADD6A9600C15524 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */; };
-		B9DDF7702BA3319C00F6593E /* AppLovinSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9DDF76F2BA3319C00F6593E /* AppLovinSDK.xcframework */; };
-		B9DDF7712BA3319C00F6593E /* AppLovinSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B9DDF76F2BA3319C00F6593E /* AppLovinSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,7 +27,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B9DDF7712BA3319C00F6593E /* AppLovinSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,6 +34,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		22A1C6482BBD581D001786E9 /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppLovinSDK.xcframework; path = "Pods/AppLovinSDK/applovin-ios-sdk-12.4.0/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
+		7DC7B37177779588EFD44573 /* Pods-Applovin-mediation-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.debug.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.debug.xcconfig"; sourceTree = "<group>"; };
 		8140D996286208B000D4E688 /* Applovin-mediation-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Applovin-mediation-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8140D999286208B000D4E688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8140D99B286208B000D4E688 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,15 +44,12 @@
 		8140D9A2286208B500D4E688 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8140D9A5286208B500D4E688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8140D9A7286208B500D4E688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		849026A2935873D7DB837858 /* Pods_Applovin_mediation_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Applovin_mediation_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C306AF284E0E1189813D142 /* Pods-Applovin-mediation-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.debug.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.debug.xcconfig"; sourceTree = "<group>"; };
+		853DEE1CF24F9134DAD44AF6 /* Pods-Applovin-mediation-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.release.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.release.xcconfig"; sourceTree = "<group>"; };
 		B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
-		B92983512B8E10EE00B4B177 /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppLovinSDK.xcframework; path = "Pods/AppLovinSDK/applovin-ios-sdk-12.2.1/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
 		B949B2CD2B90F24D00276D8A /* Applovin-mediation-sample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Applovin-mediation-sample-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
 		B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
-		B9DDF76F2BA3319C00F6593E /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppLovinSDK.xcframework; path = "Pods/AppLovinSDK/applovin-ios-sdk-12.3.0/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
-		D27E4394DFECCA14C53A6719 /* Pods-Applovin-mediation-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.release.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.release.xcconfig"; sourceTree = "<group>"; };
+		EBDCE3D3F7423B3394880E22 /* Pods_Applovin_mediation_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Applovin_mediation_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AFBBE782F8C612A11E7F4F5 /* Pods_Applovin_mediation_sample.framework in Frameworks */,
-				B9DDF7702BA3319C00F6593E /* AppLovinSDK.xcframework in Frameworks */,
+				22A1C6492BBD581D001786E9 /* AppLovinSDK.xcframework in Frameworks */,
+				74EDA8D7F5BFC525A1FBBF50 /* Pods_Applovin_mediation_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,8 +68,8 @@
 		355914E673DE4CF20B796736 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9C306AF284E0E1189813D142 /* Pods-Applovin-mediation-sample.debug.xcconfig */,
-				D27E4394DFECCA14C53A6719 /* Pods-Applovin-mediation-sample.release.xcconfig */,
+				7DC7B37177779588EFD44573 /* Pods-Applovin-mediation-sample.debug.xcconfig */,
+				853DEE1CF24F9134DAD44AF6 /* Pods-Applovin-mediation-sample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -116,9 +113,8 @@
 		B91FA34D2ADD3E7200B13D3F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B9DDF76F2BA3319C00F6593E /* AppLovinSDK.xcframework */,
-				B92983512B8E10EE00B4B177 /* AppLovinSDK.xcframework */,
-				849026A2935873D7DB837858 /* Pods_Applovin_mediation_sample.framework */,
+				22A1C6482BBD581D001786E9 /* AppLovinSDK.xcframework */,
+				EBDCE3D3F7423B3394880E22 /* Pods_Applovin_mediation_sample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -130,13 +126,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8140D9AA286208B500D4E688 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */;
 			buildPhases = (
-				9867E6A2E9D5B98BCF4485F8 /* [CP] Check Pods Manifest.lock */,
+				6D91437372398D6F8B452980 /* [CP] Check Pods Manifest.lock */,
 				8140D992286208B000D4E688 /* Sources */,
 				8140D993286208B000D4E688 /* Frameworks */,
 				8140D994286208B000D4E688 /* Resources */,
-				B64F7D98F71ABEB3504B1D19 /* [CP] Embed Pods Frameworks */,
-				0045C39BBA4D3B8B77977F93 /* [CP] Copy Pods Resources */,
 				B9DDF7722BA3319C00F6593E /* Embed Frameworks */,
+				755C4145265BD395E7CDEDA0 /* [CP] Embed Pods Frameworks */,
+				D7409AC816B37E9CABC067F9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,24 +191,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0045C39BBA4D3B8B77977F93 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9867E6A2E9D5B98BCF4485F8 /* [CP] Check Pods Manifest.lock */ = {
+		6D91437372398D6F8B452980 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,7 +213,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B64F7D98F71ABEB3504B1D19 /* [CP] Embed Pods Frameworks */ = {
+		755C4145265BD395E7CDEDA0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,6 +228,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7409AC816B37E9CABC067F9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -413,7 +409,7 @@
 		};
 		8140D9AB286208B500D4E688 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C306AF284E0E1189813D142 /* Pods-Applovin-mediation-sample.debug.xcconfig */;
+			baseConfigurationReference = 7DC7B37177779588EFD44573 /* Pods-Applovin-mediation-sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -452,7 +448,7 @@
 		};
 		8140D9AC286208B500D4E688 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D27E4394DFECCA14C53A6719 /* Pods-Applovin-mediation-sample.release.xcconfig */;
+			baseConfigurationReference = 853DEE1CF24F9134DAD44AF6 /* Pods-Applovin-mediation-sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
