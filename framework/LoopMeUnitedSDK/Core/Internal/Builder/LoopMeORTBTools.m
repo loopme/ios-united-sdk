@@ -37,6 +37,8 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 @interface LoopMeORTBTools ()
 
 @property (nonatomic, assign) BOOL isInterstitial;
+@property (nonatomic, assign) BOOL isRewarded;
+
 
 @end
 
@@ -46,7 +48,8 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
                      targeting:(LoopMeTargeting *)targeting
                     adSpotSize:(CGSize)size
                integrationType:(NSString *)integrationType
-                isInterstitial:(BOOL)isInterstitial {
+                isInterstitial:(BOOL)isInterstitial
+                    isRewarded:(BOOL)isRewarded {
     self = [super init];
     if (self) {
         self.appKey = appKey;
@@ -54,6 +57,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
         self.integrationType = integrationType;
         self.size = size;
         self.isInterstitial = isInterstitial;
+        self.isRewarded = isRewarded;
     }
     return self;
 }
@@ -81,7 +85,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     if (![consentValue boolValue]) {
         request[@"consent_type"] = @([[LoopMeGDPRTools sharedInstance] consentType]);
     }
-    if (!self.isInterstitial) {
+    if (self.isRewarded) {
         request[@"ext"] = @{
             @"placementType": @"rewarded"
         };
@@ -268,7 +272,7 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     impression[@"ext"] = @{
         @"it" : integrationType,
         @"skadn": skadn,
-        @"rewarded": self.isInterstitial ? @0 : @1
+        @"rewarded": self.isRewarded ? @1 : @0
     };
 
     return impression;
@@ -291,12 +295,12 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     video[@"w"] = @(size.width);
     video[@"h"] = @(size.height);
     video[@"api"] = @[@2, @5, @7];
-    video[@"skip"] = self.isInterstitial ? @1 : @0;
-    video[@"rwdd"] = self.isInterstitial ? @0 : @1;
-    if (!self.isInterstitial) {
+    video[@"skip"] = self.isRewarded ? @0 : @1;
+    video[@"rwdd"] = self.isRewarded ? @1 : @0;
+    if (self.isRewarded) {
         video[@"skipmin"] = @0;
     }
-    video[@"skipafter"] = self.isInterstitial ? @5 : @0;
+    video[@"skipafter"] = self.isRewarded ? @0 : @5;
     video[@"ext"] = @{
         @"videotype": @"rewarded"
     };

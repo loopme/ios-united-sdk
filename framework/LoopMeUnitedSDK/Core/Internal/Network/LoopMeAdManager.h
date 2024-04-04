@@ -25,7 +25,7 @@
 
 - (instancetype)initWithDelegate:(id<LoopMeAdManagerDelegate>)delegate;
 - (void)loadAdWithAppKey:(NSString *)appKey targeting:(LoopMeTargeting *)targeting
-         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size adSpot:(id)adSpot preferredAdTypes:(LoopMeAdType)adTypes;
+         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size adSpot:(id)adSpot preferredAdTypes:(LoopMeAdType)adTypes isRewarded:(BOOL *)isRewarded;
 - (void)loadURL:(NSURL *)url;
 - (void)invalidateTimers;
 

@@ -338,7 +338,7 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
     self.ready = NO;
     self.loading = YES;
     self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
-    [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:self.containerView.bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes];
+    [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:self.containerView.bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes isRewarded:NO];
 }
 
 - (void)loadURL:(NSURL *)url {
