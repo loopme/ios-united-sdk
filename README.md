@@ -2,21 +2,18 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.4.11**
+**Version 7.4.12**
 
-- [SDK-136] Add rwdd key to video object in LoopMeORTBTools
-- [SDK-174] Take rootVC from window in SDK init method
-- [SDK-136_113] Unskippable rewarded and interstitial ads
-- [SDK-140] Handle with XMLParser errors
-- [SDK-166] Add swift version to ISLoopMeCustomAdapter podspec
-- [SDK-169] Change adUnitIdentifier and bundle in Applovin demo app
-- [SDK-170] Fix file name in adapter and set version in podspec Applovin
-- [SDK-169] Fix presenting ads twice
-- [SDK-141] Fix Applovin Demo project
-- Update Podfile for Applovin-mediation-sample - fixed local adapter path
-- [SDK-141] Fix PodSpec source
-- Define version for dependencies for ISLoopMeCustomAdapter
-- [SDk-141] Create Applovin Custom Adapter
+- Update ISLoopMeCustomAdapter version to support IronSourceSDK 7.9.0
+- Add missing Bridging Header file to AppLovin Sample App
+- Fix AppLovin repository naming conflicts
+- Refactoring. LoopMeAdDisplayControllerNormal.m
+- [SDK-176]  avoid auto-invoke ATT pop up
+- Refactoring. LoopMeOMIDWrapper.m
+- [SDK-129] Fix after code review
+- [SDK-129] Fix after review
+- [SDK-129] Added func to SDK  to get sourceapp id from itunes
+- Update mediation adapters with new LoopMeUnitedSDK version (7.4.11)
 
 Please view the [changelog](CHANGELOG.md) for details.
 
