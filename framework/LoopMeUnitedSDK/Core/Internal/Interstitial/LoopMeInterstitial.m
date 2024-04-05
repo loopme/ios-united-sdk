@@ -104,16 +104,29 @@ static const int kLoopMeLoadCounter = 3;
 #pragma mark - Class Methods
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
-                    delegate:(id<LoopMeInterstitialDelegate>)delegate
-                            isRewarded:(BOOL *)isRewarded {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded:isRewarded];
+                    delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded: &isRewarded];
 }
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
                       preferredAdTypes:(LoopMeAdType)adTypes
-                              delegate:(id<LoopMeInterstitialDelegate>)delegate
-                            isRewarded:(BOOL *)isRewarded {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: isRewarded];
+                              delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: &isRewarded];
+}
+
++ (instancetype)rewardedWithAppKey:(NSString *)appKey
+                    delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded: &isRewarded];
+}
+
++ (instancetype)rewardedWithAppKey:(NSString *)appKey
+                      preferredAdTypes:(LoopMeAdType)adTypes
+                              delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: &isRewarded];
 }
 
 #pragma mark - Private

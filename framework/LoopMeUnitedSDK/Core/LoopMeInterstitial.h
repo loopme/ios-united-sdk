@@ -80,13 +80,18 @@ static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_in
  * @param delegate - delegate
  */
 + (instancetype _Nullable )interstitialWithAppKey:(NSString * _Nonnull)appKey
-                                             delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate
-                                       isRewarded:(BOOL * _Nullable)isRewarded;
+                                             delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
 + (instancetype _Nullable )interstitialWithAppKey:(NSString * _Nonnull)appKey
                       preferredAdTypes:(LoopMeAdType)adTypes
-                              delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate
-                                       isRewarded:(BOOL * _Nullable)isRewarded;
+                              delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
+
++ (instancetype _Nullable )rewardedWithAppKey:(NSString * _Nonnull)appKey
+                                             delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
+
++ (instancetype _Nullable )rewardedWithAppKey:(NSString * _Nonnull)appKey
+                      preferredAdTypes:(LoopMeAdType)adTypes
+                              delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
 - (instancetype _Nullable )initWithAppKey:(NSString * _Nonnull)appKey
               preferredAdTypes:(LoopMeAdType)adTypes

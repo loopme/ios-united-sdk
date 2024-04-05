@@ -70,8 +70,7 @@
 
 - (void)loadInterstitialAdForParameters:(nonnull id<MAAdapterResponseParameters>)parameters andNotify:(nonnull id<MAInterstitialAdapterDelegate>)delegate {
     intersititalDelegate = delegate;
-    BOOL isRewarded = NO;
-    intersitial = [LoopMeInterstitial interstitialWithAppKey:parameters.thirdPartyAdPlacementIdentifier delegate:self isRewarded:&isRewarded];
+    intersitial = [LoopMeInterstitial interstitialWithAppKey:parameters.thirdPartyAdPlacementIdentifier delegate:self];
     intersitial.autoLoadingEnabled = false;
     [intersitial loadAd];
 }
@@ -91,9 +90,8 @@
 
 - (void)loadRewardedAdForParameters:(id<MAAdapterResponseParameters>)parameters andNotify:(id<MARewardedAdapterDelegate>)delegate {
     rewardedAdapterDelegate = [[AppLovinMediationLoopmeRewardedAdsDelegate alloc] initWithParentAdapter: self andNotify: delegate];
-    BOOL isRewarded = YES;
 
-    rewarded = [LoopMeInterstitial interstitialWithAppKey:parameters.thirdPartyAdPlacementIdentifier delegate:rewardedAdapterDelegate isRewarded:&isRewarded];
+    rewarded = [LoopMeInterstitial rewardedWithAppKey:parameters.thirdPartyAdPlacementIdentifier delegate:rewardedAdapterDelegate];
     rewarded.autoLoadingEnabled = false;
     [rewarded loadAd];
 }
