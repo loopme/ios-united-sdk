@@ -28,6 +28,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 @property (nonatomic, strong) LoopMeServerCommunicator *communicator;
 @property (nonatomic, assign, readwrite, getter = isReady) BOOL ready;
 @property (nonatomic, assign, readwrite, getter = isLoading) BOOL loading;
+@property (nonatomic, assign) BOOL *rewarded;
 
 @property (nonatomic, strong) NSTimer *adExpirationTimer;
 @property (nonatomic, assign) NSInteger expirationTime;
@@ -104,7 +105,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 }
 
 - (void)loadAdWithAppKey:(NSString *)appKey targeting:(LoopMeTargeting *)targeting
-         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size adSpot:(id)adSpot preferredAdTypes:(LoopMeAdType)adTypes {
+         integrationType:(NSString *)integrationType adSpotSize:(CGSize)size adSpot:(id)adSpot preferredAdTypes:(LoopMeAdType)adTypes isRewarded:(BOOL *)isRewarded {
     
     self.appKey = appKey;
     self.communicator.appKey = appKey;
@@ -113,11 +114,12 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.adSpotSize = size;
     self.adUnit = adSpot;
     self.adTypes = adTypes;
+    self.rewarded = isRewarded;
     
     NSData *requestBody;
     BOOL isInterstitial = [self.adUnit isKindOfClass:[LoopMeInterstitialGeneral class]] ? YES : NO;
     
-    LoopMeORTBTools *rtbTools = [[LoopMeORTBTools alloc] initWithAppKey:appKey targeting:targeting adSpotSize:size integrationType:integrationType isInterstitial:isInterstitial];
+    LoopMeORTBTools *rtbTools = [[LoopMeORTBTools alloc] initWithAppKey:appKey targeting:targeting adSpotSize:size integrationType:integrationType isInterstitial:isInterstitial isRewarded:isRewarded];
     
     if ([adSpot isKindOfClass:[LoopMeAdView class]]) {
         self.swapRequest = YES;
@@ -177,7 +179,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
         self.swapRequest = YES;
         CGSize swapedSize = CGSizeMake(self.adSpotSize.height, self.adSpotSize.width);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self loadAdWithAppKey:self.appKey targeting:self.targeting integrationType:self.integrationType adSpotSize:swapedSize adSpot:self.adUnit preferredAdTypes:self.adTypes];
+            [self loadAdWithAppKey:self.appKey targeting:self.targeting integrationType:self.integrationType adSpotSize:swapedSize adSpot:self.adUnit preferredAdTypes:self.adTypes isRewarded:self.rewarded];
         });
     }
 }

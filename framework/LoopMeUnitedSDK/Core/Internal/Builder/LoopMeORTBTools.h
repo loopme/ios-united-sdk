@@ -22,8 +22,8 @@
                      targeting:(LoopMeTargeting * _Nullable)targeting
                     adSpotSize:(CGSize)size
                          integrationType:(NSString * _Nonnull)integrationType
-                          isInterstitial:(BOOL)isInterstitial;
-
+                          isInterstitial:(BOOL)isInterstitial
+                              isRewarded:(BOOL)isRewarded;
 - (NSData * _Nonnull )makeRequestBody;
 
 @end

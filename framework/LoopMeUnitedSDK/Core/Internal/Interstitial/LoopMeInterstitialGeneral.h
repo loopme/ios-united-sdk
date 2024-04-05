@@ -38,6 +38,8 @@
  * To get an appKey visit the LoopMe Dashboard.
  */
 @property (nonatomic, strong, readonly) NSString *appKey;
+@property (nonatomic, assign, readonly, getter = isRewarded) BOOL rewarded;
+
 
 /**
  * Indicates whether the interstitial is loading an ad content.
@@ -65,7 +67,8 @@
  */
 + (LoopMeInterstitialGeneral *)interstitialWithAppKey:(NSString *)appKey
                                      preferredAdTypes:(LoopMeAdType)adTypes
-                                             delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate;
+                                             delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate
+                                           isRewarded:(BOOL)isRewarded;
 
 /**
  * Starts loading ad content process.
@@ -84,7 +87,7 @@
  * See `loadAd` method.
  * Not for use by the publisher.
  */
-- (void)loadAdWithTargeting:(LoopMeTargeting *)targeting integrationType:(NSString *)integrationType;
+- (void)loadAdWithTargeting:(LoopMeTargeting *)targeting integrationType:(NSString *)integrationType isRewarded:(BOOL *)isRewarded ;
 
 /**
  * Presents an interstitial ad modally.

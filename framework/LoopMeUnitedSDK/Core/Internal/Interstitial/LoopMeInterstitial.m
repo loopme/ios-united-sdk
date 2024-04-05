@@ -33,6 +33,8 @@ static const int kLoopMeLoadCounter = 3;
 
 @property (nonatomic, assign, getter = isLoading) BOOL loading;
 @property (nonatomic, assign, getter = isReady) BOOL ready;
+@property (nonatomic, assign, getter= isRewarded) BOOL rewarded;
+
 @property (nonatomic, strong) NSString *integrationType;
 
 @property (nonatomic) LoopMeInterstitialGeneral *interstitial1;
@@ -59,13 +61,15 @@ static const int kLoopMeLoadCounter = 3;
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
-                      delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+                      delegate:(id<LoopMeInterstitialDelegate>)delegate
+                    isRewarded:(BOOL *)isRewarded {
+    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded:isRewarded];
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
               preferredAdTypes:(LoopMeAdType)adTypes
-                      delegate:(id<LoopMeInterstitialDelegate>)delegate {
+                      delegate:(id<LoopMeInterstitialDelegate>)delegate
+                    isRewarded:(BOOL *)isRewarded {
     if (![[LoopMeSDK shared] isReady]) {
         LoopMeLogError(@"SDK is not inited");
         return nil;
@@ -82,8 +86,9 @@ static const int kLoopMeLoadCounter = 3;
     }
     
     if (self = [super init]) {
-        _interstitial1 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self];
-        _interstitial2 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self];
+        self.rewarded = *isRewarded;
+        _interstitial1 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self isRewarded: *isRewarded];
+        _interstitial2 = [LoopMeInterstitialGeneral interstitialWithAppKey:appKey preferredAdTypes:adTypes delegate:self isRewarded: *isRewarded];
         _delegate = delegate;
         _autoLoadingEnabled = YES;
         _failCount = 0;
@@ -100,13 +105,28 @@ static const int kLoopMeLoadCounter = 3;
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
                     delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded: &isRewarded];
 }
 
 + (instancetype)interstitialWithAppKey:(NSString *)appKey
                       preferredAdTypes:(LoopMeAdType)adTypes
                               delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate];
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: &isRewarded];
+}
+
++ (instancetype)rewardedWithAppKey:(NSString *)appKey
+                    delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded: &isRewarded];
+}
+
++ (instancetype)rewardedWithAppKey:(NSString *)appKey
+                      preferredAdTypes:(LoopMeAdType)adTypes
+                              delegate:(id<LoopMeInterstitialDelegate>)delegate {
+    BOOL isRewarded = NO;
+    return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: &isRewarded];
 }
 
 #pragma mark - Private
@@ -148,9 +168,9 @@ static const int kLoopMeLoadCounter = 3;
     }
     
     self.integrationType = integrationType;
-    [self.interstitial1 loadAdWithTargeting:targeting integrationType:self.integrationType];
+    [self.interstitial1 loadAdWithTargeting:targeting integrationType:self.integrationType isRewarded:self.isRewarded];
     if (self.isAutoLoadingEnabled) {
-        [self.interstitial2 loadAdWithTargeting:targeting integrationType:self.integrationType];
+        [self.interstitial2 loadAdWithTargeting:targeting integrationType:self.integrationType isRewarded:self.isRewarded];
     }
 }
 
@@ -191,7 +211,7 @@ static const int kLoopMeLoadCounter = 3;
 - (void)loopMeInterstitialDidExpire:(LoopMeInterstitialGeneral *)interstitial {
     
     if (self.isAutoLoadingEnabled) {
-        [interstitial loadAdWithTargeting:self.targeting integrationType:self.integrationType];
+        [interstitial loadAdWithTargeting:self.targeting integrationType:self.integrationType isRewarded: self.isRewarded];
     }
     
     if (!self.isAutoLoadingEnabled || !self.isReady) {
@@ -271,7 +291,7 @@ static const int kLoopMeLoadCounter = 3;
             return;
         }
         self.failCount += 1;
-        [interstitial loadAdWithTargeting:self.targeting integrationType:self.integrationType];
+        [interstitial loadAdWithTargeting:self.targeting integrationType:self.integrationType isRewarded: self.isRewarded];
     } else {
         if (!self.isReady) {
             if ([self.delegate respondsToSelector:@selector(loopMeInterstitial:didFailToLoadAdWithError:)]) {

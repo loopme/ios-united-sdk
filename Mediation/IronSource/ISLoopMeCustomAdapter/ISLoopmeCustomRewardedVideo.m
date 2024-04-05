@@ -23,7 +23,7 @@
     NSString *appkey = adData.configuration[@"instancekey"];
 
     NSLog(@"loopme's appkey - %@", appkey);
-    self.interstitial = [LoopMeInterstitial interstitialWithAppKey:appkey delegate:self];
+    self.interstitial = [LoopMeInterstitial rewardedWithAppKey:appkey delegate:self];
     [self.interstitial setAutoLoadingEnabled:FALSE];
 
     self.delegate = delegate;

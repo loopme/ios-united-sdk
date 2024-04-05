@@ -73,19 +73,21 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
-                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate {
-    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate
+                    isRewarded:(BOOL *)isRewarded {
+    return [self initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded: isRewarded];
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
               preferredAdTypes:(LoopMeAdType)adTypes
-                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate {
+                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate
+                    isRewarded:(BOOL)isRewarded {
     if (self = [super init]) {
         _appKey = [appKey copy];
         _delegate = delegate;
         _adManager = [[LoopMeAdManager alloc] initWithDelegate:self];
         _preferredAdTypes = adTypes;
-
+        isRewarded = isRewarded;
         self.adDisplayController = [[LoopMeAdDisplayControllerNormal alloc] initWithDelegate:self];
         self.adDisplayController.isInterstitial = YES;
         
@@ -110,8 +112,9 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 + (LoopMeInterstitialGeneral *)interstitialWithAppKey:(NSString *)appKey
                                      preferredAdTypes:(LoopMeAdType)adTypes
-                                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate {
-    return [[LoopMeInterstitialGeneral alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate];
+                                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate
+                                        isRewarded:(BOOL)isRewarded{
+    return [[LoopMeInterstitialGeneral alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: isRewarded];
 }
 
 #pragma mark - Private
@@ -214,10 +217,10 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)loadAdWithTargeting:(LoopMeTargeting *)targeting {
-    [self loadAdWithTargeting:targeting integrationType:@"normal"];
+    [self loadAdWithTargeting:targeting integrationType:@"normal" isRewarded: self.isRewarded];
 }
 
-- (void)loadAdWithTargeting:(LoopMeTargeting *)targeting integrationType:(NSString *)integrationType {
+- (void)loadAdWithTargeting:(LoopMeTargeting *)targeting integrationType:(NSString *)integrationType isRewarded:(BOOL *)isRewarded {
     if (self.isLoading) {
         LoopMeLogInfo(@"Wait for previous loading ad process finish");
         return;
@@ -232,7 +235,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
     self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeRequestTimeout target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:[[UIApplication sharedApplication] keyWindow].bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes];
+        [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:[[UIApplication sharedApplication] keyWindow].bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes isRewarded: isRewarded];
     });
 }
 

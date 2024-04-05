@@ -90,7 +90,8 @@
 
 - (void)loadRewardedAdForParameters:(id<MAAdapterResponseParameters>)parameters andNotify:(id<MARewardedAdapterDelegate>)delegate {
     rewardedAdapterDelegate = [[AppLovinMediationLoopmeRewardedAdsDelegate alloc] initWithParentAdapter: self andNotify: delegate];
-    rewarded = [LoopMeInterstitial interstitialWithAppKey:parameters.thirdPartyAdPlacementIdentifier delegate:rewardedAdapterDelegate];
+
+    rewarded = [LoopMeInterstitial rewardedWithAppKey:parameters.thirdPartyAdPlacementIdentifier delegate:rewardedAdapterDelegate];
     rewarded.autoLoadingEnabled = false;
     [rewarded loadAd];
 }
