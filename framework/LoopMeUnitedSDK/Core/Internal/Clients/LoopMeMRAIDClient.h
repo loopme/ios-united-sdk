@@ -59,10 +59,6 @@ extern const struct LoopMeMRAIDStateStruct {
 - (void)processCommand:(NSString *)command withParams:(NSDictionary *)params;
 - (void)executeEvent:(NSString *)event params:(NSArray *)params;
 - (void)setSupports;
-//- (void)getOrientationProperties:(void (^)(NSDictionary *))completion;
-//- (void)getExpandProperties:(void (^)(NSDictionary *))completion;
-//- (void)getResizeProperties:(void (^)(NSDictionary *))completion;
-//- (void)getState:(void (^)(NSString *))completion;
 
 @end
 
