@@ -659,10 +659,11 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 - (void)mraidClient:(LoopMeMRAIDClient *)client useCustomClose:(BOOL)useCustomCLose {
-    if (!useCustomCLose) {
+    /// If banner (class LoopMeAdView) then do not show close button, else show close button
+    self.useCustomClose = [self.delegate isMemberOfClass:[LoopMeAdView class]];
+    if (!self.isUseCustomClose) {
         [self.iasWarpper registerFriendlyObstruction: self.closeButton];
     }
-    self.useCustomClose = useCustomCLose;
 }
 
 - (void)mraidClient:(LoopMeMRAIDClient *)client sholdPlayVideo:(NSURL *)URL {
