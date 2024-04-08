@@ -39,7 +39,6 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
 @property (nonatomic, assign) BOOL isInterstitial;
 @property (nonatomic, assign) BOOL isRewarded;
 
-
 @end
 
 @implementation LoopMeORTBTools
@@ -297,6 +296,19 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     video[@"api"] = @[@2, @5, @7];
     video[@"skip"] = self.isRewarded ? @0 : @1;
     video[@"rwdd"] = self.isRewarded ? @1 : @0;
+    
+    video[@"companiontype"] = @[@1];
+    video[@"companionad"] = @[@{
+        @"w": @(size.width),
+        @"h": @(size.height),
+        @"pos": @7,
+        @"format": @[
+            @{
+                @"w": @(size.width),
+                @"h": @(size.height),
+            }
+        ]
+    }];
     if (self.isRewarded) {
         video[@"skipmin"] = @0;
     }
