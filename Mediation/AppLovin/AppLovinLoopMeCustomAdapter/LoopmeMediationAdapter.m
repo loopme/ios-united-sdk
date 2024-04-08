@@ -44,7 +44,7 @@
      }];}
 
 - (NSString *) SDKVersion{
-    return @"7.3.1";
+    return [LoopMeSDK version];
 }
 
 - (NSString *)adapterVersion{
