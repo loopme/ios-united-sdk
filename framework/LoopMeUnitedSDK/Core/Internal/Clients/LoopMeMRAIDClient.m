@@ -16,27 +16,7 @@
 #import "NSURL+LoopMeAdditions.h"
 #import "LoopMeLogging.h"
 
-NSString * const _kLoopMeMRAIDURLScheme = @"mraid";
-
-NSString * const _kLoopMeMRAIDSupportsSMS = @"sms";
-NSString * const _kLoopMeMRAIDSupportsTel = @"tel";
-NSString * const _kLoopMeMRAIDSupportsCalendar = @"calendar";
-NSString * const _kLoopMeMRAIDSupportsStorePicture = @"storePicture";
-NSString * const _kLoopMeMRAIDSupportsInlineVideo = @"inlineVideo";
-
-//// Commands
-NSString * const _kLoopMeMRAIDOpenCommand = @"open";
-NSString * const _kLoopMeMRAIDPlayVideoCommand = @"playVideo";
-NSString * const _kLoopMeMRAIDResizeCommand = @"resize";
-NSString * const _kLoopMeMRAIDCustomCloseCommand = @"useCustomClose";
-NSString * const _kLoopMeMRAIDSetOrientationPropertiesCommand = @"setOrientationProperties";
-NSString * const _kLoopMeMRAIDSetResizePropertiesCommand = @"setResizeProperties";
-NSString * const _kLoopMeMRAIDStorePictureCommand = @"storePicture";
-NSString * const _kLoopMeMRAIDCreateCalendarEventCommand = @"createCalendarEvent";
-NSString * const _kLoopMeMRAIDCloseCommand = @"close";
-NSString * const _kLoopMeMRAIDExpandCommand = @"expand";
-
-// Events
+/// Functions
 const struct LoopMeMRAIDFunctionsStruct LoopMeMRAIDFunctions = {
     .ready = @"fireReadyEvent",
     .error = @"fireErrorEvent",
@@ -52,12 +32,27 @@ const struct LoopMeMRAIDFunctionsStruct LoopMeMRAIDFunctions = {
     .setExpandSize = @"setExpandSize"
 };
 
+/// States
 const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
     .loading = @"loading",
     .defaultt = @"default",
     .expanded = @"expanded",
     .resized = @"resized",
     .hidden = @"hidden"
+};
+
+/// Events
+const struct LoopMeMRAIDEventStruct LoopMeMRAIDEvent ={
+    .open = @"open",
+    .playVideo = @"playVideo",
+    .resize = @"resize",
+    .useCustomClose = @"useCustomClose",
+    .setOrientationProperties = @"setOrientationProperties",
+    .setResizeProperties = @"setResizeProperties",
+    .storePicture = @"storePicture",
+    .createCalendarEvent = @"createCalendarEvent",
+    .close = @"close",
+    .expand = @"expand"
 };
 
 @interface LoopMeMRAIDClient ()
@@ -84,109 +79,95 @@ const struct LoopMeMRAIDStateStruct LoopMeMRAIDState = {
     return [self.delegate webViewTransport];
 }
 
-#pragma mark - Private
-
 #pragma mark JS Commands
 
 - (void)processCommand:(NSString *)command withParams:(NSDictionary *)params {
     LoopMeLogDebug(@"Processing MRAID command: %@, params: %@", command, params);
-    
-    if ([command isEqualToString:_kLoopMeMRAIDOpenCommand]) {
-        [self.delegate mraidClient:self shouldOpenURL:[NSURL lm_urlWithEncodedString:params[@"url"]]];
-    } else if ([command isEqualToString:_kLoopMeMRAIDPlayVideoCommand]) {
-        [self.delegate mraidClient:self sholdPlayVideo:[NSURL lm_urlWithEncodedString:params[@"url"]]];
-    } else if ([command isEqualToString:_kLoopMeMRAIDResizeCommand]) {
-        NSDictionary *resizeProperties = params[@"resizeProperties"];
-        self.resizeProperties = resizeProperties;
-        [self.delegate mraidClientDidResizeAd:self];
-    } else if ([command isEqualToString:_kLoopMeMRAIDCustomCloseCommand]) {
-        [self.delegate mraidClient:self useCustomClose:[params[@"useCustomClose"] boolValue]];
-    } else if ([command isEqualToString:_kLoopMeMRAIDSetOrientationPropertiesCommand]) {
-        NSDictionary *orientationProperties = @{@"allowOrientationChange" : params[@"allowOrientationChange"], @"forceOrientation" : params[@"forceOrientation"]};
-        [self.delegate mraidClient:self setOrientationProperties:orientationProperties];
-    } else if ([command isEqualToString:_kLoopMeMRAIDSetResizePropertiesCommand]) {
-        
-    } else if ([command isEqualToString:_kLoopMeMRAIDStorePictureCommand]) {
-        
-    } else if ([command isEqualToString:_kLoopMeMRAIDCreateCalendarEventCommand]) {
-        
-    } else if ([command isEqualToString:_kLoopMeMRAIDCloseCommand]) {
-        [self.delegate mraidClientDidReceiveCloseCommand:self];
-    } else if ([command isEqualToString:_kLoopMeMRAIDExpandCommand]) {
-        NSDictionary *expandProperties = params[@"expandProperties"];
-        self.expandProperties = expandProperties;
-        [self.delegate mraidClientDidReceiveExpandCommand:self];
+
+    void (^selectedCase)(void) = @{
+        LoopMeMRAIDEvent.open: ^{
+            [self.delegate mraidClient: self
+                         shouldOpenURL: [NSURL lm_urlWithEncodedString: params[@"url"]]];
+        },
+        LoopMeMRAIDEvent.playVideo: ^{
+            [self.delegate mraidClient: self
+                        sholdPlayVideo: [NSURL lm_urlWithEncodedString: params[@"url"]]];
+        },
+        LoopMeMRAIDEvent.resize: ^{
+            self.resizeProperties = params[@"resizeProperties"];
+            [self.delegate mraidClientDidResizeAd: self];
+        },
+        LoopMeMRAIDEvent.useCustomClose: ^{
+            [self.delegate mraidClient: self
+                        useCustomClose: [params[@"useCustomClose"] boolValue]];
+        },
+        LoopMeMRAIDEvent.setOrientationProperties: ^{
+            [self.delegate mraidClient: self
+              setOrientationProperties: @{
+                @"allowOrientationChange": params[@"allowOrientationChange"],
+                @"forceOrientation": params[@"forceOrientation"]
+            }];
+        },
+        LoopMeMRAIDEvent.close: ^{
+            [self.delegate mraidClientDidReceiveCloseCommand: self];
+        },
+        LoopMeMRAIDEvent.expand: ^{
+            self.expandProperties = params[@"expandProperties"];
+            [self.delegate mraidClientDidReceiveExpandCommand: self];
+        },
+    }[command];
+
+    if (selectedCase != nil) {
+        selectedCase();
     } else {
-        LoopMeLogDebug(@"JS command: %@ is not supported", command);
+        LoopMeLogDebug(@"MRAID command: %@ is not supported", command);
     }
-}
-
-#pragma mark JS Events
-
-- (NSString *)makeEventStringForEvent:(NSString *)event params:(NSString *)params {
-    NSString *eventString = [NSString stringWithFormat:@"mraid.%@(%@)", event, params];
-    return eventString;
 }
 
 #pragma mark - Public
 
 - (void)executeEvent:(NSString *)event params:(NSArray *)params {
-    
-    if ([event isEqualToString:LoopMeMRAIDFunctions.stateChange]) {
+    if ([event isEqualToString: LoopMeMRAIDFunctions.stateChange]) {
         self.state = params.firstObject;
     }
     
     NSMutableString *stringParams = [NSMutableString new];
-    if (params.count) {
-        for (id param in params) {
-            NSString *formatedParam;
-            if ([param isKindOfClass:[NSString class]]) {
-                if ([param isEqualToString:@"true"] || [param isEqualToString:@"false"]) {
-                    formatedParam = [NSString stringWithFormat:@"%@,", param];
-                } else {
-                    formatedParam = [NSString stringWithFormat:@"'%@',", param];
-                }
-                
-            } else if ([param isKindOfClass:[NSNumber class]]) {
-               formatedParam = [NSString stringWithFormat:@"%ld,", (long)[param integerValue]];
-            }
-            [stringParams appendString:formatedParam];
+    for (id param in params) {
+        if ([param isKindOfClass: [NSString class]]) {
+            NSString *format = [@[@"true", @"false"] containsObject: param] ? @"%@," : @"'%@',";
+            [stringParams appendString: [NSString stringWithFormat: format, param]];
         }
-        //remove last ','
-        stringParams = [[stringParams substringToIndex:[stringParams length] - 1] mutableCopy];
+        if ([param isKindOfClass: [NSNumber class]]) {
+            [stringParams appendString: [NSString stringWithFormat: @"%ld,", (long)[param integerValue]]];
+        }
+    }
+    if (params.count) {
+        // remove last ','
+        stringParams = [[stringParams substringToIndex: [stringParams length] - 1] mutableCopy];
     }
     
-    NSString *eventString = [self makeEventStringForEvent:event params:stringParams];
-    [self.webViewClient evaluateJavaScript:eventString completionHandler:nil];
+    [self.webViewClient evaluateJavaScript: [NSString stringWithFormat: @"mraid.%@(%@)", event, stringParams]
+                         completionHandler: nil];
 }
 
 - (void)setSupports {
-    NSArray *mraidFeatures = @[
-                               _kLoopMeMRAIDSupportsSMS,
-                               _kLoopMeMRAIDSupportsTel,
-                               _kLoopMeMRAIDSupportsCalendar,
-                               _kLoopMeMRAIDSupportsStorePicture,
-                               _kLoopMeMRAIDSupportsInlineVideo,
-                               ];
-    for (id aFeature in mraidFeatures) {
-        if ([aFeature isEqualToString:_kLoopMeMRAIDSupportsCalendar] || [aFeature isEqualToString:_kLoopMeMRAIDSupportsStorePicture]) {
-            [self executeEvent:LoopMeMRAIDFunctions.setSupports params:@[aFeature, @"false"]];
-        } else {
-            [self executeEvent:LoopMeMRAIDFunctions.setSupports params:@[aFeature, @"true"]];
-        }
+    for (NSArray *params in @[
+        @[@"calendar", @"false"],
+        @[@"storePicture", @"false"],
+        @[@"sms", @"true"],
+        @[@"tel", @"true"],
+        @[@"inlineVideo", @"true"]
+    ]) {
+        [self executeEvent: LoopMeMRAIDFunctions.setSupports params: params];
     }
 }
 
-
 - (BOOL)shouldInterceptURL:(NSURL *)URL {
-    return [URL.scheme.lowercaseString isEqualToString:_kLoopMeMRAIDURLScheme];
+    return [URL.scheme.lowercaseString isEqualToString: @"mraid"];
 }
 
 - (void)processURL:(NSURL *)URL {
-    NSString *command = URL.host;
-    NSDictionary *params = [URL lm_toDictionary];
-    
-    [self processCommand:command withParams:params];
+    [self processCommand: URL.host withParams: [URL lm_toDictionary]];
 }
 
 @end
