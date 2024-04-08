@@ -42,6 +42,20 @@ extern const struct LoopMeWebViewStateStruct {
     __unsafe_unretained NSString *closed;
 } LoopMeWebViewState;
 
+extern const struct LoopMeJSCommandsStruct {
+    __unsafe_unretained NSString *success;
+    __unsafe_unretained NSString *fail;
+    __unsafe_unretained NSString *close;
+    __unsafe_unretained NSString *play;
+    __unsafe_unretained NSString *pause;
+    __unsafe_unretained NSString *mute;
+    __unsafe_unretained NSString *load;
+    __unsafe_unretained NSString *vibrate;
+    __unsafe_unretained NSString *enableStretching;
+    __unsafe_unretained NSString *disableStretching;
+    __unsafe_unretained NSString *fullscreenMode;
+} LoopMeJSCommands;
+
 @interface LoopMeJSClient : NSObject
 <
     LoopMeJSCommunicatorProtocol
