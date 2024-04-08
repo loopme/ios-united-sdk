@@ -118,14 +118,14 @@ static const int kLoopMeLoadCounter = 3;
 
 + (instancetype)rewardedWithAppKey:(NSString *)appKey
                     delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    BOOL isRewarded = NO;
+    BOOL isRewarded = YES;
     return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:LoopMeAdTypeAll delegate:delegate isRewarded: &isRewarded];
 }
 
 + (instancetype)rewardedWithAppKey:(NSString *)appKey
                       preferredAdTypes:(LoopMeAdType)adTypes
                               delegate:(id<LoopMeInterstitialDelegate>)delegate {
-    BOOL isRewarded = NO;
+    BOOL isRewarded = YES;
     return [[LoopMeInterstitial alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: &isRewarded];
 }
 
