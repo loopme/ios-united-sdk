@@ -271,7 +271,6 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     impression[@"ext"] = @{
         @"it" : integrationType,
         @"skadn": skadn,
-        @"rewarded": self.isRewarded ? @1 : @0
     };
 
     return impression;
@@ -314,8 +313,14 @@ typedef NS_ENUM(long, LoopMeDeviceCharge) {
     }
     video[@"skipafter"] = self.isRewarded ? @0 : @5;
     video[@"ext"] = @{
-        @"videotype": @"rewarded"
+        @"rewarded": self.isRewarded ? @1 : @0
     };
+    
+    if (self.isRewarded) {
+        video[@"ext"] = @{
+            @"videotype": @"rewarded"
+        };
+    }
 
     return video;
 }
