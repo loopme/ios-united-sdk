@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
     return [[self customAuthorizationStatus] integerValue] == CustomAuthorizationStatusAuthorized;
 }
 
-+ (BOOL) appTrackingTransparencyEnavled {
++ (BOOL) appTrackingTransparencyEnabled {
     if (@available(iOS 14, *)) {
         ATTrackingManagerAuthorizationStatus trackingStatus = [ATTrackingManager trackingAuthorizationStatus];
         return trackingStatus == ATTrackingManagerAuthorizationStatusAuthorized;
