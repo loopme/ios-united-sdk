@@ -165,4 +165,13 @@ static NSString * const kLoopMeSourceAppID = @"SourceAppID";
 - (NSString *)sourceAppID {
     return [[NSUserDefaults standardUserDefaults] stringForKey:kLoopMeSourceAppID];
 }
+
++ (NSString *)getConsentValue {
+    LoopMeGDPRTools *gdpr = [LoopMeGDPRTools sharedInstance];
+    if ([gdpr userConsentString]) {
+        return [gdpr userConsentString];
+    }
+    return ([LoopMeIdentityProvider advertisingTrackingEnabled] && [gdpr isUserConsent]) ? @"1" : @"0";
+}
+
 @end
