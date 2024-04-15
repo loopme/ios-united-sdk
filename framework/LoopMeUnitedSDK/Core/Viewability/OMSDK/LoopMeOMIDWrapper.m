@@ -7,7 +7,6 @@
 //
 
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
-#import "LoopMeOMIDVideoEventsWrapper.h"
 #import "LoopMeOMIDWrapper.h"
 #import "LoopMeDefinitions.h"
 #import "LoopMeDiscURLCache.h"

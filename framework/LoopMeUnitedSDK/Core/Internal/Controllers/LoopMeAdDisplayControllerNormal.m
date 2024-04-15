@@ -12,7 +12,6 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
-#import "LoopMeOMIDVideoEventsWrapper.h"
 #import "LoopMeIASWrapper.h"
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeAdWebView.h"

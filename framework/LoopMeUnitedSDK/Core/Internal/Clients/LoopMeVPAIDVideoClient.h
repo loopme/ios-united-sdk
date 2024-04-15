@@ -13,6 +13,7 @@
 @class LoopMeVastSkipOffset;
 @class AVPlayerLayer;
 @class LoopMeAdConfiguration;
+@class LoopMeOMIDVideoEventsWrapperNew;
 
 @protocol LoopMeVPAIDVideoClientDelegate;
 

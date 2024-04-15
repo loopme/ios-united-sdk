@@ -13,7 +13,6 @@
 #import "LoopMeVPAIDError.h"
 #import "LoopMeVideoManager.h"
 #import "LoopMeLogging.h"
-#import "LoopMeOMIDVideoEventsWrapper.h"
 
 #import "LoopMeSDK.h"
 #import "LoopMeReachability.h"
@@ -63,7 +62,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) NSURL *videoURL;
 
 @property (nonatomic, strong) LOOMoatVideoTracker *moatVideoTracker;
-@property (nonatomic, weak) OMIDLoopmeVideoEvents *omidVideoEvents;
+@property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
 
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
