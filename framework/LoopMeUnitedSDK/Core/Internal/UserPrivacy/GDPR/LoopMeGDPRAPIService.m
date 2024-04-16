@@ -104,7 +104,9 @@ static dispatch_queue_t queue;
         userConsent = [self checkConsentIn:resultDict consentType:&tempConsentType];
     }
     
-    *consentType = tempConsentType;
+    if (consentType != nil) {
+        *consentType = tempConsentType;
+    }
     return userConsent;
 }
 
