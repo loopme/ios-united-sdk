@@ -28,7 +28,6 @@
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeViewabilityProtocol.h"
 #import "LoopMeViewabilityManager.h"
-#import "LoopMeOMIDWrapper.h"
 #import "LoopMeVpaidScriptMessageHandler.h"
 
 NSInteger const kLoopMeVPAIDImpressionTimeout = 2;

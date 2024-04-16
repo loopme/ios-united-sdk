@@ -64,8 +64,6 @@
 		47A57C49233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A57B99233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a */; };
 		47A57C4A233E31C8001F7DA3 /* LoopMeIASWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */; };
 		47A57C4B233E31C8001F7DA3 /* OMSDK_Loopme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A57B9C233E31C8001F7DA3 /* OMSDK_Loopme.framework */; };
-		47A57C4C233E31C8001F7DA3 /* LoopMeOMIDWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57B9D233E31C8001F7DA3 /* LoopMeOMIDWrapper.m */; };
-		47A57C4E233E31C8001F7DA3 /* LoopMeOMIDWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57C50233E31C8001F7DA3 /* LoopMeViewabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */; };
 		47A57C51233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A57BA2233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework */; };
 		47A57C52233E31C8001F7DA3 /* LoopMeIASWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */; };
@@ -247,8 +245,6 @@
 		47A57B99233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libAvid-loopme-3.6.8.a"; sourceTree = "<group>"; };
 		47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeIASWrapper.h; sourceTree = "<group>"; };
 		47A57B9C233E31C8001F7DA3 /* OMSDK_Loopme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OMSDK_Loopme.framework; sourceTree = "<group>"; };
-		47A57B9D233E31C8001F7DA3 /* LoopMeOMIDWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeOMIDWrapper.m; sourceTree = "<group>"; };
-		47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOMIDWrapper.h; sourceTree = "<group>"; };
 		47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeViewabilityManager.m; sourceTree = "<group>"; };
 		47A57BA2233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LOOMoatMobileAppKit.framework; sourceTree = "<group>"; };
 		47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeIASWrapper.m; sourceTree = "<group>"; };
@@ -576,8 +572,6 @@
 			isa = PBXGroup;
 			children = (
 				47A57B9C233E31C8001F7DA3 /* OMSDK_Loopme.framework */,
-				47A57B9D233E31C8001F7DA3 /* LoopMeOMIDWrapper.m */,
-				47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */,
 			);
 			path = OMSDK;
 			sourceTree = "<group>";
@@ -905,7 +899,6 @@
 				47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */,
 				47A57CD3233E3412001F7DA3 /* LoopMeAdType.h in Headers */,
 				47A57CB2233E31C8001F7DA3 /* LoopMeDefinitions.h in Headers */,
-				47A57C4E233E31C8001F7DA3 /* LoopMeOMIDWrapper.h in Headers */,
 				47A57CCC233E31C8001F7DA3 /* LoopMeGDPRTools.h in Headers */,
 				47A57CB4233E31C8001F7DA3 /* LoopMeError.h in Headers */,
 				47A57CC4233E31C8001F7DA3 /* LoopMeVPAIDError.h in Headers */,
@@ -1126,7 +1119,6 @@
 				47A57CB6233E31C8001F7DA3 /* LoopMeGlobalSettings.m in Sources */,
 				47A57CCF233E31C8001F7DA3 /* LoopMeGDPRTools.m in Sources */,
 				47403417239568FD00CC14EF /* CCPATools.swift in Sources */,
-				47A57C4C233E31C8001F7DA3 /* LoopMeOMIDWrapper.m in Sources */,
 				47A57CCA233E31C8001F7DA3 /* LoopMeGDPRViewController.m in Sources */,
 				47A57C56233E31C8001F7DA3 /* LoopMeVPAIDClient.m in Sources */,
 				47A57CCD233E31C8001F7DA3 /* LoopMeGDPRAPIService.m in Sources */,

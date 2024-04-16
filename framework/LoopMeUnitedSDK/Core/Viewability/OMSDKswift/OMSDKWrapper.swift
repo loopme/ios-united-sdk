@@ -8,13 +8,23 @@
 
 import Foundation
 import OMSDK_Loopme
-import ObjectiveC
 
 struct MyError: Error {
     let message: String
 }
 
-class OMSDKWrapper {
+@objc public class AdSessionContextResult: NSObject {
+    @objc public var context: OMIDLoopmeAdSessionContext?
+    @objc public var error: Error?
+    
+    @objc public init(context: OMIDLoopmeAdSessionContext?, error: Error?) {
+        self.context = context
+        self.error = error
+    }
+}
+
+@objc (LoopMeOMIDWrapper)
+public class OMSDKWrapper: NSObject {
     static var omidJS: String?
     static var partner: OMIDLoopmePartner?
 
@@ -29,15 +39,14 @@ class OMSDKWrapper {
     static var loopmeSDKVersionString: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     }
-    init() {
+    @objc public override init() {
         scripts = []
     }
 
-    static func initOMID(completionBlock: @escaping (Bool) -> Void) -> Bool {
-        var error: Error?
+    @objc public static func initOMID(completionBlock: @escaping (Bool) -> Void) -> Bool {
         let sdkStarted = OMIDLoopmeSDK.shared.activate()
 
-        guard sdkStarted, error == nil else {
+        guard sdkStarted else {
             completionBlock(false)
             return false
         }
@@ -72,7 +81,7 @@ class OMSDKWrapper {
         partner = OMIDLoopmePartner(name: partherName, versionString: loopmeSDKVersionString)
     }
 
-    func injectScriptContentIntoHTML(_ htmlString: String) throws -> String {
+    @objc public func injectScriptContentIntoHTML(_ htmlString: String) throws -> String {
         guard let omidJS = OMSDKWrapper.omidJS else {
             throw NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID JS not loaded"])
         }
@@ -80,7 +89,7 @@ class OMSDKWrapper {
         return try OMIDLoopmeScriptInjector.injectScriptContent(omidJS, intoHTML: htmlString)
     }
 
-    func contextForHTML(_ webView: UIView) throws -> OMIDLoopmeAdSessionContext {
+    @objc public func contextForHTML(_ webView: UIView) throws -> OMIDLoopmeAdSessionContext {
         guard let partner = OMSDKWrapper.partner else {
             throw NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID partner not initialized"])
         }
@@ -88,24 +97,24 @@ class OMSDKWrapper {
         return try OMIDLoopmeAdSessionContext(partner: partner, webView: webView, contentUrl: nil, customReferenceIdentifier: "")
     }
 
-    func contextForNativeVideo(_ resources: [AdVerificationWrapper], error: inout Error?) -> OMIDLoopmeAdSessionContext? {
+    @objc public func contextForNativeVideo(_ resources: [AdVerificationWrapper]) -> AdSessionContextResult {
         guard let partner = OMSDKWrapper.partner, let omidJS = OMSDKWrapper.omidJS else {
-            error = NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID partner or JS not initialized"])
-            return nil
+            let error = NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID partner or JS not initialized"])
+            return AdSessionContextResult(context: nil, error: error)
         }
-
+        
         let omidResources = toOmidResources(resources)
-
+        
         do {
-            return try OMIDLoopmeAdSessionContext(partner: partner, script: omidJS, resources: omidResources, contentUrl: nil, customReferenceIdentifier: "")
+            let context = try OMIDLoopmeAdSessionContext(partner: partner, script: omidJS, resources: omidResources, contentUrl: nil, customReferenceIdentifier: "")
+            return AdSessionContextResult(context: context, error: nil)
         } catch let initializationError {
-            error = initializationError
-            return nil
+            return AdSessionContextResult(context: nil, error: initializationError)
         }
     }
 
     
-    func toOmidResources(_ resources: [AdVerificationWrapper]) -> [OMIDLoopmeVerificationScriptResource] {
+    @objc public func toOmidResources(_ resources: [AdVerificationWrapper]) -> [OMIDLoopmeVerificationScriptResource] {
         var omidResources: [OMIDLoopmeVerificationScriptResource] = []
         for verification in resources {
             guard let resourceURL = URL(string: verification.jsResource) else {
@@ -120,33 +129,34 @@ class OMSDKWrapper {
         return omidResources
     }
 
-    func configurationFor(_ creativeType: OMIDCreativeType) throws -> OMIDLoopmeAdSessionConfiguration {
+    @objc public  func configurationFor(_ creativeType: OMIDCreativeType) throws -> OMIDLoopmeAdSessionConfiguration {
     try OMIDLoopmeAdSessionConfiguration(creativeType: creativeType, impressionType: .beginToRender, impressionOwner: .nativeOwner, mediaEventsOwner: .noneOwner, isolateVerificationScripts: false)
     }
 
-    func sessionFor(_ configuration: OMIDLoopmeAdSessionConfiguration, context: OMIDLoopmeAdSessionContext) throws -> OMIDLoopmeAdSession {
+    @objc public func sessionFor(_ configuration: OMIDLoopmeAdSessionConfiguration, context: OMIDLoopmeAdSessionContext) throws -> OMIDLoopmeAdSession {
             return  try OMIDLoopmeAdSession(configuration: configuration, adSessionContext: context)
     }
 
-    func sessionForHTML(_ webView: UIView) throws -> OMIDLoopmeAdSession {
+    @objc public func sessionForHTML(_ webView: UIView) throws -> OMIDLoopmeAdSession {
         let configuration = try configurationFor(.htmlDisplay)
         let context = try contextForHTML(webView)
         return try sessionFor(configuration, context: context)
     }
 
-    func sessionForNativeVideo(_ resources: [AdVerificationWrapper]) throws -> OMIDLoopmeAdSession {
-        var error: Error? = nil
+    @objc public func sessionForNativeVideo(_ resources: [AdVerificationWrapper]) throws -> OMIDLoopmeAdSession {
         let configuration = try configurationFor(.video)
-        if let context = contextForNativeVideo(resources, error: &error) {
+        let contextResult = contextForNativeVideo(resources)
+        
+        // Check if context retrieval was successful
+        if let context = contextResult.context {
             // If context is successfully retrieved, create and return the session
             return try sessionFor(configuration, context: context)
         } else {
             // If an error occurred, throw the error
-            if let error = error {
+            if let error = contextResult.error {
                 throw error
             } else {
                 throw MyError(message: "Unknown error occurred")
             }
         }
-    }
-}
+    }}

@@ -22,7 +22,6 @@
 #import "LoopMeAdView.h"
 #import "LoopMeIASWrapper.h"
 #import "NSString+Encryption.h"
-#import "LoopMeOMIDWrapper.h"
 
 @class LoopMeAdConfiguration;
 

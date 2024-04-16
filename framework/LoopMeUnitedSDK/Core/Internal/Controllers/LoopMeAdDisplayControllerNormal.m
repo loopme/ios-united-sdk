@@ -29,7 +29,6 @@
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAdView.h"
-#import "LoopMeOMIDWrapper.h"
 #import "LoopMeSDK.h"
 #import "LoopMeMRAIDScriptMessageHandler.h"
 
