@@ -9,7 +9,7 @@
 import Foundation
 import OMSDK_Loopme
 
-struct MyError: Error {
+struct OMIDSessionCustomError: Error {
     let message: String
 }
 
@@ -156,7 +156,7 @@ public class OMSDKWrapper: NSObject {
             if let error = contextResult.error {
                 throw error
             } else {
-                throw MyError(message: "Unknown error occurred")
+                throw OMIDSessionCustomError(message: "Unknown error occurred")
             }
         }
     }}
