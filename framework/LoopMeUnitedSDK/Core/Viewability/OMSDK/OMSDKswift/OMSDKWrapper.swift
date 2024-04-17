@@ -30,18 +30,11 @@ public class OMSDKWrapper: NSObject {
 
     private var urlSession: URLSession?
     private var configuration: OMIDLoopmeAdSessionConfiguration?
-    private var scripts: [Any] = []
     typealias CompletionHandlerBlock = (Data?, URLResponse?, Error?) -> Void
-
     static let partherName = "Loopme"
     static let cacheKey = "OMID_JS"
     static let omidJSURL = "https://i.loopme.me/html/ios/omsdk-v1.js"
-    static var loopmeSDKVersionString: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-    }
-    @objc public override init() {
-        scripts = []
-    }
+
 
     @objc public static func initOMID(completionBlock: @escaping (Bool) -> Void) -> Bool {
         let sdkStarted = OMIDLoopmeSDK.shared.activate()
@@ -55,7 +48,7 @@ public class OMSDKWrapper: NSObject {
             completionBlock(completed)
         })
 
-        initPartner()
+        partner = OMIDLoopmePartner(name: partherName, versionString: SDKUtility.loopmeSDKVersionString())
 
         return true
     }
@@ -77,9 +70,6 @@ public class OMSDKWrapper: NSObject {
         task.resume()
     }
 
-    private static func initPartner() {
-        partner = OMIDLoopmePartner(name: partherName, versionString: loopmeSDKVersionString)
-    }
 
     @objc public func injectScriptContentIntoHTML(_ htmlString: String) throws -> String {
         guard let omidJS = OMSDKWrapper.omidJS else {
@@ -115,18 +105,18 @@ public class OMSDKWrapper: NSObject {
 
     
     @objc public func toOmidResources(_ resources: [AdVerificationWrapper]) -> [OMIDLoopmeVerificationScriptResource] {
-        var omidResources: [OMIDLoopmeVerificationScriptResource] = []
-        for verification in resources {
-            guard let resourceURL = URL(string: verification.jsResource) else {
-                continue
+        return resources.compactMap { verification in
+            guard let resourceURL = URL(string: verification.jsResource),
+                  let omidResource = OMIDLoopmeVerificationScriptResource(
+                    url: resourceURL,
+                    vendorKey: verification.vendor,
+                    parameters: verification.verificationParameters
+                  )
+            else {
+                return nil
             }
-            let params = verification.verificationParameters
-            let omidResource = OMIDLoopmeVerificationScriptResource(url: resourceURL, vendorKey: verification.vendor, parameters: params)
-            if let omidResource = omidResource {
-                omidResources.append(omidResource)
-            }
+            return omidResource
         }
-        return omidResources
     }
 
     @objc public  func configurationFor(_ creativeType: OMIDCreativeType) throws -> OMIDLoopmeAdSessionConfiguration {
