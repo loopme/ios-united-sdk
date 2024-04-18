@@ -28,8 +28,6 @@
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeViewabilityProtocol.h"
 #import "LoopMeViewabilityManager.h"
-#import "LoopMeOMIDWrapper.h"
-#import "LoopMeOMIDVideoEventsWrapper.h"
 #import "LoopMeVpaidScriptMessageHandler.h"
 
 NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
@@ -220,7 +218,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
             
             // to signal video events
             NSError *vErr;
-            self.omidVideoEvents = [[LoopMeOMIDVideoEventsWrapper alloc] initWithAdSession:self.omidSession error:&vErr];
+            self.omidVideoEvents = [[LoopMeOMIDVideoEventsWrapper alloc] initWithSession:self.omidSession error:&vErr];
             
             self.videoClient = [[LoopMeVPAIDVideoClient alloc] initWithDelegate:self];
             ((LoopMeVPAIDVideoClient *)self.videoClient).configuration = configuration;
@@ -564,7 +562,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     self.lastVolume = self.currentVolume;
     
     OMIDLoopmeVASTProperties *vastProperties = [[OMIDLoopmeVASTProperties alloc] initWithSkipOffset:self.adConfiguration.vastProperties.skipOffset.value autoPlay:YES position:OMIDPositionStandalone];
-    [self.omidVideoEvents loadedWithVastProperties:vastProperties];
+    [self.omidVideoEvents loadedWith:vastProperties];
     
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd:self];
@@ -736,7 +734,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     LoopMeLogInfo(@"Did load video ad");
     
     OMIDLoopmeVASTProperties *vastProperties = [[OMIDLoopmeVASTProperties alloc] initWithSkipOffset:self.adConfiguration.vastProperties.skipOffset.value autoPlay:YES position:OMIDPositionStandalone];
-    [self.omidVideoEvents loadedWithVastProperties:vastProperties];
+    [self.omidVideoEvents loadedWith:vastProperties];
     
     if ([self.delegate respondsToSelector:
          @selector(adDisplayControllerDidFinishLoadingAd:)]) {
