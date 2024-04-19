@@ -42,7 +42,8 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
 @interface LoopMeOMIDVideoEventsWrapper()
 
 @property (nonatomic, strong) NSMutableSet *sentEvents;
-@property (nonatomic, strong) OMIDLoopmeMediaEvents *videoEvents;
+@property (nonatomic, strong) OMIDLoopmeAdEvents *videoEvents;
+@property (nonatomic, strong) OMIDLoopmeMediaEvents *mediaEvents;
 
 @end
 
@@ -52,7 +53,9 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
     
     if (self = [super init]) {
         _sentEvents = [NSMutableSet new];
-        self.videoEvents = [[OMIDLoopmeMediaEvents alloc] initWithAdSession:session error:error];
+        self.videoEvents = [[OMIDLoopmeAdEvents alloc] initWithAdSession:session error:error];
+        self.mediaEvents = [[OMIDLoopmeMediaEvents alloc] initWithAdSession:session error:error];
+
     }
     return self;
 }
@@ -60,7 +63,8 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
 - (void)loadedWithVastProperties:(nonnull OMIDLoopmeVASTProperties *)vastProperties {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adLoaded]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adLoaded];
-        [self.videoEvents loadedWithVastProperties:vastProperties];
+        NSError *aErr;
+        [self.videoEvents loadedWithVastProperties:vastProperties error: &aErr];
     }
     
 }
@@ -69,28 +73,28 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
         videoPlayerVolume:(CGFloat)videoPlayerVolume {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adStarted]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adStarted];
-        [self.videoEvents startWithDuration:duration mediaPlayerVolume:videoPlayerVolume];
+        [self.mediaEvents startWithDuration:duration mediaPlayerVolume:videoPlayerVolume];
     }
 }
 
 - (void)firstQuartile {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adVideoFirstQuartile]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adVideoFirstQuartile];
-        [self.videoEvents firstQuartile];
+        [self.mediaEvents firstQuartile];
     }
 }
 
 - (void)midpoint {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adVideoMidpoint]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adVideoMidpoint];
-        [self.videoEvents midpoint];
+        [self.mediaEvents midpoint];
     }
 }
 
 - (void)thirdQuartile {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adVideoThirdQuartile]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adVideoThirdQuartile];
-        [self.videoEvents thirdQuartile];
+        [self.mediaEvents thirdQuartile];
     }
     
 }
@@ -98,35 +102,35 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
 - (void)complete {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adComplete]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adComplete];
-        [self.videoEvents complete];
+        [self.mediaEvents complete];
     }
 }
 
 - (void)pause {
     if ([self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adStarted]) {
-        [self.videoEvents pause];
+        [self.mediaEvents pause];
     }
 }
 
 - (void)resume {
-    [self.videoEvents resume];
+    [self.mediaEvents resume];
 }
 
 - (void)skipped {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adSkipped]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adSkipped];
-        [self.videoEvents skipped];
+        [self.mediaEvents skipped];
     }
 }
 
 - (void)volumeChangeTo:(CGFloat)playerVolume {
-    [self.videoEvents volumeChangeTo:playerVolume];
+    [self.mediaEvents volumeChangeTo:playerVolume];
 }
 
 - (void)adUserInteractionWithType:(OMIDInteractionType)interactionType
 NS_SWIFT_NAME(adUserInteraction(withType:)) {
     
-    [self.videoEvents adUserInteractionWithType:interactionType];
+    [self.mediaEvents adUserInteractionWithType:interactionType];
 }
 
 @end
