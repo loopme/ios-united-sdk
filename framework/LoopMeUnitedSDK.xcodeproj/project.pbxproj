@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -62,7 +62,6 @@
 		47A57C47233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B97233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h */; };
 		47A57C48233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B98233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h */; };
 		47A57C4A233E31C8001F7DA3 /* LoopMeIASWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */; };
-		47A57C4B233E31C8001F7DA3 /* OMSDK_Loopme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A57B9C233E31C8001F7DA3 /* OMSDK_Loopme.framework */; };
 		47A57C4C233E31C8001F7DA3 /* LoopMeOMIDWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57B9D233E31C8001F7DA3 /* LoopMeOMIDWrapper.m */; };
 		47A57C4D233E31C8001F7DA3 /* LoopMeOMIDVideoEventsWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57B9E233E31C8001F7DA3 /* LoopMeOMIDVideoEventsWrapper.m */; };
 		47A57C4E233E31C8001F7DA3 /* LoopMeOMIDWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -184,6 +183,7 @@
 		47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */; };
 		47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */; };
 		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
+		B983C8722BD282740044F316 /* OMSDK_Loopme.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B983C8712BD282740044F316 /* OMSDK_Loopme.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,7 +244,6 @@
 		47A57B98233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidManagedDisplayAdSession.h; sourceTree = "<group>"; };
 		47A57B99233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libAvid-loopme-3.6.8.a"; sourceTree = "<group>"; };
 		47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeIASWrapper.h; sourceTree = "<group>"; };
-		47A57B9C233E31C8001F7DA3 /* OMSDK_Loopme.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OMSDK_Loopme.framework; sourceTree = "<group>"; };
 		47A57B9D233E31C8001F7DA3 /* LoopMeOMIDWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeOMIDWrapper.m; sourceTree = "<group>"; };
 		47A57B9E233E31C8001F7DA3 /* LoopMeOMIDVideoEventsWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeOMIDVideoEventsWrapper.m; sourceTree = "<group>"; };
 		47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOMIDWrapper.h; sourceTree = "<group>"; };
@@ -367,6 +366,7 @@
 		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
 		81D36A5226F08F2A0037D160 /* CoppaTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoppaTools.swift; sourceTree = "<group>"; };
 		B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B983C8712BD282740044F316 /* OMSDK_Loopme.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OMSDK_Loopme.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +374,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B983C8722BD282740044F316 /* OMSDK_Loopme.xcframework in Frameworks */,
 				478C2BCF22FB00F900D618AB /* libxml2.tbd in Frameworks */,
 				47A57C4B233E31C8001F7DA3 /* OMSDK_Loopme.framework in Frameworks */,
 			);
@@ -568,7 +569,7 @@
 		47A57B9B233E31C8001F7DA3 /* OMSDK */ = {
 			isa = PBXGroup;
 			children = (
-				47A57B9C233E31C8001F7DA3 /* OMSDK_Loopme.framework */,
+				B983C8712BD282740044F316 /* OMSDK_Loopme.xcframework */,
 				47A57B9D233E31C8001F7DA3 /* LoopMeOMIDWrapper.m */,
 				47A57B9E233E31C8001F7DA3 /* LoopMeOMIDVideoEventsWrapper.m */,
 				47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */,
