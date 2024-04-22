@@ -10,7 +10,6 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
-#import "LoopMeIASWrapper.h"
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeAdWebView.h"
 #import "LoopMeDefinitions.h"
@@ -57,7 +56,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchWebView;
 
 @property (nonatomic, assign) BOOL adDisplayed;
-@property (nonatomic, strong) LoopMeIASWrapper *iasWarpper;
 
 @property (nonatomic, strong) OMIDLoopmeAdSession* omidSession;
 @property (nonatomic, strong) OMIDLoopmeAdEvents *omidAdEvents;
@@ -159,7 +157,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     self.delegate = delegate;
     _JSClient = [[LoopMeJSClient alloc] initWithDelegate: self];
     _mraidClient = [[LoopMeMRAIDClient alloc] initWithDelegate: self];
-    _iasWarpper = [[LoopMeIASWrapper alloc] init];
     _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
     
 
@@ -286,13 +283,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 - (void)loadAdConfiguration {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self initWebView];
-        if ([self.adConfiguration useTracking: LoopMeTrackerNameIas]) {
-            [self.iasWarpper initWithPartnerVersion: LOOPME_SDK_VERSION
-                                       creativeType: self.adConfiguration.creativeType
-                                    adConfiguration: self.adConfiguration];
-            [self.iasWarpper registerAdView: self.webView];
-        }
-        
 
         NSError *error;
         self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML:self.adConfiguration.creativeContent error:&error];
@@ -307,13 +297,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 - (void)displayAd {
-    if ([self.adConfiguration useTracking: LoopMeTrackerNameIas]) {
-        [self.iasWarpper recordReadyEvent];
-        [self.iasWarpper recordAdLoadedEvent];
-    }
-    
-
-    
     self.adDisplayed = YES;
     ((LoopMeVideoClientNormal *)self.videoClient).viewController = [self.delegate viewControllerForPresentation];
     CGRect adjustedFrame = [self adjustFrame: self.delegate.containerView.bounds];
@@ -381,9 +364,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     self.pinchWebView = [[UIPinchGestureRecognizer alloc] initWithTarget: self
                                                                   action: @selector(pinchWebView:)];
     [self.webView addGestureRecognizer:self.pinchWebView];
-    
-    //AVID
-    [self.iasWarpper recordAdImpressionEvent];
     //OMSDK
     NSError *impError;
     [self.omidAdEvents impressionOccurredWithError: &impError];
@@ -393,11 +373,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     //OMSDK
     [self.omidSession finish];
     self.omidSession = nil;
-    if ([self.adConfiguration useTracking: LoopMeTrackerNameIas]) {
-        [self.iasWarpper clean];
-        [self.iasWarpper unregisterAdView: self.webView];
-        [self.iasWarpper endSession];
-    }
     
     [self.JSClient executeEvent: LoopMeEvent.state
                    forNamespace: kLoopMeNamespaceWebview
@@ -595,7 +570,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 }
 
 - (void)JSClientDidReceiveCloseCommand:(LoopMeJSClient *)client {
-    [self.iasWarpper recordAdUserCloseEvent];
     if ([self.delegate respondsToSelector: @selector(adDisplayControllerShouldCloseAd:)]) {
         [self.delegate adDisplayControllerShouldCloseAd:self];
     }
@@ -629,16 +603,12 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     if ([self.delegate respondsToSelector: @selector(adDisplayControllerDidReceiveTap:)]) {
         [self.delegate adDisplayControllerDidReceiveTap: self];
     }
-    [self.iasWarpper recordAdClickThruEvent];
     [self interceptURL: URL];
 }
 
 - (void)mraidClient:(LoopMeMRAIDClient *)client useCustomClose:(BOOL)useCustomCLose {
     /// If banner (class LoopMeAdView) then do not show close button, else show close button
     self.useCustomClose = [self.delegate isMemberOfClass:[LoopMeAdView class]];
-    if (!self.isUseCustomClose) {
-        [self.iasWarpper registerFriendlyObstruction: self.closeButton];
-    }
 }
 
 - (void)mraidClient:(LoopMeMRAIDClient *)client sholdPlayVideo:(NSURL *)URL {
@@ -659,8 +629,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         return;
     }
     
-    [self.iasWarpper recordAdUserCloseEvent];
-    
     if ([self.delegate respondsToSelector: @selector(adDisplayControllerShouldCloseAd:)]) {
         [self.delegate adDisplayControllerShouldCloseAd: self];
     }
@@ -671,8 +639,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
                                 params: @[LoopMeMRAIDState.defaultt]];
         return;
     }
-    
-    [self.iasWarpper recordAdUserCloseEvent];
 }
 
 - (void)mraidClientDidReceiveExpandCommand:(LoopMeMRAIDClient *)client {
@@ -700,7 +666,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 - (void)videoClientDidReachEnd:(LoopMeVideoClient *)client {
     LoopMeLogInfo(@"Video ad did reach end");
-    [self.iasWarpper recordAdCompleteEvent];
     if ([self.delegate respondsToSelector: @selector(adDisplayControllerVideoDidReachEnd:)]) {
         [self.delegate adDisplayControllerVideoDidReachEnd: self];
     }
@@ -728,8 +693,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 #pragma mark - Override
 
 - (void)destinationDisplayControllerWillPresentModal:(LoopMeDestinationDisplayController *)destinationDisplayController {
-    //AVID
-    [self.iasWarpper recordAdClickThruEvent];
     [super destinationDisplayControllerWillPresentModal: destinationDisplayController];
 }
 

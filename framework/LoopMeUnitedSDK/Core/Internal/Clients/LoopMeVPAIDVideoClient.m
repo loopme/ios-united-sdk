@@ -19,7 +19,6 @@
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeDefinitions.h"
 #import "LoopMeAdView.h"
-#import "LoopMeIASWrapper.h"
 #import "NSString+Encryption.h"
 
 @class LoopMeAdConfiguration;
@@ -116,14 +115,6 @@ const NSInteger kResizeOffsetVPAID = 11;
         self.bottomVideoUIConstraint.active = YES;
     }
     return _videoView;
-}
-
-- (LoopMeIASWrapper *)iasWrapper {
-    if ([self.delegate respondsToSelector:@selector(iasWarpper)]) {
-        return [self.delegate performSelector:@selector(iasWarpper)];
-    }
-    
-    return nil;
 }
 
 - (LoopMeOMIDVideoEventsWrapper *)omidVideoEvents {
@@ -311,7 +302,6 @@ const NSInteger kResizeOffsetVPAID = 11;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (self.isShouldPlay) {
                     [self.player play];
-                    [self.iasWrapper recordAdPlayingEvent];
                 }
             });
             break;
@@ -499,7 +489,6 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.player.volume = (mute) ? 0.0f : 1.0f;
     
     [self.omidVideoEvents volumeChangeTo:self.player.volume];
-    [self.iasWrapper recordAdVolumeChangeEvent:self.player.volume];
 }
 
 - (void)seekToTime:(double)time {
@@ -532,8 +521,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         [self.vastUIView showEndCard:NO];
     }
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearStart];
-    
-    [self.iasWrapper recordAdPlayingEvent];
+
     self.shouldPlay = YES;
 }
 
@@ -543,8 +531,6 @@ const NSInteger kResizeOffsetVPAID = 11;
     
     //OMID
     [self.omidVideoEvents pause];
-    
-    [self.iasWrapper recordAdPausedEvent];
 }
 
 - (void)skip {
