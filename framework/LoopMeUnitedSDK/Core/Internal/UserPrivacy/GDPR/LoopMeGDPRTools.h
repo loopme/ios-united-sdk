@@ -65,4 +65,9 @@ typedef NS_ENUM(NSInteger, LoopMeConsentType) {
 - (NSString *_Nullable)consentString;
 - (NSString *_Nullable)cmpSdkID;
 - (NSString *_Nullable)sourceAppID;
+
+/**
+ * Helper functions
+ */
++ (NSString *_Nonnull)getConsentValue;
 @end

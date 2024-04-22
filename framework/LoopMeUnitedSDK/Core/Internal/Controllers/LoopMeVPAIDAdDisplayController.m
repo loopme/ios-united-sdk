@@ -7,8 +7,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-#import <LOOMoatMobileAppKit/LOOMoatAnalytics.h>
-#import <LOOMoatMobileAppKit/LOOMoatWebTracker.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 #import "LoopMeSDK.h"
@@ -84,7 +82,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 @property (nonatomic, strong) LoopMeVASTEventTracker *vastEventTracker;
 @property (nonatomic, strong) LoopMeVpaidScriptMessageHandler *vpaidMessageHandler;
-@property (nonatomic, strong) LOOMoatWebTracker *moatTracker;
 
 @property (nonatomic, assign) BOOL needCloseCallback;
 @property (nonatomic, assign) BOOL isNeedJSInject;
@@ -175,12 +172,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         _iasWrapper = [[LoopMeIASWrapper alloc] init];
         _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
         
-        if ([self.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
-            LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
-            options.debugLoggingEnabled = true;
-            [[LOOMoatAnalytics sharedInstance] startWithOptions:options];
-            _moatTracker = [LOOMoatWebTracker trackerWithWebComponent:self.webView];
-        }
     }
     return self;
 }

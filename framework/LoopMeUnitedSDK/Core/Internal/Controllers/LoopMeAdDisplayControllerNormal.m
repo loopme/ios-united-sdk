@@ -7,8 +7,6 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
-#import <LOOMoatMobileAppKit/LOOMoatAnalytics.h>
-#import <LOOMoatMobileAppKit/LOOMoatWebTracker.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
@@ -59,7 +57,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchWebView;
 
 @property (nonatomic, assign) BOOL adDisplayed;
-@property (nonatomic, strong) LOOMoatWebTracker *moatTracker;
 @property (nonatomic, strong) LoopMeIASWrapper *iasWarpper;
 
 @property (nonatomic, strong) OMIDLoopmeAdSession* omidSession;
@@ -165,13 +162,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     _iasWarpper = [[LoopMeIASWrapper alloc] init];
     _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
     
-    if ([self.adConfiguration useTracking: LoopMeTrackerNameMoat]) {
-        // if frame is zero WebView display content incorrect
-        LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
-        options.debugLoggingEnabled = true;
-        [[LOOMoatAnalytics sharedInstance] startWithOptions: options];
-        _moatTracker = [LOOMoatWebTracker trackerWithWebComponent: self.webView];
-    }
 
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(deviceShaken)
@@ -303,15 +293,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
             [self.iasWarpper registerAdView: self.webView];
         }
         
-        if ([self.adConfiguration useTracking: LoopMeTrackerNameMoat]) {
-            LOOMoatOptions *options = [[LOOMoatOptions alloc] init];
-            options.debugLoggingEnabled = YES;
-            [[LOOMoatAnalytics sharedInstance] startWithOptions: options];
-            
-            if (!self.moatTracker) {
-                self.moatTracker = [LOOMoatWebTracker trackerWithWebComponent: self.webView];
-            }
-        }
+
         NSError *error;
         self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML:self.adConfiguration.creativeContent error:&error];
         [self.webView loadHTMLString: self.adConfiguration.creativeContent
@@ -330,9 +312,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         [self.iasWarpper recordAdLoadedEvent];
     }
     
-    if ([self.adConfiguration useTracking: LoopMeTrackerNameMoat]) {
-        [self.moatTracker startTracking];
-    }
+
     
     self.adDisplayed = YES;
     ((LoopMeVideoClientNormal *)self.videoClient).viewController = [self.delegate viewControllerForPresentation];
@@ -422,9 +402,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [self.JSClient executeEvent: LoopMeEvent.state
                    forNamespace: kLoopMeNamespaceWebview
                           param: LoopMeWebViewState.closed];
-    if ([self.adConfiguration useTracking: LoopMeTrackerNameMoat]) {
-        [self.moatTracker stopTracking];
-    }
     [self stopHandlingRequests];
     self.visible = NO;
     self.adDisplayed = NO;

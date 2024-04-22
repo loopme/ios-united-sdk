@@ -11,8 +11,6 @@
 
 @interface LoopMeGDPRAPIService : NSObject
 
-+ (BOOL)isNeedUserConsent:(NSString *)deviceID;
-+ (BOOL)userConsent:(NSString *)deviceID consentType:(LoopMeConsentType *)consentType;
-+ (NSURL *)consentURL:(NSString *)deviceID;
++ (NSDictionary *)apiResponse:(NSString *)deviceID ignoreCache:(BOOL)ignoreCache;
 
 @end
