@@ -61,7 +61,6 @@
 		47A57C46233E31C8001F7DA3 /* LoopMe_ExternalAvidAdSessionContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B96233E31C8001F7DA3 /* LoopMe_ExternalAvidAdSessionContext.h */; };
 		47A57C47233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B97233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h */; };
 		47A57C48233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B98233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h */; };
-		47A57C49233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A57B99233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a */; };
 		47A57C4A233E31C8001F7DA3 /* LoopMeIASWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */; };
 		47A57C4B233E31C8001F7DA3 /* OMSDK_Loopme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A57B9C233E31C8001F7DA3 /* OMSDK_Loopme.framework */; };
 		47A57C4C233E31C8001F7DA3 /* LoopMeOMIDWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57B9D233E31C8001F7DA3 /* LoopMeOMIDWrapper.m */; };
@@ -69,7 +68,6 @@
 		47A57C4E233E31C8001F7DA3 /* LoopMeOMIDWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57C4F233E31C8001F7DA3 /* LoopMeOMIDVideoEventsWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BA0233E31C8001F7DA3 /* LoopMeOMIDVideoEventsWrapper.h */; };
 		47A57C50233E31C8001F7DA3 /* LoopMeViewabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */; };
-		47A57C51233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A57BA2233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework */; };
 		47A57C52233E31C8001F7DA3 /* LoopMeIASWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */; };
 		47A57C53233E31C8001F7DA3 /* LoopMeViewabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BA4233E31C8001F7DA3 /* LoopMeViewabilityManager.h */; };
 		47A57C54233E31C8001F7DA3 /* LoopMeAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BA5233E31C8001F7DA3 /* LoopMeAdView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -252,7 +250,6 @@
 		47A57B9F233E31C8001F7DA3 /* LoopMeOMIDWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOMIDWrapper.h; sourceTree = "<group>"; };
 		47A57BA0233E31C8001F7DA3 /* LoopMeOMIDVideoEventsWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOMIDVideoEventsWrapper.h; sourceTree = "<group>"; };
 		47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeViewabilityManager.m; sourceTree = "<group>"; };
-		47A57BA2233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LOOMoatMobileAppKit.framework; sourceTree = "<group>"; };
 		47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeIASWrapper.m; sourceTree = "<group>"; };
 		47A57BA4233E31C8001F7DA3 /* LoopMeViewabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeViewabilityManager.h; sourceTree = "<group>"; };
 		47A57BA5233E31C8001F7DA3 /* LoopMeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdView.h; sourceTree = "<group>"; };
@@ -378,9 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				478C2BCF22FB00F900D618AB /* libxml2.tbd in Frameworks */,
-				47A57C51233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework in Frameworks */,
 				47A57C4B233E31C8001F7DA3 /* OMSDK_Loopme.framework in Frameworks */,
-				47A57C49233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,7 +540,6 @@
 				47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */,
 				47A57B9B233E31C8001F7DA3 /* OMSDK */,
 				47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */,
-				47A57BA2233E31C8001F7DA3 /* LOOMoatMobileAppKit.framework */,
 				47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */,
 				47A57BA4233E31C8001F7DA3 /* LoopMeViewabilityManager.h */,
 			);
