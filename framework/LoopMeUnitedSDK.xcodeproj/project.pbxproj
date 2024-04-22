@@ -50,20 +50,7 @@
 		47A57B87233CFECC001F7DA3 /* VAST.xml in Resources */ = {isa = PBXBuildFile; fileRef = 47A57B82233CFECC001F7DA3 /* VAST.xml */; };
 		47A57B89233CFECC001F7DA3 /* VASTWrapper.xml in Resources */ = {isa = PBXBuildFile; fileRef = 47A57B84233CFECC001F7DA3 /* VASTWrapper.xml */; };
 		47A57C3D233E31C8001F7DA3 /* LoopMeTargeting.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B8B233E31C7001F7DA3 /* LoopMeTargeting.h */; };
-		47A57C3E233E31C8001F7DA3 /* LoopMe_AbstractAvidAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B8E233E31C7001F7DA3 /* LoopMe_AbstractAvidAdSession.h */; };
-		47A57C3F233E31C8001F7DA3 /* LoopMe_AvidDeferredAdSessionListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B8F233E31C7001F7DA3 /* LoopMe_AvidDeferredAdSessionListener.h */; };
-		47A57C40233E31C8001F7DA3 /* LoopMe_AvidAdSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B90233E31C7001F7DA3 /* LoopMe_AvidAdSessionManager.h */; };
-		47A57C41233E31C8001F7DA3 /* LoopMe_Avid.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B91233E31C7001F7DA3 /* LoopMe_Avid.h */; };
-		47A57C42233E31C8001F7DA3 /* LoopMe_AvidDisplayAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B92233E31C7001F7DA3 /* LoopMe_AvidDisplayAdSession.h */; };
-		47A57C43233E31C8001F7DA3 /* LoopMe_AvidVideoAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B93233E31C7001F7DA3 /* LoopMe_AvidVideoAdSession.h */; };
-		47A57C44233E31C8001F7DA3 /* LoopMe_AvidVideoPlaybackListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B94233E31C7001F7DA3 /* LoopMe_AvidVideoPlaybackListener.h */; };
-		47A57C45233E31C8001F7DA3 /* LoopMe_AvidManagedVideoAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B95233E31C8001F7DA3 /* LoopMe_AvidManagedVideoAdSession.h */; };
-		47A57C46233E31C8001F7DA3 /* LoopMe_ExternalAvidAdSessionContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B96233E31C8001F7DA3 /* LoopMe_ExternalAvidAdSessionContext.h */; };
-		47A57C47233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B97233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h */; };
-		47A57C48233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B98233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h */; };
-		47A57C4A233E31C8001F7DA3 /* LoopMeIASWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */; };
 		47A57C50233E31C8001F7DA3 /* LoopMeViewabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */; };
-		47A57C52233E31C8001F7DA3 /* LoopMeIASWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */; };
 		47A57C53233E31C8001F7DA3 /* LoopMeViewabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BA4233E31C8001F7DA3 /* LoopMeViewabilityManager.h */; };
 		47A57C54233E31C8001F7DA3 /* LoopMeAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BA5233E31C8001F7DA3 /* LoopMeAdView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57C55233E31C8001F7DA3 /* LoopMeSDKConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BA7233E31C8001F7DA3 /* LoopMeSDKConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -230,21 +217,7 @@
 		47A57B82233CFECC001F7DA3 /* VAST.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = VAST.xml; path = LoopMeUnitedSDK/AdConfiguration/AdConfigurationTests/VAST.xml; sourceTree = SOURCE_ROOT; };
 		47A57B84233CFECC001F7DA3 /* VASTWrapper.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = VASTWrapper.xml; path = LoopMeUnitedSDK/AdConfiguration/AdConfigurationTests/VASTWrapper.xml; sourceTree = SOURCE_ROOT; };
 		47A57B8B233E31C7001F7DA3 /* LoopMeTargeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeTargeting.h; sourceTree = "<group>"; };
-		47A57B8E233E31C7001F7DA3 /* LoopMe_AbstractAvidAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AbstractAvidAdSession.h; sourceTree = "<group>"; };
-		47A57B8F233E31C7001F7DA3 /* LoopMe_AvidDeferredAdSessionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidDeferredAdSessionListener.h; sourceTree = "<group>"; };
-		47A57B90233E31C7001F7DA3 /* LoopMe_AvidAdSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidAdSessionManager.h; sourceTree = "<group>"; };
-		47A57B91233E31C7001F7DA3 /* LoopMe_Avid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_Avid.h; sourceTree = "<group>"; };
-		47A57B92233E31C7001F7DA3 /* LoopMe_AvidDisplayAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidDisplayAdSession.h; sourceTree = "<group>"; };
-		47A57B93233E31C7001F7DA3 /* LoopMe_AvidVideoAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidVideoAdSession.h; sourceTree = "<group>"; };
-		47A57B94233E31C7001F7DA3 /* LoopMe_AvidVideoPlaybackListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidVideoPlaybackListener.h; sourceTree = "<group>"; };
-		47A57B95233E31C8001F7DA3 /* LoopMe_AvidManagedVideoAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidManagedVideoAdSession.h; sourceTree = "<group>"; };
-		47A57B96233E31C8001F7DA3 /* LoopMe_ExternalAvidAdSessionContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_ExternalAvidAdSessionContext.h; sourceTree = "<group>"; };
-		47A57B97233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AbstractAvidManagedAdSession.h; sourceTree = "<group>"; };
-		47A57B98233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe_AvidManagedDisplayAdSession.h; sourceTree = "<group>"; };
-		47A57B99233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libAvid-loopme-3.6.8.a"; sourceTree = "<group>"; };
-		47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeIASWrapper.h; sourceTree = "<group>"; };
 		47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeViewabilityManager.m; sourceTree = "<group>"; };
-		47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeIASWrapper.m; sourceTree = "<group>"; };
 		47A57BA4233E31C8001F7DA3 /* LoopMeViewabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeViewabilityManager.h; sourceTree = "<group>"; };
 		47A57BA5233E31C8001F7DA3 /* LoopMeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdView.h; sourceTree = "<group>"; };
 		47A57BA7233E31C8001F7DA3 /* LoopMeSDKConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeSDKConfiguration.h; sourceTree = "<group>"; };
@@ -535,33 +508,11 @@
 		47A57B8C233E31C7001F7DA3 /* Viewability */ = {
 			isa = PBXGroup;
 			children = (
-				47A57B8D233E31C7001F7DA3 /* IAS */,
-				47A57B9A233E31C8001F7DA3 /* LoopMeIASWrapper.h */,
 				47A57B9B233E31C8001F7DA3 /* OMSDK */,
 				47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */,
-				47A57BA3233E31C8001F7DA3 /* LoopMeIASWrapper.m */,
 				47A57BA4233E31C8001F7DA3 /* LoopMeViewabilityManager.h */,
 			);
 			path = Viewability;
-			sourceTree = "<group>";
-		};
-		47A57B8D233E31C7001F7DA3 /* IAS */ = {
-			isa = PBXGroup;
-			children = (
-				47A57B8E233E31C7001F7DA3 /* LoopMe_AbstractAvidAdSession.h */,
-				47A57B8F233E31C7001F7DA3 /* LoopMe_AvidDeferredAdSessionListener.h */,
-				47A57B90233E31C7001F7DA3 /* LoopMe_AvidAdSessionManager.h */,
-				47A57B91233E31C7001F7DA3 /* LoopMe_Avid.h */,
-				47A57B92233E31C7001F7DA3 /* LoopMe_AvidDisplayAdSession.h */,
-				47A57B93233E31C7001F7DA3 /* LoopMe_AvidVideoAdSession.h */,
-				47A57B94233E31C7001F7DA3 /* LoopMe_AvidVideoPlaybackListener.h */,
-				47A57B95233E31C8001F7DA3 /* LoopMe_AvidManagedVideoAdSession.h */,
-				47A57B96233E31C8001F7DA3 /* LoopMe_ExternalAvidAdSessionContext.h */,
-				47A57B97233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h */,
-				47A57B98233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h */,
-				47A57B99233E31C8001F7DA3 /* libAvid-loopme-3.6.8.a */,
-			);
-			path = IAS;
 			sourceTree = "<group>";
 		};
 		47A57B9B233E31C8001F7DA3 /* OMSDK */ = {
@@ -909,32 +860,26 @@
 				47A57C8E233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h in Headers */,
 				47A57C8A233E31C8001F7DA3 /* LoopMeAdDisplayController.h in Headers */,
 				47A57CA0233E31C8001F7DA3 /* LoopMeVASTPlayerUIView.h in Headers */,
-				47A57C47233E31C8001F7DA3 /* LoopMe_AbstractAvidManagedAdSession.h in Headers */,
-				47A57C43233E31C8001F7DA3 /* LoopMe_AvidVideoAdSession.h in Headers */,
 				47A57CCB233E31C8001F7DA3 /* LoopMeGDPRAPIService.h in Headers */,
 				47A57C5A233E31C8001F7DA3 /* LoopMeMRAIDClient.h in Headers */,
 				47A57CA6233E31C8001F7DA3 /* LoopMeMaximizedViewController.h in Headers */,
 				47A57C3D233E31C8001F7DA3 /* LoopMeTargeting.h in Headers */,
 				47A57C7E233E31C8001F7DA3 /* LoopMeInterstitialViewController.h in Headers */,
-				47A57C48233E31C8001F7DA3 /* LoopMe_AvidManagedDisplayAdSession.h in Headers */,
 				47A57CB7233E31C8001F7DA3 /* NSDictionary+JSONPrint.h in Headers */,
 				47A57CB1233E31C8001F7DA3 /* LoopMeIdentityProvider.h in Headers */,
 				47A57C80233E31C8001F7DA3 /* LoopMeBrowserViewController.h in Headers */,
 				47A57C96233E31C8001F7DA3 /* LoopMeProgressOverlayView.h in Headers */,
 				47714E3F22FAF9CF00DF0D55 /* LoopMeSDK.h in Headers */,
 				47A57C59233E31C8001F7DA3 /* LoopMeVPAIDVideoClient.h in Headers */,
-				47A57C3E233E31C8001F7DA3 /* LoopMe_AbstractAvidAdSession.h in Headers */,
 				47A57C84233E31C8001F7DA3 /* LoopMeGLProgram.h in Headers */,
 				47A57C76233E31C8001F7DA3 /* LoopMeVASTImageDownloader.h in Headers */,
 				47A57C61233E31C8001F7DA3 /* LoopMeJSCommunicatorProtocol.h in Headers */,
 				47A57CA2233E31C8001F7DA3 /* LoopMeMinimizedAdView.h in Headers */,
 				47A57C79233E31C8001F7DA3 /* LoopMeVideoManager.h in Headers */,
-				47A57C3F233E31C8001F7DA3 /* LoopMe_AvidDeferredAdSessionListener.h in Headers */,
 				47A57CBB233E31C8001F7DA3 /* UIImage+LoopMeBinaryImage.h in Headers */,
 				47A57C53233E31C8001F7DA3 /* LoopMeViewabilityManager.h in Headers */,
 				47A57C99233E31C8001F7DA3 /* LoopMeBackView.h in Headers */,
 				47A57C97233E31C8001F7DA3 /* LoopMeActivityIndicatorView.h in Headers */,
-				47A57C41233E31C8001F7DA3 /* LoopMe_Avid.h in Headers */,
 				47A57C7D233E31C8001F7DA3 /* LoopMeErrorEventSender.h in Headers */,
 				47A57C86233E31C8001F7DA3 /* LoopMeOrientationViewControllerProtocol.h in Headers */,
 				47A57CA9233E31C8001F7DA3 /* LoopMeAudioCheck.h in Headers */,
@@ -943,14 +888,10 @@
 				47A57C5C233E31C8001F7DA3 /* LoopMeVPAIDClient.h in Headers */,
 				47A57CCE233E31C8001F7DA3 /* LoopMeGDPRViewController.h in Headers */,
 				47A57C78233E31C8001F7DA3 /* LoopMeReachability.h in Headers */,
-				47A57C4A233E31C8001F7DA3 /* LoopMeIASWrapper.h in Headers */,
 				47A57CAF233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h in Headers */,
 				47A57C5F233E31C8001F7DA3 /* LoopMeVideoClientNormal.h in Headers */,
-				47A57C45233E31C8001F7DA3 /* LoopMe_AvidManagedVideoAdSession.h in Headers */,
 				47A57CA1233E31C8001F7DA3 /* LoopMeCancelView.h in Headers */,
-				47A57C40233E31C8001F7DA3 /* LoopMe_AvidAdSessionManager.h in Headers */,
 				47A57CB3233E31C8001F7DA3 /* LoopMeAnalyticsProvider.h in Headers */,
-				47A57C44233E31C8001F7DA3 /* LoopMe_AvidVideoPlaybackListener.h in Headers */,
 				47A57C67233E31C8001F7DA3 /* LoopMeDiscURLCache.h in Headers */,
 				47A57C63233E31C8001F7DA3 /* LoopMeInterstitialGeneral.h in Headers */,
 				47A57CC0233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h in Headers */,
@@ -962,8 +903,6 @@
 				47A57CBD233E31C8001F7DA3 /* NSString+Encryption.h in Headers */,
 				47A57C77233E31C8001F7DA3 /* LoopMeAdManager.h in Headers */,
 				47A57CAD233E31C8001F7DA3 /* LoopMeGlobalSettings.h in Headers */,
-				47A57C46233E31C8001F7DA3 /* LoopMe_ExternalAvidAdSessionContext.h in Headers */,
-				47A57C42233E31C8001F7DA3 /* LoopMe_AvidDisplayAdSession.h in Headers */,
 				47A57C60233E31C8001F7DA3 /* LoopMeVideoCommunicatorProtocol.h in Headers */,
 				47A57C94233E31C8001F7DA3 /* LoopMeCloseButton.h in Headers */,
 			);
@@ -1138,7 +1077,6 @@
 				47500F4C234C8B760099AD1E /* UserAgent.swift in Sources */,
 				47A57C70233E31C8001F7DA3 /* LoopMeReachability.m in Sources */,
 				47A57C58233E31C8001F7DA3 /* LoopMeVideoClientNormal.m in Sources */,
-				47A57C52233E31C8001F7DA3 /* LoopMeIASWrapper.m in Sources */,
 				47A57C91233E31C8001F7DA3 /* LoopMeServerURLBuilder.m in Sources */,
 				47A57C9C233E31C8001F7DA3 /* LoopMeVASTPlayerUIView.m in Sources */,
 				47A57B66233CFAD9001F7DA3 /* AssetLinks.swift in Sources */,

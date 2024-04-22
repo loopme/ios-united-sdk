@@ -23,7 +23,6 @@
 #import "LoopMeErrorEventSender.h"
 #import "LoopMe360ViewController.h"
 #import "LoopMeAdWebView.h"
-#import "LoopMeIASWrapper.h"
 
 const struct LoopMeVideoStateStruct LoopMeVideoState = {
     .ready = @"READY",
@@ -122,14 +121,6 @@ const CGFloat kOneFrameDuration = 0.03;
 
 - (id<LoopMeJSCommunicatorProtocol>)JSClient {
     return [self.delegate JSCommunicator];
-}
-
-- (LoopMeIASWrapper *)iasWrapper {
-    if ([self.delegate respondsToSelector:@selector(iasWarpper)]) {
-        return [self.delegate performSelector:@selector(iasWarpper)];
-    }
-    
-    return nil;
 }
 
 - (void)setPlayerItem:(AVPlayerItem *)playerItem {
@@ -288,13 +279,6 @@ const CGFloat kOneFrameDuration = 0.03;
                                          usingBlock:^(CMTime time) {
                                              float currentTime = (float)CMTimeGetSeconds(time);
                                              double percent = currentTime / CMTimeGetSeconds(selfWeak.playerItem.duration);
-                                             if (percent >= 0.25 && percent < 0.5) {
-                                                 [selfWeak.iasWrapper recordAdVideoFirstQuartileEvent];
-                                             } else if (percent >= 0.5 && percent < 0.75) {
-                                                 [selfWeak.iasWrapper recordAdVideoMidpointEvent];
-                                             } else if (percent >= 0.75) {
-                                                 [selfWeak.iasWrapper recordAdVideoThirdQuartileEvent];
-                                             }
                                              if (currentTime > 0 && selfWeak.isShouldPlay) {
                                                  [selfWeak.JSClient setCurrentTime:currentTime*1000];
                                              }
@@ -310,7 +294,6 @@ const CGFloat kOneFrameDuration = 0.03;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (self.isShouldPlay) {
                     [self.player play];
-                    [self.iasWrapper recordAdPlayingEvent];
                 }
             });
             break;
@@ -484,7 +467,6 @@ const CGFloat kOneFrameDuration = 0.03;
 
 - (void)setMute:(BOOL)mute {
     self.player.volume = (mute) ? 0.0f : 1.0f;
-    [self.iasWrapper recordAdVolumeChangeEvent:self.player.volume];
 }
 
 - (void)seekToTime:(double)time {
@@ -509,12 +491,10 @@ const CGFloat kOneFrameDuration = 0.03;
     self.shouldPlay = YES;
     [self.JSClient setVideoState:LoopMeVideoState.playing];
     [self.player play];
-    [self.iasWrapper recordAdPlayingEvent];
 }
 
 - (void)play {
     if (![self playerReachedEnd]) {
-        [self.iasWrapper recordAdPlayingEvent];
         self.shouldPlay = YES;
         [self.player play];
     }
@@ -522,7 +502,6 @@ const CGFloat kOneFrameDuration = 0.03;
 
 - (void)pause {
     self.shouldPlay = NO;
-    [self.iasWrapper recordAdPausedEvent];
     [self.player pause];
 }
 

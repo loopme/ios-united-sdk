@@ -10,7 +10,6 @@
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 #import "LoopMeSDK.h"
-#import "LoopMeIASWrapper.h"
 #import "LoopMeVPAIDClient.h"
 #import "LoopMeVPAIDAdDisplayController.h"
 #import "LoopMeDestinationDisplayController.h"
@@ -96,7 +95,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 @property (nonatomic, assign) int showCloseButtonTimerCounter;
 @property (nonatomic, assign) double adRemainingTime;
 
-@property (nonatomic, strong) LoopMeIASWrapper *iasWrapper;
 @property (nonatomic, assign) NSTimeInterval viewableTime;
 @property (nonatomic, assign) NSTimeInterval previousVideoTime;
 
@@ -169,7 +167,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     self = [super initWithDelegate:delegate];
     
     if (self) {
-        _iasWrapper = [[LoopMeIASWrapper alloc] init];
         _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
         
     }
@@ -261,14 +258,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         
         self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeWebViewLoadingTimeout target:self selector:@selector(cancelWebView) userInfo:nil repeats:NO];
     } else {
-        if ([self.adConfiguration useTracking:LoopMeTrackerNameIas]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.iasWrapper initWithPartnerVersion:LOOPME_SDK_VERSION creativeType:self.adConfiguration.creativeType adConfiguration:self.adConfiguration];
-                [self.iasWrapper registerAdView:self.delegate.containerView];
-//                [self.iasWrapper registerFriendlyObstruction:self.webView];
-            });
-        }
-        
         self.isNeedJSInject = NO;
     
         NSURL *imageURL;
@@ -280,11 +269,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)displayAd {
-    if ([self.adConfiguration useTracking:LoopMeTrackerNameIas]) {
-        [self.iasWrapper recordReadyEvent];
-        [self.iasWrapper recordAdLoadedEvent];
-    }
-    
     self.isNotPlay = NO;
     self.isDeferredAdStopped = NO;
     self.viewableTime = 0;
@@ -312,9 +296,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 //    [self.omidSession addFriendlyObstruction:self.webView];
 //    [self.omidSession addFriendlyObstruction:[(LoopMeVPAIDVideoClient *)self.videoClient vastUIView]];
 //    [self.omidSession addFriendlyObstruction:[(LoopMeVPAIDVideoClient *)self.videoClient videoView]];
-    
-    //AVID
-    [self.iasWrapper recordAdImpressionEvent];
 }
 
 - (void)closeAd {
@@ -343,12 +324,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         [self.videoClient pause];
         //TODO check on skip
         [self.vpaidClient stopAd];
-    }
-    
-    if ([self.adConfiguration useTracking:LoopMeTrackerNameIas]) {
-        [self.iasWrapper clean];
-        [self.iasWrapper unregisterAdView:self.webView];
-        [self.iasWrapper endSession];
     }
     
     [self.omidSession finish];
@@ -757,7 +732,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 - (void)videoClient:(LoopMeVPAIDVideoClient *)client setupView:(UIView *)view {
     view.frame = self.delegate.containerView.bounds;
-    [self.iasWrapper registerFriendlyObstruction:view];
     [[self.delegate containerView] addSubview:view];
     
     UIView *containerView = [self.delegate containerView];
@@ -841,15 +815,12 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     if (percent >= 0.25 && percent < 0.5) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearFirstQuartile];
-        [self.iasWrapper recordAdVideoFirstQuartileEvent];
         [self.omidVideoEvents firstQuartile];
     } else if (percent >= 0.5 && percent < 0.75) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearMidpoint];
-        [self.iasWrapper recordAdVideoMidpointEvent];
         [self.omidVideoEvents midpoint];
     } else if (percent >= 0.75) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearThirdQuartile];
-        [self.iasWrapper recordAdVideoThirdQuartileEvent];
         [self.omidVideoEvents thirdQuartile];
     }
     [self.vastEventTracker setCurrentTime:currentTime];
