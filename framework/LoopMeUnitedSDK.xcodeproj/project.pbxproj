@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2226F2BC2BD6966D00A833DD /* OMSDK_Loopme.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B983C8FD2BD67BDF0044F316 /* OMSDK_Loopme.xcframework */; };
+		2226F2BD2BD6966D00A833DD /* OMSDK_Loopme.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B983C8FD2BD67BDF0044F316 /* OMSDK_Loopme.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2246F2032B8F1E16006F316E /* AdTrackingLinksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2246F2022B8F1E16006F316E /* AdTrackingLinksTests.swift */; };
 		22F75B122B8C9B0900D4B519 /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F75B112B8C9B0900D4B519 /* ConverterTests.swift */; };
 		47403417239568FD00CC14EF /* CCPATools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47403416239568FD00CC14EF /* CCPATools.swift */; };
@@ -168,7 +170,6 @@
 		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
 		B96645122BC55DE70032060A /* OMIDVideoEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */; };
 		B96645142BC572BF0032060A /* OMSDKWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645132BC572BF0032060A /* OMSDKWrapper.swift */; };
-		B983C8FE2BD67BDF0044F316 /* OMSDK_Loopme.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B983C8FD2BD67BDF0044F316 /* OMSDK_Loopme.xcframework */; };
 		B9DEB10B2BCFF74300362D97 /* SDKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DEB10A2BCFF74300362D97 /* SDKUtility.swift */; };
 /* End PBXBuildFile section */
 
@@ -181,6 +182,20 @@
 			remoteInfo = LoopMeSDK;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2226F2BE2BD6966D00A833DD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2226F2BD2BD6966D00A833DD /* OMSDK_Loopme.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2246F2022B8F1E16006F316E /* AdTrackingLinksTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdTrackingLinksTests.swift; path = LoopMeUnitedSDK/AdConfiguration/AdConfigurationTests/AdTrackingLinksTests.swift; sourceTree = SOURCE_ROOT; };
@@ -345,7 +360,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B983C8FE2BD67BDF0044F316 /* OMSDK_Loopme.xcframework in Frameworks */,
+				2226F2BC2BD6966D00A833DD /* OMSDK_Loopme.xcframework in Frameworks */,
 				478C2BCF22FB00F900D618AB /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -919,6 +934,7 @@
 				47714E2A22FAF9CE00DF0D55 /* Sources */,
 				47714E2B22FAF9CE00DF0D55 /* Frameworks */,
 				47714E2C22FAF9CE00DF0D55 /* Resources */,
+				2226F2BE2BD6966D00A833DD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
