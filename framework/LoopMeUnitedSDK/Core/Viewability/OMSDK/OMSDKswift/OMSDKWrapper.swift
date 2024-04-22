@@ -79,7 +79,7 @@ public class OMSDKWrapper: NSObject {
         return try OMIDLoopmeScriptInjector.injectScriptContent(omidJS, intoHTML: htmlString)
     }
 
-    @objc public func contextForHTML(_ webView: UIView) throws -> OMIDLoopmeAdSessionContext {
+    @objc public func contextForHTML(_ webView: WKWebView) throws -> OMIDLoopmeAdSessionContext {
         guard let partner = OMSDKWrapper.partner else {
             throw NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID partner not initialized"])
         }
@@ -127,7 +127,7 @@ public class OMSDKWrapper: NSObject {
             return  try OMIDLoopmeAdSession(configuration: configuration, adSessionContext: context)
     }
 
-    @objc public func sessionForHTML(_ webView: UIView) throws -> OMIDLoopmeAdSession {
+    @objc public func sessionForHTML(_ webView: WKWebView) throws -> OMIDLoopmeAdSession {
         let configuration = try configurationFor(.htmlDisplay)
         let context = try contextForHTML(webView)
         return try sessionFor(configuration, context: context)

@@ -26,12 +26,14 @@ public struct LoopMeOMIDVideoEvents {
 @objc (LoopMeOMIDVideoEventsWrapper)
 public class OMIDVideoEventsWrapper: NSObject {
     private var sentEvents = Set<String>()
-    private let videoEvents: OMIDLoopmeMediaEvents
-    
+    private let videoEvents: OMIDLoopmeAdEvents
+    private let mediaEvents: OMIDLoopmeMediaEvents
+
     @objc public init(session: OMIDLoopmeAdSession) throws {
         self.sentEvents = []
         do {
-            self.videoEvents = try OMIDLoopmeMediaEvents(adSession: session)
+            self.videoEvents = try OMIDLoopmeAdEvents(adSession: session)
+            self.mediaEvents = try OMIDLoopmeMediaEvents(adSession: session)
         } catch {
             throw error
         }
@@ -40,67 +42,72 @@ public class OMIDVideoEventsWrapper: NSObject {
     @objc public func loaded(with vastProperties: OMIDLoopmeVASTProperties) {
         if !sentEvents.contains(LoopMeOMIDVideoEvents.adLoaded) {
             sentEvents.insert(LoopMeOMIDVideoEvents.adLoaded)
-            videoEvents.loaded(with: vastProperties)
+            do {
+                   try videoEvents.loaded(with: vastProperties)
+               } catch {
+                   // Handle the error here
+                   print("Error: Loaded vast properties ")
+               }
         }
     }
     
     @objc public func start(withDuration duration: CGFloat, videoPlayerVolume: CGFloat) {
         if !sentEvents.contains(LoopMeOMIDVideoEvents.adStarted) {
             sentEvents.insert(LoopMeOMIDVideoEvents.adStarted)
-            videoEvents.start(withDuration: duration, mediaPlayerVolume: videoPlayerVolume)
+            mediaEvents.start(withDuration: duration, mediaPlayerVolume: videoPlayerVolume)
         }
     }
     
     @objc public func firstQuartile() {
         if !sentEvents.contains(LoopMeOMIDVideoEvents.adVideoFirstQuartile) {
             sentEvents.insert(LoopMeOMIDVideoEvents.adVideoFirstQuartile)
-            videoEvents.firstQuartile()
+            mediaEvents.firstQuartile()
         }
     }
     
     @objc public func midpoint() {
         if !sentEvents.contains(LoopMeOMIDVideoEvents.adVideoMidpoint) {
             sentEvents.insert(LoopMeOMIDVideoEvents.adVideoMidpoint)
-            videoEvents.midpoint()
+            mediaEvents.midpoint()
         }
     }
     
     @objc public func thirdQuartile() {
         if !sentEvents.contains(LoopMeOMIDVideoEvents.adVideoThirdQuartile) {
             sentEvents.insert(LoopMeOMIDVideoEvents.adVideoThirdQuartile)
-            videoEvents.thirdQuartile()
+            mediaEvents.thirdQuartile()
         }
     }
     
     @objc public func complete() {
         if !sentEvents.contains(LoopMeOMIDVideoEvents.adComplete) {
             sentEvents.insert(LoopMeOMIDVideoEvents.adComplete)
-            videoEvents.complete()
+            mediaEvents.complete()
         }
     }
     
     @objc public func pause() {
         if sentEvents.contains(LoopMeOMIDVideoEvents.adStarted) {
-            videoEvents.pause()
+            mediaEvents.pause()
         }
     }
     
     @objc public func resume() {
-        videoEvents.resume()
+        mediaEvents.resume()
     }
     
     @objc public func skipped() {
         if !sentEvents.contains(LoopMeOMIDVideoEvents.adSkipped) {
             sentEvents.insert(LoopMeOMIDVideoEvents.adSkipped)
-            videoEvents.skipped()
+            mediaEvents.skipped()
         }
     }
     
     @objc public func volumeChange(to playerVolume: CGFloat) {
-        videoEvents.volumeChange(to: playerVolume)
+        mediaEvents.volumeChange(to: playerVolume)
     }
     
     @objc public func adUserInteraction(withType interactionType: OMIDInteractionType) {
-        videoEvents.adUserInteraction(withType: interactionType)
+        mediaEvents.adUserInteraction(withType: interactionType)
     }
 }
