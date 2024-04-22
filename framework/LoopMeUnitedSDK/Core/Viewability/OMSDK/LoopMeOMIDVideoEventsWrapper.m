@@ -60,6 +60,7 @@ const struct LoopMeOMIDVideoEventsStruct LoopMeOMIDVideoEventsValues =
 - (void)loadedWithVastProperties:(nonnull OMIDLoopmeVASTProperties *)vastProperties {
     if (![self.sentEvents containsObject:LoopMeOMIDVideoEventsValues.adLoaded]) {
         [self.sentEvents addObject:LoopMeOMIDVideoEventsValues.adLoaded];
+        [self.videoEvents loadedWithVastProperties:vastProperties];
     }
     
 }
