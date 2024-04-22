@@ -6,7 +6,6 @@
 //
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import <LOOMoatMobileAppKit/LOOMoatMobileAppKit.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 #import "LoopMeVPAIDVideoClient.h"
@@ -63,7 +62,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) NSDate *loadingVideoStartDate;
 @property (nonatomic, strong) NSURL *videoURL;
 
-@property (nonatomic, strong) LOOMoatVideoTracker *moatVideoTracker;
 @property (nonatomic, weak) OMIDLoopmeMediaEvents *omidVideoEvents;
 
 @property (nonatomic, assign) BOOL isDidReachEndSent;
@@ -435,9 +433,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)cancel {
-    if ([self.delegate.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
-        [self.moatVideoTracker stopTracking];
-    }
 
     [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
@@ -483,9 +478,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)loadWithURL:(NSURL *)URL {
     
-    if ([_delegate.adConfiguration useTracking:LoopMeTrackerNameMoat] && !_delegate.adConfiguration.isV360) {
-        _moatVideoTracker = [LOOMoatVideoTracker trackerWithPartnerCode:LOOPME_MOAT_PARTNER_CODE];
-    }
     
     self.videoURL = URL;
     

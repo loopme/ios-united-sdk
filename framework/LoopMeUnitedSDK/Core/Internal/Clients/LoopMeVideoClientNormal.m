@@ -8,7 +8,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVKit/AVKit.h>
-#import <LOOMoatMobileAppKit/LOOMoatMobileAppKit.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 
@@ -74,7 +73,6 @@ const CGFloat kOneFrameDuration = 0.03;
 @property (nonatomic, assign) BOOL preloadingForCacheStarted;
 
 @property (nonatomic, strong) AVAssetResourceLoadingRequest *resourceLoadingRequest;
-@property (nonatomic, strong) LOOMoatVideoTracker *moatVideoTracker;
 
 - (NSURL *)currentAssetURLForPlayer:(AVPlayer *)player;
 - (void)setupPlayerWithFileURL:(NSURL *)URL;
@@ -218,9 +216,6 @@ const CGFloat kOneFrameDuration = 0.03;
     if (self = [super init]) {
         _delegate = delegate;
         
-        if ([_delegate.adConfiguration useTracking:LoopMeTrackerNameMoat] && !_delegate.adConfiguration.isV360) {
-            _moatVideoTracker = [LOOMoatVideoTracker trackerWithPartnerCode:LOOPME_MOAT_PARTNER_CODE];
-        }
         [self registerObservers];
     }
     return self;
@@ -437,9 +432,6 @@ const CGFloat kOneFrameDuration = 0.03;
 }
 
 - (void)cancel {
-    if ([self.delegate.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
-        [self.moatVideoTracker stopTracking];
-    }
     [self.glkViewController removeFromParentViewController];
     [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
@@ -512,11 +504,6 @@ const CGFloat kOneFrameDuration = 0.03;
     
     if ([self.delegate.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
         NSDictionary *adIds = [LoopMeGlobalSettings sharedInstance].adIds[self.appKey];
-        if (self.playerLayer) {
-            [self.moatVideoTracker trackVideoAd:adIds usingAVMoviePlayer:self.player withLayer:self.playerLayer withContainingView:self.videoView];
-        } else {
-            [self.moatVideoTracker trackVideoAd:adIds usingAVMoviePlayer:self.player withLayer:self.videoView.layer withContainingView:self.videoView];
-        }
     }
     
     self.shouldPlay = YES;
