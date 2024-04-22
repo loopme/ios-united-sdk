@@ -24,10 +24,10 @@ FOUNDATION_EXPORT const unsigned char LoopMeUnitedSDKVersionString[];
 #import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
 #import <LoopMeUnitedSDK/LoopMeSDKConfiguration.h>
 #import <LoopMeUnitedSDK/LoopMeVPAIDError.h>
-#import <LoopMeUnitedSDK/LoopMeOMIDWrapper.h>
 #import <LoopMeUnitedSDK/LoopMeDefinitions.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class LoopMeOMIDWrapper;
 
 @interface LoopMeSDK : NSObject
     

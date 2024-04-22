@@ -12,7 +12,6 @@
 #import "LoopMeVPAIDError.h"
 #import "LoopMeVideoManager.h"
 #import "LoopMeLogging.h"
-#import "LoopMeOMIDVideoEventsWrapper.h"
 
 #import "LoopMeSDK.h"
 #import "LoopMeReachability.h"
@@ -22,8 +21,6 @@
 #import "LoopMeAdView.h"
 #import "LoopMeIASWrapper.h"
 #import "NSString+Encryption.h"
-#import "LoopMeOMIDWrapper.h"
-#import <OMSDK_Loopme/OMIDImports.h>
 
 @class LoopMeAdConfiguration;
 
@@ -61,9 +58,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @property (nonatomic, strong) NSDate *loadingVideoStartDate;
 @property (nonatomic, strong) NSURL *videoURL;
-
-@property (nonatomic, weak) OMIDLoopmeMediaEvents *omidVideoEvents;
-
+@property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
 @property (nonatomic, strong) NSLayoutConstraint *topVideoUIConstraint;
@@ -433,6 +428,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)cancel {
+    if ([self.delegate.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
+    }
 
     [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
@@ -464,7 +461,7 @@ const NSInteger kResizeOffsetVPAID = 11;
             
             [self play];
             //OMID
-            [self.omidVideoEvents startWithDuration:CMTimeGetSeconds(self.playerItem.duration) mediaPlayerVolume:self.player.volume];
+            [self.omidVideoEvents startWithDuration:CMTimeGetSeconds(self.playerItem.duration) videoPlayerVolume:self.player.volume];
         }
 }
 

@@ -7,11 +7,13 @@
 //
 
 #import "LoopMeSDK.h"
-#import "LoopMeOMIDWrapper.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeGDPRTools.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeDefinitions.h"
+#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
+
+@class LoopMeOMIDWrapper;
 
 @interface LoopMeSDK ()
 

@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <OMSDK_Loopme/OMIDImports.h>
 
 @class LoopMeVPAIDClient;
 @class WKWebView;
