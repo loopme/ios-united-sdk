@@ -1,5 +1,0 @@
-platform :ios, '11.0'
-
-target 'LoopMeMediatonDemo' do
-    pod 'mopub-ios-sdk', '~> 5.13.0'
-end

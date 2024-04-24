@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,9 +14,7 @@
 		473B9C191D65BFB200DDD20A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473B9C181D65BFB200DDD20A /* Assets.xcassets */; };
 		473B9C1C1D65BFB200DDD20A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473B9C1A1D65BFB200DDD20A /* LaunchScreen.storyboard */; };
 		476677651D8AA2B400A5D509 /* GADLoopMeInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 476677641D8AA2B400A5D509 /* GADLoopMeInterstitialAdapter.m */; };
-		477ED39823706C260093FD63 /* LoopMeResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 477ED39723706C260093FD63 /* LoopMeResources.bundle */; };
 		478AB81222E5F96E00054BC6 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 478AB81122E5F96E00054BC6 /* libxml2.tbd */; };
-		8157FF0227A718EE00ED7050 /* LoopMeUnitedSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8157FF0127A718EE00ED7050 /* LoopMeUnitedSDK.xcframework */; };
 		8157FF0327A730DC00ED7050 /* Pods_AdMobAdapterDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA43C44227E07D789A00E99 /* Pods_AdMobAdapterDemo.framework */; };
 		8157FF0427A730DC00ED7050 /* Pods_AdMobAdapterDemo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA43C44227E07D789A00E99 /* Pods_AdMobAdapterDemo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -63,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8157FF0227A718EE00ED7050 /* LoopMeUnitedSDK.xcframework in Frameworks */,
 				8157FF0327A730DC00ED7050 /* Pods_AdMobAdapterDemo.framework in Frameworks */,
 				478AB81222E5F96E00054BC6 /* libxml2.tbd in Frameworks */,
 			);
@@ -168,6 +165,7 @@
 				473B9C071D65BFB200DDD20A /* Resources */,
 				1376E96D55F6F0A9C8F784E7 /* [CP] Embed Pods Frameworks */,
 				477ED39B23706C480093FD63 /* Embed Frameworks */,
+				BC71030DC1FC209E007829E3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,7 +187,7 @@
 				TargetAttributes = {
 					473B9C081D65BFB200DDD20A = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = Q876VLK88R;
+						DevelopmentTeam = 5LM9LJ6JB7;
 					};
 				};
 			};
@@ -218,7 +216,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				473B9C1C1D65BFB200DDD20A /* LaunchScreen.storyboard in Resources */,
-				477ED39823706C260093FD63 /* LoopMeResources.bundle in Resources */,
 				473B9C191D65BFB200DDD20A /* Assets.xcassets in Resources */,
 				473B9C171D65BFB200DDD20A /* Main.storyboard in Resources */,
 			);
@@ -269,6 +266,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC71030DC1FC209E007829E3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AdMobAdapterDemo/Pods-AdMobAdapterDemo-resources.sh",
+				"${PODS_ROOT}/LoopMeUnitedSDK/LoopMeUnitedSDK.embeddedframework/Resources/LoopMeResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LoopMeResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AdMobAdapterDemo/Pods-AdMobAdapterDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -421,8 +436,8 @@
 			baseConfigurationReference = B4924C3B099C1932F4BA1326 /* Pods-AdMobAdapterDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q876VLK88R;
-				"EXCLUDED_ARCHS[sdk=*]" = arm64;
+				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -440,10 +455,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = AdMobAdapter/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -458,7 +470,7 @@
 			baseConfigurationReference = F539D07264161D167A0B64E4 /* Pods-AdMobAdapterDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q876VLK88R;
+				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -476,10 +488,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = AdMobAdapter/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

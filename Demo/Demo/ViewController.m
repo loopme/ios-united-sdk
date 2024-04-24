@@ -73,17 +73,17 @@
     switch (indexPath.row) {
         case 0:
             controllerName = @"LDInterstitialViewController";
-            appKey = @"test_interstitial_l";
+            appKey = @"b5df00223e";
             break;
         
         case 1:
             controllerName = @"LDScrollableViewController";
-            appKey = @"9584545777";
+            appKey = @"3ae8c26803";
             break;
             
         case 2:
             controllerName = @"LDBannerViewController";
-            appKey = @"5265ed8a0a";
+            appKey = @"3ae8c26803";
             break;
 
         default:
