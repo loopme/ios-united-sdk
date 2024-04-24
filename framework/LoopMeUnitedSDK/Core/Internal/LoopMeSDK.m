@@ -49,16 +49,16 @@
     NSString *bundlePath = nil;
     NSArray *allBundles = [NSBundle allFrameworks];
     for (NSBundle *bundle in allBundles) {
-        if ([bundle pathForResource:@"LoopMeResources" ofType:@"bundle"]) {
-            NSURL *bundleURL = [bundle URLForResource:@"LoopMeResources" withExtension:@"bundle"];
-            _resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+        if ([bundle pathForResource: @"LoopMeResources" ofType: @"bundle"]) {
+            NSURL *bundleURL = [bundle URLForResource: @"LoopMeResources" withExtension: @"bundle"];
+            _resourcesBundle = [NSBundle bundleWithURL: bundleURL];
             return _resourcesBundle;
         }
     }
     if (!bundlePath) {
-        @throw [NSException exceptionWithName:@"NoBundleResource" reason:@"No loopme resource bundle" userInfo:nil];
+        @throw [NSException exceptionWithName: @"NoBundleResource" reason: @"No loopme resource bundle" userInfo: nil];
     }
-    _resourcesBundle = [NSBundle bundleWithPath:bundlePath];
+    _resourcesBundle = [NSBundle bundleWithPath: bundlePath];
     return _resourcesBundle;
     
 }
@@ -67,27 +67,40 @@
     return LOOPME_SDK_VERSION;
 }
 
-- (void)initSDKFromRootViewController:(UIViewController *)rootViewController
-                     sdkConfiguration:(LoopMeSDKConfiguration *)configuration
-                     completionBlock :(void(^_Nullable)(BOOL, NSError *))completionBlock {
-    
+/// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
+- (void)initSDKFromRootViewController: (UIViewController *)rootViewController
+                     sdkConfiguration: (LoopMeSDKConfiguration *) configuration
+                      completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock __attribute__((deprecated("Use init:sdkConfiguration:completionBlock instead"))) {
+    [self init: configuration completionBlock: completionBlock];
+}
+
+/// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
+- (void)initSDKFromRootViewController: (UIViewController *)rootViewController
+                      completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock __attribute__((deprecated("Use init:completionBlock instead"))) {
+    [self init: completionBlock];
+}
+
+- (void)init: (void(^_Nullable)(BOOL, NSError *))completionBlock {
+    [self init: [LoopMeSDKConfiguration defaultConfiguration] completionBlock: completionBlock];
+}
+
+- (void)init: (LoopMeSDKConfiguration *)configuration completionBlock: (void(^_Nullable)(BOOL, NSError *))completionBlock {
     if (self.isReady) {
         return;
     }
     
     if (SYSTEM_VERSION_LESS_THAN(@"10.0")) {
-        NSString *description = @"Block iOS versions less then 10.0";
-        NSError *error = [NSError errorWithDomain:@"loopme.com" code:0 userInfo:@{ NSLocalizedDescriptionKey : description }];
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"Block iOS versions less then 10.0"};
         if (completionBlock != nil) {
-            completionBlock(false, error);
+            completionBlock(false, [NSError errorWithDomain: @"loopme.com" code: 0 userInfo: userInfo]);
         }
         return;
     }
     
     [[LoopMeGDPRTools sharedInstance] getAppDetailsFromServer];
-    [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:rootViewController];
+    [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
-    [LoopMeOMIDWrapper initOMIDWithCompletionBlock:^(BOOL ready) {
+    [LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
         if (self.isReady && ready) {
             return;
         }
@@ -95,22 +108,13 @@
         NSError *error;
         NSString *description = @"LoopMe OMID fail to initialize";
         if (!ready) {
-            [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeServer errorMessage:description appkey:@"unknown"];
-            error = [NSError errorWithDomain:@"loopme.com" code:-1 userInfo:@{NSLocalizedDescriptionKey : description}];
+            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer errorMessage: description appkey: @"unknown"];
+            error = [NSError errorWithDomain: @"loopme.com" code: -1 userInfo: @{NSLocalizedDescriptionKey: description}];
         }
-        
         if (completionBlock != nil) {
             completionBlock(ready, error);
         }
     }];
-    
-}
-
-- (void)initSDKFromRootViewController:(UIViewController *)rootViewController
-                      completionBlock:(void (^)(BOOL, NSError *))completionBlock {
-    
-    LoopMeSDKConfiguration *configuration = [LoopMeSDKConfiguration defaultConfiguration];
-    [self initSDKFromRootViewController:rootViewController sdkConfiguration:configuration completionBlock:completionBlock];
 }
 
 @end

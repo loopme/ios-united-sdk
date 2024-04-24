@@ -156,11 +156,7 @@
 		47A57CC2233E31C8001F7DA3 /* LoopMeLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C2B233E31C8001F7DA3 /* LoopMeLogging.m */; };
 		47A57CC3233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C2C233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m */; };
 		47A57CC4233E31C8001F7DA3 /* LoopMeVPAIDError.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C2D233E31C8001F7DA3 /* LoopMeVPAIDError.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		47A57CCA233E31C8001F7DA3 /* LoopMeGDPRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C35233E31C8001F7DA3 /* LoopMeGDPRViewController.m */; };
-		47A57CCB233E31C8001F7DA3 /* LoopMeGDPRAPIService.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C36233E31C8001F7DA3 /* LoopMeGDPRAPIService.h */; };
 		47A57CCC233E31C8001F7DA3 /* LoopMeGDPRTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C37233E31C8001F7DA3 /* LoopMeGDPRTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		47A57CCD233E31C8001F7DA3 /* LoopMeGDPRAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C38233E31C8001F7DA3 /* LoopMeGDPRAPIService.m */; };
-		47A57CCE233E31C8001F7DA3 /* LoopMeGDPRViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C39233E31C8001F7DA3 /* LoopMeGDPRViewController.h */; };
 		47A57CCF233E31C8001F7DA3 /* LoopMeGDPRTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C3A233E31C8001F7DA3 /* LoopMeGDPRTools.m */; };
 		47A57CD1233E31C8001F7DA3 /* LoopMeInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C3C233E31C8001F7DA3 /* LoopMeInterstitial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57CD3233E3412001F7DA3 /* LoopMeAdType.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57CD2233E3412001F7DA3 /* LoopMeAdType.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -336,11 +332,7 @@
 		47A57C2B233E31C8001F7DA3 /* LoopMeLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeLogging.m; sourceTree = "<group>"; };
 		47A57C2C233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGeoLocationProvider.m; sourceTree = "<group>"; };
 		47A57C2D233E31C8001F7DA3 /* LoopMeVPAIDError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDError.h; sourceTree = "<group>"; };
-		47A57C35233E31C8001F7DA3 /* LoopMeGDPRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRViewController.m; sourceTree = "<group>"; };
-		47A57C36233E31C8001F7DA3 /* LoopMeGDPRAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRAPIService.h; sourceTree = "<group>"; };
 		47A57C37233E31C8001F7DA3 /* LoopMeGDPRTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRTools.h; sourceTree = "<group>"; };
-		47A57C38233E31C8001F7DA3 /* LoopMeGDPRAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRAPIService.m; sourceTree = "<group>"; };
-		47A57C39233E31C8001F7DA3 /* LoopMeGDPRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRViewController.h; sourceTree = "<group>"; };
 		47A57C3A233E31C8001F7DA3 /* LoopMeGDPRTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRTools.m; sourceTree = "<group>"; };
 		47A57C3C233E31C8001F7DA3 /* LoopMeInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeInterstitial.h; sourceTree = "<group>"; };
 		47A57CD2233E3412001F7DA3 /* LoopMeAdType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdType.h; sourceTree = "<group>"; };
@@ -831,11 +823,7 @@
 		47A57C34233E31C8001F7DA3 /* GDPR */ = {
 			isa = PBXGroup;
 			children = (
-				47A57C35233E31C8001F7DA3 /* LoopMeGDPRViewController.m */,
-				47A57C36233E31C8001F7DA3 /* LoopMeGDPRAPIService.h */,
 				47A57C37233E31C8001F7DA3 /* LoopMeGDPRTools.h */,
-				47A57C38233E31C8001F7DA3 /* LoopMeGDPRAPIService.m */,
-				47A57C39233E31C8001F7DA3 /* LoopMeGDPRViewController.h */,
 				47A57C3A233E31C8001F7DA3 /* LoopMeGDPRTools.m */,
 			);
 			path = GDPR;
@@ -875,7 +863,6 @@
 				47A57C8E233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h in Headers */,
 				47A57C8A233E31C8001F7DA3 /* LoopMeAdDisplayController.h in Headers */,
 				47A57CA0233E31C8001F7DA3 /* LoopMeVASTPlayerUIView.h in Headers */,
-				47A57CCB233E31C8001F7DA3 /* LoopMeGDPRAPIService.h in Headers */,
 				47A57C5A233E31C8001F7DA3 /* LoopMeMRAIDClient.h in Headers */,
 				47A57CA6233E31C8001F7DA3 /* LoopMeMaximizedViewController.h in Headers */,
 				47A57C3D233E31C8001F7DA3 /* LoopMeTargeting.h in Headers */,
@@ -901,7 +888,6 @@
 				47A57C89233E31C8001F7DA3 /* LoopMeVPAIDAdDisplayController.h in Headers */,
 				47A57C92233E31C8001F7DA3 /* LoopMeORTBTools.h in Headers */,
 				47A57C5C233E31C8001F7DA3 /* LoopMeVPAIDClient.h in Headers */,
-				47A57CCE233E31C8001F7DA3 /* LoopMeGDPRViewController.h in Headers */,
 				47A57C78233E31C8001F7DA3 /* LoopMeReachability.h in Headers */,
 				47A57CAF233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h in Headers */,
 				47A57C5F233E31C8001F7DA3 /* LoopMeVideoClientNormal.h in Headers */,
@@ -1071,9 +1057,7 @@
 				47A57CB6233E31C8001F7DA3 /* LoopMeGlobalSettings.m in Sources */,
 				47A57CCF233E31C8001F7DA3 /* LoopMeGDPRTools.m in Sources */,
 				47403417239568FD00CC14EF /* CCPATools.swift in Sources */,
-				47A57CCA233E31C8001F7DA3 /* LoopMeGDPRViewController.m in Sources */,
 				47A57C56233E31C8001F7DA3 /* LoopMeVPAIDClient.m in Sources */,
-				47A57CCD233E31C8001F7DA3 /* LoopMeGDPRAPIService.m in Sources */,
 				47A57C7B233E31C8001F7DA3 /* LoopMeErrorEventSender.m in Sources */,
 				47A57C90233E31C8001F7DA3 /* LoopMeORTBTools.m in Sources */,
 				47A57C50233E31C8001F7DA3 /* LoopMeViewabilityManager.m in Sources */,
@@ -1319,7 +1303,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
 				MARKETING_VERSION = 7.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
@@ -1366,7 +1349,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-					"$(PROJECT_DIR)/LoopMeUnitedSDK/Core/Viewability/IAS",
 				);
 				MARKETING_VERSION = 7.4.5;
 				ONLY_ACTIVE_ARCH = NO;
