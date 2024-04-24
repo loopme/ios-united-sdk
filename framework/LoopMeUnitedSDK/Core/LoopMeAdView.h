@@ -77,15 +77,27 @@ static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
  */
 @property (nonatomic, assign) LoopMeAdType preferredAdTypes;
 
+/// TODO: Remove this method because of deprecation
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
+                          delegate: (id<LoopMeAdViewDelegate>)delegate;
+
+/// TODO: Remove this method because of deprecation
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
+                        scrollView: (UIScrollView *)scrollView
+                          delegate: (id<LoopMeAdViewDelegate>)delegate;
+
 /**
  * Returns new `LoopMeAdView` object with the given appKey
  * @param appKey - unique identifier in LoopMe ad network.
  * @param delegate - delegate
  */
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                          delegate:(id<LoopMeAdViewDelegate>)delegate;
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                          delegate: (id<LoopMeAdViewDelegate>)delegate;
 
 /**
  * Returns new `LoopMeAdView` object with the given appKey
@@ -93,11 +105,10 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
  * @param preferredAdTypes -
  * @param delegate - delegate
  */
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                  preferredAdTypes:(LoopMeAdType)preferredAdTypes
-                          delegate:(id<LoopMeAdViewDelegate>)delegate;
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                  preferredAdTypes: (LoopMeAdType)preferredAdTypes
+                          delegate: (id<LoopMeAdViewDelegate>)delegate;
 
 /**
  * Returns new `LoopMeAdView` object with the given appKey.
@@ -106,11 +117,10 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
  * @param scrollView scrollView to be used to calculate ad area visibility and manage ad activity
  * @param delegate - delegate
  */
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                        scrollView:(UIScrollView *)scrollView
-                          delegate:(id<LoopMeAdViewDelegate>)delegate;
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                        scrollView: (UIScrollView *)scrollView
+                          delegate: (id<LoopMeAdViewDelegate>)delegate;
 
 /**
  * Returns new `LoopMeAdView` object with the given appKey.
@@ -119,12 +129,11 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
  * @param scrollView scrollView to be used to calculate ad area visibility and manage ad activity
  * @param delegate - delegate
  */
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                        scrollView:(UIScrollView *)scrollView
-                  preferredAdTypes:(LoopMeAdType)preferredAdTypes
-                          delegate:(id<LoopMeAdViewDelegate>)delegate;
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                        scrollView: (UIScrollView *)scrollView
+                  preferredAdTypes: (LoopMeAdType)preferredAdTypes
+                          delegate: (id<LoopMeAdViewDelegate>)delegate;
 /**
  * Starts loading ad content process.
  * It is recommended triggering it in advance to have ad ready and to be able to display ad instantly in your application.

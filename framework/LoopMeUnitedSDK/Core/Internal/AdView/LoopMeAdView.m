@@ -68,15 +68,13 @@
     [_adDisplayControllerVPAID stopHandlingRequests];
 }
 
-- (instancetype)initWithAppKey:(NSString *)appKey
-                         frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                    scrollView:(UIScrollView *)scrollView
-              preferredAdTypes:(LoopMeAdType)preferredAdTypes
-                      delegate:(id<LoopMeAdViewDelegate>)delegate {
+- (instancetype)initWithAppKey: (NSString *)appKey
+                         frame: (CGRect)frame
+                    scrollView: (UIScrollView *)scrollView
+              preferredAdTypes: (LoopMeAdType)preferredAdTypes
+                      delegate: (id<LoopMeAdViewDelegate>)delegate {
     self = [super init];
     if (self) {
-        
         if (![[LoopMeSDK shared] isReady]) {
             LoopMeLogError(@"SDK is not inited");
             return nil;
@@ -91,13 +89,6 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
             LoopMeLogDebug(@"Block iOS versions less then 10.0");
             return nil;
         }
-        
-        if (!viewController) {
-            LoopMeLogError(@"viewController cann't be nil");
-            return nil;
-        }
-        
-        [[LoopMeGDPRTools sharedInstance] showGDPRWindowFromViewController:viewController];
         
         _appKey = appKey;
         _delegate = delegate;
@@ -195,39 +186,65 @@ viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
 
 #pragma mark - Class Methods
 
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                        scrollView:(UIScrollView *)scrollView
-                          delegate:(id<LoopMeAdViewDelegate>)delegate {
-    return [[self alloc] initWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:scrollView preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
+/// TODO: Remove it because of deprecation
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
+                          delegate: (id<LoopMeAdViewDelegate>)delegate __attribute__((deprecated("Use adViewWithAppKey:appkey:frame:delegate instead"))) {
+    return [LoopMeAdView adViewWithAppKey: appKey frame: frame delegate: delegate];
+};
+
+/// TODO: Remove it because of deprecation
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
+                        scrollView: (UIScrollView *)scrollView
+                          delegate: (id<LoopMeAdViewDelegate>)delegate __attribute__((deprecated("Use adViewWithAppKey:appkey:frame:scrollView:delegate instead"))) {
+    return [LoopMeAdView adViewWithAppKey: appKey frame: frame scrollView: scrollView delegate: delegate];
+};
+
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                        scrollView: (UIScrollView *)scrollView
+                          delegate: (id<LoopMeAdViewDelegate>)delegate {
+    return [[self alloc] initWithAppKey: appKey
+                                  frame: frame
+                             scrollView: scrollView
+                       preferredAdTypes: LoopMeAdTypeAll
+                               delegate: delegate];
 }
 
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                          delegate:(id<LoopMeAdViewDelegate>)delegate {
-    return [LoopMeAdView adViewWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:nil preferredAdTypes:LoopMeAdTypeAll delegate:delegate];
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                          delegate: (id<LoopMeAdViewDelegate>)delegate {
+    return [LoopMeAdView adViewWithAppKey: appKey
+                                    frame: frame
+                               scrollView: nil
+                         preferredAdTypes: LoopMeAdTypeAll
+                                 delegate: delegate];
 }
 
-
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                        scrollView:(UIScrollView *)scrollView
-                  preferredAdTypes:(LoopMeAdType)adTypes
-                          delegate:(id<LoopMeAdViewDelegate>)delegate {
-    
-    return [[self alloc] initWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:scrollView preferredAdTypes:adTypes delegate:delegate];
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                        scrollView: (UIScrollView *)scrollView
+                  preferredAdTypes: (LoopMeAdType)adTypes
+                          delegate: (id<LoopMeAdViewDelegate>)delegate {
+    return [[self alloc] initWithAppKey: appKey
+                                  frame: frame
+                             scrollView: scrollView
+                       preferredAdTypes: adTypes
+                               delegate: delegate];
 }
 
-+ (LoopMeAdView *)adViewWithAppKey:(NSString *)appKey
-                             frame:(CGRect)frame
-viewControllerForPresentationGDPRWindow:(UIViewController *)viewController
-                  preferredAdTypes:(LoopMeAdType)preferredAdTypes
-                          delegate:(id<LoopMeAdViewDelegate>)delegate {
-    
-    return [LoopMeAdView adViewWithAppKey:appKey frame:frame viewControllerForPresentationGDPRWindow:viewController scrollView:nil preferredAdTypes:preferredAdTypes delegate:delegate];
++ (LoopMeAdView *)adViewWithAppKey: (NSString *)appKey
+                             frame: (CGRect)frame
+                  preferredAdTypes: (LoopMeAdType)preferredAdTypes
+                          delegate: (id<LoopMeAdViewDelegate>)delegate {
+    return [LoopMeAdView adViewWithAppKey: appKey
+                                    frame: frame
+                               scrollView: nil
+                         preferredAdTypes: preferredAdTypes
+                                 delegate: delegate];
 }
 
 #pragma mark - LifeCycle

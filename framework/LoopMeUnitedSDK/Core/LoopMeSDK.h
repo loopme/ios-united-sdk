@@ -38,12 +38,18 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shared;
 + (NSBundle *)resourcesBundle;
 
+/// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
+- (void)initSDKFromRootViewController: (UIViewController *)rootViewController
+                     sdkConfiguration: (LoopMeSDKConfiguration *) configuration
+                      completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
+
+/// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
+- (void)initSDKFromRootViewController: (UIViewController *)rootViewController
+                      completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
+
+- (void)init: (LoopMeSDKConfiguration *) configuration completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
     
-- (void)initSDKFromRootViewController:(UIViewController *)rootViewController
-                     sdkConfiguration:(LoopMeSDKConfiguration *) configuration
-                     completionBlock :(void(^_Nullable)(BOOL,  NSError * _Nullable))completionBlock;
-    
-- (void)initSDKFromRootViewController:(UIViewController *)rootViewController completionBlock :(void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
+- (void)init: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
     
 @end
 

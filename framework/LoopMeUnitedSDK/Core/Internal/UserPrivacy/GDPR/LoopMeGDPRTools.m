@@ -8,14 +8,11 @@
 
 #import "LoopMeGDPRTools.h"
 #import "LoopMeIdentityProvider.h"
-#import "LoopMeGDPRAPIService.h"
-#import "LoopMeGDPRViewController.h"
 
 typedef struct {
     BOOL userConsent;
     BOOL needConsent;
     LoopMeConsentType consentType;
-    NSURL * _Nullable consentUrl;
 } LoopMeConsentResult;
 
 static NSString * const kLoopMeNeedConsentKey = @"need_consent";
@@ -30,11 +27,10 @@ static NSString * const kLoopMeIABUserDefaultsKeyGdprApplies = @"IABTCF_gdprAppl
 static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCString";
 static NSString * const kLoopMeSourceAppID = @"SourceAppID";
 
-@interface LoopMeGDPRTools() <LoopMeGDPRViewControllerDelegate>
+@interface LoopMeGDPRTools()
 
 @property (nonatomic, assign) BOOL userConsent;
 
-@property (nonatomic) LoopMeGDPRViewController *gdprVC;
 @property (nonatomic) LoopMeConsentType consentType;
 @property (nonatomic) void (^completionBlock)(void);
 
@@ -73,70 +69,19 @@ static NSString * const kLoopMeSourceAppID = @"SourceAppID";
     _userConsent = userConsent;
 }
 
-- (LoopMeConsentResult)resultFrom: (NSDictionary *)dictionary deviceID:(NSString *)deviceID {
-    NSString *consentUrl = [dictionary objectForKey: kLoopMeConsentURLKey];
-    NSString *needConsent = [dictionary objectForKey: kLoopMeNeedConsentKey];
-    return (LoopMeConsentResult){
-        .userConsent = [[dictionary objectForKey: kLoopMeUserConsentKey] boolValue],
-        .consentType = LoopMeConsentTypeLoopMe,
-        .needConsent = needConsent ? [needConsent boolValue] : NO,
-        .consentUrl = consentUrl ? [NSURL URLWithString: [NSString stringWithFormat: @"%@?is_sdk=true&device_id=%@", consentUrl, deviceID]] : nil
-    };
-}
-
-- (LoopMeConsentResult)userConsent: (NSString *)deviceID {
-    NSDictionary *resultDict = [LoopMeGDPRAPIService apiResponse: deviceID ignoreCache: NO];
-    if ([resultDict objectForKey: kLoopMeUserConsentKey]) {
-        return [self resultFrom: resultDict deviceID: deviceID];
-    }
-    // Check again without cache
-    NSDictionary *resultDict2 = [LoopMeGDPRAPIService apiResponse: deviceID ignoreCache: YES];
-    if ([resultDict2 objectForKey: kLoopMeUserConsentKey]) {
-        return [self resultFrom: resultDict2 deviceID: deviceID];
-    }
-
-    return (LoopMeConsentResult){
-        .userConsent = NO,
-        .consentType = LoopMeConsentTypeFailedAPI,
-        .consentUrl = nil,
-        .needConsent = NO
-    };
-}
-
-- (void)showGDPRWindowFromViewController:(UIViewController *)viewController {
+- (void)prepareConsent {
     if (![LoopMeIdentityProvider advertisingTrackingEnabled]) {
         self.consentType = LoopMeConsentTypeUserRestricted;
         return;
     }
-    
     if (self.consentType != LoopMeConsentTypeDidNotSet) {
         return;
     }
-    
+    // Code below calling getter, so, do not touch this entire method till defining expected behavior for this method
+    // It's not clear and hard to understand
     if (self.userConsentString) {
         return;
     }
-
-    NSString *deviceID = [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier];
-    LoopMeConsentResult result = [self userConsent: deviceID];
-
-    if (!result.needConsent) {
-        self.userConsent = result.userConsent;
-        self.consentType = result.consentType;
-        return;
-    }
-    
-    self.consentType = LoopMeConsentTypeFailedAPI;
-    
-    if (!result.consentUrl) {
-        return;
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.gdprVC = [[LoopMeGDPRViewController alloc] initWithURL: result.consentUrl];
-        self.gdprVC.delegate = self;
-        UIViewController *controller = [UIApplication sharedApplication].keyWindow.rootViewController;
-        [controller presentViewController: self.gdprVC animated: YES completion: nil];
-    });
 }
 
 - (void)getAppDetailsFromServer {
@@ -175,13 +120,6 @@ static NSString * const kLoopMeSourceAppID = @"SourceAppID";
             NSLog(@"No results found in the response");
         }
     }] resume];
-}
-
-- (void)loopMeGDPRViewControllerDidDisapper {
-    NSString *deviceID = [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier];
-    LoopMeConsentResult result = [self userConsent: deviceID];
-    self.userConsent = result.userConsent;
-    self.consentType = result.consentType;
 }
 
 #pragma mark CMP tools
