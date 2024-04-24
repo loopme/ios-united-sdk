@@ -30,7 +30,7 @@ const float kLDAdViewHeight = 50.0f;
     if (_adView == nil) {
         CGRect adFrame = CGRectMake(0, 0, kLDAdViewWidth, kLDAdViewHeight);
 
-        self.appKey = @"31d9f96d32";
+        self.appKey = @"3ae8c26803";
         // Intializing `LoopMeAdView`
         _adView = [LoopMeAdView adViewWithAppKey:self.appKey
                                            frame:adFrame viewControllerForPresentationGDPRWindow: self 
