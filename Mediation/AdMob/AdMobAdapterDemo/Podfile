@@ -6,4 +6,5 @@ use_frameworks!
 
 target 'AdMobAdapterDemo' do
   pod 'Google-Mobile-Ads-SDK'
+  pod 'LoopMeUnitedSDK'
 end
