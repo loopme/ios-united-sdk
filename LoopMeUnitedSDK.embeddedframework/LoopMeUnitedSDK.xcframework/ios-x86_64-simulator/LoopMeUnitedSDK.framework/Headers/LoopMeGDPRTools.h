@@ -10,10 +10,8 @@
 
 typedef NS_ENUM(NSInteger, LoopMeConsentType) {
     LoopMeConsentTypeDidNotSet = -1,
-    LoopMeConsentTypeLoopMe = 0,
     LoopMeConsentTypePublisher = 1,
-    LoopMeConsentTypeUserRestricted = 2,
-    LoopMeConsentTypeFailedAPI = 3
+    LoopMeConsentTypeUserRestricted = 2
 };
 
 /**
@@ -45,7 +43,7 @@ typedef NS_ENUM(NSInteger, LoopMeConsentType) {
  * Show LoopMe GDPR window to ask user consent.
  * Works only for EU users.
  */
-- (void)showGDPRWindowFromViewController:(UIViewController * _Nonnull)viewController;
+- (void)prepareConsent;
 
 /**
  * If you know user consent in BOOL format, you can set it by this method.
@@ -65,4 +63,9 @@ typedef NS_ENUM(NSInteger, LoopMeConsentType) {
 - (NSString *_Nullable)consentString;
 - (NSString *_Nullable)cmpSdkID;
 - (NSString *_Nullable)sourceAppID;
+
+/**
+ * Helper functions
+ */
++ (NSString *_Nonnull)getConsentValue;
 @end

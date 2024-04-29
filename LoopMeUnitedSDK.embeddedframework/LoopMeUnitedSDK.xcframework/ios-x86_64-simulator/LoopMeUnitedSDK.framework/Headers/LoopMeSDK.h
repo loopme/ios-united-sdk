@@ -24,10 +24,10 @@ FOUNDATION_EXPORT const unsigned char LoopMeUnitedSDKVersionString[];
 #import <LoopMeUnitedSDK/LoopMeGDPRTools.h>
 #import <LoopMeUnitedSDK/LoopMeSDKConfiguration.h>
 #import <LoopMeUnitedSDK/LoopMeVPAIDError.h>
-#import <LoopMeUnitedSDK/LoopMeOMIDWrapper.h>
 #import <LoopMeUnitedSDK/LoopMeDefinitions.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class LoopMeOMIDWrapper;
 
 @interface LoopMeSDK : NSObject
     
@@ -38,12 +38,18 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shared;
 + (NSBundle *)resourcesBundle;
 
+/// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
+- (void)initSDKFromRootViewController: (UIViewController *)rootViewController
+                     sdkConfiguration: (LoopMeSDKConfiguration *) configuration
+                      completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
+
+/// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
+- (void)initSDKFromRootViewController: (UIViewController *)rootViewController
+                      completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
+
+- (void)init: (LoopMeSDKConfiguration *) configuration completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
     
-- (void)initSDKFromRootViewController:(UIViewController *)rootViewController
-                     sdkConfiguration:(LoopMeSDKConfiguration *) configuration
-                     completionBlock :(void(^_Nullable)(BOOL,  NSError * _Nullable))completionBlock;
-    
-- (void)initSDKFromRootViewController:(UIViewController *)rootViewController completionBlock :(void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
+- (void)init: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
     
 @end
 

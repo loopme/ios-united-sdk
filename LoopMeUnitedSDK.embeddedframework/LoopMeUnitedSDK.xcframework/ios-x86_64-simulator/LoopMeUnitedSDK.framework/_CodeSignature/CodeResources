@@ -4,13 +4,29 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Frameworks/OMSDK_Loopme.framework/Info.plist</key>
+		<data>
+		GUtpGu2B4FuYqLRXPX7aJqgiLbA=
+		</data>
+		<key>Frameworks/OMSDK_Loopme.framework/OMSDK_Loopme</key>
+		<data>
+		05AG8wSIGJaMwIxWittcQJPpeyo=
+		</data>
+		<key>Frameworks/OMSDK_Loopme.framework/PrivacyInfo.xcprivacy</key>
+		<data>
+		7BgfS40JHW2Znl7afTrGvxB58Ws=
+		</data>
+		<key>Frameworks/OMSDK_Loopme.framework/_CodeSignature/CodeResources</key>
+		<data>
+		jBSNzYOYElr6WnFwEny4+1iNp58=
+		</data>
 		<key>Headers/LoopMeAdType.h</key>
 		<data>
 		yHsmigBgEQLi1r6tgZlhiBMQ1a8=
 		</data>
 		<key>Headers/LoopMeAdView.h</key>
 		<data>
-		F/PgOriNS29lInhBBpJQPZ9T8F4=
+		nWRi/tG4N79Ymdu2VYJKSpi9pi8=
 		</data>
 		<key>Headers/LoopMeDefinitions.h</key>
 		<data>
@@ -22,23 +38,19 @@
 		</data>
 		<key>Headers/LoopMeGDPRTools.h</key>
 		<data>
-		pwrm+FeocyLQG77t5DlUQzIj1FI=
+		swR34VmdGJDxKtJgQkr393a+1ns=
 		</data>
 		<key>Headers/LoopMeInterstitial.h</key>
 		<data>
-		anKTduHklyWeXYydHi0CocRWAjQ=
+		W1ZBqBCkYsb2VQ1rPB6ywvZnD8s=
 		</data>
 		<key>Headers/LoopMeLogging.h</key>
 		<data>
 		7F6VGbhM4PW6JUUHpuYLzAdvIaI=
 		</data>
-		<key>Headers/LoopMeOMIDWrapper.h</key>
-		<data>
-		ZNGO7cEI/70DM8eNFWj+jrQUMi0=
-		</data>
 		<key>Headers/LoopMeSDK.h</key>
 		<data>
-		WCaJ1HyCBrMBdcc6YrFwxgS12Tc=
+		hLk1cSPXRp+vGqIQm800s+bFZy4=
 		</data>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
 		<data>
@@ -46,7 +58,7 @@
 		</data>
 		<key>Headers/LoopMeUnitedSDK-Swift.h</key>
 		<data>
-		P2J5hGxbwtXBfgEvBwLJuKYYE7o=
+		wWKIlOoL5j6yYM89DAz7LPH2DY8=
 		</data>
 		<key>Headers/LoopMeVPAIDError.h</key>
 		<data>
@@ -54,15 +66,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		NuoY39fBudAIfYK2K0rijIDVYwM=
+		v9LnyCBF8yrGlao/9f9x9Do9JAU=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		QILJVwZAin+RwrB7DL5cAm0I6E4=
+		z50cn/bvGjvZIYvCm+tKH/qjnmU=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		xiktnm7eKKFq5KfN325rrSgfU+g=
+		z77H/Sy7MwMUNX/b7ARMNSHHhFM=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -70,11 +82,11 @@
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		xiktnm7eKKFq5KfN325rrSgfU+g=
+		z77H/Sy7MwMUNX/b7ARMNSHHhFM=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		A4+Rehfyf4EQYSBJEEvOpPZ3CXU=
+		P7daibvqpt69tyFEB0OP37v3L1s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -83,6 +95,34 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Frameworks/OMSDK_Loopme.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Yy+mm3zJL4g0Xe66RjwyIC/O7DOySS8Ho8ICZ/IifRg=
+			</data>
+		</dict>
+		<key>Frameworks/OMSDK_Loopme.framework/OMSDK_Loopme</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8PpXje4sOd0MvcAuSL9UsP1HMR/jyauNJ3d9donpMoM=
+			</data>
+		</dict>
+		<key>Frameworks/OMSDK_Loopme.framework/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			5rdpDTW6MDoz1u2y0rCJB5ensp/KZWPv7EAq4o8GtfM=
+			</data>
+		</dict>
+		<key>Frameworks/OMSDK_Loopme.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xlwp6jAjKKWqbMhCgkSKtuxHXI0cYXKSiNwHUCLQt/E=
+			</data>
+		</dict>
 		<key>Headers/LoopMeAdType.h</key>
 		<dict>
 			<key>hash2</key>
@@ -94,7 +134,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xCHfo6VRaVpN/ZzIZo2wt7D5Xmrw0xeW9y8qaDGaPco=
+			rSVIQ+SK987Vb7Qf0p7IIulA+6IiO/e8W90C2Fn7h1Q=
 			</data>
 		</dict>
 		<key>Headers/LoopMeDefinitions.h</key>
@@ -115,14 +155,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			R7DrYpokziJK6T93oAUKngNnDppu6xzZ39cfx3X8u6g=
+			ZfjlRX+3Sa9dPUHKGnYBolKbXomorQsiJulQu++9B24=
 			</data>
 		</dict>
 		<key>Headers/LoopMeInterstitial.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BXEV4C7RYfxyQ2AmKD/eqJxemnEY0jomgBQ8qAXfp2k=
+			NGOLa5MBCMVhrVTcKetvE4wyJ/lNPrxVpijTA3zepzs=
 			</data>
 		</dict>
 		<key>Headers/LoopMeLogging.h</key>
@@ -132,18 +172,11 @@
 			tuak6N98IemhU25xiIQQLH/1CvBKs/3vh2FB7dku3eY=
 			</data>
 		</dict>
-		<key>Headers/LoopMeOMIDWrapper.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			haSoYDAaPmR4CgrO5nl2S5HtEhanXKmsDVCJitND47g=
-			</data>
-		</dict>
 		<key>Headers/LoopMeSDK.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			iH90CIvFUZitHRdKsNj6kQsUsVCga6fEuPi8ozHcCLI=
+			a2maeE/yZmp5qSLrcoJEVWwzz9ml3IL+caMBCMFaBtI=
 			</data>
 		</dict>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
@@ -157,7 +190,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jtw9Vuw/FwVuI7H/5bl7jEQmMMjjQ9O6t8qEmzYumcQ=
+			Yi86kOkalC/Z8WfNONqU80prKntyhBwAq1WLShUsZrU=
 			</data>
 		</dict>
 		<key>Headers/LoopMeVPAIDError.h</key>
@@ -171,14 +204,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Io1RlKx7P23zpg69mynz6/JCeDSEhk93zDOQhtauJbg=
+			8lRDnj4MbBNwSiDsvRCjMXNyiZcKoO25bs6hBckny8c=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mt6YINcQ46GmvXnBeBIyQaG9AgA4zctS/ezCGKQe4jA=
+			DVX99v0zFvSNDbKZpQ1xe+RH/QGJJ1U3AKVZpGRdxtI=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -192,14 +225,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mt6YINcQ46GmvXnBeBIyQaG9AgA4zctS/ezCGKQe4jA=
+			DVX99v0zFvSNDbKZpQ1xe+RH/QGJJ1U3AKVZpGRdxtI=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NK5mxJo4Y6vBLij43KCxrqq31FJMnGOW1x5Br4DSF0A=
+			3lkjdro/aW4ueP0cOcuogo1yufZ+g9dhWG/QXlQBUrY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

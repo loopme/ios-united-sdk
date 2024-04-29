@@ -277,7 +277,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import CoreFoundation;
 @import Foundation;
+@import OMSDK_Loopme;
 @import ObjectiveC;
 #endif
 
@@ -342,6 +344,17 @@ typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeAdOrientation, "AdOrientationWrapper",
   LoopMeAdOrientationPortrait = 1,
   LoopMeAdOrientationLandscape = 2,
 };
+
+@class OMIDLoopmeAdSessionContext;
+
+SWIFT_CLASS("_TtC15LoopMeUnitedSDK22AdSessionContextResult")
+@interface AdSessionContextResult : NSObject
+@property (nonatomic, strong) OMIDLoopmeAdSessionContext * _Nullable context;
+@property (nonatomic) NSError * _Nullable error;
+- (nonnull instancetype)initWithContext:(OMIDLoopmeAdSessionContext * _Nullable)context error:(NSError * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 @class LoopMeViewableImpression;
 @class LoopMeLinearTracking;
@@ -429,6 +442,45 @@ SWIFT_CLASS_NAMED("MRAIDExpandPropertiesWrapper")
 @property (nonatomic) BOOL useCustomClose;
 @end
 
+@class OMIDLoopmeAdSession;
+@class OMIDLoopmeVASTProperties;
+
+SWIFT_CLASS_NAMED("OMIDVideoEventsWrapper")
+@interface LoopMeOMIDVideoEventsWrapper : NSObject
+- (nullable instancetype)initWithSession:(OMIDLoopmeAdSession * _Nonnull)session error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
+- (void)loadedWith:(OMIDLoopmeVASTProperties * _Nonnull)vastProperties;
+- (void)startWithDuration:(CGFloat)duration videoPlayerVolume:(CGFloat)videoPlayerVolume;
+- (void)firstQuartile;
+- (void)midpoint;
+- (void)thirdQuartile;
+- (void)complete;
+- (void)pause;
+- (void)resume;
+- (void)skipped;
+- (void)volumeChangeTo:(CGFloat)playerVolume;
+- (void)adUserInteractionWithType:(OMIDInteractionType)interactionType;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class WKWebView;
+@class OMIDLoopmeVerificationScriptResource;
+@class OMIDLoopmeAdSessionConfiguration;
+
+SWIFT_CLASS_NAMED("OMSDKWrapper")
+@interface LoopMeOMIDWrapper : NSObject
++ (BOOL)initOMIDWithCompletionBlock:(void (^ _Nonnull)(BOOL))completionBlock SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nullable)injectScriptContentIntoHTML:(NSString * _Nonnull)htmlString error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (OMIDLoopmeAdSessionContext * _Nullable)contextForHTML:(WKWebView * _Nonnull)webView error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (AdSessionContextResult * _Nonnull)contextForNativeVideo:(NSArray<LoopMeAdVerification *> * _Nonnull)resources SWIFT_WARN_UNUSED_RESULT;
+- (NSArray<OMIDLoopmeVerificationScriptResource *> * _Nonnull)toOmidResources:(NSArray<LoopMeAdVerification *> * _Nonnull)resources SWIFT_WARN_UNUSED_RESULT;
+- (OMIDLoopmeAdSessionConfiguration * _Nullable)configurationFor:(OMIDCreativeType)creativeType error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (OMIDLoopmeAdSession * _Nullable)sessionFor:(OMIDLoopmeAdSessionConfiguration * _Nonnull)configuration context:(OMIDLoopmeAdSessionContext * _Nonnull)context error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (OMIDLoopmeAdSession * _Nullable)sessionForHTML:(WKWebView * _Nonnull)webView error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (OMIDLoopmeAdSession * _Nullable)sessionForNativeVideo:(NSArray<LoopMeAdVerification *> * _Nonnull)resources error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS_NAMED("ProgressEventTrackerWrapper")
 @interface LoopMeProgressEventTracker : NSObject
@@ -441,6 +493,13 @@ SWIFT_CLASS_NAMED("ProgressEventWrappper")
 @interface LoopMeProgressEvent : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC15LoopMeUnitedSDK10SDKUtility")
+@interface SDKUtility : NSObject
++ (NSString * _Nonnull)loopmeSDKVersionString SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 @class NSURL;
