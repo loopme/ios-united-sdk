@@ -57,19 +57,11 @@ const NSInteger kLoopMeRequestTimeout = 180;
               [self dismissAdInterstitialViewController];
           });
       }
-    
-    [_adManager invalidateTimers];
-    [_adDisplayController stopHandlingRequests];
-    [_adDisplayControllerVPAID stopHandlingRequests];
-    
-    _adDisplayController.delegate = nil;
-    _adDisplayControllerVPAID.delegate = nil;
-    _adManager = nil;
-    _adDisplayController = nil;
-    _adDisplayControllerVPAID = nil;
-    _adInterstitialViewController = nil;
-    [self invalidateTimer];
-    [self unRegisterObserver];
+//      } else {
+//          dispatch_sync(dispatch_get_main_queue(), ^{
+//              [self dismissAdInterstitialViewController];
+//          });
+//      }
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
@@ -138,9 +130,22 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 - (void)dismissAdInterstitialViewController {
     if (self.adInterstitialViewController.presentingViewController) {
-        [self.adInterstitialViewController.presentingViewController
-            dismissViewControllerAnimated:NO completion:nil];
-    }
+         [self.adInterstitialViewController.presentingViewController
+             dismissViewControllerAnimated:NO completion:nil];
+     }
+     
+     [_adManager invalidateTimers];
+     [_adDisplayController stopHandlingRequests];
+     [_adDisplayControllerVPAID stopHandlingRequests];
+     
+     _adDisplayController.delegate = nil;
+     _adDisplayControllerVPAID.delegate = nil;
+     _adManager = nil;
+     _adDisplayController = nil;
+     _adDisplayControllerVPAID = nil;
+     _adInterstitialViewController = nil;
+     [self invalidateTimer];
+     [self unRegisterObserver];
 }
 
 - (void)willResignActive:(NSNotification *)n {

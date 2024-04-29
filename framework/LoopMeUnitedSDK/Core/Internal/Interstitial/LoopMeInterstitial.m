@@ -54,12 +54,12 @@ static const int kLoopMeLoadCounter = 3;
 #pragma mark - Life Cycle
 
 - (void)dealloc {
-    dispatch_async(dispatch_get_main_queue(), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         [self.timerToReload invalidate];
         self.timerToReload = nil;
         self.interstitial1 = nil;
         self.interstitial2 = nil;
-    });
+//    });
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
