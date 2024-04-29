@@ -51,17 +51,12 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 - (void)dealloc {
     if ([NSThread isMainThread]) {
-          [self dismissAdInterstitialViewController];
-      } else {
-          dispatch_sync(dispatch_get_main_queue(), ^{
-              [self dismissAdInterstitialViewController];
-          });
-      }
-//      } else {
-//          dispatch_sync(dispatch_get_main_queue(), ^{
-//              [self dismissAdInterstitialViewController];
-//          });
-//      }
+        [self dismissAdInterstitialViewController];
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self dismissAdInterstitialViewController];
+        });
+    }
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey
