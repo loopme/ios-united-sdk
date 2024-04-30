@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import LoopMeUnitedSDK
 import AppLovinSDK
 
 class InterstitialViewController: UIViewController, MAAdDelegate {

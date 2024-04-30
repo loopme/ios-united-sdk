@@ -7,7 +7,6 @@
 
 import UIKit
 import AppLovinSDK
-import LoopMeUnitedSDK
 
 class BannerViewController: UIViewController, MAAdViewAdDelegate {
     
