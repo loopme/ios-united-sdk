@@ -3,101 +3,99 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		724245C8566F864ECE64DF09 /* Pods_Applovin_mediation_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E2AFD08C7E703A75A50F01 /* Pods_Applovin_mediation_sample.framework */; };
-		8140D99A286208B000D4E688 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D999286208B000D4E688 /* AppDelegate.swift */; };
-		8140D99C286208B000D4E688 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99B286208B000D4E688 /* SceneDelegate.swift */; };
-		8140D99E286208B000D4E688 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8140D99D286208B000D4E688 /* ViewController.swift */; };
-		8140D9A1286208B000D4E688 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140D99F286208B000D4E688 /* Main.storyboard */; };
-		8140D9A3286208B500D4E688 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8140D9A2286208B500D4E688 /* Assets.xcassets */; };
-		8140D9A6286208B500D4E688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */; };
-		B917E44E2ADD555700C6E6A3 /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */; };
-		B959CD8B2ADD8A0200418D0C /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */; };
-		B95BB0F32ADD6A9600C15524 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */; };
+		0D2C0FA052967C119771B7A1 /* Pods_Applovin_mediation_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3E055523D9D4D72C4C1D77 /* Pods_Applovin_mediation_sample.framework */; };
+		B9E68E692BE11FBA006AAE94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E68E682BE11FBA006AAE94 /* AppDelegate.swift */; };
+		B9E68E6B2BE11FBA006AAE94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E68E6A2BE11FBA006AAE94 /* SceneDelegate.swift */; };
+		B9E68E6D2BE11FBA006AAE94 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E68E6C2BE11FBA006AAE94 /* ViewController.swift */; };
+		B9E68E722BE11FBA006AAE94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9E68E712BE11FBA006AAE94 /* Assets.xcassets */; };
+		B9E68E752BE11FBA006AAE94 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B9E68E742BE11FBA006AAE94 /* Base */; };
+		B9E68E7D2BE11FF5006AAE94 /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E68E7C2BE11FF5006AAE94 /* BannerViewController.swift */; };
+		B9E68E7F2BE12013006AAE94 /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E68E7E2BE12013006AAE94 /* RewardedVideo.swift */; };
+		B9E68E812BE1202A006AAE94 /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E68E802BE1202A006AAE94 /* InterstitialViewController.swift */; };
+		B9E68E862BE128CE006AAE94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9E68E852BE128CE006AAE94 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		62D62339D008B8BE456A058C /* Pods-Applovin-mediation-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.release.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.release.xcconfig"; sourceTree = "<group>"; };
-		62E2AFD08C7E703A75A50F01 /* Pods_Applovin_mediation_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Applovin_mediation_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		63D5C9B72D2F7C3886B8AE2C /* Pods-Applovin-mediation-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.debug.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.debug.xcconfig"; sourceTree = "<group>"; };
-		8140D996286208B000D4E688 /* Applovin-mediation-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Applovin-mediation-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8140D999286208B000D4E688 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8140D99B286208B000D4E688 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8140D99D286208B000D4E688 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8140D9A0286208B000D4E688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8140D9A2286208B500D4E688 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8140D9A5286208B500D4E688 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8140D9A7286208B500D4E688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
-		B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
-		B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
-		B9E68E582BE11986006AAE94 /* AppLovinSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AppLovinSDK.xcframework; path = "Pods/AppLovinSDK/applovin-ios-sdk-12.4.1/AppLovinSDK.xcframework"; sourceTree = "<group>"; };
+		0167E6065301DCF13CC895BE /* Pods-Applovin-mediation-sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.release.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.release.xcconfig"; sourceTree = "<group>"; };
+		1F1D0A34481AE7B1746EE6D1 /* Pods-Applovin-mediation-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Applovin-mediation-sample.debug.xcconfig"; path = "Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample.debug.xcconfig"; sourceTree = "<group>"; };
+		5D3E055523D9D4D72C4C1D77 /* Pods_Applovin_mediation_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Applovin_mediation_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9E68E652BE11FBA006AAE94 /* Applovin-mediation-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Applovin-mediation-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9E68E682BE11FBA006AAE94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B9E68E6A2BE11FBA006AAE94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B9E68E6C2BE11FBA006AAE94 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B9E68E712BE11FBA006AAE94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9E68E742BE11FBA006AAE94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B9E68E762BE11FBA006AAE94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9E68E7C2BE11FF5006AAE94 /* BannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		B9E68E7E2BE12013006AAE94 /* RewardedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
+		B9E68E802BE1202A006AAE94 /* InterstitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
+		B9E68E852BE128CE006AAE94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8140D993286208B000D4E688 /* Frameworks */ = {
+		B9E68E622BE11FBA006AAE94 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				724245C8566F864ECE64DF09 /* Pods_Applovin_mediation_sample.framework in Frameworks */,
+				0D2C0FA052967C119771B7A1 /* Pods_Applovin_mediation_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		355914E673DE4CF20B796736 /* Pods */ = {
+		510EB63D71A10258000AAFD5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				63D5C9B72D2F7C3886B8AE2C /* Pods-Applovin-mediation-sample.debug.xcconfig */,
-				62D62339D008B8BE456A058C /* Pods-Applovin-mediation-sample.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		360A9BDF9B72EB5001335ADC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B9E68E582BE11986006AAE94 /* AppLovinSDK.xcframework */,
-				62E2AFD08C7E703A75A50F01 /* Pods_Applovin_mediation_sample.framework */,
+				5D3E055523D9D4D72C4C1D77 /* Pods_Applovin_mediation_sample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8140D98D286208B000D4E688 = {
+		85791F1B06E5A3D60E19951D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8140D998286208B000D4E688 /* Applovin-mediation-sample */,
-				8140D997286208B000D4E688 /* Products */,
-				355914E673DE4CF20B796736 /* Pods */,
-				360A9BDF9B72EB5001335ADC /* Frameworks */,
+				1F1D0A34481AE7B1746EE6D1 /* Pods-Applovin-mediation-sample.debug.xcconfig */,
+				0167E6065301DCF13CC895BE /* Pods-Applovin-mediation-sample.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B9E68E5C2BE11FB9006AAE94 = {
+			isa = PBXGroup;
+			children = (
+				B9E68E672BE11FBA006AAE94 /* Applovin-mediation-sample */,
+				B9E68E662BE11FBA006AAE94 /* Products */,
+				85791F1B06E5A3D60E19951D /* Pods */,
+				510EB63D71A10258000AAFD5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		8140D997286208B000D4E688 /* Products */ = {
+		B9E68E662BE11FBA006AAE94 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8140D996286208B000D4E688 /* Applovin-mediation-sample.app */,
+				B9E68E652BE11FBA006AAE94 /* Applovin-mediation-sample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8140D998286208B000D4E688 /* Applovin-mediation-sample */ = {
+		B9E68E672BE11FBA006AAE94 /* Applovin-mediation-sample */ = {
 			isa = PBXGroup;
 			children = (
-				8140D999286208B000D4E688 /* AppDelegate.swift */,
-				8140D99B286208B000D4E688 /* SceneDelegate.swift */,
-				8140D99D286208B000D4E688 /* ViewController.swift */,
-				B95BB0F22ADD6A9600C15524 /* BannerViewController.swift */,
-				B959CD8A2ADD8A0200418D0C /* RewardedVideo.swift */,
-				B917E44D2ADD555700C6E6A3 /* InterstitialViewController.swift */,
-				8140D99F286208B000D4E688 /* Main.storyboard */,
-				8140D9A2286208B500D4E688 /* Assets.xcassets */,
-				8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */,
-				8140D9A7286208B500D4E688 /* Info.plist */,
+				B9E68E682BE11FBA006AAE94 /* AppDelegate.swift */,
+				B9E68E6A2BE11FBA006AAE94 /* SceneDelegate.swift */,
+				B9E68E6C2BE11FBA006AAE94 /* ViewController.swift */,
+				B9E68E7C2BE11FF5006AAE94 /* BannerViewController.swift */,
+				B9E68E7E2BE12013006AAE94 /* RewardedVideo.swift */,
+				B9E68E802BE1202A006AAE94 /* InterstitialViewController.swift */,
+				B9E68E852BE128CE006AAE94 /* Main.storyboard */,
+				B9E68E712BE11FBA006AAE94 /* Assets.xcassets */,
+				B9E68E732BE11FBA006AAE94 /* LaunchScreen.storyboard */,
+				B9E68E762BE11FBA006AAE94 /* Info.plist */,
 			);
 			path = "Applovin-mediation-sample";
 			sourceTree = "<group>";
@@ -105,16 +103,16 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8140D995286208B000D4E688 /* Applovin-mediation-sample */ = {
+		B9E68E642BE11FBA006AAE94 /* Applovin-mediation-sample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8140D9AA286208B500D4E688 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */;
+			buildConfigurationList = B9E68E792BE11FBA006AAE94 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */;
 			buildPhases = (
-				A04118447CB88D0ADCC774FE /* [CP] Check Pods Manifest.lock */,
-				8140D992286208B000D4E688 /* Sources */,
-				8140D993286208B000D4E688 /* Frameworks */,
-				8140D994286208B000D4E688 /* Resources */,
-				8351D26488862CDF05AE7DDB /* [CP] Embed Pods Frameworks */,
-				9F3220D0B7671D3F52EDF6F1 /* [CP] Copy Pods Resources */,
+				BA34218C455D9F1F1E8715BE /* [CP] Check Pods Manifest.lock */,
+				B9E68E612BE11FBA006AAE94 /* Sources */,
+				B9E68E622BE11FBA006AAE94 /* Frameworks */,
+				B9E68E632BE11FBA006AAE94 /* Resources */,
+				8008A109E064072CAC899654 /* [CP] Embed Pods Frameworks */,
+				A30FBF0DCAB9D79275471BCD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -122,58 +120,57 @@
 			);
 			name = "Applovin-mediation-sample";
 			productName = "Applovin-mediation-sample";
-			productReference = 8140D996286208B000D4E688 /* Applovin-mediation-sample.app */;
+			productReference = B9E68E652BE11FBA006AAE94 /* Applovin-mediation-sample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8140D98E286208B000D4E688 /* Project object */ = {
+		B9E68E5D2BE11FB9006AAE94 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					8140D995286208B000D4E688 = {
-						CreatedOnToolsVersion = 13.4.1;
-						LastSwiftMigration = 1340;
+					B9E68E642BE11FBA006AAE94 = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
-			buildConfigurationList = 8140D991286208B000D4E688 /* Build configuration list for PBXProject "Applovin-mediation-sample" */;
-			compatibilityVersion = "Xcode 13.0";
+			buildConfigurationList = B9E68E602BE11FB9006AAE94 /* Build configuration list for PBXProject "Applovin-mediation-sample" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 8140D98D286208B000D4E688;
-			productRefGroup = 8140D997286208B000D4E688 /* Products */;
+			mainGroup = B9E68E5C2BE11FB9006AAE94;
+			productRefGroup = B9E68E662BE11FBA006AAE94 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8140D995286208B000D4E688 /* Applovin-mediation-sample */,
+				B9E68E642BE11FBA006AAE94 /* Applovin-mediation-sample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8140D994286208B000D4E688 /* Resources */ = {
+		B9E68E632BE11FBA006AAE94 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8140D9A6286208B500D4E688 /* LaunchScreen.storyboard in Resources */,
-				8140D9A3286208B500D4E688 /* Assets.xcassets in Resources */,
-				8140D9A1286208B000D4E688 /* Main.storyboard in Resources */,
+				B9E68E722BE11FBA006AAE94 /* Assets.xcassets in Resources */,
+				B9E68E752BE11FBA006AAE94 /* Base in Resources */,
+				B9E68E862BE128CE006AAE94 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8351D26488862CDF05AE7DDB /* [CP] Embed Pods Frameworks */ = {
+		8008A109E064072CAC899654 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -190,7 +187,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9F3220D0B7671D3F52EDF6F1 /* [CP] Copy Pods Resources */ = {
+		A30FBF0DCAB9D79275471BCD /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -207,7 +204,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Applovin-mediation-sample/Pods-Applovin-mediation-sample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A04118447CB88D0ADCC774FE /* [CP] Check Pods Manifest.lock */ = {
+		BA34218C455D9F1F1E8715BE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -232,34 +229,26 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8140D992286208B000D4E688 /* Sources */ = {
+		B9E68E612BE11FBA006AAE94 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8140D99E286208B000D4E688 /* ViewController.swift in Sources */,
-				B917E44E2ADD555700C6E6A3 /* InterstitialViewController.swift in Sources */,
-				B959CD8B2ADD8A0200418D0C /* RewardedVideo.swift in Sources */,
-				8140D99A286208B000D4E688 /* AppDelegate.swift in Sources */,
-				8140D99C286208B000D4E688 /* SceneDelegate.swift in Sources */,
-				B95BB0F32ADD6A9600C15524 /* BannerViewController.swift in Sources */,
+				B9E68E7F2BE12013006AAE94 /* RewardedVideo.swift in Sources */,
+				B9E68E6D2BE11FBA006AAE94 /* ViewController.swift in Sources */,
+				B9E68E812BE1202A006AAE94 /* InterstitialViewController.swift in Sources */,
+				B9E68E692BE11FBA006AAE94 /* AppDelegate.swift in Sources */,
+				B9E68E7D2BE11FF5006AAE94 /* BannerViewController.swift in Sources */,
+				B9E68E6B2BE11FBA006AAE94 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8140D99F286208B000D4E688 /* Main.storyboard */ = {
+		B9E68E732BE11FBA006AAE94 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8140D9A0286208B000D4E688 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8140D9A4286208B500D4E688 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8140D9A5286208B500D4E688 /* Base */,
+				B9E68E742BE11FBA006AAE94 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -267,14 +256,14 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8140D9A8286208B500D4E688 /* Debug */ = {
+		B9E68E772BE11FBA006AAE94 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -302,10 +291,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -319,25 +308,25 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		8140D9A9286208B500D4E688 /* Release */ = {
+		B9E68E782BE11FBA006AAE94 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -365,10 +354,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -376,34 +365,26 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		8140D9AB286208B500D4E688 /* Debug */ = {
+		B9E68E7A2BE11FBA006AAE94 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 63D5C9B72D2F7C3886B8AE2C /* Pods-Applovin-mediation-sample.debug.xcconfig */;
+			baseConfigurationReference = 1F1D0A34481AE7B1746EE6D1 /* Pods-Applovin-mediation-sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-				);
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applovin-mediation-sample/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -411,40 +392,29 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.loopmemedia.loopme-portfolio";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample.Applovin-mediation-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		8140D9AC286208B500D4E688 /* Release */ = {
+		B9E68E7B2BE11FBA006AAE94 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62D62339D008B8BE456A058C /* Pods-Applovin-mediation-sample.release.xcconfig */;
+			baseConfigurationReference = 0167E6065301DCF13CC895BE /* Pods-Applovin-mediation-sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
-				);
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applovin-mediation-sample/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -452,17 +422,14 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.loopmemedia.loopme-portfolio";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample.Applovin-mediation-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -471,25 +438,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8140D991286208B000D4E688 /* Build configuration list for PBXProject "Applovin-mediation-sample" */ = {
+		B9E68E602BE11FB9006AAE94 /* Build configuration list for PBXProject "Applovin-mediation-sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8140D9A8286208B500D4E688 /* Debug */,
-				8140D9A9286208B500D4E688 /* Release */,
+				B9E68E772BE11FBA006AAE94 /* Debug */,
+				B9E68E782BE11FBA006AAE94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8140D9AA286208B500D4E688 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */ = {
+		B9E68E792BE11FBA006AAE94 /* Build configuration list for PBXNativeTarget "Applovin-mediation-sample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8140D9AB286208B500D4E688 /* Debug */,
-				8140D9AC286208B500D4E688 /* Release */,
+				B9E68E7A2BE11FBA006AAE94 /* Debug */,
+				B9E68E7B2BE11FBA006AAE94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 8140D98E286208B000D4E688 /* Project object */;
+	rootObject = B9E68E5D2BE11FB9006AAE94 /* Project object */;
 }
