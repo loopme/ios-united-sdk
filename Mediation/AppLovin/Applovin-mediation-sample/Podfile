@@ -7,6 +7,6 @@ target 'Applovin-mediation-sample' do
 
   # Pods for Applovin-mediation-sample
 
-pod 'AppLovinLoopMeCustomAdapter', :path => '../../../ApplovinLoopMeCustomAdapter.podspec'
+pod 'AppLovinLoopMeCustomAdapter'
 
 end
