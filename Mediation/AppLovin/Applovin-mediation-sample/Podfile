@@ -6,6 +6,7 @@ target 'Applovin-mediation-sample' do
   use_frameworks!
 
   # Pods for Applovin-mediation-sample
+
 pod 'AppLovinLoopMeCustomAdapter'
 
 end
