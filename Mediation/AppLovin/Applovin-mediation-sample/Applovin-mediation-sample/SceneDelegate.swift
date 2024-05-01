@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Applovin-mediation-sample
 //
-//  Created by Volodymyr Novikov on 21.06.2022.
+//  Created by Valerii Roman on 30/04/2024.
 //
 
 import UIKit

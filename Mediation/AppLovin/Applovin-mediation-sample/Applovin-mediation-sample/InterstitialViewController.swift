@@ -7,7 +7,6 @@
 
 import UIKit
 import AppLovinSDK
-
 class InterstitialViewController: UIViewController, MAAdDelegate {
     
     @IBOutlet weak var showButton: UIButton!
