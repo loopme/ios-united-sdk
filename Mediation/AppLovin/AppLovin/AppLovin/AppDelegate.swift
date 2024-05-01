@@ -11,13 +11,14 @@ import AppLovinSDK
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        ALSdk.shared().mediationProvider = "max"
-        ALSdk.shared().initializeSdk { (configuration: ALSdkConfiguration) in
-                 // AppLovin SDK is initialized, start loading ads
-             }
+        let initConfig = ALSdkInitializationConfiguration(sdkKey: "mS4u2IXJUmLuQxVgAfXAOAlRr_EkaXTz88uiE5HHG5RJ3OlVC81NmdXhl5H3bINKhAe3oufK2FD9rXC6xpIJd9") { builder in
+            builder.mediationProvider = ALMediationProviderMAX
+        }
+
+        ALSdk.shared().initialize(with: initConfig) { sdkConfig in
+          // Start loading ads
+        }
         return true
     }
 
