@@ -22,7 +22,6 @@
 
 /* Begin PBXBuildFile section */
 		2226F2BC2BD6966D00A833DD /* OMSDK_Loopme.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B983C8FD2BD67BDF0044F316 /* OMSDK_Loopme.xcframework */; };
-		2226F2BD2BD6966D00A833DD /* OMSDK_Loopme.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B983C8FD2BD67BDF0044F316 /* OMSDK_Loopme.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2246F2032B8F1E16006F316E /* AdTrackingLinksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2246F2022B8F1E16006F316E /* AdTrackingLinksTests.swift */; };
 		22F75B122B8C9B0900D4B519 /* ConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F75B112B8C9B0900D4B519 /* ConverterTests.swift */; };
 		47403417239568FD00CC14EF /* CCPATools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47403416239568FD00CC14EF /* CCPATools.swift */; };
@@ -178,20 +177,6 @@
 			remoteInfo = LoopMeSDK;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		2226F2BE2BD6966D00A833DD /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				2226F2BD2BD6966D00A833DD /* OMSDK_Loopme.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2246F2022B8F1E16006F316E /* AdTrackingLinksTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdTrackingLinksTests.swift; path = LoopMeUnitedSDK/AdConfiguration/AdConfigurationTests/AdTrackingLinksTests.swift; sourceTree = SOURCE_ROOT; };
@@ -920,7 +905,6 @@
 				47714E2A22FAF9CE00DF0D55 /* Sources */,
 				47714E2B22FAF9CE00DF0D55 /* Frameworks */,
 				47714E2C22FAF9CE00DF0D55 /* Resources */,
-				2226F2BE2BD6966D00A833DD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
