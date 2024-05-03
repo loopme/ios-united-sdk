@@ -1,3 +1,7 @@
+## Version 7.4.15 (03.05.2024)
+
+- Remove nested bundles
+
 ## Version 7.4.14 (03.05.2024)
 
 - Added OMID dependency

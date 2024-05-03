@@ -4,22 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Frameworks/OMSDK_Loopme.framework/Info.plist</key>
-		<data>
-		GUtpGu2B4FuYqLRXPX7aJqgiLbA=
-		</data>
-		<key>Frameworks/OMSDK_Loopme.framework/OMSDK_Loopme</key>
-		<data>
-		05AG8wSIGJaMwIxWittcQJPpeyo=
-		</data>
-		<key>Frameworks/OMSDK_Loopme.framework/PrivacyInfo.xcprivacy</key>
-		<data>
-		7BgfS40JHW2Znl7afTrGvxB58Ws=
-		</data>
-		<key>Frameworks/OMSDK_Loopme.framework/_CodeSignature/CodeResources</key>
-		<data>
-		jBSNzYOYElr6WnFwEny4+1iNp58=
-		</data>
 		<key>Headers/LoopMeAdType.h</key>
 		<data>
 		yHsmigBgEQLi1r6tgZlhiBMQ1a8=
@@ -66,7 +50,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		tTZWW5TyKhptH70/io5TH2OlU80=
+		2HCLQMlExGsUD6UG4aYllPvwkd0=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -95,34 +79,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Frameworks/OMSDK_Loopme.framework/Info.plist</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Yy+mm3zJL4g0Xe66RjwyIC/O7DOySS8Ho8ICZ/IifRg=
-			</data>
-		</dict>
-		<key>Frameworks/OMSDK_Loopme.framework/OMSDK_Loopme</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			8PpXje4sOd0MvcAuSL9UsP1HMR/jyauNJ3d9donpMoM=
-			</data>
-		</dict>
-		<key>Frameworks/OMSDK_Loopme.framework/PrivacyInfo.xcprivacy</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			5rdpDTW6MDoz1u2y0rCJB5ensp/KZWPv7EAq4o8GtfM=
-			</data>
-		</dict>
-		<key>Frameworks/OMSDK_Loopme.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			xlwp6jAjKKWqbMhCgkSKtuxHXI0cYXKSiNwHUCLQt/E=
-			</data>
-		</dict>
 		<key>Headers/LoopMeAdType.h</key>
 		<dict>
 			<key>hash2</key>
