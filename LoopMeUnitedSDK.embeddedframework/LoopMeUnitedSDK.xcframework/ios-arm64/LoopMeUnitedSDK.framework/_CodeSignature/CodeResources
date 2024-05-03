@@ -10,7 +10,7 @@
 		</data>
 		<key>Frameworks/OMSDK_Loopme.framework/OMSDK_Loopme</key>
 		<data>
-		Y6TnUWdEISLHZTX8cahWa/+WMJI=
+		tlJPQiM23fmTnj8/zzXc8NXIj2E=
 		</data>
 		<key>Frameworks/OMSDK_Loopme.framework/PrivacyInfo.xcprivacy</key>
 		<data>
@@ -66,11 +66,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		arLNd8DHEe/yBWmAclNrxaR3pww=
+		VV//o5h/jftXLsE4DtoMr3/6C8I=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		z50cn/bvGjvZIYvCm+tKH/qjnmU=
+		JCQCyHkQ0VH5gIezurVeT8CytFQ=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		b1Q3vvUEnSSuEQ+7oPzSr1b8Fww=
+		k9rRMFaR7VtML+5sXpwZdTAgxXU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -106,7 +106,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zWtuas0rQGl7n2v08U52f4S6+dZbgctS8sEDoEb2tjs=
+			8ecmkNX6zzcoXQ5aQdLy6jQnx6IIBNblSadtkUONu7Q=
 			</data>
 		</dict>
 		<key>Frameworks/OMSDK_Loopme.framework/PrivacyInfo.xcprivacy</key>
@@ -204,7 +204,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8lRDnj4MbBNwSiDsvRCjMXNyiZcKoO25bs6hBckny8c=
+			fsxGgjqZ3zvsJ1ll4+N72GVt4dIbzKOY/kyV1bgNnN0=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
@@ -232,7 +232,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y6UhDJHs7M0HKtZjEMW3j7PTFCkyJ8WKFsL8CxNLxHk=
+			ieMMgaQodMILTFodRL35WFErEkbq1UO3xoAzcCVojAE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

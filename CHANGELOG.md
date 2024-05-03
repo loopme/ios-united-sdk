@@ -1,3 +1,15 @@
+## Version 7.4.14 (03.05.2024)
+
+- Added OMID dependency
+- Update AppLovin Demo app. Removed deprecated methods
+- [SDK-214] Fix bundle in Applovin
+- [sdk-214-2] Change repo for Applopovin
+- [SDK-214] Fix Applovin repo
+- [SDK-214] Fix Applovin repo
+- Update AppLovinLoopMeCustomAdapter version to support LoopMeUnitedSDK 7.4.13
+- Update ISLoopMeCustomAdapter version to support IronSourceSDK 8.0 and LoopMeUnitedSDK 7.4.13
+- [SDK-214] Fix Applovin repo
+
 ## Version 7.4.13 (29.04.2024)
 
 - Remove commented code
