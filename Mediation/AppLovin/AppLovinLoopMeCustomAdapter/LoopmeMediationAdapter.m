@@ -155,7 +155,6 @@
 - (void)loopMeInterstitialDidAppear:(LoopMeInterstitial *)interstitial {
     [self.parentAdapter log: @"Rewarded ad did track impression"];
     [self.delegate didDisplayRewardedAd];
-    [self.delegate didStartRewardedAdVideo];
 }
 
 - (void)loopMeInterstitialDidReceiveTap:(LoopMeInterstitial *)interstitial {
@@ -165,7 +164,7 @@
 
 - (void)loopMeInterstitialDidDisappear:(LoopMeInterstitial *)interstitial {
     [self.parentAdapter log: @"Rewarded ad did disappear"];
-    [self.delegate didCompleteRewardedAdVideo];
+    [self.delegate didHideRewardedAd];
     
     [self.parentAdapter log: @"Rewarded ad hidden"];
     [self.delegate didHideRewardedAd];
