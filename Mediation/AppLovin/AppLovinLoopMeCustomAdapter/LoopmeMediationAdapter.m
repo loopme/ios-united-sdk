@@ -163,9 +163,7 @@
 }
 
 - (void)loopMeInterstitialDidDisappear:(LoopMeInterstitial *)interstitial {
-    [self.parentAdapter log: @"Rewarded ad did disappear"];
-    [self.delegate didHideRewardedAd];
-    
+    [self.parentAdapter log: @"Rewarded ad did disappear"];    
     [self.parentAdapter log: @"Rewarded ad hidden"];
     [self.delegate didHideRewardedAd];
 }
