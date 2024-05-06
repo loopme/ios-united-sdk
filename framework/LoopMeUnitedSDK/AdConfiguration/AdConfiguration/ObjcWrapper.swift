@@ -48,10 +48,6 @@ public class AdConfigurationWrapper: NSObject {
         return self.adConfiguration.id
     }
     
-    @objc public var isV360: Bool {
-        return self.adConfiguration.v360
-    }
-    
     @objc public var debug: Bool {
         return self.adConfiguration.debug
     }

@@ -20,7 +20,6 @@
 #import "NSURL+LoopMeAdditions.h"
 #import "LoopMeError.h"
 #import "LoopMeLogging.h"
-#import "LoopMe360ViewController.h"
 #import "LoopMeInterstitialViewController.h"
 #import "LoopMeCloseButton.h"
 #import "LoopMeInterstitialGeneral.h"
@@ -212,15 +211,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         self.prevLoaction = currentLocation;
     }
-    
-    LoopMe360ViewController *vc = [(LoopMeVideoClientNormal *)self.videoClient viewController360];
-    [vc pan: currentLocation prevLocation: self.prevLoaction];
-    self.prevLoaction = currentLocation;
-}
-
-- (void)pinchWebView:(UIPinchGestureRecognizer *)recognizer {
-    LoopMe360ViewController *vc = [(LoopMeVideoClientNormal *)self.videoClient viewController360];
-    [vc handlePinchGesture: recognizer];
 }
 
 - (void)setOrientation:(NSDictionary *)orientationProperties forConfiguration:(LoopMeAdConfiguration *)configuration {

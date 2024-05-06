@@ -90,10 +90,6 @@
 		47A57C7F233E31C8001F7DA3 /* LoopMeInterstitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BDB233E31C8001F7DA3 /* LoopMeInterstitialViewController.m */; };
 		47A57C80233E31C8001F7DA3 /* LoopMeBrowserViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BDD233E31C8001F7DA3 /* LoopMeBrowserViewController.h */; };
 		47A57C81233E31C8001F7DA3 /* LoopMeBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BDE233E31C8001F7DA3 /* LoopMeBrowserViewController.m */; };
-		47A57C82233E31C8001F7DA3 /* LoopMe360ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BE0233E31C8001F7DA3 /* LoopMe360ViewController.h */; };
-		47A57C83233E31C8001F7DA3 /* LoopMeGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BE2233E31C8001F7DA3 /* LoopMeGLProgram.m */; };
-		47A57C84233E31C8001F7DA3 /* LoopMeGLProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BE3233E31C8001F7DA3 /* LoopMeGLProgram.h */; };
-		47A57C85233E31C8001F7DA3 /* LoopMe360ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BE4233E31C8001F7DA3 /* LoopMe360ViewController.m */; };
 		47A57C86233E31C8001F7DA3 /* LoopMeOrientationViewControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BE5233E31C8001F7DA3 /* LoopMeOrientationViewControllerProtocol.h */; };
 		47A57C87233E31C8001F7DA3 /* LoopMeSDKConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BE6233E31C8001F7DA3 /* LoopMeSDKConfiguration.m */; };
 		47A57C88233E31C8001F7DA3 /* LoopMeDestinationDisplayController.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BE8233E31C8001F7DA3 /* LoopMeDestinationDisplayController.h */; };
@@ -252,10 +248,6 @@
 		47A57BDB233E31C8001F7DA3 /* LoopMeInterstitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeInterstitialViewController.m; sourceTree = "<group>"; };
 		47A57BDD233E31C8001F7DA3 /* LoopMeBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeBrowserViewController.h; sourceTree = "<group>"; };
 		47A57BDE233E31C8001F7DA3 /* LoopMeBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeBrowserViewController.m; sourceTree = "<group>"; };
-		47A57BE0233E31C8001F7DA3 /* LoopMe360ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMe360ViewController.h; sourceTree = "<group>"; };
-		47A57BE2233E31C8001F7DA3 /* LoopMeGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGLProgram.m; sourceTree = "<group>"; };
-		47A57BE3233E31C8001F7DA3 /* LoopMeGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGLProgram.h; sourceTree = "<group>"; };
-		47A57BE4233E31C8001F7DA3 /* LoopMe360ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMe360ViewController.m; sourceTree = "<group>"; };
 		47A57BE5233E31C8001F7DA3 /* LoopMeOrientationViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeOrientationViewControllerProtocol.h; sourceTree = "<group>"; };
 		47A57BE6233E31C8001F7DA3 /* LoopMeSDKConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeSDKConfiguration.m; sourceTree = "<group>"; };
 		47A57BE8233E31C8001F7DA3 /* LoopMeDestinationDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeDestinationDisplayController.h; sourceTree = "<group>"; };
@@ -624,7 +616,6 @@
 			children = (
 				47A57BD9233E31C8001F7DA3 /* Ad */,
 				47A57BDC233E31C8001F7DA3 /* Browser */,
-				47A57BDF233E31C8001F7DA3 /* 360 */,
 				47A57BE5233E31C8001F7DA3 /* LoopMeOrientationViewControllerProtocol.h */,
 			);
 			path = ViewControllers;
@@ -646,25 +637,6 @@
 				47A57BDE233E31C8001F7DA3 /* LoopMeBrowserViewController.m */,
 			);
 			path = Browser;
-			sourceTree = "<group>";
-		};
-		47A57BDF233E31C8001F7DA3 /* 360 */ = {
-			isa = PBXGroup;
-			children = (
-				47A57BE0233E31C8001F7DA3 /* LoopMe360ViewController.h */,
-				47A57BE1233E31C8001F7DA3 /* Shaders */,
-				47A57BE4233E31C8001F7DA3 /* LoopMe360ViewController.m */,
-			);
-			path = 360;
-			sourceTree = "<group>";
-		};
-		47A57BE1233E31C8001F7DA3 /* Shaders */ = {
-			isa = PBXGroup;
-			children = (
-				47A57BE2233E31C8001F7DA3 /* LoopMeGLProgram.m */,
-				47A57BE3233E31C8001F7DA3 /* LoopMeGLProgram.h */,
-			);
-			path = Shaders;
 			sourceTree = "<group>";
 		};
 		47A57BE7233E31C8001F7DA3 /* Controllers */ = {
@@ -858,7 +830,6 @@
 				47A57C96233E31C8001F7DA3 /* LoopMeProgressOverlayView.h in Headers */,
 				47714E3F22FAF9CF00DF0D55 /* LoopMeSDK.h in Headers */,
 				47A57C59233E31C8001F7DA3 /* LoopMeVPAIDVideoClient.h in Headers */,
-				47A57C84233E31C8001F7DA3 /* LoopMeGLProgram.h in Headers */,
 				47A57C76233E31C8001F7DA3 /* LoopMeVASTImageDownloader.h in Headers */,
 				47A57C61233E31C8001F7DA3 /* LoopMeJSCommunicatorProtocol.h in Headers */,
 				47A57CA2233E31C8001F7DA3 /* LoopMeMinimizedAdView.h in Headers */,
@@ -882,7 +853,6 @@
 				47A57C63233E31C8001F7DA3 /* LoopMeInterstitialGeneral.h in Headers */,
 				47A57CC0233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h in Headers */,
 				47A57C62233E31C8001F7DA3 /* LoopMeViewabilityProtocol.h in Headers */,
-				47A57C82233E31C8001F7DA3 /* LoopMe360ViewController.h in Headers */,
 				474545D52435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h in Headers */,
 				47A57C93233E31C8001F7DA3 /* LoopMeServerURLBuilder.h in Headers */,
 				47A57C9A233E31C8001F7DA3 /* LoopMeAdWebView.h in Headers */,
@@ -1020,7 +990,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47A57C85233E31C8001F7DA3 /* LoopMe360ViewController.m in Sources */,
 				47A57C9E233E31C8001F7DA3 /* LoopMeCloseButton.m in Sources */,
 				47A57B5F233CFAD9001F7DA3 /* Converter.swift in Sources */,
 				47A57C8B233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.m in Sources */,
@@ -1094,7 +1063,6 @@
 				47A57CA8233E31C8001F7DA3 /* LoopMeAnalyticsProvider.m in Sources */,
 				47A57C8C233E31C8001F7DA3 /* LoopMeVPAIDAdDisplayController.m in Sources */,
 				474545D62435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m in Sources */,
-				47A57C83233E31C8001F7DA3 /* LoopMeGLProgram.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

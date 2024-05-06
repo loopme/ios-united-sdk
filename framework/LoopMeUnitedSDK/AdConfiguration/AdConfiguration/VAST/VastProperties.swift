@@ -255,7 +255,6 @@ extension VastProperties: XMLParserDelegate {
     func parseMediaFiles() throws {
         try tempMediaFiles.sort(by: sortMediaFilesBlock)
         var videoURLs: [String] = []
-        var video360URLs: [String] = []
         for mediaFileNode in tempMediaFiles {
             let delivery = mediaFileNode.props["delivery"]
             let framework = mediaFileNode.props["apiFramework"]
@@ -263,18 +262,13 @@ extension VastProperties: XMLParserDelegate {
             let mediaType = mediaFileNode.props["mediaType"]
             if let content = mediaFileNode.content {
                 if delivery == "progressive" && type == "video/mp4" {
-                    if mediaType == "360" {
-                        video360URLs.append(content.trimmingCharacters(in: .whitespacesAndNewlines))
-                    } else {
-                        videoURLs.append(content.trimmingCharacters(in: .whitespacesAndNewlines))
-                    }
+                    videoURLs.append(content.trimmingCharacters(in: .whitespacesAndNewlines))
                 } else if framework == "VPAID" && type == "application/javascript" {
                     assetLinks.vpaidURL = content.trimmingCharacters(in: .whitespacesAndNewlines)
                 }
             }
         }
         assetLinks.videoURL = videoURLs
-        assetLinks.video360URL = video360URLs
     }
     
     func sortMediaFilesBlock(node1: Node, node2: Node) throws -> Bool {
