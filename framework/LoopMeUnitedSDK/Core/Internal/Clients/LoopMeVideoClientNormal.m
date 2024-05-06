@@ -392,8 +392,6 @@ AVAssetResourceLoaderDelegate
     [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
     [self.videoView removeFromSuperview];
-    //    self.player = nil;
-    //    self.playerItem = nil;
     self.shouldPlay = NO;
 }
 
