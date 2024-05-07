@@ -68,7 +68,6 @@ public struct AdConfiguration {
     }
     
     enum ExtKeys: String, CodingKey {
-        case v360
         case orientation
         case debug
         case crtype
@@ -89,7 +88,6 @@ public struct AdConfiguration {
     
     let skAdNetworkInfo: SKAdNetworkInfo?
     let id: String
-    let v360: Bool
     let debug: Bool
     let preload25: Bool
     let autoloading: Bool
@@ -149,7 +147,6 @@ extension AdConfiguration: Decodable {
             } else {
                 self.skAdNetworkInfo = nil
             }
-            self.v360 = (try? ext.decode(Int.self, forKey: .v360) == 1) ?? false
             self.debug = (try? ext.decode(Int.self, forKey: .debug) == 1) ?? false
             if let preload25 = try? ext.decode(Int.self, forKey: .preload25) {
                 self.preload25 = preload25 == 1
@@ -181,7 +178,6 @@ extension AdConfiguration: Decodable {
             
         } else {
             self.skAdNetworkInfo = nil
-            self.v360 = false
             self.debug = false
             self.preload25 = false
             

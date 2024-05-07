@@ -26,16 +26,6 @@ extern const struct LoopMeEventStruct {
     __unsafe_unretained NSString *fullscreenMode;    
 } LoopMeEvent;
 
-extern const struct LoopMe360EventStruct {
-    __unsafe_unretained NSString *swipe;
-    __unsafe_unretained NSString *gyro;
-    __unsafe_unretained NSString *front;
-    __unsafe_unretained NSString *left;
-    __unsafe_unretained NSString *right;
-    __unsafe_unretained NSString *back;
-    __unsafe_unretained NSString *zoom;
-} LoopMe360Event;
-
 extern const struct LoopMeWebViewStateStruct {
     __unsafe_unretained NSString *visible;
     __unsafe_unretained NSString *hidden;

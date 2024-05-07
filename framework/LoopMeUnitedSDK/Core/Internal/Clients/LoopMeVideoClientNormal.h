@@ -8,7 +8,6 @@
 
 #import "LoopMeVideoCommunicatorProtocol.h"
 
-@class LoopMe360ViewController;
 @class LoopMeVideoClient;
 @class LoopMeAdConfiguration;
 @class AVPlayerLayer;
@@ -32,7 +31,6 @@ extern const struct LoopMeVideoStateStruct {
 
 - (instancetype)initWithDelegate:(id<LoopMeVideoClientDelegate>)delegate;
 - (void)playVideo:(NSURL *)URL;
-- (LoopMe360ViewController *)viewController360;
 - (void)cancel;
 - (void)willAppear;
 - (void)moveView;

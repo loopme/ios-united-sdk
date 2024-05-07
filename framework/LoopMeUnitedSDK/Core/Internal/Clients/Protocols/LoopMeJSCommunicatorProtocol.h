@@ -17,13 +17,6 @@
 - (void)setFullScreenModeEnabled:(BOOL)enabled;
 - (void)setShake;
 
-- (void)track360LeftSector;
-- (void)track360FrontSector;
-- (void)track360BackSector;
-- (void)track360RightSector;
-- (void)track360Gyro;
-- (void)track360Swipe;
-- (void)track360Zoom;
 @end
 
 #endif
