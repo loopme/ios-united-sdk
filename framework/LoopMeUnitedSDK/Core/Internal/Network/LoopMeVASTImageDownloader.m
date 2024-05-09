@@ -54,20 +54,28 @@
                     error = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeCompanionError];
                 }
             } else {
-                NSURLResponse *response = nil;
-                NSData *imageData = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:imageURL] returningResponse:&response error:&error];
-                BOOL validImage = imageData != nil;
-                if (validImage) {
-                    self.downloadedImage = [UIImage imageWithData:imageData];
-                    if (self.downloadedImage) {
-                        [[LoopMeDiscURLCache sharedDiscCache] storeData:imageData forKey:imageURL.absoluteString];
-                    } else {
-                        LoopMeLogDebug(@"Error: invalid image data.");
-                        if (!error) {
-                            error = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeCompanionError];
+                NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+                NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+
+                // Create a data task to download the image asynchronously
+                NSURLSessionDataTask *task = [session dataTaskWithURL:imageURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if (error) {
+                        // Handle error
+                        LoopMeLogDebug(@"Error downloading image: %@", error);
+                        return;
+                    }
+                    if (data) {
+                        UIImage *image = [UIImage imageWithData:data];
+                        if (image) {
+                            [[LoopMeDiscURLCache sharedDiscCache] storeData:data forKey:imageURL.absoluteString];
+                            self.downloadedImage = image;
+                        } else {
+                            LoopMeLogDebug(@"Error: invalid image data.");
+                            NSError *companionError = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeCompanionError];
                         }
                     }
-                }
+                }];
+                [task resume];
             }
             self.error = error;
         }];
