@@ -42,6 +42,8 @@ const NSInteger kLoopMeRequestTimeout = 180;
 @property (nonatomic, assign) LoopMeAdType preferredAdTypes;
 @property (nonatomic, strong) NSTimer *timeoutTimer;
 @property (nonatomic, strong) SKAdImpression *skAdImpression;
+@property (nonatomic, assign) CGSize screenSize;
+
 
 @end
 
@@ -229,14 +231,59 @@ const NSInteger kLoopMeRequestTimeout = 180;
         LoopMeLogInfo(@"Ad already loaded and ready to be displayed");
         return;
     }
+    [self getSize];
     [self registerObserver];
     self.loading = YES;
     self.ready = NO;
     self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeRequestTimeout target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:[[UIApplication sharedApplication] keyWindow].bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes isRewarded: isRewarded];
+        [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize: self.screenSize adSpot:self preferredAdTypes:self.preferredAdTypes isRewarded: isRewarded];
     });
+}
+
+- (void) getSize {
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGFloat screenWidth = screenSize.width;
+    CGFloat screenHeight = screenSize.height;
+
+    NSString *deviceType;
+    NSString *orientation;
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        deviceType = @"iPhone";
+        if (screenWidth < screenHeight) {
+            orientation = @"Portrait";
+        } else {
+            orientation = @"Landscape";
+        }
+    } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        deviceType = @"iPad";
+        if (screenWidth < screenHeight) {
+            orientation = @"Portrait";
+        } else {
+            orientation = @"Landscape";
+        }
+    }
+    self.screenSize = sizeForDeviceAndOrientation(deviceType, orientation);
+}
+
+CGSize sizeForDeviceAndOrientation(NSString *deviceType, NSString *orientation) {
+    if ([deviceType isEqualToString:@"iPhone"]) {
+        if ([orientation isEqualToString:@"Portrait"]) {
+            return CGSizeMake(320, 480); // iPhone Portrait size: 320x480
+        } else if ([orientation isEqualToString:@"Landscape"]) {
+            return CGSizeMake(480, 320); // iPhone Landscape size: 480x320
+        }
+    } else if ([deviceType isEqualToString:@"iPad"]) {
+        if ([orientation isEqualToString:@"Portrait"]) {
+            return CGSizeMake(768, 1024); // iPad Portrait size: 768x1024
+        } else if ([orientation isEqualToString:@"Landscape"]) {
+            return CGSizeMake(1024, 768); // iPad Landscape size: 1024x768
+        }
+    }
+    // Default size
+    return CGSizeMake(0, 0);
 }
 
 - (void)showFromViewController:(UIViewController *)viewController animated:(BOOL)animated {
