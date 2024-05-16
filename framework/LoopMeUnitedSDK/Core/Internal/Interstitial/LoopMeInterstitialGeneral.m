@@ -42,6 +42,8 @@ const NSInteger kLoopMeRequestTimeout = 180;
 @property (nonatomic, assign) LoopMeAdType preferredAdTypes;
 @property (nonatomic, strong) NSTimer *timeoutTimer;
 @property (nonatomic, strong) SKAdImpression *skAdImpression;
+@property (nonatomic, assign) CGSize screenSize;
+
 
 @end
 
@@ -229,14 +231,39 @@ const NSInteger kLoopMeRequestTimeout = 180;
         LoopMeLogInfo(@"Ad already loaded and ready to be displayed");
         return;
     }
+    self.screenSize = [self getSize];
     [self registerObserver];
     self.loading = YES;
     self.ready = NO;
     self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeRequestTimeout target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize:[[UIApplication sharedApplication] keyWindow].bounds.size adSpot:self preferredAdTypes:self.preferredAdTypes isRewarded: isRewarded];
+        [self.adManager loadAdWithAppKey:self.appKey targeting:targeting integrationType:integrationType adSpotSize: self.screenSize adSpot:self preferredAdTypes:self.preferredAdTypes isRewarded: isRewarded];
     });
+}
+
+- (CGSize)getSize {
+    NSDictionary *sizes = @{
+        @"iPhone": @{
+            @"Portrait": [NSValue valueWithCGSize:CGSizeMake(320, 480)],
+            @"Landscape": [NSValue valueWithCGSize:CGSizeMake(480, 320)]
+        },
+        @"iPad": @{
+            @"Portrait": [NSValue valueWithCGSize:CGSizeMake(768, 1024)],
+            @"Landscape": [NSValue valueWithCGSize:CGSizeMake(1024, 768)]
+        }
+    };
+
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    CGFloat screenWidth = screenSize.width;
+    CGFloat screenHeight = screenSize.height;
+
+    NSString *deviceType;
+    NSString *orientation;
+    orientation = screenWidth < screenHeight ? @"Portrait" : @"Landscape";
+    deviceType = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"iPad" : @"iPhone";
+    NSValue *sizeValue = sizes[deviceType][orientation];
+    return [sizeValue CGSizeValue];
 }
 
 - (void)showFromViewController:(UIViewController *)viewController animated:(BOOL)animated {
