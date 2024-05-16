@@ -161,6 +161,12 @@
 		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
 		B96645122BC55DE70032060A /* OMIDVideoEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */; };
 		B96645142BC572BF0032060A /* OMSDKWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645132BC572BF0032060A /* OMSDKWrapper.swift */; };
+		B9A0D44E2BF61137008DB6A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0D44D2BF61137008DB6A8 /* AppDelegate.swift */; };
+		B9A0D4502BF61137008DB6A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0D44F2BF61137008DB6A8 /* SceneDelegate.swift */; };
+		B9A0D4522BF61137008DB6A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A0D4512BF61137008DB6A8 /* ViewController.swift */; };
+		B9A0D4552BF61137008DB6A8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B9A0D4542BF61137008DB6A8 /* Base */; };
+		B9A0D4572BF61138008DB6A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9A0D4562BF61138008DB6A8 /* Assets.xcassets */; };
+		B9A0D45A2BF61138008DB6A8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B9A0D4592BF61138008DB6A8 /* Base */; };
 		B9DEB10B2BCFF74300362D97 /* SDKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DEB10A2BCFF74300362D97 /* SDKUtility.swift */; };
 /* End PBXBuildFile section */
 
@@ -321,6 +327,14 @@
 		B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMIDVideoEventsWrapper.swift; sourceTree = "<group>"; };
 		B96645132BC572BF0032060A /* OMSDKWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSDKWrapper.swift; sourceTree = "<group>"; };
 		B983C8FD2BD67BDF0044F316 /* OMSDK_Loopme.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OMSDK_Loopme.xcframework; sourceTree = "<group>"; };
+		B9A0D44B2BF61137008DB6A8 /* Applovin Demo app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Applovin Demo app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9A0D44D2BF61137008DB6A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B9A0D44F2BF61137008DB6A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B9A0D4512BF61137008DB6A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B9A0D4542BF61137008DB6A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B9A0D4562BF61138008DB6A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9A0D4592BF61138008DB6A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B9A0D45B2BF61138008DB6A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9DEB10A2BCFF74300362D97 /* SDKUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -339,6 +353,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				47714E3822FAF9CF00DF0D55 /* LoopMeUnitedSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9A0D4482BF61137008DB6A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +389,7 @@
 			children = (
 				47714E3022FAF9CE00DF0D55 /* LoopMeUnitedSDK */,
 				47714E3B22FAF9CF00DF0D55 /* LoopMeUnitedSDKTests */,
+				B9A0D44C2BF61137008DB6A8 /* Applovin Demo app */,
 				47714E2F22FAF9CE00DF0D55 /* Products */,
 				478C2BCD22FB00F900D618AB /* Frameworks */,
 			);
@@ -378,6 +400,7 @@
 			children = (
 				47714E2E22FAF9CE00DF0D55 /* LoopMeUnitedSDK.framework */,
 				47714E3722FAF9CF00DF0D55 /* LoopMeUnitedSDKTests.xctest */,
+				B9A0D44B2BF61137008DB6A8 /* Applovin Demo app.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -796,6 +819,20 @@
 			path = OMSDKswift;
 			sourceTree = "<group>";
 		};
+		B9A0D44C2BF61137008DB6A8 /* Applovin Demo app */ = {
+			isa = PBXGroup;
+			children = (
+				B9A0D44D2BF61137008DB6A8 /* AppDelegate.swift */,
+				B9A0D44F2BF61137008DB6A8 /* SceneDelegate.swift */,
+				B9A0D4512BF61137008DB6A8 /* ViewController.swift */,
+				B9A0D4532BF61137008DB6A8 /* Main.storyboard */,
+				B9A0D4562BF61138008DB6A8 /* Assets.xcassets */,
+				B9A0D4582BF61138008DB6A8 /* LaunchScreen.storyboard */,
+				B9A0D45B2BF61138008DB6A8 /* Info.plist */,
+			);
+			path = "Applovin Demo app";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -903,13 +940,30 @@
 			productReference = 47714E3722FAF9CF00DF0D55 /* LoopMeUnitedSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B9A0D44A2BF61137008DB6A8 /* Applovin Demo app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9A0D45E2BF61138008DB6A8 /* Build configuration list for PBXNativeTarget "Applovin Demo app" */;
+			buildPhases = (
+				B9A0D4472BF61137008DB6A8 /* Sources */,
+				B9A0D4482BF61137008DB6A8 /* Frameworks */,
+				B9A0D4492BF61137008DB6A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Applovin Demo app";
+			productName = "Applovin Demo app";
+			productReference = B9A0D44B2BF61137008DB6A8 /* Applovin Demo app.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		47714E2522FAF9CE00DF0D55 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = LoopMe;
 				TargetAttributes = {
@@ -922,6 +976,9 @@
 					};
 					478C2BC822FB004500D618AB = {
 						CreatedOnToolsVersion = 10.3;
+					};
+					B9A0D44A2BF61137008DB6A8 = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
@@ -941,6 +998,7 @@
 				47714E2D22FAF9CE00DF0D55 /* LoopMeUnitedSDK */,
 				47714E3622FAF9CF00DF0D55 /* LoopMeUnitedSDKTests */,
 				478C2BC822FB004500D618AB /* Universal */,
+				B9A0D44A2BF61137008DB6A8 /* Applovin Demo app */,
 			);
 		};
 /* End PBXProject section */
@@ -960,6 +1018,16 @@
 				47A57B85233CFECC001F7DA3 /* ad.json in Resources */,
 				47A57B89233CFECC001F7DA3 /* VASTWrapper.xml in Resources */,
 				47A57B87233CFECC001F7DA3 /* VAST.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9A0D4492BF61137008DB6A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9A0D4572BF61138008DB6A8 /* Assets.xcassets in Resources */,
+				B9A0D45A2BF61138008DB6A8 /* Base in Resources */,
+				B9A0D4552BF61137008DB6A8 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,6 +1145,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B9A0D4472BF61137008DB6A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9A0D4522BF61137008DB6A8 /* ViewController.swift in Sources */,
+				B9A0D44E2BF61137008DB6A8 /* AppDelegate.swift in Sources */,
+				B9A0D4502BF61137008DB6A8 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1086,6 +1164,25 @@
 			targetProxy = 47714E3922FAF9CF00DF0D55 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B9A0D4532BF61137008DB6A8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9A0D4542BF61137008DB6A8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B9A0D4582BF61138008DB6A8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9A0D4592BF61138008DB6A8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		47714E4022FAF9CF00DF0D55 /* Debug */ = {
@@ -1374,6 +1471,78 @@
 			};
 			name = Release;
 		};
+		B9A0D45C2BF61138008DB6A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Applovin Demo app/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample.Applovin-Demo-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B9A0D45D2BF61138008DB6A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5LM9LJ6JB7;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Applovin Demo app/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.loopme.Applovin-mediation-sample.Applovin-Demo-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1409,6 +1578,15 @@
 			buildConfigurations = (
 				478C2BCA22FB004500D618AB /* Debug */,
 				478C2BCB22FB004500D618AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9A0D45E2BF61138008DB6A8 /* Build configuration list for PBXNativeTarget "Applovin Demo app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9A0D45C2BF61138008DB6A8 /* Debug */,
+				B9A0D45D2BF61138008DB6A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
