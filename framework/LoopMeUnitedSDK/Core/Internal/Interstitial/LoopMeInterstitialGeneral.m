@@ -103,7 +103,9 @@ const NSInteger kLoopMeRequestTimeout = 180;
                                      preferredAdTypes:(LoopMeAdType)adTypes
                                       delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate
                                         isRewarded:(BOOL)isRewarded{
-    return [[LoopMeInterstitialGeneral alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: isRewarded];
+    LoopMeInterstitialGeneral *interstitialGeneral = [[LoopMeInterstitialGeneral alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: isRewarded];
+    interstitialGeneral.adInterstitialViewController.delegate = interstitialGeneral;
+    return interstitialGeneral;
 }
 
 #pragma mark - Private
