@@ -31,12 +31,18 @@
         }
     }
     
-    
-    if ([[LoopMeSDK shared] isReady]) {
-        self.loopMeInterstitial = [LoopMeInterstitial interstitialWithAppKey:serverParameter
-                                                                    delegate:self];
-        [self.loopMeInterstitial loadAdWithTargeting:nil integrationType:@"admob"];
-    }
+    [[LoopMeSDK shared] initSDKFromRootViewController:self completionBlock:^(BOOL ready, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"LoopMeSDK did fail init with error: %@", error);
+            return;
+        }
+        
+        
+            self.loopMeInterstitial = [LoopMeInterstitial interstitialWithAppKey:serverParameter
+                                                                        delegate:self];
+            [self.loopMeInterstitial loadAdWithTargeting:nil integrationType:@"admob"];
+    }];
+
 }
 
 - (void)presentFromRootViewController:(UIViewController *)rootViewController {

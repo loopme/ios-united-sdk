@@ -1,4 +1,4 @@
-//
+ //
 //  LoopmeMediationAdapter.m
 //  Applovin-mediation-sample
 //

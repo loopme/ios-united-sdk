@@ -28,11 +28,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
-    [[LoopMeSDK shared] initSDKFromRootViewController:self completionBlock:^(BOOL ready, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"LoopMeSDK did fail init with error: %@", error);
-        }
-    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
