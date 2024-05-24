@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/LoopMeUnitedSDK-Swift.h</key>
 		<data>
-		wWKIlOoL5j6yYM89DAz7LPH2DY8=
+		iPE7iRF8L7t/cQWDzgW7hGJy9qA=
 		</data>
 		<key>Headers/LoopMeVPAIDError.h</key>
 		<data>
@@ -50,15 +50,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		2HCLQMlExGsUD6UG4aYllPvwkd0=
+		/0ZxHJnoBOtGBiQRDN7X9su2fmI=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		JCQCyHkQ0VH5gIezurVeT8CytFQ=
+		yilUwBK0AZp/j9wH1eJJQHegys8=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		z77H/Sy7MwMUNX/b7ARMNSHHhFM=
+		XGcoe/+S/UDpC3LJH4fRUUBBsDg=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -66,11 +66,11 @@
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		z77H/Sy7MwMUNX/b7ARMNSHHhFM=
+		XGcoe/+S/UDpC3LJH4fRUUBBsDg=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		YYUMevBk7l80/92x53osG6Ef2xE=
+		jM9wmOTkbkepeCReqy+79xmmdIU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -146,7 +146,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yi86kOkalC/Z8WfNONqU80prKntyhBwAq1WLShUsZrU=
+			PUmu8oTIVO/lXrj8nVvgZYMM/vsYQOtvC7g4Zysytx4=
 			</data>
 		</dict>
 		<key>Headers/LoopMeVPAIDError.h</key>
@@ -160,14 +160,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fsxGgjqZ3zvsJ1ll4+N72GVt4dIbzKOY/kyV1bgNnN0=
+			pPKw8Is+1G3T6jp22Dj+fqkHoXrTWG/R+g8QNDBI6vI=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DVX99v0zFvSNDbKZpQ1xe+RH/QGJJ1U3AKVZpGRdxtI=
+			Nme+N0g8o/sHLsti9iqZgYB81QZgGGjn5PVr/yfFuSg=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -181,14 +181,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DVX99v0zFvSNDbKZpQ1xe+RH/QGJJ1U3AKVZpGRdxtI=
+			Nme+N0g8o/sHLsti9iqZgYB81QZgGGjn5PVr/yfFuSg=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zjpsczVzzeGBg8xELbsj0rEFbkolqXAxqK9Qgr3C7Jg=
+			6xAyNa4XxEyqFZ7LSWO494ikDTTDdFNf8TnrVH2U6z0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

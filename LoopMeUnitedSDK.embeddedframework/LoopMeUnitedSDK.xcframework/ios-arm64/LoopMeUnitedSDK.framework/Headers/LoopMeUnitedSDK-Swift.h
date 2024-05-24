@@ -313,7 +313,6 @@ SWIFT_CLASS_NAMED("AdConfigurationWrapper")
 @interface LoopMeAdConfiguration : NSObject
 @property (nonatomic, copy) NSString * _Nonnull appKey;
 @property (nonatomic, readonly, copy) NSString * _Nonnull adId;
-@property (nonatomic, readonly) BOOL isV360;
 @property (nonatomic, readonly) BOOL debug;
 @property (nonatomic, readonly) BOOL preload25;
 @property (nonatomic) enum LoopMeAdOrientation adOrientation;

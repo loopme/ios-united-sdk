@@ -203,9 +203,6 @@ public struct VastSkipOffset : Swift.Equatable {
   @objc public var adId: Swift.String {
     @objc get
   }
-  @objc public var isV360: Swift.Bool {
-    @objc get
-  }
   @objc public var debug: Swift.Bool {
     @objc get
   }
