@@ -13,9 +13,7 @@
 		220658B62BE1FED4004B0BF0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 220658B52BE1FED4004B0BF0 /* Base */; };
 		220658B82BE1FED5004B0BF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220658B72BE1FED5004B0BF0 /* Assets.xcassets */; };
 		220658BB2BE1FED5004B0BF0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 220658BA2BE1FED5004B0BF0 /* Base */; };
-		2278ADE32BE20499009BE07A /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278ADE02BE20499009BE07A /* InterstitialViewController.swift */; };
-		2278ADE42BE20499009BE07A /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278ADE12BE20499009BE07A /* RewardedVideo.swift */; };
-		2278ADE52BE20499009BE07A /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278ADE22BE20499009BE07A /* BannerViewController.swift */; };
+		3E5A77D312DE21176E3FD1F0 /* Pods_AppLovin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E34D150BEDA88B65B14A5 /* Pods_AppLovin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +25,9 @@
 		220658B72BE1FED5004B0BF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		220658BA2BE1FED5004B0BF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		220658BC2BE1FED5004B0BF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2278ADE02BE20499009BE07A /* InterstitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
-		2278ADE12BE20499009BE07A /* RewardedVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
-		2278ADE22BE20499009BE07A /* BannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		56B4FB88271669B58745378B /* Pods-AppLovin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovin.release.xcconfig"; path = "Target Support Files/Pods-AppLovin/Pods-AppLovin.release.xcconfig"; sourceTree = "<group>"; };
+		EEA5B7EAF80F0121511F744D /* Pods-AppLovin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppLovin.debug.xcconfig"; path = "Target Support Files/Pods-AppLovin/Pods-AppLovin.debug.xcconfig"; sourceTree = "<group>"; };
+		F50E34D150BEDA88B65B14A5 /* Pods_AppLovin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppLovin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E5A77D312DE21176E3FD1F0 /* Pods_AppLovin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +48,7 @@
 				220658AD2BE1FED4004B0BF0 /* AppLovin */,
 				220658AC2BE1FED4004B0BF0 /* Products */,
 				A98B4986DB46181E4CAB92C1 /* Pods */,
+				37C80D6B99569B667ED27989 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,9 +63,6 @@
 		220658AD2BE1FED4004B0BF0 /* AppLovin */ = {
 			isa = PBXGroup;
 			children = (
-				2278ADE22BE20499009BE07A /* BannerViewController.swift */,
-				2278ADE02BE20499009BE07A /* InterstitialViewController.swift */,
-				2278ADE12BE20499009BE07A /* RewardedVideo.swift */,
 				220658AE2BE1FED4004B0BF0 /* AppDelegate.swift */,
 				220658B02BE1FED4004B0BF0 /* SceneDelegate.swift */,
 				220658B22BE1FED4004B0BF0 /* ViewController.swift */,
@@ -77,9 +74,19 @@
 			path = AppLovin;
 			sourceTree = "<group>";
 		};
+		37C80D6B99569B667ED27989 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F50E34D150BEDA88B65B14A5 /* Pods_AppLovin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A98B4986DB46181E4CAB92C1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				EEA5B7EAF80F0121511F744D /* Pods-AppLovin.debug.xcconfig */,
+				56B4FB88271669B58745378B /* Pods-AppLovin.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -91,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 220658BF2BE1FED5004B0BF0 /* Build configuration list for PBXNativeTarget "AppLovin" */;
 			buildPhases = (
+				B2052421229F458E18858C1B /* [CP] Check Pods Manifest.lock */,
 				220658A72BE1FED4004B0BF0 /* Sources */,
 				220658A82BE1FED4004B0BF0 /* Frameworks */,
 				220658A92BE1FED4004B0BF0 /* Resources */,
+				CE8DDA99617D98CF3080686D /* [CP] Embed Pods Frameworks */,
+				7316565A2A42232FADC1BCB9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -150,14 +160,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7316565A2A42232FADC1BCB9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovin/Pods-AppLovin-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovin/Pods-AppLovin-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovin/Pods-AppLovin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2052421229F458E18858C1B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AppLovin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE8DDA99617D98CF3080686D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovin/Pods-AppLovin-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AppLovin/Pods-AppLovin-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AppLovin/Pods-AppLovin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		220658A72BE1FED4004B0BF0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2278ADE52BE20499009BE07A /* BannerViewController.swift in Sources */,
-				2278ADE42BE20499009BE07A /* RewardedVideo.swift in Sources */,
-				2278ADE32BE20499009BE07A /* InterstitialViewController.swift in Sources */,
 				220658B32BE1FED4004B0BF0 /* ViewController.swift in Sources */,
 				220658AF2BE1FED4004B0BF0 /* AppDelegate.swift in Sources */,
 				220658B12BE1FED4004B0BF0 /* SceneDelegate.swift in Sources */,
@@ -307,6 +373,7 @@
 		};
 		220658C02BE1FED5004B0BF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEA5B7EAF80F0121511F744D /* Pods-AppLovin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -337,6 +404,7 @@
 		};
 		220658C12BE1FED5004B0BF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56B4FB88271669B58745378B /* Pods-AppLovin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

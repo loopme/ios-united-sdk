@@ -244,10 +244,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
 				"${PODS_ROOT}/LoopMeUnitedSDK/LoopMeUnitedSDK.embeddedframework/LoopMeResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LoopMeResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,10 +287,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/LoopMeUnitedSDK/LoopMeUnitedSDK.framework/LoopMeUnitedSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/LoopMeUnitedSDK/OMSDK_Loopme.framework/OMSDK_Loopme",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LoopMeUnitedSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Loopme.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
