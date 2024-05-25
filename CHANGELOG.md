@@ -1,3 +1,7 @@
+## Version 7.4.17 (25.05.2024)
+
+- Added missing method willAppear
+
 ## Version 7.4.16 (24.05.2024)
 
 - [SDK-240] Fix the rotation logic in SDK

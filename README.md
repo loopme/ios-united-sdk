@@ -2,16 +2,9 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.4.16**
+**Version 7.4.17**
 
-- [SDK-240] Fix the rotation logic in SDK
-- [SDK-222] Fix after code review
-- [SDK-221] Fix request for video size on SDK
-- [SDK-221]Fix thread issue in LoopMeVASTImageDowloader
-- [SDK-216] Remove commented lines
-- [SDK-215] Remove duplicate method
-- [SDK-216] Remove video360 support
-- [SDK-215] Fix deprecated method in Applovin adapter
+- Added missing method willAppear
 
 Please view the [changelog](CHANGELOG.md) for details.
 
