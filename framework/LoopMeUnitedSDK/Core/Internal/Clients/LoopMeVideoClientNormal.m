@@ -521,4 +521,7 @@ AVAssetResourceLoaderDelegate
     return self.delegate.adConfiguration.appKey;
 }
 
+- (void)willAppear {
+}
+
 @end
