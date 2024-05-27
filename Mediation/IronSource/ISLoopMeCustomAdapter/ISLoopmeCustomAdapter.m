@@ -13,14 +13,14 @@
 @implementation ISLoopmeCustomAdapter
 
 -(void)init:(ISAdData *)adData delegate:(id<ISNetworkInitializationDelegate>)delegate {
-    [[LoopMeSDK shared] initSDKFromRootViewController:self completionBlock:^(BOOL success, NSError *error) {
+    [[LoopMeSDK shared] init: ^(BOOL success, NSError *error) {
         if (!success) {
             NSLog(@"%@", error);
         }
     }];
     
     if (![[LoopMeSDK shared] isReady]) {
-        [delegate onInitDidFailWithErrorCode:ISAdapterErrorMissingParams errorMessage:@"SDK is not inited"];
+        [delegate onInitDidFailWithErrorCode: ISAdapterErrorMissingParams errorMessage: @"SDK is not inited"];
     }
    // init success
    [delegate onInitDidSucceed];
@@ -30,7 +30,7 @@
     return [LoopMeSDK version];
 }
 - (NSString *) adapterVersion {
-   return @"1.0.0";
+   return @"0.0.9";
 }
 
 @end
