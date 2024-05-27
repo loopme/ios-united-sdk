@@ -87,8 +87,9 @@ const NSInteger kLoopMeRequestTimeout = 180;
             
             self->_adInterstitialViewController = [[LoopMeInterstitialViewController alloc] initWithNibName:nil bundle:nil];
             self->_adInterstitialViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            self->_adInterstitialViewController.delegate = self;
         });
-        _adInterstitialViewController.delegate = self;
+        
 
         LoopMeLogInfo(@"Interstitial is initialized with appKey %@", appKey);
         
@@ -99,12 +100,15 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 #pragma mark - Class Methods
 
-+ (LoopMeInterstitialGeneral *)interstitialWithAppKey:(NSString *)appKey
-                                     preferredAdTypes:(LoopMeAdType)adTypes
-                                      delegate:(id<LoopMeInterstitialGeneralDelegate>)delegate
-                                        isRewarded:(BOOL)isRewarded{
-    LoopMeInterstitialGeneral *interstitialGeneral = [[LoopMeInterstitialGeneral alloc] initWithAppKey:appKey preferredAdTypes:adTypes delegate:delegate isRewarded: isRewarded];
-    interstitialGeneral.adInterstitialViewController.delegate = interstitialGeneral;
++ (LoopMeInterstitialGeneral *)interstitialWithAppKey: (NSString *)appKey
+                                     preferredAdTypes: (LoopMeAdType)adTypes
+                                             delegate: (id<LoopMeInterstitialGeneralDelegate>)delegate
+                                           isRewarded: (BOOL)isRewarded {
+    LoopMeInterstitialGeneral *interstitialGeneral =
+        [[LoopMeInterstitialGeneral alloc] initWithAppKey: appKey
+                                         preferredAdTypes: adTypes
+                                                 delegate: delegate
+                                               isRewarded: isRewarded];
     return interstitialGeneral;
 }
 
