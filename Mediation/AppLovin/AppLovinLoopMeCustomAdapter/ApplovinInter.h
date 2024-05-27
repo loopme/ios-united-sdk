@@ -9,7 +9,7 @@
 #define ApplovinInter_h
 
 @interface ApplovinInter: NSObject
-+ (void) loadAd:controller;
++ (void) loadAd: controller;
 @end
 
 
