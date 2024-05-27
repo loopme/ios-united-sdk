@@ -1,3 +1,9 @@
+## Version 7.4.18 (27.05.2024)
+
+- Fix: video ads have the wrong size when rotated
+- Update AppLovin Adapter version to 0.0.5
+- Review and update AppLovin Max Adapter code
+
 ## Version 7.4.17 (25.05.2024)
 
 - Added missing method willAppear
