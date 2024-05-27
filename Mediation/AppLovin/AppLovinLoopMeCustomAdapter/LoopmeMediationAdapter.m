@@ -59,7 +59,7 @@
 }
 
 - (NSString *)adapterVersion{
-    return @"0.0.5";
+    return @"0.0.6";
 }
 
 - (void)destroy {
