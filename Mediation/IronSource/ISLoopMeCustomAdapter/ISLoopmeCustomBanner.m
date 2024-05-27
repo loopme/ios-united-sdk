@@ -20,29 +20,23 @@
 
 @implementation ISLoopmeCustomBanner
 
-- (void)loadAdWithAdData:(nonnull ISAdData *)adData
-          viewController:(UIViewController *)viewController
-                    size:(ISBannerSize *)size
-                delegate:(nonnull id<ISBannerAdDelegate>)delegate {
+- (void)loadAdWithAdData: (nonnull ISAdData *)adData
+          viewController: (UIViewController *)viewController
+                    size: (ISBannerSize *)size
+                delegate: (nonnull id<ISBannerAdDelegate>)delegate {
     self.viewController = viewController;
     NSString *appkey = adData.configuration[@"instancekey"];
-
-        NSLog(@"loopme's appkey - %@", appkey);
-        CGRect adFrame = CGRectMake(0, 0, size.width, size.height);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            LoopMeAdView *bannerView = [LoopMeAdView adViewWithAppKey:appkey
-                                                                frame:adFrame
-                              viewControllerForPresentationGDPRWindow:viewController
-                                                             delegate:self];
-            self.banner = bannerView;
-            self.banner.delegate = self;
-        });
+    NSLog(@"loopme's appkey - %@", appkey);
+    
+    CGRect adFrame = CGRectMake(0, 0, size.width, size.height);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        LoopMeAdView *bannerView = [LoopMeAdView adViewWithAppKey: appkey frame: adFrame delegate: self];
+        self.banner = bannerView;
+        self.banner.delegate = self;
+    
         self.delegate = delegate;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.banner loadAd];
-        });
+        [self.banner loadAd];
+    });
 }
 
 - (BOOL)isSupportAdaptiveBanner {
@@ -58,8 +52,7 @@
                         delegate:(nonnull id<ISInterstitialAdDelegate>)delegate {
     // check if ad can be displayed
     if (![self.banner isReady]) {
-        [delegate adDidFailToShowWithErrorCode:ISAdapterErrorInternal
-                                  errorMessage:nil];
+        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal errorMessage: nil];
         return;
     }
     [delegate adDidShowSucceed];
@@ -72,8 +65,9 @@
 
 - (void)loopMeAdView:(LoopMeAdView *)banner didFailToLoadAdWithError:(NSError *)error {
     NSLog(@"LoopMe banner did fail with error: %@", [error localizedDescription]);
-    [self.delegate adDidFailToLoadWithErrorType:ISAdapterErrorTypeInternal
-                                      errorCode:[error code] errorMessage:nil];
+    [self.delegate adDidFailToLoadWithErrorType: ISAdapterErrorTypeInternal
+                                      errorCode: [error code]
+                                   errorMessage: nil];
 }
 
 - (void)loopMeAdViewDidAppear:(LoopMeAdView *)banner {
