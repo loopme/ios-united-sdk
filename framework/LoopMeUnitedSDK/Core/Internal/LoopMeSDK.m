@@ -100,7 +100,8 @@
     [[LoopMeGDPRTools sharedInstance] getAppDetailsFromServer];
     [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
-    [LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
+    // TODO: Why we do not store OMID Wrapper instance?
+    (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
         if (self.isReady && ready) {
             return;
         }
