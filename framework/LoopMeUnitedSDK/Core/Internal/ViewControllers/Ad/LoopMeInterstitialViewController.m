@@ -81,7 +81,7 @@
 
 #pragma mark - Public
 
-- (void)setOrientation:(NSInteger)orientation {
+- (void)setOrientation:(LoopMeAdOrientation)orientation {
     _adOrientation = orientation;
 }
 

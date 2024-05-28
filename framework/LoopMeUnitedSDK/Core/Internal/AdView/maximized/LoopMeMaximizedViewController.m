@@ -94,7 +94,7 @@
     }];
 }
 
-- (void)setOrientation:(LoopMeAdOrientation)orientation {
+- (void)setOrientation: (LoopMeAdOrientation)orientation {
     _adOrientation = orientation;
 }
 

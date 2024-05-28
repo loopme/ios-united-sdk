@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 @protocol LoopMeOrientationViewControllerProtocol <NSObject>
 
-//LoopMeAdOrientation
-- (void)setOrientation:(NSInteger)orientation;
+- (void)setOrientation:(LoopMeAdOrientation)orientation;
 - (void)setAllowOrientationChange:(BOOL)autorotate;
 - (void)forceChangeOrientation;
 
