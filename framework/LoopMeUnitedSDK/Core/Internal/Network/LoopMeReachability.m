@@ -98,14 +98,12 @@ typedef NS_ENUM(NSUInteger, LoopMeReachabilityNetworkStatus) {
 
 + (LoopMeReachability *)reachabilityWithAddress: (const struct sockaddr_in*) hostAddress {
     SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*)hostAddress);
-    LoopMeReachability *retVal = NULL;
-    if (reachability!= NULL) {
-        retVal= [[self alloc] init];
-        if (retVal!= NULL) {
-            retVal->reachabilityRef = reachability;
-            retVal->localWiFiRef = NO;
-        }
+    if (reachability == NULL) {
+        return NULL;
     }
+    LoopMeReachability *retVal = [[self alloc] init];
+    retVal->reachabilityRef = reachability;
+    retVal->localWiFiRef = NO;
     return retVal;
 }
 

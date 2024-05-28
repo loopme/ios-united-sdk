@@ -79,24 +79,24 @@ static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_in
  * @param appKey - unique identifier in LoopMe ad network.
  * @param delegate - delegate
  */
-+ (instancetype _Nullable )interstitialWithAppKey:(NSString * _Nonnull)appKey
-                                             delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
++ (instancetype _Nullable )interstitialWithAppKey: (NSString * _Nonnull)appKey
+                                         delegate: (id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
-+ (instancetype _Nullable )interstitialWithAppKey:(NSString * _Nonnull)appKey
-                      preferredAdTypes:(LoopMeAdType)adTypes
-                              delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
++ (instancetype _Nullable )interstitialWithAppKey: (NSString * _Nonnull)appKey
+                                 preferredAdTypes: (LoopMeAdType)adTypes
+                                         delegate: (id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
-+ (instancetype _Nullable )rewardedWithAppKey:(NSString * _Nonnull)appKey
-                                             delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
++ (instancetype _Nullable )rewardedWithAppKey: (NSString * _Nonnull)appKey
+                                     delegate: (id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
-+ (instancetype _Nullable )rewardedWithAppKey:(NSString * _Nonnull)appKey
-                      preferredAdTypes:(LoopMeAdType)adTypes
-                              delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate;
++ (instancetype _Nullable )rewardedWithAppKey: (NSString * _Nonnull)appKey
+                             preferredAdTypes: (LoopMeAdType)adTypes
+                                     delegate: (id<LoopMeInterstitialDelegate> _Nullable)delegate;
 
-- (instancetype _Nullable )initWithAppKey:(NSString * _Nonnull)appKey
-              preferredAdTypes:(LoopMeAdType)adTypes
-                      delegate:(id<LoopMeInterstitialDelegate> _Nullable)delegate
-                               isRewarded:(BOOL * _Nullable)isRewarded;
+- (instancetype _Nullable )initWithAppKey: (NSString * _Nonnull)appKey
+                         preferredAdTypes: (LoopMeAdType)adTypes
+                                 delegate: (id<LoopMeInterstitialDelegate> _Nullable)delegate
+                               isRewarded: (BOOL)isRewarded;
 
 /**
  * Starts loading ad content process.
@@ -105,19 +105,19 @@ static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_in
  */
 - (void)loadAd;
 
-- (void)loadURL:(NSURL * _Nonnull)url;
+- (void)loadURL: (NSURL * _Nonnull)url;
 
 /**
  * See `loadAd` method
  * @param targeting - represents `LoopMeTargeting` class to be used to get more relevant advertisement
  */
-- (void)loadAdWithTargeting:(LoopMeTargeting * _Nullable)targeting;
+- (void)loadAdWithTargeting: (LoopMeTargeting * _Nullable)targeting;
 
 /**
  * See `loadAd` method.
  * Not for use by the publisher.
  */
-- (void)loadAdWithTargeting:(LoopMeTargeting * _Nullable)targeting integrationType:(NSString * _Nonnull)integrationType;
+- (void)loadAdWithTargeting: (LoopMeTargeting * _Nullable)targeting integrationType: (NSString * _Nonnull)integrationType;
 
 /**
  * Presents an interstitial ad modally.
@@ -125,14 +125,14 @@ static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_in
  * @param viewController view controller from which interstitial ad will be presented.
  * @param animated - animate presenting
  */
-- (void)showFromViewController:(UIViewController * _Nonnull)viewController
-                      animated:(BOOL)animated;
+- (void)showFromViewController: (UIViewController * _Nonnull)viewController animated: (BOOL)animated;
+
 /**
  * Dismisses an interstitial ad.
  * This method dismisses an interstitial ad and only if it is currently presented.
  * @param animated - animate dismissing
  */
-- (void)dismissAnimated:(BOOL)animated;
+- (void)dismissAnimated: (BOOL)animated;
 
 @end
 
@@ -143,22 +143,21 @@ static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_in
  * Triggered when the interstitial has successfully loaded the ad content
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialDidLoadAd:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialDidLoadAd: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when interstitial ad failed to load ad content
  * @param  interstitial object - the sender of message
  * @param error - error of unsuccesful ad loading attempt
  */
-- (void)loopMeInterstitial:(LoopMeInterstitial * _Nonnull)interstitial
-  didFailToLoadAdWithError:(NSError * _Nonnull)error;
+- (void)loopMeInterstitial: (LoopMeInterstitial * _Nonnull)interstitial didFailToLoadAdWithError: (NSError * _Nonnull)error;
 
 /**
  * Triggered only when interstitial's video was played until the end.
  * It won't be sent if the video was skipped or the interstitial was dissmissed during the displaying process
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialVideoDidReachEnd:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialVideoDidReachEnd: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when the interstitial's loaded ad content is expired.
@@ -166,45 +165,45 @@ static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_in
  * Once the interstitial is presented on the screen, the expiration is no longer tracked and delegate won't receive this message
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialDidExpire:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialDidExpire: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when the interstitial ad will appear on the screen
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialWillAppear:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialWillAppear: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when the interstitial ad did appear on the screen
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialDidAppear:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialDidAppear: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when the interstitial ad will disappear from the screen
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialWillDisappear:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialWillDisappear: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when the interstitial ad will disappear from the screen
  * Interstitial's `ready` property is set to NO
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialDidDisappear:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialDidDisappear: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when the user taps the interstitial ad and the interstitial is about to perform extra actions
  * Those actions may lead to displaying a modal browser or storeKit view controller or leaving your application.
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialDidReceiveTap:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialDidReceiveTap: (LoopMeInterstitial * _Nonnull)interstitial;
 
 /**
  * Triggered when your application is about to go to the background, initiated by the SDK.
  * This may happen in various ways, f.e if user wants open the SDK's browser web page in native browser or clicks on `mailto:` links...
  * @param interstitial - object the sender of message
  */
-- (void)loopMeInterstitialWillLeaveApplication:(LoopMeInterstitial * _Nonnull)interstitial;
+- (void)loopMeInterstitialWillLeaveApplication: (LoopMeInterstitial * _Nonnull)interstitial;
 
 @end

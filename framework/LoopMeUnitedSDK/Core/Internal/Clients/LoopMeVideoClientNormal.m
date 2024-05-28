@@ -248,11 +248,10 @@ AVAssetResourceLoaderDelegate
     CMTime interval = CMTimeMakeWithSeconds(0.1, NSEC_PER_USEC);
     __weak LoopMeVideoClientNormal *selfWeak = self;
     self.playbackTimeObserver =
-    [self.player addPeriodicTimeObserverForInterval:interval
-                                              queue:NULL
-                                         usingBlock:^(CMTime time) {
+    [self.player addPeriodicTimeObserverForInterval: interval
+                                              queue: NULL
+                                         usingBlock: ^(CMTime time) {
         float currentTime = (float)CMTimeGetSeconds(time);
-        double percent = currentTime / CMTimeGetSeconds(selfWeak.playerItem.duration);
         if (currentTime > 0 && selfWeak.isShouldPlay) {
             [selfWeak.JSClient setCurrentTime:currentTime*1000];
         }
@@ -445,18 +444,13 @@ AVAssetResourceLoaderDelegate
     }
 }
 
-- (void)playFromTime:(double)time {
+- (void)playFromTime: (double)time {
     //if time is negative, dont seek. Hack for setVisibleNoJS property in LoopMeAdDisplaycontroller.
     if (time >= 0) {
-        [self seekToTime:time];
+        [self seekToTime: time];
     }
-    
-    if ([self.delegate.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
-        NSDictionary *adIds = [LoopMeGlobalSettings sharedInstance].adIds[self.appKey];
-    }
-    
     self.shouldPlay = YES;
-    [self.JSClient setVideoState:LoopMeVideoState.playing];
+    [self.JSClient setVideoState: LoopMeVideoState.playing];
     [self.player play];
 }
 
