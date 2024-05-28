@@ -213,6 +213,10 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     }
 }
 
+- (void)pinchWebView:(UIPanGestureRecognizer *)recognizer {
+    // TODO: why it's needed?
+}
+
 - (void)setOrientation:(NSDictionary *)orientationProperties forConfiguration:(LoopMeAdConfiguration *)configuration {
     if (!orientationProperties) {
         return ;
@@ -457,8 +461,16 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 #pragma mark private
 
-- (CGRect)adjustFrame:(CGRect)frame {
-    BOOL isMaximizedMraid = ([self.delegate respondsToSelector: @selector(isMaximizedControllerIsPresented)] && [self.delegate performSelector: @selector(isMaximizedControllerIsPresented)]);
+- (BOOL)isMaximizedControllerIsPresented {
+    // TODO: Check this method. Is it required to be used in adjustFrame method?
+    return NO;
+    // return self.maximizedController.isViewLoaded && self.maximizedController.view.window;
+}
+
+- (CGRect)adjustFrame: (CGRect)frame {
+    BOOL isMaximizedMraid = (
+                             [self.delegate respondsToSelector: @selector(isMaximizedControllerIsPresented)] &&
+                             [self.delegate performSelector: @selector(isMaximizedControllerIsPresented)]);
     
     BOOL isPortrait = self.adConfiguration.isPortrait;
     BOOL isVertical = frame.size.width < frame.size.height;
