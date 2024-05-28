@@ -10,19 +10,15 @@
 
 @implementation NSDictionary (JSONPrint)
 
-- (NSString *)lm_jsonStringWithPrettyPrint:(BOOL)prettyPrint {
+- (NSString *)lm_jsonStringWithPrettyPrint: (BOOL)prettyPrint {
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
-                                                       options:(NSJSONWritingOptions)(prettyPrint ? NSJSONWritingPrettyPrinted : 0)
-                                                         error:&error];
-    
+    NSJSONWritingOptions options = (NSJSONWritingOptions)(prettyPrint ? NSJSONWritingPrettyPrinted : 0);
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: self options: options error: &error];
     if (!jsonData) {
         NSLog(@"%s: error: %@", __func__, error.localizedDescription);
         return @"{}";
-    } else {
-        NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        return json;
     }
+    return [[NSString alloc] initWithData: jsonData encoding: NSUTF8StringEncoding];
 }
 
 @end

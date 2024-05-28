@@ -372,7 +372,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     }
     
     if (!self.isNotPlay) {
-        [self.vpaidClient stopActionTimeOutTimer];
         [self stopHandlingRequests];
         self.visible = NO;
         self.isNotPlay = YES;
@@ -521,7 +520,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 - (void)vpaidAdLoaded:(double)volume {
     LoopMeLogDebug(@"VPAID ad loaded");
-    [self.vpaidClient stopActionTimeOutTimer];
     [self.webViewTimeOutTimer invalidate];
     self.webViewTimeOutTimer = nil;
     self.currentVolume = volume;
@@ -541,7 +539,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 - (void)vpaidAdStarted {
     LoopMeLogDebug(@"VPAID ad started");
-    [self.vpaidClient stopActionTimeOutTimer];
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearStart];
     
     dispatch_async(dispatch_get_main_queue(), ^{
