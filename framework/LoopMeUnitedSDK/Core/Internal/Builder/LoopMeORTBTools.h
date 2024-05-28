@@ -18,12 +18,12 @@
 @property (nonatomic, assign) BOOL video;
 @property (nonatomic, assign) BOOL banner;
 
-- (instancetype _Nullable)initWithAppKey:(NSString * _Nonnull)appKey
-                     targeting:(LoopMeTargeting * _Nullable)targeting
-                    adSpotSize:(CGSize)size
-                         integrationType:(NSString * _Nonnull)integrationType
-                          isInterstitial:(BOOL)isInterstitial
-                              isRewarded:(BOOL)isRewarded;
+- (instancetype _Nullable)initWithAppKey: (NSString * _Nonnull)appKey
+                               targeting: (LoopMeTargeting * _Nullable)targeting
+                              adSpotSize: (CGSize)size
+                         integrationType: (NSString * _Nonnull)integrationType
+                          isInterstitial: (BOOL)isInterstitial
+                              isRewarded: (BOOL)isRewarded;
 - (NSData * _Nonnull )makeRequestBody;
 
 @end

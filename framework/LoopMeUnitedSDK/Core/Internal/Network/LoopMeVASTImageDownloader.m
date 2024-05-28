@@ -71,7 +71,7 @@
                             self.downloadedImage = image;
                         } else {
                             LoopMeLogDebug(@"Error: invalid image data.");
-                            NSError *companionError = [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeCompanionError];
+                            [LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeCompanionError];
                         }
                     }
                 }];

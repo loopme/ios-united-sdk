@@ -881,7 +881,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         double volume = [[params objectForKey:@"volume"] doubleValue];
         [self vpaidAdVolumeChanged:volume];
     } else if([command isEqualToString:_kLoopMeVPAIDAdSkippableStateChangeCommand]) {
-        BOOL state = [[params objectForKey:@"skipState"] boolValue];
+        [[params objectForKey:@"skipState"] boolValue];
         [self vpaidAdSkippableStateChange];
     } else if([command isEqualToString:_kLoopMeVPAIDAdSizeChangeCommand]) {
         double width = [[params objectForKey:@"width"] doubleValue];
