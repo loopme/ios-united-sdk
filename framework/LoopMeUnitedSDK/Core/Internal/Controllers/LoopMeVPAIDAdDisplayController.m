@@ -232,7 +232,13 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)loadAdConfiguration {
-    [self initWebView];
+    if ([NSThread isMainThread]) {
+        [self initWebView];
+    } else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self initWebView];
+        });
+    }
     
     self.loadImageCounter = 0;
     self.loadVideoCounter = 0;
@@ -313,7 +319,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     [self.webView stopLoading];
     [self.webView removeFromSuperview];
     [self.webView.configuration.userContentController removeAllUserScripts];
-    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"mraid"];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"vpaid"];
 }
 
 - (void)closeAdPrivate {
