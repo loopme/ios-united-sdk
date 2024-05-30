@@ -101,21 +101,21 @@
     [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
     // TODO: Why we do not store OMID Wrapper instance?
-    (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
-        if (self.isReady && ready) {
-            return;
-        }
-        self.isReady = ready;
-        NSError *error;
-        NSString *description = @"LoopMe OMID fail to initialize";
-        if (!ready) {
-            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer errorMessage: description appkey: @"unknown"];
-            error = [NSError errorWithDomain: @"loopme.com" code: -1 userInfo: @{NSLocalizedDescriptionKey: description}];
-        }
-        if (completionBlock != nil) {
-            completionBlock(ready, error);
-        }
-    }];
+//    (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
+//        if (self.isReady && ready) {
+//            return;
+//        }
+//        self.isReady = ready;
+//        NSError *error;
+//        NSString *description = @"LoopMe OMID fail to initialize";
+//        if (!ready) {
+//            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer errorMessage: description appkey: @"unknown"];
+//            error = [NSError errorWithDomain: @"loopme.com" code: -1 userInfo: @{NSLocalizedDescriptionKey: description}];
+//        }
+//        if (completionBlock != nil) {
+//            completionBlock(ready, error);
+//        }
+//    }];
 }
 
 @end
