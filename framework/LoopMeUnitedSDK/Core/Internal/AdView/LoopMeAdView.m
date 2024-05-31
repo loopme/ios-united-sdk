@@ -21,7 +21,6 @@
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAnalyticsProvider.h"
 #import "LoopMeGDPRTools.h"
-#import "LoopMeViewabilityManager.h"
 #import "LoopMeSDK.h"
 #import <StoreKit/StoreKit.h>
 
