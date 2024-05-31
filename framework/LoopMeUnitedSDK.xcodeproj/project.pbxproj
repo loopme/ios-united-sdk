@@ -1252,10 +1252,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
 				MARKETING_VERSION = 7.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1298,10 +1295,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
-					"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
 				MARKETING_VERSION = 7.4.5;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loopme.sdk.LoopMeUnitedSDK;
