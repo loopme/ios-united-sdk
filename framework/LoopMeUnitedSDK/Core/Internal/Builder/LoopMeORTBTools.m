@@ -28,7 +28,6 @@ static NSString *_userAgent;
 
 @interface LoopMeORTBTools ()
 
-@property (nonatomic, assign) BOOL isInterstitial;
 @property (nonatomic, assign) BOOL isRewarded;
 
 @end
@@ -39,7 +38,6 @@ static NSString *_userAgent;
                      targeting: (LoopMeTargeting *)targeting
                     adSpotSize: (CGSize)size
                integrationType: (NSString *)integrationType
-                isInterstitial: (BOOL)isInterstitial
                     isRewarded: (BOOL)isRewarded {
     self = [super init];
     if (self) {
@@ -47,7 +45,6 @@ static NSString *_userAgent;
         self.targeting = targeting;
         self.integrationType = integrationType ?: @"normal";
         self.size = size;
-        self.isInterstitial = isInterstitial;
         self.isRewarded = isRewarded;
     }
     return self;
@@ -79,7 +76,7 @@ static NSString *_userAgent;
             @"id": @1,
             @"displaymanager": @"LOOPME_SDK",
             @"displaymanagerver": [self sdkVersion],
-            @"instl": self.isInterstitial ? @1 : @0,
+            @"instl": self.isRewarded ? @0 : @1,
             @"bidfloor": @0,
             @"secure": @1,
             @"metric": @[

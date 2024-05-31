@@ -117,12 +117,10 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.adTypes = adTypes;
     self.rewarded = isRewarded;
     
-    BOOL isInterstitial = [self.adUnit isKindOfClass: [LoopMeInterstitialGeneral class]];
     LoopMeORTBTools *rtbTools = [[LoopMeORTBTools alloc] initWithAppKey: appKey
                                                               targeting: targeting
                                                              adSpotSize: size
                                                         integrationType: integrationType
-                                                         isInterstitial: isInterstitial
                                                              isRewarded: isRewarded];
     if ([adSpot isKindOfClass: [LoopMeAdView class]]) {
         self.swapRequest = YES;
