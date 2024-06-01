@@ -13,7 +13,7 @@
 #define USERID @"demoapp"
 #define APPKEY @"1c524597d"
 
-@interface ViewController () <LevelPlayRewardedVideoManualDelegate ,LevelPlayInterstitialDelegate>
+@interface ViewController () <LevelPlayRewardedVideoManualDelegate ,LevelPlayInterstitialDelegate, LevelPlayBannerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *showRVButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadRVButton;
@@ -239,6 +239,21 @@
     NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
 }
+
+- (void)didDismissScreenWithAdInfo:(ISAdInfo *)adInfo { 
+    NSLog(@"[ISAdapter] - didDismissScreenWithAdInfo");
+}
+
+
+- (void)didLeaveApplicationWithAdInfo:(ISAdInfo *)adInfo { 
+    NSLog(@"[ISAdapter] - didLeaveApplicationWithAdInfo");
+}
+
+
+- (void)didPresentScreenWithAdInfo:(ISAdInfo *)adInfo { 
+    NSLog(@"[ISAdapter] - didPresentScreenWithAdInfo");
+}
+
 /**
  Called after an interstitial has been displayed on the screen.
  This callback is not supported by all networks, and we recommend using it
@@ -278,6 +293,52 @@
 // Hide keyboard by tap on the view
 - (void)hideKeyboard:(UITapGestureRecognizer*)sender {
     [self.view endEditing:YES];
+}
+
+- (void)encodeWithCoder:(nonnull NSCoder *)coder { 
+    NSLog(@"[ISAdapter] - encodeWithCoder");
+}
+
+- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection { 
+    NSLog(@"[ISAdapter] - traitCollectionDidChange");
+}
+
+- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container { 
+    NSLog(@"[ISAdapter] - preferredContentSizeDidChangeForChildContentContainer");
+}
+
+- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize { 
+    NSLog(@"[ISAdapter] - sizeForChildContentContainer");
+    return parentSize;
+}
+
+- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container { 
+    NSLog(@"[ISAdapter] - systemLayoutFittingSizeDidChangeForChildContentContainer");
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator { 
+    NSLog(@"[ISAdapter] - viewWillTransitionToSize");
+}
+
+- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator { 
+    NSLog(@"[ISAdapter] - willTransitionToTraitCollection");
+}
+
+- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator { 
+    NSLog(@"[ISAdapter] - didUpdateFocusInContext");
+}
+
+- (void)setNeedsFocusUpdate { 
+    NSLog(@"[ISAdapter] - setNeedsFocusUpdate");
+}
+
+- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context { 
+    NSLog(@"[ISAdapter] - shouldUpdateFocusInContext");
+    return NO;
+}
+
+- (void)updateFocusIfNeeded { 
+    NSLog(@"[ISAdapter] - updateFocusIfNeeded");
 }
 
 @end
