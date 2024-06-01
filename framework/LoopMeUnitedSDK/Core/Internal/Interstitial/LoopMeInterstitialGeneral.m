@@ -20,7 +20,6 @@
 #import "LoopMeLogging.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
-#import "LoopMeAnalyticsProvider.h"
 #import <StoreKit/StoreKit.h>
 
 
@@ -90,7 +89,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
             self->_adInterstitialViewController.delegate = self;
         });
         LoopMeLogInfo(@"Interstitial is initialized with appKey %@", appKey);
-        [LoopMeAnalyticsProvider sharedInstance];
     }
     return self;
 }
