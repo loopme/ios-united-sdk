@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
 @property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
-@property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
+@property (nonatomic, strong) ISPlacementInfo *rvPlacementInfo;
 @property (nonatomic, strong) ISBannerView *banner;
 @end
 

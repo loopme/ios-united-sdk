@@ -30,8 +30,6 @@
         self.scrollView.bounces = NO;
         self.scrollView.scrollEnabled = NO;
         self.clipsToBounds = NO;
-//        self.dataDetectorTypes = UIDataDetectorTypeAll;
-
     }
     return self;
 }
