@@ -8,13 +8,6 @@
 #import <Foundation/Foundation.h>
 #import <LoopMeUnitedSDK/LoopMeAdType.h>
 
-/**
- * AppKeys for test purposes
- */
-
-static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_PORTRAIT = @"test_interstitial_p";
-static NSString * _Nonnull const TEST_APP_KEY_INTERSTITIAL_LANDSCAPE = @"test_interstitial_l";
-
 @class LoopMeInterstitialGeneral;
 @class LoopMeTargeting;
 @class UIViewController;
