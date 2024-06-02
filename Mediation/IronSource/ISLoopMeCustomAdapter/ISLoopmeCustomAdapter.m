@@ -13,17 +13,30 @@
 @implementation ISLoopmeCustomAdapter
 
 -(void)init:(ISAdData *)adData delegate:(id<ISNetworkInitializationDelegate>)delegate {
+    /// https://developers.is.com/ironsource-mobile/ios/custom-adapter-integration-ios/#step-2
+    /// ironSource mediation will call the init method of the base adapter as part of any initialization process in the mediation.
+    /// As a result, this method can be called several times.
+    /// As part of your init implementation, make sure to call the initialization callbacks defined in the NetworkInitializationListener each time;
+    /// upon success (onInitSuccess) and/or upon failure (onInitFailed).
+    if ([[LoopMeSDK shared] isReady]) {
+        if ([delegate respondsToSelector: @selector(onInitDidSucceed)]) {
+            [delegate onInitDidSucceed];
+        }
+        return;
+    }
     [[LoopMeSDK shared] init: ^(BOOL success, NSError *error) {
         if (!success) {
-            NSLog(@"%@", error);
+            NSLog(@"Failed to init LoopMeUnitedSDK: %@", error);
+            if ([delegate respondsToSelector: @selector(onInitDidFailWithErrorCode:errorMessage:)]) {
+                [delegate onInitDidFailWithErrorCode: error.code errorMessage: error.localizedDescription];
+            }
+        } else {
+            NSLog(@"LoopMeUnitedSDK inited successfully");
+            if ([delegate respondsToSelector: @selector(onInitDidSucceed)]) {
+                [delegate onInitDidSucceed];
+            }
         }
     }];
-    
-    if (![[LoopMeSDK shared] isReady]) {
-        [delegate onInitDidFailWithErrorCode: ISAdapterErrorMissingParams errorMessage: @"SDK is not inited"];
-    }
-   // init success
-   [delegate onInitDidSucceed];
 }
 
 - (NSString *) networkSDKVersion {

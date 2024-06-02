@@ -33,7 +33,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton, self.destroyBannerButton]) {
+    for (UIButton *button in @[
+        self.showISButton,
+        self.loadRVButton,
+        self.showRVButton,
+        self.loadISButton,
+        self.loadBannerButton,
+        self.destroyBannerButton
+    ]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -49,9 +56,9 @@
     // We're passing 'self' to our delegates because we want
     // to be able to enable/disable buttons to match ad availability.
     
-    [IronSource setLevelPlayRewardedVideoManualDelegate:self];
-    [IronSource setLevelPlayInterstitialDelegate:self];
-    [IronSource setLevelPlayBannerDelegate:self];
+    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
+    [IronSource setLevelPlayInterstitialDelegate: self];
+    [IronSource setLevelPlayBannerDelegate: self];
 
     NSString *userId = [IronSource advertiserId];
     
@@ -61,9 +68,9 @@
     }
     
     // After setting the delegates you can go ahead and initialize the SDK.
-    [IronSource setUserId:userId];
+    [IronSource setUserId: userId];
     
-    [IronSource initWithAppKey:APPKEY];
+    [IronSource initWithAppKey: APPKEY];
     [self registerTapGestureRecognizer];
 }
 
