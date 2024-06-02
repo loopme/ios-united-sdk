@@ -1,7 +1,7 @@
 #  Be sure to run `pod spec lint ISLoopMeCustomAdapter.podspec'
 Pod::Spec.new do |spec|
     spec.name         = "ISLoopMeCustomAdapter"
-    spec.version      = "0.0.10"
+    spec.version      = "0.0.11"
     spec.summary      = "LoopMe IronSource Custom Adapter (ISLoopMeCustomAdapter)"
 
     spec.description  = "LoopMe IronSource Custom Adapter builded to use LoopMe SDK with IronSource SDK through IronSource Mediation."
