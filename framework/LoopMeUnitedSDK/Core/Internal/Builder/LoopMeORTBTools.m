@@ -76,7 +76,7 @@ static NSString *_userAgent;
             @"id": @1,
             @"displaymanager": @"LOOPME_SDK",
             @"displaymanagerver": [self sdkVersion],
-            @"instl": self.isRewarded ? @0 : @1,
+            @"instl": self.isRewarded ? @1 : @0,
             @"bidfloor": @0,
             @"secure": @1,
             @"metric": @[
