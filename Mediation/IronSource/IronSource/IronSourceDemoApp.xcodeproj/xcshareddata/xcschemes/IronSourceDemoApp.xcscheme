@@ -34,6 +34,20 @@
                ReferencedContainer = "container:IronSourceDemoApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "47714E2D22FAF9CE00DF0D55"
+               BuildableName = "LoopMeUnitedSDK.framework"
+               BlueprintName = "LoopMeUnitedSDK"
+               ReferencedContainer = "container:../../../framework/LoopMeUnitedSDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
