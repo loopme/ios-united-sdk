@@ -19,7 +19,6 @@
 #import "LoopMeMaximizedViewController.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
-#import "LoopMeAnalyticsProvider.h"
 #import "LoopMeGDPRTools.h"
 #import "LoopMeSDK.h"
 #import <StoreKit/StoreKit.h>
@@ -105,7 +104,6 @@
         self.backgroundColor = [UIColor clearColor];
         [self registerObservers];
         LoopMeLogInfo(@"Ad view initialized with appKey: %@", appKey);
-        [LoopMeAnalyticsProvider sharedInstance];
     }
     return self;
 }

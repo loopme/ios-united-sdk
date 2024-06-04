@@ -13,7 +13,7 @@
 #define USERID @"demoapp"
 #define APPKEY @"1c524597d"
 
-@interface ViewController () <LevelPlayRewardedVideoManualDelegate ,LevelPlayInterstitialDelegate>
+@interface ViewController () <LevelPlayRewardedVideoManualDelegate ,LevelPlayInterstitialDelegate, LevelPlayBannerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *showRVButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadRVButton;
@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
 @property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
-@property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
+@property (nonatomic, strong) ISPlacementInfo *rvPlacementInfo;
 @property (nonatomic, strong) ISBannerView *banner;
 @end
 
@@ -33,7 +33,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    for (UIButton *button in @[self.showISButton, self.loadRVButton, self.showRVButton, self.loadISButton, self.loadBannerButton, self.destroyBannerButton]) {
+    for (UIButton *button in @[
+        self.showISButton,
+        self.loadRVButton,
+        self.showRVButton,
+        self.loadISButton,
+        self.loadBannerButton,
+        self.destroyBannerButton
+    ]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -49,9 +56,9 @@
     // We're passing 'self' to our delegates because we want
     // to be able to enable/disable buttons to match ad availability.
     
-    [IronSource setLevelPlayRewardedVideoManualDelegate:self];
-    [IronSource setLevelPlayInterstitialDelegate:self];
-    [IronSource setLevelPlayBannerDelegate:self];
+    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
+    [IronSource setLevelPlayInterstitialDelegate: self];
+    [IronSource setLevelPlayBannerDelegate: self];
 
     NSString *userId = [IronSource advertiserId];
     
@@ -61,9 +68,9 @@
     }
     
     // After setting the delegates you can go ahead and initialize the SDK.
-    [IronSource setUserId:userId];
+    [IronSource setUserId: userId];
     
-    [IronSource initWithAppKey:APPKEY];
+    [IronSource initWithAppKey: APPKEY];
     [self registerTapGestureRecognizer];
 }
 
@@ -239,6 +246,21 @@
     NSLog(@"%s",__PRETTY_FUNCTION__);
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
 }
+
+- (void)didDismissScreenWithAdInfo:(ISAdInfo *)adInfo { 
+    NSLog(@"[ISAdapter] - didDismissScreenWithAdInfo");
+}
+
+
+- (void)didLeaveApplicationWithAdInfo:(ISAdInfo *)adInfo { 
+    NSLog(@"[ISAdapter] - didLeaveApplicationWithAdInfo");
+}
+
+
+- (void)didPresentScreenWithAdInfo:(ISAdInfo *)adInfo { 
+    NSLog(@"[ISAdapter] - didPresentScreenWithAdInfo");
+}
+
 /**
  Called after an interstitial has been displayed on the screen.
  This callback is not supported by all networks, and we recommend using it
@@ -278,6 +300,52 @@
 // Hide keyboard by tap on the view
 - (void)hideKeyboard:(UITapGestureRecognizer*)sender {
     [self.view endEditing:YES];
+}
+
+- (void)encodeWithCoder:(nonnull NSCoder *)coder { 
+    NSLog(@"[ISAdapter] - encodeWithCoder");
+}
+
+- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection { 
+    NSLog(@"[ISAdapter] - traitCollectionDidChange");
+}
+
+- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container { 
+    NSLog(@"[ISAdapter] - preferredContentSizeDidChangeForChildContentContainer");
+}
+
+- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize { 
+    NSLog(@"[ISAdapter] - sizeForChildContentContainer");
+    return parentSize;
+}
+
+- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container { 
+    NSLog(@"[ISAdapter] - systemLayoutFittingSizeDidChangeForChildContentContainer");
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator { 
+    NSLog(@"[ISAdapter] - viewWillTransitionToSize");
+}
+
+- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator { 
+    NSLog(@"[ISAdapter] - willTransitionToTraitCollection");
+}
+
+- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator { 
+    NSLog(@"[ISAdapter] - didUpdateFocusInContext");
+}
+
+- (void)setNeedsFocusUpdate { 
+    NSLog(@"[ISAdapter] - setNeedsFocusUpdate");
+}
+
+- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context { 
+    NSLog(@"[ISAdapter] - shouldUpdateFocusInContext");
+    return NO;
+}
+
+- (void)updateFocusIfNeeded { 
+    NSLog(@"[ISAdapter] - updateFocusIfNeeded");
 }
 
 @end
