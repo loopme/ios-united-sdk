@@ -107,6 +107,7 @@ static NSString *_userAgent;
             @"make": @"Apple",
             @"os": @"iOS",
             @"js": @1,
+            @"pxratio": @([LoopMeIdentityProvider calculatePxratioOfScreen]),
             @"dnt": [LoopMeIdentityProvider advertisingTrackingEnabled] ? @"0" : @"1",
             @"model": [LoopMeIdentityProvider deviceType],
             @"hwv": [LoopMeIdentityProvider deviceModel],
