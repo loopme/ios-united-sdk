@@ -100,6 +100,8 @@
     [[LoopMeGDPRTools sharedInstance] getAppDetailsFromServer];
     [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
+    self.isReady = YES;
+    completionBlock(YES, nil);
 }
 
 @end
