@@ -123,7 +123,7 @@
     [self addSubview:self.skipButton];
     
     self.closeButton = [[UIButton alloc] init];
-    NSData *closeImageData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Replay options:0];
+    NSData *closeImageData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Close options:0];
     UIImage *closeImage = [UIImage imageWithData:closeImageData];
     [self.closeButton setImage:closeImage forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
