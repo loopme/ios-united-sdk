@@ -151,7 +151,8 @@ static NSString *_userAgent;
             @"yob": @(self.targeting.yearOfBirth),
             @"keywords": self.targeting.keywords,
             @"ext": @{}
-        } : @{@"ext": @{}},
+        } : @{@"ext": @{},
+              @"consent": [LoopMeGDPRTools getConsentValue]},
         @"tmax": @700,
         @"bcat": @[@"IAB25-3", @"IAB25", @"IAB26"]
     }];
