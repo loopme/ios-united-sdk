@@ -150,6 +150,7 @@ static NSString *_userAgent;
             @"gender": self.targeting.genderParameter,
             @"yob": @(self.targeting.yearOfBirth),
             @"keywords": self.targeting.keywords,
+            @"consent": [LoopMeGDPRTools getConsentValue],
             @"ext": @{}
         } : @{@"ext": @{},
               @"consent": [LoopMeGDPRTools getConsentValue]},
