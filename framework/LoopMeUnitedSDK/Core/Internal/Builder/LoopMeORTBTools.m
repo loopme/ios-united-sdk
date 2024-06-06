@@ -73,7 +73,8 @@ static NSString *_userAgent;
             @"id": self.appKey,
             @"bundle": [self parameterForBundleIdentifier],
             @"name": [[NSBundle mainBundle] infoDictionary][@"CFBundleName"],
-            @"version": [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]
+            @"ver": [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"],
+            @"domain": [self parameterForBundleIdentifier]
         },
         @"imp": @[[self mutableWithDictionary: @{
             @"id": @1,
