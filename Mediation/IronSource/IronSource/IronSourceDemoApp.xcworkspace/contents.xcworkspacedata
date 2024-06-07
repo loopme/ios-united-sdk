@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../framework/LoopMeUnitedSDK.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:IronSourceDemoApp.xcodeproj">
    </FileRef>
    <FileRef
