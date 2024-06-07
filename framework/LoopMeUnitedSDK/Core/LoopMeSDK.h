@@ -27,7 +27,6 @@ FOUNDATION_EXPORT const unsigned char LoopMeUnitedSDKVersionString[];
 #import <LoopMeUnitedSDK/LoopMeDefinitions.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@class LoopMeOMIDWrapper;
 
 @interface LoopMeSDK : NSObject
     

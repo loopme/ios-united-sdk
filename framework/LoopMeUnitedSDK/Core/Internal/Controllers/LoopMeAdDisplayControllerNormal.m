@@ -56,7 +56,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 @property (nonatomic, assign) BOOL adDisplayed;
 
-@property (nonatomic, strong) LoopMeOMIDWrapper *omidWrapper;
 
 - (void)deviceShaken;
 - (void)interceptURL:(NSURL *)URL;

@@ -97,9 +97,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 @property (nonatomic, assign) NSTimeInterval viewableTime;
 @property (nonatomic, assign) NSTimeInterval previousVideoTime;
 
-@property (nonatomic, strong) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
-@property (nonatomic, strong) LoopMeOMIDWrapper *omidWrapper;
-
 - (void)handleVpaidStop;
 
 @end

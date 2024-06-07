@@ -57,7 +57,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @property (nonatomic, strong) NSDate *loadingVideoStartDate;
 @property (nonatomic, strong) NSURL *videoURL;
-@property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
 @property (nonatomic, strong) NSLayoutConstraint *topVideoUIConstraint;
@@ -115,14 +114,6 @@ const NSInteger kResizeOffsetVPAID = 11;
         self.bottomVideoUIConstraint.active = YES;
     }
     return _videoView;
-}
-
-- (LoopMeOMIDVideoEventsWrapper *)omidVideoEvents {
-    if ([self.delegate respondsToSelector:@selector(omidVideoEvents)]) {
-        return [self.delegate performSelector:@selector(omidVideoEvents)];
-    }
-    
-    return nil;
 }
 
 - (void)setPlayerItem:(AVPlayerItem *)playerItem {

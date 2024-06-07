@@ -13,8 +13,6 @@
 #import "LoopMeDefinitions.h"
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
-@class LoopMeOMIDWrapper;
-
 @interface LoopMeSDK ()
 
 @property (nonatomic) BOOL isReady;
