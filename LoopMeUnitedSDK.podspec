@@ -17,10 +17,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "12.0"
   s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "#{s.version}" }
   s.resource = 'LoopMeUnitedSDK.embeddedframework/LoopMeResources.bundle'
-  s.vendored_frameworks = [
-    "LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework",
-    "framework/LoopMeUnitedSDK/Core/Viewability/OMSDK/OMSDKswift/OMSDK_Loopme.xcframework"
-  ]
+  s.vendored_frameworks = "LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework"
   s.library   = "xml2"
   s.requires_arc = true
   s.xcconfig = { "OTHER_LDFLAGS" => "-ObjC" " -lz"}
