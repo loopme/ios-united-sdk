@@ -14,7 +14,6 @@
 #import "LoopMeError.h"
 #import "LoopMeLogging.h"
 #import "LoopMeGlobalSettings.h"
-#import "LoopMeErrorEventSender.h"
 #import "LoopMeGDPRTools.h"
 #import "LoopMeSDK.h"
 

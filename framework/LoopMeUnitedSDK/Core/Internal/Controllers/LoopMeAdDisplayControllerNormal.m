@@ -23,7 +23,6 @@
 #import "LoopMeInterstitialViewController.h"
 #import "LoopMeCloseButton.h"
 #import "LoopMeInterstitialGeneral.h"
-#import "LoopMeErrorEventSender.h"
 #import "LoopMeAdView.h"
 #import "LoopMeSDK.h"
 #import "LoopMeMRAIDScriptMessageHandler.h"

@@ -45,7 +45,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
 
 
 @end
-
+// TODO: This class takes to much responsibility - refactor
 @implementation LoopMeInterstitialGeneral
 
 #pragma mark - Life Cycle
@@ -173,23 +173,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
     }
 }
 
-- (void)timeOut {
-    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer errorMessage: @"Time out" appkey: self.appKey];
-    
-    //-------NORMAL----
-    [self.adDisplayController stopHandlingRequests];
-    [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeHTMLRequestTimeOut]];
-    
-    //------VPAID-------
-    [self.adDisplayControllerVPAID stopHandlingRequests];
-    [self failedLoadingAdWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeUndefined]];
-}
-
-- (void)invalidateTimer {
-    [self.timeoutTimer invalidate];
-    self.timeoutTimer = nil;
-}
-
 - (void)startAd {
     [self.adDisplayControllerVPAID startAd];
 }
@@ -203,15 +186,45 @@ const NSInteger kLoopMeRequestTimeout = 180;
     [self loadAdWithTargeting: nil];
 }
 
+- (void)invalidateTimer {
+    [self.timeoutTimer invalidate];
+    self.timeoutTimer = nil;
+}
+
+- (void)timeOut: (NSTimer *)timer {
+    if (self.timeoutTimer != timer) {
+        return ;
+    }
+    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
+                         errorMessage: @"Time out"
+                               appkey: self.appKey
+                                 info: @[@"LoopMeInterstitialGeneral", self.adConfiguration.creativeType == LoopMeCreativeTypeVast ? @"VAST" : @"NOT_VAST"]];
+    
+    //-------NORMAL----
+    [self.adDisplayController stopHandlingRequests];
+    [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeHTMLRequestTimeOut]];
+    
+    //------VPAID-------
+    [self.adDisplayControllerVPAID stopHandlingRequests];
+    [self failedLoadingAdWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeUndefined]];
+}
+
+- (void)runTimeoutTimer {
+    if (self.timeoutTimer) {
+        [self invalidateTimer];
+    }
+    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: kLoopMeRequestTimeout
+                                                         target: self
+                                                       selector: @selector(timeOut:)
+                                                       userInfo: nil
+                                                        repeats: NO];
+}
+
 - (void)loadURL: (NSURL *)url {
     [self registerObserver];
     self.loading = YES;
     self.ready = NO;
-    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: kLoopMeRequestTimeout
-                                                         target: self
-                                                       selector: @selector(timeOut)
-                                                       userInfo: nil
-                                                        repeats: NO];
+    [self runTimeoutTimer];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.adManager loadURL: url];
     });
@@ -224,7 +237,9 @@ const NSInteger kLoopMeRequestTimeout = 180;
 - (void)loadAdWithTargeting: (LoopMeTargeting *)targeting
             integrationType: (NSString *)integrationType
                  isRewarded: (BOOL)isRewarded {
-    if (self.isLoading) {
+    // self.adManager can be in loading state also
+    // TODO: rethink this logic - we need to have only one source of truth
+    if (self.isLoading || self.adManager.isLoading) {
         LoopMeLogInfo(@"Wait for previous loading ad process finish");
         return;
     }
@@ -236,11 +251,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
     [self registerObserver];
     self.loading = YES;
     self.ready = NO;
-    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: kLoopMeRequestTimeout
-                                                         target: self
-                                                       selector: @selector(timeOut)
-                                                       userInfo: nil
-                                                        repeats: NO];
+    [self runTimeoutTimer];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.adManager loadAdWithAppKey: self.appKey
                                targeting: targeting
@@ -310,14 +321,16 @@ const NSInteger kLoopMeRequestTimeout = 180;
         LoopMeLogInfo(@"Ad isn't ready to be displayed");
         return [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                                     errorMessage: @"Ad isn't ready to be displayed"
-                                          appkey: self.appKey];
+                                          appkey: self.appKey
+                                            info: @[@"LoopMeInterstitialGeneral"]];
     }
     
     if (self.adInterstitialViewController.presentingViewController) {
         LoopMeLogInfo(@"Ad has already displayed");
         return [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                                     errorMessage: @"Ad has already displayed"
-                                          appkey: self.appKey];
+                                          appkey: self.appKey
+                                            info: @[@"LoopMeInterstitialGeneral"]];
     }
     
     LoopMeLogDebug(@"Interstitial ad will appear");
