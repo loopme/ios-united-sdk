@@ -48,9 +48,44 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
 #pragma mark - Life Cycle
 
+- (void)invalidateTimers {
+    [self.adExpirationTimer invalidate];
+    self.adExpirationTimer = nil;
+}
+
 - (void)dealloc {
+    if (self.adExpirationTimer) {
+        [self invalidateTimers];
+    }
+    [_communicator cancel];
+}
+
+- (void)adContentBecameExpired {
     [self invalidateTimers];
-    [_communicator cancel];    
+    LoopMeLogDebug(@"Ad content is expired");
+    if ([self.delegate respondsToSelector: @selector(adManagerDidExpireAd:)]) {
+        [self.delegate adManagerDidExpireAd: self];
+    }
+}
+
+- (void)scheduleAdExpirationIn: (NSTimeInterval)interval {
+    if (self.adExpirationTimer) {
+        [self invalidateTimers];
+    }
+    self.adExpirationTimer = [NSTimer scheduledTimerWithTimeInterval: interval
+                                                              target: self
+                                                            selector: @selector(adContentBecameExpired)
+                                                            userInfo: nil
+                                                             repeats: NO];
+}
+
+- (void)serverCommunicatorDidReceiveAd: (LoopMeServerCommunicator *)communicator {
+    if ([self.delegate respondsToSelector: @selector(adManagerDidReceiveAd:)]) {
+        [self.delegate adManagerDidReceiveAd: self];
+    }
+    self.loading = NO;
+    [self scheduleAdExpirationIn: self.expirationTime];
+    self.swapRequest = NO;
 }
 
 - (instancetype)initWithDelegate: (id<LoopMeAdManagerDelegate>)delegate {
@@ -72,22 +107,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     LoopMeLogInfo(@"Did start loading ad");
     LoopMeLogDebug(@"loads ad with URL %@", [URL absoluteString]);
     [self.communicator loadWithUrl: URL requestBody: body method: @"POST"];
-}
-
-- (void)scheduleAdExpirationIn: (NSTimeInterval)interval {
-    self.adExpirationTimer = [NSTimer scheduledTimerWithTimeInterval: interval
-                                                              target: self
-                                                            selector: @selector(adContentBecameExpired)
-                                                            userInfo: nil
-                                                             repeats: NO];
-}
-
-- (void)adContentBecameExpired {
-    [self invalidateTimers];
-    LoopMeLogDebug(@"Ad content is expired");
-    if ([self.delegate respondsToSelector: @selector(adManagerDidExpireAd:)]) {
-        [self.delegate adManagerDidExpireAd: self];
-    }
 }
 
 - (BOOL)isAdType: (LoopMeAdType)adType1 equalTo: (LoopMeAdType)adType2 {
@@ -134,11 +153,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
             requestBody: [rtbTools makeRequestBody]];
 }
 
-- (void)invalidateTimers {
-    [self.adExpirationTimer invalidate];
-    self.adExpirationTimer = nil;
-}
-
 #pragma mark - LoopMeServerCommunicatorDelegate
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {
@@ -150,15 +164,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.loading = NO;
 }
 
-- (void)serverCommunicatorDidReceiveAd: (LoopMeServerCommunicator *)communicator {
-    if ([self.delegate respondsToSelector: @selector(adManagerDidReceiveAd:)]) {
-        [self.delegate adManagerDidReceiveAd: self];
-    }
-    self.loading = NO;
-    [self scheduleAdExpirationIn: self.expirationTime];
-    self.swapRequest = NO;
-}
-
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didFailWith: (NSError *)error {
     self.loading = NO;
     if (self.swapRequest) {
@@ -167,19 +172,19 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
             [self.delegate adManager: self didFailToLoadAdWithError: error];
         }
         self.swapRequest = NO;
-    } else {
-        self.swapRequest = YES;
-        CGSize swapedSize = CGSizeMake(self.adSpotSize.height, self.adSpotSize.width);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self loadAdWithAppKey: self.appKey
-                         targeting: self.targeting
-                   integrationType: self.integrationType
-                        adSpotSize: swapedSize
-                            adSpot: self.adUnit
-                  preferredAdTypes: self.adTypes
-                        isRewarded: self.rewarded];
-        });
+        return ;
     }
+    self.swapRequest = YES;
+    CGSize swapedSize = CGSizeMake(self.adSpotSize.height, self.adSpotSize.width);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadAdWithAppKey: self.appKey
+                     targeting: self.targeting
+               integrationType: self.integrationType
+                    adSpotSize: swapedSize
+                        adSpot: self.adUnit
+              preferredAdTypes: self.adTypes
+                    isRewarded: self.rewarded];
+    });
 }
 
 @end

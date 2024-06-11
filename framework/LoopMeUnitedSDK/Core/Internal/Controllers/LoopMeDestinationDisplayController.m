@@ -151,7 +151,10 @@
 - (void)failedToResolveURLWithError:(NSError *)error {
     self.loadingDestination = NO;
     [self hideOverlay];
-    [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:[NSString stringWithFormat:@"Wrong redirect: %@", self.resorvingURL.absoluteString] appkey:self.delegate.appKey];
+    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                         errorMessage: [NSString stringWithFormat: @"Wrong redirect: %@", self.resorvingURL.absoluteString]
+                               appkey: self.delegate.appKey
+                                 info: @[@"LoopMeDestinationDisplayController"]];
     [self.delegate destinationDisplayControllerDidDismissModal:self];
 }
 

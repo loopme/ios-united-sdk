@@ -7,6 +7,8 @@
 
 #import "LoopMeVASTPlayerUIView.h"
 #import "LoopMeSDK.h"
+#import "LoopMeResources.h"
+
 
 @interface LoopMeVASTPlayerUIView ()
 
@@ -55,12 +57,14 @@
     UITapGestureRecognizer *tapVideo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoTapped)];
     [self addGestureRecognizer:tapVideo];
     
-    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
-
     self.muteButton = [[UIButton alloc] init];
-
-    [self.muteButton setImage:[UIImage imageNamed:@"loopmemute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
-    [self.muteButton setImage:[UIImage imageNamed:@"loopmeunmute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    
+    NSData *muteImageData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Mute options:0];
+    UIImage *muteImage = [UIImage imageWithData:muteImageData];
+    [self.muteButton setImage:muteImage forState:UIControlStateSelected];
+    NSData *unmuteImageData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Unmute options:0];
+    UIImage *unmuteImage = [UIImage imageWithData:unmuteImageData];
+    [self.muteButton setImage:unmuteImage forState:UIControlStateNormal];
     [self.muteButton addTarget:self action:@selector(mute:) forControlEvents:UIControlEventTouchUpInside];
     self.muteButton.selected = NO;
     self.muteButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -103,19 +107,25 @@
     [self addSubview:self.endCard];
     
     self.replayButton = [[UIButton alloc] init];
-    [self.replayButton setImage:[UIImage imageNamed:@"loopmereplay" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    NSData *replayImageData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Replay options:0];
+    UIImage *replayImage = [UIImage imageWithData:replayImageData];
+    [self.replayButton setImage:replayImage forState:UIControlStateNormal];
     [self.replayButton addTarget:self action:@selector(replay:) forControlEvents:UIControlEventTouchUpInside];
     self.replayButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.replayButton];
     
     self.skipButton = [[UIButton alloc] init];
-    [self.skipButton setImage:[UIImage imageNamed:@"loopmeskip" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    NSData *skipImageData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Skip options:0];
+    UIImage *skipImage = [UIImage imageWithData:skipImageData];
+    [self.skipButton setImage:skipImage forState:UIControlStateNormal];
     [self.skipButton addTarget:self action:@selector(skip:) forControlEvents:UIControlEventTouchUpInside];
     self.skipButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.skipButton];
     
     self.closeButton = [[UIButton alloc] init];
-    [self.closeButton setImage:[UIImage imageNamed:@"loopmeclose" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    NSData *closeImageData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Close options:0];
+    UIImage *closeImage = [UIImage imageWithData:closeImageData];
+    [self.closeButton setImage:closeImage forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.closeButton.hidden = NO;

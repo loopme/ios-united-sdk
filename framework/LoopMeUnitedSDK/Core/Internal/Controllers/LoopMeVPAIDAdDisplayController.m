@@ -25,6 +25,7 @@
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeViewabilityProtocol.h"
 #import "LoopMeVpaidScriptMessageHandler.h"
+#import "LoopMeResources.h"
 
 NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
@@ -224,7 +225,8 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     
     if (self.adConfiguration.vastProperties.isVpaid) {
-        NSString *htmlString = [self stringFromFile:@"loopmead" withExtension:@"html"];
+        NSData *htmlData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Vast4 options:0];
+        NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
         
         if (htmlString) {
             htmlString = [self injectAdVerification:htmlString];
@@ -364,15 +366,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 #pragma mark - Private
 
-- (NSString *)stringFromFile:(NSString *)filename withExtension:(NSString *)extension {
-    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
-    if (!resourcesBundle) {
-        return nil;
-    }
-    NSString *htmlPath = [resourcesBundle pathForResource:filename ofType:extension];
-    return [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:NULL];
-}
-
 - (NSString *)injectAdVerification:(NSString *)htmlString {
     NSMutableString *copyHTMLstring = [htmlString mutableCopy];
     
@@ -395,7 +388,8 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (NSString *)makeVastVerificationHTML {
-    NSString *htmlString = [self stringFromFile:@"loopmevast4" withExtension:@"html"];
+    NSData *htmlData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Vast4 options:0];
+    NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
     htmlString = [self injectAdVerification:htmlString];
     return htmlString;
 }
@@ -493,7 +487,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         [self.delegate adDisplayController:self didFailToLoadAdWithError:error];
     }
     
-    [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeJS errorMessage:message appkey:self.adConfiguration.appKey];
+    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeJS
+                         errorMessage: message
+                               appkey: self.adConfiguration.appKey
+                                 info: @[@"LoopMeVPAIDAdDispalyController"]];
     [self.vastEventTracker trackErrorCode:LoopMeVPAIDErrorCodeVPAIDError];
 }
 
@@ -799,7 +796,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     if (self.isDeferredAdStopped) {
         [self handleVpaidStop];
-        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"Deferred adStopped" appkey:self.appKey];
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                             errorMessage: @"Deferred adStopped"
+                                   appkey: self.appKey
+                                     info: @[@"LoopMeVPAIDAdDisplayController"]];
     }
 }
 

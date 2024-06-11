@@ -55,6 +55,7 @@
 @property (nonatomic, assign, getter = isVisibilityUpdated) BOOL visibilityUpdated;
 @end
 
+// TODO: This class takes to much responsibility - refactor
 @implementation LoopMeAdView
 
 #pragma mark - Initialization
@@ -109,17 +110,18 @@
 }
 
 - (void)setMinimizedModeEnabled: (BOOL)minimizedModeEnabled {
-    if (_minimizedModeEnabled != minimizedModeEnabled) {
-        _minimizedModeEnabled = minimizedModeEnabled;
-        if (_minimizedModeEnabled) {
-            _minimizedView = [[LoopMeMinimizedAdView alloc] initWithDelegate: self];
-            _minimizedView.backgroundColor = [UIColor clearColor];
-            _minimizedView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
-            [[UIApplication sharedApplication].keyWindow addSubview: _minimizedView];
-        } else {
-            [self removeMinimizedView];
-        }
+    if (_minimizedModeEnabled == minimizedModeEnabled) {
+        return ;
     }
+    _minimizedModeEnabled = minimizedModeEnabled;
+    if (!_minimizedModeEnabled) {
+        [self removeMinimizedView];
+        return ;
+    }
+    _minimizedView = [[LoopMeMinimizedAdView alloc] initWithDelegate: self];
+    _minimizedView.backgroundColor = [UIColor clearColor];
+    _minimizedView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+    [[UIApplication sharedApplication].keyWindow addSubview: _minimizedView];
 }
 
 - (void)setDoNotLoadVideoWithoutWiFi: (BOOL)doNotLoadVideoWithoutWiFi {
@@ -152,6 +154,7 @@
     if (@available(iOS 14.5, *)) {
         [SKAdNetwork startImpression: self.skAdImpression completionHandler: ^(NSError * _Nullable error) {
             if (error) {
+                // TODO: send event to server
                 NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
             } else {
                 NSLog(@"SKAdImpression started successfully");
@@ -165,6 +168,7 @@
     if (@available(iOS 14.5, *)) {
         [SKAdNetwork endImpression: self.skAdImpression completionHandler: ^(NSError * _Nullable error) {
             if (error) {
+                // TODO: send event to server
                 NSLog(@"Error starting SKAdImpression: %@", error.localizedDescription);
             } else {
                 NSLog(@"SKAdImpression ended successfully");
@@ -250,7 +254,8 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     if (!self.isReady) {
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: @"Banner added to view, but wasn't ready to be displayed"
-                                   appkey: self.appKey];
+                                   appkey: self.appKey
+                                     info: @[@"LoopMeAdView"]];
         self.needsToBeDisplayedWhenReady = YES;
     }
     if ([self.delegate respondsToSelector: @selector(loopMeAdViewWillAppear:)]) {
@@ -331,8 +336,38 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     [self loadAdWithTargeting: targeting integrationType: @"normal"];
 }
 
+- (void)timeOut: (NSTimer *)timer {
+    if (self.timeoutTimer != timer) {
+        return ;
+    }
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+        [self.adDisplayController stopHandlingRequests];
+    } else {
+        [self.adDisplayControllerVPAID stopHandlingRequests];
+    }
+    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
+                         errorMessage: @"Time out"
+                               appkey: self.appKey
+                                 info: @[@"LoopMeAdView", self.adConfiguration.creativeType == LoopMeCreativeTypeVast ? @"VAST" : @"NOT_VAST"]];
+    [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeHTMLRequestTimeOut]];
+}
+
+- (void)invalidateTimer {
+    [self.timeoutTimer invalidate];
+    self.timeoutTimer = nil;
+}
+
+- (void)runTimeoutTimer {
+    if (self.timeoutTimer) {
+        [self invalidateTimer];
+    }
+    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: 180 target: self selector: @selector(timeOut:) userInfo: nil repeats: NO];
+}
+
 - (void)loadAdWithTargeting: (LoopMeTargeting *)targeting integrationType: (NSString *)integrationType {
-    if (self.isLoading) {
+    // self.adManager can be in loading state also
+    // TODO: rethink this logic - we need to have only one source of truth
+    if (self.isLoading || self.adManager.isLoading) {
         return LoopMeLogInfo(@"Wait for previous loading ad process finish");
     }
     if (self.isReady) {
@@ -340,11 +375,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     }
     self.ready = NO;
     self.loading = YES;
-    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: 180
-                                                         target: self
-                                                       selector: @selector(timeOut)
-                                                       userInfo: nil
-                                                        repeats: NO];
+    [self runTimeoutTimer];
     [self.adManager loadAdWithAppKey: self.appKey
                            targeting: targeting
                      integrationType: integrationType
@@ -355,29 +386,10 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 }
 
 - (void)loadURL: (NSURL *)url {
-    self.loading = YES;
     self.ready = NO;
-    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: 180 target: self selector: @selector(timeOut) userInfo: nil repeats: NO];
+    self.loading = YES;
+    [self runTimeoutTimer];
     [self.adManager loadURL: url];
-}
-
-- (void)setAdVisible:(BOOL)visible {
-    if (!self.isReady) {
-        return;
-    }
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-        self.adDisplayController.forceHidden = !visible;
-        self.adDisplayController.visible = visible;
-    } else {
-        self.adDisplayControllerVPAID.visible = visible;
-    }
-    if (self.isMinimizedModeEnabled && self.scrollView) {
-        if (!visible) {
-            [self toOriginalSize];
-        } else {
-            [self updateAdVisibilityInScrollView];
-        }
-    }
 }
 
 - (void)updateAdVisibilityInScrollView {
@@ -424,14 +436,15 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 #pragma mark - Private
 
 - (void)minimize {
-    if (!self.isMinimized && (self.adDisplayController.isVisible || self.adDisplayControllerVPAID.isVisible)) {
-        self.minimized = YES;
-        [self.minimizedView show];
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-            [self.adDisplayController moveView: YES];
-        } else {
-            [self.adDisplayControllerVPAID moveView: YES];
-        }
+    if (self.isMinimized || !(self.adDisplayController.isVisible || self.adDisplayControllerVPAID.isVisible)) {
+        return ;
+    }
+    self.minimized = YES;
+    [self.minimizedView show];
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+        [self.adDisplayController moveView: YES];
+    } else {
+        [self.adDisplayControllerVPAID moveView: YES];
     }
 }
 
@@ -546,21 +559,6 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     return self.maximizedController.isViewLoaded && self.maximizedController.view.window;
 }
 
-- (void)timeOut {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-        [self.adDisplayController stopHandlingRequests];
-    } else {
-        [self.adDisplayControllerVPAID stopHandlingRequests];
-    }
-    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer errorMessage: @"Time out" appkey: self.appKey];
-    [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeHTMLRequestTimeOut]];
-}
-
-- (void)invalidateTimer {
-    [self.timeoutTimer invalidate];
-    self.timeoutTimer = nil;
-}
-
 #pragma mark - LoopMeAdManagerDelegate
 
 - (void)adManager: (LoopMeAdManager *)manager didReceiveAdConfiguration: (LoopMeAdConfiguration *)adConfiguration {
@@ -618,11 +616,11 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 }
 
 - (void)adManagerDidReceiveAd: (LoopMeAdManager *)manager {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-        return;
-    }
     if (!self.adConfiguration) {
         [self failedLoadingAdWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeUndefined]];
+        return;
+    }
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
         return;
     }
     [self.adDisplayControllerVPAID loadAdConfiguration];
@@ -655,6 +653,25 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 }
 
 #pragma mark - LoopMeMaximizedAdViewDelegate
+
+- (void)setAdVisible:(BOOL)visible {
+    if (!self.isReady) {
+        return;
+    }
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+        self.adDisplayController.forceHidden = !visible;
+        self.adDisplayController.visible = visible;
+    } else {
+        self.adDisplayControllerVPAID.visible = visible;
+    }
+    if (self.isMinimizedModeEnabled && self.scrollView) {
+        if (!visible) {
+            [self toOriginalSize];
+        } else {
+            [self updateAdVisibilityInScrollView];
+        }
+    }
+}
 
 - (void)maximizedAdViewDidPresent: (LoopMeMaximizedViewController *)maximizedViewController {
     if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {

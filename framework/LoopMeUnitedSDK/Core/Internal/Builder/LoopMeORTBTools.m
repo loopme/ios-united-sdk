@@ -23,6 +23,7 @@
 #import "LoopMeGDPRTools.h"
 #import "LoopMeAudioCheck.h"
 #import "LoopMeGlobalSettings.h"
+#import "LoopMeErrorEventSender.h"
 
 static NSString *_userAgent;
 
@@ -169,9 +170,17 @@ static NSString *_userAgent;
     }
 
     NSError *error;
-    return [NSJSONSerialization dataWithJSONObject: cleanNullsFromCollection(request)
-                                           options: NSJSONWritingPrettyPrinted
-                                             error: &error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: cleanNullsFromCollection(request)
+                                                       options: NSJSONWritingPrettyPrinted
+                                                         error: &error];
+    if (!jsonData) {
+        NSString *errorMessage = [NSString stringWithFormat: @"OpenRTB Request JSON Serialization Error %@", error.localizedDescription];
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                             errorMessage: errorMessage
+                                   appkey: self.appKey
+                                     info: @[@"LoopMeORTBTools"]];
+    }
+    return jsonData;
 }
 
 - (NSDictionary *)video:(CGSize)size {
