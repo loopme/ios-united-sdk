@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
   s.authors            = { "Bogdan Korda" => "bogdan@loopme.com", "Volodymyr Novikov" => "volodymyr.novikov@loopme.com", "Evgen A. Epanchin" => "evgen@loopme.com", "Valerii Roman" => "valerii.roman@loopme.com" }
   s.platform     = :ios, "12.0"
   s.source = { :git => "https://github.com/loopme/ios-united-sdk.git", :tag => "#{s.version}" }
-  s.resource = 'LoopMeUnitedSDK.embeddedframework/LoopMeResources.bundle'
   s.vendored_frameworks = [
     "LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework",
     "framework/LoopMeUnitedSDK/Core/Viewability/OMSDK/OMSDKswift/OMSDK_Loopme.xcframework"
