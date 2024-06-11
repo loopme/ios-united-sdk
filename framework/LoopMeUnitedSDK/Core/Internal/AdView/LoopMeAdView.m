@@ -20,7 +20,6 @@
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeGDPRTools.h"
-#import "LoopMeViewabilityManager.h"
 #import "LoopMeSDK.h"
 #import <StoreKit/StoreKit.h>
 
