@@ -105,11 +105,15 @@
         if (self.isReady && ready) {
             return;
         }
+        NSArray<NSString *>* info = @[self.isReady ? @"LM_SDK_READY" : @"LM_SDK_NOT_READY", ready ? @"OMSDK_READY" : @"OMSDK_NOT_READY"];
         self.isReady = ready;
         NSError *error;
         NSString *description = @"LoopMe OMID fail to initialize";
         if (!ready) {
-            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer errorMessage: description appkey: @"unknown"];
+            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
+                                 errorMessage: description
+                                       appkey: @"unknown"
+                                         info: info];
             error = [NSError errorWithDomain: @"loopme.com" code: -1 userInfo: @{NSLocalizedDescriptionKey: description}];
         }
         if (completionBlock != nil) {

@@ -520,7 +520,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         [self.delegate adDisplayController:self didFailToLoadAdWithError:error];
     }
     
-    [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeJS errorMessage:message appkey:self.adConfiguration.appKey];
+    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeJS
+                         errorMessage: message
+                               appkey: self.adConfiguration.appKey
+                                 info: @[@"LoopMeVPAIDAdDispalyController"]];
     [self.vastEventTracker trackErrorCode:LoopMeVPAIDErrorCodeVPAIDError];
 }
 
@@ -837,7 +840,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     if (self.isDeferredAdStopped) {
         [self handleVpaidStop];
-        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"Deferred adStopped" appkey:self.appKey];
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                             errorMessage: @"Deferred adStopped"
+                                   appkey: self.appKey
+                                     info: @[@"LoopMeVPAIDAdDisplayController"]];
     }
 }
 

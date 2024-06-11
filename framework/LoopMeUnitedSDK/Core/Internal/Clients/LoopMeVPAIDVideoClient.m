@@ -349,7 +349,10 @@ const NSInteger kResizeOffsetVPAID = 11;
     if (object == self.playerItem ) {
         if ([keyPath isEqualToString:kLoopMeVPAIDVideoStatusKey]) {
             if (self.playerItem.status == AVPlayerItemStatusFailed) {
-                [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeBadAsset errorMessage:@"Video player could not init file" appkey:self.appKey];
+                [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
+                                     errorMessage: @"Video player could not init file"
+                                           appkey: self.appKey
+                                             info: @[@"LoopMeVPAIDVideoClient"]];
                 [self.delegate videoClient:self didFailToLoadVideoWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeMediaDisplay]];
             } else if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
                 if ([self.videoManager hasCachedURL:self.videoURL]) {
