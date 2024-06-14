@@ -104,14 +104,4 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
     }
 }
 
-+ (CGFloat)calculatePxratioOfScreen {
-    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
-    CGFloat screenDiagonal = sqrt(pow(screenWidth, 2) + pow(screenHeight, 2));
-    CGFloat ppi = screenDiagonal / [[UIScreen mainScreen] bounds].size.width;
-    ppi = round(ppi * 1000.0) / 1000.0;
-     
-    return ppi;
-}
-
 @end

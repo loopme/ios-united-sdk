@@ -16,6 +16,4 @@
 + (NSString *)deviceType;
 + (NSUInteger)deviceTypeNum;
 + (NSString *)phoneName;
-+ (CGFloat)calculatePxratioOfScreen;
-
 @end
