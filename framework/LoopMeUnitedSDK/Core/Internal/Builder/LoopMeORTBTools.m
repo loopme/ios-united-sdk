@@ -201,7 +201,6 @@ static NSString *_userAgent;
         @"h": @(size.height),
         @"companiontype": @[@1],
         @"companionad": @[@{
-            @"pos": @7,
             @"w": @(size.width),
             @"h": @(size.height),
             @"format": @[@{
