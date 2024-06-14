@@ -1,0 +1,31 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '12.0'
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+    end
+  end
+end
+workspace 'Development.xcworkspace'
+
+target 'IronSourceDemoApp' do
+  project 'IronSourceDemoApp.xcodeproj'
+    use_frameworks!
+    pod 'IronSourceSDK'
+    # pod 'ISLoopMeCustomAdapter'
+end
+
+target 'AppLovinDemoApp' do
+  project 'AppLovinDemoApp.xcodeproj'
+    use_frameworks!
+    pod 'AppLovinSDK'
+    # pod 'ISLoopMeCustomAdapter'
+end
+
+target 'LoopMeUnitedSDK' do
+  use_frameworks!
+  project 'LoopMeUnitedSDK.xcodeproj'
+end
