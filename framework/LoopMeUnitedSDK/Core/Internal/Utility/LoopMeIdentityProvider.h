@@ -16,4 +16,5 @@
 + (NSString *)deviceType;
 + (NSUInteger)deviceTypeNum;
 + (NSString *)phoneName;
+
 @end
