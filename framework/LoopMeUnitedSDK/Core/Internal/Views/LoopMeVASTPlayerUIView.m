@@ -84,17 +84,9 @@
     self.countDownLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.countDownLabel];
     
-    
     self.endCardBackground = [[UIImageView alloc] init];
     self.endCardBackground.translatesAutoresizingMaskIntoConstraints = NO;
     self.endCardBackground.backgroundColor = [UIColor blackColor];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        UIImage *bluredImage = [self blurredImageWithImage:self.endCardImage];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.endCardBackground.image = bluredImage;
-        });
-    });
     self.endCardBackground.contentMode = UIViewContentModeScaleAspectFill;
     self.endCardBackground.clipsToBounds = YES;
     [self addSubview:self.endCardBackground];
@@ -191,30 +183,6 @@
 }
 
 #pragma mark - Private
-
-- (UIImage *)blurredImageWithImage:(UIImage *)sourceImage {
-    //  Create our blurred image
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CIImage *inputImage = [CIImage imageWithCGImage:sourceImage.CGImage];
-    
-    //  Setting up Gaussian Blur
-    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-    [filter setValue:inputImage forKey:kCIInputImageKey];
-    [filter setValue:[NSNumber numberWithFloat:20.0f] forKey:@"inputRadius"];
-    CIImage *result = [filter valueForKey:kCIOutputImageKey];
-    
-    /*  CIGaussianBlur has a tendency to shrink the image a little, this ensures it matches
-     *  up exactly to the bounds of our original image */
-    CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
-    
-    UIImage *retVal = [UIImage imageWithCGImage:cgImage];
-    
-    if (cgImage) {
-        CGImageRelease(cgImage);
-    }
-    
-    return retVal;
-}
 
 - (void)showSkipButton {
     if (!self.endCard.hidden) {
