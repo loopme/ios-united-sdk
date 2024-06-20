@@ -16,6 +16,8 @@
 @interface LoopMeSDK ()
 
 @property (nonatomic) BOOL isReady;
+@property (nonatomic, strong) NSDate *startSessionTime;
+@property (nonatomic, strong) NSMutableDictionary *sessionDepth;
 
 @end
 
@@ -26,6 +28,7 @@
     
     if (!instance) {
         instance = [[LoopMeSDK alloc] init];
+        instance.sessionDepth = [[NSMutableDictionary alloc] init];
     }
     
     return instance;
@@ -69,7 +72,37 @@
     [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
     self.isReady = YES;
+    
+    // Initialize the start for session duration time here
+    [self startSession];
+
     completionBlock(YES, nil);
+}
+
+- (NSNumber *)timeElapsedSinceStart {
+    if (self.startSessionTime) {
+        NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.startSessionTime];
+        return @(round(timeInterval));
+    }
+    return @0;
+}
+
+-(void)startSession {
+    if (!self.startSessionTime) {
+        self.startSessionTime = [NSDate date];
+    }
+}
+
+-(void)updateSessionDepth: (NSString* )appKey {
+    NSNumber* count = [self.sessionDepth valueForKey:appKey];
+    NSNumber* value = count ? [NSNumber numberWithInt: count.intValue + 1] : [NSNumber numberWithInt: 1];
+    [self.sessionDepth setValue: value  forKey: appKey];
+}
+
+- (NSNumber *)sessionDepthForAppKey:(NSString *)appKey {
+    NSNumber *depth = [self.sessionDepth valueForKey: appKey];
+    
+    return depth ?: @0;
 }
 
 @end

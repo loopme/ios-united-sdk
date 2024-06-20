@@ -176,6 +176,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     NSError *impError;
     
     UIView *containerView = self.delegate.containerView;
+    [[LoopMeSDK shared] updateSessionDepth:self.delegate.appKey];
     [self.vpaidClient resizeAdWithWidth:containerView.bounds.size.width height:containerView.bounds.size.height viewMode:LoopMeVPAIDViewMode.fullscreen];
 }
 
