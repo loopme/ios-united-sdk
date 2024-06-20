@@ -48,7 +48,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)init: (LoopMeSDKConfiguration *) configuration completionBlock: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
     
 - (void)init: (void(^_Nullable)(BOOL, NSError * _Nullable))completionBlock;
-    
+
+// Start session time
+- (NSNumber *)timeElapsedSinceStart;
+
+// Update sessionDepth value depended of appKey
+-(void)updateSessionDepth: (NSString* )appKey;
+
+// Take sessionDepth value depended of appKey
+- (NSNumber *)sessionDepthForAppKey:(NSString *)appKey;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -24,6 +24,7 @@
 #import "LoopMeAudioCheck.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
+#import "LoopMeSDK.h"
 
 static NSString *_userAgent;
 
@@ -153,8 +154,14 @@ static NSString *_userAgent;
             @"yob": @(self.targeting.yearOfBirth),
             @"keywords": self.targeting.keywords,
             @"consent": [LoopMeGDPRTools getConsentValue],
-            @"ext": @{}
-        } : @{@"ext": @{},
+            @"ext": @{
+                @"sessionduration": [[LoopMeSDK shared] timeElapsedSinceStart],
+                @"impdepth": [[LoopMeSDK shared] sessionDepthForAppKey: self.appKey]
+            }
+        } : @{@"ext": @{
+            @"sessionduration": [[LoopMeSDK shared] timeElapsedSinceStart],
+            @"impdepth": [[LoopMeSDK shared] sessionDepthForAppKey: self.appKey]
+        },
               @"consent": [LoopMeGDPRTools getConsentValue]},
         @"tmax": @700,
         @"bcat": @[@"IAB25-3", @"IAB25", @"IAB26"]
