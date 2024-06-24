@@ -170,7 +170,11 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     self.impressionTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeVPAIDImpressionTimeout target:self selector:@selector(vpaidAdImpression) userInfo:nil repeats:NO];
     
     [self.closeButton removeFromSuperview];
-    
+    NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
+    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
+    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                         errorMessage: @"Deferred adStopped"
+                                 info: infoDictionary];
     [self.vastEventTracker trackEvent:LoopMeVASTEventTypeImpression];
 //    [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearCreativeView];
     NSError *impError;
@@ -488,10 +492,12 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         [self.delegate adDisplayController:self didFailToLoadAdWithError:error];
     }
     
+    NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
+    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
+    
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeJS
                          errorMessage: message
-                               appkey: self.adConfiguration.appKey
-                                 info: @[@"LoopMeVPAIDAdDispalyController"]];
+                                 info: infoDictionary];
     [self.vastEventTracker trackErrorCode:LoopMeVPAIDErrorCodeVPAIDError];
 }
 
@@ -797,10 +803,11 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     if (self.isDeferredAdStopped) {
         [self handleVpaidStop];
+        NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
+        [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: @"Deferred adStopped"
-                                   appkey: self.appKey
-                                     info: @[@"LoopMeVPAIDAdDisplayController"]];
+                                     info: infoDictionary];
     }
 }
 

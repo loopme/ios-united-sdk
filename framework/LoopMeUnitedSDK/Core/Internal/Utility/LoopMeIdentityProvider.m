@@ -68,6 +68,14 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
     return [deviceType isEqualToString:@"phone"] ? LoopMeORTBDeviceTypePhone : LoopMeORTBDeviceTypeTablet;
 }
 
++ (NSString *) deviceOS {
+    return [[UIDevice currentDevice] systemVersion];
+}
+
++ (NSString *)deviceManufacturer {
+    return @"Apple";
+}
+
 + (NSString *)deviceModel {
     struct utsname systemInfo;
     uname(&systemInfo);

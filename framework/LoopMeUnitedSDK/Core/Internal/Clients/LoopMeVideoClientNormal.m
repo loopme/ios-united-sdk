@@ -304,11 +304,12 @@ AVAssetResourceLoaderDelegate
                 if ([self.delegate.adConfiguration preload25]) {
                     [self.videoManager failedInitPlayer: self.videoURL];
                 } else {
+                    NSMutableDictionary *infoDictionary = [self.delegate.adConfiguration toDictionary];
+                    [infoDictionary setObject:@"LoopMeVideoClientNormal" forKey: @"class"];
                     [self.JSClient setVideoState:LoopMeVideoState.broken];
                     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
                                          errorMessage: [NSString stringWithFormat: @"Video player could not init file: %@", self.videoURL]
-                                               appkey: self.delegate.adConfiguration.appKey
-                                                 info: @[@"LoopMeVideoClientNormal"]];
+                                                 info:infoDictionary];
                     self.statusSent = YES;
                 }
             } else if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
@@ -514,8 +515,8 @@ AVAssetResourceLoaderDelegate
     }
 }
 
-- (NSString *)appKey {
-    return self.delegate.adConfiguration.appKey;
+- (LoopMeAdConfiguration *)adConfiguration {
+    return self.delegate.adConfiguration;
 }
 
 - (void)willAppear {

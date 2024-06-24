@@ -65,6 +65,8 @@ public struct AdConfiguration {
         case ext
         case adm
         case id
+        case cid
+        case crid
     }
     
     enum ExtKeys: String, CodingKey {
@@ -88,7 +90,10 @@ public struct AdConfiguration {
     
     let skAdNetworkInfo: SKAdNetworkInfo?
     let id: String
+    let requestId: String
     let debug: Bool
+    let crid: String
+    let cid: String
     let preload25: Bool
     let autoloading: Bool
     let adOrientation: AdOrientation
@@ -121,6 +126,7 @@ extension AdConfiguration: Decodable {
         
         let response = try decoder.container(keyedBy: CodingKeys.self)
         var seatbidContainer = try response.nestedUnkeyedContainer(forKey: .seatbid)
+        self.requestId = try response.decode(String.self, forKey: .id)
         let bidContainer = try seatbidContainer.nestedContainer(keyedBy: CodingKeys.self)
         //get bid element
         var bidValue = try bidContainer.nestedUnkeyedContainer(forKey: .bid)
@@ -129,7 +135,8 @@ extension AdConfiguration: Decodable {
         let id = try bid.decode(String.self, forKey: .id)
         self.id = id
         self.creativeContent = try bid.decode(String.self, forKey: .adm)
-        
+        self.cid = try bid.decode(String.self, forKey: .cid)
+        self.crid = try bid.decode(String.self, forKey: .crid)
         //parse ext section
         let ext = try? bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
         if let ext = ext {

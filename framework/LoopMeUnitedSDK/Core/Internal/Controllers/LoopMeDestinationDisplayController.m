@@ -14,6 +14,7 @@
 #import "LoopMeProgressOverlayView.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeGlobalSettings.h"
+#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 @interface LoopMeDestinationDisplayController ()
 <
@@ -151,10 +152,11 @@
 - (void)failedToResolveURLWithError:(NSError *)error {
     self.loadingDestination = NO;
     [self hideOverlay];
+    NSMutableDictionary *infoDictionary = [self.delegate.adConfiguration toDictionary];
+    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                          errorMessage: [NSString stringWithFormat: @"Wrong redirect: %@", self.resorvingURL.absoluteString]
-                               appkey: self.delegate.appKey
-                                 info: @[@"LoopMeDestinationDisplayController"]];
+                                 info: infoDictionary];
     [self.delegate destinationDisplayControllerDidDismissModal:self];
 }
 

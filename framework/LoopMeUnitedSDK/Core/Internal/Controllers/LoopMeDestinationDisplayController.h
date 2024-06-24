@@ -7,7 +7,7 @@
 //
 
 #import "LoopMeURLResolver.h"
-
+@class LoopMeAdConfiguration;
 @class LoopMeBrowserViewController;
 
 @protocol LoopMeDestinationDisplayControllerDelegate;
@@ -32,6 +32,6 @@
 - (void)destinationDisplayControllerWillPresentModal:(LoopMeDestinationDisplayController *)destinationDisplayController;
 - (void)destinationDisplayControllerWillLeaveApplication:(LoopMeDestinationDisplayController *)destinationDisplayController;
 - (void)destinationDisplayControllerDidDismissModal:(LoopMeDestinationDisplayController *)destinationDisplayController;
-- (NSString *)appKey;
+- (LoopMeAdConfiguration *)adConfiguration;
 
 @end

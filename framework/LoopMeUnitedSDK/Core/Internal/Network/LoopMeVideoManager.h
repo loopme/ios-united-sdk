@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class LoopMeAdConfiguration;
 
 @protocol LoopMeVideoManagerDelegate;
 
@@ -28,6 +29,6 @@
 
 - (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL;
 - (void)videoManager:(LoopMeVideoManager *)videoManager didFailLoadWithError:(NSError *)error;
-- (NSString *)appKey;
+- (LoopMeAdConfiguration *)adConfiguration;
 
 @end

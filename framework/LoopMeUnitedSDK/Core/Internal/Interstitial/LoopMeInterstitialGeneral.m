@@ -195,10 +195,14 @@ const NSInteger kLoopMeRequestTimeout = 180;
     if (self.timeoutTimer != timer) {
         return ;
     }
+    NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
+    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey:@"class"];
+    [infoDictionary setObject:self.adConfiguration.creativeType == LoopMeCreativeTypeVast ? @"VAST" : @"NOT_VAST" forKey:@"creative_type"];
+
+    
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
                          errorMessage: @"Time out"
-                               appkey: self.appKey
-                                 info: @[@"LoopMeInterstitialGeneral", self.adConfiguration.creativeType == LoopMeCreativeTypeVast ? @"VAST" : @"NOT_VAST"]];
+                                 info: infoDictionary];
     
     //-------NORMAL----
     [self.adDisplayController stopHandlingRequests];
@@ -316,21 +320,21 @@ const NSInteger kLoopMeRequestTimeout = 180;
             self.skAdImpression.adImpressionIdentifier = self.adConfiguration.skadNonce;
         }
     }
+    NSMutableDictionary *infoDictionary =   [self.adConfiguration toDictionary];
+    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey:@"class"];
     
     if (!self.isReady) {
         LoopMeLogInfo(@"Ad isn't ready to be displayed");
         return [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                                     errorMessage: @"Ad isn't ready to be displayed"
-                                          appkey: self.appKey
-                                            info: @[@"LoopMeInterstitialGeneral"]];
+                                            info: infoDictionary];
     }
     
     if (self.adInterstitialViewController.presentingViewController) {
         LoopMeLogInfo(@"Ad has already displayed");
         return [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                                     errorMessage: @"Ad has already displayed"
-                                          appkey: self.appKey
-                                            info: @[@"LoopMeInterstitialGeneral"]];
+                                            info: infoDictionary];
     }
     
     LoopMeLogDebug(@"Interstitial ad will appear");
