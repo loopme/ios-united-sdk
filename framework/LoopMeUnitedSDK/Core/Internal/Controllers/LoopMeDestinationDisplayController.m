@@ -152,7 +152,7 @@
 - (void)failedToResolveURLWithError:(NSError *)error {
     self.loadingDestination = NO;
     [self hideOverlay];
-    NSMutableDictionary *infoDictionary = [self.delegate.adConfiguration toDictionary];
+    NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
     [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                          errorMessage: [NSString stringWithFormat: @"Wrong redirect: %@", self.resorvingURL.absoluteString]

@@ -335,7 +335,7 @@ const NSInteger kResizeOffsetVPAID = 11;
     if (object == self.playerItem ) {
         if ([keyPath isEqualToString:kLoopMeVPAIDVideoStatusKey]) {
             if (self.playerItem.status == AVPlayerItemStatusFailed) {
-                NSMutableDictionary *infoDictionary =   [self.delegate.adConfiguration toDictionary];
+                NSMutableDictionary *infoDictionary =   [self.delegate.adConfigurationObject toDictionary];
                 [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:@"class"];
                 [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
                                      errorMessage: @"Video player could not init file"
@@ -408,7 +408,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)cancel {
-    if ([self.delegate.adConfiguration useTracking:LoopMeTrackerNameMoat]) {
+    if ([self.delegate.adConfigurationObject useTracking:LoopMeTrackerNameMoat]) {
     }
 
     [self.videoManager cancel];
@@ -580,8 +580,8 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.delegate videoClient:self didFailToLoadVideoWithError:error];
 }
 
-- (LoopMeAdConfiguration *)adConfiguration {
-    return self.delegate.adConfiguration;
+- (LoopMeAdConfiguration *)adConfigurationObject {
+    return self.delegate.adConfigurationObject;
 }
 
 @end

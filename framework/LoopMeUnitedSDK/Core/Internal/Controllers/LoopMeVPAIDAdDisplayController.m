@@ -662,7 +662,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     LoopMeLogDebug(videoSource);
     self.isVideoVPAID = YES;
 }
-- (LoopMeAdConfiguration *)adConfiguration {
+- (LoopMeAdConfiguration *)adConfigurationObject {
     return self.adConfiguration;
 
 }
@@ -818,7 +818,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 #pragma mark -- VPAID Commands
 
 - (void)processCommand:(NSString *)command withParams:(NSDictionary *)params {
-//    LoopMeLogDebug(@"Processing VPAID command: %@, params: %@", command, params);
+    //    LoopMeLogDebug(@"Processing VPAID command: %@, params: %@", command, params);
     
     if ([command isEqualToString:_kLoopMeVPAIDAdLoadedCommand]) {
         double volume = [[params objectForKey:@"volume"] doubleValue];

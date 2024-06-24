@@ -153,6 +153,10 @@
     }
 }
 
+- (LoopMeAdConfiguration *)adConfigurationObject { 
+    return self.adConfiguration;
+}
+
 - (NSString *)appKey {
     return self.adConfiguration.appKey;
 }

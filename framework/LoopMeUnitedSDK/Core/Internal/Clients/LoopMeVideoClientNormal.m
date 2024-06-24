@@ -515,7 +515,7 @@ AVAssetResourceLoaderDelegate
     }
 }
 
-- (LoopMeAdConfiguration *)adConfiguration {
+- (LoopMeAdConfiguration *)adConfigurationObject {
     return self.delegate.adConfiguration;
 }
 

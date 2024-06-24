@@ -135,8 +135,8 @@ extension AdConfiguration: Decodable {
         let id = try bid.decode(String.self, forKey: .id)
         self.id = id
         self.creativeContent = try bid.decode(String.self, forKey: .adm)
-        self.cid = try bid.decode(String.self, forKey: .cid)
-        self.crid = try bid.decode(String.self, forKey: .crid)
+        self.cid = (try? bid.decode(String.self, forKey: .cid)) ?? ""
+        self.crid = (try? bid.decode(String.self, forKey: .crid)) ?? ""
         //parse ext section
         let ext = try? bid.nestedContainer(keyedBy: ExtKeys.self, forKey: .ext)
         if let ext = ext {

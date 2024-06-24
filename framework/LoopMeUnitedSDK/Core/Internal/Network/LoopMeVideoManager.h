@@ -29,6 +29,6 @@
 
 - (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL;
 - (void)videoManager:(LoopMeVideoManager *)videoManager didFailLoadWithError:(NSError *)error;
-- (LoopMeAdConfiguration *)adConfiguration;
+- (LoopMeAdConfiguration *)adConfigurationObject;
 
 @end

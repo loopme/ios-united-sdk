@@ -32,6 +32,6 @@
 - (void)destinationDisplayControllerWillPresentModal:(LoopMeDestinationDisplayController *)destinationDisplayController;
 - (void)destinationDisplayControllerWillLeaveApplication:(LoopMeDestinationDisplayController *)destinationDisplayController;
 - (void)destinationDisplayControllerDidDismissModal:(LoopMeDestinationDisplayController *)destinationDisplayController;
-- (LoopMeAdConfiguration *)adConfiguration;
+- (LoopMeAdConfiguration *)adConfigurationObject;
 
 @end
