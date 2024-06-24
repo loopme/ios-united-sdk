@@ -27,8 +27,8 @@
 }
 
 + (void)sendError: (LoopMeEventErrorType)errorType
-     errorMessage: (NSString * _Nonnull)errorMessage
-           appkey: (NSString * _Nonnull)appkey{
+       errorMessage: (NSString * _Nonnull)errorMessage
+             appkey: (NSString * _Nonnull)appkey{
     return [self sendError:errorType errorMessage:errorMessage info: @{@"app_key" : appkey }];
 }
 
@@ -55,8 +55,7 @@
     NSMutableArray *queryItems = [[NSMutableArray alloc] initWithArray:components.queryItems];
 
     for (NSString * key in [info allKeys]) {
-        NSURLQueryItem *queryItem = [[NSURLQueryItem alloc] initWithName:key value:info[key]];
-        [queryItems addObject: queryItem];
+        [queryItems addObject: [[NSURLQueryItem alloc] initWithName:key value:info[key]]];;
     }
     
     components.queryItems = queryItems;

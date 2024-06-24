@@ -662,9 +662,9 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     LoopMeLogDebug(videoSource);
     self.isVideoVPAID = YES;
 }
+- (LoopMeAdConfiguration *)adConfiguration {
+    return self.adConfiguration;
 
-- (NSString *)appKey {
-    return self.adConfiguration.appKey;
 }
 
 #pragma mark - VideoClientDelegate

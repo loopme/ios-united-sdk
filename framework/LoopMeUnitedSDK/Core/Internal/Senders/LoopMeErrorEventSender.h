@@ -23,9 +23,8 @@ typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
     errorMessage:(NSString * _Nonnull)errorMessage
             info:(NSDictionary<NSString *, NSString *>  * _Nonnull)info;
 
-+ (void)sendError: (LoopMeEventErrorType)errorType
-     errorMessage: (NSString * _Nonnull)errorMessage
-           appkey: (NSString * _Nonnull)appkey
-             info: (NSArray<NSString *> * _Nonnull)info;
++  (void)sendError: (LoopMeEventErrorType)errorType
+       errorMessage: (NSString * _Nonnull)errorMessage
+             appkey: (NSString * _Nonnull)appkey;;
 
 @end
