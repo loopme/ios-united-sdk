@@ -12,6 +12,7 @@
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeIdentityProvider.h"
 #import "LoopMeSDK.h"
+#import "LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h"
 
 @implementation LoopMeErrorEventSender
 
@@ -26,31 +27,39 @@
 }
 
 + (void)sendError: (LoopMeEventErrorType)errorType
-     errorMessage: (NSString * _Nonnull)errorMessage
-           appkey: (NSString * _Nonnull)appkey{
-    return [self sendError:errorType errorMessage:errorMessage appkey:appkey info: @[]];
+       errorMessage: (NSString * _Nonnull)errorMessage
+             appkey: (NSString * _Nonnull)appkey{
+    return [self sendError:errorType errorMessage:errorMessage info: @{@"app_key" : appkey }];
 }
 
-+ (void)sendError: (LoopMeEventErrorType)errorType
-     errorMessage: (NSString * _Nonnull)errorMessage
-           appkey: (NSString * _Nonnull)appkey
-             info: (NSArray<NSString *> * _Nonnull)info {
++ (void)sendError:(LoopMeEventErrorType)errorType
+     errorMessage:(NSString * _Nonnull)errorMessage
+             info:(NSDictionary<NSString *, NSString *>  * _Nonnull)info {
     NSURLComponents *components = [[NSURLComponents alloc] init];
-    NSString *aditional = [NSString stringWithFormat: @"\"%@\"", [info componentsJoinedByString: @","]];
+    
     components.queryItems = @[
-        [NSURLQueryItem queryItemWithName: @"device_os"     value: @"ios"],
-        [NSURLQueryItem queryItemWithName: @"sdk_type"      value: @"loopme"],
-        [NSURLQueryItem queryItemWithName: @"msg"           value: @"sdk_error"],
-        [NSURLQueryItem queryItemWithName: @"sdk_version"   value: LOOPME_SDK_VERSION],
-        [NSURLQueryItem queryItemWithName: @"device_id"     value: [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier]],
-        [NSURLQueryItem queryItemWithName: @"package"       value: [NSBundle mainBundle].bundleIdentifier],
-        [NSURLQueryItem queryItemWithName: @"error_type"    value: [LoopMeErrorEventSender errorTypeToString: errorType]],
-        [NSURLQueryItem queryItemWithName: @"error_msg"     value: [NSString stringWithFormat: @"\"%@\"", errorMessage]],
-        [NSURLQueryItem queryItemWithName: @"app_key"       value: appkey],
-        [NSURLQueryItem queryItemWithName: @"ifv"           value: [UIDevice currentDevice].identifierForVendor.UUIDString],
-        [NSURLQueryItem queryItemWithName: @"info"          value: aditional],
-        
-    ];
+        [NSURLQueryItem queryItemWithName: @"device_os"           value: @"ios"],
+        [NSURLQueryItem queryItemWithName: @"device_id"           value: [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier]],
+        [NSURLQueryItem queryItemWithName: @"device_model"        value: [LoopMeIdentityProvider deviceModel]],
+        [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceModel]],
+        [NSURLQueryItem queryItemWithName: @"device_manufacturer" value: [LoopMeIdentityProvider deviceManufacturer]],
+        [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"loopme"],
+        [NSURLQueryItem queryItemWithName: @"msg"                 value: @"sdk_error"],
+        [NSURLQueryItem queryItemWithName: @"sdk_version"         value: LOOPME_SDK_VERSION],
+        [NSURLQueryItem queryItemWithName: @"package"             value: [NSBundle mainBundle].bundleIdentifier],
+        [NSURLQueryItem queryItemWithName: @"error_type"          value: [LoopMeErrorEventSender errorTypeToString: errorType]],
+        [NSURLQueryItem queryItemWithName: @"error_msg"           value: [NSString stringWithFormat: @"\"%@\"", errorMessage]],
+        [NSURLQueryItem queryItemWithName: @"ifv"                 value: [UIDevice currentDevice].identifierForVendor.UUIDString],
+        ];
+    
+    NSMutableArray *queryItems = [[NSMutableArray alloc] initWithArray:components.queryItems];
+
+    for (NSString * key in [info allKeys]) {
+        [queryItems addObject: [[NSURLQueryItem alloc] initWithName:key value:info[key]]];;
+    }
+    
+    components.queryItems = queryItems;
+    
     NSURL *url = [NSURL URLWithString: @"https://tk0x1.com/api/errors"];
     NSMutableURLRequest *request = [
         NSMutableURLRequest requestWithURL: url cachePolicy: NSURLRequestUseProtocolCachePolicy timeoutInterval: 60.0

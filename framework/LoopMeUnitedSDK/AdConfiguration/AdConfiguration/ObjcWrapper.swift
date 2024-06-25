@@ -164,6 +164,15 @@ public class AdConfigurationWrapper: NSObject {
         let trackerName = TrackerName(intValue: trackerNameWrapped.rawValue)
         return adConfiguration.useTracking(trackerName: trackerName)
     }
+    
+    @objc public func toDictionary() -> NSMutableDictionary{
+        let dictionary: NSMutableDictionary = [:]
+        dictionary["app_key"] = self.adConfiguration.appKey
+        dictionary["cid"] = self.adConfiguration.cid
+        dictionary["crid"] = self.adConfiguration.crid
+        dictionary["request_id"] = self.adConfiguration.requestId
+        return dictionary
+     }
 }
 
 @objc (LoopMeVASTEventTracker)

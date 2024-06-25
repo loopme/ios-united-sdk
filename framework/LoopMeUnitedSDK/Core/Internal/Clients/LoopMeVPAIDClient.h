@@ -9,6 +9,7 @@
 
 @class LoopMeVPAIDClient;
 @class WKWebView;
+@class LoopMeAdConfiguration;
 
 @protocol LoopMeVpaidProtocol;
 
@@ -78,6 +79,6 @@ extern const struct LoopMeVPAIDViewModeStruct {
 - (void)vpaidJSError: (NSString *)message;
 - (void)vpaidAdVideoSource: (NSString *)videoSource;
 
-- (NSString *)appKey;
+- (LoopMeAdConfiguration *)adConfigurationObject;
 
 @end

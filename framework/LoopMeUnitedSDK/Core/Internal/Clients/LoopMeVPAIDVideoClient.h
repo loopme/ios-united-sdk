@@ -45,6 +45,6 @@
 - (LoopMeVastSkipOffset *)skipOffset;
 - (void)currentTime:(NSTimeInterval) currentTime percent:(double)percent;
 @optional
-- (LoopMeAdConfiguration *)adConfiguration;
+- (LoopMeAdConfiguration *)adConfigurationObject;
 
 @end

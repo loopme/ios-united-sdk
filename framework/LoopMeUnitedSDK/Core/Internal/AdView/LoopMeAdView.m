@@ -252,10 +252,11 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
         return;
     }
     if (!self.isReady) {
+        NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
+        [infoDictionary setObject:@"LoopMeAdView" forKey:@"class"];
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: @"Banner added to view, but wasn't ready to be displayed"
-                                   appkey: self.appKey
-                                     info: @[@"LoopMeAdView"]];
+                                     info: infoDictionary];
         self.needsToBeDisplayedWhenReady = YES;
     }
     if ([self.delegate respondsToSelector: @selector(loopMeAdViewWillAppear:)]) {
@@ -347,8 +348,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     }
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
                          errorMessage: @"Time out"
-                               appkey: self.appKey
-                                 info: @[@"LoopMeAdView", self.adConfiguration.creativeType == LoopMeCreativeTypeVast ? @"VAST" : @"NOT_VAST"]];
+                                 info:self.adConfiguration.toDictionary];
     [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeHTMLRequestTimeOut]];
 }
 
