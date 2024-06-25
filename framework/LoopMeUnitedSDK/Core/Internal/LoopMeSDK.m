@@ -60,15 +60,6 @@
         return;
     }
     
-    if (SYSTEM_VERSION_LESS_THAN(@"10.0")) {
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"Block iOS versions less then 10.0"};
-        if (completionBlock != nil) {
-            completionBlock(false, [NSError errorWithDomain: @"loopme.com" code: 0 userInfo: userInfo]);
-        }
-        return;
-    }
-    
-    [[LoopMeGDPRTools sharedInstance] getAppDetailsFromServer];
     [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
     self.isReady = YES;

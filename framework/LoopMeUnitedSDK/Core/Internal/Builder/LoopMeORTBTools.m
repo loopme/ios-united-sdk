@@ -93,7 +93,7 @@ static NSString *_userAgent;
                 @"it": self.integrationType,
                 @"skadn": @{
                     @"versions": @[@"2.0", @"2.1", @"2.2", @"3.0", @"4.0"],
-                    @"sourceapp": [gdpr sourceAppID] ?: [self parameterForBundleIdentifier],
+                    @"sourceapp": [self parameterForBundleIdentifier],
                     @"skadnetids": [self skadnetids: [[NSBundle mainBundle] infoDictionary][@"SKAdNetworkItems"]]
                 }
             },
