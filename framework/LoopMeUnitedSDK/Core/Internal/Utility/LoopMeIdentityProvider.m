@@ -86,6 +86,15 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
     return currentModel;
 }
 
++ (NSString *)deviceAppleModel {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return @"iphone";
+    } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return @"ipad";
+    }
+    return @"other";
+}
+
 + (NSString *)phoneName {
     return [[[UIDevice currentDevice] name] lm_AES128Encrypt];
 }
