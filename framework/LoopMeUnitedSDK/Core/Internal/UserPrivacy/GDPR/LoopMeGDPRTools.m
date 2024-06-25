@@ -25,7 +25,6 @@ static NSString * const kLoopMeUserDefaultsGDPRWindowKey = @"LoopMeGDPRWindowFla
 static NSString * const kLoopMeIABUserDefaultsKeyCMPSdkId = @"IABTCF_CmpSdkID";
 static NSString * const kLoopMeIABUserDefaultsKeyGdprApplies = @"IABTCF_gdprApplies";
 static NSString * const kLoopMeIABUserDefaultsKeyConsentString = @"IABTCF_TCString";
-static NSString * const kLoopMeSourceAppID = @"SourceAppID";
 
 @interface LoopMeGDPRTools()
 
@@ -84,44 +83,6 @@ static NSString * const kLoopMeSourceAppID = @"SourceAppID";
     }
 }
 
-- (void)getAppDetailsFromServer {
-    // Retrieve bundle identifier
-    NSString *bundleIdentifier = [[NSBundle mainBundle] infoDictionary][@"CFBundleIdentifier"];
-    NSString *baseURL = [NSString stringWithFormat: @"http://itunes.apple.com/lookup?bundleId=%@", bundleIdentifier];
-    NSString *encodedURL = [baseURL stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLQueryAllowedCharacterSet]];
-    
-    // Creating URL Object
-    NSURL *url = [NSURL URLWithString: encodedURL];
-    // Creating a Mutable Request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: url];
-    // Setting HTTP values
-    [request setHTTPMethod: @"GET"];
-    [request setTimeoutInterval: 120];
-    
-    // Creating URLSession
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration: configuration];
-    
-    // Creating Data Task
-    [[session dataTaskWithRequest: request
-                completionHandler: ^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error != nil || data == nil) {
-            NSLog(@"Error fetching data: %@", error.localizedDescription);
-            return;
-        }        
-        NSArray *results = [NSJSONSerialization JSONObjectWithData: data
-                                                           options: NSJSONReadingMutableContainers
-                                                             error: &error][@"results"];
-        if (results.count > 0) {
-            NSString *appId = [NSString stringWithFormat: @"%@", results[0][@"trackId"]];
-            [[NSUserDefaults standardUserDefaults] setObject: appId forKey: kLoopMeSourceAppID];
-            NSLog(@"App ID: %@", appId);
-        } else {
-            NSLog(@"No results found in the response");
-        }
-    }] resume];
-}
-
 #pragma mark CMP tools
 
 - (NSInteger)GDRRApplies {
@@ -137,9 +98,6 @@ static NSString * const kLoopMeSourceAppID = @"SourceAppID";
 
 - (NSString *)cmpSdkID {
     return [[NSUserDefaults standardUserDefaults] stringForKey: kLoopMeIABUserDefaultsKeyCMPSdkId];
-}
-- (NSString *)sourceAppID {
-    return [[NSUserDefaults standardUserDefaults] stringForKey: kLoopMeSourceAppID];
 }
 
 + (NSString *)getConsentValue {
