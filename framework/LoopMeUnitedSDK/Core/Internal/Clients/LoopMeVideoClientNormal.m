@@ -306,9 +306,11 @@ AVAssetResourceLoaderDelegate
                 } else {
                     NSMutableDictionary *infoDictionary = [self.delegate.adConfiguration toDictionary];
                     [infoDictionary setObject:@"LoopMeVideoClientNormal" forKey: @"class"];
+                    [infoDictionary setObject:self.videoURL forKey: @"url"];
+
                     [self.JSClient setVideoState:LoopMeVideoState.broken];
                     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                                         errorMessage: [NSString stringWithFormat: @"Video player could not init file: %@", self.videoURL]
+                                         errorMessage: [NSString stringWithFormat: @"Video player could not init file"]
                                                  info:infoDictionary];
                     self.statusSent = YES;
                 }

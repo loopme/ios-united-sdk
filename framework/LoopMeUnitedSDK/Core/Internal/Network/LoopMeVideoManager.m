@@ -164,8 +164,10 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
             completionHandler(NSURLSessionResponseCancel);
             NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
             [infoDictionary setObject:@"LoopMeVideoManager" forKey:@"class"];
+            [infoDictionary setObject:self.videoURL.absoluteString forKey: @"url"];
+
             [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                                 errorMessage: [NSString stringWithFormat: @"response code %ld: %@", (long)statusCode, self.videoURL.absoluteString]
+                                 errorMessage: [NSString stringWithFormat: @"response code: %ld", (long)statusCode]
                                          info: infoDictionary];
             //CHECK ERROR
             [self.delegate videoManager:self didFailLoadWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeTrafficking]];
@@ -183,19 +185,21 @@ didCompleteWithError:(NSError *)error {
     if (error) {
         NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
         [infoDictionary setObject:@"LoopMeVideoManager" forKey:@"class"];
+        [infoDictionary setObject:self.videoURL.absoluteString forKey: @"url"];
+
         if (error.code == NSURLErrorNetworkConnectionLost) {
             [self reconect];
             return;
         } else {
             if (error.code == NSURLErrorTimedOut) {
                 [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                                     errorMessage: [NSString stringWithFormat: @"Time out for: %@", self.videoURL.absoluteString]
+                                     errorMessage: [NSString stringWithFormat: @"Time out for"]
                                              info: infoDictionary];
                 
                 [self.delegate videoManager:self didFailLoadWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeMediaTimeOut]];
             } else if (error.code != NSURLErrorCancelled) {
                 [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                                     errorMessage: [NSString stringWithFormat: @"Response code %ld: %@", (long)error.code, self.videoURL.absoluteString]
+                                     errorMessage: [NSString stringWithFormat: @"Response code %ld:", (long)error.code]
                                              info: infoDictionary];
                 
                 [self.delegate videoManager:self didFailLoadWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeTrafficking]];
