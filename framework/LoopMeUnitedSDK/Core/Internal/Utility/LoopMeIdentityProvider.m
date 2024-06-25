@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
     } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         return @"ipad";
     }
-    return nil;
+    return @"other";
 }
 
 + (NSString *)phoneName {
