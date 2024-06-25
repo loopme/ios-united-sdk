@@ -41,7 +41,7 @@
         [NSURLQueryItem queryItemWithName: @"device_os"           value: @"ios"],
         [NSURLQueryItem queryItemWithName: @"device_id"           value: [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier]],
         [NSURLQueryItem queryItemWithName: @"device_model"        value: [LoopMeIdentityProvider deviceModel]],
-        [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceModel]],
+        [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceOS]],
         [NSURLQueryItem queryItemWithName: @"device_manufacturer" value: [LoopMeIdentityProvider deviceManufacturer]],
         [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"loopme"],
         [NSURLQueryItem queryItemWithName: @"msg"                 value: @"sdk_error"],

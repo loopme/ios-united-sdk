@@ -154,6 +154,8 @@
     [self hideOverlay];
     NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
     [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
+    [infoDictionary setObject:self.resorvingURL.absoluteString forKey: @"url"];
+
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                          errorMessage: [NSString stringWithFormat: @"Wrong redirect: %@", self.resorvingURL.absoluteString]
                                  info: infoDictionary];
