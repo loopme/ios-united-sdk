@@ -21,6 +21,7 @@
 @interface AppLovinMediationLoopmeRewardedAdsDelegate : NSObject<LoopMeInterstitialDelegate>
 @property (nonatomic, weak) LoopmeMediationAdapter *parentAdapter;
 @property (nonatomic, strong) id<MARewardedAdapterDelegate> delegate;
+@property (nonatomic, assign) BOOL hasRewarded;
 - (instancetype)initWithParentAdapter: (LoopmeMediationAdapter *)parentAdapter
                             andNotify: (id<MARewardedAdapterDelegate>)delegate;
 @end
@@ -184,6 +185,7 @@
     if (self) {
         self.parentAdapter = parentAdapter;
         self.delegate = delegate;
+        self.hasRewarded = false;
     }
     return self;
 }
@@ -210,12 +212,18 @@
 }
 
 - (void)loopMeInterstitialDidDisappear: (LoopMeInterstitial *)interstitial {
-    [self.parentAdapter log: @"Rewarded ad did disappear"];
-    [self.delegate didHideRewardedAd];
+    if (self.hasRewarded) {
+        [self.delegate didHideRewardedAd];
+        [self.parentAdapter log: @"Rewarded ad did disappear"];
+    } else {
+        [self.delegate didRewardUserWithReward: [MAReward rewardWithAmount: MAReward.defaultAmount
+                                                                     label: MAReward.defaultLabel]];
+    }
 }
 
 
 - (void)loopMeInterstitialVideoDidReachEnd: (LoopMeInterstitial *)interstitial {
+    self.hasRewarded = true;
   [self.delegate didRewardUserWithReward: [MAReward rewardWithAmount: MAReward.defaultAmount
                                                                label: MAReward.defaultLabel]];
 }

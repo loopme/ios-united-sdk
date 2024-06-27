@@ -104,6 +104,8 @@ public struct AdConfiguration {
     var adIDsForMoat: Dictionary<String, Any>
     var adIDsForIAS: Dictionary<String, Any>
     var expandProperties: MRAIDExpandProperties
+    var isRewarded: Bool
+
     var appKey: String = "" {
         didSet {
 //            var iasIds = adIDsForIAS
@@ -123,7 +125,7 @@ public struct AdConfiguration {
 extension AdConfiguration: Decodable {
     public init(from decoder: Decoder) throws {
         expandProperties = .empty
-        
+        self.isRewarded = false
         let response = try decoder.container(keyedBy: CodingKeys.self)
         var seatbidContainer = try response.nestedUnkeyedContainer(forKey: .seatbid)
         self.requestId = try response.decode(String.self, forKey: .id)
