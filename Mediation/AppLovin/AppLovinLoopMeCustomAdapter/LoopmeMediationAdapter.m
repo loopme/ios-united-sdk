@@ -212,14 +212,12 @@
 }
 
 - (void)loopMeInterstitialDidDisappear: (LoopMeInterstitial *)interstitial {
-    if (self.hasRewarded) {
-        [self.delegate didHideRewardedAd];
-        [self.parentAdapter log: @"Rewarded ad did disappear"];
-    } else {
+    if (!self.hasRewarded) {
         [self.delegate didRewardUserWithReward: [MAReward rewardWithAmount: MAReward.defaultAmount
                                                                      label: MAReward.defaultLabel]];
-        [self.delegate didHideRewardedAd];
     }
+    [self.delegate didHideRewardedAd];
+    [self.parentAdapter log: @"Rewarded ad did disappear"];
 }
 
 

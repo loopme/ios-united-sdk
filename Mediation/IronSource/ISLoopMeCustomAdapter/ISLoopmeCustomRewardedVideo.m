@@ -66,15 +66,12 @@
 }
 
 - (void)loopMeInterstitialDidDisappear: (LoopMeInterstitial *)interstitial {
-    if (self.hasRewarded) {
-        [self.delegate adDidClose];
-        NSLog(@"LoopMe rewarded video did dismiss");
-    } else {
+    if (!self.hasRewarded) {
         [self.delegate adRewarded];
         NSLog(@"LoopMe rewarded video did reach end.");
-        [self.delegate adDidClose];
-        NSLog(@"LoopMe rewarded video did dismiss");
     }
+    [self.delegate adDidClose];
+    NSLog(@"LoopMe rewarded video did dismiss");
 }
 
 - (void)loopMeInterstitialDidReceiveTap: (LoopMeInterstitial *)interstitial {
