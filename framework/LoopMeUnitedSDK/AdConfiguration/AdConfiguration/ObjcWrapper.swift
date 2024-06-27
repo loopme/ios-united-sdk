@@ -318,13 +318,11 @@ public class VastSkipOffsetWrapper: NSObject {
     }
     
     @objc public static func initWith30Second() -> VastSkipOffsetWrapper {
-        let skip = VastSkipOffsetWrapper(skipOffset: .seconds30)
-        return skip
+        return VastSkipOffsetWrapper(skipOffset: .seconds30)
     }
     
     @objc public static func initWith5Second() -> VastSkipOffsetWrapper {
-        let skip = VastSkipOffsetWrapper(skipOffset: .seconds5)
-        return skip
+        return VastSkipOffsetWrapper(skipOffset: .seconds5)
     }
     
     @objc public var value: Double {
