@@ -44,6 +44,15 @@ public class AdConfigurationWrapper: NSObject {
         }
     }
     
+    @objc public var isRewarded: Bool  {
+        get {
+            return self.adConfiguration.isRewarded
+        } 
+        set {
+            self.adConfiguration.isRewarded = newValue
+        }
+    }
+    
     @objc public var adId: String {
         return self.adConfiguration.id
     }
@@ -308,6 +317,14 @@ public class VastSkipOffsetWrapper: NSObject {
         self.skipOffset = skipOffset
     }
     
+    @objc public static func initWith30Second() -> VastSkipOffsetWrapper {
+        return VastSkipOffsetWrapper(skipOffset: .seconds30)
+    }
+    
+    @objc public static func initWith5Second() -> VastSkipOffsetWrapper {
+        return VastSkipOffsetWrapper(skipOffset: .seconds5)
+    }
+    
     @objc public var value: Double {
         return skipOffset.value
     }
@@ -315,6 +332,8 @@ public class VastSkipOffsetWrapper: NSObject {
     @objc public var type: TimeOffsetType {
         return skipOffset.type
     }
+    
+    
 }
 
 @objc (LoopMeAssetLinks)

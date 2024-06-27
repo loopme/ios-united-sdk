@@ -670,7 +670,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 #pragma mark - VideoClientDelegate
 
 - (LoopMeVastSkipOffset *)skipOffset {
-    return self.adConfiguration.vastProperties.skipOffset;
+    return self.adConfiguration.isRewarded ? [LoopMeVastSkipOffset initWith30Second] : [LoopMeVastSkipOffset initWith5Second] ;
 }
 
 - (void)videoClientDidLoadVideo:(LoopMeVPAIDVideoClient *)client {

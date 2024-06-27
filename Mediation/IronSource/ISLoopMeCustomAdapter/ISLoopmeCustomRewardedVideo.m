@@ -13,6 +13,8 @@
 @interface ISLoopmeCustomRewardedVideo()<LoopMeInterstitialDelegate>
 @property (nonatomic, strong) LoopMeInterstitial *interstitial;
 @property (nonatomic, strong) id<ISRewardedVideoAdDelegate> delegate;
+@property (nonatomic, assign) BOOL hasRewarded;
+
 @end
 
 @implementation ISLoopmeCustomRewardedVideo
@@ -26,6 +28,7 @@
     [self.interstitial setAutoLoadingEnabled: NO];
 
     self.delegate = delegate;
+    self.hasRewarded = NO;
     [self.interstitial loadAd];
 }
 
@@ -63,8 +66,12 @@
 }
 
 - (void)loopMeInterstitialDidDisappear: (LoopMeInterstitial *)interstitial {
-    NSLog(@"LoopMe rewarded video did dismiss");
+    if (!self.hasRewarded) {
+        [self.delegate adRewarded];
+        NSLog(@"LoopMe rewarded video did reach end.");
+    }
     [self.delegate adDidClose];
+    NSLog(@"LoopMe rewarded video did dismiss");
 }
 
 - (void)loopMeInterstitialDidReceiveTap: (LoopMeInterstitial *)interstitial {
@@ -74,6 +81,7 @@
 
 - (void)loopMeInterstitialVideoDidReachEnd: (LoopMeInterstitial *)interstitial {
     NSLog(@"LoopMe rewarded video did reach end.");
+    self.hasRewarded = YES;
     [self.delegate adRewarded];
 }
 

@@ -324,16 +324,16 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
                                 params: nil];
         
         self.closeButton.frame = [self frameForCloseButton: adjustedFrame];
-        [self.delegate.containerView addSubview: self.closeButton];
         
-        if (@available(iOS 11.0, *)) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.delegate.containerView addSubview: self.closeButton];
             self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
             UILayoutGuide *guide = [self.delegate.containerView safeAreaLayoutGuide];
             [[[guide topAnchor] constraintEqualToAnchor: self.closeButton.topAnchor
                                                constant: -8] setActive: YES];
             [[[guide trailingAnchor] constraintEqualToSystemSpacingAfterAnchor: self.closeButton.trailingAnchor
                                                                     multiplier: 1] setActive: YES];
-        }
+        });
     }
     
     self.panWebView = [[UIPanGestureRecognizer alloc] initWithTarget: self
