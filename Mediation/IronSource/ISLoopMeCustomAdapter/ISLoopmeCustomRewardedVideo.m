@@ -72,6 +72,8 @@
     } else {
         [self.delegate adRewarded];
         NSLog(@"LoopMe rewarded video did reach end.");
+        [self.delegate adDidClose];
+        NSLog(@"LoopMe rewarded video did dismiss");
     }
 }
 

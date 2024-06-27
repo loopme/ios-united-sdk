@@ -218,6 +218,7 @@
     } else {
         [self.delegate didRewardUserWithReward: [MAReward rewardWithAmount: MAReward.defaultAmount
                                                                      label: MAReward.defaultLabel]];
+        [self.delegate didHideRewardedAd];
     }
 }
 
