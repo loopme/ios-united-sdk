@@ -305,8 +305,8 @@ AVAssetResourceLoaderDelegate
                     [self.videoManager failedInitPlayer: self.videoURL];
                 } else {
                     NSMutableDictionary *infoDictionary = [self.delegate.adConfiguration toDictionary];
-                    [infoDictionary setObject:@"LoopMeVideoClientNormal" forKey: @"class"];
-                    [infoDictionary setObject:self.videoURL forKey: @"url"];
+                    [infoDictionary setObject:@"LoopMeVideoClientNormal" forKey: [LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
+                    [infoDictionary setObject:self.videoURL forKey: [LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyUrl]];
 
                     [self.JSClient setVideoState:LoopMeVideoState.broken];
                     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset

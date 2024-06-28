@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class LoopMeError;
 typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
     LoopMeEventErrorTypeServer,
     LoopMeEventErrorTypeBadAsset,
@@ -26,5 +27,7 @@ typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
 +  (void)sendError: (LoopMeEventErrorType)errorType
        errorMessage: (NSString * _Nonnull)errorMessage
              appkey: (NSString * _Nonnull)appkey;;
+
++ (NSString *)checkForMediationNetworks;
 
 @end

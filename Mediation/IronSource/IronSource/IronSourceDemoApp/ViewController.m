@@ -142,7 +142,7 @@
 //    ISBannerSize *leaderboardSize = [[ISBannerSize alloc] initWithWidth:self.view.frame.size.width andHeight:90];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
+        [IronSource loadBannerWithViewController:self size:ISBannerSize_RECTANGLE];
     });
 }
 
