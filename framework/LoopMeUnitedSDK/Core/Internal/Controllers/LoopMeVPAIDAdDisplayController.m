@@ -171,7 +171,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     [self.closeButton removeFromSuperview];
     NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
-    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
+    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                          errorMessage: @"Deferred adStopped"
                                  info: infoDictionary];
@@ -493,7 +493,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     }
     
     NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
-    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
+    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
     
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeJS
                          errorMessage: message
@@ -804,7 +804,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     if (self.isDeferredAdStopped) {
         [self handleVpaidStop];
         NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
-        [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
+        [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: @"Deferred adStopped"
                                      info: infoDictionary];

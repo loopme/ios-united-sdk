@@ -163,8 +163,8 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
         if (statusCode != 206) {
             completionHandler(NSURLSessionResponseCancel);
             NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
-            [infoDictionary setObject:@"LoopMeVideoManager" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
-            [infoDictionary setObject:self.videoURL.absoluteString forKey: [LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyUrl]];
+            [infoDictionary setObject:@"LoopMeVideoManager" forKey:@"class"];
+            [infoDictionary setObject:self.videoURL.absoluteString forKey: @"url"];
 
             [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
                                  errorMessage: [NSString stringWithFormat: @"response code: %ld", (long)statusCode]
@@ -184,8 +184,8 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
 didCompleteWithError:(NSError *)error {
     if (error) {
         NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
-        [infoDictionary setObject:@"LoopMeVideoManager" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
-        [infoDictionary setObject:self.videoURL.absoluteString forKey: [LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyUrl]];
+        [infoDictionary setObject:@"LoopMeVideoManager" forKey:@"class"];
+        [infoDictionary setObject:self.videoURL.absoluteString forKey: @"url"];
 
         if (error.code == NSURLErrorNetworkConnectionLost) {
             [self reconect];

@@ -336,7 +336,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         if ([keyPath isEqualToString:kLoopMeVPAIDVideoStatusKey]) {
             if (self.playerItem.status == AVPlayerItemStatusFailed) {
                 NSMutableDictionary *infoDictionary =   [self.delegate.adConfigurationObject toDictionary];
-                [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
+                [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:@"class"];
                 [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
                                      errorMessage: @"Video player could not init file"
                                              info: infoDictionary];

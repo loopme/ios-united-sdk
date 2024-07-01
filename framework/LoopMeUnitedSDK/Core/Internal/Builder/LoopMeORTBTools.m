@@ -185,7 +185,7 @@ static NSString *_userAgent;
         NSString *errorMessage = [NSString stringWithFormat: @"OpenRTB Request JSON Serialization Error %@", error.localizedDescription];
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: errorMessage
-                                     info: @{[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]: @"LoopMeORTBTools", [LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyAppKey]: self.appKey}];
+                                     info: @{@"class": @"LoopMeORTBTools", @"app_key": self.appKey}];
     }
     return jsonData;
 }
