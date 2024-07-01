@@ -31,6 +31,9 @@
                 [delegate onInitDidFailWithErrorCode: error.code errorMessage: error.localizedDescription];
             }
         } else {
+            
+            [[LoopMeSDK shared] setAdapterName: @"ironsource"];
+            
             NSLog(@"LoopMeUnitedSDK inited successfully");
             if ([delegate respondsToSelector: @selector(onInitDidSucceed)]) {
                 [delegate onInitDidSucceed];

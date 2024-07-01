@@ -29,7 +29,7 @@
 + (void)sendError: (LoopMeEventErrorType)errorType
        errorMessage: (NSString * _Nonnull)errorMessage
              appkey: (NSString * _Nonnull)appkey{
-    return [self sendError:errorType errorMessage:errorMessage info: @{@"app_key" : appkey }];
+    return [self sendError:errorType errorMessage:errorMessage info: @{ kErrorInfoAppKey : appkey }];
 }
 
 + (void)sendError:(LoopMeEventErrorType)errorType
@@ -44,6 +44,7 @@
         [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceOS]],
         [NSURLQueryItem queryItemWithName: @"device_manufacturer" value: [LoopMeIdentityProvider deviceManufacturer]],
         [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"loopme"],
+        [NSURLQueryItem queryItemWithName: @"mediation"            value: [[LoopMeSDK shared] adapterName]],
         [NSURLQueryItem queryItemWithName: @"msg"                 value: @"sdk_error"],
         [NSURLQueryItem queryItemWithName: @"sdk_version"         value: LOOPME_SDK_VERSION],
         [NSURLQueryItem queryItemWithName: @"package"             value: [NSBundle mainBundle].bundleIdentifier],
