@@ -10,6 +10,7 @@
 #import "LoopMeVPAIDError.h"
 #import "LoopMeErrorEventSender.h"
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
+#import "LoopMeDefinitions.h"
 
 NSInteger const kLoopMeVideoLoadTimeOutInterval = 60;
 NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
@@ -163,8 +164,8 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
         if (statusCode != 206) {
             completionHandler(NSURLSessionResponseCancel);
             NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
-            [infoDictionary setObject:@"LoopMeVideoManager" forKey:@"class"];
-            [infoDictionary setObject:self.videoURL.absoluteString forKey: @"url"];
+            [infoDictionary setObject:@"LoopMeVideoManager" forKey:kErrorInfoClass];
+            [infoDictionary setObject:self.videoURL.absoluteString forKey: kErrorInfoUrl];
 
             [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
                                  errorMessage: [NSString stringWithFormat: @"response code: %ld", (long)statusCode]
@@ -184,8 +185,8 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
 didCompleteWithError:(NSError *)error {
     if (error) {
         NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
-        [infoDictionary setObject:@"LoopMeVideoManager" forKey:@"class"];
-        [infoDictionary setObject:self.videoURL.absoluteString forKey: @"url"];
+        [infoDictionary setObject:@"LoopMeVideoManager" forKey:kErrorInfoClass];
+        [infoDictionary setObject:self.videoURL.absoluteString forKey: kErrorInfoUrl];
 
         if (error.code == NSURLErrorNetworkConnectionLost) {
             [self reconect];

@@ -18,6 +18,7 @@
 @property (nonatomic) BOOL isReady;
 @property (nonatomic, strong) NSDate *startSessionTime;
 @property (nonatomic, strong) NSMutableDictionary *sessionDepth;
+@property (nonatomic, strong) NSString *adpaterName;
 
 @end
 
@@ -94,6 +95,14 @@
     NSNumber *depth = [self.sessionDepth valueForKey: appKey];
     
     return depth ?: @0;
+}
+
+-(void)setAdapterName: (NSString* )name {
+    self.adpaterName = name;
+}
+
+-(NSString *)adapterName {
+    return self.adpaterName;;
 }
 
 @end

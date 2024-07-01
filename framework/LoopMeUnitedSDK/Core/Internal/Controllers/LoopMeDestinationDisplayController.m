@@ -15,6 +15,7 @@
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeGlobalSettings.h"
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
+#import "LoopMeDefinitions.h"
 
 @interface LoopMeDestinationDisplayController ()
 <
@@ -153,8 +154,9 @@
     self.loadingDestination = NO;
     [self hideOverlay];
     NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
-    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey:@"class"];
-    [infoDictionary setObject:self.resorvingURL.absoluteString forKey: @"url"];
+
+    [infoDictionary setObject:@"LoopMeVPAIDAdDispalyController" forKey: kErrorInfoClass];
+    [infoDictionary setObject:self.resorvingURL.absoluteString forKey: kErrorInfoUrl];
 
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                          errorMessage: [NSString stringWithFormat: @"Wrong redirect: %@", self.resorvingURL.absoluteString]

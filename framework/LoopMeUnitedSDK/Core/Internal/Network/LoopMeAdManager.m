@@ -160,6 +160,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     adConfiguration.appKey = self.appKey;
     if ([self.delegate respondsToSelector: @selector(adManager:didReceiveAdConfiguration:)]) {
         adConfiguration.isRewarded = self.rewarded;
+        adConfiguration.placement = self.rewarded ? @"rewarded" : @"interstitial";
         [self.delegate adManager: self didReceiveAdConfiguration: adConfiguration];
     }
     self.loading = NO;

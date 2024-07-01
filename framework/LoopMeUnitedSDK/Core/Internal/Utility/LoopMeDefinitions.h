@@ -17,6 +17,10 @@
 #define kLoopMeWebViewLoadingTimeout 180
 #define kLoopMeBaseURL @"https://i.loopme.me/"
 #define kLoopMeURLScheme @"loopme"
+#define kErrorInfoAppKey @"app_key"
+#define kErrorInfoClass @"class"
+#define kErrorInfoUrl @"url"
+#define kErrorInfoCreativeType @"creative_type"
 
 #define kLoopMeHTMLBannerSize CGSizeMake(320, 50)
 #define kLoopMeMPUBannerSize CGSizeMake(300, 250)

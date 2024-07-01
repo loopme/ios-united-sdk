@@ -50,6 +50,9 @@
             completionHandler(MAAdapterInitializationStatusInitializedFailure, @"Loopme sdk has not been initialized!");
             return;
         }
+        
+        [[LoopMeSDK shared] setAdapterName: @"applovin"];
+
         // Set the AppLovin mediation provider
         completionHandler(MAAdapterInitializationStatusInitializedSuccess, nil);
     }];
