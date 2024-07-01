@@ -12,7 +12,7 @@
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeIdentityProvider.h"
 #import "LoopMeSDK.h"
-#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
+#import "LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h"
 
 @implementation LoopMeErrorEventSender
 

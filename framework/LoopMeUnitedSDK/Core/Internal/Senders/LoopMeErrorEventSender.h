@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class LoopMeError;
 typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
     LoopMeEventErrorTypeServer,
     LoopMeEventErrorTypeBadAsset,

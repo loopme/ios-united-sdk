@@ -255,6 +255,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     if (!self.isReady) {
         NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
         [infoDictionary setObject:@"LoopMeAdView" forKey:kErrorInfoClass];
+
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: @"Banner added to view, but wasn't ready to be displayed"
                                      info: infoDictionary];
