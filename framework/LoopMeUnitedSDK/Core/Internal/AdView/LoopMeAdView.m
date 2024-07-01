@@ -75,6 +75,7 @@
                       delegate: (id<LoopMeAdViewDelegate>)delegate {
     self = [super init];
     if (self) {
+        self.adConfiguration.placement = @"banner";
         if (![[LoopMeSDK shared] isReady]) {
             LoopMeLogError(@"SDK is not inited");
             return nil;
@@ -253,7 +254,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     }
     if (!self.isReady) {
         NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
-        [infoDictionary setObject:@"LoopMeAdView" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
+        [infoDictionary setObject:@"LoopMeAdView" forKey:kErrorInfoClass];
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: @"Banner added to view, but wasn't ready to be displayed"
                                      info: infoDictionary];
@@ -568,6 +569,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
         return;
     }
     self.adConfiguration = adConfiguration;
+    self.adConfiguration.placement = @"banner";
     if (@available(iOS 14.5, *)) {
         self.skAdImpression = [[SKAdImpression alloc] init];
         // iOS 16.0 and later

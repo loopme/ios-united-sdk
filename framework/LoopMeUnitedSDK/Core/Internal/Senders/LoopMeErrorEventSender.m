@@ -29,7 +29,7 @@
 + (void)sendError: (LoopMeEventErrorType)errorType
        errorMessage: (NSString * _Nonnull)errorMessage
              appkey: (NSString * _Nonnull)appkey{
-    return [self sendError:errorType errorMessage:errorMessage info: @{ [LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyAppKey] : appkey }];
+    return [self sendError:errorType errorMessage:errorMessage info: @{ kErrorInfoAppKey : appkey }];
 }
 
 + (void)sendError:(LoopMeEventErrorType)errorType
@@ -44,7 +44,7 @@
         [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceOS]],
         [NSURLQueryItem queryItemWithName: @"device_manufacturer" value: [LoopMeIdentityProvider deviceManufacturer]],
         [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"loopme"],
-        [NSURLQueryItem queryItemWithName: @"mediation"            value: [self checkForMediationNetworks]],
+        [NSURLQueryItem queryItemWithName: @"mediation"            value: [[LoopMeSDK shared] adapterName]],
         [NSURLQueryItem queryItemWithName: @"msg"                 value: @"sdk_error"],
         [NSURLQueryItem queryItemWithName: @"sdk_version"         value: LOOPME_SDK_VERSION],
         [NSURLQueryItem queryItemWithName: @"package"             value: [NSBundle mainBundle].bundleIdentifier],
@@ -70,26 +70,5 @@
     [request setHTTPBody: [components.query dataUsingEncoding: NSUTF8StringEncoding]];
     [[[NSURLSession sharedSession] dataTaskWithRequest: request] resume];
 }
-
-+ (NSString *)checkForMediationNetworks {
-    NSDictionary *networks = @{
-         @"IronSource" : @"IronSource",
-         @"ALSdk" : @"AppLovin",
-         @"GADMobileAds" : @"AdMob",
-     };
-     
-     NSMutableArray *integratedNetworks = [NSMutableArray array];
-     
-     for (NSString *className in networks) {
-         if (NSClassFromString(className) != nil) {
-             [integratedNetworks addObject:networks[className]];
-         }
-     }
-     
-     if (integratedNetworks.count == 0) {
-         return @"No mediation networks are integrated.";
-     } else {
-         return [NSString stringWithFormat:@"Integrated mediation networks: %@", [integratedNetworks componentsJoinedByString:@", "]];
-     }}
 
 @end

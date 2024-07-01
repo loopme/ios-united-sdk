@@ -28,6 +28,4 @@ typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
        errorMessage: (NSString * _Nonnull)errorMessage
              appkey: (NSString * _Nonnull)appkey;;
 
-+ (NSString *)checkForMediationNetworks;
-
 @end

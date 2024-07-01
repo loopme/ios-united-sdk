@@ -58,6 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 // Take sessionDepth value depended of appKey
 - (NSNumber *)sessionDepthForAppKey:(NSString *)appKey;
 
+
+-(void)setAdapterName: (NSString* )name;
+-(NSString *)adapterName;
+
 @end
 
 NS_ASSUME_NONNULL_END

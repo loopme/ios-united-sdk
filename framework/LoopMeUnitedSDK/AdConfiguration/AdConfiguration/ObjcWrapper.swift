@@ -53,6 +53,8 @@ public class AdConfigurationWrapper: NSObject {
         }
     }
     
+    @objc public var placement: String = "unknown"
+    
     @objc public var adId: String {
         return self.adConfiguration.id
     }
@@ -180,6 +182,7 @@ public class AdConfigurationWrapper: NSObject {
         dictionary["cid"] = self.adConfiguration.cid
         dictionary["crid"] = self.adConfiguration.crid
         dictionary["request_id"] = self.adConfiguration.requestId
+        dictionary["placement"] = self.placement
         return dictionary
      }
 }

@@ -196,8 +196,8 @@ const NSInteger kLoopMeRequestTimeout = 180;
         return ;
     }
     NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
-    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey: [LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
-    [infoDictionary setObject:self.adConfiguration.creativeType == LoopMeCreativeTypeVast ? @"VAST" : @"NOT_VAST" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyCreativeType]];
+    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey: kErrorInfoClass];
+    [infoDictionary setObject:self.adConfiguration.creativeType == LoopMeCreativeTypeVast ? @"VAST" : @"NOT_VAST" forKey:kErrorInfoCreativeType];
 
     
     [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
@@ -321,7 +321,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
         }
     }
     NSMutableDictionary *infoDictionary =   [self.adConfiguration toDictionary];
-    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey:[LoopMeErrorInfoKey keyWithKeyString: ErrorInfoKeyClassKey]];
+    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey:kErrorInfoClass];
     
     if (!self.isReady) {
         LoopMeLogInfo(@"Ad isn't ready to be displayed");
