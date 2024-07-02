@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
 @property (nonatomic, strong) ISPlacementInfo *rvPlacementInfo;
 @property (nonatomic, strong) ISBannerView *banner;
+@property (nonatomic, assign) BOOL showAlertVC;
+
 @end
 
 @implementation ViewController
@@ -32,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.showAlertVC = YES;
     for (UIButton *button in @[
         self.showISButton,
         self.loadRVButton,
@@ -87,15 +89,17 @@
 }
 
 -(void)showText:(NSString *)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    double duration = 1.0;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [alert dismissViewControllerAnimated:YES completion:nil];
-    });
-
-    [self presentViewController:alert animated:YES completion:nil];
+    if (self.showAlertVC) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        double duration = 1.0;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,6 +111,8 @@
 #pragma mark Interface Handling
 
 - (IBAction)loadRVButtonTapped:(id)sender {
+    self.showAlertVC = YES;
+
     [IronSource loadRewardedVideo];
 }
 - (IBAction)showRVButtonTapped:(id)sender {
@@ -115,7 +121,8 @@
     // you are ready to present an ad. You can supply a placement
     // by calling 'showRVWithPlacementName', or you can simply
     // call 'showRV'. In this case the SDK will use the default
-    // placement one created for you.
+    // placement one created for you
+    self.showAlertVC = NO;
     [IronSource showRewardedVideoWithViewController:self];
 }
 
@@ -123,15 +130,18 @@
 - (IBAction)showISButtonTapped:(id)sender {
     
     // This will present the Interstitial. Unlike Rewarded
-    // Videos there are no placements.
+    // Videos there are no placements
+    self.showAlertVC = NO;
     [IronSource showInterstitialWithViewController:self];
 }
 
 - (IBAction)loadISButtonTapped:(id)sender {
+    self.showAlertVC = YES;
 
     // This will load the Interstitial. Unlike Rewarded
     // Videos there are no placements.
     dispatch_async(dispatch_get_main_queue(), ^{
+
         [IronSource loadInterstitial];
     });
 }
@@ -142,6 +152,7 @@
 //    ISBannerSize *leaderboardSize = [[ISBannerSize alloc] initWithWidth:self.view.frame.size.width andHeight:90];
 
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.showAlertVC = YES;
         [IronSource loadBannerWithViewController:self size:ISBannerSize_BANNER];
     });
 }
@@ -219,6 +230,7 @@
  */
 - (void)didCloseWithAdInfo:(ISAdInfo *)adInfo{
     NSLog(@"%s",__PRETTY_FUNCTION__);
+    self.showAlertVC = false;
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
     if ([adInfo.ad_unit isEqual:@"interstitial"])
         _showISButton.enabled = NO;
