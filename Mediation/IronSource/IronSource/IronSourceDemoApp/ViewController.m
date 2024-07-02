@@ -230,7 +230,6 @@
  */
 - (void)didCloseWithAdInfo:(ISAdInfo *)adInfo{
     NSLog(@"%s",__PRETTY_FUNCTION__);
-    self.showAlertVC = false;
     [self showText:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]];
     if ([adInfo.ad_unit isEqual:@"interstitial"])
         _showISButton.enabled = NO;
