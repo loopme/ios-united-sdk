@@ -55,6 +55,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 @property (nonatomic, assign) BOOL adDisplayed;
 
+@property (nonatomic, strong) OMIDLoopmeAdSession* omidSession;
+@property (nonatomic, strong) OMIDLoopmeAdEvents *omidAdEvents;
+@property (nonatomic, strong) LoopMeOMIDWrapper *omidWrapper;
 
 - (void)deviceShaken;
 - (void)interceptURL:(NSURL *)URL;
@@ -135,6 +138,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 #pragma mark - Life Cycle
 
 - (void)dealloc {
+    [self.omidSession finish];
     [self removeWebView];
     [self invalidateTimer];
     [[NSNotificationCenter defaultCenter] removeObserver: self
@@ -151,6 +155,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     self.delegate = delegate;
     _JSClient = [[LoopMeJSClient alloc] initWithDelegate: self];
     _mraidClient = [[LoopMeMRAIDClient alloc] initWithDelegate: self];
+    _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
     
 
     [[NSNotificationCenter defaultCenter] addObserver: self
@@ -271,6 +276,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 - (void)loadAdConfiguration {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self initWebView];
+
+        NSError *error;
+        self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML:self.adConfiguration.creativeContent error:&error];
         [self.webView loadHTMLString: self.adConfiguration.creativeContent
                              baseURL: [NSURL URLWithString: kLoopMeBaseURL]];
         self.webViewTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval: kLoopMeWebViewLoadingTimeout
@@ -349,9 +357,16 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     self.pinchWebView = [[UIPinchGestureRecognizer alloc] initWithTarget: self
                                                                   action: @selector(pinchWebView:)];
     [self.webView addGestureRecognizer:self.pinchWebView];
+    //OMSDK
+    NSError *impError;
+    [self.omidAdEvents impressionOccurredWithError: &impError];
 }
 
 - (void)closeAd {
+    //OMSDK
+    [self.omidSession finish];
+    self.omidSession = nil;
+    
     [self.JSClient executeEvent: LoopMeEvent.state
                    forNamespace: kLoopMeNamespaceWebview
                           param: LoopMeWebViewState.closed];
@@ -495,6 +510,27 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         [self.mraidClient setSupports];
         [self.delegate adDisplayControllerDidFinishLoadingAd: self];
     }
+
+    //OMSDK
+    if (self.omidSession != nil) return;
+    
+    NSError *error;
+    self.omidSession = [self.omidWrapper sessionForHTML: webView error: &error];
+    if (error) {
+        // TODO: Fill empty case
+    }
+    // Set the view on which to track viewability
+    self.omidSession.mainAdView = webView;
+    [self.omidSession addFriendlyObstruction: self.closeButton
+                                     purpose: OMIDFriendlyObstructionCloseAd
+                              detailedReason: nil
+                                       error: &error];
+    // Start session
+    [self.omidSession start];
+    
+    NSError *adEvtsError;
+    self.omidAdEvents = [[OMIDLoopmeAdEvents alloc] initWithAdSession: self.omidSession
+                                                                error: &adEvtsError];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
@@ -517,6 +553,8 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 - (void)JSClientDidReceiveSuccessCommand:(LoopMeJSClient *)client {
     LoopMeLogInfo(@"Ad was successfully loaded");
     [self invalidateTimer];
+    
+    [self.omidAdEvents loadedWithError:nil];
     
     if ([self.delegate respondsToSelector: @selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd: self];

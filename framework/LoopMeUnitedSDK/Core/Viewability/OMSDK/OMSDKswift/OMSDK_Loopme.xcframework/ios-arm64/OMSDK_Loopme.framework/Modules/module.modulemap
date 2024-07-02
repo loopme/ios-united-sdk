@@ -1,0 +1,4 @@
+module OMSDK_Loopme {
+    header "Headers/OMIDImports.h"
+    export *
+}

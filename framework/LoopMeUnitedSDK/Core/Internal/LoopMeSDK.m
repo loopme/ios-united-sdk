@@ -13,6 +13,8 @@
 #import "LoopMeDefinitions.h"
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
+@class LoopMeOMIDWrapper;
+
 @interface LoopMeSDK ()
 
 @property (nonatomic) BOOL isReady;
@@ -88,17 +90,25 @@
 
 - (void)init: (LoopMeSDKConfiguration *)configuration completionBlock: (void(^_Nullable)(BOOL, NSError *))completionBlock {
     if (self.isReady) {
+        if (completionBlock != nil) {
+            completionBlock(YES, nil);
+        }
         return;
     }
+    self.isReady = YES;
     
     [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
-    self.isReady = YES;
-    
+
     // Initialize the start for session duration time here
     [self startSession];
-
-    completionBlock(YES, nil);
+    
+    (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
+        NSLog(@"%@", LoopMeOMIDWrapper.isReady ? @"LoopMe OMID initialized" : @"LoopMe OMID not initialized");
+    }];
+    if (completionBlock != nil) {
+        completionBlock(YES, nil);
+    }
 }
 
 - (NSNumber *)timeElapsedSinceStart {
