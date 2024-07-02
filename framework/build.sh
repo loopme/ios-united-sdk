@@ -58,6 +58,9 @@ xcodebuild -create-xcframework \
     -framework "$ARCHIVE_IOS/Products/Library/Frameworks/LoopMeUnitedSDK.framework" \
     -output "$BUILD_DIR/LoopMeUnitedSDK.xcframework"
 
+echo "Copy LoopMeResources.bundle"
+cp -r ./LoopMeUnitedSDK/LoopMeResources.bundle $BUILD_DIR/LoopMeResources.bundle
+
 echo "Cleaning up - removing archives"
 rm -rf $ARCHIVE_SIM
 rm -rf $ARCHIVE_IOS

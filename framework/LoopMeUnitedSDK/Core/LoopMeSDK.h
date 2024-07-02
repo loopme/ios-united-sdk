@@ -27,6 +27,7 @@ FOUNDATION_EXPORT const unsigned char LoopMeUnitedSDKVersionString[];
 #import <LoopMeUnitedSDK/LoopMeDefinitions.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class LoopMeOMIDWrapper;
 
 @interface LoopMeSDK : NSObject
     
@@ -35,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)version;
 
 + (instancetype)shared;
++ (NSBundle *)resourcesBundle;
 
 /// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
 - (void)initSDKFromRootViewController: (UIViewController *)rootViewController

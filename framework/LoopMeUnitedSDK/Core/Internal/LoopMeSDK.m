@@ -13,6 +13,8 @@
 #import "LoopMeDefinitions.h"
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
+@class LoopMeOMIDWrapper;
+
 @interface LoopMeSDK ()
 
 @property (nonatomic) BOOL isReady;
@@ -33,6 +35,36 @@
     }
     
     return instance;
+}
+
++ (NSBundle * )resourcesBundle {
+    
+    static NSBundle *_resourcesBundle;
+    
+    if (_resourcesBundle) {
+        return  _resourcesBundle;
+    }
+    NSURL *bundleURL = [[NSBundle mainBundle] URLForResource:@"LoopMeResources" withExtension:@"bundle"];
+    if (bundleURL) {
+        _resourcesBundle = [NSBundle bundleWithURL:bundleURL];
+        return _resourcesBundle;
+    }
+    
+    NSString *bundlePath = nil;
+    NSArray *allBundles = [NSBundle allFrameworks];
+    for (NSBundle *bundle in allBundles) {
+        if ([bundle pathForResource: @"LoopMeResources" ofType: @"bundle"]) {
+            NSURL *bundleURL = [bundle URLForResource: @"LoopMeResources" withExtension: @"bundle"];
+            _resourcesBundle = [NSBundle bundleWithURL: bundleURL];
+            return _resourcesBundle;
+        }
+    }
+    if (!bundlePath) {
+        @throw [NSException exceptionWithName: @"NoBundleResource" reason: @"No loopme resource bundle" userInfo: nil];
+    }
+    _resourcesBundle = [NSBundle bundleWithPath: bundlePath];
+    return _resourcesBundle;
+    
 }
 
 + (NSString *)version {
@@ -58,17 +90,25 @@
 
 - (void)init: (LoopMeSDKConfiguration *)configuration completionBlock: (void(^_Nullable)(BOOL, NSError *))completionBlock {
     if (self.isReady) {
+        if (completionBlock != nil) {
+            completionBlock(YES, nil);
+        }
         return;
     }
+    self.isReady = YES;
     
     [[LoopMeGDPRTools sharedInstance] prepareConsent];
     [LoopMeGlobalSettings sharedInstance];
-    self.isReady = YES;
-    
+
     // Initialize the start for session duration time here
     [self startSession];
-
-    completionBlock(YES, nil);
+    
+    (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
+        NSLog(@"%@", LoopMeOMIDWrapper.isReady ? @"LoopMe OMID initialized" : @"LoopMe OMID not initialized");
+    }];
+    if (completionBlock != nil) {
+        completionBlock(YES, nil);
+    }
 }
 
 - (NSNumber *)timeElapsedSinceStart {

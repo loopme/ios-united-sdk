@@ -24,8 +24,8 @@
 #import "LoopMeCloseButton.h"
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeViewabilityProtocol.h"
+#import "LoopMeViewabilityManager.h"
 #import "LoopMeVpaidScriptMessageHandler.h"
-#import "LoopMeResources.h"
 
 NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
@@ -98,6 +98,11 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 @property (nonatomic, assign) NSTimeInterval viewableTime;
 @property (nonatomic, assign) NSTimeInterval previousVideoTime;
 
+@property (nonatomic, strong) OMIDLoopmeAdSession* omidSession;
+@property (nonatomic, strong) OMIDLoopmeAdEvents *omidAdEvents;
+@property (nonatomic, strong) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
+@property (nonatomic, strong) LoopMeOMIDWrapper *omidWrapper;
+
 - (void)handleVpaidStop;
 
 @end
@@ -151,6 +156,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 #pragma mark - Life Cycle
 
 - (void)dealloc {
+    [self.omidSession finish];
     self.webView.navigationDelegate = nil;
     self.webView.UIDelegate = nil;
     self.vastEventTracker = nil;
@@ -160,6 +166,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     self = [super initWithDelegate:delegate];
     
+    if (self) {
+        _omidWrapper = [[LoopMeOMIDWrapper alloc] init];
+        
+    }
     return self;
 }
 
@@ -172,6 +182,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     [self.closeButton removeFromSuperview];
 //    [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearCreativeView];
     NSError *impError;
+    [self.omidAdEvents impressionOccurredWithError:&impError];
     
     UIView *containerView = self.delegate.containerView;
     [[LoopMeSDK shared] updateSessionDepth:self.delegate.appKey];
@@ -185,6 +196,17 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         self.vastEventTracker = [[LoopMeVASTEventTracker alloc] initWithTrackingLinks:configuration.vastProperties.trackingLinks];
         
         if (!configuration.vastProperties.isVpaid) {
+            NSError *error;
+            self.omidSession = [self.omidWrapper sessionForNativeVideo: configuration.vastProperties.adVerifications error:&error];
+
+            // to signal impression event
+            NSError *aErr;
+            self.omidAdEvents = [[OMIDLoopmeAdEvents alloc] initWithAdSession:self.omidSession error:&aErr];
+            
+            // to signal video events
+            NSError *vErr;
+            self.omidVideoEvents = [[LoopMeOMIDVideoEventsWrapper alloc] initWithSession:self.omidSession error:&vErr];
+            
             self.videoClient = [[LoopMeVPAIDVideoClient alloc] initWithDelegate:self];
             ((LoopMeVPAIDVideoClient *)self.videoClient).configuration = configuration;
             ((LoopMeVPAIDVideoClient *)self.videoClient).eventSender = self.vastEventTracker;
@@ -222,10 +244,10 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     self.needCloseCallback = YES;
     self.isNotPlay = YES;
     
+    [self.omidSession start];
     
     if (self.adConfiguration.vastProperties.isVpaid) {
-        NSData *htmlData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Vast4 options:0];
-        NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+        NSString *htmlString = [self stringFromFile:@"loopmead" withExtension:@"html"];
         
         if (htmlString) {
             htmlString = [self injectAdVerification:htmlString];
@@ -274,6 +296,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     [(LoopMeVPAIDVideoClient *)self.videoClient willAppear];
     [self.vastEventTracker trackAdVerificationNonExecuted];
     
+    self.omidSession.mainAdView = self.delegate.containerView;
     
 //    [self.omidSession addFriendlyObstruction:self.webView];
 //    [self.omidSession addFriendlyObstruction:[(LoopMeVPAIDVideoClient *)self.videoClient vastUIView]];
@@ -308,6 +331,8 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         [self.vpaidClient stopAd];
     }
     
+    [self.omidSession finish];
+    self.omidSession = nil;
 }
 
 - (void)closeAdByButton {
@@ -365,6 +390,15 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 #pragma mark - Private
 
+- (NSString *)stringFromFile:(NSString *)filename withExtension:(NSString *)extension {
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+    if (!resourcesBundle) {
+        return nil;
+    }
+    NSString *htmlPath = [resourcesBundle pathForResource:filename ofType:extension];
+    return [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:NULL];
+}
+
 - (NSString *)injectAdVerification:(NSString *)htmlString {
     NSMutableString *copyHTMLstring = [htmlString mutableCopy];
     
@@ -387,8 +421,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (NSString *)makeVastVerificationHTML {
-    NSData *htmlData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Vast4 options:0];
-    NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    NSString *htmlString = [self stringFromFile:@"loopmevast4" withExtension:@"html"];
     htmlString = [self injectAdVerification:htmlString];
     return htmlString;
 }
@@ -501,6 +534,9 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     self.webViewTimeOutTimer = nil;
     self.currentVolume = volume;
     self.lastVolume = self.currentVolume;
+    
+    OMIDLoopmeVASTProperties *vastProperties = [[OMIDLoopmeVASTProperties alloc] initWithSkipOffset:self.adConfiguration.vastProperties.skipOffset.value autoPlay:YES position:OMIDPositionStandalone];
+    [self.omidVideoEvents loadedWith:vastProperties];
     
     if ([self.delegate respondsToSelector:@selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd:self];
@@ -670,6 +706,9 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 - (void)videoClientDidLoadVideo:(LoopMeVPAIDVideoClient *)client {
     LoopMeLogInfo(@"Did load video ad");
     
+    OMIDLoopmeVASTProperties *vastProperties = [[OMIDLoopmeVASTProperties alloc] initWithSkipOffset:self.adConfiguration.vastProperties.skipOffset.value autoPlay:YES position:OMIDPositionStandalone];
+    [self.omidVideoEvents loadedWith:vastProperties];
+    
     if ([self.delegate respondsToSelector:
          @selector(adDisplayControllerDidFinishLoadingAd:)]) {
         [self.delegate adDisplayControllerDidFinishLoadingAd:self];
@@ -771,7 +810,9 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)currentTime:(NSTimeInterval)currentTime percent:(double)percent {
-    self.viewableTime += currentTime - self.previousVideoTime;
+    if ([[LoopMeViewabilityManager sharedInstance] isViewable:self.delegate.containerView]) {
+        self.viewableTime += currentTime - self.previousVideoTime;
+    }
     self.previousVideoTime = currentTime;
     //    NSLog(@"viewable time: %f", self.viewableTime);
     //    NSLog(@"current time: %f", currentTime);
@@ -781,10 +822,13 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     if (percent >= 0.25 && percent < 0.5) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearFirstQuartile];
+        [self.omidVideoEvents firstQuartile];
     } else if (percent >= 0.5 && percent < 0.75) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearMidpoint];
+        [self.omidVideoEvents midpoint];
     } else if (percent >= 0.75) {
         [self.vastEventTracker trackEvent:LoopMeVASTEventTypeLinearThirdQuartile];
+        [self.omidVideoEvents thirdQuartile];
     }
     [self.vastEventTracker setCurrentTime:currentTime];
 }

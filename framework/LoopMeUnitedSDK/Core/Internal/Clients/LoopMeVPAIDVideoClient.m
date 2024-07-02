@@ -20,7 +20,6 @@
 #import "LoopMeDefinitions.h"
 #import "LoopMeAdView.h"
 #import "NSString+Encryption.h"
-#import "LoopMeResources.h"
 
 @class LoopMeAdConfiguration;
 
@@ -58,6 +57,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @property (nonatomic, strong) NSDate *loadingVideoStartDate;
 @property (nonatomic, strong) NSURL *videoURL;
+@property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
 @property (nonatomic, strong) NSLayoutConstraint *topVideoUIConstraint;
@@ -115,6 +115,14 @@ const NSInteger kResizeOffsetVPAID = 11;
         self.bottomVideoUIConstraint.active = YES;
     }
     return _videoView;
+}
+
+- (LoopMeOMIDVideoEventsWrapper *)omidVideoEvents {
+    if ([self.delegate respondsToSelector:@selector(omidVideoEvents)]) {
+        return [self.delegate performSelector:@selector(omidVideoEvents)];
+    }
+    
+    return nil;
 }
 
 - (void)setPlayerItem:(AVPlayerItem *)playerItem {
@@ -305,6 +313,10 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)didEnterBackground:(NSNotification*)notification {
+    
+    //OMID
+    [self.omidVideoEvents pause];
+    
     [self.player pause];
 }
 #pragma mark Player state notification
@@ -317,6 +329,8 @@ const NSInteger kResizeOffsetVPAID = 11;
         self.shouldPlay = NO;
         [self.eventSender trackEvent:LoopMeVASTEventTypeLinearComplete];
         [self.delegate videoClientDidReachEnd:self];
+        
+        [self.omidVideoEvents complete];
     }
     
     if ([self.vastUIView endCardImage]) {
@@ -360,15 +374,15 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.videoView.frame = frame;
     
     if (SYSTEM_VERSION_LESS_THAN(@"13.0")) {
+        NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+        
         self.vastUIView.frame = frame;
         MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
         volumeView.showsVolumeSlider = YES;
         volumeView.showsRouteButton = NO;
-        NSData *thumbData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Thumb options:0];
-        UIImage *thumbImage = [UIImage imageWithData:thumbData];
-        [volumeView setVolumeThumbImage:thumbImage forState:UIControlStateNormal];
-        [volumeView setMaximumVolumeSliderImage:thumbImage forState:UIControlStateNormal];
-        [volumeView setMinimumVolumeSliderImage:thumbImage forState:UIControlStateNormal];
+        [volumeView setVolumeThumbImage:[UIImage imageNamed:@"thumb" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [volumeView setMaximumVolumeSliderImage:[UIImage imageNamed:@"maximumVolume" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [volumeView setMinimumVolumeSliderImage:[UIImage imageNamed:@"minimumVolume" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         volumeView.alpha = 1;
         
 //        [self.vastUIView addSubview:volumeView];
@@ -440,6 +454,8 @@ const NSInteger kResizeOffsetVPAID = 11;
             [self.vastUIView setSkipOffset:skipOffsetTime];
             
             [self play];
+            //OMID
+            [self.omidVideoEvents startWithDuration:CMTimeGetSeconds(self.playerItem.duration) videoPlayerVolume:self.player.volume];
         }
 }
 
@@ -475,6 +491,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)setMute:(BOOL)mute {
     self.player.volume = (mute) ? 0.0f : 1.0f;
+    
+    [self.omidVideoEvents volumeChangeTo:self.player.volume];
 }
 
 - (void)seekToTime:(double)time {
@@ -496,6 +514,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)resume {
+    [self.omidVideoEvents resume];
     [self play];
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearResume];
 }
@@ -513,6 +532,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (void)pause {
     self.shouldPlay = NO;
     [self.player pause];
+    
+    //OMID
+    [self.omidVideoEvents pause];
 }
 
 - (void)skip {
@@ -520,6 +542,10 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.skipped = YES;
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearSkip];
     [self pause];
+    
+    //OMID
+    [self.omidVideoEvents skipped];
+    
     if ([self.vastUIView endCardImage]) {
         [self showEndCard];
     } else {
@@ -561,6 +587,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)uiViewVideoTapped {
     [self.delegate videoClientDidVideoTap];
+    
+    [self.omidVideoEvents adUserInteractionWithType:OMIDInteractionTypeClick];
 }
 
 - (void)uiViewExpand:(BOOL)expand {
