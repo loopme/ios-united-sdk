@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)version;
 
 + (instancetype)shared;
++ (NSBundle *)resourcesBundle;
 
 /// TODO: Remove and use `init` instead of `initSDKFromRootViewController`
 - (void)initSDKFromRootViewController: (UIViewController *)rootViewController

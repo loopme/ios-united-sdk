@@ -20,7 +20,6 @@
 #import "LoopMeDefinitions.h"
 #import "LoopMeAdView.h"
 #import "NSString+Encryption.h"
-#import "LoopMeResources.h"
 
 @class LoopMeAdConfiguration;
 
@@ -360,15 +359,15 @@ const NSInteger kResizeOffsetVPAID = 11;
     self.videoView.frame = frame;
     
     if (SYSTEM_VERSION_LESS_THAN(@"13.0")) {
+        NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+        
         self.vastUIView.frame = frame;
         MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
         volumeView.showsVolumeSlider = YES;
         volumeView.showsRouteButton = NO;
-        NSData *thumbData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Thumb options:0];
-        UIImage *thumbImage = [UIImage imageWithData:thumbData];
-        [volumeView setVolumeThumbImage:thumbImage forState:UIControlStateNormal];
-        [volumeView setMaximumVolumeSliderImage:thumbImage forState:UIControlStateNormal];
-        [volumeView setMinimumVolumeSliderImage:thumbImage forState:UIControlStateNormal];
+        [volumeView setVolumeThumbImage:[UIImage imageNamed:@"thumb" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [volumeView setMaximumVolumeSliderImage:[UIImage imageNamed:@"maximumVolume" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [volumeView setMinimumVolumeSliderImage:[UIImage imageNamed:@"minimumVolume" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
         volumeView.alpha = 1;
         
 //        [self.vastUIView addSubview:volumeView];

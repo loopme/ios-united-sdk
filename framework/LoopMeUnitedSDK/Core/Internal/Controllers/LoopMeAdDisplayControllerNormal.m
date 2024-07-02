@@ -26,7 +26,6 @@
 #import "LoopMeAdView.h"
 #import "LoopMeSDK.h"
 #import "LoopMeMRAIDScriptMessageHandler.h"
-#import "LoopMeResources.h"
 
 NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
@@ -172,9 +171,17 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [controller addScriptMessageHandler: self.mraidScriptMessageHandler
                                    name: @"mraid"];
 
-    // Decode the base64 string to get the mraid.js content
-    NSData *mraidData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Mraid options:0];
-    NSString *mraidjs = [[NSString alloc] initWithData:mraidData encoding:NSUTF8StringEncoding];
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+    if (!resourcesBundle) {
+        @throw [NSException exceptionWithName: @"NoBundleResource"
+                                       reason: @"No loopme resourse bundle"
+                                     userInfo: nil];
+    }
+    NSString *jsPath = [resourcesBundle pathForResource: @"mraid.js"
+                                                 ofType: @"ignore"];
+    NSString *mraidjs = [NSString stringWithContentsOfFile: jsPath
+                                                  encoding: NSUTF8StringEncoding
+                                                     error: NULL];
     WKUserScript *script = [[WKUserScript alloc] initWithSource: mraidjs
                                                   injectionTime: WKUserScriptInjectionTimeAtDocumentStart
                                                forMainFrameOnly: NO];

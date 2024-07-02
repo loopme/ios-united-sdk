@@ -156,8 +156,6 @@
 		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
 		B9A588982C32D12F003DC037 /* ErrorInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */; };
 		B9DEB10B2BCFF74300362D97 /* SDKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DEB10A2BCFF74300362D97 /* SDKUtility.swift */; };
-		D28605412C1253AD004E415F /* LoopMeResources.h in Headers */ = {isa = PBXBuildFile; fileRef = D286053E2C1253AD004E415F /* LoopMeResources.h */; };
-		D28605422C1253AD004E415F /* LoopMeResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D286053F2C1253AD004E415F /* LoopMeResources.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -312,8 +310,6 @@
 		B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfoKey.swift; sourceTree = "<group>"; };
 		B9DEB10A2BCFF74300362D97 /* SDKUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKUtility.swift; sourceTree = "<group>"; };
-		D286053E2C1253AD004E415F /* LoopMeResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeResources.h; sourceTree = "<group>"; };
-		D286053F2C1253AD004E415F /* LoopMeResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeResources.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -479,6 +475,24 @@
 				47A57C3C233E31C8001F7DA3 /* LoopMeInterstitial.h */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		47A57B8C233E31C7001F7DA3 /* Viewability */ = {
+			isa = PBXGroup;
+			children = (
+				47A57B9B233E31C8001F7DA3 /* OMSDK */,
+				47A57BA1233E31C8001F7DA3 /* LoopMeViewabilityManager.m */,
+				47A57BA4233E31C8001F7DA3 /* LoopMeViewabilityManager.h */,
+			);
+			path = Viewability;
+			sourceTree = "<group>";
+		};
+		47A57B9B233E31C8001F7DA3 /* OMSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B96645102BC55DA60032060A /* OMSDKswift */,
+			);
+			path = OMSDK;
 			sourceTree = "<group>";
 		};
 		47A57BA6233E31C8001F7DA3 /* Internal */ = {
@@ -766,16 +780,6 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		D28605402C1253AD004E415F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D286053E2C1253AD004E415F /* LoopMeResources.h */,
-				D286053F2C1253AD004E415F /* LoopMeResources.m */,
-			);
-			name = Resources;
-			path = LoopMeUnitedSDK/Core/Internal/Resources;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -818,7 +822,6 @@
 				47A57C99233E31C8001F7DA3 /* LoopMeBackView.h in Headers */,
 				47A57C97233E31C8001F7DA3 /* LoopMeActivityIndicatorView.h in Headers */,
 				47A57C7D233E31C8001F7DA3 /* LoopMeErrorEventSender.h in Headers */,
-				D28605412C1253AD004E415F /* LoopMeResources.h in Headers */,
 				47A57C86233E31C8001F7DA3 /* LoopMeOrientationViewControllerProtocol.h in Headers */,
 				47A57CA9233E31C8001F7DA3 /* LoopMeAudioCheck.h in Headers */,
 				47A57C89233E31C8001F7DA3 /* LoopMeVPAIDAdDisplayController.h in Headers */,
@@ -1014,7 +1017,6 @@
 				47A57C5D233E31C8001F7DA3 /* LoopMeMRAIDClient.m in Sources */,
 				47A57C65233E31C8001F7DA3 /* LoopMeInterstitialGeneral.m in Sources */,
 				47A57B5A233CFAD9001F7DA3 /* AdConfiguration.swift in Sources */,
-				D28605422C1253AD004E415F /* LoopMeResources.m in Sources */,
 				47A57C87233E31C8001F7DA3 /* LoopMeSDKConfiguration.m in Sources */,
 				47A57C8D233E31C8001F7DA3 /* LoopMeDestinationDisplayController.m in Sources */,
 				47A57B67233CFAD9001F7DA3 /* VastSkipOffset.swift in Sources */,

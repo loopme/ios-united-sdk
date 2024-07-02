@@ -25,7 +25,6 @@
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeViewabilityProtocol.h"
 #import "LoopMeVpaidScriptMessageHandler.h"
-#import "LoopMeResources.h"
 
 NSInteger const kLoopMeVPAIDImpressionTimeout = 2;
 
@@ -224,8 +223,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     
     
     if (self.adConfiguration.vastProperties.isVpaid) {
-        NSData *htmlData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Vast4 options:0];
-        NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+        NSString *htmlString = [self stringFromFile:@"loopmead" withExtension:@"html"];
         
         if (htmlString) {
             htmlString = [self injectAdVerification:htmlString];
@@ -365,6 +363,15 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 
 #pragma mark - Private
 
+- (NSString *)stringFromFile:(NSString *)filename withExtension:(NSString *)extension {
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+    if (!resourcesBundle) {
+        return nil;
+    }
+    NSString *htmlPath = [resourcesBundle pathForResource:filename ofType:extension];
+    return [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:NULL];
+}
+
 - (NSString *)injectAdVerification:(NSString *)htmlString {
     NSMutableString *copyHTMLstring = [htmlString mutableCopy];
     
@@ -387,8 +394,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (NSString *)makeVastVerificationHTML {
-    NSData *htmlData = [[NSData alloc] initWithBase64EncodedString:kLoopMeResourceBase64Vast4 options:0];
-    NSString *htmlString = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    NSString *htmlString = [self stringFromFile:@"loopmevast4" withExtension:@"html"];
     htmlString = [self injectAdVerification:htmlString];
     return htmlString;
 }
