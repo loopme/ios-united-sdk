@@ -1,5 +1,5 @@
 //
-//  StringExtension.swift
+//  String+Extension.swift
 //  LoopMeUnitedSDK
 //
 //  Created by Valerii Roman on 04/07/2024.
@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 extension String {
     var isValidURL: Bool {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)

@@ -157,10 +157,11 @@
 		47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */; };
 		47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */; };
 		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
-		B9A588982C32D12F003DC037 /* ErrorInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */; };
 		B96645122BC55DE70032060A /* OMIDVideoEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */; };
 		B96645142BC572BF0032060A /* OMSDKWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645132BC572BF0032060A /* OMSDKWrapper.swift */; };
+		B9A588982C32D12F003DC037 /* ErrorInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */; };
 		B9DEB10B2BCFF74300362D97 /* SDKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DEB10A2BCFF74300362D97 /* SDKUtility.swift */; };
+		B9EBF7562C36C75F002693A6 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EBF7552C36C75F002693A6 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -315,11 +316,12 @@
 		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
 		81D36A5226F08F2A0037D160 /* CoppaTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoppaTools.swift; sourceTree = "<group>"; };
 		B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfoKey.swift; sourceTree = "<group>"; };
 		B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMIDVideoEventsWrapper.swift; sourceTree = "<group>"; };
 		B96645132BC572BF0032060A /* OMSDKWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMSDKWrapper.swift; sourceTree = "<group>"; };
 		B983C8FD2BD67BDF0044F316 /* OMSDK_Loopme.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OMSDK_Loopme.xcframework; sourceTree = "<group>"; };
+		B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorInfoKey.swift; sourceTree = "<group>"; };
 		B9DEB10A2BCFF74300362D97 /* SDKUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKUtility.swift; sourceTree = "<group>"; };
+		B9EBF7552C36C75F002693A6 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +387,7 @@
 			children = (
 				47A57B8A233E31C7001F7DA3 /* Core */,
 				47A57B40233CFAD9001F7DA3 /* AdConfiguration */,
+				B9EBF7542C36C70B002693A6 /* Extensions */,
 				B9A588962C32D119003DC037 /* Enums */,
 				47A57B53233CFAD9001F7DA3 /* LoopMeServerCommuniator */,
 				47714E3122FAF9CE00DF0D55 /* LoopMeSDK.h */,
@@ -783,14 +786,6 @@
 			path = GDPR;
 			sourceTree = "<group>";
 		};
-		B9A588962C32D119003DC037 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
 		B96645102BC55DA60032060A /* OMSDKswift */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,6 +794,22 @@
 				B96645132BC572BF0032060A /* OMSDKWrapper.swift */,
 			);
 			path = OMSDKswift;
+			sourceTree = "<group>";
+		};
+		B9A588962C32D119003DC037 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				B9A588972C32D12F003DC037 /* ErrorInfoKey.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		B9EBF7542C36C70B002693A6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B9EBF7552C36C75F002693A6 /* String+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1028,6 +1039,7 @@
 				47A57C81233E31C8001F7DA3 /* LoopMeBrowserViewController.m in Sources */,
 				47A57C5E233E31C8001F7DA3 /* LoopMeVPAIDVideoClient.m in Sources */,
 				47A57C9D233E31C8001F7DA3 /* LoopMeCancelView.m in Sources */,
+				B9EBF7562C36C75F002693A6 /* String+Extension.swift in Sources */,
 				47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */,
 				B9DEB10B2BCFF74300362D97 /* SDKUtility.swift in Sources */,
 				47A57C7F233E31C8001F7DA3 /* LoopMeInterstitialViewController.m in Sources */,
