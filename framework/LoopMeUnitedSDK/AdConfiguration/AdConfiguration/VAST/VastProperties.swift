@@ -260,12 +260,13 @@ extension VastProperties: XMLParserDelegate {
             let framework = mediaFileNode.props["apiFramework"]
             let type = mediaFileNode.props["type"]
             let mediaType = mediaFileNode.props["mediaType"]
-            if let content = mediaFileNode.content {
-                if delivery == "progressive" && type == "video/mp4" {
-                    videoURLs.append(content.trimmingCharacters(in: .whitespacesAndNewlines))
-                } else if framework == "VPAID" && type == "application/javascript" {
-                    assetLinks.vpaidURL = content.trimmingCharacters(in: .whitespacesAndNewlines)
-                }
+            if let content = mediaFileNode.content?.trimmingCharacters(in: .whitespacesAndNewlines),
+                content.isValidURL {
+                    if delivery == "progressive" && type == "video/mp4" {
+                        videoURLs.append(content)
+                    } else if framework == "VPAID" && type == "application/javascript" {
+                        assetLinks.vpaidURL = content
+                    }
             }
         }
         assetLinks.videoURL = videoURLs

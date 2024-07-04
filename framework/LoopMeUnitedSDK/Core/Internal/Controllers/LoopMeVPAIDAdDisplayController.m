@@ -941,18 +941,42 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         [self.vastEventTracker trackErrorCode:error.code];
     }
     
-    NSURL *videoURL;
-    if (self.adConfiguration.vastProperties.assetLinks.videoURL.count != 0) {
-        videoURL = [NSURL URLWithString:self.adConfiguration.vastProperties.assetLinks.videoURL[self.loadVideoCounter]];
-    }
-    self.loadImageCounter++;
     if (image) {
-        [((LoopMeVPAIDVideoClient *)self.videoClient).vastUIView setEndCardImage:image];
-        [self.videoClient loadWithURL:videoURL];
-    } else if (self.adConfiguration.vastProperties.assetLinks.endCard.count > self.loadImageCounter){
-        [self.imageDownloader loadImageWithURL:[NSURL URLWithString:self.adConfiguration.vastProperties.assetLinks.endCard[self.loadImageCounter]]];
+        [self handleLoadedImage:image];
     } else {
-        [self.videoClient loadWithURL:videoURL];
+        [self handleImageLoadingFailure];
+    }
+}
+
+- (void)handleLoadedImage:(UIImage *)image {
+    [((LoopMeVPAIDVideoClient *)self.videoClient).vastUIView setEndCardImage:image];
+    [self loadVideoIfNeeded];
+}
+
+- (void)handleImageLoadingFailure {
+    self.loadImageCounter++;
+    if (self.adConfiguration.vastProperties.assetLinks.endCard.count > self.loadImageCounter) {
+        NSString *nextImageURLString = self.adConfiguration.vastProperties.assetLinks.endCard[self.loadImageCounter];
+        NSURL *nextImageURL = [NSURL URLWithString:nextImageURLString];
+        [self.imageDownloader loadImageWithURL:nextImageURL];
+    } else {
+        [self loadVideoIfNeeded];
+    }
+}
+
+- (void)loadVideoIfNeeded {
+    if (self.adConfiguration.vastProperties.assetLinks.videoURL.count > 0) {
+        NSString *videoURLString = self.adConfiguration.vastProperties.assetLinks.videoURL[self.loadVideoCounter];
+        NSURL *videoURL = [NSURL URLWithString:videoURLString];
+        if (videoURL) {
+            [self.videoClient loadWithURL:videoURL];
+        } else {
+            NSError *error = [NSError errorWithDomain:@"LoopMeErrorDomain" code:1001 userInfo:@{NSLocalizedDescriptionKey : @"videoURL is nil."}];
+            [self.delegate adDisplayController:self didFailToLoadAdWithError: error];
+        }
+    } else {
+        NSError *error = [NSError errorWithDomain:@"LoopMeErrorDomain" code:1002 userInfo:@{NSLocalizedDescriptionKey : @"No video URL available."}];
+        [self.delegate adDisplayController:self didFailToLoadAdWithError: error];
     }
 }
 
