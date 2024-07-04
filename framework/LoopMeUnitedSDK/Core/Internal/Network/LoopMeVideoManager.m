@@ -168,7 +168,7 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
             [infoDictionary setObject:self.videoURL.absoluteString forKey: kErrorInfoUrl];
 
             [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                                 errorMessage: [NSString stringWithFormat: @"response code: %ld", (long)statusCode]
+                                 errorMessage: [NSString stringWithFormat: @"Response code: %ld", (long)statusCode]
                                          info: infoDictionary];
             //CHECK ERROR
             [self.delegate videoManager:self didFailLoadWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeTrafficking]];
