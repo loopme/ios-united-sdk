@@ -44,11 +44,8 @@
        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal errorMessage: nil];
        return;
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
         [self.interstitial showFromViewController: viewController animated: YES];
         [delegate adDidShowSucceed];
-    });
 }
 
 - (void)loopMeInterstitialDidLoadAd: (LoopMeInterstitial *)interstitial {
