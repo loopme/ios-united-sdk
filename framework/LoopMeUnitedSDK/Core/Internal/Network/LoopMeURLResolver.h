@@ -16,23 +16,24 @@
     NSURLConnectionDataDelegate
 >
 
-@property (nonatomic, weak) id<LoopMeURLResolverDelegate> delegate;
+@property (nonatomic, weak, nullable) id<LoopMeURLResolverDelegate> delegate;
+@property (nonatomic, strong, nonnull) NSURL *URL;
 
-+ (LoopMeURLResolver *)resolver;
-+ (NSString *)storeItemIdentifierForURL:(NSURL *)URL;
-+ (BOOL)mailToForURL:(NSURL *)URL;
-+ (BOOL)telLinkForURL:(NSURL *)URL;
-
-- (void)startResolvingWithURL:(NSURL *)URL delegate:(id<LoopMeURLResolverDelegate>)delegate;
-- (void)cancel;
++ (nonnull LoopMeURLResolver *)resolver;
++ (nullable NSString *)storeItemIdentifierForURL:(nonnull NSURL *)URL;
++ (BOOL)mailToForURL:(nonnull NSURL *)URL;
++ (BOOL)telLinkForURL:(nonnull NSURL *)URL;
++ (nullable NSString *)safariURLForURL: (nonnull NSURL *)URL;
+- (BOOL)handleURL:(nonnull NSURL *)URL;
+- (void)startResolvingWithURL:(nonnull NSURL *)URL delegate:(nonnull id<LoopMeURLResolverDelegate>)delegate;
 
 @end
 
 @protocol LoopMeURLResolverDelegate <NSObject>
 
-- (void)showWebViewWithHTMLString:(NSString *)HTMLString baseURL:(NSURL *)URL;
-- (void)showStoreKitProductWithParameter:(NSString *)parameter fallbackURL:(NSURL *)URL;
-- (void)openURLInApplication:(NSURL *)URL;
-- (void)failedToResolveURLWithError:(NSError *)error;
+- (void)showWebView:(nonnull NSURL *)baseUrl;
+- (void)showStoreKitProductWithParameter:(nonnull NSString *)parameter fallbackURL:(nonnull NSURL *)URL;
+- (void)openURLInApplication:(nonnull NSURL *)URL;
+- (void)failedToResolveURLWithError:(nonnull NSError *)error;
 
 @end
