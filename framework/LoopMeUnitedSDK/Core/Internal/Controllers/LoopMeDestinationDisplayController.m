@@ -33,8 +33,7 @@
 
 @property (nonatomic, strong) NSURL *resorvingURL;
 
-- (void)presentStoreKitControllerWithItemIdentifier:(NSString *)identifier
-                                        fallbackURL:(NSURL *)URL;
+- (void)presentStoreKitControllerWithItemIdentifier:(NSString *)identifier;
 - (void)hideOverlay;
 - (void)dismissStoreKitController;
 
@@ -58,7 +57,7 @@
                                                animated:YES];
 }
 
-- (void)presentStoreKitControllerWithItemIdentifier:(NSString *)identifier fallbackURL:(NSURL *)URL {
+- (void)presentStoreKitControllerWithItemIdentifier:(NSString *)identifier {
     self.storeKitController = [[SKStoreProductViewController alloc] init];
     self.storeKitController.delegate = self;
     
@@ -106,7 +105,6 @@
 - (void)cancel {
     if (self.isLoadingDestination) {
         self.loadingDestination = NO;
-        [self.resolver cancel];
         [self hideOverlay];
         [self.delegate destinationDisplayControllerDidDismissModal:self];
     }
@@ -114,11 +112,10 @@
 
 #pragma mark - LoopMeURLResolverDelegate
 
-- (void)showWebViewWithHTMLString:(NSString *)HTMLString
-                          baseURL:(NSURL *)URL {
+- (void)showWebView: (NSURL *)baseURL {
     [self hideOverlay];
     
-    self.browserController = [[SFSafariViewController alloc] initWithURL:URL];
+    self.browserController = [[SFSafariViewController alloc] initWithURL:baseURL];
     self.browserController.delegate = self;
     self.browserController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     self.browserController.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -130,7 +127,7 @@
 
 - (void)showStoreKitProductWithParameter:(NSString *)parameter fallbackURL:(NSURL *)URL {
     if (!!NSClassFromString(@"SKStoreProductViewController")) {
-        [self presentStoreKitControllerWithItemIdentifier:parameter fallbackURL:URL];
+        [self presentStoreKitControllerWithItemIdentifier:parameter];
     } else {
         [self openURLInApplication:URL];
     }
