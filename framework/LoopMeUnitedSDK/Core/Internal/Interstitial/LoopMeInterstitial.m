@@ -195,7 +195,9 @@ static const int kLoopMeLoadCounter = 3;
     }
     self.shown = YES;
     LoopMeInterstitialGeneral *interstitial = self.interstitial1.isReady ? self.interstitial1 : self.interstitial2;
-    [interstitial showFromViewController: viewController animated: animated];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [interstitial showFromViewController: viewController animated: animated];
+    });
 }
 
 - (void)dismissAnimated: (BOOL)animated {
