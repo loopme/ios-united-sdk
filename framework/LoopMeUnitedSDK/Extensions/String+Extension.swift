@@ -1,5 +1,5 @@
 //
-//  StringExtension.swift
+//  String+Extension.swift
 //  LoopMeUnitedSDK
 //
 //  Created by Valerii Roman on 04/07/2024.
