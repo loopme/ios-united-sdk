@@ -44,8 +44,8 @@
        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal errorMessage: nil];
        return;
     }
-    [self.interstitial showFromViewController: viewController animated: YES];
-    [delegate adDidShowSucceed];
+     [self.interstitial showFromViewController: viewController animated: YES];
+     [delegate adDidShowSucceed];
 }
 
 - (void)loopMeInterstitialDidLoadAd: (LoopMeInterstitial *)interstitial {
