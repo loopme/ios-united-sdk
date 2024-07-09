@@ -626,8 +626,7 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
 - (void)mraidClientDidReceiveCloseCommand:(LoopMeMRAIDClient *)client {
     NSString *state = self.mraidClient.state;
-    
-    if ([state isEqualToString: LoopMeMRAIDState.resized]) {
+    if ([state isEqualToString: LoopMeMRAIDState.resized] && self.isExpanded) {
         [self resizeTo: self.originalSize];
         [self.mraidClient executeEvent: LoopMeMRAIDFunctions.stateChange
                                 params: @[LoopMeMRAIDState.defaultt]];
