@@ -85,10 +85,6 @@ static NSString *_userAgent;
             @"instl": self.isInterstitial ? @1 : @0,
             @"bidfloor": @0,
             @"secure": @1,
-            @"metric": @[
-                @{@"type": @"viewability", @"vendor": @"moat"},
-                @{@"type": @"viewability", @"vendor": @"ias"}
-            ],
             @"ext": @{
                 @"it": self.integrationType,
                 @"skadn": @{

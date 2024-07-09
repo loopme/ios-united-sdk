@@ -610,7 +610,6 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     }
     
     if (adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-        [[LoopMeGlobalSettings sharedInstance].adIds setObject: adConfiguration.adIdsForMoat forKey: self.appKey];
         [self.adDisplayController setAdConfiguration: self.adConfiguration];
         [self.adDisplayController loadAdConfiguration];
     } else {

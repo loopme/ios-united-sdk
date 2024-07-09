@@ -45,19 +45,6 @@ enum CreativeType: String, Codable {
     case mraid = "MRAID"
 }
 
-enum TrackerName: String {
-    case ias
-    case moat
-    
-    init(intValue: Int) {
-        switch intValue {
-        case 0: self = .ias
-        case 1: self = .moat
-        default: self = .ias
-        }
-    }
-}
-
 public struct AdConfiguration {
     enum CodingKeys: String, CodingKey {
         case seatbid
@@ -76,7 +63,6 @@ public struct AdConfiguration {
         case adm
         case preload25
         case autoloading
-        case measure_partners
         
         case advertiser
         case campaign
@@ -98,28 +84,14 @@ public struct AdConfiguration {
     let autoloading: Bool
     let adOrientation: AdOrientation
     let creativeType: CreativeType
-    let measurePartners: [String]
     
     var creativeContent: String
-    var adIDsForMoat: Dictionary<String, Any>
-    var adIDsForIAS: Dictionary<String, Any>
     var expandProperties: MRAIDExpandProperties
     var isRewarded: Bool
 
-    var appKey: String = "" {
-        didSet {
-//            var iasIds = adIDsForIAS
-            var placementId: String = adIDsForIAS["placementId"] as? String ?? ""
-            placementId += "_\(appKey)"
-            adIDsForIAS["placementId"] = placementId
-        }
-    }
+    var appKey: String = ""
     
     public var vastProperties: VastProperties?
-    
-    func useTracking(trackerName: TrackerName) -> Bool {
-        return self.measurePartners.contains(trackerName.rawValue)
-    }
 }
 
 extension AdConfiguration: Decodable {
@@ -172,9 +144,6 @@ extension AdConfiguration: Decodable {
                 self.creativeType = isVast ? .vast : .mraid
             }
             
-            self.adIDsForIAS =  (try? AdConfiguration.initAdIDs(for: .ias, decoder: ext, id: id)) ?? ["":""]
-            self.adIDsForMoat = (try? AdConfiguration.initAdIDs(for: .moat, decoder: ext)) ?? ["":""]
-            
             if let autoloading = try? ext.decode(Int.self, forKey: .autoloading) {
                 self.autoloading = autoloading == 1
             } else {
@@ -182,9 +151,6 @@ extension AdConfiguration: Decodable {
             }
             
             UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
-            
-            self.measurePartners = (try? ext.decode([String].self, forKey: .measure_partners)) ?? [""]
-            
         } else {
             self.skAdNetworkInfo = nil
             self.debug = false
@@ -203,48 +169,14 @@ extension AdConfiguration: Decodable {
             let isVast = self.creativeContent.range(of: searchString, options: .caseInsensitive) != nil
             self.creativeType = isVast ? .vast : .mraid
             
-            self.adIDsForIAS =  Dictionary()
-            self.adIDsForMoat = Dictionary()
-            
             self.autoloading = false
             
             UserDefaults.standard.set(autoloading, forKey: LOOPME_USERDEFAULTS_KEY_AUTOLOADING)
-            
-            self.measurePartners = []
         }
         if self.creativeType == .vast || self.creativeType == .vpaid {
             guard let data = creativeContent.data(using: .utf8) else { fatalError() }
             
             vastProperties = VastProperties(data: data)
         }
-    }
-    
-    static func initAdIDs(for tracker: TrackerName, decoder: KeyedDecodingContainer<ExtKeys>, id: String = "") throws -> Dictionary<String, Any> {
-        
-        guard let advertiser = try? decoder.decode(String.self, forKey: .advertiser),
-        let campaign = try? decoder.decode(String.self, forKey: .campaign),
-            let level3 = try? decoder.decode(String.self, forKey: .lineitem),
-            let level5 = try? decoder.decode(String.self, forKey: .appname) else { return [:] }
-        
-        let level4 = id
-        
-        if tracker == .moat {
-            let _adIdsForMOAT = ["level1" : advertiser, "level2" : campaign, "level3" : level3, "level4" : level4, "level5" : level5, "slicer1" : "", "slicer2" : ""]
-            return _adIdsForMOAT
-        }
-        
-        let placemantid = "\(level5)"
-        let bundleIdentifier = Bundle.main.bundleIdentifier ?? "unknown"
-        
-        let anId = InfoPlisReader.iasID
-        
-        guard let company = try? decoder.decode(String.self, forKey: .company),
-            let developer = try? decoder.decode(String.self, forKey: .developer) else { return [:] }
-            
-        let pubId = "\(company)_\(developer)"
-        
-        let _adIdsForIAS = [ "anId" : anId, "advId" : advertiser, "campId" : campaign, "pubId" : pubId, "chanId" : bundleIdentifier, "placementId" : placemantid, "bundleId" : bundleIdentifier];
-        
-        return _adIdsForIAS
     }
 }

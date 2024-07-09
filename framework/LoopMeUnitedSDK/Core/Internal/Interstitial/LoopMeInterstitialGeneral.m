@@ -439,7 +439,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
         if (adConfiguration.creativeType == LoopMeCreativeTypeVast) {
             return [self.adDisplayControllerVPAID setAdConfiguration: self.adConfiguration];
         }
-        [[LoopMeGlobalSettings sharedInstance].adIds setObject: adConfiguration.adIdsForMoat forKey: self.appKey];
         [self.adDisplayController setAdConfiguration: self.adConfiguration];
         [self.adDisplayController loadAdConfiguration];
     });

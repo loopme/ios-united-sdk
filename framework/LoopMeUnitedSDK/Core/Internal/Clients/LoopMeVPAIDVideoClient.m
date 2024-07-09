@@ -422,9 +422,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)cancel {
-    if ([self.delegate.adConfigurationObject useTracking:LoopMeTrackerNameMoat]) {
-    }
-
     [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
     [_videoView removeFromSuperview];
