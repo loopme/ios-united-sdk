@@ -83,6 +83,7 @@ static NSString *_userAgent;
             @"displaymanager": @"LOOPME_SDK",
             @"displaymanagerver": [self sdkVersion],
             @"instl": self.isInterstitial ? @1 : @0,
+            @"rwdd": self.isRewarded ? @1 : @0,
             @"bidfloor": @0,
             @"secure": @1,
             @"ext": @{
