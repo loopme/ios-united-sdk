@@ -76,7 +76,11 @@ public class OMSDKWrapper: NSObject {
 
     @objc public func injectScriptContentIntoHTML(_ htmlString: String) throws -> String {
         guard let omidJS = OMSDKWrapper.omidJS else {
-            throw NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID JS not loaded"])
+            throw NSError(
+                domain: "OMSDKWrapper",
+                code: -1,
+                userInfo: [NSLocalizedDescriptionKey: "Can't inject OMID JS, because it is not loaded yet"]
+            )
         }
 
         return try OMIDLoopmeScriptInjector.injectScriptContent(omidJS, intoHTML: htmlString)

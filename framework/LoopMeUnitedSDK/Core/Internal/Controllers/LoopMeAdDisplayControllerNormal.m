@@ -278,7 +278,10 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
         [self initWebView];
 
         NSError *error;
-        self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML:self.adConfiguration.creativeContent error:&error];
+        if (LoopMeOMIDWrapper.isReady) {
+            self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML: self.adConfiguration.creativeContent
+                                                                                           error: &error];
+        }
         NSString *meta = @"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{margin:0;padding:0;}</style>";
         NSString *htmlString = [meta stringByAppendingString: self.adConfiguration.creativeContent];
         [self.webView loadHTMLString: htmlString
