@@ -47,7 +47,5 @@ extern const struct LoopMeVideoStateStruct {
 - (UIViewController *)viewControllerForPresentation;
 @optional
 - (LoopMeAdConfiguration *)adConfiguration;
-- (BOOL)useMoatTracking;
-
 
 @end

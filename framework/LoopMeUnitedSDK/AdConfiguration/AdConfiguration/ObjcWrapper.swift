@@ -16,12 +16,6 @@ public enum CreativeTypeWrapper: Int {
     case mraid
 }
 
-@objc (LoopMeTrackerName)
-public enum TrackerNameWrapper: Int {
-    case ias = 0
-    case moat
-}
-
 @objc (LoopMeAdConfiguration)
 public class AdConfigurationWrapper: NSObject {
     private var adConfiguration: AdConfiguration
@@ -110,14 +104,6 @@ public class AdConfigurationWrapper: NSObject {
         return adOrientation == .portrait
     }
     
-    @objc public var adIdsForMoat: Dictionary<String, Any> {
-        return adConfiguration.adIDsForMoat
-    }
-    
-    @objc public var adIdsForIAS: Dictionary<String, Any> {
-        return adConfiguration.adIDsForIAS
-    }
-    
     @objc public var skadSignature: String? {
         if skadNetworkInfo?.fidelities.count == 2 {
             return skadNetworkInfo?.fidelities.first?.signature
@@ -170,11 +156,6 @@ public class AdConfigurationWrapper: NSObject {
     @objc public var vastProperties: VastPropertiesWrapper?
     public var skadNetworkInfo: SKAdNetworkInfo?
     @objc public var allowOrientationChange: Bool = false
-    
-    @objc public func useTracking(_ trackerNameWrapped: TrackerNameWrapper) -> Bool {
-        let trackerName = TrackerName(intValue: trackerNameWrapped.rawValue)
-        return adConfiguration.useTracking(trackerName: trackerName)
-    }
     
     @objc public func toDictionary() -> NSMutableDictionary{
         let dictionary: NSMutableDictionary = [:]

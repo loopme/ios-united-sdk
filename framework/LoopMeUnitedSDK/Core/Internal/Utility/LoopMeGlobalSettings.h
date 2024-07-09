@@ -23,7 +23,6 @@ static const NSString *kLoopMeCompany = @"company";
 @property (nonatomic, assign, getter = isDoNotLoadVideoWithoutWiFi) BOOL doNotLoadVideoWithoutWiFi;
 @property (nonatomic, assign, getter = isLiveDebugEnabled) BOOL liveDebugEnabled;
 @property (nonatomic, strong) NSString *appKeyForLiveDebug;
-@property (nonatomic, strong) NSMutableDictionary *adIds;
 @property (nonatomic, strong) NSString *userAgent;
 
 @end
