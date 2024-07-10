@@ -40,8 +40,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 @property (nonatomic, assign) LoopMeAdType adTypes;
 @property (nonatomic, weak) id adUnit;
 
-@property (nonatomic, assign) BOOL swapRequest;
-
 @end
 
 @implementation LoopMeAdManager
@@ -85,7 +83,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     }
     self.loading = NO;
     [self scheduleAdExpirationIn: self.expirationTime];
-    self.swapRequest = NO;
 }
 
 - (instancetype)initWithDelegate: (id<LoopMeAdManagerDelegate>)delegate {
@@ -116,7 +113,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 #pragma mark - Public
 
 - (void)loadURL: (NSURL *)url {
-    self.swapRequest = NO;
     [self.communicator loadWithUrl: url requestBody: nil method: @"GET"];
 }
 
@@ -143,9 +139,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
                                                         integrationType: integrationType
                                                          isInterstitial: isInterstitial
                                                              isRewarded: isRewarded];
-    if ([adSpot isKindOfClass: [LoopMeAdView class]]) {
-        self.swapRequest = YES;
-    }
     rtbTools.banner = [self isAdType: adTypes equalTo: LoopMeAdTypeHTML];
     BOOL isBannerSize = !(size.width >= 320 && size.height >= 320);
     rtbTools.video = [self isAdType: adTypes equalTo: LoopMeAdTypeVideo] && !isBannerSize;
@@ -168,25 +161,10 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didFailWith: (NSError *)error {
     self.loading = NO;
-    if (self.swapRequest) {
-        LoopMeLogDebug(@"Ad failed to load with error: %@", error);
-        if ([self.delegate respondsToSelector: @selector(adManager:didFailToLoadAdWithError:)]) {
-            [self.delegate adManager: self didFailToLoadAdWithError: error];
-        }
-        self.swapRequest = NO;
-        return ;
+    LoopMeLogDebug(@"Ad failed to load with error: %@", error);
+    if ([self.delegate respondsToSelector: @selector(adManager:didFailToLoadAdWithError:)]) {
+        [self.delegate adManager: self didFailToLoadAdWithError: error];
     }
-    self.swapRequest = YES;
-    CGSize swapedSize = CGSizeMake(self.adSpotSize.height, self.adSpotSize.width);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self loadAdWithAppKey: self.appKey
-                     targeting: self.targeting
-               integrationType: self.integrationType
-                    adSpotSize: swapedSize
-                        adSpot: self.adUnit
-              preferredAdTypes: self.adTypes
-                    isRewarded: self.rewarded];
-    });
 }
 
 @end
