@@ -10,8 +10,13 @@
 #define ISLoopmeCustomRewardedVideo_h
 
 #import "IronSource/IronSource.h"
+#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
 
-@interface ISLoopmeCustomRewardedVideo : ISBaseRewardedVideo
+@interface ISLoopmeCustomRewardedVideo : ISBaseRewardedVideo<LoopMeInterstitialDelegate>
+
+@property (nonatomic, strong) LoopMeInterstitial *interstitial;
+@property (nonatomic, strong) id<ISRewardedVideoAdDelegate> delegate;
+@property (nonatomic, assign) BOOL hasRewarded;
 
 @end
 

@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomInterstitial.h"
-#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
-
-@interface ISLoopmeCustomInterstitial()<LoopMeInterstitialDelegate>
-@property (nonatomic, strong) LoopMeInterstitial *interstitial;
-@property (nonatomic, strong) id<ISInterstitialAdDelegate> delegate;
-@end
-
 
 @implementation ISLoopmeCustomInterstitial
 
@@ -39,7 +32,8 @@
                         delegate: (nonnull id<ISInterstitialAdDelegate>)delegate {
    // check if ad can be displayed
    if (![self.interstitial isReady]) {
-      [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal errorMessage: nil];
+      [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
+                                errorMessage: @"LoopMe Interstitial is not ready to display"];
       return;
    }
     [self.interstitial showFromViewController: viewController animated: YES];
@@ -53,9 +47,9 @@
 
 - (void)loopMeInterstitial: (LoopMeInterstitial *)interstitial didFailToLoadAdWithError: (NSError *)error {
     NSLog(@"LoopMe interstitial did fail with error: %@", [error localizedDescription]);
-    [self.delegate adDidFailToLoadWithErrorType: ISAdapterErrorTypeInternal
-                                      errorCode: [error code]
-                                   errorMessage: nil];
+    [self.delegate adDidFailToLoadWithErrorType: ISAdapterErrorTypeNoFill
+                                      errorCode: ISAdapterErrorInternal
+                                   errorMessage: [error localizedDescription]];
 }
 
 - (void)loopMeInterstitialDidAppear: (LoopMeInterstitial *)interstitial {

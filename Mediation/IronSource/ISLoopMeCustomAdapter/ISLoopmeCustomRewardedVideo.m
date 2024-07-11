@@ -8,14 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomRewardedVideo.h"
-#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
-
-@interface ISLoopmeCustomRewardedVideo()<LoopMeInterstitialDelegate>
-@property (nonatomic, strong) LoopMeInterstitial *interstitial;
-@property (nonatomic, strong) id<ISRewardedVideoAdDelegate> delegate;
-@property (nonatomic, assign) BOOL hasRewarded;
-
-@end
 
 @implementation ISLoopmeCustomRewardedVideo
 
@@ -41,7 +33,8 @@
                         delegate: (nonnull id<ISRewardedVideoAdDelegate>)delegate {
     // check if ad can be displayed
     if (![self.interstitial isReady]) {
-       [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal errorMessage: nil];
+       [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
+                                 errorMessage: @"LoopMe Rewarded is not redy to display"];
        return;
     }
      [self.interstitial showFromViewController: viewController animated: YES];
@@ -55,9 +48,9 @@
 
 - (void)loopMeInterstitial: (LoopMeInterstitial *)interstitial didFailToLoadAdWithError: (NSError *)error {
     NSLog(@"LoopMe rewarded video did fail with error: %@", [error localizedDescription]);
-    [self.delegate adDidFailToLoadWithErrorType: ISAdapterErrorTypeInternal
-                                      errorCode: [error code]
-                                   errorMessage: nil];
+    [self.delegate adDidFailToLoadWithErrorType: ISAdapterErrorTypeNoFill
+                                      errorCode: ISAdapterErrorInternal
+                                   errorMessage: [error localizedDescription]];
 }
 
 - (void)loopMeInterstitialDidAppear: (LoopMeInterstitial *)interstitial {

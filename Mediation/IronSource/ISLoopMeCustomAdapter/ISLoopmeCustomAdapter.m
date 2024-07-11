@@ -12,7 +12,7 @@
 
 @implementation ISLoopmeCustomAdapter
 
--(void)init:(ISAdData *)adData delegate:(id<ISNetworkInitializationDelegate>)delegate {
+-(void)init: (ISAdData *)adData delegate: (id<ISNetworkInitializationDelegate>)delegate {
     /// https://developers.is.com/ironsource-mobile/ios/custom-adapter-integration-ios/#step-2
     /// ironSource mediation will call the init method of the base adapter as part of any initialization process in the mediation.
     /// As a result, this method can be called several times.
