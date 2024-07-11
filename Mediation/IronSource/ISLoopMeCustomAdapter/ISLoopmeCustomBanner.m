@@ -8,15 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomBanner.h"
-#import "LoopMeUnitedSDK/LoopMeAdView.h"
-
-@interface ISLoopmeCustomBanner()<LoopMeAdViewDelegate>
-
-@property (nonatomic, strong) LoopMeAdView *banner;
-@property (nonatomic, strong) UIViewController *viewController;
-@property (nonatomic, strong) id<ISBannerAdDelegate> delegate;
-@end
-
 
 @implementation ISLoopmeCustomBanner
 
@@ -43,34 +34,20 @@
     return YES;
 }
 
-- (BOOL)isAdAvailableWithAdData:(nonnull ISAdData *)adData {
-    return [self.banner isReady];
-}
-
-- (void)showAdWithViewController:(nonnull UIViewController *)viewController
-                          adData:(nonnull ISAdData *)adData
-                        delegate:(nonnull id<ISInterstitialAdDelegate>)delegate {
-    // check if ad can be displayed
-    if (![self.banner isReady]) {
-        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal errorMessage: nil];
-        return;
-    }
-    [delegate adDidShowSucceed];
-}
-
-- (void)loopMeAdViewDidLoadAd:(LoopMeAdView *)banner {
+- (void)loopMeAdViewDidLoadAd: (LoopMeAdView *)banner {
     NSLog(@"LoopMe banner did load");
     [self.delegate adDidLoadWithView: self.banner];
 }
 
-- (void)loopMeAdView:(LoopMeAdView *)banner didFailToLoadAdWithError:(NSError *)error {
+- (void)loopMeAdView: (LoopMeAdView *)adView didFailToLoadAdWithError: (NSError *)error {
     NSLog(@"LoopMe banner did fail with error: %@", [error localizedDescription]);
-    [self.delegate adDidFailToLoadWithErrorType: ISAdapterErrorTypeInternal
-                                      errorCode: [error code]
-                                   errorMessage: nil];
+    [self.delegate adDidFailToLoadWithErrorType: ISAdapterErrorTypeNoFill
+                                      errorCode: ISAdapterErrorInternal
+                                   errorMessage: [error localizedDescription]];
+    
 }
 
-- (void)loopMeAdViewDidAppear:(LoopMeAdView *)banner {
+- (void)loopMeAdViewDidAppear: (LoopMeAdView *)banner {
     NSLog(@"LoopMe banner did present");
     [self.delegate adDidOpen];
 }
@@ -85,11 +62,7 @@
     [self.delegate adDidClick];
 }
 
-- (void)loopMeAdViewVideoDidReachEnd:(LoopMeAdView *)banner {
-    NSLog(@"LoopMe banner video did reach end.");
-}
-
-- (void)destroyAdWithAdData:(ISAdData *)adData {
+- (void)destroyAdWithAdData: (ISAdData *)adData {
     [self.delegate adDidDismissScreen];
 }
 
