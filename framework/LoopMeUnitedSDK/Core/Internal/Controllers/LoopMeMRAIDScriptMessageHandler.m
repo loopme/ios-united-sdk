@@ -20,6 +20,10 @@
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([[message name] isEqualToString:@"mraid"]) {
         NSLog(@"MRAID: %@", [message body]);
+        if ([[[message body] objectForKey: @"command"] isEqualToString: @"expand"]) {
+            // TODO: Temporary disabled expand functionality
+            return;
+        }
         [self.mraidClient processCommand:[[message body] objectForKey:@"command"] withParams:[[message body] objectForKey:@"params"]];
     }
 }

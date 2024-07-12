@@ -100,7 +100,6 @@ static NSString *_userAgent;
                 @"id": @1,
                 @"battr": @[@3, @8],
                 @"api": @[@2, @5, @7],
-                @"expdir": @[@5]
             } : [NSNull null],
         }]],
         @"device": [self mutableWithDictionary: @{
