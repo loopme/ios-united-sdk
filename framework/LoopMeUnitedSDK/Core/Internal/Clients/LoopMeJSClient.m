@@ -191,7 +191,7 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
     } else if ([param isKindOfClass: [NSString class]]) {
         param = [NSString stringWithFormat:@"\"%@\"", param];
     }
-    NSString *bridgeSetFormat = @"L.bridge.set(\"%@\",{%@:%@})";
+    NSString *bridgeSetFormat = @"window.L && window.L.bridge && window.L.bridge.set(\"%@\",{%@:%@})";
     [self.webViewClient evaluateJavaScript: [NSString stringWithFormat: bridgeSetFormat, ns, event, param]
                          completionHandler: nil];
 }
