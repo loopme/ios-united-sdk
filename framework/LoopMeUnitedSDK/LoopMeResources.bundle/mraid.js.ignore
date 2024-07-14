@@ -841,3 +841,7 @@
     };
 
 }());
+
+// Some creatives still use window.open instead of mraid.open
+// replace window.open with mraid.open
+window.open = mraid.open;
