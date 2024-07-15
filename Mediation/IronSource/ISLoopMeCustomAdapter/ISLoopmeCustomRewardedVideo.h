@@ -10,7 +10,7 @@
 #define ISLoopmeCustomRewardedVideo_h
 
 #import "IronSource/IronSource.h"
-#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
+#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
 
 @interface ISLoopmeCustomRewardedVideo : ISBaseRewardedVideo<LoopMeInterstitialDelegate>
 
