@@ -10,7 +10,7 @@
 #define ISLoopmeCustomInterstitial_h
 
 #import "IronSource/IronSource.h"
-#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
+#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
 
 @interface ISLoopmeCustomInterstitial : ISBaseInterstitial<LoopMeInterstitialDelegate>
 

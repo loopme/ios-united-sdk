@@ -10,7 +10,7 @@
 #define ISLoopmeCustomBanner_h
 
 #import <IronSource/IronSource.h>
-#import "LoopMeUnitedSDK/LoopMeAdView.h"
+#import <LoopMeUnitedSDK/LoopMeAdView.h>
 
 @interface ISLoopmeCustomBanner : ISBaseBanner<LoopMeAdViewDelegate>
 
