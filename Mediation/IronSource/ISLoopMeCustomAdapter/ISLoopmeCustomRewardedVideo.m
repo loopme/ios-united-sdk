@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomRewardedVideo.h"
+#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
+
+@interface ISLoopmeCustomRewardedVideo()<LoopMeInterstitialDelegate>
+@property (nonatomic, strong) LoopMeInterstitial *interstitial;
+@property (nonatomic, strong) id<ISRewardedVideoAdDelegate> delegate;
+@property (nonatomic, assign) BOOL hasRewarded;
+
+@end
 
 @implementation ISLoopmeCustomRewardedVideo
 

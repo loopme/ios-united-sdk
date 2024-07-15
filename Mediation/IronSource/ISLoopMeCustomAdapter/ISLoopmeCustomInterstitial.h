@@ -10,12 +10,8 @@
 #define ISLoopmeCustomInterstitial_h
 
 #import "IronSource/IronSource.h"
-#import <LoopMeUnitedSDK/LoopMeInterstitial.h>
 
-@interface ISLoopmeCustomInterstitial : ISBaseInterstitial<LoopMeInterstitialDelegate>
-
-@property (nonatomic, strong) LoopMeInterstitial *interstitial;
-@property (nonatomic, strong) id<ISInterstitialAdDelegate> delegate;
+@interface ISLoopmeCustomInterstitial : ISBaseInterstitial
 
 @end
 
