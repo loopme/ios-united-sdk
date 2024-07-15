@@ -11,12 +11,13 @@
 
 #define LOOPME_SDK_VERSION [[NSBundle bundleForClass:LoopMeSDK.class].infoDictionary objectForKey:@"CFBundleShortVersionString"]
 
-#define LOOPME_MOAT_PARTNER_CODE @"loopmeinappvideo302333386816"
-#define kLoopMeIASAnID @"927083"
-
 #define kLoopMeWebViewLoadingTimeout 180
 #define kLoopMeBaseURL @"https://i.loopme.me/"
 #define kLoopMeURLScheme @"loopme"
+#define kErrorInfoAppKey @"app_key"
+#define kErrorInfoClass @"class"
+#define kErrorInfoUrl @"url"
+#define kErrorInfoCreativeType @"creative_type"
 
 #define kLoopMeHTMLBannerSize CGSizeMake(320, 50)
 #define kLoopMeMPUBannerSize CGSizeMake(300, 250)

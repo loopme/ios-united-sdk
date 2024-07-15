@@ -16,8 +16,6 @@
 #define kLoopMeExpandableBannerSize CGSizeMake(320, 50)
 #define kLoopMeMPUBannerSize CGSizeMake(300, 250)
 
-static NSString * const TEST_APP_KEY_MPU = @"test_interstitial_l";
-
 @class LoopMeTargeting;
 
 @protocol LoopMeAdViewDelegate;

@@ -765,16 +765,6 @@
       },
       {
         "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "LoopMeUnitedSDK",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
         "name": "OMSDK_Loopme",
         "printedName": "OMSDK_Loopme",
         "declKind": "Import",
@@ -1166,6 +1156,109 @@
         "name": "OMSDKWrapper",
         "printedName": "OMSDKWrapper",
         "children": [
+          {
+            "kind": "Var",
+            "name": "isReady",
+            "printedName": "isReady",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(cpy)isReady",
+            "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC7isReadySbvpZ",
+            "moduleName": "LoopMeUnitedSDK",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(cm)isReady",
+                "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC7isReadySbvgZ",
+                "moduleName": "LoopMeUnitedSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(cm)setIsReady:",
+                "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC7isReadySbvsZ",
+                "moduleName": "LoopMeUnitedSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15LoopMeUnitedSDK12OMSDKWrapperC7isReadySbvMZ",
+                "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC7isReadySbvMZ",
+                "moduleName": "LoopMeUnitedSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
           {
             "kind": "Function",
             "name": "initOMID",
@@ -2656,6 +2749,289 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "ErrorInfoKey",
+        "printedName": "ErrorInfoKey",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "appKey",
+            "printedName": "appKey",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LoopMeUnitedSDK.ErrorInfoKey.Type) -> LoopMeUnitedSDK.ErrorInfoKey",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ErrorInfoKey",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                    "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ErrorInfoKey",
+                        "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                        "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO03appG0yA2CmF",
+            "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO03appG0yA2CmF",
+            "moduleName": "LoopMeUnitedSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "classKey",
+            "printedName": "classKey",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LoopMeUnitedSDK.ErrorInfoKey.Type) -> LoopMeUnitedSDK.ErrorInfoKey",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ErrorInfoKey",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                    "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ErrorInfoKey",
+                        "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                        "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO05classG0yA2CmF",
+            "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO05classG0yA2CmF",
+            "moduleName": "LoopMeUnitedSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "url",
+            "printedName": "url",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LoopMeUnitedSDK.ErrorInfoKey.Type) -> LoopMeUnitedSDK.ErrorInfoKey",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ErrorInfoKey",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                    "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ErrorInfoKey",
+                        "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                        "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO3urlyA2CmF",
+            "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO3urlyA2CmF",
+            "moduleName": "LoopMeUnitedSDK"
+          },
+          {
+            "kind": "Var",
+            "name": "creativeType",
+            "printedName": "creativeType",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(LoopMeUnitedSDK.ErrorInfoKey.Type) -> LoopMeUnitedSDK.ErrorInfoKey",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ErrorInfoKey",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                    "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ErrorInfoKey",
+                        "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                        "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO12creativeTypeyA2CmF",
+            "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO12creativeTypeyA2CmF",
+            "moduleName": "LoopMeUnitedSDK"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "LoopMeUnitedSDK.ErrorInfoKey?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ErrorInfoKey",
+                    "printedName": "LoopMeUnitedSDK.ErrorInfoKey",
+                    "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO8rawValueACSgSi_tcfc",
+            "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO8rawValueACSgSi_tcfc",
+            "moduleName": "LoopMeUnitedSDK",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO8rawValueSivp",
+            "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO8rawValueSivp",
+            "moduleName": "LoopMeUnitedSDK",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO8rawValueSivg",
+                "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO8rawValueSivg",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:15LoopMeUnitedSDK12ErrorInfoKeyO",
+        "mangledName": "$s15LoopMeUnitedSDK12ErrorInfoKeyO",
+        "moduleName": "LoopMeUnitedSDK",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "LoopMeUnitedSDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
         "name": "VASTEventType",
         "printedName": "VASTEventType",
         "children": [
@@ -3640,6 +4016,16 @@
             "usr": "s:SY",
             "mangledName": "$sSY"
           }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "LoopMeUnitedSDK",
+        "declAttributes": [
+          "RawDocComment"
         ]
       },
       {
@@ -5839,215 +6225,6 @@
       },
       {
         "kind": "TypeDecl",
-        "name": "TrackerNameWrapper",
-        "printedName": "TrackerNameWrapper",
-        "children": [
-          {
-            "kind": "Var",
-            "name": "ias",
-            "printedName": "ias",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(LoopMeUnitedSDK.TrackerNameWrapper.Type) -> LoopMeUnitedSDK.TrackerNameWrapper",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "TrackerNameWrapper",
-                    "printedName": "LoopMeUnitedSDK.TrackerNameWrapper",
-                    "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "LoopMeUnitedSDK.TrackerNameWrapper.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "TrackerNameWrapper",
-                        "printedName": "LoopMeUnitedSDK.TrackerNameWrapper",
-                        "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName@LoopMeTrackerNameIas",
-            "mangledName": "$s15LoopMeUnitedSDK18TrackerNameWrapperO3iasyA2CmF",
-            "moduleName": "LoopMeUnitedSDK",
-            "declAttributes": [
-              "ObjC"
-            ],
-            "fixedbinaryorder": 0
-          },
-          {
-            "kind": "Var",
-            "name": "moat",
-            "printedName": "moat",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(LoopMeUnitedSDK.TrackerNameWrapper.Type) -> LoopMeUnitedSDK.TrackerNameWrapper",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "TrackerNameWrapper",
-                    "printedName": "LoopMeUnitedSDK.TrackerNameWrapper",
-                    "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "LoopMeUnitedSDK.TrackerNameWrapper.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "TrackerNameWrapper",
-                        "printedName": "LoopMeUnitedSDK.TrackerNameWrapper",
-                        "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName@LoopMeTrackerNameMoat",
-            "mangledName": "$s15LoopMeUnitedSDK18TrackerNameWrapperO4moatyA2CmF",
-            "moduleName": "LoopMeUnitedSDK",
-            "declAttributes": [
-              "ObjC"
-            ],
-            "fixedbinaryorder": 1
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(rawValue:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "LoopMeUnitedSDK.TrackerNameWrapper?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "TrackerNameWrapper",
-                    "printedName": "LoopMeUnitedSDK.TrackerNameWrapper",
-                    "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName"
-                  }
-                ],
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Int",
-                "printedName": "Swift.Int",
-                "usr": "s:Si"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "s:15LoopMeUnitedSDK18TrackerNameWrapperO8rawValueACSgSi_tcfc",
-            "mangledName": "$s15LoopMeUnitedSDK18TrackerNameWrapperO8rawValueACSgSi_tcfc",
-            "moduleName": "LoopMeUnitedSDK",
-            "implicit": true,
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Var",
-            "name": "rawValue",
-            "printedName": "rawValue",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Int",
-                "printedName": "Swift.Int",
-                "usr": "s:Si"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:15LoopMeUnitedSDK18TrackerNameWrapperO8rawValueSivp",
-            "mangledName": "$s15LoopMeUnitedSDK18TrackerNameWrapperO8rawValueSivp",
-            "moduleName": "LoopMeUnitedSDK",
-            "implicit": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:15LoopMeUnitedSDK18TrackerNameWrapperO8rawValueSivg",
-                "mangledName": "$s15LoopMeUnitedSDK18TrackerNameWrapperO8rawValueSivg",
-                "moduleName": "LoopMeUnitedSDK",
-                "implicit": true,
-                "accessorKind": "get"
-              }
-            ]
-          }
-        ],
-        "declKind": "Enum",
-        "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName",
-        "mangledName": "$s15LoopMeUnitedSDK18TrackerNameWrapperO",
-        "moduleName": "LoopMeUnitedSDK",
-        "objc_name": "LoopMeTrackerName",
-        "declAttributes": [
-          "AccessControl",
-          "ObjC"
-        ],
-        "enumRawTypeName": "Int",
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "RawRepresentable",
-            "printedName": "RawRepresentable",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "RawValue",
-                "printedName": "RawValue",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:SY",
-            "mangledName": "$sSY"
-          }
-        ]
-      },
-      {
-        "kind": "TypeDecl",
         "name": "AdConfigurationWrapper",
         "printedName": "AdConfigurationWrapper",
         "children": [
@@ -6160,6 +6337,187 @@
                 "declKind": "Accessor",
                 "usr": "s:15LoopMeUnitedSDK22AdConfigurationWrapperC6appKeySSvM",
                 "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC6appKeySSvM",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "isRewarded",
+            "printedName": "isRewarded",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(py)isRewarded",
+            "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC10isRewardedSbvp",
+            "moduleName": "LoopMeUnitedSDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)isRewarded",
+                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC10isRewardedSbvg",
+                "moduleName": "LoopMeUnitedSDK",
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)setIsRewarded:",
+                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC10isRewardedSbvs",
+                "moduleName": "LoopMeUnitedSDK",
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15LoopMeUnitedSDK22AdConfigurationWrapperC10isRewardedSbvM",
+                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC10isRewardedSbvM",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "placement",
+            "printedName": "placement",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(py)placement",
+            "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC9placementSSvp",
+            "moduleName": "LoopMeUnitedSDK",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)placement",
+                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC9placementSSvg",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)setPlacement:",
+                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC9placementSSvs",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15LoopMeUnitedSDK22AdConfigurationWrapperC9placementSSvM",
+                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC9placementSSvM",
                 "moduleName": "LoopMeUnitedSDK",
                 "implicit": true,
                 "accessorKind": "_modify"
@@ -6554,146 +6912,6 @@
                 "declKind": "Accessor",
                 "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)isPortrait",
                 "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC10isPortraitSbvg",
-                "moduleName": "LoopMeUnitedSDK",
-                "declAttributes": [
-                  "ObjC"
-                ],
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "adIdsForMoat",
-            "printedName": "adIdsForMoat",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Dictionary",
-                "printedName": "[Swift.String : Any]",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProtocolComposition",
-                    "printedName": "Any"
-                  }
-                ],
-                "usr": "s:SD"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(py)adIdsForMoat",
-            "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC12adIdsForMoatSDySSypGvp",
-            "moduleName": "LoopMeUnitedSDK",
-            "declAttributes": [
-              "AccessControl",
-              "ObjC"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Dictionary",
-                    "printedName": "[Swift.String : Any]",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      },
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ProtocolComposition",
-                        "printedName": "Any"
-                      }
-                    ],
-                    "usr": "s:SD"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)adIdsForMoat",
-                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC12adIdsForMoatSDySSypGvg",
-                "moduleName": "LoopMeUnitedSDK",
-                "declAttributes": [
-                  "ObjC"
-                ],
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "adIdsForIAS",
-            "printedName": "adIdsForIAS",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Dictionary",
-                "printedName": "[Swift.String : Any]",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ProtocolComposition",
-                    "printedName": "Any"
-                  }
-                ],
-                "usr": "s:SD"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(py)adIdsForIAS",
-            "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC11adIdsForIASSDySSypGvp",
-            "moduleName": "LoopMeUnitedSDK",
-            "declAttributes": [
-              "AccessControl",
-              "ObjC"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Dictionary",
-                    "printedName": "[Swift.String : Any]",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      },
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ProtocolComposition",
-                        "printedName": "Any"
-                      }
-                    ],
-                    "usr": "s:SD"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)adIdsForIAS",
-                "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC11adIdsForIASSDySSypGvg",
                 "moduleName": "LoopMeUnitedSDK",
                 "declAttributes": [
                   "ObjC"
@@ -7681,25 +7899,19 @@
           },
           {
             "kind": "Function",
-            "name": "useTracking",
-            "printedName": "useTracking(_:)",
+            "name": "toDictionary",
+            "printedName": "toDictionary()",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "TrackerNameWrapper",
-                "printedName": "LoopMeUnitedSDK.TrackerNameWrapper",
-                "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeTrackerName"
+                "name": "NSMutableDictionary",
+                "printedName": "Foundation.NSMutableDictionary",
+                "usr": "c:objc(cs)NSMutableDictionary"
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)useTracking:",
-            "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC11useTrackingySbAA011TrackerNameG0OF",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeAdConfiguration(im)toDictionary",
+            "mangledName": "$s15LoopMeUnitedSDK22AdConfigurationWrapperC12toDictionarySo09NSMutableI0CyF",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
               "AccessControl",
@@ -8962,6 +9174,54 @@
         "name": "VastSkipOffsetWrapper",
         "printedName": "VastSkipOffsetWrapper",
         "children": [
+          {
+            "kind": "Function",
+            "name": "initWith30Second",
+            "printedName": "initWith30Second()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "VastSkipOffsetWrapper",
+                "printedName": "LoopMeUnitedSDK.VastSkipOffsetWrapper",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeVastSkipOffset"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeVastSkipOffset(cm)initWith30Second",
+            "mangledName": "$s15LoopMeUnitedSDK21VastSkipOffsetWrapperC16initWith30SecondACyFZ",
+            "moduleName": "LoopMeUnitedSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "initWith5Second",
+            "printedName": "initWith5Second()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "VastSkipOffsetWrapper",
+                "printedName": "LoopMeUnitedSDK.VastSkipOffsetWrapper",
+                "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeVastSkipOffset"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeVastSkipOffset(cm)initWith5Second",
+            "mangledName": "$s15LoopMeUnitedSDK21VastSkipOffsetWrapperC15initWith5SecondACyFZ",
+            "moduleName": "LoopMeUnitedSDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
           {
             "kind": "Var",
             "name": "value",
@@ -12296,13 +12556,6 @@
       "value": "\"LoopMeUnitedSDK.OMIDVideoEventsWrapper\""
     },
     {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/InfoPlistReader.swift",
-      "kind": "StringLiteral",
-      "offset": 198,
-      "length": 8,
-      "value": "\"IAS_ID\""
-    },
-    {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
       "offset": 272,
@@ -12311,22 +12564,29 @@
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
+      "kind": "BooleanLiteral",
+      "offset": 731,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 899,
+      "offset": 949,
       "length": 8,
       "value": "\"Loopme\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 934,
+      "offset": 984,
       "length": 9,
       "value": "\"OMID_JS\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 971,
+      "offset": 1021,
       "length": 42,
       "value": "\"https:\/\/i.loopme.me\/html\/ios\/omsdk-v1.js\""
     },
@@ -12378,6 +12638,69 @@
       "offset": 258,
       "length": 6,
       "value": "\"1---\""
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 224,
+      "length": 8,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 242,
+      "length": 3,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 255,
+      "length": 12,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 224,
+      "length": 8,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 242,
+      "length": 3,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 255,
+      "length": 12,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 224,
+      "length": 8,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 242,
+      "length": 3,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "kind": "IntegerLiteral",
+      "offset": 255,
+      "length": 12,
+      "value": "3"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
@@ -12809,49 +13132,7 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
-      "offset": 2344,
-      "length": 13,
-      "value": "\"placementId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 2373,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 2403,
-      "length": 12,
-      "value": "\"_\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 2414,
-      "length": 1,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 2440,
-      "length": 13,
-      "value": "\"placementId\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 2233,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 7705,
+      "offset": 1990,
       "length": 2,
       "value": "\"\""
     },
@@ -12872,14 +13153,28 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
       "kind": "IntegerLiteral",
-      "offset": 527,
+      "offset": 528,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
       "kind": "IntegerLiteral",
-      "offset": 594,
+      "offset": 596,
+      "length": 2,
+      "value": "30"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
+      "kind": "IntegerLiteral",
+      "offset": 664,
+      "length": 1,
+      "value": "5"
+    },
+    {
+      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
+      "kind": "IntegerLiteral",
+      "offset": 731,
       "length": 3,
       "value": "100"
     },
@@ -12976,113 +13271,92 @@
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 355,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 366,
-      "length": 4,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 355,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 366,
-      "length": 4,
-      "value": "1"
+      "kind": "StringLiteral",
+      "offset": 1198,
+      "length": 9,
+      "value": "\"unknown\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "BooleanLiteral",
-      "offset": 4335,
+      "offset": 4270,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 417,
+      "offset": 319,
       "length": 22,
       "value": "\"LoopMeUnitedSDK.AdConfigurationWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 4631,
+      "offset": 4755,
       "length": 23,
       "value": "\"LoopMeUnitedSDK.VastEventTrackerWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 5383,
+      "offset": 5507,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.ProgressEventWrappper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 5594,
+      "offset": 5718,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.VastPropertiesWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 7397,
+      "offset": 7521,
       "length": 22,
       "value": "\"LoopMeUnitedSDK.AdTrackingLinksWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 8538,
+      "offset": 8662,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.VastSkipOffsetWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 8901,
+      "offset": 9327,
       "length": 17,
       "value": "\"LoopMeUnitedSDK.AssetLinksWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 9457,
+      "offset": 9883,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.AdVerificationWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 9991,
+      "offset": 10417,
       "length": 25,
       "value": "\"LoopMeUnitedSDK.ViewableImpressionWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 10551,
+      "offset": 10977,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.LinearTrackingWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 12109,
+      "offset": 12535,
       "length": 27,
       "value": "\"LoopMeUnitedSDK.ProgressEventTrackerWrapper\""
     },

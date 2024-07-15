@@ -307,11 +307,13 @@ enum LoopMeCreativeType : NSInteger;
 @class NSNumber;
 @class LoopMeMRAIDExpandProperties;
 @class LoopMeVastProperties;
-enum LoopMeTrackerName : NSInteger;
+@class NSMutableDictionary;
 
 SWIFT_CLASS_NAMED("AdConfigurationWrapper")
 @interface LoopMeAdConfiguration : NSObject
 @property (nonatomic, copy) NSString * _Nonnull appKey;
+@property (nonatomic) BOOL isRewarded;
+@property (nonatomic, copy) NSString * _Nonnull placement;
 @property (nonatomic, readonly, copy) NSString * _Nonnull adId;
 @property (nonatomic, readonly) BOOL debug;
 @property (nonatomic, readonly) BOOL preload25;
@@ -319,8 +321,6 @@ SWIFT_CLASS_NAMED("AdConfigurationWrapper")
 @property (nonatomic, readonly) enum LoopMeCreativeType creativeType;
 @property (nonatomic, copy) NSString * _Nonnull creativeContent;
 @property (nonatomic, readonly) BOOL isPortrait;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull adIdsForMoat;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull adIdsForIAS;
 @property (nonatomic, readonly, copy) NSString * _Nullable skadSignature;
 @property (nonatomic, readonly, copy) NSString * _Nullable skadNonce;
 @property (nonatomic, readonly, copy) NSString * _Nullable skadNetwork;
@@ -333,7 +333,7 @@ SWIFT_CLASS_NAMED("AdConfigurationWrapper")
 @property (nonatomic, strong) LoopMeMRAIDExpandProperties * _Nullable expandProperties;
 @property (nonatomic, strong) LoopMeVastProperties * _Nullable vastProperties;
 @property (nonatomic) BOOL allowOrientationChange;
-- (BOOL)useTracking:(enum LoopMeTrackerName)trackerNameWrapped SWIFT_WARN_UNUSED_RESULT;
+- (NSMutableDictionary * _Nonnull)toDictionary SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -468,6 +468,9 @@ SWIFT_CLASS_NAMED("OMIDVideoEventsWrapper")
 
 SWIFT_CLASS_NAMED("OMSDKWrapper")
 @interface LoopMeOMIDWrapper : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL isReady;)
++ (BOOL)isReady SWIFT_WARN_UNUSED_RESULT;
++ (void)setIsReady:(BOOL)value;
 + (BOOL)initOMIDWithCompletionBlock:(void (^ _Nonnull)(BOOL))completionBlock SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
 - (NSString * _Nullable)injectScriptContentIntoHTML:(NSString * _Nonnull)htmlString error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
 - (OMIDLoopmeAdSessionContext * _Nullable)contextForHTML:(WKWebView * _Nonnull)webView error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
@@ -517,11 +520,6 @@ SWIFT_CLASS_NAMED("ServerCommunicator")
 typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeTimeOffsetType, "TimeOffsetType", open) {
   LoopMeTimeOffsetTypePercent = 0,
   LoopMeTimeOffsetTypeSeconds = 1,
-};
-
-typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeTrackerName, "TrackerNameWrapper", open) {
-  LoopMeTrackerNameIas = 0,
-  LoopMeTrackerNameMoat = 1,
 };
 
 
@@ -602,6 +600,8 @@ SWIFT_CLASS_NAMED("VastPropertiesWrapper")
 
 SWIFT_CLASS_NAMED("VastSkipOffsetWrapper")
 @interface LoopMeVastSkipOffset : NSObject
++ (LoopMeVastSkipOffset * _Nonnull)initWith30Second SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
++ (LoopMeVastSkipOffset * _Nonnull)initWith5Second SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
 @property (nonatomic, readonly) double value;
 @property (nonatomic, readonly) enum LoopMeTimeOffsetType type;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;

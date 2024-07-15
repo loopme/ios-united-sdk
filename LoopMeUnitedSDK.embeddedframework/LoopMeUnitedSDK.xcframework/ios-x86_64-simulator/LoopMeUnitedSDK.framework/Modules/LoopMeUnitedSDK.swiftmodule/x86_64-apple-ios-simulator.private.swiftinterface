@@ -41,6 +41,7 @@ public struct LoopMeOMIDVideoEvents {
   @objc deinit
 }
 @_inheritsConvenienceInitializers @objc(LoopMeOMIDWrapper) public class OMSDKWrapper : ObjectiveC.NSObject {
+  @objc public static var isReady: Swift.Bool
   @objc public static func initOMID(completionBlock: @escaping (Swift.Bool) -> Swift.Void) -> Swift.Bool
   @objc public func injectScriptContentIntoHTML(_ htmlString: Swift.String) throws -> Swift.String
   @objc public func contextForHTML(_ webView: WebKit.WKWebView) throws -> OMSDK_Loopme.OMIDLoopmeAdSessionContext
@@ -77,6 +78,17 @@ extension LoopMeUnitedSDK.VastProperties : Foundation.XMLParserDelegate {
   }
   @objc override dynamic public init()
   @objc deinit
+}
+public enum ErrorInfoKey : Swift.Int {
+  case appKey
+  case classKey
+  case url
+  case creativeType
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
 }
 @objc(LoopMeVASTEventType) public enum VASTEventType : Swift.Int {
   case impression
@@ -185,21 +197,17 @@ public struct VastSkipOffset : Swift.Equatable {
     get
   }
 }
-@objc(LoopMeTrackerName) public enum TrackerNameWrapper : Swift.Int {
-  case ias = 0
-  case moat
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
 @objc(LoopMeAdConfiguration) public class AdConfigurationWrapper : ObjectiveC.NSObject {
   public init(adConfiguration: LoopMeUnitedSDK.AdConfiguration)
   @objc public var appKey: Swift.String {
     @objc get
     @objc set
   }
+  @objc public var isRewarded: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var placement: Swift.String
   @objc public var adId: Swift.String {
     @objc get
   }
@@ -221,12 +229,6 @@ public struct VastSkipOffset : Swift.Equatable {
     @objc set
   }
   @objc public var isPortrait: Swift.Bool {
-    @objc get
-  }
-  @objc public var adIdsForMoat: Swift.Dictionary<Swift.String, Any> {
-    @objc get
-  }
-  @objc public var adIdsForIAS: Swift.Dictionary<Swift.String, Any> {
     @objc get
   }
   @objc public var skadSignature: Swift.String? {
@@ -260,7 +262,7 @@ public struct VastSkipOffset : Swift.Equatable {
   @objc public var vastProperties: LoopMeUnitedSDK.VastPropertiesWrapper?
   public var skadNetworkInfo: LoopMeUnitedSDK.SKAdNetworkInfo?
   @objc public var allowOrientationChange: Swift.Bool
-  @objc public func useTracking(_ trackerNameWrapped: LoopMeUnitedSDK.TrackerNameWrapper) -> Swift.Bool
+  @objc public func toDictionary() -> Foundation.NSMutableDictionary
   @objc deinit
 }
 @objc(LoopMeVASTEventTracker) public class VastEventTrackerWrapper : ObjectiveC.NSObject {
@@ -320,6 +322,8 @@ public struct VastSkipOffset : Swift.Equatable {
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(LoopMeVastSkipOffset) public class VastSkipOffsetWrapper : ObjectiveC.NSObject {
+  @objc public static func initWith30Second() -> LoopMeUnitedSDK.VastSkipOffsetWrapper
+  @objc public static func initWith5Second() -> LoopMeUnitedSDK.VastSkipOffsetWrapper
   @objc public var value: Swift.Double {
     @objc get
   }
@@ -449,6 +453,9 @@ public struct AdVerification : Swift.Equatable {
   public var jsResource: Swift.String
   public var verificationParameters: Swift.String
 }
+extension LoopMeUnitedSDK.ErrorInfoKey : Swift.Equatable {}
+extension LoopMeUnitedSDK.ErrorInfoKey : Swift.Hashable {}
+extension LoopMeUnitedSDK.ErrorInfoKey : Swift.RawRepresentable {}
 extension LoopMeUnitedSDK.VASTEventType : Swift.Equatable {}
 extension LoopMeUnitedSDK.VASTEventType : Swift.Hashable {}
 extension LoopMeUnitedSDK.VASTEventType : Swift.RawRepresentable {}
@@ -461,6 +468,3 @@ extension LoopMeUnitedSDK.AdOrientationWrapper : Swift.RawRepresentable {}
 extension LoopMeUnitedSDK.CreativeTypeWrapper : Swift.Equatable {}
 extension LoopMeUnitedSDK.CreativeTypeWrapper : Swift.Hashable {}
 extension LoopMeUnitedSDK.CreativeTypeWrapper : Swift.RawRepresentable {}
-extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.Equatable {}
-extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.Hashable {}
-extension LoopMeUnitedSDK.TrackerNameWrapper : Swift.RawRepresentable {}
