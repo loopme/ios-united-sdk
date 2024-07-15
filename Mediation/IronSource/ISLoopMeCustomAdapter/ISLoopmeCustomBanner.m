@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomBanner.h"
+#import "LoopMeUnitedSDK/LoopMeAdView.h"
+
+@interface ISLoopmeCustomBanner()<LoopMeAdViewDelegate>
+
+@property (nonatomic, strong) LoopMeAdView *banner;
+@property (nonatomic, strong) UIViewController *viewController;
+@property (nonatomic, strong) id<ISBannerAdDelegate> delegate;
+@end
 
 @implementation ISLoopmeCustomBanner
 

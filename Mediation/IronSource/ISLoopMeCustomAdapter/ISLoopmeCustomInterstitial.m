@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "ISLoopmeCustomInterstitial.h"
+#import "LoopMeUnitedSDK/LoopMeInterstitial.h"
+
+@interface ISLoopmeCustomInterstitial()<LoopMeInterstitialDelegate>
+@property (nonatomic, strong) LoopMeInterstitial *interstitial;
+@property (nonatomic, strong) id<ISInterstitialAdDelegate> delegate;
+@end
 
 @implementation ISLoopmeCustomInterstitial
 
