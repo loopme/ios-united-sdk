@@ -64,13 +64,10 @@ public class AdConfigurationWrapper: NSObject {
     var _adOrientation: AdOrientationWrapper = .undefined
     @objc public var adOrientation: AdOrientationWrapper {
         get {
-            switch self.adConfiguration.adOrientation {
-            case .landscape:
-                return .landscape
-            case .portrait:
-                return .portrait
-            case .undefined:
-                return .undefined
+            if let orientation = adConfiguration.vastProperties?.orientation, orientation != .undefined {
+                return orientation
+            } else {
+                return adConfiguration.adOrientation == .portrait ? .portrait : .landscape
             }
         }
         set {
