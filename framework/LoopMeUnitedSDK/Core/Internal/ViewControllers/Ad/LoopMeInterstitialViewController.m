@@ -27,6 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
+    
+    if (self.adOrientation == LoopMeAdOrientationLandscape) {
+          [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationLandscapeLeft) forKey:@"orientation"];
+      } else if (self.adOrientation == LoopMeAdOrientationPortrait) {
+          [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationPortrait) forKey:@"orientation"];
+      }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -44,7 +50,7 @@
 #pragma mark Orientation handling
 
 - (BOOL)shouldAutorotate {
-    return self.allowOrientationChange;
+    return NO;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
@@ -65,18 +71,12 @@
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    UIInterfaceOrientationMask applicationSupportedOrientations =
-    [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:[UIApplication sharedApplication].keyWindow];
-    UIInterfaceOrientationMask interstitialSupportedOrientations = applicationSupportedOrientations;
-    
     if (self.adOrientation == LoopMeAdOrientationPortrait) {
-        interstitialSupportedOrientations |=
-        (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown);
+        return UIInterfaceOrientationMaskPortrait;
     } else if (self.adOrientation == LoopMeAdOrientationLandscape) {
-        interstitialSupportedOrientations |= UIInterfaceOrientationMaskLandscape;
+        return UIInterfaceOrientationMaskLandscape;
     }
-    
-    return interstitialSupportedOrientations;
+    return UIInterfaceOrientationMaskAll; // Fallback, ideally should never hit.
 }
 
 #pragma mark - Public

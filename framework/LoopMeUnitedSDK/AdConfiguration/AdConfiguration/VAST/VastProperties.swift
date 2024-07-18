@@ -12,6 +12,7 @@ public class VastProperties: NSObject {
     public var adId: String?
     public var duration: TimeInterval = 0
     public var skipOffset: VastSkipOffset = .notExist
+    public var orientation: AdOrientationWrapper = .undefined
     public var adTagURI: String?
     var trackingLinks = AdTrackingLinks()
     var assetLinks = AssetLinks()
@@ -259,7 +260,14 @@ extension VastProperties: XMLParserDelegate {
             let delivery = mediaFileNode.props["delivery"]
             let framework = mediaFileNode.props["apiFramework"]
             let type = mediaFileNode.props["type"]
-            let mediaType = mediaFileNode.props["mediaType"]
+            let width = mediaFileNode.props["width"]
+            let height = mediaFileNode.props["height"]
+            if let width = width, let height = height {
+                if let widthInt = Int(width), let heightInt = Int(height) {
+                    self.orientation = widthInt > heightInt ? .landscape : .portrait
+                }
+            }
+           
             if let content = mediaFileNode.content?.trimmingCharacters(in: .whitespacesAndNewlines),
                 content.isValidURL {
                     if delivery == "progressive" && type == "video/mp4" {

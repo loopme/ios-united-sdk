@@ -52,6 +52,8 @@ public struct AdConfiguration {
         case ext
         case adm
         case id
+        case w
+        case h
         case cid
         case crid
     }
@@ -82,7 +84,9 @@ public struct AdConfiguration {
     let cid: String
     let preload25: Bool
     let autoloading: Bool
-    let adOrientation: AdOrientation
+    var adOrientation: AdOrientation
+    let height: Int
+    let width: Int
     let creativeType: CreativeType
     
     var creativeContent: String
@@ -108,6 +112,21 @@ extension AdConfiguration: Decodable {
         
         let id = try bid.decode(String.self, forKey: .id)
         self.id = id
+        self.width = (try? bid.decode(Int.self, forKey: .w)) ?? 0
+        self.height = (try? bid.decode(Int.self, forKey: .h)) ?? 0
+        if width != 0 && height != 0 {
+            self.adOrientation = width > height ? .landscape : .portrait
+        } else {
+            switch UIDevice.current.orientation{
+            case .portrait:
+                self.adOrientation = .portrait
+            case .landscapeLeft, .landscapeRight:
+                self.adOrientation = .landscape
+            default:
+                self.adOrientation = .landscape
+            }
+        }
+
         self.creativeContent = try bid.decode(String.self, forKey: .adm)
         self.cid = (try? bid.decode(String.self, forKey: .cid)) ?? ""
         self.crid = (try? bid.decode(String.self, forKey: .crid)) ?? ""
@@ -134,7 +153,6 @@ extension AdConfiguration: Decodable {
             } else {
                 self.preload25 = false
             }
-            self.adOrientation = (try? ext.decode(AdOrientation.self, forKey: .orientation)) ?? .landscape
             
             if let creativeType = try? ext.decode(CreativeType.self, forKey: .crtype) {
                 self.creativeType = creativeType
@@ -155,15 +173,6 @@ extension AdConfiguration: Decodable {
             self.skAdNetworkInfo = nil
             self.debug = false
             self.preload25 = false
-            
-            switch UIDevice.current.orientation{
-            case .portrait:
-                self.adOrientation = .portrait
-            case .landscapeLeft, .landscapeRight:
-                self.adOrientation = .landscape
-            default:
-                self.adOrientation = .landscape
-            }
             
             let searchString = "<VAST"
             let isVast = self.creativeContent.range(of: searchString, options: .caseInsensitive) != nil
