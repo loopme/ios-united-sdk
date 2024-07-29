@@ -44,6 +44,7 @@
 		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "IronSourceDemoApp/Supporting Files/main.m"; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1C2867C85F9FE06F2E0779C /* Pods_IronSourceDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B973C3EC2C57791500770370 /* LatencyManagerSwizz.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LatencyManagerSwizz.h; sourceTree = "<group>"; };
 		B9EAE2032B4C367F00092C8B /* LoopMeUnitedSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LoopMeUnitedSDK.xcframework; path = Pods/LoopMeUnitedSDK/LoopMeUnitedSDK.embeddedframework/LoopMeUnitedSDK.xcframework; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* IronSourceDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IronSourceDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -110,6 +111,7 @@
 				72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */,
 				72E0D6491E267513009ABC1B /* Main.storyboard */,
 				72E0D6611E267AFB009ABC1B /* Info.plist */,
+				B973C3EC2C57791500770370 /* LatencyManagerSwizz.h */,
 			);
 			path = IronSourceDemoApp;
 			sourceTree = "<group>";
