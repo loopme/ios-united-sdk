@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3yv-kz-mR7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8L-OH-EWN">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="3eY-Fa-svE">
             <objects>
-                <viewController id="3yv-kz-mR7" customClass="ViewController" customModule="Applovin_mediation_sample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3yv-kz-mR7" customClass="ViewController" customModule="AppLovinDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OAS-Th-6a0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,6 +46,24 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohQ-Tc-yjA">
+                                <rect key="frame" x="125" y="751" width="143" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Check latancy">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="eu2-JK-OW6" kind="show" id="sg9-sH-8gE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7jM-rH-Cct"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -53,15 +72,16 @@
                             <constraint firstItem="o6M-NE-yB0" firstAttribute="centerY" secondItem="OAS-Th-6a0" secondAttribute="centerY" id="dyk-rJ-BiB"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="HPu-od-bj3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tcq-yW-C4g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-76" y="-152"/>
+            <point key="canvasLocation" x="849.61832061068696" y="-152.11267605633805"/>
         </scene>
         <!--Rewarded Video View Controller-->
         <scene sceneID="rnW-Th-qkG">
             <objects>
-                <viewController id="eOR-ch-e3I" customClass="RewardedVideoViewController" customModule="Applovin_mediation_sample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eOR-ch-e3I" customClass="RewardedVideoViewController" customModule="AppLovinDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3KT-SZ-Tuh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,12 +121,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdl-ck-2ge" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-50" y="653"/>
+            <point key="canvasLocation" x="1749" y="584"/>
         </scene>
         <!--Interstitial View Controller-->
         <scene sceneID="7Vr-T8-r2F">
             <objects>
-                <viewController id="vPZ-MC-jjc" customClass="InterstitialViewController" customModule="Applovin_mediation_sample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vPZ-MC-jjc" customClass="InterstitialViewController" customModule="AppLovinDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oLZ-QS-kZG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,12 +166,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNW-OS-8IO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="-225"/>
+            <point key="canvasLocation" x="1785" y="-811"/>
         </scene>
         <!--Banner View Controller-->
         <scene sceneID="Rn6-1O-Thn">
             <objects>
-                <viewController id="sku-4a-jJp" customClass="BannerViewController" customModule="Applovin_mediation_sample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sku-4a-jJp" customClass="BannerViewController" customModule="AppLovinDemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yya-3v-E8x">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -162,18 +182,178 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uFH-qS-z5z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="423"/>
+            <point key="canvasLocation" x="1749" y="-152"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HU0-0h-GQP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="X8L-OH-EWN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZCh-eq-5P9">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3yv-kz-mR7" kind="relationship" relationship="rootViewController" id="uKJ-Kk-qGR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yl2-sS-Agq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-77.099236641221367" y="-152.11267605633805"/>
+        </scene>
+        <!--Latency Checker View Controller-->
+        <scene sceneID="IaI-dk-TfF">
+            <objects>
+                <viewController id="eu2-JK-OW6" customClass="LatencyCheckerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xgJ-Pd-dLR">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="lYU-Dp-HaJ">
+                                <rect key="frame" x="50" y="368.66666666666669" width="293" height="115"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYS-FL-GMu">
+                                        <rect key="frame" x="0.0" y="0.0" width="293" height="34.333333333333336"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Check Rewarded">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkRewarded:" destination="KEH-6T-ulb" eventType="touchUpInside" id="heg-yE-9nO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQc-6c-SoD">
+                                        <rect key="frame" x="0.0" y="40.333333333333314" width="293" height="34.333333333333343"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Check Interstitial">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkInterstitial:" destination="KEH-6T-ulb" eventType="touchUpInside" id="7Iv-Bm-QO4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fz-F5-Zvi">
+                                        <rect key="frame" x="0.0" y="80.666666666666629" width="293" height="34.333333333333343"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Check Banner">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkBanner:" destination="KEH-6T-ulb" eventType="touchUpInside" id="c7R-at-LN4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wzX-7O-h2j"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lYU-Dp-HaJ" firstAttribute="centerY" secondItem="xgJ-Pd-dLR" secondAttribute="centerY" id="0ij-3I-m14"/>
+                            <constraint firstItem="lYU-Dp-HaJ" firstAttribute="leading" secondItem="wzX-7O-h2j" secondAttribute="leading" constant="50" id="1po-e3-lM1"/>
+                            <constraint firstItem="wzX-7O-h2j" firstAttribute="trailing" secondItem="lYU-Dp-HaJ" secondAttribute="trailing" constant="50" id="ZIg-H2-gdL"/>
+                            <constraint firstItem="lYU-Dp-HaJ" firstAttribute="centerX" secondItem="xgJ-Pd-dLR" secondAttribute="centerX" id="au4-c4-N1k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="KJv-v1-5Oz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KEH-6T-ulb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="584"/>
+        </scene>
+        <!--Letancy Report View Controller-->
+        <scene sceneID="Sod-5f-WrI">
+            <objects>
+                <viewController storyboardIdentifier="LetancyReportViewController" id="tb5-Gg-fP5" customClass="LetancyReportViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ayD-Ux-peB"/>
+                        <viewControllerLayoutGuide type="bottom" id="baU-zC-UFw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VcG-dn-MLa">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7p-ae-WRL">
+                                <rect key="frame" x="66" y="733.66666666666663" width="261" height="34.333333333333371"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Export .csv report">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="exportCSVReport:" destination="tb5-Gg-fP5" eventType="touchUpInside" id="UbU-yw-fas"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="w0Q-xE-SNb">
+                                <rect key="frame" x="46" y="109" width="301" height="574.66666666666663"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xEN-cn-WMe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="s7p-ae-WRL" secondAttribute="trailing" constant="50" id="3pW-NY-RW4"/>
+                            <constraint firstItem="baU-zC-UFw" firstAttribute="top" secondItem="s7p-ae-WRL" secondAttribute="bottom" constant="50" id="MM3-Hj-a3p"/>
+                            <constraint firstItem="s7p-ae-WRL" firstAttribute="leading" secondItem="VcG-dn-MLa" secondAttribute="leadingMargin" constant="50" id="iR3-To-SKX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="w0Q-xE-SNb" secondAttribute="trailing" constant="30" id="m3v-n9-Sx5"/>
+                            <constraint firstItem="w0Q-xE-SNb" firstAttribute="centerX" secondItem="VcG-dn-MLa" secondAttribute="centerX" id="qAM-po-PG5"/>
+                            <constraint firstItem="s7p-ae-WRL" firstAttribute="top" secondItem="w0Q-xE-SNb" secondAttribute="bottom" constant="50" id="wCA-2c-DCw"/>
+                            <constraint firstItem="w0Q-xE-SNb" firstAttribute="top" secondItem="ayD-Ux-peB" secondAttribute="bottom" constant="50" id="wLc-Dw-qPf"/>
+                            <constraint firstItem="w0Q-xE-SNb" firstAttribute="leading" secondItem="VcG-dn-MLa" secondAttribute="leadingMargin" constant="30" id="xQ8-4k-5aj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="latencyText" destination="w0Q-xE-SNb" id="jqs-4q-ujL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9sh-zl-LiL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="103" y="584"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

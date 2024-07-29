@@ -16,6 +16,7 @@
 		2278ADE32BE20499009BE07A /* InterstitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278ADE02BE20499009BE07A /* InterstitialViewController.swift */; };
 		2278ADE42BE20499009BE07A /* RewardedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278ADE12BE20499009BE07A /* RewardedVideo.swift */; };
 		2278ADE52BE20499009BE07A /* BannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2278ADE22BE20499009BE07A /* BannerViewController.swift */; };
+		B973C3E92C53C51900770370 /* LegacyManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B973C3E82C53C51900770370 /* LegacyManger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		2278ADE02BE20499009BE07A /* InterstitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialViewController.swift; sourceTree = "<group>"; };
 		2278ADE12BE20499009BE07A /* RewardedVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardedVideo.swift; sourceTree = "<group>"; };
 		2278ADE22BE20499009BE07A /* BannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerViewController.swift; sourceTree = "<group>"; };
+		B973C3DE2C5295DE00770370 /* LatencyManagerSwizz.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LatencyManagerSwizz.h; path = ../../../LatencyManagerSwizz.h; sourceTree = "<group>"; };
+		B973C3E82C53C51900770370 /* LegacyManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LegacyManger.swift; path = ../../../LegacyManger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				220658B42BE1FED4004B0BF0 /* Main.storyboard */,
 				220658B72BE1FED5004B0BF0 /* Assets.xcassets */,
 				220658B92BE1FED5004B0BF0 /* LaunchScreen.storyboard */,
+				B973C3DE2C5295DE00770370 /* LatencyManagerSwizz.h */,
+				B973C3E82C53C51900770370 /* LegacyManger.swift */,
 				220658BC2BE1FED5004B0BF0 /* Info.plist */,
 			);
 			path = AppLovin;
@@ -156,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2278ADE52BE20499009BE07A /* BannerViewController.swift in Sources */,
+				B973C3E92C53C51900770370 /* LegacyManger.swift in Sources */,
 				2278ADE42BE20499009BE07A /* RewardedVideo.swift in Sources */,
 				2278ADE32BE20499009BE07A /* InterstitialViewController.swift in Sources */,
 				220658B32BE1FED4004B0BF0 /* ViewController.swift in Sources */,
