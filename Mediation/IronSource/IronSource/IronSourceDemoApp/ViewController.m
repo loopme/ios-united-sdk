@@ -8,6 +8,7 @@
 #import "ViewController.h"
 #import <IronSource/IronSource.h>
 #import "LoopMeUnitedSDK/LoopMeSDK.h"
+#import "LatencyManagerSwizz.h"
 
 #define USERID @"demoapp"
 #define APPKEY @"1c524597d"

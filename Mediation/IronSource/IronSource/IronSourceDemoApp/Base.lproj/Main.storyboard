@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fKC-aV-ArK">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupersonicLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl">
-                                <rect key="frame" x="0.0" y="28" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="AIm-zw-dN4"/>
                                     <constraint firstAttribute="width" constant="375" id="sDb-5O-aWJ"/>
@@ -124,15 +125,36 @@
                                     <constraint firstItem="MGG-Gd-maA" firstAttribute="leading" secondItem="D4m-DK-IlX" secondAttribute="leading" constant="85" id="G5O-ah-Wpl"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amr-NU-HcD">
+                                <rect key="frame" x="116" y="582.5" width="143" height="34.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Check latancy">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="bnC-md-XCz" kind="show" id="9Ox-pn-DRp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Dtn-jb-wLu"/>
                             <constraint firstItem="D4m-DK-IlX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LwJ-sp-UHh"/>
+                            <constraint firstItem="Amr-NU-HcD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="100" id="Rbt-U1-gUe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Amr-NU-HcD" secondAttribute="trailing" constant="100" id="eZt-Bf-Tt5"/>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fjI-hK-kEr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Amr-NU-HcD" secondAttribute="bottom" constant="50" id="iye-lY-9mj"/>
                             <constraint firstItem="D4m-DK-IlX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-100" id="rXB-nv-KVX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="bul-kQ-rvb"/>
                     <connections>
                         <outlet property="destroyBannerButton" destination="FiW-JM-7fb" id="c6A-9F-f3s"/>
                         <outlet property="loadBannerButton" destination="2yk-3B-2Xq" id="SIE-ew-0Bk"/>
@@ -144,6 +166,165 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1437.5999999999999" y="313.49325337331339"/>
+        </scene>
+        <!--Letancy View Controller Checker-->
+        <scene sceneID="IbK-Ax-3FD">
+            <objects>
+                <viewController id="bnC-md-XCz" customClass="LetancyViewControllerChecker" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xYP-f4-fcw"/>
+                        <viewControllerLayoutGuide type="bottom" id="9cX-tp-ZGb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mZQ-nh-L2e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Wqm-Hr-c4o">
+                                <rect key="frame" x="66" y="276" width="243" height="115.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWy-0B-rc3">
+                                        <rect key="frame" x="0.0" y="0.0" width="243" height="34.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Check Rewarded">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkRewarded:" destination="bnC-md-XCz" eventType="touchUpInside" id="67b-Px-NNI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ky6-G7-zWG">
+                                        <rect key="frame" x="0.0" y="40.5" width="243" height="34.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Check Interstitial">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkInterstitial:" destination="bnC-md-XCz" eventType="touchUpInside" id="YQA-gV-Qd1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5jy-MZ-fQt">
+                                        <rect key="frame" x="0.0" y="81" width="243" height="34.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Check Banner">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkBanner:" destination="bnC-md-XCz" eventType="touchUpInside" id="EMT-PY-Pzn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wqm-Hr-c4o" secondAttribute="trailing" constant="50" id="3lb-XO-4ec"/>
+                            <constraint firstItem="Wqm-Hr-c4o" firstAttribute="leading" secondItem="mZQ-nh-L2e" secondAttribute="leadingMargin" constant="50" id="FKE-7K-vEd"/>
+                            <constraint firstItem="Wqm-Hr-c4o" firstAttribute="centerX" secondItem="mZQ-nh-L2e" secondAttribute="centerX" id="JWR-2S-NLY"/>
+                            <constraint firstItem="Wqm-Hr-c4o" firstAttribute="centerY" secondItem="mZQ-nh-L2e" secondAttribute="centerY" id="Wf9-h9-5t3"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="375-HA-HzQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Om2-8j-Mqt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2156" y="312.59370314842579"/>
+        </scene>
+        <!--Letancy Report View Controller-->
+        <scene sceneID="afl-sf-aHR">
+            <objects>
+                <viewController storyboardIdentifier="LetancyReportViewController" id="vIs-sW-XfH" customClass="LetancyReportViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tu2-qt-025"/>
+                        <viewControllerLayoutGuide type="bottom" id="bZv-BT-cbc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i1X-nC-Eyg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zQ-2d-1Ll">
+                                <rect key="frame" x="66" y="582.5" width="243" height="34.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Export .csv report">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="exportCSVReport:" destination="vIs-sW-XfH" eventType="touchUpInside" id="x44-mz-T1F"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fnd-fZ-4bP">
+                                <rect key="frame" x="46" y="70" width="283" height="462.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0zQ-2d-1Ll" firstAttribute="leading" secondItem="i1X-nC-Eyg" secondAttribute="leadingMargin" constant="50" id="1qM-oh-gNs"/>
+                            <constraint firstItem="Fnd-fZ-4bP" firstAttribute="top" secondItem="tu2-qt-025" secondAttribute="bottom" constant="50" id="G0T-7P-xDT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0zQ-2d-1Ll" secondAttribute="trailing" constant="50" id="HUL-2y-OUl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fnd-fZ-4bP" secondAttribute="trailing" constant="30" id="REv-3A-2rM"/>
+                            <constraint firstItem="Fnd-fZ-4bP" firstAttribute="centerX" secondItem="i1X-nC-Eyg" secondAttribute="centerX" id="W2B-Qf-w3K"/>
+                            <constraint firstItem="bZv-BT-cbc" firstAttribute="top" secondItem="0zQ-2d-1Ll" secondAttribute="bottom" constant="50" id="byx-Lq-T4C"/>
+                            <constraint firstItem="0zQ-2d-1Ll" firstAttribute="top" secondItem="Fnd-fZ-4bP" secondAttribute="bottom" constant="50" id="hNv-9X-EUG"/>
+                            <constraint firstItem="Fnd-fZ-4bP" firstAttribute="leading" secondItem="i1X-nC-Eyg" secondAttribute="leadingMargin" constant="30" id="yLw-FY-b8I"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="latencyText" destination="Fnd-fZ-4bP" id="G6k-RZ-9jX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FNb-qo-SnM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2852" y="312.59370314842579"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hWu-hl-nej">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fKC-aV-ArK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fjr-T3-yIx">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QGS-HT-jfB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XPp-nd-SeU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="498.39999999999998" y="313.49325337331339"/>
         </scene>
     </scenes>
@@ -151,6 +332,12 @@
         <image name="SupersonicLogo" width="205" height="43.5"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
