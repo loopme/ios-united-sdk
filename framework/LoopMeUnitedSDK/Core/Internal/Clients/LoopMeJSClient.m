@@ -26,7 +26,6 @@ const struct LoopMeJSCommandsStruct LoopMeJSCommands = {
     .pause = @"pause",
     .mute = @"mute",
     .load = @"load",
-    .vibrate = @"vibrate",
     .enableStretching = @"enableStretching",
     .disableStretching = @"disableStretching",
     .fullscreenMode = @"fullscreenMode"
@@ -136,9 +135,6 @@ const struct LoopMeWebViewStateStruct LoopMeWebViewState = {
         },
         LoopMeJSCommands.close: ^{
             [self.delegate JSClientDidReceiveCloseCommand: self];
-        },
-        LoopMeJSCommands.vibrate: ^{
-            [self.delegate JSClientDidReceiveVibrateCommand: self];
         },
         LoopMeJSCommands.fullscreenMode: ^{
             [self.delegate JSClientDidReceiveFulLScreenCommand: self fullScreen: [params[@"mode"] boolValue]];

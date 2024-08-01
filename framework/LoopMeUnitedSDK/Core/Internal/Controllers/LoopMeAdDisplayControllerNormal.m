@@ -583,10 +583,6 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     }
 }
 
-- (void)JSClientDidReceiveVibrateCommand:(LoopMeJSClient *)client {
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-}
-
 - (void)JSClientDidReceiveFulLScreenCommand:(LoopMeJSClient *)client fullScreen:(BOOL)expand {
     if (self.isFirstCallToExpand) {
         expand = NO;
