@@ -40,7 +40,6 @@ extern const struct LoopMeJSCommandsStruct {
     __unsafe_unretained NSString *pause;
     __unsafe_unretained NSString *mute;
     __unsafe_unretained NSString *load;
-    __unsafe_unretained NSString *vibrate;
     __unsafe_unretained NSString *enableStretching;
     __unsafe_unretained NSString *disableStretching;
     __unsafe_unretained NSString *fullscreenMode;
@@ -66,7 +65,6 @@ extern const struct LoopMeJSCommandsStruct {
 - (void)JSClientDidReceiveSuccessCommand:(LoopMeJSClient *)client;
 - (void)JSClientDidReceiveFailCommand:(LoopMeJSClient *)client;
 - (void)JSClientDidReceiveCloseCommand:(LoopMeJSClient *)client;
-- (void)JSClientDidReceiveVibrateCommand:(LoopMeJSClient *)client;
 - (void)JSClientDidReceiveFulLScreenCommand:(LoopMeJSClient *)client fullScreen:(BOOL)expand;
 - (UIViewController *)viewControllerForPresentation;
 
