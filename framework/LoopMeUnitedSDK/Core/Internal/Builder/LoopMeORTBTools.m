@@ -128,6 +128,7 @@ static NSString *_userAgent;
                 @"atts": [LoopMeIdentityProvider customAuthorizationStatus],
                 @"plugin": [self batterryState],
                 @"chargelevel": [self batteryChargeLevel],
+                @"batterysaver": [LoopMeIdentityProvider isLowPowerModeEnabled],
                 @"orientation": UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ? @"p" : @"l",
                 @"timezone": [self timezone],
                 @"ifa": canSetIfa ? [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier] : [NSNull null],
