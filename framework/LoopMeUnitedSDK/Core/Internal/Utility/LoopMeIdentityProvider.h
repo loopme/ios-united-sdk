@@ -19,4 +19,5 @@
 + (NSString *) deviceOS;
 + (NSString *)deviceManufacturer;
 + (NSString *)deviceAppleModel;
++ (NSInteger)batteryLevel;
 @end
