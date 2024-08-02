@@ -121,4 +121,38 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
     }
 }
 
++ (NSInteger)batteryLevel {
+    // Enable battery monitoring
+    UIDevice *device = [UIDevice currentDevice];
+    device.batteryMonitoringEnabled = YES;
+    
+    // Get the battery level (values are between 0.0 and 1.0)
+    float batteryLevel = device.batteryLevel;
+    
+    // Disable battery monitoring (optional, to avoid unnecessary monitoring)
+    device.batteryMonitoringEnabled = NO;
+    
+    // Convert battery level to percentage
+    NSInteger batteryPercentage = (NSInteger)(batteryLevel * 100);
+    
+    // Determine the battery level category based on the ranges provided
+    if (batteryPercentage < 5) {
+        return 1;
+    } else if (batteryPercentage >= 5 && batteryPercentage <= 9) {
+        return 2;
+    } else if (batteryPercentage >= 10 && batteryPercentage <= 21) {
+        return 3;
+    } else if (batteryPercentage >= 25 && batteryPercentage <= 39) {
+        return 4;
+    } else if (batteryPercentage >= 40 && batteryPercentage <= 54) {
+        return 5;
+    } else if (batteryPercentage >= 55 && batteryPercentage <= 69) {
+        return 6;
+    } else if (batteryPercentage >= 70 && batteryPercentage <= 84) {
+        return 7;
+    } else {
+        return 8;
+    }
+}
+
 @end
