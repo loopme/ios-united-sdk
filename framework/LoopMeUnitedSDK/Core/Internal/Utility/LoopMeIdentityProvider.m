@@ -123,13 +123,9 @@ typedef NS_ENUM(NSInteger, CustomAuthorizationStatus) {
 
 + (NSNumber *)isLowPowerModeEnabled {
     // Use NSProcessInfo to check if Low Power Mode is enabled
-    NSProcessInfo *processInfo = [NSProcessInfo processInfo];
-    BOOL lowPowerModeEnabled = processInfo.isLowPowerModeEnabled;
-    if (lowPowerModeEnabled) {
-        return @1;
-    }
-    return @0;
+    return [NSProcessInfo processInfo].isLowPowerModeEnabled ? @1 : @0;
 }
+
 + (NSInteger)batteryLevel {
     // Enable battery monitoring
     UIDevice *device = [UIDevice currentDevice];
