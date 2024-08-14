@@ -126,10 +126,10 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amr-NU-HcD">
-                                <rect key="frame" x="116" y="582.5" width="143" height="34.5"/>
+                                <rect key="frame" x="116" y="379" width="143" height="34.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Check latancy">
+                                <buttonConfiguration key="configuration" style="plain" title="Check latency">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
@@ -150,8 +150,8 @@
                             <constraint firstItem="Amr-NU-HcD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="100" id="Rbt-U1-gUe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Amr-NU-HcD" secondAttribute="trailing" constant="100" id="eZt-Bf-Tt5"/>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fjI-hK-kEr"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Amr-NU-HcD" secondAttribute="bottom" constant="50" id="iye-lY-9mj"/>
                             <constraint firstItem="D4m-DK-IlX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-100" id="rXB-nv-KVX"/>
+                            <constraint firstItem="Amr-NU-HcD" firstAttribute="top" secondItem="D4m-DK-IlX" secondAttribute="bottom" constant="50" id="t5c-tX-YQc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bul-kQ-rvb"/>

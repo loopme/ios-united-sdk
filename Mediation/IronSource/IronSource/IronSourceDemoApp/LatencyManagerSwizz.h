@@ -13,8 +13,6 @@
 #import "ISLoopmeCustomBanner.h"
 #import "ISLoopmeCustomInterstitial.h"
 #import "ISLoopmeCustomRewardedVideo.h"
-#import <LoopMeUnitedSDK/LoopMeAdDisplayControllerNormal.h>
-
 
 
 //MARK: - IronSource
@@ -135,7 +133,7 @@
     [[LegacyManger shared] logEventForCall:nil withText:@"Load (SDK)" adType: nil];
 }
 
-- (void)swizzle_adDisplayControllerDidFinishLoadingAd: (LoopMeAdDisplayControllerNormal *)adDisplayController {
+- (void)swizzle_adDisplayControllerDidFinishLoadingAd: (va_list)adDisplayController {
     [self swizzle_adDisplayControllerDidFinishLoadingAd: adDisplayController];
     [[LegacyManger shared] logEventForCall:nil withText:@"Did Load (SDK)" adType: nil];
 }
