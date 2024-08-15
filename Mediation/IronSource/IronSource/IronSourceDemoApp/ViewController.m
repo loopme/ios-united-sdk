@@ -8,7 +8,6 @@
 #import "ViewController.h"
 #import <IronSource/IronSource.h>
 #import "LoopMeUnitedSDK/LoopMeSDK.h"
-#import "LatencyManagerSwizz.h"
 
 #define USERID @"demoapp"
 #define APPKEY @"1c524597d"
@@ -20,6 +19,7 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.showAlertVC = YES;
     
@@ -31,10 +31,6 @@
     // we will not be able to communicate with you.
     // We're passing 'self' to our delegates because we want
     // to be able to enable/disable buttons to match ad availability.
-    
-    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
-    [IronSource setLevelPlayInterstitialDelegate: self];
-    [IronSource setLevelPlayBannerDelegate: self];
 
     NSString *userId = [IronSource advertiserId];
     if([userId length] == 0) {
@@ -47,6 +43,7 @@
     [IronSource initWithAppKey: APPKEY];
     [self.view addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(hideKeyboard:)]];
 }
+
 
 - (void)keyboardWillShow: (NSNotification *)notification {
     [UIView animateWithDuration: 0.3 animations: ^{
@@ -67,6 +64,11 @@
 
 - (void)viewWillAppear: (BOOL)animated {
     [super viewWillAppear: animated];
+
+    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
+    [IronSource setLevelPlayInterstitialDelegate: self];
+    [IronSource setLevelPlayBannerDelegate: self];
+
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(keyboardWillShow:)
                                                  name: UIKeyboardWillShowNotification

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <IronSourceDemoApp-Swift.h>
 #import "LetancyReportViewController.h"
+#import "LatencyManagerSwizz.h"
 
 
 @implementation LetancyReportViewController
