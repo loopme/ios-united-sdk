@@ -55,9 +55,9 @@
     
 }
 
-- (void)loopMeAdViewDidAppear: (LoopMeAdView *)banner {
+- (void)loopMeAdViewWillAppear: (LoopMeAdView *)banner {
     NSLog(@"LoopMe banner did present");
-    [self.delegate adDidOpen];
+    [self.delegate adWillPresentScreen];
 }
 
 - (void)loopMeAdViewDidDisappear:(LoopMeAdView *)banner {

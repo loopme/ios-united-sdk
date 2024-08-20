@@ -543,6 +543,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 }
 
 - (void)displayAd {
+    [self.delegate loopMeAdViewWillAppear:self];
     if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
         [self.adDisplayController displayAd];
     } else {
