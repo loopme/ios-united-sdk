@@ -218,6 +218,12 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 - (void)loopMeAdViewDidReceiveTap:(LoopMeAdView *)adView;
 
 /**
+ * Triggered when adView is will appear on screen.
+ * @param adView - sender
+ */
+- (void)loopMeAdViewDidAppear:(LoopMeAdView *)adView;
+
+/**
  * Triggered when your application is about to go to the background, initiated by the SDK.
  * This may happen in various ways, f.e if user wants open the SDK's browser web page in native browser or clicks on `mailto:` links...
  * @param adView - sender
