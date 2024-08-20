@@ -221,7 +221,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
  * Triggered when adView is will appear on screen.
  * @param adView - sender
  */
-- (void)loopMeAdViewWillAppear:(LoopMeAdView *)adView;
+- (void)loopMeAdViewDidAppear:(LoopMeAdView *)adView;
 
 /**
  * Triggered when your application is about to go to the background, initiated by the SDK.
