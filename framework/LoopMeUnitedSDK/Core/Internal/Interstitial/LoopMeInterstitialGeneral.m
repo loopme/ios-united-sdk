@@ -128,18 +128,18 @@ const NSInteger kLoopMeRequestTimeout = 180;
          [self.adInterstitialViewController.presentingViewController dismissViewControllerAnimated: NO completion: nil];
     }
     
-    [_adManager invalidateTimers];
-    [_adDisplayController stopHandlingRequests];
-    [_adDisplayControllerVPAID stopHandlingRequests];
+     [_adManager invalidateTimers];
+     [_adDisplayController stopHandlingRequests];
+     [_adDisplayControllerVPAID stopHandlingRequests];
     
-    _adDisplayController.delegate = nil;
-    _adDisplayControllerVPAID.delegate = nil;
-    _adManager = nil;
-    _adDisplayController = nil;
-    _adDisplayControllerVPAID = nil;
-    _adInterstitialViewController = nil;
-    [self invalidateTimer];
-    [self unRegisterObserver];
+     _adDisplayController.delegate = nil;
+     _adDisplayControllerVPAID.delegate = nil;
+     _adManager = nil;
+     _adDisplayController = nil;
+     _adDisplayControllerVPAID = nil;
+     _adInterstitialViewController = nil;
+     [self invalidateTimer];
+     [self unRegisterObserver];
 }
 
 - (void)willResignActive: (NSNotification *)n {
