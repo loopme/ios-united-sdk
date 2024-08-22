@@ -22,6 +22,7 @@
         case LoopMeEventErrorTypeBadAsset: return @"bad_asset";
         case LoopMeEventErrorTypeServer: return @"server";
         case LoopMeEventErrorTypeCustom: return @"custom";
+        case LoopMeEventErrorTypeLog: return @"log";
     }
     return @"unknown";
 }

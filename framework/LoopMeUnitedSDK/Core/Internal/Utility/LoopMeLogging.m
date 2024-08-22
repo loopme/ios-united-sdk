@@ -168,7 +168,7 @@ static dispatch_once_t onceToken;
 }
 
 - (void)startSendingTask {
-    [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeLog errorMessage:[self logs] info:@{ kErrorInfoAppKey : [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug }];
+    [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeLog errorMessage:@"" info:@{ kErrorInfoAppKey : [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug, @"debug_logs": [self logs]  }];
         
     [self removeLogs];
     dispatch_semaphore_signal(sema);
