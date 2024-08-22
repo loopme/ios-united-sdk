@@ -126,11 +126,8 @@ const NSInteger kLoopMeRequestTimeout = 180;
 - (void)dismissAdInterstitialViewController {
     if (self.adInterstitialViewController.presentingViewController) {
          [self.adInterstitialViewController.presentingViewController dismissViewControllerAnimated: NO completion: nil];
-     }
-    [self cleanupAfterDismissal];
-}
-
-- (void)cleanupAfterDismissal {
+    }
+    
     [_adManager invalidateTimers];
     [_adDisplayController stopHandlingRequests];
     [_adDisplayControllerVPAID stopHandlingRequests];
