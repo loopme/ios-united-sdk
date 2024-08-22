@@ -14,6 +14,7 @@
 #import "LoopMeServerURLBuilder.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeIdentityProvider.h"
+#import "LoopMeErrorEventSender.h"
 
 @class LoopMeLoggingSender;
 
@@ -167,47 +168,10 @@ static dispatch_once_t onceToken;
 }
 
 - (void)startSendingTask {
-    
-    NSURLComponents *components = [[NSURLComponents alloc] init];
-    
-    components.queryItems = @[
-        [NSURLQueryItem queryItemWithName: @"device_os"           value: @"ios"],
-        [NSURLQueryItem queryItemWithName: @"device_id"           value: [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier]],
-        [NSURLQueryItem queryItemWithName: @"device_model"        value: [LoopMeIdentityProvider deviceAppleModel]],
-        [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceOS]],
-        [NSURLQueryItem queryItemWithName: @"device_manufacturer" value: [LoopMeIdentityProvider deviceManufacturer]],
-        [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"loopme"],
-        [NSURLQueryItem queryItemWithName: @"mediation"           value: [[LoopMeSDK shared] adapterName]],
-        [NSURLQueryItem queryItemWithName: @"msg"                 value: @"sdk_error"],
-        [NSURLQueryItem queryItemWithName: @"app_key"             value: [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug],
-        [NSURLQueryItem queryItemWithName: @"sdk_version"         value: LOOPME_SDK_VERSION],
-        [NSURLQueryItem queryItemWithName: @"package"             value: [NSBundle mainBundle].bundleIdentifier],
-        [NSURLQueryItem queryItemWithName: @"ifv"                 value: [UIDevice currentDevice].identifierForVendor.UUIDString],
-        [NSURLQueryItem queryItemWithName: @"debug_logs"                 value: [self logs]]
-        ];
-    
-    NSMutableArray *queryItems = [[NSMutableArray alloc] initWithArray:components.queryItems];
-    
-    components.queryItems = queryItems;
-    
-    NSURL *url = [NSURL URLWithString:@"https://tk0x1.com/api/errors"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:60.0];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"UTF-8" forHTTPHeaderField:@"Content-Encoding"];
-    [request setHTTPBody: [components.query dataUsingEncoding: NSUTF8StringEncoding]];
-    
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
-        [self removeLogs];
-        dispatch_semaphore_signal(sema);
+    [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeLog errorMessage:[self logs] info:@{ kErrorInfoAppKey : [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug }];
         
-    }];
-
-    [postDataTask resume];
+    [self removeLogs];
+    dispatch_semaphore_signal(sema);
 }
 
 @end
