@@ -570,8 +570,27 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
         [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeIncorrectFormat]];
         return;
     }
+    [self setupSKAdImpression];
+  
+    if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled ) {
+        [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug = self.appKey;
+    }
+    [self setupAdConfiguration:adConfiguration];
+
+}
+
+-(void)setupAdConfiguration: (LoopMeAdConfiguration *)adConfiguration {
     self.adConfiguration = adConfiguration;
     self.adConfiguration.placement = @"banner";
+    if (adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+        [self.adDisplayController setAdConfiguration: self.adConfiguration];
+        [self.adDisplayController loadAdConfiguration];
+    } else {
+        [self.adDisplayControllerVPAID setAdConfiguration: self.adConfiguration];
+    }
+}
+
+- (void)setupSKAdImpression {
     if (@available(iOS 14.5, *)) {
         self.skAdImpression = [[SKAdImpression alloc] init];
         // iOS 16.0 and later
@@ -605,17 +624,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
             self.skAdImpression.adImpressionIdentifier = self.adConfiguration.skadNonce;
         }
     }
-    
-    if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled ) {
-        [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug = self.appKey;
-    }
-    
-    if (adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-        [self.adDisplayController setAdConfiguration: self.adConfiguration];
-        [self.adDisplayController loadAdConfiguration];
-    } else {
-        [self.adDisplayControllerVPAID setAdConfiguration: self.adConfiguration];
-    }
+
 }
 
 - (void)adManagerDidReceiveAd: (LoopMeAdManager *)manager {
