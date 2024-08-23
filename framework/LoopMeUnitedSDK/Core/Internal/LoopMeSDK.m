@@ -89,6 +89,8 @@
 }
 
 - (void)init: (LoopMeSDKConfiguration *)configuration completionBlock: (void(^_Nullable)(BOOL, NSError *))completionBlock {
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+    
     if (self.isReady) {
         if (completionBlock != nil) {
             completionBlock(YES, nil);
@@ -109,6 +111,18 @@
     if (completionBlock != nil) {
         completionBlock(YES, nil);
     }
+    
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+     
+    double timeElapsed = endTime - startTime;
+     if (timeElapsed > 0.1) { 
+         NSMutableDictionary *infoDictionary ;
+         [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
+
+         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
+                              errorMessage: @"SDK Init time alert <100ms"
+                                      info: infoDictionary];
+     }
 }
 
 - (NSNumber *)timeElapsedSinceStart {
