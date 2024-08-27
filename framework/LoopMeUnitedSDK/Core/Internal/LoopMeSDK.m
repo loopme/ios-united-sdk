@@ -108,14 +108,14 @@
     CFAbsoluteTime startTimeOmid = CFAbsoluteTimeGetCurrent();
     (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
         CFAbsoluteTime endTimeOmid  = CFAbsoluteTimeGetCurrent();
-        double timeElapsedOmid = endTimeOmid - startTimeOmid;
-        if (timeElapsedOmid > 0.1) {
+        int timeElapsedOmid = (int)((endTimeOmid - startTimeOmid) *1000);
+        if (timeElapsedOmid > 100) {
             NSMutableDictionary *infoDictionary ;
             [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
-            [infoDictionary setObject:[NSString stringWithFormat: @"LoopMe OMID initialized time: %.3f", timeElapsedOmid] forKey: kErrorInfoTimeout];;
+            [infoDictionary setObject:[NSString stringWithFormat: @"LoopMe OMID initialized time: %.3d", timeElapsedOmid] forKey: kErrorInfoTimeout];;
 
-            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
-                                 errorMessage: @"Omid Init time alert <100ms"
+            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                                 errorMessage: @"Omid init time alert <100ms"
                                          info: infoDictionary];
         }
         NSLog(@"%@", LoopMeOMIDWrapper.isReady ? @"LoopMe OMID initialized" : @"LoopMe OMID not initialized");
@@ -127,14 +127,14 @@
     
     CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
      
-    double timeElapsed = endTime - startTime;
+    int timeElapsed = (int)((endTime - startTime) *1000);
 
-     if (timeElapsed > 0.1) {
+     if (timeElapsed > 100) {
          NSMutableDictionary *infoDictionary ;
          [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
-         [infoDictionary setObject:[NSString stringWithFormat:@"SDK init time: %.3f", timeElapsed] forKey: kErrorInfoTimeout];;
+         [infoDictionary setObject:[NSString stringWithFormat:@"SDK init time: %.3d", (int)(timeElapsed *1000)] forKey: kErrorInfoTimeout];;
 
-         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
+         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                               errorMessage: @"SDK Init time alert <100ms"
                                       info: infoDictionary];
      }
