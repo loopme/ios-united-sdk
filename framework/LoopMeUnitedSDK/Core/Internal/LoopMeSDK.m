@@ -112,7 +112,7 @@
         if (timeElapsedOmid > 0.1) {
             NSMutableDictionary *infoDictionary ;
             [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
-            [infoDictionary setObject:[NSString stringWithFormat:LoopMeOMIDWrapper.isReady ? @"LoopMe OMID initialized time: %.3f" : @"LoopMe OMID not initialized time: %.3f", timeElapsedOmid] forKey: kErrorInfoTimeout];;
+            [infoDictionary setObject:[NSString stringWithFormat: @"LoopMe OMID initialized time: %.3f", timeElapsedOmid] forKey: kErrorInfoTimeout];;
 
             [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
                                  errorMessage: @"Omid Init time alert <100ms"
