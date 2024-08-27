@@ -19,7 +19,6 @@
  *
  * It is recommented to define interstitial's `targeting` property, which will be passed as part of the ad request to get more relevant advertisement.
  * Also for the same purpose, the SDK tries to get the user location and keeps informed about location updating simply using timer with 10 minutes interval.
- * You can use `LoopMeGeoLocationProvider` `locationUpdatesEnabled` property to opt out of this functionality.
  * The SDK will never prompt the user for permission if location permissions are not currently granted.
  *
  * It is recommended to implement `LoopMeInterstitialDelegate`
