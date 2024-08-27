@@ -19,7 +19,6 @@
 #import "LoopMeReachability.h"
 #import "LoopMeServerURLBuilder.h"
 #import "LoopMeTargeting.h"
-#import "LoopMeGeoLocationProvider.h"
 #import "LoopMeLogging.h"
 #import "NSData+LoopMeAES128.h"
 #import "LoopMeORTBTools.h"
@@ -43,11 +42,6 @@
     parameters[@"mr"] = @"0";
     parameters[@"plg"] = [self parameterForBatteryState];
     parameters[@"chl"] = [NSString stringWithFormat:@"%f", [UIDevice currentDevice].batteryLevel];
-
-    if ([[LoopMeGeoLocationProvider sharedProvider] isLocationUpdateEnabled] && [[LoopMeGeoLocationProvider sharedProvider] isValidLocation]) {
-        parameters[@"lat"] = [NSString stringWithFormat:@"%0.4f", (float)[LoopMeGeoLocationProvider sharedProvider].location.coordinate.latitude];
-        parameters[@"lon"] = [NSString stringWithFormat:@"%0.4f", (float)[LoopMeGeoLocationProvider sharedProvider].location.coordinate.longitude];
-    }
     
     NSMutableString *parametersString = [[NSMutableString alloc] init];
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {

@@ -11,7 +11,6 @@
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeAdManager.h"
 #import "LoopMeTargeting.h"
-#import "LoopMeGeoLocationProvider.h"
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeVPAIDAdDisplayController.h"
 #import "LoopMeInterstitialViewController.h"
