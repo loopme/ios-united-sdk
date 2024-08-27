@@ -104,8 +104,20 @@
 
     // Initialize the start for session duration time here
     [self startSession];
-
+    
+    CFAbsoluteTime startTimeOmid = CFAbsoluteTimeGetCurrent();
     (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
+        CFAbsoluteTime endTimeOmid  = CFAbsoluteTimeGetCurrent();
+        double timeElapsedOmid = endTimeOmid - startTimeOmid;
+        if (timeElapsedOmid > 0.1) {
+            NSMutableDictionary *infoDictionary ;
+            [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
+            [infoDictionary setObject:@((int)(timeElapsedOmid *1000)) forKey: kErrorInfoTimeout];;
+
+            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                                 errorMessage: @"Omid init time alert <100ms"
+                                         info: infoDictionary];
+        }
         NSLog(@"%@", LoopMeOMIDWrapper.isReady ? @"LoopMe OMID initialized" : @"LoopMe OMID not initialized");
     }];
     
@@ -120,9 +132,9 @@
      if (timeElapsed > 0.1) {
          NSMutableDictionary *infoDictionary ;
          [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
-         [infoDictionary setObject:[NSString stringWithFormat:@"SDK init time: %.3f", timeElapsed] forKey: kErrorInfoTimeout];;
+         [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
 
-         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeServer
+         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                               errorMessage: @"SDK Init time alert <100ms"
                                       info: infoDictionary];
      }
