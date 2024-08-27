@@ -108,11 +108,11 @@
     CFAbsoluteTime startTimeOmid = CFAbsoluteTimeGetCurrent();
     (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
         CFAbsoluteTime endTimeOmid  = CFAbsoluteTimeGetCurrent();
-        int timeElapsedOmid = (int)((endTimeOmid - startTimeOmid) *1000);
-        if (timeElapsedOmid > 100) {
+        double timeElapsedOmid = endTimeOmid - startTimeOmid;
+        if (timeElapsedOmid > 0.1) {
             NSMutableDictionary *infoDictionary ;
             [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
-            [infoDictionary setObject:[NSString stringWithFormat: @"LoopMe OMID initialized time: %.3d", timeElapsedOmid] forKey: kErrorInfoTimeout];;
+            [infoDictionary setObject:@((int)(timeElapsedOmid *1000)) forKey: kErrorInfoTimeout];;
 
             [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                                  errorMessage: @"Omid init time alert <100ms"
@@ -127,12 +127,12 @@
     
     CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
      
-    int timeElapsed = (int)((endTime - startTime) *1000);
+    double timeElapsed = endTime - startTime;
 
-     if (timeElapsed > 100) {
+     if (timeElapsed > 0.1) {
          NSMutableDictionary *infoDictionary ;
          [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
-         [infoDictionary setObject:[NSString stringWithFormat:@"SDK init time: %.3d", (int)(timeElapsed *1000)] forKey: kErrorInfoTimeout];;
+         [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
 
          [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                               errorMessage: @"SDK Init time alert <100ms"
