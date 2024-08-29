@@ -43,7 +43,7 @@
         [NSURLQueryItem queryItemWithName: @"device_model"        value: [LoopMeIdentityProvider deviceAppleModel]],
         [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceOS]],
         [NSURLQueryItem queryItemWithName: @"device_manufacturer" value: [LoopMeIdentityProvider deviceManufacturer]],
-        [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"loopme"],
+        [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"LoopMe iOS SDK"],
         [NSURLQueryItem queryItemWithName: @"mediation"            value: [[LoopMeSDK shared] adapterName]],
         [NSURLQueryItem queryItemWithName: @"msg"                 value: @"sdk_error"],
         [NSURLQueryItem queryItemWithName: @"sdk_version"         value: LOOPME_SDK_VERSION],
