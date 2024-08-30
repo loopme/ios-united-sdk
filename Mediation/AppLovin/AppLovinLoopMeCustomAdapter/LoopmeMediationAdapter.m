@@ -44,7 +44,6 @@
 
 - (void)initializeWithParameters: (id<MAAdapterInitializationParameters>)parameters
                completionHandler: (void(^)(MAAdapterInitializationStatus initializationStatus, NSString *_Nullable errorMessage))completionHandler {
-    // TODO: Replace deprecated initSDKFromRootViewController with init
     [[LoopMeSDK shared] setAdapterName: @"applovin"];
     
     [[LoopMeSDK shared] init: ^(BOOL success, NSError *error) {
