@@ -178,21 +178,17 @@
 
 - (NSString *)getJSStringFromResources: (NSString *)fileName {
     NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
-    NSString *fileContent = [self.resourcesFiles valueForKey:fileName];
-    
-    if (!fileContent) {
+      NSString *fileContent = [self.resourcesFiles valueForKey:fileName];
+
+      if (fileContent) return fileContent;
         NSString *jsPath = [resourcesBundle pathForResource:fileName ofType:@"ignore"];
-        
-        fileContent = [NSString stringWithContentsOfFile:jsPath encoding:NSUTF8StringEncoding error:NULL];
-        
-        if (fileContent) {
-            [self.resourcesFiles setValue:fileContent forKey:fileName];
-        } else {
-            NSLog(@"Error: File not found in resourcesBundle for fileName: %@", fileName);
-            return nil;
-        }
+        fileContent = [NSString stringWithContentsOfFile: jsPath encoding: NSUTF8StringEncoding error: NULL];
+    if (fileContent) {
+        [self.resourcesFiles setValue:fileContent forKey:fileName];
+        return fileContent;
     }
-    return fileContent;
+      NSLog(@"Error: File not found in resourcesBundle for fileName: %@", fileName);
+      return nil;
 }
 
 @end

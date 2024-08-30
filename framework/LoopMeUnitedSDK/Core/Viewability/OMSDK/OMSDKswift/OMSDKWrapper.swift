@@ -51,23 +51,6 @@ public class OMSDKWrapper: NSObject {
         return true
     }
 
-//    private static func loadJS(completionBlock: @escaping (Bool) -> Void) {
-//        let omidJSURL = URL(string: omidJSURL)!
-//        let request = URLRequest(url: omidJSURL)
-//
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data, error == nil else {
-//                completionBlock(false)
-//                return
-//            }
-//
-//            completionBlock(true)
-//        }
-////        LoopMeAdView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
-//        task.resume()
-//    }
-
-
     @objc public func injectScriptContentIntoHTML(omidJS: String, htmlString: String) throws -> String {
         return try OMIDLoopmeScriptInjector.injectScriptContent(omidJS, intoHTML: htmlString)
     }
