@@ -279,8 +279,8 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
         NSError *error;
         if (LoopMeOMIDWrapper.isReady) {
-            self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML: self.adConfiguration.creativeContent
-                                                                                           error: &error];
+            self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTMLWithOmidJS: [[LoopMeSDK shared] getJSStringFromResources:@"omsdk.js"] htmlString:self.adConfiguration.creativeContent error:&error];
+
         }
         NSString *meta = @"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{margin:0;padding:0;}</style>";
         NSString *htmlString = [meta stringByAppendingString: self.adConfiguration.creativeContent];

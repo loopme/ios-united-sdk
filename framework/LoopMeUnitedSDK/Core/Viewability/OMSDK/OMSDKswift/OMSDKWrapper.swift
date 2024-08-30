@@ -25,7 +25,6 @@ struct OMIDSessionCustomError: Error {
 
 @objc (LoopMeOMIDWrapper)
 public class OMSDKWrapper: NSObject {
-    static var omidJS: String?
     static var partner: OMIDLoopmePartner?
     @objc static public var isReady: Bool = false
 
@@ -34,55 +33,42 @@ public class OMSDKWrapper: NSObject {
     typealias CompletionHandlerBlock = (Data?, URLResponse?, Error?) -> Void
     static let partherName = "Loopme"
     static let cacheKey = "OMID_JS"
-    static let omidJSURL = "https://i.loopme.me/html/ios/omsdk-v1.js"
     
 
 
     @objc public static func initOMID(completionBlock: @escaping (Bool) -> Void) -> Bool {
         let sdkStarted = OMIDLoopmeSDK.shared.activate()
-
         guard sdkStarted else {
             completionBlock(false)
             return false
         }
 
-        loadJS(completionBlock: { completed in
-            self.isReady = completed
-            completionBlock(completed)
-        })
+        self.isReady = true
+        completionBlock(true)
 
         partner = OMIDLoopmePartner(name: partherName, versionString: SDKUtility.loopmeSDKVersionString())
 
         return true
     }
 
-    private static func loadJS(completionBlock: @escaping (Bool) -> Void) {
-        let omidJSURL = URL(string: omidJSURL)!
-        let request = URLRequest(url: omidJSURL)
+//    private static func loadJS(completionBlock: @escaping (Bool) -> Void) {
+//        let omidJSURL = URL(string: omidJSURL)!
+//        let request = URLRequest(url: omidJSURL)
+//
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data, error == nil else {
+//                completionBlock(false)
+//                return
+//            }
+//
+//            completionBlock(true)
+//        }
+////        LoopMeAdView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+//        task.resume()
+//    }
 
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                completionBlock(false)
-                return
-            }
 
-            self.omidJS = String(data: data, encoding: .utf8)
-            completionBlock(true)
-        }
-
-        task.resume()
-    }
-
-
-    @objc public func injectScriptContentIntoHTML(_ htmlString: String) throws -> String {
-        guard let omidJS = OMSDKWrapper.omidJS else {
-            throw NSError(
-                domain: "OMSDKWrapper",
-                code: -1,
-                userInfo: [NSLocalizedDescriptionKey: "Can't inject OMID JS, because it is not loaded yet"]
-            )
-        }
-
+    @objc public func injectScriptContentIntoHTML(omidJS: String, htmlString: String) throws -> String {
         return try OMIDLoopmeScriptInjector.injectScriptContent(omidJS, intoHTML: htmlString)
     }
 
@@ -94,9 +80,9 @@ public class OMSDKWrapper: NSObject {
         return try OMIDLoopmeAdSessionContext(partner: partner, webView: webView, contentUrl: nil, customReferenceIdentifier: "")
     }
 
-    @objc public func contextForNativeVideo(_ resources: [AdVerificationWrapper]) -> AdSessionContextResult {
-        guard let partner = OMSDKWrapper.partner, let omidJS = OMSDKWrapper.omidJS else {
-            let error = NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID partner or JS not initialized"])
+    @objc public func contextForNativeVideo(omidJS: String, _ resources: [AdVerificationWrapper]) -> AdSessionContextResult {
+        guard let partner = OMSDKWrapper.partner else {
+            let error = NSError(domain: "OMSDKWrapper", code: -1, userInfo: [NSLocalizedDescriptionKey: "OMID partner"])
             return AdSessionContextResult(context: nil, error: error)
         }
         
@@ -140,9 +126,9 @@ public class OMSDKWrapper: NSObject {
         return try sessionFor(configuration, context: context)
     }
 
-    @objc public func sessionForNativeVideo(_ resources: [AdVerificationWrapper]) throws -> OMIDLoopmeAdSession {
+    @objc public func sessionForNativeVideo(omidJS: String, resources: [AdVerificationWrapper]) throws -> OMIDLoopmeAdSession {
         let configuration = try configurationFor(.video)
-        let contextResult = contextForNativeVideo(resources)
+        let contextResult = contextForNativeVideo(omidJS: omidJS, resources)
         
         // Check if context retrieval was successful
         if let context = contextResult.context {

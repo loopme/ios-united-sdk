@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)setAdapterName: (NSString* )name;
 -(NSString *)adapterName;
-
+- (NSString *)getJSStringFromResources: (NSString *)fileName;
 @end
 
 NS_ASSUME_NONNULL_END
