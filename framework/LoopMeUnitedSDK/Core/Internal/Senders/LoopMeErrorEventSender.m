@@ -56,7 +56,8 @@
     NSMutableArray *queryItems = [[NSMutableArray alloc] initWithArray:components.queryItems];
 
     for (NSString * key in [info allKeys]) {
-        [queryItems addObject: [[NSURLQueryItem alloc] initWithName:key value:info[key]]];;
+        NSString *value = [NSString stringWithFormat:@"%@", info[key]];
+        [queryItems addObject:[[NSURLQueryItem alloc] initWithName:key value:value]];
     }
     
     components.queryItems = queryItems;

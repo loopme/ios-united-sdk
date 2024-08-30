@@ -20,6 +20,7 @@
 @property (nonatomic) BOOL isReady;
 @property (nonatomic, strong) NSDate *startSessionTime;
 @property (nonatomic, strong) NSMutableDictionary *sessionDepth;
+@property (nonatomic, strong) NSMutableDictionary *resourcesFiles;
 @property (nonatomic, strong) NSString *adpaterName;
 
 @end
@@ -32,6 +33,7 @@
     if (!instance) {
         instance = [[LoopMeSDK alloc] init];
         instance.sessionDepth = [[NSMutableDictionary alloc] init];
+        instance.resourcesFiles = [[NSMutableDictionary alloc] init];
     }
     
     return instance;
@@ -110,7 +112,7 @@
         CFAbsoluteTime endTimeOmid  = CFAbsoluteTimeGetCurrent();
         double timeElapsedOmid = endTimeOmid - startTimeOmid;
         if (timeElapsedOmid > 0.1) {
-            NSMutableDictionary *infoDictionary ;
+            NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
             [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
             [infoDictionary setObject:@((int)(timeElapsedOmid *1000)) forKey: kErrorInfoTimeout];;
 
@@ -130,7 +132,7 @@
     double timeElapsed = endTime - startTime;
 
      if (timeElapsed > 0.1) {
-         NSMutableDictionary *infoDictionary ;
+         NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
          [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
          [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
 
@@ -172,6 +174,21 @@
 
 -(NSString *)adapterName {
     return self.adpaterName;;
+}
+
+- (NSString *)getJSStringFromResources: (NSString *)fileName {
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+    NSString *fileContent = [self.resourcesFiles valueForKey:fileName];
+    
+    if (fileContent) return fileContent;
+    NSString *jsPath = [resourcesBundle pathForResource:fileName ofType:@"ignore"];
+    fileContent = [NSString stringWithContentsOfFile: jsPath encoding: NSUTF8StringEncoding error: NULL];
+    if (fileContent) {
+        [self.resourcesFiles setValue:fileContent forKey:fileName];
+        return fileContent;
+    }
+    NSLog(@"Error: File not found in resourcesBundle for fileName: %@", fileName);
+    return nil;
 }
 
 @end
