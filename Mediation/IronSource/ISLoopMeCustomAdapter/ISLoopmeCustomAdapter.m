@@ -24,6 +24,8 @@
         }
         return;
     }
+    [[LoopMeSDK shared] setAdapterName: @"ironsource"];
+
     [[LoopMeSDK shared] init: ^(BOOL success, NSError *error) {
         if (!success) {
             NSLog(@"Failed to init LoopMeUnitedSDK: %@", error);
@@ -31,9 +33,6 @@
                 [delegate onInitDidFailWithErrorCode: error.code errorMessage: error.localizedDescription];
             }
         } else {
-            
-            [[LoopMeSDK shared] setAdapterName: @"ironsource"];
-            
             NSLog(@"LoopMeUnitedSDK inited successfully");
             if ([delegate respondsToSelector: @selector(onInitDidSucceed)]) {
                 [delegate onInitDidSucceed];
