@@ -245,12 +245,21 @@
 
 - (void)loopMeAdViewDidLoadAd: (LoopMeAdView *)adView {
     [self.delegate didLoadAdForAdView: adView];
-    [self.delegate didDisplayAdViewAd];
     
 }
+
+- (void)loopMeAdViewDidAppear: (LoopMeAdView *)banner {
+    NSLog(@"LoopMe banner did present");
+    [self.delegate didDisplayAdViewAd];
+}
+
 - (void)loopMeAdView: (LoopMeAdView *)adView didFailToLoadAdWithError: (NSError *)error {
     [self.parentAdapter log: @"AdView failed to load with error: %@", error];
     [self.delegate didFailToLoadAdViewAdWithError: MAAdapterError.adNotReady];
+}
+
+- (void)loopMeAdViewDidDisappear:(LoopMeAdView *)banner {
+    [self.delegate didHideAdViewAd];
 }
 
 - (void)loopMeAdViewDidReceiveTap: (LoopMeAdView *)adView {
