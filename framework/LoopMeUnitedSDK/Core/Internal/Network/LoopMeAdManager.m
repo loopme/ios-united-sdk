@@ -39,6 +39,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 @property (nonatomic, strong) NSString *integrationType;
 @property (nonatomic, assign) CGSize adSpotSize;
 @property (nonatomic, assign) LoopMeAdType adTypes;
+@property (nonatomic, assign) CFAbsoluteTime startTime;
 @property (nonatomic, weak) id adUnit;
 
 @end
@@ -104,19 +105,8 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.loading = YES;
     LoopMeLogInfo(@"Did start loading ad");
     LoopMeLogDebug(@"loads ad with URL %@", [URL absoluteString]);
-    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+    self.startTime = CFAbsoluteTimeGetCurrent();
     [self.communicator loadWithUrl: URL requestBody: body method: @"POST"];
-    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-    double timeElapsed = endTime - startTime;
-    if (timeElapsed > 0.1) {
-        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
-        [infoDictionary setObject:@"LoopMeAdManager" forKey: kErrorInfoClass];;
-        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
-
-        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                             errorMessage: @"SDK request time more that 1 sec"
-                                     info: infoDictionary];
-    }
 }
 
 - (BOOL)isAdType: (LoopMeAdType)adType1 equalTo: (LoopMeAdType)adType2 {
@@ -162,6 +152,17 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 #pragma mark - LoopMeServerCommunicatorDelegate
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+    double timeElapsed = endTime - self.startTime;
+    if (timeElapsed > 1) {
+        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+        [infoDictionary setObject:@"LoopMeAdManager" forKey: kErrorInfoClass];;
+        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
+
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                             errorMessage: @"SDK request time more that 1 sec"
+                                     info: infoDictionary];
+    }
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
     adConfiguration.appKey = self.appKey;
     if ([self.delegate respondsToSelector: @selector(adManager:didReceiveAdConfiguration:)]) {
@@ -173,8 +174,20 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 }
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didFailWith: (NSError *)error {
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+    double timeElapsed = endTime - self.startTime;
+    if (timeElapsed > 1) {
+        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+        [infoDictionary setObject:@"LoopMeAdManager" forKey: kErrorInfoClass];;
+        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
+
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                             errorMessage: @"SDK request time more that 1 sec"
+                                     info: infoDictionary];
+    }
     self.loading = NO;
     LoopMeLogDebug(@"Ad failed to load with error: %@", error);
+    
     if ([self.delegate respondsToSelector: @selector(adManager:didFailToLoadAdWithError:)]) {
         [self.delegate adManager: self didFailToLoadAdWithError: error];
     }
