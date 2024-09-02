@@ -14,6 +14,7 @@
 #import "LoopMeLogging.h"
 #import "LoopMeORTBTools.h"
 #import "LoopMeError.h"
+#import "LoopMeErrorEventSender.h"
 
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeAdView.h"
@@ -103,7 +104,19 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.loading = YES;
     LoopMeLogInfo(@"Did start loading ad");
     LoopMeLogDebug(@"loads ad with URL %@", [URL absoluteString]);
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
     [self.communicator loadWithUrl: URL requestBody: body method: @"POST"];
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+    double timeElapsed = endTime - startTime;
+    if (timeElapsed > 0.1) {
+        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+        [infoDictionary setObject:@"LoopMeAdManager" forKey: kErrorInfoClass];;
+        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
+
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                             errorMessage: @"SDK request time more that 1 sec"
+                                     info: infoDictionary];
+    }
 }
 
 - (BOOL)isAdType: (LoopMeAdType)adType1 equalTo: (LoopMeAdType)adType2 {
