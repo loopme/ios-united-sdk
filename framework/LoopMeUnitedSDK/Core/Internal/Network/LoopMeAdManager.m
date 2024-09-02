@@ -160,7 +160,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
         [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
 
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                             errorMessage: @"SDK request time more that 1 sec"
+                             errorMessage: @"SDK request is success but spend more that 1 sec"
                                      info: infoDictionary];
     }
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
@@ -182,7 +182,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
         [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
 
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                             errorMessage: @"SDK request time more that 1 sec"
+                             errorMessage: @"SDK request is fail but spend more that 1 sec"
                                      info: infoDictionary];
     }
     self.loading = NO;
