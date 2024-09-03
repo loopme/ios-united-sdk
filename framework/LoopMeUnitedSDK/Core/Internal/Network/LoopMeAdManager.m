@@ -152,7 +152,12 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 #pragma mark - LoopMeServerCommunicatorDelegate
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {
-    [self checkLatency: @"ORTB request takes more then 1sec" status: @"Success"];
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+    double timeElapsed = endTime - self.startTime;
+    if (timeElapsed > 1) {
+        [self checkLatency: @"ORTB request takes more then 1sec" status: @"Success" time:((int) timeElapsed)];
+    }
+    
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
     adConfiguration.appKey = self.appKey;
     if ([self.delegate respondsToSelector: @selector(adManager:didReceiveAdConfiguration:)]) {
@@ -164,7 +169,12 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 }
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didFailWith: (NSError *)error {
-    [self checkLatency: @"ORTB request takes more then 1sec" status: @"Fail"];
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+    double timeElapsed = endTime - self.startTime;
+    if (timeElapsed > 1) {
+        [self checkLatency: @"ORTB request takes more then 1sec" status: @"Fail" time:((int) timeElapsed)];
+    }
+    
     self.loading = NO;
     LoopMeLogDebug(@"Ad failed to load with error: %@", error);
     
@@ -173,19 +183,15 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     }
 }
 
-- (void) checkLatency: (NSString *)errorMessage status:(NSString *)status {
-    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-    double timeElapsed = endTime - self.startTime;
-    if (timeElapsed > 1) {
+- (void) checkLatency: (NSString *)errorMessage status:(NSString *)status time: (int) timeElapsed {
         NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
         [infoDictionary setObject: @"LoopMeAdManager" forKey: kErrorInfoClass];
         [infoDictionary setObject: status forKey: kErrorInfoStatus];
-        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
+        [infoDictionary setObject: @(timeElapsed *1000) forKey: kErrorInfoTimeout];
 
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
                              errorMessage: errorMessage
                                      info: infoDictionary];
-    }
 }
 
 @end
