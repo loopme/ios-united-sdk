@@ -155,7 +155,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
     double timeElapsed = endTime - self.startTime;
     if (timeElapsed > 1) {
-        [self checkLatency: @"ORTB request takes more then 1sec" status: @"Success" time:((int) timeElapsed)];
+        [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency  errorMessage:@"ORTB request takes more then 1sec" status:@"Success" time:((int) timeElapsed) className:@"LoopMeAdManager"];
     }
     
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
@@ -172,7 +172,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
     double timeElapsed = endTime - self.startTime;
     if (timeElapsed > 1) {
-        [self checkLatency: @"ORTB request takes more then 1sec" status: @"Fail" time:((int) timeElapsed)];
+        [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency errorMessage:@"ORTB request takes more then 1sec" status:@"Fail" time:((int) timeElapsed) className:@"LoopMeAdManager"];
     }
     
     self.loading = NO;
@@ -183,15 +183,5 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     }
 }
 
-- (void) checkLatency: (NSString *)errorMessage status:(NSString *)status time: (int) timeElapsed {
-        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
-        [infoDictionary setObject: @"LoopMeAdManager" forKey: kErrorInfoClass];
-        [infoDictionary setObject: status forKey: kErrorInfoStatus];
-        [infoDictionary setObject: @(timeElapsed *1000) forKey: kErrorInfoTimeout];
-
-        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                             errorMessage: errorMessage
-                                     info: infoDictionary];
-}
 
 @end
