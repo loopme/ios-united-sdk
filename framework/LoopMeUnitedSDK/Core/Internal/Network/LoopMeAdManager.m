@@ -152,17 +152,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 #pragma mark - LoopMeServerCommunicatorDelegate
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {
-    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-    double timeElapsed = endTime - self.startTime;
-    if (timeElapsed > 1) {
-        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
-        [infoDictionary setObject:@"LoopMeAdManager" forKey: kErrorInfoClass];;
-        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
-
-        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                             errorMessage: @"SDK request is success but spend more that 1 sec"
-                                     info: infoDictionary];
-    }
+    [self checkLatency: @"ORTB request takes more then 1sec" status: @"Success"];
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
     adConfiguration.appKey = self.appKey;
     if ([self.delegate respondsToSelector: @selector(adManager:didReceiveAdConfiguration:)]) {
@@ -174,22 +164,27 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 }
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didFailWith: (NSError *)error {
-    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-    double timeElapsed = endTime - self.startTime;
-    if (timeElapsed > 1) {
-        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
-        [infoDictionary setObject:@"LoopMeAdManager" forKey: kErrorInfoClass];;
-        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
-
-        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                             errorMessage: @"SDK request is fail but spend more that 1 sec"
-                                     info: infoDictionary];
-    }
+    [self checkLatency: @"ORTB request takes more then 1sec" status: @"Fail"];
     self.loading = NO;
     LoopMeLogDebug(@"Ad failed to load with error: %@", error);
     
     if ([self.delegate respondsToSelector: @selector(adManager:didFailToLoadAdWithError:)]) {
         [self.delegate adManager: self didFailToLoadAdWithError: error];
+    }
+}
+
+- (void) checkLatency: (NSString *)errorMessage status:(NSString *)status {
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+    double timeElapsed = endTime - self.startTime;
+    if (timeElapsed > 1) {
+        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+        [infoDictionary setObject: @"LoopMeAdManager" forKey: kErrorInfoClass];
+        [infoDictionary setObject: status forKey: kErrorInfoStatus];
+        [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
+
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                             errorMessage: errorMessage
+                                     info: infoDictionary];
     }
 }
 
