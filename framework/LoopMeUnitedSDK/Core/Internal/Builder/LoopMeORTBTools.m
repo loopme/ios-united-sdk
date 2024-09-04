@@ -59,6 +59,7 @@ static NSString *_userAgent;
     BOOL isGDPR = [gdpr cmpSdkID] && [gdpr GDRRApplies] != -1;
     BOOL isLiveDebug = [LoopMeGlobalSettings sharedInstance].liveDebugEnabled;
     BOOL canSetIfa = ([LoopMeIdentityProvider appTrackingTransparencyEnabled] && [ASIdentifierManager sharedManager].isAdvertisingTrackingEnabled);
+    NSNumber *instlValue = !self.isRewarded ? (self.isInterstitial ? @1 : @0) : nil;
 
     NSMutableDictionary *request = [[NSMutableDictionary alloc] initWithDictionary: @{
         @"id": [[NSUUID UUID] UUIDString],
@@ -80,7 +81,7 @@ static NSString *_userAgent;
             @"id": @1,
             @"displaymanager": @"LOOPME_SDK",
             @"displaymanagerver": [self sdkVersion],
-            @"instl": self.isInterstitial ? @1 : @0,
+            @"instl": instlValue ?: @0,
             @"rwdd": self.isRewarded ? @1 : @0,
             @"bidfloor": @0,
             @"secure": @1,
