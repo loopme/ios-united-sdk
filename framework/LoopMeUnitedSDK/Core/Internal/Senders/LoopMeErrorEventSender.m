@@ -34,7 +34,7 @@
 }
 
 + (void)sendLetancyError: (LoopMeEventErrorType)errorType
-       errorMessage: (NSString * _Nonnull)errorMessage
+            errorMessage: (NSString * _Nonnull)errorMessage
                   status: (NSString * _Nonnull)status
                     time: (NSInteger)timeElapsed
                className: (NSString * _Nonnull)className {

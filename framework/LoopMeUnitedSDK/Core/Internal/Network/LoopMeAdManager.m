@@ -155,7 +155,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
     double timeElapsed = endTime - self.startTime;
     if (timeElapsed > 1) {
-        [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency  errorMessage:@"ORTB request takes more then 1sec" status:@"Success" time:((int) timeElapsed) className:@"LoopMeAdManager"];
+        [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency errorMessage:@"ORTB request takes more then 1sec" status:@"Success" time:((int) timeElapsed) className:@"LoopMeAdManager"];
     }
     
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
