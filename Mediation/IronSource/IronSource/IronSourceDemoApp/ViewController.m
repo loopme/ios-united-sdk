@@ -177,7 +177,6 @@
  */
 - (void)didReceiveRewardForPlacement: (ISPlacementInfo *)placementInfo withAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"didReceiveRewardForPlacement: %@\n%@", adInfo, placementInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
 }
 
 /**
@@ -196,7 +195,6 @@
  */
 - (void)didOpenWithAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"didOpenWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
 }
 
 /**
@@ -205,7 +203,6 @@
  */
 - (void)didCloseWithAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"didCloseWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
     if ([adInfo.ad_unit isEqual: @"interstitial"])
         _showISButton.enabled = NO;
     else
@@ -220,16 +217,18 @@
  */
 - (void)didClick: (ISPlacementInfo *)placementInfo withAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"didClick: %@\n%@", adInfo, placementInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
 }
 
+- (void)hasAvailableAdWithAdInfo:(ISAdInfo *)adInfo {
+    NSLog(@"hasAvailableAdWithAdInfo");
+
+}
 /**
  Called after an interstitial has been clicked.
  @param adInfo The info of the ad.
  */
 - (void)didClickWithAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"didClickWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
 }
 
 - (void)didLoad: (ISBannerView *)bannerView withAdInfo: (ISAdInfo *)adInfo {
@@ -266,7 +265,6 @@
  */
 - (void)didShowWithAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"didShowWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
 }
 
 @end
