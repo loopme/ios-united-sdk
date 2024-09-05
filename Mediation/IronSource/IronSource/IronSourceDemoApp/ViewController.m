@@ -243,18 +243,8 @@
     });
 }
 
-- (void)didDismissScreenWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"[ISAdapter] - didDismissScreenWithAdInfo");
-}
-
-
 - (void)didLeaveApplicationWithAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"[ISAdapter] - didLeaveApplicationWithAdInfo");
-}
-
-
-- (void)didPresentScreenWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"[ISAdapter] - didPresentScreenWithAdInfo");
 }
 
 /**
