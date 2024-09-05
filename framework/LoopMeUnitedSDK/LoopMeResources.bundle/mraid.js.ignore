@@ -842,6 +842,10 @@
 
 }());
 
+// Some browser don't support window.crypto.randomUUID
+window.crypto = window.crypto || {};
+window.crypto.randomUUID = window.crypto.randomUUID || function () { return Date.now(); };
+
 // Some creatives still use window.open instead of mraid.open
 // replace window.open with mraid.open
 window.open = mraid.open;

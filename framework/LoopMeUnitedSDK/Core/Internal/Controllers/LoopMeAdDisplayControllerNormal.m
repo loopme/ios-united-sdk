@@ -175,8 +175,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     WKUserContentController *controller = [[WKUserContentController alloc] init];
     [controller addScriptMessageHandler: self.mraidScriptMessageHandler
                                    name: @"mraid"];
-
-    NSString *mraidjs = [[LoopMeSDK shared] getJSStringFromResources:@"mraid.js"];
+    
+    NSString *mraidjs = [self.adConfiguration.creativeContent containsString: @"mraid.js"] ?
+        [[LoopMeSDK shared] getJSStringFromResources:@"mraid.js"] : @"";
     WKUserScript *script = [[WKUserScript alloc] initWithSource: mraidjs
                                                   injectionTime: WKUserScriptInjectionTimeAtDocumentStart
                                                forMainFrameOnly: NO];
