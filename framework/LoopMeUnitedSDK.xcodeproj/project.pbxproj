@@ -128,7 +128,6 @@
 		47A57CAA233E31C8001F7DA3 /* LoopMeError.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C12233E31C8001F7DA3 /* LoopMeError.m */; };
 		47A57CAD233E31C8001F7DA3 /* LoopMeGlobalSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C15233E31C8001F7DA3 /* LoopMeGlobalSettings.h */; };
 		47A57CAE233E31C8001F7DA3 /* LoopMeVPAIDError.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C16233E31C8001F7DA3 /* LoopMeVPAIDError.m */; };
-		47A57CAF233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C17233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h */; };
 		47A57CB0233E31C8001F7DA3 /* LoopMeLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C18233E31C8001F7DA3 /* LoopMeLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57CB1233E31C8001F7DA3 /* LoopMeIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C19233E31C8001F7DA3 /* LoopMeIdentityProvider.h */; };
 		47A57CB2233E31C8001F7DA3 /* LoopMeDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C1A233E31C8001F7DA3 /* LoopMeDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -861,7 +860,6 @@
 				47A57C92233E31C8001F7DA3 /* LoopMeORTBTools.h in Headers */,
 				47A57C5C233E31C8001F7DA3 /* LoopMeVPAIDClient.h in Headers */,
 				47A57C78233E31C8001F7DA3 /* LoopMeReachability.h in Headers */,
-				47A57CAF233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h in Headers */,
 				47A57C5F233E31C8001F7DA3 /* LoopMeVideoClientNormal.h in Headers */,
 				47A57CA1233E31C8001F7DA3 /* LoopMeCancelView.h in Headers */,
 				47A57C67233E31C8001F7DA3 /* LoopMeDiscURLCache.h in Headers */,
