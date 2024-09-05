@@ -37,19 +37,6 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     letacyReportViewContrller = [storyboard instantiateViewControllerWithIdentifier:@"LetancyReportViewController"];
     
-    [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @(YES);
-    
-    // Before initializing any of our products (Rewarded video, Offerwall, Interstitial or Banner) you must set
-    // their delegates. Take a look at each of there delegates method and you will see that they each implement a product
-    // protocol. This is our way of letting you know what's going on, and if you don't set the delegates
-    // we will not be able to communicate with you.
-    // We're passing 'self' to our delegates because we want
-    // to be able to enable/disable buttons to match ad availability.
-    
-    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
-    [IronSource setLevelPlayInterstitialDelegate: self];
-    [IronSource setLevelPlayBannerDelegate: self];
-    
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
     self.activityIndicator.center = self.view.center;
     [self.view addSubview:self.activityIndicator];

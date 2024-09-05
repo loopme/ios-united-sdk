@@ -38,6 +38,10 @@
         userId = USERID;
     }
     
+    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
+    [IronSource setLevelPlayInterstitialDelegate: self];
+    [IronSource setLevelPlayBannerDelegate: self];
+    
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId: userId];
     [IronSource initWithAppKey: APPKEY];
@@ -64,10 +68,6 @@
 
 - (void)viewWillAppear: (BOOL)animated {
     [super viewWillAppear: animated];
-
-    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
-    [IronSource setLevelPlayInterstitialDelegate: self];
-    [IronSource setLevelPlayBannerDelegate: self];
 
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(keyboardWillShow:)
