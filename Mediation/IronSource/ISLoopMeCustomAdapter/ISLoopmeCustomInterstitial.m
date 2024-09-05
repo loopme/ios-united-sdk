@@ -36,12 +36,12 @@
 - (void)showAdWithViewController: (nonnull UIViewController *)viewController
                           adData: (nonnull ISAdData *)adData
                         delegate: (nonnull id<ISInterstitialAdDelegate>)delegate {
-   // check if ad can be displayed
-   if (![self.interstitial isReady]) {
-      [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
-                                errorMessage: @"LoopMe Interstitial is not ready to display"];
-      return;
-   }
+    // check if ad can be displayed
+    if (![self isAdAvailableWithAdData:adData]) {
+        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
+                                  errorMessage: @"LoopMe Interstitial is not ready to display"];
+        return;
+    }
     [self.interstitial showFromViewController: viewController animated: YES];
     [delegate adDidShowSucceed];
 }
@@ -61,7 +61,8 @@
 - (void)loopMeInterstitialDidAppear: (LoopMeInterstitial *)interstitial {
     NSLog(@"LoopMe interstitial did present");
     [self.delegate adDidOpen];
-}
+    [self.delegate adDidStart];
+    [self.delegate adDidBecomeVisible];}
 
 - (void)loopMeInterstitialDidDisappear: (LoopMeInterstitial *)interstitial {
     NSLog(@"LoopMe interstitial did dismiss");
@@ -75,6 +76,6 @@
 
 - (void)loopMeInterstitialVideoDidReachEnd: (LoopMeInterstitial *)interstitial {
     NSLog(@"LoopMe interstitial video did reach end.");
-    [self.delegate adDidShowSucceed];
+    [self.delegate adDidEnd];
 }
 @end
