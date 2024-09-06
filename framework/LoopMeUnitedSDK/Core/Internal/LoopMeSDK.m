@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableDictionary *sessionDepth;
 @property (nonatomic, strong) NSMutableDictionary *resourcesFiles;
 @property (nonatomic, strong) NSString *adpaterName;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *sdkInitTimes;
 
 @end
 
@@ -34,9 +35,21 @@
         instance = [[LoopMeSDK alloc] init];
         instance.sessionDepth = [[NSMutableDictionary alloc] init];
         instance.resourcesFiles = [[NSMutableDictionary alloc] init];
+        instance.sdkInitTimes = [[NSMutableArray alloc] init];
     }
     
     return instance;
+}
+
+- (void)setSdkInitTime:(NSUInteger)value {
+    [self.sdkInitTimes addObject: @(value)];
+}
+
+- (NSUInteger)getSdkInitTime {
+    if ([self.sdkInitTimes count] == 0) return 0;
+    NSNumber *lastValue = [self.sdkInitTimes lastObject];
+    [self.sdkInitTimes removeLastObject];
+    return [lastValue unsignedIntegerValue];
 }
 
 + (NSBundle * )resourcesBundle {
@@ -94,6 +107,7 @@
     CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
     
     if (self.isReady) {
+        [self setSdkInitTime: (int)((CFAbsoluteTimeGetCurrent() - startTime) * 1000.0)];
         if (completionBlock != nil) {
             completionBlock(YES, nil);
         }
@@ -128,8 +142,8 @@
     }
     
     CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-     
     double timeElapsed = endTime - startTime;
+    [self setSdkInitTime: (int)(timeElapsed * 1000.0)];
 
      if (timeElapsed > 0.1) {
          NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];

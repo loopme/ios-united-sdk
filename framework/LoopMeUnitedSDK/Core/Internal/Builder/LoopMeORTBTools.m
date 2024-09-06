@@ -158,14 +158,13 @@ static NSString *_userAgent;
         @"tmax": @700,
         @"bcat": @[@"IAB25-3", @"IAB25", @"IAB26"]
     }];
-
+    
+    request[@"ext"] = (self.video && self.isRewarded) ?
+        @{ @"sdk_init_time": @([LoopMeSDK.shared getSdkInitTime]), @"placementType": @"rewarded" } :
+        @{ @"sdk_init_time": @([LoopMeSDK.shared getSdkInitTime]) };
+    
     if (self.video) {
-        if (self.isRewarded) {
-            request[@"ext"] = @{@"placementType": @"rewarded"};
-            request[@"imp"][0][@"video"] = [self rewardedVideo: self.size];
-        } else {
-            request[@"imp"][0][@"video"] = [self video: self.size];
-        }
+        request[@"imp"][0][@"video"] = self.isRewarded ? [self rewardedVideo: self.size] : [self video: self.size];
     }
 
     NSError *error;
