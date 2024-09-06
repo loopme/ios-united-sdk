@@ -74,6 +74,10 @@
     [self.delegate adDidDismissScreen];
 }
 
+- (void)loopMeAdViewWillLeaveApplication:(LoopMeAdView *)adView {
+    [self.delegate adWillLeaveApplication];
+}
+
 - (UIViewController *)viewControllerForPresentation {
     return self.viewController;
 }
