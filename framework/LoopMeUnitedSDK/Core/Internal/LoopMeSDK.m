@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableDictionary *sessionDepth;
 @property (nonatomic, strong) NSMutableDictionary *resourcesFiles;
 @property (nonatomic, strong) NSString *adpaterName;
+@property (nonatomic, strong) NSString *initedTime;
 
 @end
 
@@ -130,7 +131,8 @@
     CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
      
     double timeElapsed = endTime - startTime;
-
+    self.initedTime = [NSString stringWithFormat:@"%@", @((int)(timeElapsed *1000))];
+    
      if (timeElapsed > 0.1) {
          NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
          [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;

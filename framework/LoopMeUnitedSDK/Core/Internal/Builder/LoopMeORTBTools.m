@@ -156,7 +156,10 @@ static NSString *_userAgent;
         },
               @"consent": [LoopMeGDPRTools getConsentValue]},
         @"tmax": @700,
-        @"bcat": @[@"IAB25-3", @"IAB25", @"IAB26"]
+        @"bcat": @[@"IAB25-3", @"IAB25", @"IAB26"],
+        @"ext": @{
+        @"sdk_init_time": [[LoopMeSDK shared] initedTime]
+    }
     }];
 
     if (self.video) {
