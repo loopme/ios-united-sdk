@@ -164,7 +164,8 @@ static NSString *_userAgent;
 
     if (self.video) {
         if (self.isRewarded) {
-            request[@"ext"] = @{@"placementType": @"rewarded"};
+            request[@"ext"] = @{@"placementType": @"rewarded",
+                                @"sdk_init_time": [[LoopMeSDK shared] initedTime]};
             request[@"imp"][0][@"video"] = [self rewardedVideo: self.size];
         } else {
             request[@"imp"][0][@"video"] = [self video: self.size];
