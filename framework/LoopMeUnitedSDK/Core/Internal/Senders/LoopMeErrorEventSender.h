@@ -14,7 +14,6 @@ typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
     LoopMeEventErrorTypeJS,
     LoopMeEventErrorTypeCustom,
     LoopMeEventErrorTypeLog,
-
 };
 
 @interface LoopMeErrorEventSender : NSObject
