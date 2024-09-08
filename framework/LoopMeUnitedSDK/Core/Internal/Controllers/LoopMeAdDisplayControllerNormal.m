@@ -188,6 +188,18 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     self.webView.navigationDelegate = self;
 }
 
+- (WKWebView *)webView: (WKWebView *)webView
+createWebViewWithConfiguration: (WKWebViewConfiguration *)configuration
+   forNavigationAction: (WKNavigationAction *)navigationAction
+        windowFeatures: (WKWindowFeatures *)windowFeatures
+{
+    if ([self.delegate respondsToSelector: @selector(adDisplayControllerDidReceiveTap:)]) {
+        [self.delegate adDisplayControllerDidReceiveTap: self];
+    }
+    [self interceptURL: navigationAction.request.URL];
+    return nil;
+}
+
 - (void)deviceShaken {
     [self.JSClient setShake];
 }
