@@ -11,7 +11,6 @@
 #import "LoopMeSDK.h"
 #import "LoopMeLogging.h"
 #import "LoopMeDefinitions.h"
-#import "LoopMeServerURLBuilder.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeIdentityProvider.h"
 
