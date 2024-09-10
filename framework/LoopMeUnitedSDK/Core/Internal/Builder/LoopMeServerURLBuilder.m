@@ -7,10 +7,6 @@
 //
 #import <AdSupport/AdSupport.h>
 #import <CoreLocation/CoreLocation.h>
-#import <CoreTelephony/CTCallCenter.h>
-#import <CoreTelephony/CTCall.h>
-#import <CoreTelephony/CTCarrier.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <SystemConfiguration/CaptiveNetwork.h>
 
 #import "LoopMeSDK.h"
