@@ -101,9 +101,7 @@
 		47A57C8E233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BEE233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h */; };
 		47A57C8F233E31C8001F7DA3 /* LoopMeAdDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BEF233E31C8001F7DA3 /* LoopMeAdDisplayController.m */; };
 		47A57C90233E31C8001F7DA3 /* LoopMeORTBTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF1233E31C8001F7DA3 /* LoopMeORTBTools.m */; };
-		47A57C91233E31C8001F7DA3 /* LoopMeServerURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF2233E31C8001F7DA3 /* LoopMeServerURLBuilder.m */; };
 		47A57C92233E31C8001F7DA3 /* LoopMeORTBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF3233E31C8001F7DA3 /* LoopMeORTBTools.h */; };
-		47A57C93233E31C8001F7DA3 /* LoopMeServerURLBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF4233E31C8001F7DA3 /* LoopMeServerURLBuilder.h */; };
 		47A57C94233E31C8001F7DA3 /* LoopMeCloseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF6233E31C8001F7DA3 /* LoopMeCloseButton.h */; };
 		47A57C95233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF8233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m */; };
 		47A57C96233E31C8001F7DA3 /* LoopMeProgressOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF9233E31C8001F7DA3 /* LoopMeProgressOverlayView.h */; };
@@ -866,7 +864,6 @@
 				47A57CC0233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h in Headers */,
 				47A57C62233E31C8001F7DA3 /* LoopMeViewabilityProtocol.h in Headers */,
 				474545D52435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h in Headers */,
-				47A57C93233E31C8001F7DA3 /* LoopMeServerURLBuilder.h in Headers */,
 				47A57C9A233E31C8001F7DA3 /* LoopMeAdWebView.h in Headers */,
 				47A57CBD233E31C8001F7DA3 /* NSString+Encryption.h in Headers */,
 				47A57C77233E31C8001F7DA3 /* LoopMeAdManager.h in Headers */,
@@ -1044,7 +1041,6 @@
 				47500F4C234C8B760099AD1E /* UserAgent.swift in Sources */,
 				47A57C70233E31C8001F7DA3 /* LoopMeReachability.m in Sources */,
 				47A57C58233E31C8001F7DA3 /* LoopMeVideoClientNormal.m in Sources */,
-				47A57C91233E31C8001F7DA3 /* LoopMeServerURLBuilder.m in Sources */,
 				47A57C9C233E31C8001F7DA3 /* LoopMeVASTPlayerUIView.m in Sources */,
 				47A57B66233CFAD9001F7DA3 /* AssetLinks.swift in Sources */,
 				47A57B6B233CFAD9001F7DA3 /* ServerCommunicator.swift in Sources */,
