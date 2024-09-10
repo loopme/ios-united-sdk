@@ -29,7 +29,6 @@
 #pragma mark - Life Cycle
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_webViewTimeOutTimer invalidate];
     _webViewTimeOutTimer = nil;
     [self stopHandlingRequests];
@@ -40,10 +39,7 @@
     if (self) {
         _delegate = delegate;
         _destinationDisplayClient = [LoopMeDestinationDisplayController controllerWithDelegate:self];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                         selector:@selector(appDidEnterBackground:)
-                                                             name:UIApplicationDidEnterBackgroundNotification
-                                                           object:nil];
+
     }
     return self;
 }
@@ -55,12 +51,6 @@
 }
 
 #pragma mark - Private
-
-- (void)appDidEnterBackground:(NSNotification *)notification {
-    LoopMeLogInfo(@"App did enter background - user left the app.");
-        [self.delegate adDisplayControllerWillLeaveApplication:self];
-}
-
 
 - (BOOL)shouldIntercept:(NSURL *)URL
          navigationType:(WKNavigationType)navigationType {
