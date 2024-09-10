@@ -39,7 +39,6 @@
     if (self) {
         _delegate = delegate;
         _destinationDisplayClient = [LoopMeDestinationDisplayController controllerWithDelegate:self];
-
     }
     return self;
 }
