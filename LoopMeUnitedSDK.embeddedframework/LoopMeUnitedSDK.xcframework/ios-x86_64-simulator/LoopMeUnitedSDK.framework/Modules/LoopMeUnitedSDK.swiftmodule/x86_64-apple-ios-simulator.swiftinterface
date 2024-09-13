@@ -43,14 +43,14 @@ public struct LoopMeOMIDVideoEvents {
 @_inheritsConvenienceInitializers @objc(LoopMeOMIDWrapper) public class OMSDKWrapper : ObjectiveC.NSObject {
   @objc public static var isReady: Swift.Bool
   @objc public static func initOMID(completionBlock: @escaping (Swift.Bool) -> Swift.Void) -> Swift.Bool
-  @objc public func injectScriptContentIntoHTML(_ htmlString: Swift.String) throws -> Swift.String
+  @objc public func injectScriptContentIntoHTML(omidJS: Swift.String, htmlString: Swift.String) throws -> Swift.String
   @objc public func contextForHTML(_ webView: WebKit.WKWebView) throws -> OMSDK_Loopme.OMIDLoopmeAdSessionContext
-  @objc public func contextForNativeVideo(_ resources: [LoopMeUnitedSDK.AdVerificationWrapper]) -> LoopMeUnitedSDK.AdSessionContextResult
+  @objc public func contextForNativeVideo(omidJS: Swift.String, _ resources: [LoopMeUnitedSDK.AdVerificationWrapper]) -> LoopMeUnitedSDK.AdSessionContextResult
   @objc public func toOmidResources(_ resources: [LoopMeUnitedSDK.AdVerificationWrapper]) -> [OMSDK_Loopme.OMIDLoopmeVerificationScriptResource]
   @objc public func configurationFor(_ creativeType: OMSDK_Loopme.OMIDCreativeType) throws -> OMSDK_Loopme.OMIDLoopmeAdSessionConfiguration
   @objc public func sessionFor(_ configuration: OMSDK_Loopme.OMIDLoopmeAdSessionConfiguration, context: OMSDK_Loopme.OMIDLoopmeAdSessionContext) throws -> OMSDK_Loopme.OMIDLoopmeAdSession
   @objc public func sessionForHTML(_ webView: WebKit.WKWebView) throws -> OMSDK_Loopme.OMIDLoopmeAdSession
-  @objc public func sessionForNativeVideo(_ resources: [LoopMeUnitedSDK.AdVerificationWrapper]) throws -> OMSDK_Loopme.OMIDLoopmeAdSession
+  @objc public func sessionForNativeVideo(omidJS: Swift.String, resources: [LoopMeUnitedSDK.AdVerificationWrapper]) throws -> OMSDK_Loopme.OMIDLoopmeAdSession
   @objc override dynamic public init()
   @objc deinit
 }
@@ -58,6 +58,7 @@ public struct LoopMeOMIDVideoEvents {
   public var adId: Swift.String?
   public var duration: Swift.Double
   public var skipOffset: LoopMeUnitedSDK.VastSkipOffset
+  public var orientation: LoopMeUnitedSDK.AdOrientationWrapper
   public var adTagURI: Swift.String?
   public var isWrapper: Swift.Bool
   public func append(vastProperties: LoopMeUnitedSDK.VastProperties)
