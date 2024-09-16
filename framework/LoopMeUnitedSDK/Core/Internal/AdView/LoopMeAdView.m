@@ -633,6 +633,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
         return;
     }
     if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+        [self adDisplayControllerDidFinishLoadingAd: self.adDisplayController];
         return;
     }
     [self.adDisplayControllerVPAID loadAdConfiguration];

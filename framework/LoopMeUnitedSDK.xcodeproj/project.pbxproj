@@ -101,9 +101,7 @@
 		47A57C8E233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BEE233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h */; };
 		47A57C8F233E31C8001F7DA3 /* LoopMeAdDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BEF233E31C8001F7DA3 /* LoopMeAdDisplayController.m */; };
 		47A57C90233E31C8001F7DA3 /* LoopMeORTBTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF1233E31C8001F7DA3 /* LoopMeORTBTools.m */; };
-		47A57C91233E31C8001F7DA3 /* LoopMeServerURLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF2233E31C8001F7DA3 /* LoopMeServerURLBuilder.m */; };
 		47A57C92233E31C8001F7DA3 /* LoopMeORTBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF3233E31C8001F7DA3 /* LoopMeORTBTools.h */; };
-		47A57C93233E31C8001F7DA3 /* LoopMeServerURLBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF4233E31C8001F7DA3 /* LoopMeServerURLBuilder.h */; };
 		47A57C94233E31C8001F7DA3 /* LoopMeCloseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF6233E31C8001F7DA3 /* LoopMeCloseButton.h */; };
 		47A57C95233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF8233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m */; };
 		47A57C96233E31C8001F7DA3 /* LoopMeProgressOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF9233E31C8001F7DA3 /* LoopMeProgressOverlayView.h */; };
@@ -128,7 +126,6 @@
 		47A57CAA233E31C8001F7DA3 /* LoopMeError.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C12233E31C8001F7DA3 /* LoopMeError.m */; };
 		47A57CAD233E31C8001F7DA3 /* LoopMeGlobalSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C15233E31C8001F7DA3 /* LoopMeGlobalSettings.h */; };
 		47A57CAE233E31C8001F7DA3 /* LoopMeVPAIDError.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C16233E31C8001F7DA3 /* LoopMeVPAIDError.m */; };
-		47A57CAF233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C17233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h */; };
 		47A57CB0233E31C8001F7DA3 /* LoopMeLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C18233E31C8001F7DA3 /* LoopMeLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57CB1233E31C8001F7DA3 /* LoopMeIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C19233E31C8001F7DA3 /* LoopMeIdentityProvider.h */; };
 		47A57CB2233E31C8001F7DA3 /* LoopMeDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C1A233E31C8001F7DA3 /* LoopMeDefinitions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -147,7 +144,6 @@
 		47A57CC0233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C29233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h */; };
 		47A57CC1233E31C8001F7DA3 /* LoopMeIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C2A233E31C8001F7DA3 /* LoopMeIdentityProvider.m */; };
 		47A57CC2233E31C8001F7DA3 /* LoopMeLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C2B233E31C8001F7DA3 /* LoopMeLogging.m */; };
-		47A57CC3233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C2C233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m */; };
 		47A57CC4233E31C8001F7DA3 /* LoopMeVPAIDError.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C2D233E31C8001F7DA3 /* LoopMeVPAIDError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57CCC233E31C8001F7DA3 /* LoopMeGDPRTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57C37233E31C8001F7DA3 /* LoopMeGDPRTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47A57CCF233E31C8001F7DA3 /* LoopMeGDPRTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57C3A233E31C8001F7DA3 /* LoopMeGDPRTools.m */; };
@@ -861,7 +857,6 @@
 				47A57C92233E31C8001F7DA3 /* LoopMeORTBTools.h in Headers */,
 				47A57C5C233E31C8001F7DA3 /* LoopMeVPAIDClient.h in Headers */,
 				47A57C78233E31C8001F7DA3 /* LoopMeReachability.h in Headers */,
-				47A57CAF233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h in Headers */,
 				47A57C5F233E31C8001F7DA3 /* LoopMeVideoClientNormal.h in Headers */,
 				47A57CA1233E31C8001F7DA3 /* LoopMeCancelView.h in Headers */,
 				47A57C67233E31C8001F7DA3 /* LoopMeDiscURLCache.h in Headers */,
@@ -869,7 +864,6 @@
 				47A57CC0233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h in Headers */,
 				47A57C62233E31C8001F7DA3 /* LoopMeViewabilityProtocol.h in Headers */,
 				474545D52435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.h in Headers */,
-				47A57C93233E31C8001F7DA3 /* LoopMeServerURLBuilder.h in Headers */,
 				47A57C9A233E31C8001F7DA3 /* LoopMeAdWebView.h in Headers */,
 				47A57CBD233E31C8001F7DA3 /* NSString+Encryption.h in Headers */,
 				47A57C77233E31C8001F7DA3 /* LoopMeAdManager.h in Headers */,
@@ -1047,7 +1041,6 @@
 				47500F4C234C8B760099AD1E /* UserAgent.swift in Sources */,
 				47A57C70233E31C8001F7DA3 /* LoopMeReachability.m in Sources */,
 				47A57C58233E31C8001F7DA3 /* LoopMeVideoClientNormal.m in Sources */,
-				47A57C91233E31C8001F7DA3 /* LoopMeServerURLBuilder.m in Sources */,
 				47A57C9C233E31C8001F7DA3 /* LoopMeVASTPlayerUIView.m in Sources */,
 				47A57B66233CFAD9001F7DA3 /* AssetLinks.swift in Sources */,
 				47A57B6B233CFAD9001F7DA3 /* ServerCommunicator.swift in Sources */,
@@ -1058,7 +1051,6 @@
 				47A57C8D233E31C8001F7DA3 /* LoopMeDestinationDisplayController.m in Sources */,
 				47A57B67233CFAD9001F7DA3 /* VastSkipOffset.swift in Sources */,
 				47A57C72233E31C8001F7DA3 /* LoopMeAdManager.m in Sources */,
-				47A57CC3233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m in Sources */,
 				47A57B60233CFAD9001F7DA3 /* MRAIDExpandProperties.swift in Sources */,
 				47A57B5E233CFAD9001F7DA3 /* ObjcWrapper.swift in Sources */,
 				47A57CA4233E31C8001F7DA3 /* LoopMeAdView.m in Sources */,

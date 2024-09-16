@@ -459,10 +459,13 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)adManagerDidReceiveAd: (LoopMeAdManager *)manager {
-    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVast && self.adConfiguration) {
+    if (!self.adConfiguration) return;
+    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVast) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.adDisplayControllerVPAID loadAdConfiguration];
         });
+    } else {
+        [self adDisplayControllerDidFinishLoadingAd: self.adDisplayController];
     }
 }
 

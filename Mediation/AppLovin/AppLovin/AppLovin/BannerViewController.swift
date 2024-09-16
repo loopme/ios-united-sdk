@@ -52,10 +52,12 @@ class BannerViewController: UIViewController, MAAdViewAdDelegate {
         NSLog("CALLBACK - banner didFailToLoadAd", error)
     }
     
+    /* DO NOT USE - THIS IS RESERVED FOR FULLSCREEN ADS ONLY AND WILL BE REMOVED IN A FUTURE SDK RELEASE */
     func didDisplay(_ ad: MAAd) {
         NSLog("CALLBACK - banner didDisplay")
     }
     
+    /* DO NOT USE - THIS IS RESERVED FOR FULLSCREEN ADS ONLY AND WILL BE REMOVED IN A FUTURE SDK RELEASE */
     func didHide(_ ad: MAAd) {
         NSLog("CALLBACK - banner didHide")
     }

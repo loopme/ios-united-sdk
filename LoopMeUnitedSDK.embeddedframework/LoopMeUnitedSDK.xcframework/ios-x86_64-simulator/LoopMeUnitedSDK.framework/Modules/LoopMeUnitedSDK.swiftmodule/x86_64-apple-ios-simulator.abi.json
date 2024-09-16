@@ -1305,8 +1305,14 @@
           {
             "kind": "Function",
             "name": "injectScriptContentIntoHTML",
-            "printedName": "injectScriptContentIntoHTML(_:)",
+            "printedName": "injectScriptContentIntoHTML(omidJS:htmlString:)",
             "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
               {
                 "kind": "TypeNominal",
                 "name": "String",
@@ -1321,9 +1327,10 @@
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(im)injectScriptContentIntoHTML:error:",
-            "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC27injectScriptContentIntoHTMLyS2SKF",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(im)injectScriptContentIntoHTMLWithOmidJS:htmlString:error:",
+            "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC27injectScriptContentIntoHTML6omidJS10htmlStringS2S_SStKF",
             "moduleName": "LoopMeUnitedSDK",
+            "objc_name": "injectScriptContentIntoHTMLWithOmidJS:htmlString:error:",
             "declAttributes": [
               "AccessControl",
               "ObjC"
@@ -1363,13 +1370,19 @@
           {
             "kind": "Function",
             "name": "contextForNativeVideo",
-            "printedName": "contextForNativeVideo(_:)",
+            "printedName": "contextForNativeVideo(omidJS:_:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "AdSessionContextResult",
                 "printedName": "LoopMeUnitedSDK.AdSessionContextResult",
                 "usr": "c:@M@LoopMeUnitedSDK@objc(cs)AdSessionContextResult"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               },
               {
                 "kind": "TypeNominal",
@@ -1387,9 +1400,10 @@
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(im)contextForNativeVideo:",
-            "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC21contextForNativeVideoyAA22AdSessionContextResultCSayAA0J19VerificationWrapperCGF",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(im)contextForNativeVideoWithOmidJS::",
+            "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC21contextForNativeVideo6omidJS_AA22AdSessionContextResultCSS_SayAA0L19VerificationWrapperCGtF",
             "moduleName": "LoopMeUnitedSDK",
+            "objc_name": "contextForNativeVideoWithOmidJS::",
             "declAttributes": [
               "AccessControl",
               "ObjC"
@@ -1536,13 +1550,19 @@
           {
             "kind": "Function",
             "name": "sessionForNativeVideo",
-            "printedName": "sessionForNativeVideo(_:)",
+            "printedName": "sessionForNativeVideo(omidJS:resources:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "OMIDLoopmeAdSession",
                 "printedName": "OMSDK_Loopme.OMIDLoopmeAdSession",
                 "usr": "c:objc(cs)OMIDLoopmeAdSession"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
               },
               {
                 "kind": "TypeNominal",
@@ -1560,9 +1580,10 @@
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(im)sessionForNativeVideo:error:",
-            "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC21sessionForNativeVideoySo19OMIDLoopmeAdSessionCSayAA0K19VerificationWrapperCGKF",
+            "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeOMIDWrapper(im)sessionForNativeVideoWithOmidJS:resources:error:",
+            "mangledName": "$s15LoopMeUnitedSDK12OMSDKWrapperC21sessionForNativeVideo6omidJS9resourcesSo19OMIDLoopmeAdSessionCSS_SayAA0N19VerificationWrapperCGtKF",
             "moduleName": "LoopMeUnitedSDK",
+            "objc_name": "sessionForNativeVideoWithOmidJS:resources:error:",
             "declAttributes": [
               "AccessControl",
               "ObjC"
@@ -1954,6 +1975,92 @@
                 "declKind": "Accessor",
                 "usr": "s:15LoopMeUnitedSDK14VastPropertiesC10skipOffsetAA0e4SkipH0VvM",
                 "mangledName": "$s15LoopMeUnitedSDK14VastPropertiesC10skipOffsetAA0e4SkipH0VvM",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "orientation",
+            "printedName": "orientation",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AdOrientationWrapper",
+                "printedName": "LoopMeUnitedSDK.AdOrientationWrapper",
+                "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeAdOrientation"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvp",
+            "mangledName": "$s15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvp",
+            "moduleName": "LoopMeUnitedSDK",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AdOrientationWrapper",
+                    "printedName": "LoopMeUnitedSDK.AdOrientationWrapper",
+                    "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeAdOrientation"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvg",
+                "mangledName": "$s15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvg",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AdOrientationWrapper",
+                    "printedName": "LoopMeUnitedSDK.AdOrientationWrapper",
+                    "usr": "c:@M@LoopMeUnitedSDK@E@LoopMeAdOrientation"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvs",
+                "mangledName": "$s15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvs",
+                "moduleName": "LoopMeUnitedSDK",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvM",
+                "mangledName": "$s15LoopMeUnitedSDK14VastPropertiesC11orientationAA20AdOrientationWrapperOvM",
                 "moduleName": "LoopMeUnitedSDK",
                 "implicit": true,
                 "accessorKind": "_modify"
@@ -12565,30 +12672,23 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "BooleanLiteral",
-      "offset": 731,
+      "offset": 700,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 949,
+      "offset": 918,
       "length": 8,
       "value": "\"Loopme\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 984,
+      "offset": 953,
       "length": 9,
       "value": "\"OMID_JS\""
-    },
-    {
-      "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 1021,
-      "length": 42,
-      "value": "\"https:\/\/i.loopme.me\/html\/ios\/omsdk-v1.js\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
@@ -12600,35 +12700,35 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "Array",
-      "offset": 480,
+      "offset": 542,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "BooleanLiteral",
-      "offset": 521,
+      "offset": 583,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "Array",
-      "offset": 645,
+      "offset": 707,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "Dictionary",
-      "offset": 1775,
+      "offset": 1837,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "StringLiteral",
-      "offset": 7410,
+      "offset": 7472,
       "length": 2,
       "value": "\"\""
     },
@@ -13132,7 +13232,7 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
-      "offset": 1990,
+      "offset": 2059,
       "length": 2,
       "value": "\"\""
     },
@@ -13279,7 +13379,7 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "BooleanLiteral",
-      "offset": 4270,
+      "offset": 4280,
       "length": 5,
       "value": "false"
     },
@@ -13293,70 +13393,70 @@
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 4755,
+      "offset": 4765,
       "length": 23,
       "value": "\"LoopMeUnitedSDK.VastEventTrackerWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 5507,
+      "offset": 5517,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.ProgressEventWrappper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 5718,
+      "offset": 5728,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.VastPropertiesWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 7521,
+      "offset": 7531,
       "length": 22,
       "value": "\"LoopMeUnitedSDK.AdTrackingLinksWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 8662,
+      "offset": 8672,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.VastSkipOffsetWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 9327,
+      "offset": 9337,
       "length": 17,
       "value": "\"LoopMeUnitedSDK.AssetLinksWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 9883,
+      "offset": 9893,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.AdVerificationWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 10417,
+      "offset": 10427,
       "length": 25,
       "value": "\"LoopMeUnitedSDK.ViewableImpressionWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 10977,
+      "offset": 10987,
       "length": 21,
       "value": "\"LoopMeUnitedSDK.LinearTrackingWrapper\""
     },
     {
       "filePath": "\/Users\/evgenepanchin\/work\/projects\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
-      "offset": 12535,
+      "offset": 12545,
       "length": 27,
       "value": "\"LoopMeUnitedSDK.ProgressEventTrackerWrapper\""
     },

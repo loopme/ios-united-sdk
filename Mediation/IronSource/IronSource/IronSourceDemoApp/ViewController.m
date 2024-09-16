@@ -38,6 +38,10 @@
         userId = USERID;
     }
     
+    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
+    [IronSource setLevelPlayInterstitialDelegate: self];
+    [IronSource setLevelPlayBannerDelegate: self];
+    
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId: userId];
     [IronSource initWithAppKey: APPKEY];
@@ -64,10 +68,6 @@
 
 - (void)viewWillAppear: (BOOL)animated {
     [super viewWillAppear: animated];
-
-    [IronSource setLevelPlayRewardedVideoManualDelegate: self];
-    [IronSource setLevelPlayInterstitialDelegate: self];
-    [IronSource setLevelPlayBannerDelegate: self];
 
     [[NSNotificationCenter defaultCenter] addObserver: self
                                              selector: @selector(keyboardWillShow:)
@@ -153,7 +153,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didLoadWithAdInfo: (ISAdInfo *)adInfo{
-    NSLog(@"didLoadWithAdInfo: %@", adInfo);
+    NSLog(@"[ISAdapter] didLoadWithAdInfo: %@", adInfo);
     [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
     if ([adInfo.ad_unit isEqual: @"interstitial"])
         _showISButton.enabled = YES;
@@ -166,7 +166,7 @@
  @param error The reason for the error
  */
 - (void)didFailToLoadWithError: (NSError *)error {
-    NSLog(@"didFailToLoadWithError: %@", error);
+    NSLog(@"[ISAdapter] didFailToLoadWithError: %@", error);
     [self showText: error.localizedDescription];
 }
 
@@ -176,8 +176,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didReceiveRewardForPlacement: (ISPlacementInfo *)placementInfo withAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didReceiveRewardForPlacement: %@\n%@", adInfo, placementInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
+    NSLog(@"[ISAdapter] didReceiveRewardForPlacement: %@\n%@", adInfo, placementInfo);
 }
 
 /**
@@ -186,7 +185,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didFailToShowWithError: (NSError *)error andAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didFailToShowWithError: %@\n%@", adInfo, error);
+    NSLog(@"[ISAdapter] didFailToShowWithError: %@\n%@", adInfo, error);
     [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
 }
 
@@ -195,8 +194,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didOpenWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didOpenWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
+    NSLog(@"[ISAdapter] didOpenWithAdInfo: %@", adInfo);
 }
 
 /**
@@ -204,8 +202,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didCloseWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didCloseWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
+    NSLog(@"[ISAdapter] didCloseWithAdInfo: %@", adInfo);
     if ([adInfo.ad_unit isEqual: @"interstitial"])
         _showISButton.enabled = NO;
     else
@@ -219,21 +216,23 @@
  @param adInfo The info of the ad.
  */
 - (void)didClick: (ISPlacementInfo *)placementInfo withAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didClick: %@\n%@", adInfo, placementInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
+    NSLog(@"[ISAdapter] didClick: %@\n%@", adInfo, placementInfo);
 }
 
+- (void)hasAvailableAdWithAdInfo:(ISAdInfo *)adInfo {
+    NSLog(@"[ISAdapter] hasAvailableAdWithAdInfo");
+
+}
 /**
  Called after an interstitial has been clicked.
  @param adInfo The info of the ad.
  */
 - (void)didClickWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didClickWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
+    NSLog(@"[ISAdapter] didClickWithAdInfo: %@", adInfo);
 }
 
 - (void)didLoad: (ISBannerView *)bannerView withAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didLoad: %@", adInfo);
+    NSLog(@"[ISAdapter] didLoad: %@", adInfo);
     [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
     CGFloat viewCenterX = self.view.center.x;
     CGFloat viewСenterY = (self.view.frame.size.height - (bannerView.frame.size.height / 2.0) - self.view.safeAreaInsets.bottom);
@@ -244,18 +243,8 @@
     });
 }
 
-- (void)didDismissScreenWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"[ISAdapter] - didDismissScreenWithAdInfo");
-}
-
-
 - (void)didLeaveApplicationWithAdInfo: (ISAdInfo *)adInfo {
     NSLog(@"[ISAdapter] - didLeaveApplicationWithAdInfo");
-}
-
-
-- (void)didPresentScreenWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"[ISAdapter] - didPresentScreenWithAdInfo");
 }
 
 /**
@@ -265,8 +254,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didShowWithAdInfo: (ISAdInfo *)adInfo {
-    NSLog(@"didShowWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
+    NSLog(@"[ISAdapter] didShowWithAdInfo: %@", adInfo);
 }
 
 @end

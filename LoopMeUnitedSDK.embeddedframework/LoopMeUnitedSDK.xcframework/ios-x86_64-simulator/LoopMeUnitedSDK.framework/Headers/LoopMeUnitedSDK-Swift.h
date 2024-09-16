@@ -472,14 +472,14 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL isReady;)
 + (BOOL)isReady SWIFT_WARN_UNUSED_RESULT;
 + (void)setIsReady:(BOOL)value;
 + (BOOL)initOMIDWithCompletionBlock:(void (^ _Nonnull)(BOOL))completionBlock SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
-- (NSString * _Nullable)injectScriptContentIntoHTML:(NSString * _Nonnull)htmlString error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nullable)injectScriptContentIntoHTMLWithOmidJS:(NSString * _Nonnull)omidJS htmlString:(NSString * _Nonnull)htmlString error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
 - (OMIDLoopmeAdSessionContext * _Nullable)contextForHTML:(WKWebView * _Nonnull)webView error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
-- (AdSessionContextResult * _Nonnull)contextForNativeVideo:(NSArray<LoopMeAdVerification *> * _Nonnull)resources SWIFT_WARN_UNUSED_RESULT;
+- (AdSessionContextResult * _Nonnull)contextForNativeVideoWithOmidJS:(NSString * _Nonnull)omidJS :(NSArray<LoopMeAdVerification *> * _Nonnull)resources SWIFT_WARN_UNUSED_RESULT;
 - (NSArray<OMIDLoopmeVerificationScriptResource *> * _Nonnull)toOmidResources:(NSArray<LoopMeAdVerification *> * _Nonnull)resources SWIFT_WARN_UNUSED_RESULT;
 - (OMIDLoopmeAdSessionConfiguration * _Nullable)configurationFor:(OMIDCreativeType)creativeType error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
 - (OMIDLoopmeAdSession * _Nullable)sessionFor:(OMIDLoopmeAdSessionConfiguration * _Nonnull)configuration context:(OMIDLoopmeAdSessionContext * _Nonnull)context error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
 - (OMIDLoopmeAdSession * _Nullable)sessionForHTML:(WKWebView * _Nonnull)webView error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
-- (OMIDLoopmeAdSession * _Nullable)sessionForNativeVideo:(NSArray<LoopMeAdVerification *> * _Nonnull)resources error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
+- (OMIDLoopmeAdSession * _Nullable)sessionForNativeVideoWithOmidJS:(NSString * _Nonnull)omidJS resources:(NSArray<LoopMeAdVerification *> * _Nonnull)resources error:(NSError * _Nullable * _Nullable)error SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

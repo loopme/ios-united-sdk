@@ -45,7 +45,7 @@
     return [LoopMeSDK version];
 }
 - (NSString *) adapterVersion {
-   return @"0.0.12";
+   return @"0.0.13";
 }
 
 @end

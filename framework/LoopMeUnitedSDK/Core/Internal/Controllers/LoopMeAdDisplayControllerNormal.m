@@ -175,8 +175,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     WKUserContentController *controller = [[WKUserContentController alloc] init];
     [controller addScriptMessageHandler: self.mraidScriptMessageHandler
                                    name: @"mraid"];
-
-    NSString *mraidjs = [[LoopMeSDK shared] getJSStringFromResources:@"mraid.js"];
+    
+    NSString *mraidjs = [self.adConfiguration.creativeContent containsString: @"mraid.js"] ?
+        [[LoopMeSDK shared] getJSStringFromResources:@"mraid.js"] : @"";
     WKUserScript *script = [[WKUserScript alloc] initWithSource: mraidjs
                                                   injectionTime: WKUserScriptInjectionTimeAtDocumentStart
                                                forMainFrameOnly: NO];
@@ -185,6 +186,18 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [self initializeWebViewWithContentController: controller];
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
+}
+
+- (WKWebView *)webView: (WKWebView *)webView
+createWebViewWithConfiguration: (WKWebViewConfiguration *)configuration
+   forNavigationAction: (WKNavigationAction *)navigationAction
+        windowFeatures: (WKWindowFeatures *)windowFeatures
+{
+    if ([self.delegate respondsToSelector: @selector(adDisplayControllerDidReceiveTap:)]) {
+        [self.delegate adDisplayControllerDidReceiveTap: self];
+    }
+    [self interceptURL: navigationAction.request.URL];
+    return nil;
 }
 
 - (void)deviceShaken {

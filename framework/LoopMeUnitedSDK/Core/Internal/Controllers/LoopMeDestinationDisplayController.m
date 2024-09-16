@@ -114,6 +114,7 @@
 
 - (void)showWebView: (NSURL *)baseURL {
     [self hideOverlay];
+    [self.delegate destinationDisplayControllerWillLeaveApplication:self];
     
     self.browserController = [[SFSafariViewController alloc] initWithURL:baseURL];
     self.browserController.delegate = self;

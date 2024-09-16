@@ -40,13 +40,13 @@
                           adData: (nonnull ISAdData *)adData
                         delegate: (nonnull id<ISRewardedVideoAdDelegate>)delegate {
     // check if ad can be displayed
-    if (![self.interstitial isReady]) {
-       [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
-                                 errorMessage: @"LoopMe Rewarded is not redy to display"];
-       return;
+    if (![self isAdAvailableWithAdData:adData]) {
+        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
+                                  errorMessage: @"LoopMe Rewarded is not redy to display"];
+        return;
     }
-     [self.interstitial showFromViewController: viewController animated: YES];
-     [delegate adDidShowSucceed];
+    [self.interstitial showFromViewController: viewController animated: YES];
+    [delegate adDidShowSucceed];
 }
 
 - (void)loopMeInterstitialDidLoadAd: (LoopMeInterstitial *)interstitial {
@@ -64,6 +64,8 @@
 - (void)loopMeInterstitialDidAppear: (LoopMeInterstitial *)interstitial {
     NSLog(@"LoopMe rewarded video did present");
     [self.delegate adDidOpen];
+    [self.delegate adDidStart];
+    [self.delegate adDidBecomeVisible];
 }
 
 - (void)loopMeInterstitialDidDisappear: (LoopMeInterstitial *)interstitial {
