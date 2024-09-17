@@ -149,7 +149,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
 #pragma mark - LoopMeServerCommunicatorDelegate
 
-- (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {    
+- (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration { 
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
     adConfiguration.appKey = self.appKey;
     if ([self.delegate respondsToSelector: @selector(adManager:didReceiveAdConfiguration:)]) {
@@ -163,7 +163,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didFailWith: (NSError *)error {
     self.loading = NO;
     LoopMeLogDebug(@"Ad failed to load with error: %@", error);
-    
     if ([self.delegate respondsToSelector: @selector(adManager:didFailToLoadAdWithError:)]) {
         [self.delegate adManager: self didFailToLoadAdWithError: error];
     }
