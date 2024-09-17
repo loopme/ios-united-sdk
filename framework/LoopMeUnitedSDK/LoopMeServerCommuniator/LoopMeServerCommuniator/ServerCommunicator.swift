@@ -22,7 +22,8 @@ open class ServerCommunicator: NSObject {
     private var configurationWrapper: AdConfigurationWrapper?
     private var url: URL?
     private var data: Data!
-    
+    private var startTime: CFAbsoluteTime!
+
     let adRequestTimeOutInterval: TimeInterval = 20.0
     let maxWrapperNodes = 5
     var wrapperRequestCounter: Int = 0
@@ -41,6 +42,7 @@ open class ServerCommunicator: NSObject {
     }
     
     @objc public func load(url: URL, requestBody: Data?, method: String?) {
+        self.startTime = CFAbsoluteTimeGetCurrent()
         if let properties = self.configuration?.vastProperties, !properties.isWrapper {
             self.configuration = nil;
         }
@@ -66,13 +68,13 @@ open class ServerCommunicator: NSObject {
 //                }
 //                       
                 if response.statusCode == 408 || response.statusCode == NSURLErrorTimedOut {
-                   self.delegate?.serverCommunicator(self, didFailWith: ServerError.timeout)
+                    self.taskFailed(error: ServerError.timeout)
                     return
                 } else if response.statusCode == 204 {
-                    self.delegate?.serverCommunicator(self, didFailWith: ServerError.noAds)
+                    self.taskFailed(error: ServerError.noAds)
                     return
                 } else if response.statusCode >= 500 {
-                    self.delegate?.serverCommunicator(self, didFailWith: ServerError.serverError(response.statusCode))
+                    self.taskFailed(error: ServerError.serverError(response.statusCode))
                     return
                 }
                        
@@ -143,6 +145,11 @@ open class ServerCommunicator: NSObject {
     
     
     func taskCompleted(success: Bool, error: Error?) {
+        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+        if timeElapsed > 1 {
+            self.delegate?.serverTimeAlert(self, timeElapsed: Int(timeElapsed * 1000), status: success)
+        }
+        
         self.isLoading = false
         self.configuration = nil
         if let configuration = self.configurationWrapper {
@@ -154,10 +161,20 @@ open class ServerCommunicator: NSObject {
             self.delegate?.serverCommunicator(self, didFailWith: error)
         }
     }
+    
+    func taskFailed( error: Error?) {
+        let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+        if timeElapsed > 1 {
+            self.delegate?.serverTimeAlert(self, timeElapsed: Int(timeElapsed * 1000), status: false)
+        }
+        self.delegate?.serverCommunicator(self, didFailWith: error)
+    }
+    
 }
 
 @objc public protocol LoopMeServerCommunicatorDelegate: NSObjectProtocol {
     @objc func serverCommunicator(_ communicator: ServerCommunicator, didReceive adConfiguration: AdConfigurationWrapper)
     @objc func serverCommunicator(_ communicator: ServerCommunicator, didFailWith error: Error?)
     @objc func serverCommunicatorDidReceiveAd(_ communicator: ServerCommunicator)
+    @objc func serverTimeAlert(_ communicator: ServerCommunicator, timeElapsed: Int, status: Bool)
 }

@@ -39,7 +39,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 @property (nonatomic, strong) NSString *integrationType;
 @property (nonatomic, assign) CGSize adSpotSize;
 @property (nonatomic, assign) LoopMeAdType adTypes;
-@property (nonatomic, assign) CFAbsoluteTime startTime;
 @property (nonatomic, weak) id adUnit;
 
 @end
@@ -105,7 +104,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     self.loading = YES;
     LoopMeLogInfo(@"Did start loading ad");
     LoopMeLogDebug(@"loads ad with URL %@", [URL absoluteString]);
-    self.startTime = CFAbsoluteTimeGetCurrent();
     [self.communicator loadWithUrl: URL requestBody: body method: @"POST"];
 }
 
@@ -151,13 +149,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
 #pragma mark - LoopMeServerCommunicatorDelegate
 
-- (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {
-    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-    double timeElapsed = endTime - self.startTime;
-    if (timeElapsed > 1) {
-        [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency errorMessage:@"ORTB request takes more then 1sec" status:@"Success" time:((int) timeElapsed) className:@"LoopMeAdManager"];
-    }
-    
+- (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {    
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
     adConfiguration.appKey = self.appKey;
     if ([self.delegate respondsToSelector: @selector(adManager:didReceiveAdConfiguration:)]) {
@@ -169,12 +161,6 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 }
 
 - (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didFailWith: (NSError *)error {
-    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
-    double timeElapsed = endTime - self.startTime;
-    if (timeElapsed > 1) {
-        [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency errorMessage:@"ORTB request takes more then 1sec" status:@"Fail" time:((int) timeElapsed) className:@"LoopMeAdManager"];
-    }
-    
     self.loading = NO;
     LoopMeLogDebug(@"Ad failed to load with error: %@", error);
     
@@ -183,5 +169,12 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     }
 }
 
+- (void)serverTimeAlert:(LoopMeServerCommunicator *)communicator timeElapsed:(NSInteger)timeElapsed status:(BOOL)status {
+    [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency
+                                errorMessage:@"ORTB request takes more then 1sec"
+                                status: (status ? @"Success" : @"Fail")
+                                time:((int) timeElapsed)
+                                className:@"LoopMeAdManager"];
+}
 
 @end
