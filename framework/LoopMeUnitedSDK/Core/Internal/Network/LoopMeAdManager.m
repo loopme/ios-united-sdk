@@ -143,8 +143,11 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     rtbTools.banner = [self isAdType: adTypes equalTo: LoopMeAdTypeHTML];
     BOOL isBannerSize = !(size.width >= 320 && size.height >= 320);
     rtbTools.video = [self isAdType: adTypes equalTo: LoopMeAdTypeVideo] && !isBannerSize;
+    NSData *requestBody = [rtbTools makeRequestBody];
+    BOOL isValidated = [rtbTools validateRequestData:requestBody];
+    
     [self loadAdWithURL: [NSURL URLWithString: kLoopMeAPIURL]
-            requestBody: [rtbTools makeRequestBody]];
+            requestBody: requestBody];
 }
 
 #pragma mark - LoopMeServerCommunicatorDelegate

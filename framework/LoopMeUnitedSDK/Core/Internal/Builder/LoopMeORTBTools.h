@@ -25,5 +25,6 @@
                           isInterstitial: (BOOL)isInterstitial
                               isRewarded: (BOOL)isRewarded;
 - (NSData * _Nonnull )makeRequestBody;
+- (BOOL)validateRequestData:(NSData *)data;
 
 @end

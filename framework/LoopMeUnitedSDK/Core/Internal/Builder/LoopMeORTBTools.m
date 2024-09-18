@@ -300,4 +300,72 @@ id cleanNullsFromCollection(id collection) {
     return collection;
 }
 
+- (BOOL)validateRequestData:(NSData *)data {
+    NSError *error = nil;
+    
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+
+    if (error || !jsonDict) {
+        NSLog(@"Validation failed: Invalid input data. Error: %@", error.localizedDescription);
+        return NO;
+    }
+
+    // Validate required fields
+    if (![self validateStringInDictionary:jsonDict[@"app"] forKey:@"id" errorMessage:@"app.id is missing or empty."]) {
+        return NO;
+    }
+
+    if (![self validateStringInDictionary:jsonDict[@"source"][@"ext"] forKey:@"omidpn" errorMessage:@"source.ext.omidpn is missing or empty."] ||
+        ![self validateStringInDictionary:jsonDict[@"source"][@"ext"] forKey:@"omidpv" errorMessage:@"source.ext.omidpv is missing or empty."]) {
+        return NO;
+    }
+
+    if (![self validateStringInDictionary:jsonDict[@"events"][@"ext"] forKey:@"omidpn" errorMessage:@"events.ext.omidpn is missing or empty."] ||
+        ![self validateStringInDictionary:jsonDict[@"events"][@"ext"] forKey:@"omidpv" errorMessage:@"events.ext.omidpv is missing or empty."]) {
+        return NO;
+    }
+
+    NSArray *imp = jsonDict[@"imp"];
+    if (!imp || imp.count == 0) {
+        NSLog(@"Validation failed: 'imp' array is missing or empty.");
+        return NO;
+    }
+
+    NSDictionary *firstImp = imp.firstObject;
+    
+    NSDictionary *banner = firstImp[@"banner"];
+    if (banner && (![self validateDimensionInDictionary:banner forWidthKey:@"w" heightKey:@"h" objectName:@"banner"])) {
+        return NO;
+    }
+
+    NSDictionary *video = firstImp[@"video"];
+    if (video && (![self validateDimensionInDictionary:video forWidthKey:@"w" heightKey:@"h" objectName:@"video"])) {
+        return NO;
+    }
+
+    return YES;
+}
+
+#pragma mark - Helper Methods
+
+- (BOOL)validateStringInDictionary:(NSDictionary *)dict forKey:(NSString *)key errorMessage:(NSString *)errorMessage {
+    if (!dict || ![dict[key] isKindOfClass:[NSString class]] || [dict[key] length] == 0) {
+        NSLog(@"Validation failed: %@", errorMessage);
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)validateDimensionInDictionary:(NSDictionary *)dict forWidthKey:(NSString *)widthKey heightKey:(NSString *)heightKey objectName:(NSString *)objectName {
+    NSNumber *width = dict[widthKey];
+    NSNumber *height = dict[heightKey];
+
+    if (![width isKindOfClass:[NSNumber class]] || [width integerValue] == 0 ||
+        ![height isKindOfClass:[NSNumber class]] || [height integerValue] == 0) {
+        NSLog(@"Validation failed: %@.w or %@.h is missing or invalid.", objectName, objectName);
+        return NO;
+    }
+    return YES;
+}
+
 @end
