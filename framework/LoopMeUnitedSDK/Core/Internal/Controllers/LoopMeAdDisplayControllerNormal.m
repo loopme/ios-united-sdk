@@ -175,18 +175,9 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     WKUserContentController *controller = [[WKUserContentController alloc] init];
     [controller addScriptMessageHandler: self.mraidScriptMessageHandler
                                    name: @"mraid"];
-
-    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
-    if (!resourcesBundle) {
-        @throw [NSException exceptionWithName: @"NoBundleResource"
-                                       reason: @"No loopme resourse bundle"
-                                     userInfo: nil];
-    }
-    NSString *jsPath = [resourcesBundle pathForResource: @"mraid.js"
-                                                 ofType: @"ignore"];
-    NSString *mraidjs = [NSString stringWithContentsOfFile: jsPath
-                                                  encoding: NSUTF8StringEncoding
-                                                     error: NULL];
+    
+    NSString *mraidjs = [self.adConfiguration.creativeContent containsString: @"mraid.js"] ?
+        [[LoopMeSDK shared] getJSStringFromResources:@"mraid.js"] : @"";
     WKUserScript *script = [[WKUserScript alloc] initWithSource: mraidjs
                                                   injectionTime: WKUserScriptInjectionTimeAtDocumentStart
                                                forMainFrameOnly: NO];
@@ -195,6 +186,18 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
     [self initializeWebViewWithContentController: controller];
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
+}
+
+- (WKWebView *)webView: (WKWebView *)webView
+createWebViewWithConfiguration: (WKWebViewConfiguration *)configuration
+   forNavigationAction: (WKNavigationAction *)navigationAction
+        windowFeatures: (WKWindowFeatures *)windowFeatures
+{
+    if ([self.delegate respondsToSelector: @selector(adDisplayControllerDidReceiveTap:)]) {
+        [self.delegate adDisplayControllerDidReceiveTap: self];
+    }
+    [self interceptURL: navigationAction.request.URL];
+    return nil;
 }
 
 - (void)deviceShaken {
@@ -279,8 +282,8 @@ NSString * const kLoopMeShakeNotificationName = @"DeviceShaken";
 
         NSError *error;
         if (LoopMeOMIDWrapper.isReady) {
-            self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTML: self.adConfiguration.creativeContent
-                                                                                           error: &error];
+            self.adConfiguration.creativeContent = [self.omidWrapper injectScriptContentIntoHTMLWithOmidJS: [[LoopMeSDK shared] getJSStringFromResources:@"omsdk.js"] htmlString:self.adConfiguration.creativeContent error:&error];
+
         }
         NSString *meta = @"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>body{margin:0;padding:0;}</style>";
         NSString *htmlString = [meta stringByAppendingString: self.adConfiguration.creativeContent];

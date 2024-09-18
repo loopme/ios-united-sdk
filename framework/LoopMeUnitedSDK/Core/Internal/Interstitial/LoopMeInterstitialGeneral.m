@@ -11,7 +11,6 @@
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeAdManager.h"
 #import "LoopMeTargeting.h"
-#import "LoopMeGeoLocationProvider.h"
 #import "LoopMeAdDisplayControllerNormal.h"
 #import "LoopMeVPAIDAdDisplayController.h"
 #import "LoopMeInterstitialViewController.h"
@@ -126,12 +125,12 @@ const NSInteger kLoopMeRequestTimeout = 180;
 - (void)dismissAdInterstitialViewController {
     if (self.adInterstitialViewController.presentingViewController) {
          [self.adInterstitialViewController.presentingViewController dismissViewControllerAnimated: NO completion: nil];
-     }
-     
+    }
+    
      [_adManager invalidateTimers];
      [_adDisplayController stopHandlingRequests];
      [_adDisplayControllerVPAID stopHandlingRequests];
-     
+    
      _adDisplayController.delegate = nil;
      _adDisplayControllerVPAID.delegate = nil;
      _adManager = nil;
@@ -284,35 +283,69 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)showFromViewController: (UIViewController *)viewController animated: (BOOL)animated {
-    if (@available(iOS 14.5, *)) {
-        self.skAdImpression = [[SKAdImpression alloc] init];
-        // iOS 16.0 and later
-        if (@available(iOS 16.0, *)) {
-            self.skAdImpression = [[SKAdImpression alloc]
-                                   initWithSourceAppStoreItemIdentifier: (NSNumber *)self.adConfiguration.skadSourceApp
-                                   advertisedAppStoreItemIdentifier: (NSNumber *)self.adConfiguration.skadItunesitem
-                                   adNetworkIdentifier: (NSString *)self.adConfiguration.skadNetwork
-                                   adCampaignIdentifier: (NSNumber *)self.adConfiguration.skadCampaign
-                                   adImpressionIdentifier: (NSString *)self.adConfiguration.skadNonce
-                                   timestamp: (NSNumber *)self.adConfiguration.skadTimestamp
-                                   signature: (NSString *)self.adConfiguration.skadSignature
-                                   version: (NSString *)self.adConfiguration.skadVersion];
-            
-            // iOS 16.1 and later
-            if (@available(iOS 16.1, *)) {
-                if  (![self.adConfiguration.skadSourceidentifier isEqualToNumber: @(0)]) {
-                    [self.skAdImpression setSourceIdentifier: self.adConfiguration.skadSourceidentifier];
-                }
+    [self setupSKAdImpression];
+     
+    NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
+    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey:kErrorInfoClass];
+    
+    if (!self.isReady) {
+        LoopMeLogInfo(@"Ad isn't ready to be displayed");
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom
+                            errorMessage:@"Ad isn't ready to be displayed"
+                                    info:infoDictionary];
+        return;
+    }
+    
+    if (self.adInterstitialViewController.presentingViewController) {
+        LoopMeLogInfo(@"Ad has already displayed");
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom
+                            errorMessage:@"Ad has already displayed"
+                                    info:infoDictionary];
+        return;
+    }
+    
+    LoopMeLogDebug(@"Interstitial ad will appear");
+    if ([self.delegate respondsToSelector:@selector(loopMeInterstitialWillAppear:)]) {
+        [self.delegate loopMeInterstitialWillAppear:self];
+    }
+    
+    [self.adManager invalidateTimers];
+    [self.adInterstitialViewController setOrientation:self.adConfiguration.adOrientation];
+    [self.adInterstitialViewController setAllowOrientationChange:self.adConfiguration.allowOrientationChange];
+    
+    [self displayAd];
+    
+    [viewController presentViewController:self.adInterstitialViewController animated:animated completion:^{
+        [self handleAdAppearance];
+    }];
+}
+
+- (void)setupSKAdImpression {
+    if (@available(iOS 16.0, *)) {
+        self.skAdImpression = [[SKAdImpression alloc] initWithSourceAppStoreItemIdentifier:(NSNumber *)self.adConfiguration.skadSourceApp
+                            advertisedAppStoreItemIdentifier:(NSNumber *)self.adConfiguration.skadItunesitem
+                            adNetworkIdentifier:(NSString *)self.adConfiguration.skadNetwork
+                            adCampaignIdentifier:(NSNumber *)self.adConfiguration.skadCampaign
+                            adImpressionIdentifier:(NSString *)self.adConfiguration.skadNonce
+                            timestamp:(NSNumber *)self.adConfiguration.skadTimestamp
+                            signature:(NSString *)self.adConfiguration.skadSignature
+                            version:(NSString *)self.adConfiguration.skadVersion];
+        
+        if (@available(iOS 16.1, *)) {
+            if (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
+                [self.skAdImpression setSourceIdentifier:self.adConfiguration.skadSourceidentifier];
             }
-        } else {
-            // iOS versions earlier than 16.0
+        }
+    } else {
+        if (@available(iOS 14.5, *)) {
+            self.skAdImpression = [[SKAdImpression alloc] init];
             self.skAdImpression.adNetworkIdentifier = self.adConfiguration.skadNetwork;
             self.skAdImpression.signature = self.adConfiguration.skadSignature;
             self.skAdImpression.version = self.adConfiguration.skadVersion;
             self.skAdImpression.timestamp = self.adConfiguration.skadTimestamp;
             self.skAdImpression.sourceAppStoreItemIdentifier = self.adConfiguration.skadItunesitem;
             
-            if  (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
+            if (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
                 self.skAdImpression.adCampaignIdentifier = self.adConfiguration.skadCampaign;
             }
             
@@ -320,30 +353,9 @@ const NSInteger kLoopMeRequestTimeout = 180;
             self.skAdImpression.adImpressionIdentifier = self.adConfiguration.skadNonce;
         }
     }
-    NSMutableDictionary *infoDictionary =   [self.adConfiguration toDictionary];
-    [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey:kErrorInfoClass];
-    
-    if (!self.isReady) {
-        LoopMeLogInfo(@"Ad isn't ready to be displayed");
-        return [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                                    errorMessage: @"Ad isn't ready to be displayed"
-                                            info: infoDictionary];
-    }
-    
-    if (self.adInterstitialViewController.presentingViewController) {
-        LoopMeLogInfo(@"Ad has already displayed");
-        return [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
-                                    errorMessage: @"Ad has already displayed"
-                                            info: infoDictionary];
-    }
-    
-    LoopMeLogDebug(@"Interstitial ad will appear");
-    if ([self.delegate respondsToSelector: @selector(loopMeInterstitialWillAppear:)]) {
-        [self.delegate loopMeInterstitialWillAppear: self];
-    }
-    [self.adManager invalidateTimers];
-    [self.adInterstitialViewController setOrientation: self.adConfiguration.adOrientation];
-    [self.adInterstitialViewController setAllowOrientationChange: self.adConfiguration.allowOrientationChange];
+}
+
+- (void)displayAd {
     if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
         [self.adDisplayController displayAd];
         self.adDisplayController.visible = YES;
@@ -352,17 +364,19 @@ const NSInteger kLoopMeRequestTimeout = 180;
         self.adDisplayControllerVPAID.visible = YES;
     }
     [self startSKAdImpression];
-    [viewController presentViewController: self.adInterstitialViewController animated: animated completion: ^{
-        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-            [self.adDisplayController layoutSubviews];
-        } else {
-            [self startAd];
-        }
-        LoopMeLogDebug(@"Interstitial ad did appear");
-        if ([self.delegate respondsToSelector: @selector(loopMeInterstitialDidAppear:)]) {
-            [self.delegate loopMeInterstitialDidAppear: self];
-        }
-    }];
+}
+
+- (void)handleAdAppearance {
+    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+        [self.adDisplayController layoutSubviews];
+    } else {
+        [self startAd];
+    }
+    
+    LoopMeLogDebug(@"Interstitial ad did appear");
+    if ([self.delegate respondsToSelector:@selector(loopMeInterstitialDidAppear:)]) {
+        [self.delegate loopMeInterstitialDidAppear:self];
+    }
 }
 
 - (void)dismissAnimated: (BOOL)animated {
@@ -445,10 +459,13 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)adManagerDidReceiveAd: (LoopMeAdManager *)manager {
-    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVast && self.adConfiguration) {
+    if (!self.adConfiguration) return;
+    if (self.adConfiguration.creativeType == LoopMeCreativeTypeVast) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.adDisplayControllerVPAID loadAdConfiguration];
         });
+    } else {
+        [self adDisplayControllerDidFinishLoadingAd: self.adDisplayController];
     }
 }
 

@@ -20,7 +20,9 @@
 @property (nonatomic) BOOL isReady;
 @property (nonatomic, strong) NSDate *startSessionTime;
 @property (nonatomic, strong) NSMutableDictionary *sessionDepth;
+@property (nonatomic, strong) NSMutableDictionary *resourcesFiles;
 @property (nonatomic, strong) NSString *adpaterName;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *sdkInitTimes;
 
 @end
 
@@ -32,9 +34,22 @@
     if (!instance) {
         instance = [[LoopMeSDK alloc] init];
         instance.sessionDepth = [[NSMutableDictionary alloc] init];
+        instance.resourcesFiles = [[NSMutableDictionary alloc] init];
+        instance.sdkInitTimes = [[NSMutableArray alloc] init];
     }
     
     return instance;
+}
+
+- (void)setSdkInitTime:(NSUInteger)value {
+    [self.sdkInitTimes addObject: @(value)];
+}
+
+- (NSUInteger)getSdkInitTime {
+    if ([self.sdkInitTimes count] == 0) return 0;
+    NSNumber *lastValue = [self.sdkInitTimes lastObject];
+    [self.sdkInitTimes removeLastObject];
+    return [lastValue unsignedIntegerValue];
 }
 
 + (NSBundle * )resourcesBundle {
@@ -89,7 +104,10 @@
 }
 
 - (void)init: (LoopMeSDKConfiguration *)configuration completionBlock: (void(^_Nullable)(BOOL, NSError *))completionBlock {
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+    
     if (self.isReady) {
+        [self setSdkInitTime: (int)((CFAbsoluteTimeGetCurrent() - startTime) * 1000.0)];
         if (completionBlock != nil) {
             completionBlock(YES, nil);
         }
@@ -103,12 +121,39 @@
     // Initialize the start for session duration time here
     [self startSession];
     
+    CFAbsoluteTime startTimeOmid = CFAbsoluteTimeGetCurrent();
     (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
+        CFAbsoluteTime endTimeOmid  = CFAbsoluteTimeGetCurrent();
+        double timeElapsedOmid = endTimeOmid - startTimeOmid;
+        if (timeElapsedOmid > 0.1) {
+            NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+            [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
+            [infoDictionary setObject:@((int)(timeElapsedOmid *1000)) forKey: kErrorInfoTimeout];;
+
+            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                                 errorMessage: @"Omid init time alert <100ms"
+                                         info: infoDictionary];
+        }
         NSLog(@"%@", LoopMeOMIDWrapper.isReady ? @"LoopMe OMID initialized" : @"LoopMe OMID not initialized");
     }];
+    
     if (completionBlock != nil) {
         completionBlock(YES, nil);
     }
+    
+    CFAbsoluteTime endTime = CFAbsoluteTimeGetCurrent();
+    double timeElapsed = endTime - startTime;
+    [self setSdkInitTime: (int)(timeElapsed * 1000.0)];
+
+     if (timeElapsed > 0.1) {
+         NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+         [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
+         [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
+
+         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+                              errorMessage: @"SDK Init time alert <100ms"
+                                      info: infoDictionary];
+     }
 }
 
 - (NSNumber *)timeElapsedSinceStart {
@@ -143,6 +188,21 @@
 
 -(NSString *)adapterName {
     return self.adpaterName;;
+}
+
+- (NSString *)getJSStringFromResources: (NSString *)fileName {
+    NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
+    NSString *fileContent = [self.resourcesFiles valueForKey:fileName];
+    
+    if (fileContent) return fileContent;
+    NSString *jsPath = [resourcesBundle pathForResource:fileName ofType:@"ignore"];
+    fileContent = [NSString stringWithContentsOfFile: jsPath encoding: NSUTF8StringEncoding error: NULL];
+    if (fileContent) {
+        [self.resourcesFiles setValue:fileContent forKey:fileName];
+        return fileContent;
+    }
+    NSLog(@"Error: File not found in resourcesBundle for fileName: %@", fileName);
+    return nil;
 }
 
 @end

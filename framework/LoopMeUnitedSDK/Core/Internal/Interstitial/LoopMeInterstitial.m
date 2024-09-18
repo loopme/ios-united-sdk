@@ -10,7 +10,6 @@
 #import "LoopMeInterstitial.h"
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeTargeting.h"
-#import "LoopMeGeoLocationProvider.h"
 #import "LoopMeError.h"
 #import "LoopMeLogging.h"
 #import "LoopMeGlobalSettings.h"

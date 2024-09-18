@@ -10,11 +10,11 @@
 		</data>
 		<key>Headers/LoopMeAdView.h</key>
 		<data>
-		oaemXn/VlLkyB+kUBN5RvB7Eoc0=
+		zwOYv1ogJsSWEDW0Qs6t6geLOQw=
 		</data>
 		<key>Headers/LoopMeDefinitions.h</key>
 		<data>
-		axhnqyNPDKKZ4xseoH+u9tTEQSc=
+		nf0naHTf9V3eT7hJL1r13OM04ak=
 		</data>
 		<key>Headers/LoopMeError.h</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/LoopMeInterstitial.h</key>
 		<data>
-		mMeUVOQA++PY5nI+Lzle3vf1uM4=
+		pZWzzDraXNZccnClSKW/vNXrErE=
 		</data>
 		<key>Headers/LoopMeLogging.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Headers/LoopMeSDK.h</key>
 		<data>
-		Bewpq3uVlfPzd16v3wOn3Nlao4M=
+		6d0P4sxOuEKcGbvryx4LZJxTrQQ=
 		</data>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/LoopMeUnitedSDK-Swift.h</key>
 		<data>
-		gGqtj2u7pPBz5gQ04cB1Lzy2Ngk=
+		R2rgjseD8fxP6sL00arKHdVvfnQ=
 		</data>
 		<key>Headers/LoopMeVPAIDError.h</key>
 		<data>
@@ -50,15 +50,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		TOFDupr7MUgJaJh503RZAzf4OsU=
+		EIeduLsrmYtv5cSrB1KpRHECOeE=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		7fHWnupXg6ed0W6OQsY/0fFDjW8=
+		5qwr8Oi65sjcM3/2lMo1klER9NY=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		cWgI5N9x8myg001Zq+lWM9BegMo=
+		q8nEXP+pks1avC27eeSTOzbsfIw=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -66,11 +66,11 @@
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		cWgI5N9x8myg001Zq+lWM9BegMo=
+		q8nEXP+pks1avC27eeSTOzbsfIw=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		h5tROoYbDfNGGTad13GZaQPM7E4=
+		nQk3NtjpPlXtRsmNTV07BVftmfA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -90,14 +90,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7IqPW1xSIhsVj0njOL+mdOlAoVcJMru08tSDwGEVadY=
+			8XIoqKl1+qpD1cKKVIxg3gGKygpBSGzDN0Pp75JndSo=
 			</data>
 		</dict>
 		<key>Headers/LoopMeDefinitions.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			d0yTupS1U1fs6imJJ1bgCerlkt28Lip1+CgzjdU4idU=
+			M14pnZN9q6wup3DP8CVwSYwJbG+HMnI4sSv0OqEQYcs=
 			</data>
 		</dict>
 		<key>Headers/LoopMeError.h</key>
@@ -118,7 +118,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			H6dBQ8dL/GLPu13+Q/yQQCSogQBHDJMdMa4aPBtKiT4=
+			/K3DGbXFEYnQuo3VForNCBdFyBZlYKu3vNC8oPlbtAA=
 			</data>
 		</dict>
 		<key>Headers/LoopMeLogging.h</key>
@@ -132,7 +132,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dIJ3Rsi269LbvXaL86Bc0lrcucdcLuH3iAR32HWIyL0=
+			cxXqNRGWFTgxdxa5aeASCfqVw7/+lOOfL+TOg855pwA=
 			</data>
 		</dict>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
@@ -146,7 +146,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+7tIlaugr/EBdb5i/nzpkOkRv8K5wQTRoKrmDyiFR94=
+			SCnjzWytiltEpMDWrz1+VOLhupCaL65j7Zl/RKMs8Eo=
 			</data>
 		</dict>
 		<key>Headers/LoopMeVPAIDError.h</key>
@@ -160,14 +160,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8zNzJELFL+JZeJXUETdrOcL2OWMUkY7fMAtlqNGeOXc=
+			JLcFxB5DRF2eUpL90xL1Wa5OrhWMTAPd/7v480cyLpo=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nwtocmSWwn+NtC5vyWfGDuj2yYUVMoP+pFnK6m9Ya50=
+			caGu//zJvlSOlNaJHkTGeQCDcqHhoKVLTmym0XQt3oA=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -181,14 +181,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			nwtocmSWwn+NtC5vyWfGDuj2yYUVMoP+pFnK6m9Ya50=
+			caGu//zJvlSOlNaJHkTGeQCDcqHhoKVLTmym0XQt3oA=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bqcaaluHihMNKBwnW8I2PsdlJKD/IYTDLEdRmio0ku4=
+			oSYiCTcA52rXZ/43SFuK8/DTIBMNK4tN7VqWnU5wGW0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -44,15 +44,13 @@
 
 - (void)initializeWithParameters: (id<MAAdapterInitializationParameters>)parameters
                completionHandler: (void(^)(MAAdapterInitializationStatus initializationStatus, NSString *_Nullable errorMessage))completionHandler {
-    // TODO: Replace deprecated initSDKFromRootViewController with init
+    [[LoopMeSDK shared] setAdapterName: @"applovin"];
+    
     [[LoopMeSDK shared] init: ^(BOOL success, NSError *error) {
         if (!success) {
             completionHandler(MAAdapterInitializationStatusInitializedFailure, @"Loopme sdk has not been initialized!");
             return;
         }
-        
-        [[LoopMeSDK shared] setAdapterName: @"applovin"];
-
         // Set the AppLovin mediation provider
         completionHandler(MAAdapterInitializationStatusInitializedSuccess, nil);
     }];
@@ -63,7 +61,7 @@
 }
 
 - (NSString *)adapterVersion{
-    return @"0.0.8";
+    return @"0.0.9";
 }
 
 - (void)destroy {
@@ -247,12 +245,21 @@
 
 - (void)loopMeAdViewDidLoadAd: (LoopMeAdView *)adView {
     [self.delegate didLoadAdForAdView: adView];
-    [self.delegate didDisplayAdViewAd];
     
 }
+
+- (void)loopMeAdViewDidAppear: (LoopMeAdView *)banner {
+    NSLog(@"LoopMe banner did present");
+    [self.delegate didDisplayAdViewAd];
+}
+
 - (void)loopMeAdView: (LoopMeAdView *)adView didFailToLoadAdWithError: (NSError *)error {
     [self.parentAdapter log: @"AdView failed to load with error: %@", error];
     [self.delegate didFailToLoadAdViewAdWithError: MAAdapterError.adNotReady];
+}
+
+- (void)loopMeAdViewDidDisappear:(LoopMeAdView *)banner {
+    [self.delegate didHideAdViewAd];
 }
 
 - (void)loopMeAdViewDidReceiveTap: (LoopMeAdView *)adView {

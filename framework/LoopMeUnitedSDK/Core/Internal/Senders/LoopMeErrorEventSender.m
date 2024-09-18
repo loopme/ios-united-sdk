@@ -44,7 +44,7 @@
         [NSURLQueryItem queryItemWithName: @"device_model"        value: [LoopMeIdentityProvider deviceAppleModel]],
         [NSURLQueryItem queryItemWithName: @"device_os_ver"       value: [LoopMeIdentityProvider deviceOS]],
         [NSURLQueryItem queryItemWithName: @"device_manufacturer" value: [LoopMeIdentityProvider deviceManufacturer]],
-        [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"loopme"],
+        [NSURLQueryItem queryItemWithName: @"sdk_type"            value: @"LoopMe iOS SDK"],
         [NSURLQueryItem queryItemWithName: @"mediation"            value: [[LoopMeSDK shared] adapterName]],
         [NSURLQueryItem queryItemWithName: @"msg"                 value: @"sdk_error"],
         [NSURLQueryItem queryItemWithName: @"sdk_version"         value: LOOPME_SDK_VERSION],
@@ -57,7 +57,8 @@
     NSMutableArray *queryItems = [[NSMutableArray alloc] initWithArray:components.queryItems];
 
     for (NSString * key in [info allKeys]) {
-        [queryItems addObject: [[NSURLQueryItem alloc] initWithName:key value:info[key]]];;
+        NSString *value = [NSString stringWithFormat:@"%@", info[key]];
+        [queryItems addObject:[[NSURLQueryItem alloc] initWithName:key value:value]];
     }
     
     components.queryItems = queryItems;

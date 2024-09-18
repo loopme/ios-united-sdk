@@ -16,6 +16,7 @@
 #define kLoopMeURLScheme @"loopme"
 #define kErrorInfoAppKey @"app_key"
 #define kErrorInfoClass @"class"
+#define kErrorInfoTimeout @"timeout"
 #define kErrorInfoUrl @"url"
 #define kErrorInfoCreativeType @"creative_type"
 

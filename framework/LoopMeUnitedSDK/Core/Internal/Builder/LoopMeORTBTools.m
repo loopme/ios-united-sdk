@@ -15,7 +15,6 @@
 
 #import "LoopMeDefinitions.h"
 #import "LoopMeReachability.h"
-#import "LoopMeGeoLocationProvider.h"
 #import "NSString+Encryption.h"
 #import "LoopMeTargeting.h"
 #import "LoopMeIdentityProvider.h"
@@ -58,7 +57,6 @@ static NSString *_userAgent;
 - (NSData *)makeRequestBody {
     LoopMeGDPRTools *gdpr = [LoopMeGDPRTools sharedInstance];
     BOOL isGDPR = [gdpr cmpSdkID] && [gdpr GDRRApplies] != -1;
-    LoopMeGeoLocationProvider *geoProvider = [LoopMeGeoLocationProvider sharedProvider];
     BOOL isLiveDebug = [LoopMeGlobalSettings sharedInstance].liveDebugEnabled;
     BOOL canSetIfa = ([LoopMeIdentityProvider appTrackingTransparencyEnabled] && [ASIdentifierManager sharedManager].isAdvertisingTrackingEnabled);
 
@@ -118,11 +116,6 @@ static NSString *_userAgent;
             @"connectiontype": @([[LoopMeReachability reachabilityForLocalWiFi] connectionType]),
             @"w": @([[UIScreen mainScreen] bounds].size.width),
             @"h": @([[UIScreen mainScreen] bounds].size.height),
-            @"geo": [geoProvider isLocationUpdateEnabled] && [geoProvider isValidLocation] ? @{
-                @"lat": [NSString stringWithFormat: @"%0.4f", (float)geoProvider.location.coordinate.latitude],
-                @"lon": [NSString stringWithFormat: @"%0.4f", (float)geoProvider.location.coordinate.longitude],
-                @"type": @1
-            } : [NSNull null],
             @"ext": [self mutableWithDictionary: @{
                 @"ifv": [[UIDevice currentDevice] identifierForVendor].UUIDString,
                 @"atts": [LoopMeIdentityProvider customAuthorizationStatus],
@@ -165,14 +158,13 @@ static NSString *_userAgent;
         @"tmax": @700,
         @"bcat": @[@"IAB25-3", @"IAB25", @"IAB26"]
     }];
-
+    
+    request[@"ext"] = (self.video && self.isRewarded) ?
+        @{ @"sdk_init_time": @([LoopMeSDK.shared getSdkInitTime]), @"placementType": @"rewarded" } :
+        @{ @"sdk_init_time": @([LoopMeSDK.shared getSdkInitTime]) };
+    
     if (self.video) {
-        if (self.isRewarded) {
-            request[@"ext"] = @{@"placementType": @"rewarded"};
-            request[@"imp"][0][@"video"] = [self rewardedVideo: self.size];
-        } else {
-            request[@"imp"][0][@"video"] = [self video: self.size];
-        }
+        request[@"imp"][0][@"video"] = self.isRewarded ? [self rewardedVideo: self.size] : [self video: self.size];
     }
 
     NSError *error;
