@@ -42,7 +42,10 @@ open class ServerCommunicator: NSObject {
     }
     
     @objc public func load(url: URL, requestBody: Data?, method: String?) {
-        self.startTime = CFAbsoluteTimeGetCurrent()
+        if self.startTime == nil {
+            self.startTime = CFAbsoluteTimeGetCurrent()
+        }
+        
         if let properties = self.configuration?.vastProperties, !properties.isWrapper {
             self.configuration = nil;
         }
