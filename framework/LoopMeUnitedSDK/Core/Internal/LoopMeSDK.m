@@ -130,7 +130,7 @@
             [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
             [infoDictionary setObject:@((int)(timeElapsedOmid *1000)) forKey: kErrorInfoTimeout];;
 
-            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+            [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeLatency
                                  errorMessage: @"Omid init time alert <100ms"
                                          info: infoDictionary];
         }
@@ -150,7 +150,7 @@
          [infoDictionary setObject:@"LoopMeSDK" forKey: kErrorInfoClass];;
          [infoDictionary setObject: @((int)(timeElapsed *1000)) forKey: kErrorInfoTimeout];;
 
-         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeCustom
+         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeLatency
                               errorMessage: @"SDK Init time alert <100ms"
                                       info: infoDictionary];
      }
