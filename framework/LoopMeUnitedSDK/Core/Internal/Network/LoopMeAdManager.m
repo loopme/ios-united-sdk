@@ -14,6 +14,7 @@
 #import "LoopMeLogging.h"
 #import "LoopMeORTBTools.h"
 #import "LoopMeError.h"
+#import "LoopMeErrorEventSender.h"
 
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeAdView.h"
@@ -148,7 +149,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 
 #pragma mark - LoopMeServerCommunicatorDelegate
 
-- (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration {
+- (void)serverCommunicator: (LoopMeServerCommunicator *)communicator didReceive: (LoopMeAdConfiguration *)adConfiguration { 
     LoopMeLogDebug(@"Did receive ad configuration: %@", adConfiguration);
     adConfiguration.appKey = self.appKey;
     if ([self.delegate respondsToSelector: @selector(adManager:didReceiveAdConfiguration:)]) {
@@ -165,6 +166,14 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     if ([self.delegate respondsToSelector: @selector(adManager:didFailToLoadAdWithError:)]) {
         [self.delegate adManager: self didFailToLoadAdWithError: error];
     }
+}
+
+- (void)serverTimeAlert:(LoopMeServerCommunicator *)communicator timeElapsed:(NSInteger)timeElapsed status:(BOOL)status {
+    [LoopMeErrorEventSender sendLetancyError: LoopMeEventErrorTypeLatency
+                                errorMessage:@"ORTB request takes more then 1sec"
+                                status: (status ? @"Success" : @"Fail")
+                                time:((int) timeElapsed)
+                                className:@"LoopMeAdManager"];
 }
 
 @end

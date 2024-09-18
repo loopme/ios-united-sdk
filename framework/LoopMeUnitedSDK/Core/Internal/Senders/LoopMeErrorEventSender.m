@@ -22,6 +22,7 @@
         case LoopMeEventErrorTypeBadAsset: return @"bad_asset";
         case LoopMeEventErrorTypeServer: return @"server";
         case LoopMeEventErrorTypeCustom: return @"custom";
+        case LoopMeEventErrorTypeLatency: return @"latency";
     }
     return @"unknown";
 }
@@ -30,6 +31,20 @@
        errorMessage: (NSString * _Nonnull)errorMessage
              appkey: (NSString * _Nonnull)appkey{
     return [self sendError:errorType errorMessage:errorMessage info: @{ kErrorInfoAppKey : appkey }];
+}
+
++ (void)sendLetancyError: (LoopMeEventErrorType)errorType
+            errorMessage: (NSString * _Nonnull)errorMessage
+                  status: (NSString * _Nonnull)status
+                    time: (NSInteger)timeElapsed
+               className: (NSString * _Nonnull)className {
+    NSString *timeElapsedString = [NSString stringWithFormat:@"%ld", (long)timeElapsed];
+    NSDictionary *info = @{
+         kErrorInfoClass : className,
+         kErrorInfoStatus : status,
+         kErrorInfoTimeout : timeElapsedString
+     };
+    return [self sendError:errorType errorMessage:errorMessage info: info];
 }
 
 + (void)sendError:(LoopMeEventErrorType)errorType
