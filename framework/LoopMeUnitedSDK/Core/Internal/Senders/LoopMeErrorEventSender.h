@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
     LoopMeEventErrorTypeBadAsset,
     LoopMeEventErrorTypeJS,
     LoopMeEventErrorTypeCustom,
-    LoopMeEventErrorTypeLog,
+    LoopMeEventErrorTypeLatency,
 };
 
 @interface LoopMeErrorEventSender : NSObject
@@ -28,4 +28,9 @@ typedef NS_ENUM(NSUInteger, LoopMeEventErrorType) {
       errorMessage: (NSString * _Nonnull)errorMessage
             appkey: (NSString * _Nonnull)appkey;
 
++ (void)sendLetancyError: (LoopMeEventErrorType)errorType
+       errorMessage: (NSString * _Nonnull)errorMessage
+                  status: (NSString * _Nonnull)status
+                    time: (NSInteger)timeElapsed
+                   className: (NSString * _Nonnull)className;
 @end
