@@ -145,9 +145,12 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     rtbTools.video = [self isAdType: adTypes equalTo: LoopMeAdTypeVideo] && !isBannerSize;
     NSData *requestBody = [rtbTools makeRequestBody];
     BOOL isValidated = [rtbTools validateRequestData:requestBody];
-    
-    [self loadAdWithURL: [NSURL URLWithString: kLoopMeAPIURL]
-            requestBody: requestBody];
+    if (isValidated) {
+        [self loadAdWithURL: [NSURL URLWithString: kLoopMeAPIURL]
+                requestBody: requestBody];
+    } else {
+        [self.delegate adManager: self didFailToLoadAdWithError: [LoopMeError errorForStatusCode:LoopMeErrorCodeInvalidRequest] ];
+    }
 }
 
 #pragma mark - LoopMeServerCommunicatorDelegate

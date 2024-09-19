@@ -302,8 +302,7 @@ id cleanNullsFromCollection(id collection) {
 
 - (BOOL)validateRequestData:(NSData *)data {
     NSError *error = nil;
-    
-    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 
     if (error || !jsonDict) {
         NSLog(@"Validation failed: Invalid input data. Error: %@", error.localizedDescription);
@@ -311,18 +310,18 @@ id cleanNullsFromCollection(id collection) {
     }
 
     // Validate required fields
-    if (![self validateStringInDictionary:jsonDict[@"app"] forKey:@"id" errorMessage:@"app.id is missing or empty."]) {
-        return NO;
-    }
+    NSArray *requiredFields = @[
+        @{@"dict": jsonDict[@"app"], @"key": @"id", @"message": @"app.id is missing or empty."},
+        @{@"dict": jsonDict[@"source"][@"ext"], @"key": @"omidpn", @"message": @"source.ext.omidpn is missing or empty."},
+        @{@"dict": jsonDict[@"source"][@"ext"], @"key": @"omidpv", @"message": @"source.ext.omidpv is missing or empty."},
+        @{@"dict": jsonDict[@"events"][@"ext"], @"key": @"omidpn", @"message": @"events.ext.omidpn is missing or empty."},
+        @{@"dict": jsonDict[@"events"][@"ext"], @"key": @"omidpv", @"message": @"events.ext.omidpv is missing or empty."}
+    ];
 
-    if (![self validateStringInDictionary:jsonDict[@"source"][@"ext"] forKey:@"omidpn" errorMessage:@"source.ext.omidpn is missing or empty."] ||
-        ![self validateStringInDictionary:jsonDict[@"source"][@"ext"] forKey:@"omidpv" errorMessage:@"source.ext.omidpv is missing or empty."]) {
-        return NO;
-    }
-
-    if (![self validateStringInDictionary:jsonDict[@"events"][@"ext"] forKey:@"omidpn" errorMessage:@"events.ext.omidpn is missing or empty."] ||
-        ![self validateStringInDictionary:jsonDict[@"events"][@"ext"] forKey:@"omidpv" errorMessage:@"events.ext.omidpv is missing or empty."]) {
-        return NO;
+    for (NSDictionary *field in requiredFields) {
+        if (![self validateStringInDictionary:field[@"dict"] forKey:field[@"key"] errorMessage:field[@"message"]]) {
+            return NO;
+        }
     }
 
     NSArray *imp = jsonDict[@"imp"];
@@ -332,15 +331,15 @@ id cleanNullsFromCollection(id collection) {
     }
 
     NSDictionary *firstImp = imp.firstObject;
-    
-    NSDictionary *banner = firstImp[@"banner"];
-    if (banner && (![self validateDimensionInDictionary:banner forWidthKey:@"w" heightKey:@"h" objectName:@"banner"])) {
-        return NO;
-    }
+    NSArray *dimensions = @[
+        @{@"dict": firstImp[@"banner"], @"objectName": @"banner"},
+        @{@"dict": firstImp[@"video"], @"objectName": @"video"}
+    ];
 
-    NSDictionary *video = firstImp[@"video"];
-    if (video && (![self validateDimensionInDictionary:video forWidthKey:@"w" heightKey:@"h" objectName:@"video"])) {
-        return NO;
+    for (NSDictionary *dimension in dimensions) {
+        if (dimension[@"dict"] && ![self validateDimensionInDictionary:dimension[@"dict"] forWidthKey:@"w" heightKey:@"h" objectName:dimension[@"objectName"]]) {
+            return NO;
+        }
     }
 
     return YES;
