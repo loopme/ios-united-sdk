@@ -48,6 +48,7 @@
 @property (nonatomic, strong) NSLayoutConstraint *expandedWidth;
 @property (nonatomic, strong) NSLayoutConstraint *expandedHeight;
 @property (nonatomic, strong) SKAdImpression *skAdImpression;
+@property (nonatomic) BOOL isSkadAvailable;
 
 /*
  * Update webView "visible" state is required on JS first time when ad appears on the screen,
@@ -515,7 +516,10 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 }
 
 - (void)updateAdVisibilityWhenScroll {
-    [self endSKAdImpression];
+    if (self.isSkadAvailable) {
+        [self endSKAdImpression];
+    }
+    
     if (!self.isVisibilityUpdated) {
         if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
             self.adDisplayController.visible = YES;
@@ -553,7 +557,10 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
         return;
     }
-    [self startSKAdImpression];
+    if (self.isSkadAvailable) {
+        [self startSKAdImpression];
+    }
+    
     [self.adDisplayControllerVPAID startAd];
     [self updateVisibility];
 }
@@ -570,7 +577,11 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
         [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeIncorrectFormat]];
         return;
     }
-    [self setupSKAdImpression];
+    
+    self.isSkadAvailable = !(self.adConfiguration.skadSourceidentifier == nil || [self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]);
+    if (self.isSkadAvailable) {
+        [self setupSKAdImpression];
+    }
   
     if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled ) {
         [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug = self.appKey;
