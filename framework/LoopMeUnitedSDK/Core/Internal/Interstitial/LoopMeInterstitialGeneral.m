@@ -41,6 +41,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
 @property (nonatomic, strong) NSTimer *timeoutTimer;
 @property (nonatomic, strong) SKAdImpression *skAdImpression;
 @property (nonatomic, assign) CGSize screenSize;
+@property (nonatomic) BOOL isSkadnAvailable;
 
 
 @end
@@ -283,7 +284,10 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)showFromViewController: (UIViewController *)viewController animated: (BOOL)animated {
-    [self setupSKAdImpression];
+    self.isSkadnAvailable = !(self.adConfiguration.skadSourceidentifier == nil || [self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]);
+    if (self.isSkadnAvailable) {
+        [self setupSKAdImpression];
+    }
      
     NSMutableDictionary *infoDictionary = [self.adConfiguration toDictionary];
     [infoDictionary setObject:@"LoopMeInterstitialGeneral" forKey:kErrorInfoClass];
@@ -332,9 +336,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
                             version:(NSString *)self.adConfiguration.skadVersion];
         
         if (@available(iOS 16.1, *)) {
-            if (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
                 [self.skAdImpression setSourceIdentifier:self.adConfiguration.skadSourceidentifier];
-            }
         }
     } else {
         if (@available(iOS 14.5, *)) {
@@ -345,9 +347,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
             self.skAdImpression.timestamp = self.adConfiguration.skadTimestamp;
             self.skAdImpression.sourceAppStoreItemIdentifier = self.adConfiguration.skadItunesitem;
             
-            if (![self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]) {
-                self.skAdImpression.adCampaignIdentifier = self.adConfiguration.skadCampaign;
-            }
+            self.skAdImpression.adCampaignIdentifier = self.adConfiguration.skadCampaign;
             
             self.skAdImpression.advertisedAppStoreItemIdentifier = self.adConfiguration.skadItunesitem;
             self.skAdImpression.adImpressionIdentifier = self.adConfiguration.skadNonce;
@@ -363,7 +363,9 @@ const NSInteger kLoopMeRequestTimeout = 180;
         [self.adDisplayControllerVPAID displayAd];
         self.adDisplayControllerVPAID.visible = YES;
     }
-    [self startSKAdImpression];
+    if (self.isSkadnAvailable) {
+        [self startSKAdImpression];
+    }
 }
 
 - (void)handleAdAppearance {
@@ -397,7 +399,10 @@ const NSInteger kLoopMeRequestTimeout = 180;
         [self.adDisplayControllerVPAID closeAd];
     }
     [self unRegisterObserver];
-    [self endSKAdImpression];
+    if (self.isSkadnAvailable) {
+        [self endSKAdImpression];
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.adInterstitialViewController.presentingViewController dismissViewControllerAnimated: animated completion: ^{
             LoopMeLogDebug(@"Interstitial ad did disappear");
