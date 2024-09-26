@@ -309,62 +309,66 @@ id cleanNullsFromCollection(id collection) {
         return NO;
     }
 
-    // Validate required fields
-    NSArray *requiredFields = @[
-        @{@"dict": jsonDict[@"app"], @"key": @"id", @"message": @"app.id is missing or empty."},
-        @{@"dict": jsonDict[@"source"][@"ext"], @"key": @"omidpn", @"message": @"source.ext.omidpn is missing or empty."},
-        @{@"dict": jsonDict[@"source"][@"ext"], @"key": @"omidpv", @"message": @"source.ext.omidpv is missing or empty."},
-        @{@"dict": jsonDict[@"events"][@"ext"], @"key": @"omidpn", @"message": @"events.ext.omidpn is missing or empty."},
-        @{@"dict": jsonDict[@"events"][@"ext"], @"key": @"omidpv", @"message": @"events.ext.omidpv is missing or empty."}
-    ];
+    @try {
+        // Define validation rules
+        NSArray *validations = @[
+            @{@"field": jsonDict[@"app"][@"id"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"source"][@"ext"][@"omidpn"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"source"][@"ext"][@"omidpv"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"events"][@"ext"][@"omipn"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"events"][@"ext"][@"omidpv"], @"rules": @[@"required"]},
+            self.banner ? @{@"field": jsonDict[@"imp"][0][@"banner"][@"w"], @"rules": @[@"required", @"gt0"]} : @{},
+            self.banner ? @{@"field": jsonDict[@"imp"][0][@"banner"][@"h"], @"rules": @[@"required", @"gt0"]} : @{},
+            self.video ? @{@"field": jsonDict[@"imp"][0][@"video"][@"w"], @"rules": @[@"required", @"gt0"]} : @{},
+            self.video ? @{@"field": jsonDict[@"imp"][0][@"video"][@"h"], @"rules": @[@"required", @"gt0"]} : @{}
+        ];
 
-    for (NSDictionary *field in requiredFields) {
-        if (![self validateStringInDictionary:field[@"dict"] forKey:field[@"key"] errorMessage:field[@"message"]]) {
-            return NO;
+        for (NSDictionary *validation in validations) {
+            NSString *field = validation[@"field"];
+            NSArray *rules = validation[@"rules"];
+
+            // If validation dictionary is empty, skip it
+            if ([validation count] == 0) continue;
+
+            if (![self isValidField:field inJSON:jsonDict withRules:rules]) {
+                return NO;
+            }
         }
-    }
 
-    NSArray *imp = jsonDict[@"imp"];
-    if (!imp || imp.count == 0) {
-        NSLog(@"Validation failed: 'imp' array is missing or empty.");
+    } @catch (NSException *exception) {
+        NSLog(@"Validation failed: An error occurred during validation. Exception: %@", exception.reason);
         return NO;
     }
-
-    NSDictionary *firstImp = imp.firstObject;
-    NSArray *dimensions = @[
-        @{@"dict": firstImp[@"banner"], @"objectName": @"banner"},
-        @{@"dict": firstImp[@"video"], @"objectName": @"video"}
-    ];
-
-    for (NSDictionary *dimension in dimensions) {
-        if (dimension[@"dict"] && ![self validateDimensionInDictionary:dimension[@"dict"] forWidthKey:@"w" heightKey:@"h" objectName:dimension[@"objectName"]]) {
-            return NO;
-        }
-    }
-
     return YES;
 }
 
 #pragma mark - Helper Methods
 
-- (BOOL)validateStringInDictionary:(NSDictionary *)dict forKey:(NSString *)key errorMessage:(NSString *)errorMessage {
-    if (!dict || ![dict[key] isKindOfClass:[NSString class]] || [dict[key] length] == 0) {
-        NSLog(@"Validation failed: %@", errorMessage);
-        return NO;
+- (BOOL)isValidField:(NSString *)field inJSON:(NSDictionary *)jsonDict withRules:(NSArray *)rules {
+
+    for (NSString *rule in rules) {
+        if ([rule isEqualToString:@"required"]) {
+            if (![self isValidRequiredField:field]) {
+                NSLog(@"Validation failed: %@ is required and missing or empty.", field);
+                return NO;
+            }
+        }
+        if ([rule isEqualToString:@"gt0"]) {
+            if (![self isValidGreaterThanZero:field]) {
+                NSLog(@"Validation failed: %@ must be greater than 0.", field);
+                return NO;
+            }
+        }
     }
     return YES;
 }
 
-- (BOOL)validateDimensionInDictionary:(NSDictionary *)dict forWidthKey:(NSString *)widthKey heightKey:(NSString *)heightKey objectName:(NSString *)objectName {
-    NSNumber *width = dict[widthKey];
-    NSNumber *height = dict[heightKey];
+- (BOOL)isValidRequiredField:(id)fieldValue {
+    return (fieldValue && ([fieldValue isKindOfClass:[NSString class]] ? [fieldValue length] > 0 : YES));
+}
 
-    if (![width isKindOfClass:[NSNumber class]] || [width integerValue] == 0 ||
-        ![height isKindOfClass:[NSNumber class]] || [height integerValue] == 0) {
-        NSLog(@"Validation failed: %@.w or %@.h is missing or invalid.", objectName, objectName);
-        return NO;
-    }
-    return YES;
+- (BOOL)isValidGreaterThanZero:(id)fieldValue {
+    return ([fieldValue isKindOfClass:[NSNumber class]] && [fieldValue integerValue] > 0);
 }
 
 @end
