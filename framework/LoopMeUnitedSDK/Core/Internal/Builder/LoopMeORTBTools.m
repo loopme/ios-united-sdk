@@ -300,4 +300,75 @@ id cleanNullsFromCollection(id collection) {
     return collection;
 }
 
+- (BOOL)validateRequestData:(NSData *)data {
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+
+    if (error || !jsonDict) {
+        NSLog(@"Validation failed: Invalid input data. Error: %@", error.localizedDescription);
+        return NO;
+    }
+
+    @try {
+        // Define validation rules
+        NSArray *validations = @[
+            @{@"field": jsonDict[@"app"][@"id"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"source"][@"ext"][@"omidpn"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"source"][@"ext"][@"omidpv"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"events"][@"ext"][@"omipn"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"events"][@"ext"][@"omidpv"], @"rules": @[@"required"]},
+            self.banner ? @{@"field": jsonDict[@"imp"][0][@"banner"][@"w"], @"rules": @[@"required", @"gt0"]} : @{},
+            self.banner ? @{@"field": jsonDict[@"imp"][0][@"banner"][@"h"], @"rules": @[@"required", @"gt0"]} : @{},
+            self.video ? @{@"field": jsonDict[@"imp"][0][@"video"][@"w"], @"rules": @[@"required", @"gt0"]} : @{},
+            self.video ? @{@"field": jsonDict[@"imp"][0][@"video"][@"h"], @"rules": @[@"required", @"gt0"]} : @{}
+        ];
+
+        for (NSDictionary *validation in validations) {
+            NSString *field = validation[@"field"];
+            NSArray *rules = validation[@"rules"];
+
+            // If validation dictionary is empty, skip it
+            if ([validation count] == 0) continue;
+
+            if (![self isValidField:field inJSON:jsonDict withRules:rules]) {
+                return NO;
+            }
+        }
+
+    } @catch (NSException *exception) {
+        NSLog(@"Validation failed: An error occurred during validation. Exception: %@", exception.reason);
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - Helper Methods
+
+- (BOOL)isValidField:(NSString *)field inJSON:(NSDictionary *)jsonDict withRules:(NSArray *)rules {
+
+    for (NSString *rule in rules) {
+        if ([rule isEqualToString:@"required"]) {
+            if (![self isValidRequiredField:field]) {
+                NSLog(@"Validation failed: %@ is required and missing or empty.", field);
+                return NO;
+            }
+        }
+        if ([rule isEqualToString:@"gt0"]) {
+            if (![self isValidGreaterThanZero:field]) {
+                NSLog(@"Validation failed: %@ must be greater than 0.", field);
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
+- (BOOL)isValidRequiredField:(id)fieldValue {
+    return (fieldValue && ([fieldValue isKindOfClass:[NSString class]] ? [fieldValue length] > 0 : YES));
+}
+
+- (BOOL)isValidGreaterThanZero:(id)fieldValue {
+    return ([fieldValue isKindOfClass:[NSNumber class]] && [fieldValue integerValue] > 0);
+}
+
 @end

@@ -143,8 +143,21 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
     rtbTools.banner = [self isAdType: adTypes equalTo: LoopMeAdTypeHTML];
     BOOL isBannerSize = !(size.width >= 320 && size.height >= 320);
     rtbTools.video = [self isAdType: adTypes equalTo: LoopMeAdTypeVideo] && !isBannerSize;
-    [self loadAdWithURL: [NSURL URLWithString: kLoopMeAPIURL]
-            requestBody: [rtbTools makeRequestBody]];
+    NSData *requestBody = [rtbTools makeRequestBody];
+    BOOL isValidated = [rtbTools validateRequestData:requestBody];
+    if (isValidated) {
+        [self loadAdWithURL: [NSURL URLWithString: kLoopMeAPIURL]
+                requestBody: requestBody];
+    } else {
+        [self.delegate adManager: self didFailToLoadAdWithError: [LoopMeError errorForStatusCode:LoopMeErrorCodeInvalidRequest] ];
+        NSString *jsonString = [[NSString alloc] initWithData:requestBody encoding:NSUTF8StringEncoding];
+           
+        NSString *urlEncodedString = [jsonString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+        [infoDictionary setObject: urlEncodedString forKey: @"json"];;
+
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"ORTB request failed the validation" info: infoDictionary];
+    }
 }
 
 #pragma mark - LoopMeServerCommunicatorDelegate
