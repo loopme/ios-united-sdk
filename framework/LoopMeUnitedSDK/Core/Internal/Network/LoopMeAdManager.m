@@ -150,9 +150,13 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
                 requestBody: requestBody];
     } else {
         [self.delegate adManager: self didFailToLoadAdWithError: [LoopMeError errorForStatusCode:LoopMeErrorCodeInvalidRequest] ];
-        NSError *error = nil;
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:requestBody options:0 error: &error];
-        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"ORTB request failed the validation" info: jsonDict];
+        NSString *jsonString = [[NSString alloc] initWithData:requestBody encoding:NSUTF8StringEncoding];
+           
+        NSString *urlEncodedString = [jsonString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] init];
+        [infoDictionary setObject: urlEncodedString forKey: @"json"];;
+
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"ORTB request failed the validation" info: infoDictionary];
     }
 }
 
