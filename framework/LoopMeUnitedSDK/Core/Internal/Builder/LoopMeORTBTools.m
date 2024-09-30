@@ -315,7 +315,7 @@ id cleanNullsFromCollection(id collection) {
             @{@"field": jsonDict[@"app"][@"id"], @"rules": @[@"required"]},
             @{@"field": jsonDict[@"source"][@"ext"][@"omidpn"], @"rules": @[@"required"]},
             @{@"field": jsonDict[@"source"][@"ext"][@"omidpv"], @"rules": @[@"required"]},
-            @{@"field": jsonDict[@"events"][@"ext"][@"omipn"], @"rules": @[@"required"]},
+            @{@"field": jsonDict[@"events"][@"ext"][@"omidpn"], @"rules": @[@"required"]},
             @{@"field": jsonDict[@"events"][@"ext"][@"omidpv"], @"rules": @[@"required"]},
             self.banner ? @{@"field": jsonDict[@"imp"][0][@"banner"][@"w"], @"rules": @[@"required", @"gt0"]} : @{},
             self.banner ? @{@"field": jsonDict[@"imp"][0][@"banner"][@"h"], @"rules": @[@"required", @"gt0"]} : @{},
