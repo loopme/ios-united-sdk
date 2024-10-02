@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableDictionary *resourcesFiles;
 @property (nonatomic, strong) NSString *adpaterName;
 @property (nonatomic, strong) NSMutableArray<NSNumber *> *sdkInitTimes;
+@property (nonatomic, strong) NSString *sessionId;
 
 @end
 
@@ -109,6 +110,7 @@
     if (self.isReady) {
         [self setSdkInitTime: (int)((CFAbsoluteTimeGetCurrent() - startTime) * 1000.0)];
         if (completionBlock != nil) {
+            [self setSessionId];
             completionBlock(YES, nil);
         }
         return;
@@ -138,6 +140,7 @@
     }];
     
     if (completionBlock != nil) {
+        [self setSessionId];
         completionBlock(YES, nil);
     }
     
@@ -203,6 +206,17 @@
     }
     NSLog(@"Error: File not found in resourcesBundle for fileName: %@", fileName);
     return nil;
+}
+
+-(void)setSessionId {
+    if (!self.sessionId) {
+        NSUUID *sessionUUID = [NSUUID UUID];
+        self.sessionId = [sessionUUID UUIDString];
+    }
+}
+
+-(NSString *)sessionId {
+    return _sessionId;
 }
 
 @end
