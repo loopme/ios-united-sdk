@@ -147,12 +147,12 @@ static NSString *_userAgent;
             @"keywords": self.targeting.keywords,
             @"consent": [LoopMeGDPRTools getConsentValue],
             @"ext": @{
-                @"sessionduration": [[LoopMeSDK shared] timeElapsedSinceStart],
-                @"impdepth": [[LoopMeSDK shared] sessionDepthForAppKey: self.appKey]
+                @"sessionduration": [[LoopMeLifecycleManager shared] timeElapsedSinceStart],
+                @"impdepth": @([[LoopMeLifecycleManager shared] sessionDepthForAppKey: self.appKey])
             }
         } : @{@"ext": @{
-            @"sessionduration": [[LoopMeSDK shared] timeElapsedSinceStart],
-            @"impdepth": [[LoopMeSDK shared] sessionDepthForAppKey: self.appKey]
+            @"sessionduration": [[LoopMeLifecycleManager shared] timeElapsedSinceStart],
+            @"impdepth": @([[LoopMeLifecycleManager shared] sessionDepthForAppKey: self.appKey])
         },
               @"consent": [LoopMeGDPRTools getConsentValue]},
         @"tmax": @700,

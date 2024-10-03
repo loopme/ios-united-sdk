@@ -110,7 +110,6 @@
     if (self.isReady) {
         [self setSdkInitTime: (int)((CFAbsoluteTimeGetCurrent() - startTime) * 1000.0)];
         if (completionBlock != nil) {
-            [self setSessionId];
             completionBlock(YES, nil);
         }
         return;
@@ -121,8 +120,8 @@
     [LoopMeGlobalSettings sharedInstance];
 
     // Initialize the start for session duration time here
-    [self startSession];
-    
+    [[LoopMeLifecycleManager shared] startSession];
+
     CFAbsoluteTime startTimeOmid = CFAbsoluteTimeGetCurrent();
     (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
         CFAbsoluteTime endTimeOmid  = CFAbsoluteTimeGetCurrent();
@@ -140,7 +139,6 @@
     }];
     
     if (completionBlock != nil) {
-        [self setSessionId];
         completionBlock(YES, nil);
     }
     
@@ -157,32 +155,6 @@
                               errorMessage: @"SDK Init time alert <100ms"
                                       info: infoDictionary];
      }
-}
-
-- (NSNumber *)timeElapsedSinceStart {
-    if (self.startSessionTime) {
-        NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.startSessionTime];
-        return @(round(timeInterval));
-    }
-    return @0;
-}
-
--(void)startSession {
-    if (!self.startSessionTime) {
-        self.startSessionTime = [NSDate date];
-    }
-}
-
--(void)updateSessionDepth: (NSString* )appKey {
-    NSNumber* count = [self.sessionDepth valueForKey:appKey];
-    NSNumber* value = count ? [NSNumber numberWithInt: count.intValue + 1] : [NSNumber numberWithInt: 1];
-    [self.sessionDepth setValue: value  forKey: appKey];
-}
-
-- (NSNumber *)sessionDepthForAppKey:(NSString *)appKey {
-    NSNumber *depth = [self.sessionDepth valueForKey: appKey];
-    
-    return depth ?: @0;
 }
 
 -(void)setAdapterName: (NSString* )name {
@@ -206,17 +178,6 @@
     }
     NSLog(@"Error: File not found in resourcesBundle for fileName: %@", fileName);
     return nil;
-}
-
--(void)setSessionId {
-    if (!self.sessionId) {
-        NSUUID *sessionUUID = [NSUUID UUID];
-        self.sessionId = [sessionUUID UUIDString];
-    }
-}
-
--(NSString *)sessionId {
-    return _sessionId;
 }
 
 @end

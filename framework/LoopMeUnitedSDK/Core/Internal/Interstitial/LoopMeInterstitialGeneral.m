@@ -371,6 +371,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
 - (void)handleAdAppearance {
     if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
         [self.adDisplayController layoutSubviews];
+        [[LoopMeLifecycleManager shared] updateSessionDepthForKey:self.appKey];
     } else {
         [self startAd];
     }
