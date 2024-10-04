@@ -60,7 +60,6 @@ public class LifecycleManager: NSObject {
     }
     
     @objc private func handleWillResignActive() {
-        print("App will resign active")
         pauseTime()
     }
     
@@ -82,7 +81,6 @@ public class LifecycleManager: NSObject {
         } else {
             sessionDepth[appKey] = 1
         }
-        print("Updated session depth for \(appKey): \(sessionDepth[appKey]!)")
     }
     
     @objc public func sessionDepth(forAppKey appKey: String) -> Int {
@@ -111,7 +109,6 @@ public class LifecycleManager: NSObject {
         let elapsedTime = currentTime.timeIntervalSince(startTime) - totalPausedTime
         lastElapsedTime = elapsedTime
         isPaused = true
-        print("Time paused at: \(elapsedTime) seconds")
     }
     
     @objc private func resumeTime() {
