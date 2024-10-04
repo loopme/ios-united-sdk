@@ -83,6 +83,7 @@
     ];
     [request setHTTPMethod: @"POST"];
     [request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
+    [request setValue: @"2.5/2.6" forHTTPHeaderField: @"x-openrtb-version"];
     [request setHTTPBody: [components.query dataUsingEncoding: NSUTF8StringEncoding]];
     [[[NSURLSession sharedSession] dataTaskWithRequest: request] resume];
 }
