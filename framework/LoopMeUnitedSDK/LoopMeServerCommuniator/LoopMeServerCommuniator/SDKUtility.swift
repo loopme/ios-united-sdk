@@ -12,4 +12,6 @@ import Foundation
     @objc public static func loopmeSDKVersionString() -> String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     }
+    
+    @objc public static var ortbVersion = "2.5/2.6"
 }

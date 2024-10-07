@@ -84,6 +84,7 @@
     ];
     [request setHTTPMethod: @"POST"];
     [request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
+    [request setValue: SDKUtility.ortbVersion forHTTPHeaderField: @"x-openrtb-version"];
     [request setHTTPBody: [components.query dataUsingEncoding: NSUTF8StringEncoding]];
     [[[NSURLSession sharedSession] dataTaskWithRequest: request] resume];
 }
