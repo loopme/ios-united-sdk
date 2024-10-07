@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableDictionary *resourcesFiles;
 @property (nonatomic, strong) NSString *adpaterName;
 @property (nonatomic, strong) NSMutableArray<NSNumber *> *sdkInitTimes;
+@property (nonatomic, strong) NSString *sessionId;
 
 @end
 
@@ -119,8 +120,8 @@
     [LoopMeGlobalSettings sharedInstance];
 
     // Initialize the start for session duration time here
-    [self startSession];
-    
+    [[LoopMeLifecycleManager shared] startSession];
+
     CFAbsoluteTime startTimeOmid = CFAbsoluteTimeGetCurrent();
     (void)[LoopMeOMIDWrapper initOMIDWithCompletionBlock: ^(BOOL ready) {
         CFAbsoluteTime endTimeOmid  = CFAbsoluteTimeGetCurrent();
@@ -154,32 +155,6 @@
                               errorMessage: @"SDK Init time alert <100ms"
                                       info: infoDictionary];
      }
-}
-
-- (NSNumber *)timeElapsedSinceStart {
-    if (self.startSessionTime) {
-        NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.startSessionTime];
-        return @(round(timeInterval));
-    }
-    return @0;
-}
-
--(void)startSession {
-    if (!self.startSessionTime) {
-        self.startSessionTime = [NSDate date];
-    }
-}
-
--(void)updateSessionDepth: (NSString* )appKey {
-    NSNumber* count = [self.sessionDepth valueForKey:appKey];
-    NSNumber* value = count ? [NSNumber numberWithInt: count.intValue + 1] : [NSNumber numberWithInt: 1];
-    [self.sessionDepth setValue: value  forKey: appKey];
-}
-
-- (NSNumber *)sessionDepthForAppKey:(NSString *)appKey {
-    NSNumber *depth = [self.sessionDepth valueForKey: appKey];
-    
-    return depth ?: @0;
 }
 
 -(void)setAdapterName: (NSString* )name {
