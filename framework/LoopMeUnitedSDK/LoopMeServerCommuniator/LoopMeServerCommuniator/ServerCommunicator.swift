@@ -37,7 +37,7 @@ open class ServerCommunicator: NSObject {
         configuration.timeoutIntervalForRequest = adRequestTimeOutInterval
 
         //TODO: get user agent
-        configuration.httpAdditionalHeaders = ["User-Agent" :  UserAgent.defaultUserAgent, "x-openrtb-version" : "2.5"]
+        configuration.httpAdditionalHeaders = ["User-Agent" :  UserAgent.defaultUserAgent, "x-openrtb-version" : SDKUtility.ortbVersion]
         self.session = URLSession(configuration: configuration, delegate: nil, delegateQueue: nil)
     }
     
