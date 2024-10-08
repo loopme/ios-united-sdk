@@ -445,11 +445,6 @@ const NSInteger kLoopMeRequestTimeout = 180;
 #pragma mark - LoopMeAdManagerDelegate
 
 - (void)adManager: (LoopMeAdManager *)manager didReceiveAdConfiguration: (LoopMeAdConfiguration *)adConfiguration {
-    if (!adConfiguration) {
-        LoopMeLogDebug(@"Could not process ad: interstitial format expected.");
-        return [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeIncorrectFormat]];
-    }
-    
     self.adConfiguration = adConfiguration;
     if ([LoopMeGlobalSettings sharedInstance].liveDebugEnabled ) {
         [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug = self.appKey;

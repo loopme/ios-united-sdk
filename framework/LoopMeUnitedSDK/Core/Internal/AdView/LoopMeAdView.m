@@ -571,13 +571,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 
 #pragma mark - LoopMeAdManagerDelegate
 
-- (void)adManager: (LoopMeAdManager *)manager didReceiveAdConfiguration: (LoopMeAdConfiguration *)adConfiguration {
-    if (!adConfiguration) {
-        LoopMeLogDebug(@"Could not process ad: interstitial format expected.");
-        [self failedLoadingAdWithError: [LoopMeError errorForStatusCode: LoopMeErrorCodeIncorrectFormat]];
-        return;
-    }
-    
+- (void)adManager: (LoopMeAdManager *)manager didReceiveAdConfiguration: (LoopMeAdConfiguration *)adConfiguration {    
     self.isSkadAvailable = !(self.adConfiguration.skadSourceidentifier == nil || [self.adConfiguration.skadSourceidentifier isEqualToNumber:@(0)]);
     if (self.isSkadAvailable) {
         [self setupSKAdImpression];
