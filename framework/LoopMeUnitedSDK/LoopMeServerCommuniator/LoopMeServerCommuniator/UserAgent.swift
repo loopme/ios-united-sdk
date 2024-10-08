@@ -56,4 +56,11 @@ public class UserAgent: NSObject {
     @objc public static var defaultUserAgent: String {
         clientUserAgent(prefix: "Mozilla/5.0")
     }
+    
+    @objc public static func formattedDateString(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        return formatter.string(from: date)
+    }
 }

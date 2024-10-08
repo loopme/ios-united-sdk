@@ -53,6 +53,7 @@
     NSURLComponents *components = [[NSURLComponents alloc] init];
     
     components.queryItems = @[
+        [NSURLQueryItem queryItemWithName: @"created_at"           value:  [UserAgent formattedDateStringFrom:[NSDate date]]],
         [NSURLQueryItem queryItemWithName: @"device_os"           value: @"ios"],
         [NSURLQueryItem queryItemWithName: @"device_id"           value: [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier]],
         [NSURLQueryItem queryItemWithName: @"device_model"        value: [LoopMeIdentityProvider deviceAppleModel]],
