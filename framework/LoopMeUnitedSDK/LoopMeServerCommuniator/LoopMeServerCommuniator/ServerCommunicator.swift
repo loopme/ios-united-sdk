@@ -69,7 +69,6 @@ open class ServerCommunicator: NSObject {
 //                if response.statusCode == -999 {
 //                    return
 //                }
-//
                 
                 if response.statusCode == 408 || response.statusCode == NSURLErrorTimedOut {
                     self.taskFailed(error: ServerError.timeout)

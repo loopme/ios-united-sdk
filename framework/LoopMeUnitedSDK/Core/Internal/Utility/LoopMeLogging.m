@@ -13,6 +13,7 @@
 #import "LoopMeDefinitions.h"
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeIdentityProvider.h"
+#import "LoopMeErrorEventSender.h"
 
 @class LoopMeLoggingSender;
 
@@ -166,28 +167,10 @@ static dispatch_once_t onceToken;
 }
 
 - (void)startSendingTask {
-    NSURL *url = [NSURL URLWithString:@"https://tk0x1.com/api/errors"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:60.0];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"UTF-8" forHTTPHeaderField:@"Content-Encoding"];
-    
-    
-    NSString *params = [NSString stringWithFormat:@"device_os=ios&sdk_type=loopme&sdk_version=%@&device_id=%@&package=%@&app_key=%@&msg=sdk_debug&debug_logs=%@", LOOPME_SDK_VERSION, [LoopMeIdentityProvider advertisingTrackingDeviceIdentifier], [NSBundle mainBundle].bundleIdentifier, [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug, [self logs]];
-    
-    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
-        [self removeLogs];
-        dispatch_semaphore_signal(sema);
+    [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom errorMessage:@"" info:@{ kErrorInfoAppKey : [LoopMeGlobalSettings sharedInstance].appKeyForLiveDebug, @"debug_logs": [self logs]  }];
         
-    }];
-
-    [postDataTask resume];
+    [self removeLogs];
+    dispatch_semaphore_signal(sema);
 }
 
 @end
