@@ -799,6 +799,7 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
 }
 
 - (void)adDisplayControllerWillExpandAd: (LoopMeAdDisplayControllerNormal *)adDisplayController {
+    [self.delegate adDisplayControllerWillExpandAd:self];
     [self expand];
 }
 

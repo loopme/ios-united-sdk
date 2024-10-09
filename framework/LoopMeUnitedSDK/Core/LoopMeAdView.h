@@ -242,5 +242,11 @@ viewControllerForPresentationGDPRWindow: (UIViewController *)viewController
  */
 - (void)loopMeAdViewWillAppear:(LoopMeAdView *)adView;
 
+/**
+ * Triggered when the adView is expand
+ * AdView `ready` property is set to NO
+ * @param adView object the sender of message
+ */
+-(void)adDisplayControllerWillExpandAd:(LoopMeAdView *)adView;
 
 @end
