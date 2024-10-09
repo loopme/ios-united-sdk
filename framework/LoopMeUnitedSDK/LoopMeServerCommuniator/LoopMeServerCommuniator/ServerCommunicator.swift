@@ -69,11 +69,6 @@ open class ServerCommunicator: NSObject {
 //                if response.statusCode == -999 {
 //                    return
 //                }
-//                       
-                if response.statusCode == 200 && ((data?.isEmpty) != nil) {
-                    self.taskCompleted(success: false, error: ServerError.noData)
-                    return
-                }
                 
                 if response.statusCode == 408 || response.statusCode == NSURLErrorTimedOut {
                     self.taskFailed(error: ServerError.timeout)
@@ -87,7 +82,11 @@ open class ServerCommunicator: NSObject {
                 }
                        
                 do {
-                    guard let data = data else { return }
+                    guard let data = data else {
+                        if response.statusCode == 200 {
+                            self.taskCompleted(success: false, error: ServerError.noData)
+                        }
+                        return }
                     
                     if self.configuration == nil {
                         let configuration = try JSONDecoder().decode(AdConfiguration.self, from: data)
