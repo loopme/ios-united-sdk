@@ -22,8 +22,6 @@
         errorMessage = @"Ad processing timed out";
     } else if (statusCode == LoopMeErrorCodeSpecificHost) {
         errorMessage = @"Failed to process ad";
-    } else if (statusCode == LoopMeErrorCodeIncorrectFormat) {
-        errorMessage = @"Could not process ad: wrong format";
     } else if (statusCode == LoopMeErrorCodeURLResolve) {
         errorMessage = @"Failed to resolve URL";
     } else if (statusCode == LoopMeErrorCodeWrirtingToDisk) {
