@@ -15,6 +15,7 @@ enum ServerError: Error {
     case noAds
     case parsingError
     case vastWrapperLimit
+    case noData
 }
 
 extension ServerError: LocalizedError {
@@ -32,6 +33,8 @@ extension ServerError: LocalizedError {
             return "Server error code: \(code)"
         case .some:
             return "Unknown error"
+        case .noData:
+            return "Response empty data"
         }
     }
 }

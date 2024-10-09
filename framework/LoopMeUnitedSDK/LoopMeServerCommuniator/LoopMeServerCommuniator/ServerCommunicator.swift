@@ -70,6 +70,11 @@ open class ServerCommunicator: NSObject {
 //                    return
 //                }
 //                       
+                if response.statusCode == 200 && ((data?.isEmpty) != nil) {
+                    self.taskCompleted(success: false, error: ServerError.noData)
+                    return
+                }
+                
                 if response.statusCode == 408 || response.statusCode == NSURLErrorTimedOut {
                     self.taskFailed(error: ServerError.timeout)
                     return
