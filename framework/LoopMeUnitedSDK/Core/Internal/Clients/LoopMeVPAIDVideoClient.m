@@ -356,10 +356,7 @@ const NSInteger kResizeOffsetVPAID = 11;
                                              info: infoDictionary];
                 [self.delegate videoClient:self didFailToLoadVideoWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeMediaDisplay]];
             } else if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
-                if ([self.videoManager hasCachedURL:self.videoURL]) {
-                    [self.delegate videoClientDidLoadVideo:self];
-                    [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
-                }
+                [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
             }
         }
     } //else if (object == self.audioSession) {
@@ -471,6 +468,7 @@ const NSInteger kResizeOffsetVPAID = 11;
     
     self.videoPath = [NSString stringWithFormat:@"%@.mp4", [URL.absoluteString lm_MD5]];
     self.videoManager = [[LoopMeVideoManager alloc] initWithVideoPath:self.videoPath delegate:self];
+
     if ([self playerHasBufferedURL:URL]) {
         [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
     } else if ([self.videoManager hasCachedURL:URL]) {
@@ -483,7 +481,9 @@ const NSInteger kResizeOffsetVPAID = 11;
         
         self.loadingVideoStartDate = [NSDate date];
         [self.videoManager loadVideoWithURL:URL];
+        [self setupPlayerWithFileURL:URL];
     }
+    [self.delegate videoClientDidLoadVideo:self];
 }
 
 - (void)setMute:(BOOL)mute {
@@ -517,6 +517,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)play {
+    [self.videoManager cancel];
     [self.player play];
     if (self.shouldPlay) {
         [self.vastUIView showEndCard:NO];
