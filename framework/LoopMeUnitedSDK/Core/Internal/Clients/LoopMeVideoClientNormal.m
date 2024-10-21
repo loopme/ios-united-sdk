@@ -315,11 +315,9 @@ AVAssetResourceLoaderDelegate
                     self.statusSent = YES;
                 }
             } else if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
-                if (([self.videoManager hasCachedURL:self.videoURL] && !self.isStatusSent) ) {
-                    [self.JSClient setVideoState:LoopMeVideoState.ready];
-                    [self.JSClient setDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)*1000];
-                    self.statusSent = YES;
-                }
+                [self.JSClient setVideoState:LoopMeVideoState.ready];
+                [self.JSClient setDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)*1000];
+                self.statusSent = YES;
             }
         } else if ([keyPath isEqualToString:kLoopMeLoadedTimeRangesKey]) {
             if (self.delegate.adConfiguration.preload25) {
@@ -371,8 +369,12 @@ AVAssetResourceLoaderDelegate
 
 - (void)adjustViewToFrame:(CGRect)frame {
     self.videoView.frame = frame;
+    if (!self.playerLayer.superlayer) {
+        [self.videoView.layer addSublayer:self.playerLayer];
+    }
+    
     if (self.playerLayer) {
-        self.playerLayer.frame = frame;
+        self.playerLayer.frame =  self.videoView.bounds;
         if (self.layerGravity) {
             self.playerLayer.videoGravity = self.layerGravity;
             self.layerGravity = nil;
@@ -461,6 +463,7 @@ AVAssetResourceLoaderDelegate
 }
 
 - (void)play {
+    [self.videoManager cancel];
     if (![self playerReachedEnd]) {
         self.shouldPlay = YES;
         [self.player play];

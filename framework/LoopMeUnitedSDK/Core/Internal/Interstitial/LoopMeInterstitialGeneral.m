@@ -356,16 +356,18 @@ const NSInteger kLoopMeRequestTimeout = 180;
 }
 
 - (void)displayAd {
-    if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
-        [self.adDisplayController displayAd];
-        self.adDisplayController.visible = YES;
-    } else {
-        [self.adDisplayControllerVPAID displayAd];
-        self.adDisplayControllerVPAID.visible = YES;
-    }
-    if (self.isSkadnAvailable) {
-        [self startSKAdImpression];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.adConfiguration.creativeType != LoopMeCreativeTypeVast) {
+            [self.adDisplayController displayAd];
+            self.adDisplayController.visible = YES;
+        } else {
+            [self.adDisplayControllerVPAID displayAd];
+            self.adDisplayControllerVPAID.visible = YES;
+        }
+        if (self.isSkadnAvailable) {
+            [self startSKAdImpression];
+        }
+    });
 }
 
 - (void)handleAdAppearance {
@@ -463,7 +465,10 @@ const NSInteger kLoopMeRequestTimeout = 180;
     if (!self.adConfiguration) return;
     if (self.adConfiguration.creativeType == LoopMeCreativeTypeVast) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Interstitial %@", [UserAgent formattedDateStringFrom:[NSDate date]]);
             [self.adDisplayControllerVPAID loadAdConfiguration];
+            [self adDisplayControllerDidFinishLoadingAd:self.adDisplayControllerVPAID];
+
         });
     } else {
         [self adDisplayControllerDidFinishLoadingAd: self.adDisplayController];

@@ -154,11 +154,13 @@
  */
 - (void)didLoadWithAdInfo: (ISAdInfo *)adInfo{
     NSLog(@"[ISAdapter] didLoadWithAdInfo: %@", adInfo);
-    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
-    if ([adInfo.ad_unit isEqual: @"interstitial"])
+//    [self showText: [NSString stringWithUTF8String: __PRETTY_FUNCTION__]];
+    if ([adInfo.ad_unit isEqual: @"interstitial"]) {
         _showISButton.enabled = YES;
-    else
+    } else {
         _showRVButton.enabled = YES;
+        [IronSource showRewardedVideoWithViewController: self];
+    }
 }
 
 /**

@@ -233,6 +233,16 @@ const NSInteger kResizeOffsetVPAID = 11;
     });
 }
 
+- (void)setupPlayerWithStreaming:(NSURL *)URL {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.playerItem  = [AVPlayerItem playerItemWithURL:URL];
+        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+        if (self.shouldPlay) {
+            [self.player play];
+        }
+    });
+}
+
 - (BOOL)playerHasBufferedURL:(NSURL *)URL {
     if (!self.videoPath) {
         return NO;
@@ -346,23 +356,41 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context {
-    if (object == self.playerItem ) {
+    if (object == self.playerItem) {
         if ([keyPath isEqualToString:kLoopMeVPAIDVideoStatusKey]) {
             if (self.playerItem.status == AVPlayerItemStatusFailed) {
-                NSMutableDictionary *infoDictionary =   [self.delegate.adConfigurationObject toDictionary];
-                [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
-                [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                                     errorMessage: @"Video player could not init file"
-                                             info: infoDictionary];
+                // Handle error
                 [self.delegate videoClient:self didFailToLoadVideoWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeMediaDisplay]];
             } else if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
-                [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
+                // Player is ready to play
+                if (self.shouldPlay) {
+                    [self.player play];
+                }
             }
+        } else if ([keyPath isEqualToString:kLoopMeVPAIDLoadedTimeRangesKey]) {
+            // Check if enough data is buffered to resume playback
+            [self handleBuffering];
         }
     } //else if (object == self.audioSession) {
 //        NSNumber * newValue = [change objectForKey:NSKeyValueChangeNewKey];
 //        [self.omidVideoEvents volumeChangeTo:newValue.floatValue];
    // }
+}
+
+- (void)handleBuffering {
+    NSArray *loadedTimeRanges = self.playerItem.loadedTimeRanges;
+    if (loadedTimeRanges.count > 0) {
+        CMTimeRange timeRange = [[loadedTimeRanges firstObject] CMTimeRangeValue];
+        float bufferedTime = CMTimeGetSeconds(CMTimeAdd(timeRange.start, timeRange.duration));
+        float currentTime = CMTimeGetSeconds(self.playerItem.currentTime);
+        
+        if (bufferedTime > currentTime + 5) {
+            // Enough data is buffered, resume playback if necessary
+            if (self.shouldPlay && self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
+                [self.player play];
+            }
+        }
+    }
 }
 
 #pragma mark - Public
@@ -385,6 +413,10 @@ const NSInteger kResizeOffsetVPAID = 11;
 //        [self.vastUIView addSubview:volumeView];
     }
 
+    if (!self.playerLayer.superlayer) {
+        [self.videoView.layer addSublayer:self.playerLayer];
+    }
+    
     if (self.playerLayer) {
         self.playerLayer.frame = frame;
         if (self.layerGravity) {
@@ -473,6 +505,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
     } else if ([self.videoManager hasCachedURL:URL]) {
         [self setupPlayerWithFileURL:[self.videoManager videoFileURL]];
+        NSLog(@"cahche");
     } else {
         if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi && [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi) {
             [self videoManager:self.videoManager didFailLoadWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeUndefined]];
@@ -480,8 +513,9 @@ const NSInteger kResizeOffsetVPAID = 11;
         }
         
         self.loadingVideoStartDate = [NSDate date];
-        [self.videoManager loadVideoWithURL:URL];
-        [self setupPlayerWithFileURL:URL];
+        [self setupPlayerWithStreaming:URL];
+        NSLog(@"stream");
+
     }
     [self.delegate videoClientDidLoadVideo:self];
 }

@@ -37,11 +37,11 @@
                           adData: (nonnull ISAdData *)adData
                         delegate: (nonnull id<ISInterstitialAdDelegate>)delegate {
     // check if ad can be displayed
-    if (![self isAdAvailableWithAdData:adData]) {
-        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
-                                  errorMessage: @"LoopMe Interstitial is not ready to display"];
-        return;
-    }
+//    if (![self isAdAvailableWithAdData:adData]) {
+//        [delegate adDidFailToShowWithErrorCode: ISAdapterErrorInternal
+//                                  errorMessage: @"LoopMe Interstitial is not ready to display"];
+//        return;
+//    }
     [self.interstitial showFromViewController: viewController animated: YES];
     [delegate adDidShowSucceed];
 }

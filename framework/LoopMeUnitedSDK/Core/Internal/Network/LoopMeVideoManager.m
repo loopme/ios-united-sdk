@@ -92,9 +92,9 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
         NSDate *creationDate = [[fm attributesOfItemAtPath:[directoryPath stringByAppendingPathComponent:file] error:nil] fileCreationDate];
         NSDate *yesterDay = [[NSDate date] dateByAddingTimeInterval:kLoopMeVideoCacheExpiredTime];
         
-        if ([creationDate compare:yesterDay] == NSOrderedAscending) {
+//        if ([creationDate compare:yesterDay] == NSOrderedAscending) {
             [fm removeItemAtPath:[directoryPath stringByAppendingPathComponent:file] error:nil];
-        }
+//        }
     }
 }
 

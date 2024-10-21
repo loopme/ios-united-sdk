@@ -79,6 +79,7 @@ NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
 }
 
 - (void)serverCommunicatorDidReceiveAd: (LoopMeServerCommunicator *)communicator {
+    NSLog(@"Server %@", [UserAgent formattedDateStringFrom:[NSDate date]]);
     if ([self.delegate respondsToSelector: @selector(adManagerDidReceiveAd:)]) {
         [self.delegate adManagerDidReceiveAd: self];
     }
