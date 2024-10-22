@@ -128,7 +128,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (void)setPlayerItem:(AVPlayerItem *)playerItem {
     if (_playerItem != playerItem) {
         self.isDidReachEndSent = NO;
+        
         if (_playerItem) {
+            [_playerItem removeObserver:self forKeyPath:@"status"];
             [_playerItem removeObserver:self forKeyPath:kLoopMeVPAIDVideoStatusKey context:VPAIDvideoControllerStatusObservationContext];
             [_playerItem removeObserver:self forKeyPath:kLoopMeVPAIDLoadedTimeRangesKey context:VPAIDvideoControllerStatusObservationContext];
             [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -158,6 +160,7 @@ const NSInteger kResizeOffsetVPAID = 11;
                              forKeyPath:kLoopMeVPAIDLoadedTimeRangesKey
                                 options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                                 context:VPAIDvideoControllerStatusObservationContext];
+            [_playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 
         }
     }
@@ -233,21 +236,21 @@ const NSInteger kResizeOffsetVPAID = 11;
     });
 }
 
-- (void)setupPlayerWithStreaming:(NSURL *)URL {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.playerItem  = [AVPlayerItem playerItemWithURL:URL];
-        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        if (self.shouldPlay) {
-            [self.player play];
-        }
-    });
-}
+//- (void)setupPlayerWithStreaming:(NSURL *)URL {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        self.playerItem  = [AVPlayerItem playerItemWithURL:URL];
+//        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+//        if (self.shouldPlay) {
+//            [self.player play];
+//        }
+//    });
+//}
 
 - (BOOL)playerHasBufferedURL:(NSURL *)URL {
-    if (!self.videoPath) {
+    if (!URL) {
         return NO;
     }
-    return [[self currentAssetURLForPlayer:self.player].absoluteString hasSuffix:self.videoPath];
+    return [[self currentAssetURLForPlayer:self.player].absoluteString hasSuffix:[URL absoluteString]];
 }
 
 - (void)showEndCard {
@@ -365,11 +368,14 @@ const NSInteger kResizeOffsetVPAID = 11;
                 // Player is ready to play
                 if (self.shouldPlay) {
                     [self.player play];
+                } else {
+                    [self handleBuffering];
                 }
             }
         } else if ([keyPath isEqualToString:kLoopMeVPAIDLoadedTimeRangesKey]) {
-            // Check if enough data is buffered to resume playback
-            [self handleBuffering];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self handleBuffering];
+            });
         }
     } //else if (object == self.audioSession) {
 //        NSNumber * newValue = [change objectForKey:NSKeyValueChangeNewKey];
@@ -497,7 +503,6 @@ const NSInteger kResizeOffsetVPAID = 11;
     
     
     self.videoURL = URL;
-    
     self.videoPath = [NSString stringWithFormat:@"%@.mp4", [URL.absoluteString lm_MD5]];
     self.videoManager = [[LoopMeVideoManager alloc] initWithVideoPath:self.videoPath delegate:self];
 
@@ -513,7 +518,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         }
         
         self.loadingVideoStartDate = [NSDate date];
-        [self setupPlayerWithStreaming:URL];
+        [self setupPlayerWithFileURL:URL];
         NSLog(@"stream");
 
     }
@@ -551,7 +556,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)play {
-    [self.videoManager cancel];
     [self.player play];
     if (self.shouldPlay) {
         [self.vastUIView showEndCard:NO];
