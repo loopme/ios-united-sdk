@@ -14,6 +14,7 @@
 @interface LoopMeVideoManager : NSObject
 
 @property (nonatomic, weak) id<LoopMeVideoManagerDelegate> delegate;
+@property (nonatomic, assign, getter=isDidLoadSent) BOOL didLoadSent;
 
 - (instancetype)initWithVideoPath:(NSString *)videoPath delegate:(id<LoopMeVideoManagerDelegate>)delegate;
 - (void)loadVideoWithURL:(NSURL *)URL;

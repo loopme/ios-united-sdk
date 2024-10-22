@@ -30,7 +30,6 @@ NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1*32*60*60);
 @property (nonatomic, strong) NSURL *videoURL;
 @property (nonatomic, strong) NSString *videoPath;
 @property (nonatomic, assign) long long contentLength;
-@property (nonatomic, assign, getter=isDidLoadSent) BOOL didLoadSent;
 
 - (NSString *)assetsDirectory;
 

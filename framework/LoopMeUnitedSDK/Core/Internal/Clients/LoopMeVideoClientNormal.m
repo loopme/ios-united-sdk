@@ -315,11 +315,9 @@ AVAssetResourceLoaderDelegate
                     self.statusSent = YES;
                 }
             } else if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
-                if (([self.videoManager hasCachedURL:self.videoURL] && !self.isStatusSent) ) {
-                    [self.JSClient setVideoState:LoopMeVideoState.ready];
-                    [self.JSClient setDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)*1000];
-                    self.statusSent = YES;
-                }
+                [self.JSClient setVideoState:LoopMeVideoState.ready];
+                [self.JSClient setDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)*1000];
+                self.statusSent = YES;
             }
         } else if ([keyPath isEqualToString:kLoopMeLoadedTimeRangesKey]) {
             if (self.delegate.adConfiguration.preload25) {
