@@ -14,12 +14,21 @@
 
 @implementation LoopMeAdWebView
 
++ (WKWebViewConfiguration *)sharedConfiguration {
+    static WKWebViewConfiguration *sharedConf = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedConf = [[WKWebViewConfiguration alloc] init];
+        sharedConf.allowsInlineMediaPlayback = YES;
+        sharedConf.mediaTypesRequiringUserActionForPlayback = NO;
+    });
+    return sharedConf;
+}
+
 - (id)initWithFrame:(CGRect)frame contentController:(WKUserContentController *)controller {
-    WKWebViewConfiguration *conf = [[WKWebViewConfiguration alloc] init];
-    conf.allowsInlineMediaPlayback = YES;
-    conf.mediaTypesRequiringUserActionForPlayback = NO;
-    conf.userContentController = controller;
-    
+    WKWebViewConfiguration *conf = [LoopMeAdWebView sharedConfiguration];
+    conf.userContentController = controller; 
+
     self = [super initWithFrame:frame configuration:conf];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
