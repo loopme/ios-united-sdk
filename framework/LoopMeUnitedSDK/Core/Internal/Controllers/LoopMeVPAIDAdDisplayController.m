@@ -710,9 +710,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
     [self.omidVideoEvents loadedWith: [[OMIDLoopmeVASTProperties alloc] initWithSkipOffset: skipOffset
                                                                                   autoPlay: YES
                                                                                   position: OMIDPositionStandalone]];
-    if ([self.delegate respondsToSelector: @selector(adDisplayControllerDidFinishLoadingAd:)]) {
-        [self.delegate adDisplayControllerDidFinishLoadingAd: self];
-    }
 }
 
 - (void)videoClient: (LoopMeVPAIDVideoClient *)client didFailToLoadVideoWithError: (NSError *)error {

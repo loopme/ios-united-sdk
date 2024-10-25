@@ -463,6 +463,7 @@ const NSInteger kLoopMeRequestTimeout = 180;
     if (!self.adConfiguration) return;
     if (self.adConfiguration.creativeType == LoopMeCreativeTypeVast) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self adDisplayControllerDidFinishLoadingAd:self.adDisplayControllerVPAID];
             [self.adDisplayControllerVPAID loadAdConfiguration];
         });
     } else {
