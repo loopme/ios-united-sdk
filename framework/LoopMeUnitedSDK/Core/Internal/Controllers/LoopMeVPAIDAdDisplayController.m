@@ -270,6 +270,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         if (self.adConfiguration.vastProperties.assetLinks.endCard.count) {
             imageURL = [NSURL URLWithString:[self.adConfiguration.vastProperties.assetLinks.endCard objectAtIndex:self.loadImageCounter]];
         }
+        [self loadVideoIfNeeded];
         [self.imageDownloader loadImageWithURL:imageURL];
     }
 }
@@ -713,13 +714,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)videoClient: (LoopMeVPAIDVideoClient *)client didFailToLoadVideoWithError: (NSError *)error {
-    self.loadVideoCounter++;
-    NSArray *urls = self.adConfiguration.vastProperties.assetLinks.videoURL;
-    if (urls.count > self.loadVideoCounter) {
-        [self.vastEventTracker trackErrorCode: error.code];
-        [self.videoClient loadWithURL: [NSURL URLWithString: urls[self.loadVideoCounter]]];
-        return;
-    }
     LoopMeLogInfo(@"Did fail to load video ad");
     if ([self.delegate respondsToSelector: @selector(adDisplayController: didFailToLoadAdWithError:)]) {
         [self.delegate adDisplayController: self didFailToLoadAdWithError: error];
@@ -946,8 +940,7 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
 }
 
 - (void)handleLoadedImage:(UIImage *)image {
-    [((LoopMeVPAIDVideoClient *)self.videoClient).vastUIView setEndCardImage:image];
-    [self loadVideoIfNeeded];
+    [((LoopMeVPAIDVideoClient *)self.videoClient).vastUIView updateEndCard:image];
 }
 
 - (void)handleImageLoadingFailure {
@@ -956,8 +949,6 @@ NSString * const _kLoopMeVPAIDAdErrorCommand = @"vpaidAdError";
         NSString *nextImageURLString = self.adConfiguration.vastProperties.assetLinks.endCard[self.loadImageCounter];
         NSURL *nextImageURL = [NSURL URLWithString:nextImageURLString];
         [self.imageDownloader loadImageWithURL:nextImageURL];
-    } else {
-        [self loadVideoIfNeeded];
     }
 }
 

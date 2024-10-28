@@ -354,7 +354,7 @@ AVAssetResourceLoaderDelegate
 
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [[LoopMeVideoManager alloc] initWithVideo: URL delegate: self];
+    self.videoManager = [LoopMeVideoManager sharedInstance];
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
@@ -363,7 +363,7 @@ AVAssetResourceLoaderDelegate
         return;
     }
     if (!self.isDidLoadSent) {
-        [self setupPlayerWithFileURL: [self.videoManager cacheVideoWith: URL]];
+        [self setupPlayerWithFileURL: URL];
         self.didLoadSent = YES;
     }
     if ([self.player.currentItem.asset isKindOfClass: [AVURLAsset class]]) {

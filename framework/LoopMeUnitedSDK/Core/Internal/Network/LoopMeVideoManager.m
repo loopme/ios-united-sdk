@@ -14,204 +14,218 @@
 #import "NSString+Encryption.h"
 
 NSInteger const kLoopMeVideoLoadTimeOutInterval = 60;
-NSTimeInterval const kLoopMeVideoCacheExpiredTime = (-1 * 32 * 60 * 60);
+NSTimeInterval const kLoopMeVideoCacheExpiredTime = 32 * 60 * 60;
+static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 
-@interface LoopMeVideoManager ()
-<
-    NSURLSessionTaskDelegate,
-    NSURLSessionDataDelegate
->
+@interface LoopMeVideoManager () <NSURLSessionDownloadDelegate>
 
-@property (nonatomic, strong) id ETag;
-@property (nonatomic, strong) NSMutableURLRequest *request;
 @property (nonatomic, strong) NSURLSession *session;
-@property (nonatomic, strong) NSURLSessionDataTask *dataTask;
-@property (nonatomic, strong) NSMutableData *videoData;
-
-@property (nonatomic, strong) NSURL *videoURL;
-@property (nonatomic, strong) NSString *videoPath;
-@property (nonatomic, assign) long long contentLength;
-
 @property (nonatomic, strong) NSString *assetsDirectory;
+@property (nonatomic, strong) NSLock *lock;
+@property (nonatomic, strong) NSMutableSet<NSURL *> *cacheQueue;
+@property (nonatomic, strong) NSTimer *cacheTimer;
+@property (nonatomic, strong) NSMutableDictionary<NSURL *, NSURLSessionDownloadTask *> *downloadTasks;
 
 @end
 
 @implementation LoopMeVideoManager
 
-#pragma mark - Life Cycle
+#pragma mark - Singleton
 
-- (void)dealloc { }
++ (instancetype)sharedInstance {
+    static LoopMeVideoManager *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[LoopMeVideoManager alloc] initPrivate];
+    });
+    return sharedInstance;
+}
 
-- (void)clearCacheFilesOlderThan: (NSTimeInterval)cacheLifetime {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![[NSFileManager defaultManager] fileExistsAtPath: self.assetsDirectory]) {
-        return;
+- (instancetype)initPrivate {
+    self = [super init];
+    if (self) {
+        _lock = [[NSLock alloc] init];
+        _cacheQueue = [NSMutableSet set];
+        _downloadTasks = [NSMutableDictionary dictionary];
+
+        NSString *domainDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+        _assetsDirectory = [domainDir stringByAppendingPathComponent:@"lm_assets/"];
+
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.timeoutIntervalForResource = kLoopMeVideoLoadTimeOutInterval;
+        self.session = [NSURLSession sessionWithConfiguration:configuration
+                                                     delegate:self
+                                                delegateQueue:nil];
+        [self clearCacheFilesOlderThan:kLoopMeVideoCacheExpiredTime];
     }
-    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtPath: self.assetsDirectory];
-    NSString *file;
-    NSDate *expirationDate = [[NSDate date] dateByAddingTimeInterval: -cacheLifetime];
-    while (file = [enumerator nextObject]) {
-        NSString *filePath = [self.assetsDirectory stringByAppendingPathComponent: file];
-        NSError *attributesError = nil;
-        NSDate *creationDate = [[fileManager attributesOfItemAtPath: filePath error: &attributesError] fileCreationDate];
-        if (attributesError) {
-            NSLog(@"Failed to get attributes for file: %@, error: %@", file, attributesError);
+    return self;
+}
+
+#pragma mark - Public Methods
+
+- (void)setDelegate:(id<LoopMeVideoManagerDelegate>)delegate {
+    [self.lock lock];
+    _delegate = delegate;
+    [self.lock unlock];
+}
+
+- (NSURL *)cacheVideoWith:(NSURL *)URL {
+    [self.lock lock];
+    NSString *localPath = [self localPathForURL:URL];
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
+        [self.lock unlock];
+        return [NSURL fileURLWithPath:localPath];
+    }
+
+    if (![self.cacheQueue containsObject:URL]) {
+        [self.cacheQueue addObject:URL];
+    }
+
+    if (!self.cacheTimer) {
+        self.cacheTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeVideoCacheDelay
+                                                           target:self
+                                                         selector:@selector(startCaching)
+                                                         userInfo:nil
+                                                          repeats:NO];
+    }
+
+    [self.lock unlock];
+    return URL;
+}
+
+- (void)cancel {
+    [self.lock lock];
+    for (NSURLSessionDownloadTask *downloadTask in self.downloadTasks.allValues) {
+        [downloadTask cancel];
+    }
+    [self.downloadTasks removeAllObjects];
+    [self.lock unlock];
+}
+
+#pragma mark - Private Methods
+
+- (void)startCaching {
+    [self.lock lock];
+
+    if (!self.session) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.timeoutIntervalForResource = kLoopMeVideoLoadTimeOutInterval;
+        self.session = [NSURLSession sessionWithConfiguration:configuration
+                                                     delegate:self
+                                                delegateQueue:nil];
+    }
+
+    for (NSURL *URL in self.cacheQueue) {
+        NSString *localPath = [self localPathForURL:URL];
+
+        if ([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
             continue;
         }
-        if ([creationDate compare: expirationDate] == NSOrderedDescending) {
+
+        if (self.downloadTasks[URL]) {
+            continue;
+        }
+
+        NSURLSessionDownloadTask *downloadTask = [self.session downloadTaskWithURL:URL];
+        self.downloadTasks[URL] = downloadTask;
+        [downloadTask resume];
+    }
+
+    [self.cacheQueue removeAllObjects];
+    self.cacheTimer = nil;
+
+    [self.lock unlock];
+}
+
+- (NSString *)localPathForURL:(NSURL *)URL {
+    NSString *fileName = [NSString stringWithFormat:@"%@.mp4", [URL.absoluteString lm_MD5]];
+    return [self.assetsDirectory stringByAppendingPathComponent:fileName];
+}
+
+- (void)clearCacheFilesOlderThan:(NSTimeInterval)cacheLifetime {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:self.assetsDirectory]) {
+        return;
+    }
+
+    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtPath:self.assetsDirectory];
+    NSString *file;
+    NSDate *expirationDate = [NSDate dateWithTimeIntervalSinceNow:-cacheLifetime];
+
+    while ((file = [enumerator nextObject])) {
+        NSString *filePath = [self.assetsDirectory stringByAppendingPathComponent:file];
+        NSError *attributesError = nil;
+        NSDictionary *attributes = [fileManager attributesOfItemAtPath:filePath error:&attributesError];
+
+        if (attributesError) {
+            continue;
+        }
+
+        NSDate *creationDate = attributes[NSFileCreationDate];
+        if ([creationDate compare:expirationDate] == NSOrderedAscending) {
             NSError *removeError = nil;
-            if (![fileManager removeItemAtPath: filePath error: &removeError]) {
-                NSLog(@"Failed to remove file: %@, error: %@", file, removeError);
+            if (![fileManager removeItemAtPath:filePath error:&removeError]) {
             }
         }
     }
 }
 
-- (instancetype)initWithVideo: (NSURL *)URL delegate: (id<LoopMeVideoManagerDelegate>)delegate {
-    self = [super init];
-    if (self) {
-        _videoURL = URL;
-        _videoPath = [NSString stringWithFormat: @"%@.mp4", [URL.absoluteString lm_MD5]];
-        _delegate = delegate;
-        NSString *domainDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-        _assetsDirectory = [domainDir stringByAppendingPathComponent: @"lm_assets/"];
-        
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        configuration.timeoutIntervalForResource = kLoopMeVideoLoadTimeOutInterval;
-        self.session = [NSURLSession sessionWithConfiguration: configuration
-                                                     delegate: self
-                                                delegateQueue: nil];
-        [self clearCacheFilesOlderThan: kLoopMeVideoCacheExpiredTime];
-    }
-    return self;
-}
+#pragma mark - NSURLSessionDownloadDelegate
 
-#pragma mark - Public
+- (void)URLSession:(NSURLSession *)session
+      downloadTask:(NSURLSessionDownloadTask *)downloadTask
+didFinishDownloadingToURL:(NSURL *)location {
+    NSURL *originalURL = downloadTask.originalRequest.URL;
+    NSString *localPath = [self localPathForURL:originalURL];
+    NSError *error = nil;
 
-// TODO: Singleton + synchronization to not load the same video at short period of time
-- (NSURL *)cacheVideoWith: (NSURL *)URL {
-    self.videoURL = URL;
-    self.videoPath = [NSString stringWithFormat: @"%@.mp4", [URL.absoluteString lm_MD5]];
-    NSString *localPath = [self.assetsDirectory stringByAppendingPathComponent: self.videoPath];
-    if ([[NSFileManager defaultManager] fileExistsAtPath: localPath]) {
-        return [NSURL fileURLWithPath: localPath];
-    }
-    self.request = [NSMutableURLRequest requestWithURL: URL];
-    self.dataTask = [self.session dataTaskWithRequest: self.request];
-    [self.dataTask resume];
-    return URL;
-}
-
-- (void)cancel {
-    [self.dataTask cancel];
-    self.dataTask = nil;
-    [self.session invalidateAndCancel];
-}
-
-#pragma mark - NSURLConnectionDelegate
-
-- (void)URLSession: (NSURLSession *)session
-          dataTask: (NSURLSessionDataTask *)dataTask
-didReceiveResponse: (NSURLResponse *)response
- completionHandler: (void (^)(NSURLSessionResponseDisposition))completionHandler {
-    if (![response respondsToSelector: @selector(statusCode)]) {
+    // Ensure directory exists
+    [[NSFileManager defaultManager] createDirectoryAtPath:self.assetsDirectory
+                              withIntermediateDirectories:YES
+                                               attributes:nil
+                                                    error:&error];
+    if (error) {
         return;
     }
-    NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-    if (statusCode == 206) {
-        return;
+
+    [[NSFileManager defaultManager] moveItemAtURL:location
+                                            toURL:[NSURL fileURLWithPath:localPath]
+                                            error:&error];
+    if (error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate videoManager:self didFailLoadWithError:error];
+        });
     }
-    if (statusCode == 200) {
-        self.contentLength = [response expectedContentLength];
-        self.ETag = [[(NSHTTPURLResponse *)response allHeaderFields] valueForKey: @"ETag"];
-        self.videoData = [NSMutableData data];
-        completionHandler(NSURLSessionResponseAllow);
-        return;
-    }
-    completionHandler(NSURLSessionResponseCancel);
-    NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
-    infoDictionary[kErrorInfoClass] = @"LoopMeVideoManager";
-    infoDictionary[kErrorInfoUrl] = self.videoURL.absoluteString;
-    [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                         errorMessage: [NSString stringWithFormat: @"Response code: %ld", (long)statusCode]
-                                 info: infoDictionary];
-    [self.delegate videoManager: self
-           didFailLoadWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeTrafficking]];
+
+    [self.lock lock];
+    [self.downloadTasks removeObjectForKey:originalURL];
+    [self.lock unlock];
 }
 
-- (void)URLSession: (NSURLSession *)session
-          dataTask: (NSURLSessionDataTask *)dataTask
-    didReceiveData: (NSData *)data {
-    [self.videoData appendData: data];
-}
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didCompleteWithError:(NSError *)error {
+    NSURL *originalURL = task.originalRequest.URL;
 
-- (void)reconect {
-    [self.request setValue: self.ETag forHTTPHeaderField: @"If-Range"];
-    [self.request setValue: [NSString stringWithFormat: @"bytes=%lu-%lld", (unsigned long)self.videoData.length, self.contentLength]
-        forHTTPHeaderField: @"Range"];
-    self.dataTask = [self.session dataTaskWithRequest: self.request];
-    [self.dataTask resume];
-}
+    if (error) {
+        [self.lock lock];
+        [self.downloadTasks removeObjectForKey:originalURL];
+        [self.lock unlock];
 
-- (void)cacheVideoData: (NSData *)data {
-    [[NSFileManager defaultManager] createDirectoryAtPath: self.assetsDirectory
-                              withIntermediateDirectories: NO
-                                               attributes: nil
-                                                    error: nil];
-    NSString *localPath = [self.assetsDirectory stringByAppendingPathComponent: self.videoPath];
-    if ([[NSFileManager defaultManager] fileExistsAtPath: localPath]) {
-        NSLog(@"Already cached");
-        return;
-    }
-    if (![data writeToFile: localPath atomically: NO]) {
-        [self.delegate videoManager: self
-               didFailLoadWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeUndefined]];
-        return;
-    }
-}
+        // Notify delegate on main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSMutableDictionary *infoDictionary = [[self.delegate adConfigurationObject] toDictionary].mutableCopy;
+            infoDictionary[kErrorInfoClass] = @"LoopMeVideoManager";
+            infoDictionary[kErrorInfoUrl] = originalURL.absoluteString;
 
-- (void)URLSession: (NSURLSession *)session
-              task: (NSURLSessionTask *)task
-didCompleteWithError: (NSError *)error {
-    if (!error) {
-        [self cacheVideoData: [NSData dataWithData: self.videoData]];
-        self.videoData = nil;
-        [self.dataTask cancel];
-        self.dataTask = nil;
-        [self.session invalidateAndCancel];
-        self.session = nil;
-        return;
-    }
-    NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
-    infoDictionary[kErrorInfoClass] = @"LoopMeVideoManager";
-    infoDictionary[kErrorInfoUrl] = self.videoURL.absoluteString;
-    if (error.code == NSURLErrorNetworkConnectionLost) {
-        [self reconect];
-        return;
-    }
-    if (error.code == NSURLErrorTimedOut) {
-        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                             errorMessage: [NSString stringWithFormat: @"Time out for"]
-                                     info: infoDictionary];
-        [self.delegate videoManager: self
-               didFailLoadWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeMediaTimeOut]];
-        return;
-    }
-    if (error.code != NSURLErrorCancelled) {
-        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                             errorMessage: [NSString stringWithFormat: @"Response code %ld:", (long)error.code]
-                                     info: infoDictionary];
-        [self.delegate videoManager: self
-               didFailLoadWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeTrafficking]];
-    }
-}
+            [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeBadAsset
+                                 errorMessage:error.localizedDescription
+                                         info:infoDictionary];
 
-- (void)URLSession: (NSURLSession *)session
-              task: (NSURLSessionTask *)task
-willPerformHTTPRedirection: (NSHTTPURLResponse *)redirectResponse
-        newRequest: (NSURLRequest *)request
- completionHandler: (void (^)(NSURLRequest *))completionHandler {
-    completionHandler(request);
+                [self.delegate videoManager:self didFailLoadWithError:error];
+        });
+    }
 }
 
 @end

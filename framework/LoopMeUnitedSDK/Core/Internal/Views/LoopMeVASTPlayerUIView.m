@@ -182,6 +182,14 @@
     self.skipButton.hidden = YES;
 }
 
+- (void)updateEndCard: (UIImage *)image {
+    self.endCard.image = image;
+}
+
+- (BOOL)hasEndCard {
+    return  self.endCard.image;
+}
+
 #pragma mark - Private
 
 - (void)showSkipButton {

@@ -15,10 +15,8 @@
 
 @property (nonatomic, weak) id<LoopMeVideoManagerDelegate> delegate;
 
-- (instancetype)initWithVideo: (NSURL *)URL delegate: (id<LoopMeVideoManagerDelegate>)delegate;
-- (NSURL *)cacheVideoWith: (NSURL *)URL;
-- (void)cacheVideoData: (NSData *)data;
-- (NSURL *)videoFileURL;
++ (instancetype)sharedInstance;
+- (NSURL *)cacheVideoWith:(NSURL *)URL;
 - (void)cancel;
 
 @end

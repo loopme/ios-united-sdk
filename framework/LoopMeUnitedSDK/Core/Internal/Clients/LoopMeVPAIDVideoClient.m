@@ -126,7 +126,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         [self.delegate videoClientDidReachEnd: self];
         [self.omidVideoEvents complete];
     }
-    if ([self.vastUIView endCardImage]) {
+    if ([self.vastUIView hasEndCard]) {
         [self showEndCard];
     } else {
         [self.delegate videoClientShouldCloseAd: self];
@@ -232,7 +232,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)cancel {
-    [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
     [_videoView removeFromSuperview];
     [_vastUIView removeFromSuperview];
@@ -337,6 +336,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
                              errorMessage: @"Video player could not init file"
                                      info: infoDictionary];
+        [self uiViewClose];
         [self.delegate videoClient: self didFailToLoadVideoWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeMediaDisplay]];
     }
     if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
@@ -417,7 +417,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [[LoopMeVideoManager alloc] initWithVideo: URL delegate: self];
+    self.videoManager = [LoopMeVideoManager sharedInstance];
+    self.videoManager.delegate = self;
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
@@ -494,7 +495,7 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.eventSender trackEvent:LoopMeVASTEventTypeLinearSkip];
     [self pause];
     [self.omidVideoEvents skipped];
-    if ([self.vastUIView endCardImage]) {
+    if ([self.vastUIView hasEndCard]) {
         [self showEndCard];
     } else {
         [self.delegate videoClientShouldCloseAd: self];
