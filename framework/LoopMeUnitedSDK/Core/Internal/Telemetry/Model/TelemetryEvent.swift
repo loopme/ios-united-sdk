@@ -8,6 +8,7 @@
 import Foundation
 
 struct TelemetryEvent {
+    let id: String = UUID().uuidString
     let type: TelemetryEventType
     let attributes: [EventAttributeValue]
     
@@ -16,6 +17,25 @@ struct TelemetryEvent {
         self.attributes = attributes
         try validateAttributes()
     }
+    
+    func toDictionary() -> [String: Any] {
+        var dictionary: [String: Any] = ["msg": type.rawValue]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        attributes.forEach { attributeValue in
+            let key = attributeValue.attribute.rawValue
+            let value = attributeValue.value
+            
+            if let dateValue = value as? Date {
+                dictionary[key] = dateFormatter.string(from: dateValue)
+            } else {
+                dictionary[key] = value
+            }
+        }
+        return dictionary
+    }
+
     
     private func validateAttributes() throws {
         let attributeKeys = Set(attributes.map { $0.attribute })
