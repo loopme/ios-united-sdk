@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: LoopMe SDK Telemetry API
+  description: API to log events from LoopMe SDK, including both errors and non-error events.
+  version: 1.0.0
+servers:
+  - url: https://telemetry.tk0x1.com
+paths:
+  /:
+    post:
+      summary: Log an event from the LoopMe SDK
+      description: |
+        Endpoint to log events from the SDK. This endpoint is used for reporting both error and non-error events, allowing for dynamic event types based on the fields provided in the JSON body. Each field represents specific data about the event, such as timestamps, device information, event type, and SDK version details.
+
+        **Important:**
+        - The data type for each field is expected to remain consistent. This is crucial because the event logs are parsed by Kibana for further analysis, so any deviation in data types can lead to parsing errors and data discrepancies.
+        - This endpoint is shared across different platforms. To maintain cohesion, it is essential to keep the same field schema and data types across all platforms (e.g., iOS and Android). This ensures that event logs are comparable and consistent across different device ecosystems.
+        - New fields can be added dynamically as needed for different event types, but their types should remain consistent to avoid parsing issues.
+        - Not all fields need to be sent for every event. Fields should only be included if they are relevant to the specific event context. For example, in a non-error event like `initialization_end`, there is no need to send `impression_id`, as it is not applicable in that context.
+        - `impression_id` equals `bid request id`
+        - `session_id` should be formatted as simple UUIDs to ensure unique and standardized identifiers.
+        - The `created_at` field should follow the format `yyyy-MM-dd’T’HH:mm:ss.SSSZ` (e.g., `2024-10-08T15:14:00.000Z`) to ensure precise timestamp recording.
+
+      operationId: logEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: |
+                      Timestamp of when the event occurred, following the format `yyyy-MM-dd’T’HH:mm:ss.SSSZ`.
+                    example: "2024-10-08T15:14:00.000Z"
+                  device_os:
+                    type: string
+                    description: Operating system of the device.
+                    example: "ios"
+                  device_id:
+                    type: string
+                    description: Advertising tracking identifier for the device.
+                    example: "A1B2C3D4E5F6G7H8I9J0"
+                  device_model:
+                    type: string
+                    description: Model of the device.
+                    example: "iPhone 14 Pro"
+                  device_os_ver:
+                    type: string
+                    description: Version of the device's operating system.
+                    example: "16.0"
+                  device_manufacturer:
+                    type: string
+                    description: Manufacturer of the device.
+                    example: "Apple"
+                  sdk_type:
+                    type: string
+                    description: Type of SDK, in this case loopme for producation, loopme-dev for development.
+                    example: "loopme"
+                  session_id:
+                    type: string
+                    description: Unique session identifier for the SDK instance. Should be formatted as a UUID.
+                    example: "123e4567-e89b-12d3-a456-426614174000"
+                  mediation:
+                    type: string
+                    description: Name of the mediation platform.
+                    example: "SomeMediationAdapter"
+                  msg:
+                    type: string
+                    description: Type of message, indicating the nature of the event
+                    example: "OMID init time alert > 100ms"
+                  sdk_version:
+                    type: string
+                    description: Version of the LoopMe SDK.
+                    example: "1.2.3"
+                  mediation_sdk_version:
+                    type: string
+                    description: Version of mediation SDK.
+                    example: "12.6.0"
+                  package:
+                    type: string
+                    description: Bundle identifier of the app.
+                    example: "com.example.myapp"
+                  type:
+                    type: string
+                    description: Type of event
+                    example: "NetworkError"
+                  ifv:
+                    type: string
+                    description: Identifier for Vendor (IFV).
+                    example: "F1234567-89AB-CDEF-1234-56789ABCDEF0"
+                  impression_id:
+                    type: string
+                    description: Unique identifier for the ad impression. Should be formatted as a UUID.
+                    example: "123e4567-e89b-12d3-a456-426614174000"
+                  platform:
+                    type: string
+                    description: Operating system platform of the device.
+                    example: "iOS"
+                  version:
+                    type: string
+                    description: Version of the LoopMe SDK.
+                    example: "1.2.3"
+                  adapter_version:
+                    type: string
+                    description: Version of the mediation adapter.
+                    example: "2.3.4"
+                  duration:
+                    type: integer
+                    description: Duration time in milliseconds of the action that caused the event.
+                    example: 1500
+                  duration_avg:
+                    type: integer
+                    description: Duration of avg buffering in milliseconds. Used only for aggregated event (i.e. video_buffering_average)
+                    example: 1400
+                  app_key:
+                    type: string
+                    description: Unique identifier for the application key.
+                    example: "app12345key"
+                  cid:
+                    type: string
+                    description: Campaign ID associated with the event.
+                    example: "campaign123"
+                  crid:
+                    type: string
+                    description: Creative ID associated with the event.
+                    example: "creative456"
+                  placement:
+                    type: string
+                    description: Placement identifier for the ad or event location.
+                    example: "placement001"
+                  media_url:
+                    type: string
+                    description: URL of the media resource associated with video-related events.
+                    example: "https://example.com/media.mp4"
+                  
+                required:
+                  - created_at
+                  - device_os
+                  - device_id
+                  - device_model
+                  - device_os_ver
+                  - device_manufacturer
+                  - sdk_type
+                  - session_id
+                  - mediation
+                  - msg
+                  - sdk_version
+                  - package
+                  - ifv
+                  - platform
+                  - version
+                  - adapter_version
+                  - app_key
+                  - placement
+                  - type
+      responses:
+        '200':
+          description: Event successfully logged
+        '400':
+          description: Bad request, invalid or missing parameters
+        '500':
+          description: Internal server error
