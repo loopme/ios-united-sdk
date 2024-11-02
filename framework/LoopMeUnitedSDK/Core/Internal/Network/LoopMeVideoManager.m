@@ -22,7 +22,6 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSString *assetsDirectory;
 @property (nonatomic, strong) NSLock *lock;
-@property (nonatomic, strong) NSMutableSet<NSURL *> *cacheQueue;
 @property (nonatomic, strong) NSTimer *cacheTimer;
 @property (nonatomic, strong) NSMutableDictionary<NSURL *, NSURLSessionDownloadTask *> *downloadTasks;
 
@@ -32,22 +31,14 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 
 #pragma mark - Singleton
 
-+ (instancetype)sharedInstance {
-    static LoopMeVideoManager *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[LoopMeVideoManager alloc] initPrivate];
-    });
-    return sharedInstance;
-}
 
-- (instancetype)initPrivate {
+
+- (instancetype)initWithDelegate:(id<LoopMeVideoManagerDelegate>)delegate {
     self = [super init];
     if (self) {
         _lock = [[NSLock alloc] init];
-        _cacheQueue = [NSMutableSet set];
         _downloadTasks = [NSMutableDictionary dictionary];
-
+        [self setDelegate:delegate];
         NSString *domainDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
         _assetsDirectory = [domainDir stringByAppendingPathComponent:@"lm_assets/"];
 
@@ -78,18 +69,7 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
         return [NSURL fileURLWithPath:localPath];
     }
 
-    if (![self.cacheQueue containsObject:URL]) {
-        [self.cacheQueue addObject:URL];
-    }
-
-    if (!self.cacheTimer) {
-        self.cacheTimer = [NSTimer scheduledTimerWithTimeInterval:kLoopMeVideoCacheDelay
-                                                           target:self
-                                                         selector:@selector(startCaching)
-                                                         userInfo:nil
-                                                          repeats:NO];
-    }
-
+    [self startCachingURL:URL];
     [self.lock unlock];
     return URL;
 }
@@ -105,7 +85,7 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 
 #pragma mark - Private Methods
 
-- (void)startCaching {
+- (void)startCachingURL:(NSURL *)URL {
     [self.lock lock];
 
     if (!self.session) {
@@ -115,24 +95,13 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
                                                      delegate:self
                                                 delegateQueue:nil];
     }
+    if (self.downloadTasks[URL]) {
+          return;
+      }
 
-    for (NSURL *URL in self.cacheQueue) {
-        NSString *localPath = [self localPathForURL:URL];
-
-        if ([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
-            continue;
-        }
-
-        if (self.downloadTasks[URL]) {
-            continue;
-        }
-
-        NSURLSessionDownloadTask *downloadTask = [self.session downloadTaskWithURL:URL];
-        self.downloadTasks[URL] = downloadTask;
-        [downloadTask resume];
-    }
-
-    [self.cacheQueue removeAllObjects];
+    NSURLSessionDownloadTask *downloadTask = [self.session downloadTaskWithURL:URL];
+    self.downloadTasks[URL] = downloadTask;
+    [downloadTask resume];
     self.cacheTimer = nil;
 
     [self.lock unlock];

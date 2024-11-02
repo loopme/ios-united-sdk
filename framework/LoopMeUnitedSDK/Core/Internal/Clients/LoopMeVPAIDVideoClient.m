@@ -417,7 +417,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [LoopMeVideoManager sharedInstance];
+    self.videoManager = [[LoopMeVideoManager alloc] initWithDelegate:self];
     self.videoManager.delegate = self;
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi

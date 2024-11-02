@@ -354,7 +354,7 @@ AVAssetResourceLoaderDelegate
 
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [LoopMeVideoManager sharedInstance];
+    self.videoManager = [[LoopMeVideoManager alloc] initWithDelegate:self];
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
