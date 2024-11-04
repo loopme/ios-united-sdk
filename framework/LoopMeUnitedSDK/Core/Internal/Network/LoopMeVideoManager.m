@@ -19,9 +19,9 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 
 @interface LoopMeVideoManager () <NSURLSessionDownloadDelegate>
 
+@property (nonatomic, strong) NSString *uniqueName;
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSString *assetsDirectory;
-@property (nonatomic, strong) NSLock *lock;
 @property (nonatomic, strong) NSTimer *cacheTimer;
 @property (nonatomic, strong) NSMutableDictionary<NSURL *, NSURLSessionDownloadTask *> *downloadTasks;
 
@@ -31,14 +31,11 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 
 #pragma mark - Singleton
 
-
-
-- (instancetype)initWithDelegate:(id<LoopMeVideoManagerDelegate>)delegate {
+- (instancetype)initWithUniqueName:(NSString*)uniqueName delegate:(id<LoopMeVideoManagerDelegate>)delegate {
     self = [super init];
     if (self) {
-        _lock = [[NSLock alloc] init];
         _downloadTasks = [NSMutableDictionary dictionary];
-        [self setDelegate:delegate];
+        _delegate = delegate;
         NSString *domainDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
         _assetsDirectory = [domainDir stringByAppendingPathComponent:@"lm_assets/"];
 
@@ -55,39 +52,30 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 #pragma mark - Public Methods
 
 - (void)setDelegate:(id<LoopMeVideoManagerDelegate>)delegate {
-    [self.lock lock];
     _delegate = delegate;
-    [self.lock unlock];
 }
 
 - (NSURL *)cacheVideoWith:(NSURL *)URL {
-    [self.lock lock];
     NSString *localPath = [self localPathForURL:URL];
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
-        [self.lock unlock];
         return [NSURL fileURLWithPath:localPath];
     }
 
     [self startCachingURL:URL];
-    [self.lock unlock];
     return URL;
 }
 
 - (void)cancel {
-    [self.lock lock];
     for (NSURLSessionDownloadTask *downloadTask in self.downloadTasks.allValues) {
         [downloadTask cancel];
     }
     [self.downloadTasks removeAllObjects];
-    [self.lock unlock];
 }
 
 #pragma mark - Private Methods
 
 - (void)startCachingURL:(NSURL *)URL {
-    [self.lock lock];
-
     if (!self.session) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         configuration.timeoutIntervalForResource = kLoopMeVideoLoadTimeOutInterval;
@@ -103,12 +91,10 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
     self.downloadTasks[URL] = downloadTask;
     [downloadTask resume];
     self.cacheTimer = nil;
-
-    [self.lock unlock];
 }
 
 - (NSString *)localPathForURL:(NSURL *)URL {
-    NSString *fileName = [NSString stringWithFormat:@"%@.mp4", [URL.absoluteString lm_MD5]];
+    NSString *fileName = [NSString stringWithFormat:@"%@_%@.mp4", _uniqueName, [URL.absoluteString lm_MD5]];
     return [self.assetsDirectory stringByAppendingPathComponent:fileName];
 }
 
@@ -147,6 +133,7 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
 didFinishDownloadingToURL:(NSURL *)location {
     NSURL *originalURL = downloadTask.originalRequest.URL;
     NSString *localPath = [self localPathForURL:originalURL];
+    NSURL *localURL = [NSURL fileURLWithPath:localPath];
     NSError *error = nil;
 
     // Ensure directory exists
@@ -167,9 +154,10 @@ didFinishDownloadingToURL:(NSURL *)location {
         });
     }
 
-    [self.lock lock];
     [self.downloadTasks removeObjectForKey:originalURL];
-    [self.lock unlock];
+    
+    [self.delegate videoManager:self didLoadVideo:localURL];
+
 }
 
 - (void)URLSession:(NSURLSession *)session
@@ -178,9 +166,7 @@ didCompleteWithError:(NSError *)error {
     NSURL *originalURL = task.originalRequest.URL;
 
     if (error) {
-        [self.lock lock];
         [self.downloadTasks removeObjectForKey:originalURL];
-        [self.lock unlock];
 
         // Notify delegate on main thread
         dispatch_async(dispatch_get_main_queue(), ^{

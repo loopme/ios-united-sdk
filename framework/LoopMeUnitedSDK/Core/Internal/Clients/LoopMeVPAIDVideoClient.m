@@ -19,6 +19,7 @@
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeDefinitions.h"
 #import "LoopMeAdView.h"
+#import "NSString+Encryption.h"
 
 @class LoopMeAdConfiguration;
 
@@ -62,6 +63,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @property (nonatomic, assign, getter=isDidLoadSent) BOOL didLoadSent;
 @property (nonatomic, strong) NSURL *videoURL;
+@property (nonatomic, assign) BOOL playStarted;
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL;
 - (void)unregisterObservers;
@@ -297,7 +299,11 @@ const NSInteger kResizeOffsetVPAID = 11;
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.playerItem = [AVPlayerItem playerItemWithURL: URL];
-        self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+        if (self.player != nil) {
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+        } else {
+            self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+        }
     });
 }
 
@@ -415,10 +421,14 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.delegate videoClient: self didFailToLoadVideoWithError: error];
 }
 
+- (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
+    [self setupPlayerWithFileURL:videoURL];
+}
+
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [[LoopMeVideoManager alloc] initWithDelegate:self];
-    self.videoManager.delegate = self;
+    self.videoManager = [[LoopMeVideoManager alloc] initWithUniqueName:[self.adConfigurationObject.appKey lm_MD5]
+                                                              delegate:self];
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
@@ -438,6 +448,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)play {
+    self.playStarted = true;
     [self.player play];
     if (self.shouldPlay) {
         [self.vastUIView showEndCard: NO];

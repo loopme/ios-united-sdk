@@ -19,6 +19,8 @@
 #import "LoopMeGlobalSettings.h"
 #import "LoopMeErrorEventSender.h"
 #import "LoopMeAdWebView.h"
+#import "NSString+Encryption.h"
+
 
 const struct LoopMeVideoStateStruct LoopMeVideoState = {
     .ready = @"READY",
@@ -354,7 +356,8 @@ AVAssetResourceLoaderDelegate
 
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [[LoopMeVideoManager alloc] initWithDelegate:self];
+    self.videoManager = [[LoopMeVideoManager alloc] initWithUniqueName:[self.adConfigurationObject.appKey lm_MD5]
+                                                              delegate:self];
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
