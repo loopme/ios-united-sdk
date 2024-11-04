@@ -15,20 +15,15 @@
 
 @property (nonatomic, weak) id<LoopMeVideoManagerDelegate> delegate;
 
-- (instancetype)initWithVideoPath:(NSString *)videoPath delegate:(id<LoopMeVideoManagerDelegate>)delegate;
-- (void)loadVideoWithURL:(NSURL *)URL;
-- (void)cacheVideoData:(NSData *)data;
-- (BOOL)hasCachedURL:(NSURL *)URL;
-- (NSURL *)videoFileURL;
+- (instancetype)initWithDelegate:(id<LoopMeVideoManagerDelegate>)delegate;
+- (NSURL *)cacheVideoWith:(NSURL *)URL;
 - (void)cancel;
-- (void)failedInitPlayer: (NSURL *)url;
 
 @end
 
 @protocol LoopMeVideoManagerDelegate
 
-- (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL;
-- (void)videoManager:(LoopMeVideoManager *)videoManager didFailLoadWithError:(NSError *)error;
+- (void)videoManager:(LoopMeVideoManager *)videoManager didFailLoadWithError: (NSError *)error;
 - (LoopMeAdConfiguration *)adConfigurationObject;
 
 @end
