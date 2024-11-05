@@ -20,6 +20,10 @@
 #define kErrorInfoTimeout @"timeout"
 #define kErrorInfoUrl @"url"
 #define kErrorInfoCreativeType @"creative_type"
+#define kErrorInfoDuration @"duration"
+#define kErrorInfoDurationAvg @"duration_avg"
+#define kErrorInfoBufferCount @"bufferCount"
+#define kErrorInfoMediaUrl @"media_url"
 
 #define kLoopMeHTMLBannerSize CGSizeMake(320, 50)
 #define kLoopMeMPUBannerSize CGSizeMake(300, 250)

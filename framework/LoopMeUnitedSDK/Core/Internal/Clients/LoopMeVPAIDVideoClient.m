@@ -547,7 +547,28 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 -(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
              didCaptureEvent:(LoopMeVideoBufferingEvent *)event {
-    //TODO: sent event
+    // Only proceed if the total buffering duration is greater than 0 seconds
+    if ([event.duration integerValue] > 0) {
+        // Convert adConfigurationObject to a mutable dictionary
+        NSMutableDictionary *infoDictionary = [self.adConfigurationObject toDictionary];
+        
+        // Add the class information
+        [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
+        
+        // Add buffering event details
+        [infoDictionary setObject:event.duration forKey:kErrorInfoDuration];
+        [infoDictionary setObject:event.durationAvg forKey:kErrorInfoDurationAvg];
+        [infoDictionary setObject:event.bufferCount forKey:kErrorInfoBufferCount];
+        
+        // Safely add media URL as a string
+        NSString *mediaURLString = event.mediaURL.absoluteString ?: @"";
+        [infoDictionary setObject:mediaURLString forKey:kErrorInfoMediaUrl];
+        
+        // Send the buffering event using LoopMeErrorEventSender
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom
+                             errorMessage:@"video_buffering_average"
+                                     info:infoDictionary];
+    }
 }
 
 @end
