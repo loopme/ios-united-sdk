@@ -33,6 +33,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 <
     LoopMeVideoManagerDelegate,
     LoopMePlayerUIViewDelegate,
+    LoopMeVideoBufferingTrackerDelegate,
     AVPlayerItemOutputPullDelegate,
     AVAssetResourceLoaderDelegate
 >
@@ -54,6 +55,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) NSString *layerGravity;
 
 @property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
+@property (nonatomic, strong) LoopMeVideoBufferingTracker *videoBufferingTracker;
+
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
 @property (nonatomic, strong) NSLayoutConstraint *topVideoUIConstraint;
@@ -303,6 +306,8 @@ const NSInteger kResizeOffsetVPAID = 11;
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         } else {
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+            self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
+                                                                                    delegate:self];
         }
     });
 }
@@ -536,6 +541,34 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (LoopMeAdConfiguration *)adConfigurationObject {
     return self.delegate.adConfigurationObject;
+}
+
+#pragma mark - LoopMeVideoBufferingTrackerDelegate
+
+-(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
+             didCaptureEvent:(LoopMeVideoBufferingEvent *)event {
+    // Only proceed if the total buffering duration is greater than 0 seconds
+    if ([event.duration integerValue] > 0) {
+        // Convert adConfigurationObject to a mutable dictionary
+        NSMutableDictionary *infoDictionary = [self.adConfigurationObject toDictionary];
+        
+        // Add the class information
+        [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
+        
+        // Add buffering event details
+        [infoDictionary setObject:event.duration forKey:kErrorInfoDuration];
+        [infoDictionary setObject:event.durationAvg forKey:kErrorInfoDurationAvg];
+        [infoDictionary setObject:event.bufferCount forKey:kErrorInfoBufferCount];
+        
+        // Safely add media URL as a string
+        NSString *mediaURLString = event.mediaURL.absoluteString ?: @"";
+        [infoDictionary setObject:mediaURLString forKey:kErrorInfoMediaUrl];
+        
+        // Send the buffering event using LoopMeErrorEventSender
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom
+                             errorMessage:@"video_buffering_average"
+                                     info:infoDictionary];
+    }
 }
 
 @end
