@@ -62,6 +62,7 @@ AVAssetResourceLoaderDelegate
 
 @property (nonatomic, strong) NSURL *videoURL;
 @property (nonatomic, assign) BOOL preloadingForCacheStarted;
+@property (nonatomic, assign) BOOL hasPlaybackStarted;
 
 @property (nonatomic, strong) AVAssetResourceLoadingRequest *resourceLoadingRequest;
 
@@ -242,9 +243,14 @@ AVAssetResourceLoaderDelegate
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.playerItem = [AVPlayerItem playerItemWithURL: URL];
-        self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+        if (self.player != nil) {
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+        } else {
+            self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+        }
     });
 }
+
 
 #pragma mark Observers & Timers
 
@@ -354,6 +360,12 @@ AVAssetResourceLoaderDelegate
     [self.delegate videoClient: self didFailToLoadVideoWithError: error];
 }
 
+- (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
+    if (!self.hasPlaybackStarted) {
+        [self setupPlayerWithFileURL:videoURL];
+    }
+}
+
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
     self.videoManager = [[LoopMeVideoManager alloc] initWithUniqueName:[self.adConfigurationObject.appKey lm_MD5]
@@ -366,7 +378,7 @@ AVAssetResourceLoaderDelegate
         return;
     }
     if (!self.isDidLoadSent) {
-        [self setupPlayerWithFileURL: URL];
+        [self setupPlayerWithFileURL: [self.videoManager cacheVideoWith: URL]];
         self.didLoadSent = YES;
     }
     if ([self.player.currentItem.asset isKindOfClass: [AVURLAsset class]]) {
