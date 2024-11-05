@@ -33,6 +33,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 <
     LoopMeVideoManagerDelegate,
     LoopMePlayerUIViewDelegate,
+    LoopMeVideoBufferingTrackerDelegate,
     AVPlayerItemOutputPullDelegate,
     AVAssetResourceLoaderDelegate
 >
@@ -54,6 +55,8 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) NSString *layerGravity;
 
 @property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
+@property (nonatomic, strong) LoopMeVideoBufferingTracker *videoBufferingTracker;
+
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
 @property (nonatomic, strong) NSLayoutConstraint *topVideoUIConstraint;
@@ -303,6 +306,8 @@ const NSInteger kResizeOffsetVPAID = 11;
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         } else {
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+            self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
+                                                                                    delegate:self];
         }
     });
 }
@@ -536,6 +541,13 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (LoopMeAdConfiguration *)adConfigurationObject {
     return self.delegate.adConfigurationObject;
+}
+
+#pragma mark - LoopMeVideoBufferingTrackerDelegate
+
+-(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
+             didCaptureEvent:(LoopMeVideoBufferingEvent *)event {
+    //TODO: sent event
 }
 
 @end
