@@ -63,7 +63,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @property (nonatomic, assign, getter=isDidLoadSent) BOOL didLoadSent;
 @property (nonatomic, strong) NSURL *videoURL;
-@property (nonatomic, assign) BOOL playStarted;
+@property (nonatomic, assign) BOOL hasPlaybackStarted;
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL;
 - (void)unregisterObservers;
@@ -422,7 +422,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
-    [self setupPlayerWithFileURL:videoURL];
+    if (!self.hasPlaybackStarted) {
+        [self setupPlayerWithFileURL:videoURL];
+    }
 }
 
 - (void)loadWithURL: (NSURL *)URL {
@@ -448,7 +450,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)play {
-    self.playStarted = true;
+    self.hasPlaybackStarted = true;
     [self.player play];
     if (self.shouldPlay) {
         [self.vastUIView showEndCard: NO];
