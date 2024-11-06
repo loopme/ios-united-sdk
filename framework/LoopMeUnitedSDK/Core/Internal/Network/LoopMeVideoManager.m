@@ -36,6 +36,7 @@ static NSTimeInterval const kLoopMeVideoCacheDelay = 5.0;
     if (self) {
         _downloadTasks = [NSMutableDictionary dictionary];
         _delegate = delegate;
+        _uniqueName = uniqueName;
         NSString *domainDir = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
         _assetsDirectory = [domainDir stringByAppendingPathComponent:@"lm_assets/"];
 
