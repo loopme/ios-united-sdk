@@ -456,6 +456,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)play {
     self.hasPlaybackStarted = true;
+    [self.videoManager cancel];
     [self.player play];
     if (self.shouldPlay) {
         [self.vastUIView showEndCard: NO];

@@ -107,6 +107,8 @@ AVAssetResourceLoaderDelegate
 
 - (void)play {
     if (![self playerReachedEnd]) {
+        self.hasPlaybackStarted = YES;
+        [self.videoManager cancel];
         self.shouldPlay = YES;
         [self.player play];
     }
