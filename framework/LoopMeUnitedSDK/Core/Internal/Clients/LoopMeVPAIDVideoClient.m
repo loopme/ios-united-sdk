@@ -50,12 +50,14 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @property (nonatomic, strong) id playbackTimeObserver;
 @property (nonatomic, strong) LoopMeVideoManager *videoManager;
+
 @property (nonatomic, assign, getter = isShouldPlay) BOOL shouldPlay;
 @property (nonatomic, assign, getter = isSkipped) BOOL skipped;
 @property (nonatomic, strong) NSString *layerGravity;
 
 @property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
 @property (nonatomic, strong) LoopMeVideoBufferingTracker *videoBufferingTracker;
+@property (nonatomic, strong) LoopMeAVPlayerResumer *avPlayerResumer;
 
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
@@ -308,6 +310,7 @@ const NSInteger kResizeOffsetVPAID = 11;
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
             self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
                                                                                     delegate:self];
+            self.avPlayerResumer = [[LoopMeAVPlayerResumer alloc] initWithPlayer:self.player];
         }
     });
 }
