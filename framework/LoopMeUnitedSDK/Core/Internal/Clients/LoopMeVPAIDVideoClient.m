@@ -32,7 +32,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 @interface LoopMeVPAIDVideoClient ()
 <
     CachingPlayerItemWrapperDelegate,
-//    LoopMeVideoManagerDelegate,
     LoopMePlayerUIViewDelegate,
     LoopMeVideoBufferingTrackerDelegate,
     AVPlayerItemOutputPullDelegate,
@@ -305,10 +304,10 @@ const NSInteger kResizeOffsetVPAID = 11;
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *cacheKey = [[URL absoluteString] lm_MD5];
               
-              // Initialize the wrapper
         self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
         self.cachingPlayerItemWrapper.delegate = self;
         self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
+        
         if (self.player != nil) {
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         } else {
@@ -428,8 +427,6 @@ const NSInteger kResizeOffsetVPAID = 11;
     return self.playerItem.duration.value == self.playerItem.currentTime.value;
 }
 
-#pragma mark - LoopMeJSVideoTransportProtocol
-
 #pragma mark - CachingPlayerItemWrapperDelegate
 
 - (void)playerItemReadyToPlay:(CachingPlayerItemWrapper *)playerItem {
@@ -457,7 +454,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
-    NSLog(@"Caching failed with error: %@", error.localizedDescription);
     [self.delegate videoClient:self didFailToLoadVideoWithError:error];
 }
 

@@ -39,7 +39,7 @@ const CGFloat kOneFrameDuration = 0.03;
 
 @interface LoopMeVideoClientNormal ()
 <
-LoopMeVideoManagerDelegate,
+CachingPlayerItemWrapperDelegate,
 AVPlayerItemOutputPullDelegate,
 AVAssetResourceLoaderDelegate
 >
@@ -56,7 +56,7 @@ AVAssetResourceLoaderDelegate
 
 @property (nonatomic, strong) NSTimer *loadingVideoTimer;
 @property (nonatomic, strong) id playbackTimeObserver;
-@property (nonatomic, strong) LoopMeVideoManager *videoManager;
+@property (nonatomic, strong) CachingPlayerItemWrapper *cachingPlayerItemWrapper;
 @property (nonatomic, assign, getter = isShouldPlay) BOOL shouldPlay;
 @property (nonatomic, strong) NSString *layerGravity;
 
@@ -108,7 +108,6 @@ AVAssetResourceLoaderDelegate
 - (void)play {
     if (![self playerReachedEnd]) {
         self.hasPlaybackStarted = YES;
-        [self.videoManager cancel];
         self.shouldPlay = YES;
         [self.player play];
     }
@@ -244,7 +243,13 @@ AVAssetResourceLoaderDelegate
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.playerItem = [AVPlayerItem playerItemWithURL: URL];
+        NSString *cacheKey = [[URL absoluteString] lm_MD5];
+              
+              // Initialize the wrapper
+        self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
+        self.cachingPlayerItemWrapper.delegate = self;
+        self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
+        
         if (self.player != nil) {
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         } else {
@@ -345,7 +350,6 @@ AVAssetResourceLoaderDelegate
 }
 
 - (void)cancel {
-    [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
     [self.videoView removeFromSuperview];
     self.shouldPlay = NO;
@@ -355,23 +359,33 @@ AVAssetResourceLoaderDelegate
     [self.delegate videoClient: self setupView: self.videoView];
 }
 
-#pragma mark - LoopMeJSVideoTransportProtocol
+#pragma mark - CachingPlayerItemWrapperDelegate
 
-- (void)videoManager: (LoopMeVideoManager *)videoManager didFailLoadWithError: (NSError *)error {
+- (void)playerItemReadyToPlay:(CachingPlayerItemWrapper *)playerItem {
+    if (!self.hasPlaybackStarted) {
+        [self setupPlayerWithFileURL:self.videoURL];
+    }
+}
+
+- (void)playerItemDidFailToPlay:(CachingPlayerItemWrapper *)playerItem error:(NSError *)error {
+    [self.JSClient setVideoState: LoopMeVideoState.broken];
+    [self.delegate videoClient: self didFailToLoadVideoWithError: error];}
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location {
+    NSLog(@"Caching complete at %@", location);
+}
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected {
+    float progress = (float)bytesDownloaded / (float)bytesExpected;
+}
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
     [self.JSClient setVideoState: LoopMeVideoState.broken];
     [self.delegate videoClient: self didFailToLoadVideoWithError: error];
 }
 
-- (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
-    if (!self.hasPlaybackStarted) {
-        [self setupPlayerWithFileURL:videoURL];
-    }
-}
-
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [[LoopMeVideoManager alloc] initWithUniqueName:[self.adConfigurationObject.appKey lm_MD5]
-                                                              delegate:self];
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
@@ -380,7 +394,7 @@ AVAssetResourceLoaderDelegate
         return;
     }
     if (!self.isDidLoadSent) {
-        [self setupPlayerWithFileURL: [self.videoManager cacheVideoWith: URL]];
+        [self setupPlayerWithFileURL: URL];
         self.didLoadSent = YES;
     }
     if ([self.player.currentItem.asset isKindOfClass: [AVURLAsset class]]) {
