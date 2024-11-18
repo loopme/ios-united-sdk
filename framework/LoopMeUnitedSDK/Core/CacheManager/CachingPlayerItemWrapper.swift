@@ -7,7 +7,6 @@
 
 import Foundation
 import AVFoundation
-import CachingPlayerItem
 
 @objc public protocol CachingPlayerItemWrapperDelegate: NSObjectProtocol {
     @objc optional func playerItemReadyToPlay(_ playerItem: CachingPlayerItemWrapper)
@@ -19,7 +18,7 @@ import CachingPlayerItem
 }
 
 @objc public class CachingPlayerItemWrapper: NSObject, CachingPlayerItemDelegate {
-    private var cachingPlayerItem: CachingPlayerItem?
+     var cachingPlayerItem: CachingPlayerItem?
     @objc public weak var delegate: CachingPlayerItemWrapperDelegate?
     
     private var lock = NSLock()
@@ -27,7 +26,7 @@ import CachingPlayerItem
     @objc public init(url: URL, cacheKey: String) {
         super.init()
         
-        let cacheManager = CachingPlayerItemCacheManager.shared
+        let cacheManager = CachingPlayerItemCacheManager()
         let cacheFileURL = cacheManager.cacheFileURL(forKey: cacheKey, url: url)
         let cacheProgressFileURL = cacheManager.cacheProgressFileURL(forKey: cacheKey, url: url)
         

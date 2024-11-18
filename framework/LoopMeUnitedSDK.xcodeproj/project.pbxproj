@@ -74,7 +74,6 @@
 		47A57C66233E31C8001F7DA3 /* LoopMeDiscURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BBC233E31C8001F7DA3 /* LoopMeDiscURLCache.m */; };
 		47A57C67233E31C8001F7DA3 /* LoopMeDiscURLCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BBD233E31C8001F7DA3 /* LoopMeDiscURLCache.h */; };
 		47A57C68233E31C8001F7DA3 /* LoopMeTargeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BBF233E31C8001F7DA3 /* LoopMeTargeting.m */; };
-		47A57C6F233E31C8001F7DA3 /* LoopMeVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BC8233E31C8001F7DA3 /* LoopMeVideoManager.m */; };
 		47A57C70233E31C8001F7DA3 /* LoopMeReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BC9233E31C8001F7DA3 /* LoopMeReachability.m */; };
 		47A57C71233E31C8001F7DA3 /* LoopMeVASTImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BCA233E31C8001F7DA3 /* LoopMeVASTImageDownloader.m */; };
 		47A57C72233E31C8001F7DA3 /* LoopMeAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BCB233E31C8001F7DA3 /* LoopMeAdManager.m */; };
@@ -83,7 +82,6 @@
 		47A57C76233E31C8001F7DA3 /* LoopMeVASTImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BCF233E31C8001F7DA3 /* LoopMeVASTImageDownloader.h */; };
 		47A57C77233E31C8001F7DA3 /* LoopMeAdManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BD0233E31C8001F7DA3 /* LoopMeAdManager.h */; };
 		47A57C78233E31C8001F7DA3 /* LoopMeReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BD1233E31C8001F7DA3 /* LoopMeReachability.h */; };
-		47A57C79233E31C8001F7DA3 /* LoopMeVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BD2233E31C8001F7DA3 /* LoopMeVideoManager.h */; };
 		47A57C7B233E31C8001F7DA3 /* LoopMeErrorEventSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BD5233E31C8001F7DA3 /* LoopMeErrorEventSender.m */; };
 		47A57C7D233E31C8001F7DA3 /* LoopMeErrorEventSender.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BD7233E31C8001F7DA3 /* LoopMeErrorEventSender.h */; };
 		47A57C7E233E31C8001F7DA3 /* LoopMeInterstitialViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BDA233E31C8001F7DA3 /* LoopMeInterstitialViewController.h */; };
@@ -100,8 +98,6 @@
 		47A57C8D233E31C8001F7DA3 /* LoopMeDestinationDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BED233E31C8001F7DA3 /* LoopMeDestinationDisplayController.m */; };
 		47A57C8E233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BEE233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h */; };
 		47A57C8F233E31C8001F7DA3 /* LoopMeAdDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BEF233E31C8001F7DA3 /* LoopMeAdDisplayController.m */; };
-		47A57C90233E31C8001F7DA3 /* LoopMeORTBTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF1233E31C8001F7DA3 /* LoopMeORTBTools.m */; };
-		47A57C92233E31C8001F7DA3 /* LoopMeORTBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF3233E31C8001F7DA3 /* LoopMeORTBTools.h */; };
 		47A57C94233E31C8001F7DA3 /* LoopMeCloseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF6233E31C8001F7DA3 /* LoopMeCloseButton.h */; };
 		47A57C95233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BF8233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m */; };
 		47A57C96233E31C8001F7DA3 /* LoopMeProgressOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A57BF9233E31C8001F7DA3 /* LoopMeProgressOverlayView.h */; };
@@ -153,6 +149,18 @@
 		47D1BA89243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */; };
 		47D1BA8A243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */; };
 		81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D36A5226F08F2A0037D160 /* CoppaTools.swift */; };
+		B90C1E312CEB711E00C6E1B7 /* CachingPlayerItemConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E2C2CEB711E00C6E1B7 /* CachingPlayerItemConfiguration.swift */; };
+		B90C1E322CEB711E00C6E1B7 /* MediaFileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E2D2CEB711E00C6E1B7 /* MediaFileHandle.swift */; };
+		B90C1E332CEB711E00C6E1B7 /* ResourceLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E2E2CEB711E00C6E1B7 /* ResourceLoaderDelegate.swift */; };
+		B90C1E342CEB711E00C6E1B7 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E2F2CEB711E00C6E1B7 /* URLExtension.swift */; };
+		B90C1E352CEB711E00C6E1B7 /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E302CEB711E00C6E1B7 /* CachingPlayerItem.swift */; };
+		B90C1E3C2CEB719000C6E1B7 /* CachingPlayerItemWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E3A2CEB719000C6E1B7 /* CachingPlayerItemWrapper.swift */; };
+		B90C1E3D2CEB719000C6E1B7 /* CachingPlayerItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E3B2CEB719000C6E1B7 /* CachingPlayerItemManager.swift */; };
+		B90C1E402CEB71BA00C6E1B7 /* CachingPlayerItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E3F2CEB71BA00C6E1B7 /* CachingPlayerItemTests.swift */; };
+		B90C1E422CEB72CD00C6E1B7 /* LifecycleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E412CEB72CD00C6E1B7 /* LifecycleManager.swift */; };
+		B90C1E5A2CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E572CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift */; };
+		B90C1E5B2CEB780D00C6E1B7 /* VideoBufferingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E582CEB780D00C6E1B7 /* VideoBufferingEvent.swift */; };
+		B90C1E5C2CEB780D00C6E1B7 /* VideoBufferingTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E592CEB780D00C6E1B7 /* VideoBufferingTracker.swift */; };
 		B95A3C0A2C36E35E00696053 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95A3C092C36E35E00696053 /* String+Extension.swift */; };
 		B96645122BC55DE70032060A /* OMIDVideoEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */; };
 		B96645142BC572BF0032060A /* OMSDKWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645132BC572BF0032060A /* OMSDKWrapper.swift */; };
@@ -228,7 +236,6 @@
 		47A57BBC233E31C8001F7DA3 /* LoopMeDiscURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeDiscURLCache.m; sourceTree = "<group>"; };
 		47A57BBD233E31C8001F7DA3 /* LoopMeDiscURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeDiscURLCache.h; sourceTree = "<group>"; };
 		47A57BBF233E31C8001F7DA3 /* LoopMeTargeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeTargeting.m; sourceTree = "<group>"; };
-		47A57BC8233E31C8001F7DA3 /* LoopMeVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVideoManager.m; sourceTree = "<group>"; };
 		47A57BC9233E31C8001F7DA3 /* LoopMeReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeReachability.m; sourceTree = "<group>"; };
 		47A57BCA233E31C8001F7DA3 /* LoopMeVASTImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVASTImageDownloader.m; sourceTree = "<group>"; };
 		47A57BCB233E31C8001F7DA3 /* LoopMeAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdManager.m; sourceTree = "<group>"; };
@@ -237,7 +244,6 @@
 		47A57BCF233E31C8001F7DA3 /* LoopMeVASTImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVASTImageDownloader.h; sourceTree = "<group>"; };
 		47A57BD0233E31C8001F7DA3 /* LoopMeAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdManager.h; sourceTree = "<group>"; };
 		47A57BD1233E31C8001F7DA3 /* LoopMeReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeReachability.h; sourceTree = "<group>"; };
-		47A57BD2233E31C8001F7DA3 /* LoopMeVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVideoManager.h; sourceTree = "<group>"; };
 		47A57BD5233E31C8001F7DA3 /* LoopMeErrorEventSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeErrorEventSender.m; sourceTree = "<group>"; };
 		47A57BD7233E31C8001F7DA3 /* LoopMeErrorEventSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeErrorEventSender.h; sourceTree = "<group>"; };
 		47A57BDA233E31C8001F7DA3 /* LoopMeInterstitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeInterstitialViewController.h; sourceTree = "<group>"; };
@@ -254,10 +260,6 @@
 		47A57BED233E31C8001F7DA3 /* LoopMeDestinationDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeDestinationDisplayController.m; sourceTree = "<group>"; };
 		47A57BEE233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeAdDisplayControllerNormal.h; sourceTree = "<group>"; };
 		47A57BEF233E31C8001F7DA3 /* LoopMeAdDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeAdDisplayController.m; sourceTree = "<group>"; };
-		47A57BF1233E31C8001F7DA3 /* LoopMeORTBTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeORTBTools.m; sourceTree = "<group>"; };
-		47A57BF2233E31C8001F7DA3 /* LoopMeServerURLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeServerURLBuilder.m; sourceTree = "<group>"; };
-		47A57BF3233E31C8001F7DA3 /* LoopMeORTBTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeORTBTools.h; sourceTree = "<group>"; };
-		47A57BF4233E31C8001F7DA3 /* LoopMeServerURLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeServerURLBuilder.h; sourceTree = "<group>"; };
 		47A57BF6233E31C8001F7DA3 /* LoopMeCloseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeCloseButton.h; sourceTree = "<group>"; };
 		47A57BF8233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeActivityIndicatorView.m; sourceTree = "<group>"; };
 		47A57BF9233E31C8001F7DA3 /* LoopMeProgressOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeProgressOverlayView.h; sourceTree = "<group>"; };
@@ -311,6 +313,20 @@
 		47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVpaidScriptMessageHandler.m; sourceTree = "<group>"; };
 		47D1BA88243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVpaidScriptMessageHandler.h; sourceTree = "<group>"; };
 		81D36A5226F08F2A0037D160 /* CoppaTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoppaTools.swift; sourceTree = "<group>"; };
+		B90C1E2C2CEB711E00C6E1B7 /* CachingPlayerItemConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachingPlayerItemConfiguration.swift; path = LoopMeUnitedSDK/Core/CacheManager/CachingPlayerItem/CachingPlayerItemConfiguration.swift; sourceTree = SOURCE_ROOT; };
+		B90C1E2D2CEB711E00C6E1B7 /* MediaFileHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaFileHandle.swift; path = LoopMeUnitedSDK/Core/CacheManager/CachingPlayerItem/MediaFileHandle.swift; sourceTree = SOURCE_ROOT; };
+		B90C1E2E2CEB711E00C6E1B7 /* ResourceLoaderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResourceLoaderDelegate.swift; path = LoopMeUnitedSDK/Core/CacheManager/CachingPlayerItem/ResourceLoaderDelegate.swift; sourceTree = SOURCE_ROOT; };
+		B90C1E2F2CEB711E00C6E1B7 /* URLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLExtension.swift; path = LoopMeUnitedSDK/Core/CacheManager/CachingPlayerItem/URLExtension.swift; sourceTree = SOURCE_ROOT; };
+		B90C1E302CEB711E00C6E1B7 /* CachingPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachingPlayerItem.swift; path = LoopMeUnitedSDK/Core/CacheManager/CachingPlayerItem/CachingPlayerItem.swift; sourceTree = SOURCE_ROOT; };
+		B90C1E3A2CEB719000C6E1B7 /* CachingPlayerItemWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachingPlayerItemWrapper.swift; path = LoopMeUnitedSDK/Core/CacheManager/CachingPlayerItemWrapper.swift; sourceTree = SOURCE_ROOT; };
+		B90C1E3B2CEB719000C6E1B7 /* CachingPlayerItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachingPlayerItemManager.swift; path = LoopMeUnitedSDK/Core/CacheManager/CachingPlayerItemManager.swift; sourceTree = SOURCE_ROOT; };
+		B90C1E3F2CEB71BA00C6E1B7 /* CachingPlayerItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingPlayerItemTests.swift; sourceTree = "<group>"; };
+		B90C1E412CEB72CD00C6E1B7 /* LifecycleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifecycleManager.swift; sourceTree = "<group>"; };
+		B90C1E502CEB776900C6E1B7 /* LoopMeORTBTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoopMeORTBTools.h; sourceTree = "<group>"; };
+		B90C1E512CEB776900C6E1B7 /* LoopMeORTBTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoopMeORTBTools.m; sourceTree = "<group>"; };
+		B90C1E572CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBufferingTrackerDelegate.swift; sourceTree = "<group>"; };
+		B90C1E582CEB780D00C6E1B7 /* VideoBufferingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBufferingEvent.swift; sourceTree = "<group>"; };
+		B90C1E592CEB780D00C6E1B7 /* VideoBufferingTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBufferingTracker.swift; sourceTree = "<group>"; };
 		B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B95A3C092C36E35E00696053 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMIDVideoEventsWrapper.swift; sourceTree = "<group>"; };
@@ -396,6 +412,7 @@
 		47714E3B22FAF9CF00DF0D55 /* LoopMeUnitedSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				B90C1E3E2CEB71A000C6E1B7 /* Caching */,
 				2246F2022B8F1E16006F316E /* AdTrackingLinksTests.swift */,
 				22F75B112B8C9B0900D4B519 /* ConverterTests.swift */,
 				47A57B80233CFECB001F7DA3 /* ad.json */,
@@ -478,9 +495,11 @@
 		47A57B8A233E31C7001F7DA3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B90C1E2B2CEB70EE00C6E1B7 /* CachingManager */,
 				47A57B8C233E31C7001F7DA3 /* Viewability */,
 				47A57BA6233E31C8001F7DA3 /* Internal */,
 				47A57B8B233E31C7001F7DA3 /* LoopMeTargeting.h */,
+				B90C1E412CEB72CD00C6E1B7 /* LifecycleManager.swift */,
 				47A57BA5233E31C8001F7DA3 /* LoopMeAdView.h */,
 				47A57C3C233E31C8001F7DA3 /* LoopMeInterstitial.h */,
 			);
@@ -508,6 +527,7 @@
 		47A57BA6233E31C8001F7DA3 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				B90C1E562CEB77E100C6E1B7 /* Telemetry */,
 				47403414239568D100CC14EF /* UserPrivacy */,
 				47A57BA7233E31C8001F7DA3 /* LoopMeSDKConfiguration.h */,
 				47A57BA8233E31C8001F7DA3 /* Clients */,
@@ -518,8 +538,8 @@
 				47A57BD3233E31C8001F7DA3 /* Senders */,
 				47A57BD8233E31C8001F7DA3 /* ViewControllers */,
 				47A57BE6233E31C8001F7DA3 /* LoopMeSDKConfiguration.m */,
+				B90C1E522CEB776900C6E1B7 /* Builder */,
 				47A57BE7233E31C8001F7DA3 /* Controllers */,
-				47A57BF0233E31C8001F7DA3 /* Builder */,
 				47A57BF5233E31C8001F7DA3 /* Views */,
 				47A57C06233E31C8001F7DA3 /* AdView */,
 				47A57C0E233E31C8001F7DA3 /* LoopMeSDK.m */,
@@ -586,7 +606,6 @@
 		47A57BC6233E31C8001F7DA3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				47A57BC8233E31C8001F7DA3 /* LoopMeVideoManager.m */,
 				47A57BC9233E31C8001F7DA3 /* LoopMeReachability.m */,
 				47A57BCA233E31C8001F7DA3 /* LoopMeVASTImageDownloader.m */,
 				47A57BCB233E31C8001F7DA3 /* LoopMeAdManager.m */,
@@ -595,7 +614,6 @@
 				47A57BCF233E31C8001F7DA3 /* LoopMeVASTImageDownloader.h */,
 				47A57BD0233E31C8001F7DA3 /* LoopMeAdManager.h */,
 				47A57BD1233E31C8001F7DA3 /* LoopMeReachability.h */,
-				47A57BD2233E31C8001F7DA3 /* LoopMeVideoManager.h */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -654,17 +672,6 @@
 				47D1BA87243CB8C600A163A8 /* LoopMeVpaidScriptMessageHandler.m */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		47A57BF0233E31C8001F7DA3 /* Builder */ = {
-			isa = PBXGroup;
-			children = (
-				47A57BF1233E31C8001F7DA3 /* LoopMeORTBTools.m */,
-				47A57BF2233E31C8001F7DA3 /* LoopMeServerURLBuilder.m */,
-				47A57BF3233E31C8001F7DA3 /* LoopMeORTBTools.h */,
-				47A57BF4233E31C8001F7DA3 /* LoopMeServerURLBuilder.h */,
-			);
-			path = Builder;
 			sourceTree = "<group>";
 		};
 		47A57BF5233E31C8001F7DA3 /* Views */ = {
@@ -782,6 +789,56 @@
 			path = GDPR;
 			sourceTree = "<group>";
 		};
+		B90C1E2B2CEB70EE00C6E1B7 /* CachingManager */ = {
+			isa = PBXGroup;
+			children = (
+				B90C1E4B2CEB76B600C6E1B7 /* CachingPlayerItem */,
+				B90C1E3B2CEB719000C6E1B7 /* CachingPlayerItemManager.swift */,
+				B90C1E3A2CEB719000C6E1B7 /* CachingPlayerItemWrapper.swift */,
+			);
+			name = CachingManager;
+			path = CacheManager;
+			sourceTree = "<group>";
+		};
+		B90C1E3E2CEB71A000C6E1B7 /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				B90C1E3F2CEB71BA00C6E1B7 /* CachingPlayerItemTests.swift */,
+			);
+			path = Caching;
+			sourceTree = "<group>";
+		};
+		B90C1E4B2CEB76B600C6E1B7 /* CachingPlayerItem */ = {
+			isa = PBXGroup;
+			children = (
+				B90C1E302CEB711E00C6E1B7 /* CachingPlayerItem.swift */,
+				B90C1E2C2CEB711E00C6E1B7 /* CachingPlayerItemConfiguration.swift */,
+				B90C1E2D2CEB711E00C6E1B7 /* MediaFileHandle.swift */,
+				B90C1E2E2CEB711E00C6E1B7 /* ResourceLoaderDelegate.swift */,
+				B90C1E2F2CEB711E00C6E1B7 /* URLExtension.swift */,
+			);
+			path = CachingPlayerItem;
+			sourceTree = "<group>";
+		};
+		B90C1E522CEB776900C6E1B7 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				B90C1E502CEB776900C6E1B7 /* LoopMeORTBTools.h */,
+				B90C1E512CEB776900C6E1B7 /* LoopMeORTBTools.m */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		B90C1E562CEB77E100C6E1B7 /* Telemetry */ = {
+			isa = PBXGroup;
+			children = (
+				B90C1E582CEB780D00C6E1B7 /* VideoBufferingEvent.swift */,
+				B90C1E592CEB780D00C6E1B7 /* VideoBufferingTracker.swift */,
+				B90C1E572CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift */,
+			);
+			path = Telemetry;
+			sourceTree = "<group>";
+		};
 		B95A3C082C36E34200696053 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -845,7 +902,6 @@
 				47A57C76233E31C8001F7DA3 /* LoopMeVASTImageDownloader.h in Headers */,
 				47A57C61233E31C8001F7DA3 /* LoopMeJSCommunicatorProtocol.h in Headers */,
 				47A57CA2233E31C8001F7DA3 /* LoopMeMinimizedAdView.h in Headers */,
-				47A57C79233E31C8001F7DA3 /* LoopMeVideoManager.h in Headers */,
 				47A57CBB233E31C8001F7DA3 /* UIImage+LoopMeBinaryImage.h in Headers */,
 				47A57C53233E31C8001F7DA3 /* LoopMeViewabilityManager.h in Headers */,
 				47A57C99233E31C8001F7DA3 /* LoopMeBackView.h in Headers */,
@@ -854,7 +910,6 @@
 				47A57C86233E31C8001F7DA3 /* LoopMeOrientationViewControllerProtocol.h in Headers */,
 				47A57CA9233E31C8001F7DA3 /* LoopMeAudioCheck.h in Headers */,
 				47A57C89233E31C8001F7DA3 /* LoopMeVPAIDAdDisplayController.h in Headers */,
-				47A57C92233E31C8001F7DA3 /* LoopMeORTBTools.h in Headers */,
 				47A57C5C233E31C8001F7DA3 /* LoopMeVPAIDClient.h in Headers */,
 				47A57C78233E31C8001F7DA3 /* LoopMeReachability.h in Headers */,
 				47A57C5F233E31C8001F7DA3 /* LoopMeVideoClientNormal.h in Headers */,
@@ -1003,13 +1058,15 @@
 				47A57B5F233CFAD9001F7DA3 /* Converter.swift in Sources */,
 				47A57C8B233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.m in Sources */,
 				47A57C8F233E31C8001F7DA3 /* LoopMeAdDisplayController.m in Sources */,
+				B90C1E5A2CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift in Sources */,
 				47A57B63233CFAD9001F7DA3 /* AdTrackingLinks.swift in Sources */,
 				47A57B5C233CFAD9001F7DA3 /* XMLNode.swift in Sources */,
 				B96645122BC55DE70032060A /* OMIDVideoEventsWrapper.swift in Sources */,
 				47A57CAE233E31C8001F7DA3 /* LoopMeVPAIDError.m in Sources */,
-				47A57C6F233E31C8001F7DA3 /* LoopMeVideoManager.m in Sources */,
 				47A57C71233E31C8001F7DA3 /* LoopMeVASTImageDownloader.m in Sources */,
 				47A57C9F233E31C8001F7DA3 /* LoopMeBackView.m in Sources */,
+				B90C1E352CEB711E00C6E1B7 /* CachingPlayerItem.swift in Sources */,
+				B90C1E422CEB72CD00C6E1B7 /* LifecycleManager.swift in Sources */,
 				477EFC862350CB4A0060D261 /* InfoPlistReader.swift in Sources */,
 				47A57CB9233E31C8001F7DA3 /* NSString+Encryption.m in Sources */,
 				B96645142BC572BF0032060A /* OMSDKWrapper.swift in Sources */,
@@ -1019,11 +1076,13 @@
 				47A57CB6233E31C8001F7DA3 /* LoopMeGlobalSettings.m in Sources */,
 				47A57CCF233E31C8001F7DA3 /* LoopMeGDPRTools.m in Sources */,
 				47403417239568FD00CC14EF /* CCPATools.swift in Sources */,
+				B90C1E3C2CEB719000C6E1B7 /* CachingPlayerItemWrapper.swift in Sources */,
 				47A57C56233E31C8001F7DA3 /* LoopMeVPAIDClient.m in Sources */,
+				B90C1E312CEB711E00C6E1B7 /* CachingPlayerItemConfiguration.swift in Sources */,
 				B9A588982C32D12F003DC037 /* ErrorInfoKey.swift in Sources */,
 				47A57C7B233E31C8001F7DA3 /* LoopMeErrorEventSender.m in Sources */,
-				47A57C90233E31C8001F7DA3 /* LoopMeORTBTools.m in Sources */,
 				47A57C50233E31C8001F7DA3 /* LoopMeViewabilityManager.m in Sources */,
+				B90C1E332CEB711E00C6E1B7 /* ResourceLoaderDelegate.swift in Sources */,
 				47A57CBF233E31C8001F7DA3 /* UIImage+LoopMeBinaryImage.m in Sources */,
 				47A57B68233CFAD9001F7DA3 /* VastEventTracker.swift in Sources */,
 				47A57CA3233E31C8001F7DA3 /* LoopMeMinimizedAdView.m in Sources */,
@@ -1045,6 +1104,7 @@
 				47A57B66233CFAD9001F7DA3 /* AssetLinks.swift in Sources */,
 				47A57B6B233CFAD9001F7DA3 /* ServerCommunicator.swift in Sources */,
 				47A57C5D233E31C8001F7DA3 /* LoopMeMRAIDClient.m in Sources */,
+				B90C1E5B2CEB780D00C6E1B7 /* VideoBufferingEvent.swift in Sources */,
 				47A57C65233E31C8001F7DA3 /* LoopMeInterstitialGeneral.m in Sources */,
 				47A57B5A233CFAD9001F7DA3 /* AdConfiguration.swift in Sources */,
 				47A57C87233E31C8001F7DA3 /* LoopMeSDKConfiguration.m in Sources */,
@@ -1058,6 +1118,7 @@
 				47A57CBA233E31C8001F7DA3 /* NSURL+LoopMeAdditions.m in Sources */,
 				47A57CA7233E31C8001F7DA3 /* LoopMeSDK.m in Sources */,
 				47A57CC1233E31C8001F7DA3 /* LoopMeIdentityProvider.m in Sources */,
+				B90C1E342CEB711E00C6E1B7 /* URLExtension.swift in Sources */,
 				47A57CC2233E31C8001F7DA3 /* LoopMeLogging.m in Sources */,
 				47A57C95233E31C8001F7DA3 /* LoopMeActivityIndicatorView.m in Sources */,
 				81D36A5326F08F2A0037D160 /* CoppaTools.swift in Sources */,
@@ -1065,9 +1126,12 @@
 				47A57CB8233E31C8001F7DA3 /* NSData+LoopMeAES128.m in Sources */,
 				47A57B62233CFAD9001F7DA3 /* AdVerification.swift in Sources */,
 				47A57C68233E31C8001F7DA3 /* LoopMeTargeting.m in Sources */,
+				B90C1E3D2CEB719000C6E1B7 /* CachingPlayerItemManager.swift in Sources */,
 				47A57CB5233E31C8001F7DA3 /* LoopMeAudioCheck.m in Sources */,
+				B90C1E5C2CEB780D00C6E1B7 /* VideoBufferingTracker.swift in Sources */,
 				47A57B6A233CFAD9001F7DA3 /* ServerError.swift in Sources */,
 				47A57C9B233E31C8001F7DA3 /* LoopMeAdWebView.m in Sources */,
+				B90C1E322CEB711E00C6E1B7 /* MediaFileHandle.swift in Sources */,
 				47A57C66233E31C8001F7DA3 /* LoopMeDiscURLCache.m in Sources */,
 				47A57C8C233E31C8001F7DA3 /* LoopMeVPAIDAdDisplayController.m in Sources */,
 				474545D62435F84D00FB8E4A /* LoopMeMRAIDScriptMessageHandler.m in Sources */,
@@ -1078,6 +1142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B90C1E402CEB71BA00C6E1B7 /* CachingPlayerItemTests.swift in Sources */,
 				22F75B122B8C9B0900D4B519 /* ConverterTests.swift in Sources */,
 				2246F2032B8F1E16006F316E /* AdTrackingLinksTests.swift in Sources */,
 				4774006C2358BC8B00CE9AD8 /* VASTParserTests.swift in Sources */,

@@ -12,7 +12,6 @@
 #import "LoopMeDefinitions.h"
 #import "LoopMeJSCommunicatorProtocol.h"
 #import "LoopMeError.h"
-#import "LoopMeVideoManager.h"
 #import "LoopMeLogging.h"
 
 #import "LoopMeReachability.h"
@@ -243,8 +242,8 @@ AVAssetResourceLoaderDelegate
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *cacheKey = [[URL absoluteString] lm_MD5];
-              
+        NSString *cacheKey = [self.delegate.adConfiguration.appKey lm_MD5];
+
               // Initialize the wrapper
         self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
         self.cachingPlayerItemWrapper.delegate = self;
@@ -452,12 +451,6 @@ AVAssetResourceLoaderDelegate
 
 - (CVPixelBufferRef)retrievePixelBufferToDraw {
     return [self.videoOutput copyPixelBufferForItemTime: [self.playerItem currentTime] itemTimeForDisplay: nil];
-}
-
-#pragma mark - LoopMeVideoManagerDelegate
-
-- (LoopMeAdConfiguration *)adConfigurationObject {
-    return self.delegate.adConfiguration;
 }
 
 - (void)willAppear { }

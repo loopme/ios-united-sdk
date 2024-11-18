@@ -7,36 +7,35 @@
 
 import Foundation
 
-@objc public class CachingPlayerItemCacheManager: NSObject {
-    @objc public static let shared = CachingPlayerItemCacheManager()
+@objcMembers public class CachingPlayerItemCacheManager: NSObject {
+    public let cacheExpirationInterval: TimeInterval = 32 * 60 * 60 // 32 hours
+    public let maxCacheSize: UInt64 = 50 * 1024 * 1024 // 50 MB
     
-    private let cacheExpirationInterval: TimeInterval = 32 * 60 * 60 // 32 hours
-    private let maxCacheSize: UInt64 = 50 * 1024 * 1024 // 50 MB
+    public let accessQueue: DispatchQueue
     
-    private let accessQueue = DispatchQueue(label: "com.yourapp.CachingPlayerItemCacheManagerQueue")
-    
-    private override init() {
+    public override init() {
+        self.accessQueue = DispatchQueue(label: "com.yourapp.CachingPlayerItemCacheManagerQueue")
         super.init()
         cleanCache()
     }
     
-    @objc public func defaultCacheDirectory() -> URL {
+    public func defaultCacheDirectory() -> URL {
         let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         let cacheDir = cacheDirectory.appendingPathComponent("lm_assets", isDirectory: true)
         return cacheDir
     }
     
-    @objc public func cacheFileURL(forKey key: String, url: URL) -> URL {
+    public func cacheFileURL(forKey key: String, url: URL) -> URL {
         let fileName = "\(key).\(url.pathExtension)"
         return defaultCacheDirectory().appendingPathComponent(fileName)
     }
     
-    @objc public func cacheProgressFileURL(forKey key: String, url: URL) -> URL {
+    public func cacheProgressFileURL(forKey key: String, url: URL) -> URL {
         let fileName = "\(key)_caching.\(url.pathExtension)"
         return defaultCacheDirectory().appendingPathComponent(fileName)
     }
     
-    @objc public func cleanCache() {
+    public func cleanCache() {
         accessQueue.async {
             self.ensureCacheDirectoryExists()
             self.clearExpiredCacheFiles()

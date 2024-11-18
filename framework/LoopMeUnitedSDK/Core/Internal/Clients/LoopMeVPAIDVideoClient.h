@@ -7,7 +7,6 @@
 
 #import "LoopMeVASTPlayerUIView.h"
 #import "LoopMeVideoCommunicatorProtocol.h"
-#import <CachingPlayerItem/CachingPlayerItem-Swift.h>
 #import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 @class LoopMeVPAIDVideoClient;

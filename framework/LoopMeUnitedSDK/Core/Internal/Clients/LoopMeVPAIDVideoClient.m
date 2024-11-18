@@ -10,7 +10,6 @@
 
 #import "LoopMeVPAIDVideoClient.h"
 #import "LoopMeVPAIDError.h"
-#import "LoopMeVideoManager.h"
 #import "LoopMeLogging.h"
 
 #import "LoopMeSDK.h"
@@ -302,7 +301,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *cacheKey = [[URL absoluteString] lm_MD5];
+        NSString *cacheKey = [self.delegate.adConfigurationObject.appKey lm_MD5];
               
         self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
         self.cachingPlayerItemWrapper.delegate = self;
@@ -560,12 +559,6 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.delegate videoClientDidExpandTap: expand];
 }
 
-#pragma mark - LoopMeVideoManagerDelegate
-
-- (LoopMeAdConfiguration *)adConfigurationObject {
-    return self.delegate.adConfigurationObject;
-}
-
 #pragma mark - LoopMeVideoBufferingTrackerDelegate
 
 -(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
@@ -573,7 +566,7 @@ const NSInteger kResizeOffsetVPAID = 11;
     // Only proceed if the total buffering duration is greater than 0 seconds
     if ([event.duration integerValue] > 0) {
         // Convert adConfigurationObject to a mutable dictionary
-        NSMutableDictionary *infoDictionary = [self.adConfigurationObject toDictionary];
+        NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
         
         // Add the class information
         [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
