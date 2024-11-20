@@ -62,7 +62,6 @@ import Foundation
             for fileURL in fileURLs {
                 if let creationDate = try fileURL.resourceValues(forKeys: [.creationDateKey]).creationDate, creationDate < expirationDate {
                     try FileManager.default.removeItem(at: fileURL)
-                    print("Removed expired cache file: \(fileURL.lastPathComponent)")
                 }
             }
         } catch {
@@ -97,7 +96,6 @@ import Foundation
                     }
                     try FileManager.default.removeItem(at: fileInfo.url)
                     cacheSize -= fileInfo.size
-                    print("Removed cache file to enforce size limit: \(fileInfo.url.lastPathComponent)")
                 }
             }
         } catch {

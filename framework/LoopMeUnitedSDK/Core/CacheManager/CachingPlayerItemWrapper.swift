@@ -21,7 +21,6 @@ import AVFoundation
      var cachingPlayerItem: CachingPlayerItem?
     @objc public weak var delegate: CachingPlayerItemWrapperDelegate?
     
-    private var lock = NSLock()
     
     @objc public init(url: URL, cacheKey: String) {
         super.init()

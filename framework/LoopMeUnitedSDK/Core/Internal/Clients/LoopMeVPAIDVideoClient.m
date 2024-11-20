@@ -309,8 +309,10 @@ const NSInteger kResizeOffsetVPAID = 11;
         
         if (self.player != nil) {
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+            self.player.automaticallyWaitsToMinimizeStalling = NO;
         } else {
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+            self.player.automaticallyWaitsToMinimizeStalling = NO;
             self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
                                                                                     delegate:self];
             self.avPlayerResumer = [[LoopMeAVPlayerResumer alloc] initWithPlayer:self.player];
@@ -448,8 +450,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 }
 
 - (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected {
-    float progress = (float)bytesDownloaded / (float)bytesExpected;
-    NSLog(@"Download progress: %.2f%%", progress * 100);
+    if (self.shouldPlay) {
+        [self.player play];
+    }
 }
 
 - (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
