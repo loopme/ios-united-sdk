@@ -31,7 +31,7 @@ import AVFoundation
         
             //Check if caching in progress
         if FileManager.default.fileExists(atPath: cacheProgressFileURL.path) {
-            cachingPlayerItem = CachingPlayerItem(nonCachingURL: cacheFileURL)
+            cachingPlayerItem = CachingPlayerItem(nonCachingURL: url)
         } else if FileManager.default.fileExists(atPath: cacheFileURL.path) {
             cachingPlayerItem = CachingPlayerItem(filePathURL: cacheFileURL)
         } else {
