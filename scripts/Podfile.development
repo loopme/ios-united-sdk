@@ -28,5 +28,4 @@ end
 target 'LoopMeUnitedSDK' do
   use_frameworks!
   project 'LoopMeUnitedSDK.xcodeproj'
-    pod 'CachingPlayerItem'
 end
