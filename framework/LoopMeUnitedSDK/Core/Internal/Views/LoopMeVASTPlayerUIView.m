@@ -86,7 +86,7 @@
     self.endCard.translatesAutoresizingMaskIntoConstraints = NO;
     self.endCard.backgroundColor = [UIColor clearColor];
     self.endCard.image = self.endCardImage;
-    self.endCard.contentMode = UIViewContentModeScaleToFill;
+    self.endCard.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview: self.endCard];
     
     self.replayButton = [[UIButton alloc] init];

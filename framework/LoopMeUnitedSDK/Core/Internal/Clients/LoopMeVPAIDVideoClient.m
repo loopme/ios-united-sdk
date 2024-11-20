@@ -96,7 +96,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         return nil;
     }
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer: self.player];
-    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     _playerLayer.needsDisplayOnBoundsChange = YES;
 
     _videoView = [[UIView alloc] init];

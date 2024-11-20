@@ -66,6 +66,18 @@
     }];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    if (self.banner) {
+        CGFloat bannerHeight = self.banner.frame.size.height;
+        CGFloat viewCenterX = self.view.center.x;
+        CGFloat viewCenterY = self.view.frame.size.height - bannerHeight - self.view.safeAreaInsets.bottom;
+        
+        self.banner.center = CGPointMake(viewCenterX, viewCenterY);
+    }
+}
+
 - (void)viewWillAppear: (BOOL)animated {
     [super viewWillAppear: animated];
 
