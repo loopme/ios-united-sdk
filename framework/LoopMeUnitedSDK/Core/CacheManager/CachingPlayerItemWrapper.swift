@@ -18,32 +18,33 @@ import AVFoundation
 }
 
 @objc public class CachingPlayerItemWrapper: NSObject, CachingPlayerItemDelegate {
-     var cachingPlayerItem: CachingPlayerItem?
+    private var playerItem: AVPlayerItem?
     @objc public weak var delegate: CachingPlayerItemWrapperDelegate?
-    
     
     @objc public init(url: URL, cacheKey: String) {
         super.init()
-        
-        let cacheManager = CachingPlayerItemCacheManager()
+
+        let cacheManager = CachingPlayerItemCacheManager.shared
         let cacheFileURL = cacheManager.cacheFileURL(forKey: cacheKey, url: url)
         let cacheProgressFileURL = cacheManager.cacheProgressFileURL(forKey: cacheKey, url: url)
         
             //Check if caching in progress
         if FileManager.default.fileExists(atPath: cacheProgressFileURL.path) {
-            cachingPlayerItem = CachingPlayerItem(nonCachingURL: url)
+            playerItem = AVPlayerItem(url: url)
         } else if FileManager.default.fileExists(atPath: cacheFileURL.path) {
-            cachingPlayerItem = CachingPlayerItem(filePathURL: cacheFileURL)
+            playerItem = AVPlayerItem(url: cacheFileURL)
         } else {
             // Load url and put the path for caching
-            cachingPlayerItem = CachingPlayerItem(url: url, saveFilePath: cacheProgressFileURL.path, customFileExtension: url.pathExtension)
+            let cachingPlayerItem = CachingPlayerItem(url: url,
+                                                      saveFilePath: cacheProgressFileURL.path,
+                                                      customFileExtension: url.pathExtension)
+            cachingPlayerItem.delegate = self
+            self.playerItem = cachingPlayerItem
         }
-        
-        cachingPlayerItem?.delegate = self
     }
     
     @objc public var avPlayerItem: AVPlayerItem? {
-        return cachingPlayerItem
+        return playerItem
     }
     
     // MARK: - CachingPlayerItemDelegate Methods
