@@ -8,13 +8,10 @@
 import Foundation
 
 @objcMembers public class CachingPlayerItemCacheManager: NSObject {
-    public static let shared = CachingPlayerItemCacheManager()
     public let cacheExpirationInterval: TimeInterval = 32 * 60 * 60 // 32 hours
     public let maxCacheSize: UInt64 = 50 * 1024 * 1024 // 50 MB
     
-    public let accessQueue: DispatchQueue = DispatchQueue(label: "com.yourapp.CachingPlayerItemCacheManagerQueue")
-    
-    private override init() {
+    public override init() {
         super.init()
         cleanCache()
     }
@@ -26,17 +23,13 @@ import Foundation
     }
     
     public func cacheFileURL(forKey key: String, url: URL) -> URL {
-        return accessQueue.sync {
             let fileName = "\(key)_\(url.lastPathComponent)"
             return defaultCacheDirectory().appendingPathComponent(fileName)
-        }
     }
     
     public func cacheProgressFileURL(forKey key: String, url: URL) -> URL {
-        return accessQueue.sync {
             let fileName = "\(key)_caching_\(url.lastPathComponent)"
             return defaultCacheDirectory().appendingPathComponent(fileName)
-        }
     }
     
     public func cleanCache() {

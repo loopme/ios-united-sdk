@@ -21,10 +21,15 @@ import AVFoundation
     private var playerItem: AVPlayerItem?
     @objc public weak var delegate: CachingPlayerItemWrapperDelegate?
     
+    private static let initializationLock = NSLock()
+    
     @objc public init(url: URL, cacheKey: String) {
+        CachingPlayerItemWrapper.initializationLock.lock()
+        defer { CachingPlayerItemWrapper.initializationLock.unlock() }
+        
         super.init()
 
-        let cacheManager = CachingPlayerItemCacheManager.shared
+        let cacheManager = CachingPlayerItemCacheManager()
         let cacheFileURL = cacheManager.cacheFileURL(forKey: cacheKey, url: url)
         let cacheProgressFileURL = cacheManager.cacheProgressFileURL(forKey: cacheKey, url: url)
         
