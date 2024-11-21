@@ -22,7 +22,7 @@ public final class AVPlayerResumer: NSObject {
 
     // Private debug mode property
     /// Enables or disables debug logging. Default is `false`.
-    private var isDebugMode: Bool = true
+    private var isDebugMode: Bool = false
 
     // Private identifier for distinguishing instances
     private let identifier: String

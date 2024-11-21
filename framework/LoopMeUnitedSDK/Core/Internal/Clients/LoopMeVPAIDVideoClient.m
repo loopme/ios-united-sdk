@@ -447,13 +447,9 @@ const NSInteger kResizeOffsetVPAID = 11;
     if (!self.hasPlaybackStarted) {
         [self setupPlayerWithFileURL:location];
     }
-    NSLog(@"didFinishDownloadingToURL %@", [location absoluteString]);
 }
 
-- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected {
-    float progress = (float)bytesDownloaded / (float)bytesExpected;
-    NSLog(@"Download progress: %.2f%%", progress * 100);
-}
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected { }
 
 - (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
     [self.delegate videoClient:self didFailToLoadVideoWithError:error];
