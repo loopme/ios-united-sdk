@@ -311,11 +311,9 @@ const NSInteger kResizeOffsetVPAID = 11;
         }
 
         if (self.player != nil) {
-            NSLog(@"replaceCurrentItemWithPlayerItem");
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
             [self.videoBufferingTracker cancelTracking];
         } else {
-            NSLog(@"Create AVPlayer");
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
             self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
                                                                                     delegate:self];

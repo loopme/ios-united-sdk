@@ -23,13 +23,13 @@ import Foundation
     }
     
     public func cacheFileURL(forKey key: String, url: URL) -> URL {
-            let fileName = "\(key)_\(url.lastPathComponent)"
-            return defaultCacheDirectory().appendingPathComponent(fileName)
+        let fileName = "\(key)_\(url.lastPathComponent)"
+        return defaultCacheDirectory().appendingPathComponent(fileName)
     }
     
     public func cacheProgressFileURL(forKey key: String, url: URL) -> URL {
-            let fileName = "\(key)_caching_\(url.lastPathComponent)"
-            return defaultCacheDirectory().appendingPathComponent(fileName)
+        let fileName = "\(key)_caching_\(url.lastPathComponent)"
+        return defaultCacheDirectory().appendingPathComponent(fileName)
     }
     
     public func cleanCache() {
