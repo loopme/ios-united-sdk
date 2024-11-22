@@ -11,10 +11,7 @@ import Foundation
     public let cacheExpirationInterval: TimeInterval = 32 * 60 * 60 // 32 hours
     public let maxCacheSize: UInt64 = 50 * 1024 * 1024 // 50 MB
     
-    public let accessQueue: DispatchQueue
-    
     public override init() {
-        self.accessQueue = DispatchQueue(label: "com.yourapp.CachingPlayerItemCacheManagerQueue")
         super.init()
         cleanCache()
     }
@@ -26,21 +23,19 @@ import Foundation
     }
     
     public func cacheFileURL(forKey key: String, url: URL) -> URL {
-        let fileName = "\(key).\(url.pathExtension)"
+        let fileName = "\(key)_\(url.lastPathComponent)"
         return defaultCacheDirectory().appendingPathComponent(fileName)
     }
     
     public func cacheProgressFileURL(forKey key: String, url: URL) -> URL {
-        let fileName = "\(key)_caching.\(url.pathExtension)"
+        let fileName = "\(key)_caching_\(url.lastPathComponent)"
         return defaultCacheDirectory().appendingPathComponent(fileName)
     }
     
     public func cleanCache() {
-        accessQueue.async {
-            self.ensureCacheDirectoryExists()
-            self.clearExpiredCacheFiles()
-            self.enforceMaxCacheSize()
-        }
+        self.ensureCacheDirectoryExists()
+        self.clearExpiredCacheFiles()
+        self.enforceMaxCacheSize()
     }
     
     private func ensureCacheDirectoryExists() {

@@ -370,13 +370,9 @@ AVAssetResourceLoaderDelegate
     [self.JSClient setVideoState: LoopMeVideoState.broken];
     [self.delegate videoClient: self didFailToLoadVideoWithError: error];}
 
-- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location {
-    NSLog(@"Caching complete at %@", location);
-}
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location { }
 
-- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected {
-    float progress = (float)bytesDownloaded / (float)bytesExpected;
-}
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected { }
 
 - (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
     [self.JSClient setVideoState: LoopMeVideoState.broken];
