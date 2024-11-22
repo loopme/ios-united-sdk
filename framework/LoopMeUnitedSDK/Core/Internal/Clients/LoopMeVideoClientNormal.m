@@ -12,7 +12,6 @@
 #import "LoopMeDefinitions.h"
 #import "LoopMeJSCommunicatorProtocol.h"
 #import "LoopMeError.h"
-#import "LoopMeVideoManager.h"
 #import "LoopMeLogging.h"
 
 #import "LoopMeReachability.h"
@@ -39,7 +38,8 @@ const CGFloat kOneFrameDuration = 0.03;
 
 @interface LoopMeVideoClientNormal ()
 <
-LoopMeVideoManagerDelegate,
+LoopMeVideoBufferingTrackerDelegate,
+CachingPlayerItemWrapperDelegate,
 AVPlayerItemOutputPullDelegate,
 AVAssetResourceLoaderDelegate
 >
@@ -56,7 +56,7 @@ AVAssetResourceLoaderDelegate
 
 @property (nonatomic, strong) NSTimer *loadingVideoTimer;
 @property (nonatomic, strong) id playbackTimeObserver;
-@property (nonatomic, strong) LoopMeVideoManager *videoManager;
+@property (nonatomic, strong) CachingPlayerItemWrapper *cachingPlayerItemWrapper;
 @property (nonatomic, assign, getter = isShouldPlay) BOOL shouldPlay;
 @property (nonatomic, strong) NSString *layerGravity;
 
@@ -67,6 +67,9 @@ AVAssetResourceLoaderDelegate
 @property (nonatomic, strong) AVAssetResourceLoadingRequest *resourceLoadingRequest;
 
 @property (nonatomic, assign, getter=isDidLoadSent) BOOL didLoadSent;
+
+@property (nonatomic, strong) LoopMeVideoBufferingTracker *videoBufferingTracker;
+@property (nonatomic, strong) LoopMeAVPlayerResumer *avPlayerResumer;
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL;
 - (void)unregisterObservers;
@@ -108,7 +111,6 @@ AVAssetResourceLoaderDelegate
 - (void)play {
     if (![self playerReachedEnd]) {
         self.hasPlaybackStarted = YES;
-        [self.videoManager cancel];
         self.shouldPlay = YES;
         [self.player play];
     }
@@ -244,14 +246,54 @@ AVAssetResourceLoaderDelegate
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.playerItem = [AVPlayerItem playerItemWithURL: URL];
+        if ([URL isFileURL]) {
+            self.playerItem = [AVPlayerItem playerItemWithURL:URL];
+        } else {
+            NSString *cacheKey = [self.delegate.adConfiguration.appKey lm_MD5];
+            self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
+            self.cachingPlayerItemWrapper.delegate = self;
+            self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
+        }
+
         if (self.player != nil) {
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         } else {
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+            self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
+                                                                                    delegate:self];
+            self.avPlayerResumer = [[LoopMeAVPlayerResumer alloc] initWithPlayer:self.player];
         }
     });
 }
+
+#pragma mark - LoopMeVideoBufferingTrackerDelegate
+
+-(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
+             didCaptureEvent:(LoopMeVideoBufferingEvent *)event {
+    // Only proceed if the total buffering duration is greater than 0 seconds
+    if ([event.duration integerValue] > 0) {
+        // Convert adConfigurationObject to a mutable dictionary
+        NSMutableDictionary *infoDictionary = [self.delegate.adConfiguration toDictionary];
+        
+        // Add the class information
+        [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
+        
+        // Add buffering event details
+        [infoDictionary setObject:event.duration forKey:kErrorInfoDuration];
+        [infoDictionary setObject:event.durationAvg forKey:kErrorInfoDurationAvg];
+        [infoDictionary setObject:event.bufferCount forKey:kErrorInfoBufferCount];
+        
+        // Safely add media URL as a string
+        NSString *mediaURLString = event.mediaURL.absoluteString ?: @"";
+        [infoDictionary setObject:mediaURLString forKey:kErrorInfoMediaUrl];
+        
+        // Send the buffering event using LoopMeErrorEventSender
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom
+                             errorMessage:@"video_buffering_average"
+                                     info:infoDictionary];
+    }
+}
+
 
 
 #pragma mark Observers & Timers
@@ -345,7 +387,6 @@ AVAssetResourceLoaderDelegate
 }
 
 - (void)cancel {
-    [self.videoManager cancel];
     [self.playerLayer removeFromSuperlayer];
     [self.videoView removeFromSuperview];
     self.shouldPlay = NO;
@@ -355,23 +396,25 @@ AVAssetResourceLoaderDelegate
     [self.delegate videoClient: self setupView: self.videoView];
 }
 
-#pragma mark - LoopMeJSVideoTransportProtocol
+#pragma mark - CachingPlayerItemWrapperDelegate
 
-- (void)videoManager: (LoopMeVideoManager *)videoManager didFailLoadWithError: (NSError *)error {
+- (void)playerItemReadyToPlay:(CachingPlayerItemWrapper *)playerItem { }
+
+- (void)playerItemDidFailToPlay:(CachingPlayerItemWrapper *)playerItem error:(NSError *)error {
+    [self.JSClient setVideoState: LoopMeVideoState.broken];
+    [self.delegate videoClient: self didFailToLoadVideoWithError: error];}
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location { }
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected { }
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
     [self.JSClient setVideoState: LoopMeVideoState.broken];
     [self.delegate videoClient: self didFailToLoadVideoWithError: error];
 }
 
-- (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
-    if (!self.hasPlaybackStarted) {
-        [self setupPlayerWithFileURL:videoURL];
-    }
-}
-
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [[LoopMeVideoManager alloc] initWithUniqueName:[self.adConfigurationObject.appKey lm_MD5]
-                                                              delegate:self];
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
@@ -380,7 +423,7 @@ AVAssetResourceLoaderDelegate
         return;
     }
     if (!self.isDidLoadSent) {
-        [self setupPlayerWithFileURL: [self.videoManager cacheVideoWith: URL]];
+        [self setupPlayerWithFileURL: URL];
         self.didLoadSent = YES;
     }
     if ([self.player.currentItem.asset isKindOfClass: [AVURLAsset class]]) {
@@ -438,12 +481,6 @@ AVAssetResourceLoaderDelegate
 
 - (CVPixelBufferRef)retrievePixelBufferToDraw {
     return [self.videoOutput copyPixelBufferForItemTime: [self.playerItem currentTime] itemTimeForDisplay: nil];
-}
-
-#pragma mark - LoopMeVideoManagerDelegate
-
-- (LoopMeAdConfiguration *)adConfigurationObject {
-    return self.delegate.adConfiguration;
 }
 
 - (void)willAppear { }

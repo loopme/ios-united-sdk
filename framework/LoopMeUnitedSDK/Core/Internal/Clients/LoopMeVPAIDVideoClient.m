@@ -10,7 +10,6 @@
 
 #import "LoopMeVPAIDVideoClient.h"
 #import "LoopMeVPAIDError.h"
-#import "LoopMeVideoManager.h"
 #import "LoopMeLogging.h"
 
 #import "LoopMeSDK.h"
@@ -31,7 +30,7 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @interface LoopMeVPAIDVideoClient ()
 <
-    LoopMeVideoManagerDelegate,
+    CachingPlayerItemWrapperDelegate,
     LoopMePlayerUIViewDelegate,
     LoopMeVideoBufferingTrackerDelegate,
     AVPlayerItemOutputPullDelegate,
@@ -43,13 +42,12 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) AVAudioSession *audioSession;
-
+@property (nonatomic, strong) CachingPlayerItemWrapper *cachingPlayerItemWrapper;
 @property (nonatomic, readwrite, strong) LoopMeVASTPlayerUIView *vastUIView;
 
 @property (nonatomic, strong) UIView *videoView;
 
 @property (nonatomic, strong) id playbackTimeObserver;
-@property (nonatomic, strong) LoopMeVideoManager *videoManager;
 
 @property (nonatomic, assign, getter = isShouldPlay) BOOL shouldPlay;
 @property (nonatomic, assign, getter = isSkipped) BOOL skipped;
@@ -303,9 +301,18 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.playerItem = [AVPlayerItem playerItemWithURL: URL];
+        if ([URL isFileURL]) {
+            self.playerItem = [AVPlayerItem playerItemWithURL:URL];
+        } else {
+            NSString *cacheKey = [self.delegate.adConfigurationObject.appKey lm_MD5];
+            self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
+            self.cachingPlayerItemWrapper.delegate = self;
+            self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
+        }
+
         if (self.player != nil) {
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+            [self.videoBufferingTracker cancelTracking];
         } else {
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
             self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
@@ -423,22 +430,33 @@ const NSInteger kResizeOffsetVPAID = 11;
     return self.playerItem.duration.value == self.playerItem.currentTime.value;
 }
 
-#pragma mark - LoopMeJSVideoTransportProtocol
+#pragma mark - CachingPlayerItemWrapperDelegate
 
-- (void)videoManager: (LoopMeVideoManager *)videoManager didFailLoadWithError: (NSError *)error {
-    [self.delegate videoClient: self didFailToLoadVideoWithError: error];
+- (void)playerItemReadyToPlay:(CachingPlayerItemWrapper *)playerItem {
+    [self.delegate videoClientDidLoadVideo:self];
+    [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
 }
 
-- (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
+- (void)playerItemDidFailToPlay:(CachingPlayerItemWrapper *)playerItem error:(NSError *)error {
+    [self.delegate videoClient:self didFailToLoadVideoWithError:error];
+}
+
+- (void)playerItemPlaybackStalled:(CachingPlayerItemWrapper *)playerItem { }
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location {
     if (!self.hasPlaybackStarted) {
-        [self setupPlayerWithFileURL:videoURL];
+        [self setupPlayerWithFileURL:location];
     }
+}
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected { }
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
+    [self.delegate videoClient:self didFailToLoadVideoWithError:error];
 }
 
 - (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    self.videoManager = [[LoopMeVideoManager alloc] initWithUniqueName:[self.adConfigurationObject.appKey lm_MD5]
-                                                              delegate:self];
     if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
         [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
     ) {
@@ -446,7 +464,7 @@ const NSInteger kResizeOffsetVPAID = 11;
         return;
     }
     if (!self.isDidLoadSent) {
-        [self setupPlayerWithFileURL: [self.videoManager cacheVideoWith: URL]];
+        [self setupPlayerWithFileURL: URL];
         self.didLoadSent = YES;
     }
 }
@@ -459,7 +477,6 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)play {
     self.hasPlaybackStarted = true;
-    [self.videoManager cancel];
     [self.player play];
     if (self.shouldPlay) {
         [self.vastUIView showEndCard: NO];
@@ -541,12 +558,6 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.delegate videoClientDidExpandTap: expand];
 }
 
-#pragma mark - LoopMeVideoManagerDelegate
-
-- (LoopMeAdConfiguration *)adConfigurationObject {
-    return self.delegate.adConfigurationObject;
-}
-
 #pragma mark - LoopMeVideoBufferingTrackerDelegate
 
 -(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
@@ -554,7 +565,7 @@ const NSInteger kResizeOffsetVPAID = 11;
     // Only proceed if the total buffering duration is greater than 0 seconds
     if ([event.duration integerValue] > 0) {
         // Convert adConfigurationObject to a mutable dictionary
-        NSMutableDictionary *infoDictionary = [self.adConfigurationObject toDictionary];
+        NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
         
         // Add the class information
         [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];

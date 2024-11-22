@@ -7,6 +7,7 @@
 //
 
 #import "LoopMeVideoCommunicatorProtocol.h"
+#import "LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h"
 
 @class LoopMeVideoClient;
 @class LoopMeAdConfiguration;
@@ -25,7 +26,8 @@ extern const struct LoopMeVideoStateStruct {
 
 @interface LoopMeVideoClientNormal : NSObject
 <
-    LoopMeVideoCommunicatorProtocol
+    LoopMeVideoCommunicatorProtocol,
+CachingPlayerItemWrapperDelegate
 >
 @property (nonatomic, weak) UIViewController *viewController;
 
