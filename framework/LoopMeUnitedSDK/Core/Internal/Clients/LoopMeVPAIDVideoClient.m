@@ -301,14 +301,18 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *cacheKey = [self.delegate.adConfigurationObject.appKey lm_MD5];
-              
-        self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
-        self.cachingPlayerItemWrapper.delegate = self;
-        self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
-        
+        if ([URL isFileURL]) {
+            self.playerItem = [AVPlayerItem playerItemWithURL:URL];
+        } else {
+            NSString *cacheKey = [self.delegate.adConfigurationObject.appKey lm_MD5];
+            self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
+            self.cachingPlayerItemWrapper.delegate = self;
+            self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
+        }
+
         if (self.player != nil) {
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+            [self.videoBufferingTracker cancelTracking];
         } else {
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
             self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
@@ -437,20 +441,15 @@ const NSInteger kResizeOffsetVPAID = 11;
     [self.delegate videoClient:self didFailToLoadVideoWithError:error];
 }
 
-- (void)playerItemPlaybackStalled:(CachingPlayerItemWrapper *)playerItem {
-    if (self.shouldPlay) {
-        [self.player play];
+- (void)playerItemPlaybackStalled:(CachingPlayerItemWrapper *)playerItem { }
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location {
+    if (!self.hasPlaybackStarted) {
+        [self setupPlayerWithFileURL:location];
     }
 }
 
-- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location {
-    NSLog(@"Caching complete at %@", location);
-}
-
-- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected {
-    float progress = (float)bytesDownloaded / (float)bytesExpected;
-    NSLog(@"Download progress: %.2f%%", progress * 100);
-}
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected { }
 
 - (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
     [self.delegate videoClient:self didFailToLoadVideoWithError:error];

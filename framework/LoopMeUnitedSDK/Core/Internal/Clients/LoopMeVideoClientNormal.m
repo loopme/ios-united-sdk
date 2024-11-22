@@ -38,6 +38,7 @@ const CGFloat kOneFrameDuration = 0.03;
 
 @interface LoopMeVideoClientNormal ()
 <
+LoopMeVideoBufferingTrackerDelegate,
 CachingPlayerItemWrapperDelegate,
 AVPlayerItemOutputPullDelegate,
 AVAssetResourceLoaderDelegate
@@ -66,6 +67,9 @@ AVAssetResourceLoaderDelegate
 @property (nonatomic, strong) AVAssetResourceLoadingRequest *resourceLoadingRequest;
 
 @property (nonatomic, assign, getter=isDidLoadSent) BOOL didLoadSent;
+
+@property (nonatomic, strong) LoopMeVideoBufferingTracker *videoBufferingTracker;
+@property (nonatomic, strong) LoopMeAVPlayerResumer *avPlayerResumer;
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL;
 - (void)unregisterObservers;
@@ -242,20 +246,54 @@ AVAssetResourceLoaderDelegate
 
 - (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *cacheKey = [self.delegate.adConfiguration.appKey lm_MD5];
+        if ([URL isFileURL]) {
+            self.playerItem = [AVPlayerItem playerItemWithURL:URL];
+        } else {
+            NSString *cacheKey = [self.delegate.adConfiguration.appKey lm_MD5];
+            self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
+            self.cachingPlayerItemWrapper.delegate = self;
+            self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
+        }
 
-              // Initialize the wrapper
-        self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
-        self.cachingPlayerItemWrapper.delegate = self;
-        self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
-        
         if (self.player != nil) {
             [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         } else {
             self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+            self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
+                                                                                    delegate:self];
+            self.avPlayerResumer = [[LoopMeAVPlayerResumer alloc] initWithPlayer:self.player];
         }
     });
 }
+
+#pragma mark - LoopMeVideoBufferingTrackerDelegate
+
+-(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
+             didCaptureEvent:(LoopMeVideoBufferingEvent *)event {
+    // Only proceed if the total buffering duration is greater than 0 seconds
+    if ([event.duration integerValue] > 0) {
+        // Convert adConfigurationObject to a mutable dictionary
+        NSMutableDictionary *infoDictionary = [self.delegate.adConfiguration toDictionary];
+        
+        // Add the class information
+        [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
+        
+        // Add buffering event details
+        [infoDictionary setObject:event.duration forKey:kErrorInfoDuration];
+        [infoDictionary setObject:event.durationAvg forKey:kErrorInfoDurationAvg];
+        [infoDictionary setObject:event.bufferCount forKey:kErrorInfoBufferCount];
+        
+        // Safely add media URL as a string
+        NSString *mediaURLString = event.mediaURL.absoluteString ?: @"";
+        [infoDictionary setObject:mediaURLString forKey:kErrorInfoMediaUrl];
+        
+        // Send the buffering event using LoopMeErrorEventSender
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom
+                             errorMessage:@"video_buffering_average"
+                                     info:infoDictionary];
+    }
+}
+
 
 
 #pragma mark Observers & Timers
@@ -360,23 +398,15 @@ AVAssetResourceLoaderDelegate
 
 #pragma mark - CachingPlayerItemWrapperDelegate
 
-- (void)playerItemReadyToPlay:(CachingPlayerItemWrapper *)playerItem {
-    if (!self.hasPlaybackStarted) {
-        [self setupPlayerWithFileURL:self.videoURL];
-    }
-}
+- (void)playerItemReadyToPlay:(CachingPlayerItemWrapper *)playerItem { }
 
 - (void)playerItemDidFailToPlay:(CachingPlayerItemWrapper *)playerItem error:(NSError *)error {
     [self.JSClient setVideoState: LoopMeVideoState.broken];
     [self.delegate videoClient: self didFailToLoadVideoWithError: error];}
 
-- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location {
-    NSLog(@"Caching complete at %@", location);
-}
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location { }
 
-- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected {
-    float progress = (float)bytesDownloaded / (float)bytesExpected;
-}
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected { }
 
 - (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
     [self.JSClient setVideoState: LoopMeVideoState.broken];
