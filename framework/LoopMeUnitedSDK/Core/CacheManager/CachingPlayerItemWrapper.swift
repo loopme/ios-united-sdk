@@ -72,7 +72,6 @@ import AVFoundation
             let dstURL = URL(fileURLWithPath: filePath.replacingOccurrences(of: "_caching", with: ""))
             try FileManager.default.moveItem(at: srcURL, to: dstURL)
             delegate?.playerItem?(self, didFinishDownloadingToURL: dstURL)
-            cachingPlayerItem = CachingPlayerItem(filePathURL: dstURL)
         } catch {
             print("Error - can't replace the path: \(error.localizedDescription)")
         }
