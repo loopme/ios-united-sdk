@@ -19,7 +19,7 @@
 #import "LoopMeInterstitialGeneral.h"
 #import "LoopMeAdView.h"
 
-NSString * const kLoopMeAPIURL = @"https://loopme.me/api/ortb/ads";
+NSString * const kLoopMeAPIURL = @"https://sdk.loopmertb.com";
 
 @interface LoopMeAdManager ()
 <
