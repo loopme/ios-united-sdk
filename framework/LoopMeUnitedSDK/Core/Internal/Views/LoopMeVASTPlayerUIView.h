@@ -20,7 +20,8 @@
 - (void)setVideoCurrentTime:(CGFloat)currentTime;
 - (void)showEndCard:(BOOL)show;
 - (void)setSkipOffset:(CMTime)skipOffset;
-
+- (void)updateEndCard: (UIImage *)image;
+- (BOOL)hasEndCard;
 @end
 
 @protocol LoopMePlayerUIViewDelegate <NSObject>
@@ -32,5 +33,4 @@
 - (void)uiViewEndCardTapped;
 - (void)uiViewVideoTapped;
 - (void)uiViewExpand:(BOOL)expand;
-
 @end

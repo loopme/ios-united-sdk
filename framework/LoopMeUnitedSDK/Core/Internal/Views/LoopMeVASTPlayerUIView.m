@@ -25,14 +25,11 @@
 
 @end
 
-
 @implementation LoopMeVASTPlayerUIView
 
-- (void)dealloc {
-    
-}
+- (void)dealloc { }
 
-- (instancetype)initWithDelegate:(id<LoopMePlayerUIViewDelegate>)delegate {
+- (instancetype)initWithDelegate: (id<LoopMePlayerUIViewDelegate>)delegate {
     self = [super init];
     if (self) {
         _delegate = delegate;
@@ -41,9 +38,8 @@
     return self;
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-    [super willMoveToSuperview:newSuperview];
-    
+- (void)willMoveToSuperview: (UIView *)newSuperview {
+    [super willMoveToSuperview: newSuperview];
     if (newSuperview) {
         [self initUI];
     } else {
@@ -52,113 +48,127 @@
 }
 
 - (void)initUI {
-    UITapGestureRecognizer *tapVideo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(videoTapped)];
-    [self addGestureRecognizer:tapVideo];
+    [self addGestureRecognizer: [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(videoTapped)]];
     
     NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
-
     self.muteButton = [[UIButton alloc] init];
-
-    [self.muteButton setImage:[UIImage imageNamed:@"loopmemute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
-    [self.muteButton setImage:[UIImage imageNamed:@"loopmeunmute" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    [self.muteButton addTarget:self action:@selector(mute:) forControlEvents:UIControlEventTouchUpInside];
+    [self.muteButton setImage: [UIImage imageNamed: @"loopmemute" inBundle: resourcesBundle compatibleWithTraitCollection: nil]
+                     forState: UIControlStateSelected];
+    [self.muteButton setImage: [UIImage imageNamed: @"loopmeunmute" inBundle: resourcesBundle compatibleWithTraitCollection: nil]
+                     forState: UIControlStateNormal];
+    [self.muteButton addTarget: self action: @selector(mute:) forControlEvents: UIControlEventTouchUpInside];
     self.muteButton.selected = NO;
     self.muteButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self.muteButton];
+    [self addSubview: self.muteButton];
     
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle: UIProgressViewStyleBar];
     self.progressView.trackTintColor = [UIColor lightGrayColor];
-    self.progressView.progressTintColor = [UIColor colorWithRed:0 green:142/255.f blue:239/255.f alpha:1];
+    self.progressView.progressTintColor = [UIColor colorWithRed: 0 green: 142/255.f blue: 239/255.f alpha: 1];
     self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
     self.progressView.layer.masksToBounds = YES;
     self.progressView.layer.cornerRadius = self.progressView.bounds.size.height / 2;
-    [self addSubview:self.progressView];
+    [self addSubview: self.progressView];
     
     self.countDownLabel = [[UILabel alloc] init];
     self.countDownLabel.textColor = [UIColor lightGrayColor];
-    self.countDownLabel.font = [UIFont systemFontOfSize:12];
+    self.countDownLabel.font = [UIFont systemFontOfSize: 12];
     self.countDownLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self.countDownLabel];
+    [self addSubview: self.countDownLabel];
     
     self.endCardBackground = [[UIImageView alloc] init];
     self.endCardBackground.translatesAutoresizingMaskIntoConstraints = NO;
     self.endCardBackground.backgroundColor = [UIColor blackColor];
     self.endCardBackground.contentMode = UIViewContentModeScaleAspectFill;
     self.endCardBackground.clipsToBounds = YES;
-    [self addSubview:self.endCardBackground];
+    [self addSubview: self.endCardBackground];
     
     self.endCard = [[UIImageView alloc] init];
     self.endCard.translatesAutoresizingMaskIntoConstraints = NO;
     self.endCard.backgroundColor = [UIColor clearColor];
     self.endCard.image = self.endCardImage;
     self.endCard.contentMode = UIViewContentModeScaleToFill;
-    [self addSubview:self.endCard];
+    [self addSubview: self.endCard];
     
     self.replayButton = [[UIButton alloc] init];
-    [self.replayButton setImage:[UIImage imageNamed:@"loopmereplay" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    [self.replayButton addTarget:self action:@selector(replay:) forControlEvents:UIControlEventTouchUpInside];
+    [self.replayButton setImage: [UIImage imageNamed: @"loopmereplay"
+                                            inBundle: resourcesBundle
+                       compatibleWithTraitCollection: nil]
+                       forState: UIControlStateNormal];
+    [self.replayButton addTarget: self action: @selector(replay:) forControlEvents: UIControlEventTouchUpInside];
     self.replayButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self.replayButton];
+    [self addSubview: self.replayButton];
     
     self.skipButton = [[UIButton alloc] init];
-    [self.skipButton setImage:[UIImage imageNamed:@"loopmeskip" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    [self.skipButton addTarget:self action:@selector(skip:) forControlEvents:UIControlEventTouchUpInside];
+    [self.skipButton setImage: [UIImage imageNamed: @"loopmeskip" inBundle: resourcesBundle compatibleWithTraitCollection: nil]
+                     forState: UIControlStateNormal];
+    [self.skipButton addTarget: self action: @selector(skip:) forControlEvents: UIControlEventTouchUpInside];
     self.skipButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:self.skipButton];
+    [self addSubview: self.skipButton];
     
     self.closeButton = [[UIButton alloc] init];
-    [self.closeButton setImage:[UIImage imageNamed:@"loopmeclose" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    [self.closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [self.closeButton setImage: [UIImage imageNamed: @"loopmeclose" inBundle: resourcesBundle compatibleWithTraitCollection: nil]
+                      forState: UIControlStateNormal];
+    [self.closeButton addTarget: self action: @selector(close:) forControlEvents: UIControlEventTouchUpInside];
     self.closeButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.closeButton.hidden = NO;
-    [self addSubview:self.closeButton];
+    [self addSubview: self.closeButton];
     
-    NSDictionary *views = @{@"progress" : self.progressView, @"mute" : self.muteButton, @"countdown" : self.countDownLabel, @"close" : self.closeButton, @"replay" : self.replayButton, @"skipped" : self.skipButton,  @"endCard" : self.endCard, @"endCardBackground" : self.endCardBackground};
+    NSDictionary *views = @{
+        @"progress": self.progressView,
+        @"mute": self.muteButton,
+        @"countdown": self.countDownLabel,
+        @"close": self.closeButton,
+        @"replay": self.replayButton,
+        @"skipped": self.skipButton,
+        @"endCard": self.endCard,
+        @"endCardBackground": self.endCardBackground
+    };
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[mute(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[mute(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[replay(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[replay(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[close(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[close(50)]-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[skipped(50)]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[skipped(50)]-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[countdown]-4-[progress]-0-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[progress]-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[countdown]" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[endCard]|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[endCard]|" options:0 metrics:nil views:views]];
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[endCardBackground]|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[endCardBackground]|" options:0 metrics:nil views:views]];
+    NSArray *formats = @[
+        @"V:|-[mute(50)]",
+        @"|-[mute(50)]",
+        @"V:|-[replay(50)]",
+        @"|-[replay(50)]",
+        @"V:|-[close(50)]",
+        @"[close(50)]-|",
+        @"V:|-[skipped(50)]",
+        @"[skipped(50)]-|",
+        @"V:[countdown]-4-[progress]-0-|",
+        @"|-[progress]-|",
+        @"|-[countdown]",
+        @"V:|[endCard]|",
+        @"H:|[endCard]|",
+        @"V:|[endCardBackground]|",
+        @"H:|[endCardBackground]|"
+    ];
+    for (NSString *format in formats) {
+        [self addConstraints: [NSLayoutConstraint constraintsWithVisualFormat: format options: 0 metrics: nil views: views]];
+    }
 }
 
-- (void)setVideoCurrentTime:(CGFloat)currentTime {
-
+- (void)setVideoCurrentTime: (CGFloat)currentTime {
     if (self.skipOffset.value <= currentTime) {
         [self showSkipButton];
     }
-    
     self.progressView.progress = currentTime / self.videoDuration;
-    
     int secondsToEnd = self.videoDuration - currentTime + 1;
     NSUInteger minutes = floor(secondsToEnd % 3600 / 60);
     NSUInteger seconds = floor(secondsToEnd % 3600 % 60);
-    NSString *time = [NSString stringWithFormat:@"%02ld:%02ld", (unsigned long)minutes, (unsigned long)seconds];
+    NSString *time = [NSString stringWithFormat: @"%02ld:%02ld", (unsigned long)minutes, (unsigned long)seconds];
     self.countDownLabel.text = time;
     [self.countDownLabel sizeToFit];
 }
 
-- (void)setVideoDuration:(CGFloat)duration {
+- (void)setVideoDuration: (CGFloat)duration {
     _videoDuration = duration;
 }
 
-- (void)setMute:(BOOL)mute {
+- (void)setMute: (BOOL)mute {
     self.muteButton.selected = mute;
-    [self.delegate uiViewMuted:mute];
+    [self.delegate uiViewMuted: mute];
 }
 
-- (void)showEndCard:(BOOL)show {
+- (void)showEndCard: (BOOL)show {
     if (!show && self.endCard.hidden) {
         return;
     }
@@ -172,6 +182,14 @@
     self.skipButton.hidden = YES;
 }
 
+- (void)updateEndCard: (UIImage *)image {
+    self.endCard.image = image;
+}
+
+- (BOOL)hasEndCard {
+    return  self.endCard.image;
+}
+
 #pragma mark - Private
 
 - (void)showSkipButton {
@@ -181,26 +199,26 @@
     self.skipButton.hidden = NO;
 }
 
-- (void)mute:(UIButton *)muteButton {
+- (void)mute: (UIButton *)muteButton {
     [self setMute:!muteButton.selected];
 }
 
-- (void)close:(UIButton *)closeButton {
+- (void)close: (UIButton *)closeButton {
     [self.delegate uiViewClose];
 }
 
-- (void)replay:(UIButton *)replayButton {
+- (void)replay: (UIButton *)replayButton {
     [self.delegate uiViewReplay];
     self.skipButton.hidden = NO;
 }
 
-- (void)skip:(UIButton *)skipButton {
+- (void)skip: (UIButton *)skipButton {
     self.skipButton.hidden = YES;
     [self.delegate uiViewSkip];
 }
 
-- (void)expandCollapse:(UIButton *)expandButton {
-    [self.delegate uiViewExpand:!expandButton.selected];
+- (void)expandCollapse: (UIButton *)expandButton {
+    [self.delegate uiViewExpand: !expandButton.selected];
     expandButton.selected = !expandButton.selected;
 }
 
