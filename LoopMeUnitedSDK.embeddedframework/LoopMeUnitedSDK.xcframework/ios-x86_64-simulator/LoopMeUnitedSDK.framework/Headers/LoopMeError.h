@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, LoopMeErrorCode) {
     LoopMeErrorCodeInvalidAppKey = 404,
     LoopMeErrorCodeVideoDownloadTimeout = 408,
     LoopMeErrorCodeIncorrectResponse = -10,
-    LoopMeErrorCodeIncorrectFormat = -11,
     LoopMeErrorCodeSpecificHost = -12,
     LoopMeErrorCodeHTMLRequestTimeOut = -13,
     LoopMeErrorCodeURLResolve = -20,

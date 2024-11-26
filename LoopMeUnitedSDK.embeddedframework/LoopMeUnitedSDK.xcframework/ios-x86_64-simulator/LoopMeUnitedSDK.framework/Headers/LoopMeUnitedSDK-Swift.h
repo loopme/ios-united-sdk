@@ -277,6 +277,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AVFoundation;
 @import CoreFoundation;
 @import Foundation;
 @import OMSDK_Loopme;
@@ -301,6 +302,20 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 #if defined(__OBJC__)
+@class AVPlayer;
+
+SWIFT_CLASS_NAMED("AVPlayerResumer")
+@interface LoopMeAVPlayerResumer : NSObject
+/// Initializes the AVPlayerResumer with an AVPlayer.
+/// \param player The AVPlayer instance to monitor.
+///
+/// \param debugMode Optional parameter to enable debug mode.
+///
+- (nonnull instancetype)initWithPlayer:(AVPlayer * _Nonnull)player OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class NSString;
 enum LoopMeAdOrientation : NSInteger;
 enum LoopMeCreativeType : NSInteger;
@@ -400,6 +415,85 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSString * _Nonnull ccpa
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSURL;
+@class AVAsset;
+
+/// AVPlayerItem subclass that supports caching while playing.
+SWIFT_CLASS("_TtC15LoopMeUnitedSDK17CachingPlayerItem")
+@interface CachingPlayerItem : AVPlayerItem
+/// Play and cache remote media on a local file. <code>saveFilePath</code> is <em>randomly</em> generated. Requires <code>url.pathExtension</code> to not be empty otherwise the player will fail playing.
+/// \param url URL referencing the media file.
+///
+- (nonnull instancetype)initWithURL:(NSURL * _Nonnull)url;
+/// Play media using an AVAsset. Caching is <em>not</em> supported for this method.
+/// \param asset An instance of AVAsset.
+///
+/// \param automaticallyLoadedAssetKeys An NSArray of NSStrings, each representing a property key defined by AVAsset.
+///
+- (nonnull instancetype)initWithAsset:(AVAsset * _Nonnull)asset automaticallyLoadedAssetKeys:(NSArray<NSString *> * _Nullable)automaticallyLoadedAssetKeys OBJC_DESIGNATED_INITIALIZER;
+- (void)observeValueForKeyPath:(NSString * _Nullable)keyPath ofObject:(id _Nullable)object change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)change context:(void * _Nullable)context;
+@end
+
+
+SWIFT_CLASS("_TtC15LoopMeUnitedSDK29CachingPlayerItemCacheManager")
+@interface CachingPlayerItemCacheManager : NSObject
+@property (nonatomic, readonly) NSTimeInterval cacheExpirationInterval;
+@property (nonatomic, readonly) uint64_t maxCacheSize;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (NSURL * _Nonnull)defaultCacheDirectory SWIFT_WARN_UNUSED_RESULT;
+- (NSURL * _Nonnull)cacheFileURLForKey:(NSString * _Nonnull)key url:(NSURL * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
+- (NSURL * _Nonnull)cacheProgressFileURLForKey:(NSString * _Nonnull)key url:(NSURL * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
+- (void)cleanCache;
+@end
+
+
+/// Convenient delegate methods for <code>CachingPlayerItem</code> status updates.
+SWIFT_PROTOCOL("_TtP15LoopMeUnitedSDK25CachingPlayerItemDelegate_")
+@protocol CachingPlayerItemDelegate
+@optional
+/// Called when the media file is fully downloaded.
+- (void)playerItem:(CachingPlayerItem * _Nonnull)playerItem didFinishDownloadingFileAt:(NSString * _Nonnull)filePath;
+/// Called every time a new portion of data is received.
+- (void)playerItem:(CachingPlayerItem * _Nonnull)playerItem didDownloadBytesSoFar:(NSInteger)bytesDownloaded outOf:(NSInteger)bytesExpected;
+/// Called on downloading error.
+- (void)playerItem:(CachingPlayerItem * _Nonnull)playerItem downloadingFailedWith:(NSError * _Nonnull)error;
+/// Called after initial prebuffering is finished, means we are ready to play.
+- (void)playerItemReadyToPlay:(CachingPlayerItem * _Nonnull)playerItem;
+/// Called when the player is unable to play the data/url.
+- (void)playerItemDidFailToPlay:(CachingPlayerItem * _Nonnull)playerItem withError:(NSError * _Nullable)error;
+/// Called when the data being downloaded did not arrive in time to continue playback.
+- (void)playerItemPlaybackStalled:(CachingPlayerItem * _Nonnull)playerItem;
+@end
+
+@protocol CachingPlayerItemWrapperDelegate;
+
+SWIFT_CLASS("_TtC15LoopMeUnitedSDK24CachingPlayerItemWrapper")
+@interface CachingPlayerItemWrapper : NSObject <CachingPlayerItemDelegate>
+@property (nonatomic, weak) id <CachingPlayerItemWrapperDelegate> _Nullable delegate;
+- (nonnull instancetype)initWithUrl:(NSURL * _Nonnull)url cacheKey:(NSString * _Nonnull)cacheKey OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, strong) AVPlayerItem * _Nullable avPlayerItem;
+- (void)playerItemReadyToPlay:(CachingPlayerItem * _Nonnull)playerItem;
+- (void)playerItemDidFailToPlay:(CachingPlayerItem * _Nonnull)playerItem withError:(NSError * _Nullable)error;
+- (void)playerItemPlaybackStalled:(CachingPlayerItem * _Nonnull)playerItem;
+- (void)playerItem:(CachingPlayerItem * _Nonnull)playerItem didFinishDownloadingFileAt:(NSString * _Nonnull)filePath;
+- (void)playerItem:(CachingPlayerItem * _Nonnull)playerItem didDownloadBytesSoFar:(NSInteger)bytesDownloaded outOf:(NSInteger)bytesExpected;
+- (void)playerItem:(CachingPlayerItem * _Nonnull)playerItem downloadingFailedWith:(NSError * _Nonnull)error;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL("_TtP15LoopMeUnitedSDK32CachingPlayerItemWrapperDelegate_")
+@protocol CachingPlayerItemWrapperDelegate <NSObject>
+@optional
+- (void)playerItemReadyToPlay:(CachingPlayerItemWrapper * _Nonnull)playerItem;
+- (void)playerItemDidFailToPlay:(CachingPlayerItemWrapper * _Nonnull)playerItem error:(NSError * _Nullable)error;
+- (void)playerItemPlaybackStalled:(CachingPlayerItemWrapper * _Nonnull)playerItem;
+- (void)playerItem:(CachingPlayerItemWrapper * _Nonnull)playerItem didFinishDownloadingToURL:(NSURL * _Nonnull)location;
+- (void)playerItem:(CachingPlayerItemWrapper * _Nonnull)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected;
+- (void)playerItem:(CachingPlayerItemWrapper * _Nonnull)playerItem downloadingFailedWith:(NSError * _Nonnull)error;
+@end
+
 
 SWIFT_CLASS_NAMED("CoppaTools")
 @interface LoopMeCOPPATools : NSObject
@@ -417,6 +511,20 @@ typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeCreativeType, "CreativeTypeWrapper", o
 };
 
 
+SWIFT_CLASS_NAMED("LifecycleManager")
+@interface LoopMeLifecycleManager : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LoopMeLifecycleManager * _Nonnull shared;)
++ (LoopMeLifecycleManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, copy) NSString * _Nullable sessionId;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)startSession;
+- (void)updateSessionDepthForKey:(NSString * _Nonnull)appKey;
+- (NSInteger)sessionDepthForAppKey:(NSString * _Nonnull)appKey SWIFT_WARN_UNUSED_RESULT;
+- (NSNumber * _Nullable)timeElapsedSinceStart SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 SWIFT_CLASS_NAMED("LinearTrackingWrapper")
 @interface LoopMeLinearTracking : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -430,6 +538,7 @@ SWIFT_PROTOCOL("_TtP15LoopMeUnitedSDK32LoopMeServerCommunicatorDelegate_")
 - (void)serverCommunicator:(LoopMeServerCommunicator * _Nonnull)communicator didReceive:(LoopMeAdConfiguration * _Nonnull)adConfiguration;
 - (void)serverCommunicator:(LoopMeServerCommunicator * _Nonnull)communicator didFailWith:(NSError * _Nullable)error;
 - (void)serverCommunicatorDidReceiveAd:(LoopMeServerCommunicator * _Nonnull)communicator;
+- (void)serverTimeAlert:(LoopMeServerCommunicator * _Nonnull)communicator timeElapsed:(NSInteger)timeElapsed status:(BOOL)status;
 @end
 
 
@@ -501,10 +610,12 @@ SWIFT_CLASS_NAMED("ProgressEventWrappper")
 SWIFT_CLASS("_TtC15LoopMeUnitedSDK10SDKUtility")
 @interface SDKUtility : NSObject
 + (NSString * _Nonnull)loopmeSDKVersionString SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSString * _Nonnull ortbVersion;)
++ (NSString * _Nonnull)ortbVersion SWIFT_WARN_UNUSED_RESULT;
++ (void)setOrtbVersion:(NSString * _Nonnull)value;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class NSURL;
 @class NSData;
 
 SWIFT_CLASS_NAMED("ServerCommunicator")
@@ -522,11 +633,13 @@ typedef SWIFT_ENUM_NAMED(NSInteger, LoopMeTimeOffsetType, "TimeOffsetType", open
   LoopMeTimeOffsetTypeSeconds = 1,
 };
 
+@class NSDate;
 
 SWIFT_CLASS("_TtC15LoopMeUnitedSDK9UserAgent")
 @interface UserAgent : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull defaultUserAgent;)
 + (NSString * _Nonnull)defaultUserAgent SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)formattedDateStringFrom:(NSDate * _Nonnull)date SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -606,6 +719,46 @@ SWIFT_CLASS_NAMED("VastSkipOffsetWrapper")
 @property (nonatomic, readonly) enum LoopMeTimeOffsetType type;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS_NAMED("VideoBufferingEvent")
+@interface LoopMeVideoBufferingEvent : NSObject
+@property (nonatomic, readonly, strong) NSNumber * _Nonnull duration;
+@property (nonatomic, readonly, strong) NSNumber * _Nonnull durationAvg;
+@property (nonatomic, readonly, strong) NSNumber * _Nonnull bufferCount;
+@property (nonatomic, readonly, copy) NSURL * _Nonnull mediaURL;
+- (nonnull instancetype)initWithDuration:(NSNumber * _Nonnull)duration durationAvg:(NSNumber * _Nonnull)durationAvg bufferCount:(NSNumber * _Nonnull)bufferCount mediaURL:(NSURL * _Nonnull)mediaURL OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@protocol LoopMeVideoBufferingTrackerDelegate;
+
+SWIFT_CLASS_NAMED("VideoBufferingTracker")
+@interface LoopMeVideoBufferingTracker : NSObject
+/// Enables or disables debug logging. Default is <code>false</code>.
+@property (nonatomic) BOOL isDebugMode;
+/// Initializes the VideoBufferingTracker with an AVPlayer and a delegate.
+/// \param player The AVPlayer instance to monitor.
+///
+/// \param delegate The delegate to receive buffering events.
+///
+- (nonnull instancetype)initWithPlayer:(AVPlayer * _Nonnull)player delegate:(id <LoopMeVideoBufferingTrackerDelegate> _Nullable)delegate OBJC_DESIGNATED_INITIALIZER;
+/// Cancels all tracking and resets internal state.
+- (void)cancelTracking;
+/// Called when the user skips the ad.
+- (void)userDidSkipAd;
+/// Observes changes to the player’s properties using KVO.
+- (void)observeValueForKeyPath:(NSString * _Nullable)keyPath ofObject:(id _Nullable)object change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)change context:(void * _Nullable)context;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("VideoBufferingTrackerDelegate")
+@protocol LoopMeVideoBufferingTrackerDelegate
+- (void)videoBufferingTracker:(LoopMeVideoBufferingTracker * _Nonnull)tracker didCaptureEvent:(LoopMeVideoBufferingEvent * _Nonnull)event;
 @end
 
 
