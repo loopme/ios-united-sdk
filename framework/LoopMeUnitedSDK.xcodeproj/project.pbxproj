@@ -161,6 +161,9 @@
 		B90C1E5A2CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E572CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift */; };
 		B90C1E5B2CEB780D00C6E1B7 /* VideoBufferingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E582CEB780D00C6E1B7 /* VideoBufferingEvent.swift */; };
 		B90C1E5C2CEB780D00C6E1B7 /* VideoBufferingTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E592CEB780D00C6E1B7 /* VideoBufferingTracker.swift */; };
+		B90C1E782CF5CD3000C6E1B7 /* AVPlayerResumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E772CF5CD3000C6E1B7 /* AVPlayerResumer.swift */; };
+		B90C1E7B2CF5CF4F00C6E1B7 /* LoopMeORTBTools.h in Headers */ = {isa = PBXBuildFile; fileRef = B90C1E502CEB776900C6E1B7 /* LoopMeORTBTools.h */; };
+		B90C1E7C2CF5CF5900C6E1B7 /* LoopMeORTBTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C1E512CEB776900C6E1B7 /* LoopMeORTBTools.m */; };
 		B95A3C0A2C36E35E00696053 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95A3C092C36E35E00696053 /* String+Extension.swift */; };
 		B96645122BC55DE70032060A /* OMIDVideoEventsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */; };
 		B96645142BC572BF0032060A /* OMSDKWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96645132BC572BF0032060A /* OMSDKWrapper.swift */; };
@@ -284,7 +287,6 @@
 		47A57C12233E31C8001F7DA3 /* LoopMeError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeError.m; sourceTree = "<group>"; };
 		47A57C15233E31C8001F7DA3 /* LoopMeGlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGlobalSettings.h; sourceTree = "<group>"; };
 		47A57C16233E31C8001F7DA3 /* LoopMeVPAIDError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeVPAIDError.m; sourceTree = "<group>"; };
-		47A57C17233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGeoLocationProvider.h; sourceTree = "<group>"; };
 		47A57C18233E31C8001F7DA3 /* LoopMeLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeLogging.h; sourceTree = "<group>"; };
 		47A57C19233E31C8001F7DA3 /* LoopMeIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeIdentityProvider.h; sourceTree = "<group>"; };
 		47A57C1A233E31C8001F7DA3 /* LoopMeDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeDefinitions.h; sourceTree = "<group>"; };
@@ -303,7 +305,6 @@
 		47A57C29233E31C8001F7DA3 /* NSURL+LoopMeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+LoopMeAdditions.h"; sourceTree = "<group>"; };
 		47A57C2A233E31C8001F7DA3 /* LoopMeIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeIdentityProvider.m; sourceTree = "<group>"; };
 		47A57C2B233E31C8001F7DA3 /* LoopMeLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeLogging.m; sourceTree = "<group>"; };
-		47A57C2C233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGeoLocationProvider.m; sourceTree = "<group>"; };
 		47A57C2D233E31C8001F7DA3 /* LoopMeVPAIDError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeVPAIDError.h; sourceTree = "<group>"; };
 		47A57C37233E31C8001F7DA3 /* LoopMeGDPRTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopMeGDPRTools.h; sourceTree = "<group>"; };
 		47A57C3A233E31C8001F7DA3 /* LoopMeGDPRTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopMeGDPRTools.m; sourceTree = "<group>"; };
@@ -327,6 +328,7 @@
 		B90C1E572CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBufferingTrackerDelegate.swift; sourceTree = "<group>"; };
 		B90C1E582CEB780D00C6E1B7 /* VideoBufferingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBufferingEvent.swift; sourceTree = "<group>"; };
 		B90C1E592CEB780D00C6E1B7 /* VideoBufferingTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBufferingTracker.swift; sourceTree = "<group>"; };
+		B90C1E772CF5CD3000C6E1B7 /* AVPlayerResumer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerResumer.swift; sourceTree = "<group>"; };
 		B912C9FE2B692D6500DD0504 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B95A3C092C36E35E00696053 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B96645112BC55DE70032060A /* OMIDVideoEventsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMIDVideoEventsWrapper.swift; sourceTree = "<group>"; };
@@ -747,7 +749,6 @@
 				47A57C12233E31C8001F7DA3 /* LoopMeError.m */,
 				47A57C15233E31C8001F7DA3 /* LoopMeGlobalSettings.h */,
 				47A57C16233E31C8001F7DA3 /* LoopMeVPAIDError.m */,
-				47A57C17233E31C8001F7DA3 /* LoopMeGeoLocationProvider.h */,
 				47A57C18233E31C8001F7DA3 /* LoopMeLogging.h */,
 				47A57C19233E31C8001F7DA3 /* LoopMeIdentityProvider.h */,
 				47A57C1A233E31C8001F7DA3 /* LoopMeDefinitions.h */,
@@ -757,8 +758,8 @@
 				47A57C1F233E31C8001F7DA3 /* Categories */,
 				47A57C2A233E31C8001F7DA3 /* LoopMeIdentityProvider.m */,
 				47A57C2B233E31C8001F7DA3 /* LoopMeLogging.m */,
-				47A57C2C233E31C8001F7DA3 /* LoopMeGeoLocationProvider.m */,
 				47A57C2D233E31C8001F7DA3 /* LoopMeVPAIDError.h */,
+				B90C1E772CF5CD3000C6E1B7 /* AVPlayerResumer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -882,6 +883,7 @@
 				47A57CB0233E31C8001F7DA3 /* LoopMeLogging.h in Headers */,
 				47A57C54233E31C8001F7DA3 /* LoopMeAdView.h in Headers */,
 				47A57CD1233E31C8001F7DA3 /* LoopMeInterstitial.h in Headers */,
+				B90C1E7B2CF5CF4F00C6E1B7 /* LoopMeORTBTools.h in Headers */,
 				47A57C5B233E31C8001F7DA3 /* LoopMeJSClient.h in Headers */,
 				47A57CBE233E31C8001F7DA3 /* NSData+LoopMeAES128.h in Headers */,
 				47A57C88233E31C8001F7DA3 /* LoopMeDestinationDisplayController.h in Headers */,
@@ -1054,11 +1056,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B90C1E7C2CF5CF5900C6E1B7 /* LoopMeORTBTools.m in Sources */,
 				47A57C9E233E31C8001F7DA3 /* LoopMeCloseButton.m in Sources */,
 				47A57B5F233CFAD9001F7DA3 /* Converter.swift in Sources */,
 				47A57C8B233E31C8001F7DA3 /* LoopMeAdDisplayControllerNormal.m in Sources */,
 				47A57C8F233E31C8001F7DA3 /* LoopMeAdDisplayController.m in Sources */,
 				B90C1E5A2CEB780D00C6E1B7 /* VideoBufferingTrackerDelegate.swift in Sources */,
+				B90C1E782CF5CD3000C6E1B7 /* AVPlayerResumer.swift in Sources */,
 				47A57B63233CFAD9001F7DA3 /* AdTrackingLinks.swift in Sources */,
 				47A57B5C233CFAD9001F7DA3 /* XMLNode.swift in Sources */,
 				B96645122BC55DE70032060A /* OMIDVideoEventsWrapper.swift in Sources */,
