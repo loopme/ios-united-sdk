@@ -11,7 +11,7 @@ targets:
     settings:
       DEVELOPMENT_TEAM: 5LM9LJ6JB7
       # GENERATE_INFOPLIST_FILE: true
-      PRODUCT_BUNDLE_IDENTIFIER: com.loopmemedia.loopme-portfolio
+      PRODUCT_BUNDLE_IDENTIFIER: com.loopme.Applovin-mediation-sample
       MARKETING_VERSION: 7.4.5
       # TODO: Info.plist modified
       INFOPLIST_FILE: Info.plist
