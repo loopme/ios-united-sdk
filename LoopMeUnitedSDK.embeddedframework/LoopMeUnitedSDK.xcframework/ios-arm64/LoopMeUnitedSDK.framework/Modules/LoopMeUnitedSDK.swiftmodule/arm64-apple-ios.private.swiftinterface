@@ -73,7 +73,7 @@ public struct LoopMeOMIDVideoEvents {
   @objc public func startSession()
   @objc public func updateSessionDepth(forKey appKey: Swift.String)
   @objc public func sessionDepth(forAppKey appKey: Swift.String) -> Swift.Int
-  @objc public func timeElapsedSinceStart() -> Foundation.NSNumber?
+  @objc public func timeElapsedSinceStart() -> Foundation.NSNumber
 }
 @objc public class AdSessionContextResult : ObjectiveC.NSObject {
   @objc public var context: OMSDK_Loopme.OMIDLoopmeAdSessionContext?

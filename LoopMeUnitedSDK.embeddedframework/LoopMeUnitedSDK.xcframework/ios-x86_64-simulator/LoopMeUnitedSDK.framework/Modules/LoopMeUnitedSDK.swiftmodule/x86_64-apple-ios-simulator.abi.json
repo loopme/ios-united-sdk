@@ -2367,22 +2367,14 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Foundation.NSNumber?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "NSNumber",
-                    "printedName": "Foundation.NSNumber",
-                    "usr": "c:objc(cs)NSNumber"
-                  }
-                ],
-                "usr": "s:Sq"
+                "name": "NSNumber",
+                "printedName": "Foundation.NSNumber",
+                "usr": "c:objc(cs)NSNumber"
               }
             ],
             "declKind": "Func",
             "usr": "c:@M@LoopMeUnitedSDK@objc(cs)LoopMeLifecycleManager(im)timeElapsedSinceStart",
-            "mangledName": "$s15LoopMeUnitedSDK16LifecycleManagerC21timeElapsedSinceStartSo8NSNumberCSgyF",
+            "mangledName": "$s15LoopMeUnitedSDK16LifecycleManagerC21timeElapsedSinceStartSo8NSNumberCyF",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
               "AccessControl",
@@ -16897,7 +16889,7 @@
     {
       "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
       "kind": "IntegerLiteral",
-      "offset": 3220,
+      "offset": 3236,
       "length": 1,
       "value": "0"
     },

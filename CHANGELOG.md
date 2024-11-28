@@ -1,3 +1,9 @@
+## Version 7.4.23 (28.11.2024)
+
+- [SDK-575] Fixed: timeElapsedSinceStart is nil (#235)
+- Update AppLovinLoopMeCustomAdapter.podspec (#233)
+- Add new version to ISLoopMeCustomAdapter (#232)
+
 ## Version 7.4.22 (26.11.2024)
 
 - Fix project struct (#231)

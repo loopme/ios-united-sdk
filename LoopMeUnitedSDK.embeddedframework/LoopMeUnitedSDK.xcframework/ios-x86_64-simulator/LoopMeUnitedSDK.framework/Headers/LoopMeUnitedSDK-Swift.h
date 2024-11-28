@@ -521,7 +521,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LoopMeLifecy
 - (void)startSession;
 - (void)updateSessionDepthForKey:(NSString * _Nonnull)appKey;
 - (NSInteger)sessionDepthForAppKey:(NSString * _Nonnull)appKey SWIFT_WARN_UNUSED_RESULT;
-- (NSNumber * _Nullable)timeElapsedSinceStart SWIFT_WARN_UNUSED_RESULT;
+- (NSNumber * _Nonnull)timeElapsedSinceStart SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
