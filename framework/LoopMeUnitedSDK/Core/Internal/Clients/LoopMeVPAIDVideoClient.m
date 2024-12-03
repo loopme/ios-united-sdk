@@ -10,7 +10,6 @@
 
 #import "LoopMeVPAIDVideoClient.h"
 #import "LoopMeVPAIDError.h"
-#import "LoopMeVideoManager.h"
 #import "LoopMeLogging.h"
 
 #import "LoopMeSDK.h"
@@ -31,8 +30,9 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 @interface LoopMeVPAIDVideoClient ()
 <
-    LoopMeVideoManagerDelegate,
+    CachingPlayerItemWrapperDelegate,
     LoopMePlayerUIViewDelegate,
+    LoopMeVideoBufferingTrackerDelegate,
     AVPlayerItemOutputPullDelegate,
     AVAssetResourceLoaderDelegate
 >
@@ -42,22 +42,21 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 @property (nonatomic, strong) AVAudioSession *audioSession;
-
-
+@property (nonatomic, strong) CachingPlayerItemWrapper *cachingPlayerItemWrapper;
 @property (nonatomic, readwrite, strong) LoopMeVASTPlayerUIView *vastUIView;
 
 @property (nonatomic, strong) UIView *videoView;
 
 @property (nonatomic, strong) id playbackTimeObserver;
-@property (nonatomic, strong) LoopMeVideoManager *videoManager;
-@property (nonatomic, strong) NSString *videoPath;
+
 @property (nonatomic, assign, getter = isShouldPlay) BOOL shouldPlay;
 @property (nonatomic, assign, getter = isSkipped) BOOL skipped;
 @property (nonatomic, strong) NSString *layerGravity;
 
-@property (nonatomic, strong) NSDate *loadingVideoStartDate;
-@property (nonatomic, strong) NSURL *videoURL;
 @property (nonatomic, weak) LoopMeOMIDVideoEventsWrapper *omidVideoEvents;
+@property (nonatomic, strong) LoopMeVideoBufferingTracker *videoBufferingTracker;
+@property (nonatomic, strong) LoopMeAVPlayerResumer *avPlayerResumer;
+
 @property (nonatomic, assign) BOOL isDidReachEndSent;
 
 @property (nonatomic, strong) NSLayoutConstraint *topVideoUIConstraint;
@@ -65,13 +64,15 @@ const NSInteger kResizeOffsetVPAID = 11;
 @property (nonatomic, strong) NSLayoutConstraint *leftVideoUIConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *rightVideoUIConstraint;
 
-- (NSURL *)currentAssetURLForPlayer:(AVPlayer *)player;
-- (void)setupPlayerWithFileURL:(NSURL *)URL;
-- (BOOL)playerHasBufferedURL:(NSURL *)URL;
+@property (nonatomic, assign, getter=isDidLoadSent) BOOL didLoadSent;
+@property (nonatomic, strong) NSURL *videoURL;
+@property (nonatomic, assign) BOOL hasPlaybackStarted;
+
+- (void)setupPlayerWithFileURL: (NSURL *)URL;
 - (void)unregisterObservers;
 - (void)addTimerForCurrentTime;
-- (void)routeChange:(NSNotification*)notification;
-- (void)playerItemDidReachEnd:(id)object;
+- (void)routeChange: (NSNotification*)notification;
+- (void)playerItemDidReachEnd: (id)object;
 
 @end
 
@@ -81,119 +82,170 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (UIView *)vastUIView {
     if (!_vastUIView) {
-        _vastUIView = [[LoopMeVASTPlayerUIView alloc] initWithDelegate:self];
+        _vastUIView = [[LoopMeVASTPlayerUIView alloc] initWithDelegate: self];
         _vastUIView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _vastUIView;
 }
 
 - (UIView *)videoView {
-    if (_videoView == nil) {
-        if (!self.player) {
-            return nil;
-        }
-        _playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        [_playerLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
-        _playerLayer.needsDisplayOnBoundsChange = YES;
-            
-        UIView *videoView = [[UIView alloc] init];
-        _videoView = videoView;
-         [self.delegate videoClient:self setupView:_videoView];
-        [_videoView.layer addSublayer:_playerLayer];
-        [_videoView addSubview:self.vastUIView];
-        
-        self.leftVideoUIConstraint =  [self.vastUIView.leadingAnchor constraintEqualToAnchor:_videoView.leadingAnchor];
-        self.leftVideoUIConstraint.active = YES;
-        
-        self.rightVideoUIConstraint = [self.vastUIView.trailingAnchor constraintEqualToAnchor:_videoView.trailingAnchor];
-        self.rightVideoUIConstraint.active = YES;
-        
-        self.topVideoUIConstraint = [self.vastUIView.topAnchor constraintEqualToAnchor:_videoView.topAnchor];
-        self.topVideoUIConstraint.active = YES;
-        
-        self.bottomVideoUIConstraint = [self.vastUIView.bottomAnchor constraintEqualToAnchor:_videoView.bottomAnchor];
-        self.bottomVideoUIConstraint.active = YES;
+    if (_videoView != nil) {
+        return _videoView;
     }
+    if (!self.player) {
+        return nil;
+    }
+    _playerLayer = [AVPlayerLayer playerLayerWithPlayer: self.player];
+    _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    _playerLayer.needsDisplayOnBoundsChange = YES;
+
+    _videoView = [[UIView alloc] init];
+    [self.delegate videoClient: self setupView: _videoView];
+    [_videoView.layer addSublayer: _playerLayer];
+    [_videoView addSubview: self.vastUIView];
+    
+    self.leftVideoUIConstraint = [self.vastUIView.leadingAnchor constraintEqualToAnchor: _videoView.leadingAnchor];
+    self.leftVideoUIConstraint.active = YES;
+    
+    self.rightVideoUIConstraint = [self.vastUIView.trailingAnchor constraintEqualToAnchor: _videoView.trailingAnchor];
+    self.rightVideoUIConstraint.active = YES;
+    
+    self.topVideoUIConstraint = [self.vastUIView.topAnchor constraintEqualToAnchor: _videoView.topAnchor];
+    self.topVideoUIConstraint.active = YES;
+    
+    self.bottomVideoUIConstraint = [self.vastUIView.bottomAnchor constraintEqualToAnchor: _videoView.bottomAnchor];
+    self.bottomVideoUIConstraint.active = YES;
     return _videoView;
 }
 
 - (LoopMeOMIDVideoEventsWrapper *)omidVideoEvents {
-    if ([self.delegate respondsToSelector:@selector(omidVideoEvents)]) {
-        return [self.delegate performSelector:@selector(omidVideoEvents)];
-    }
-    
-    return nil;
+    return [self.delegate respondsToSelector: @selector(omidVideoEvents)] ?
+        [self.delegate performSelector: @selector(omidVideoEvents)] : nil;
 }
 
-- (void)setPlayerItem:(AVPlayerItem *)playerItem {
-    if (_playerItem != playerItem) {
-        self.isDidReachEndSent = NO;
-        if (_playerItem) {
-            [_playerItem removeObserver:self forKeyPath:kLoopMeVPAIDVideoStatusKey context:VPAIDvideoControllerStatusObservationContext];
-            [_playerItem removeObserver:self forKeyPath:kLoopMeVPAIDLoadedTimeRangesKey context:VPAIDvideoControllerStatusObservationContext];
-            [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                            name:AVPlayerItemDidPlayToEndTimeNotification
-                                                          object:_playerItem];
-            [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                            name:AVPlayerItemFailedToPlayToEndTimeNotification
-                                                          object:_playerItem];
-            
-            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:_playerItem];
-        }
-        _playerItem = playerItem;
-        if (_playerItem) {
-            [_playerItem addObserver:self forKeyPath:kLoopMeVPAIDVideoStatusKey options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:VPAIDvideoControllerStatusObservationContext];
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(playerItemDidReachEnd:)
-                                                         name:AVPlayerItemDidPlayToEndTimeNotification
-                                                       object:_playerItem];
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(playerItemDidFailedToPlayToEndTime:)
-                                                         name:AVPlayerItemFailedToPlayToEndTimeNotification
-                                                       object:_playerItem];
-            
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStalled:) name:AVPlayerItemPlaybackStalledNotification object:_playerItem];
-            
-            [_playerItem addObserver:self
-                             forKeyPath:kLoopMeVPAIDLoadedTimeRangesKey
-                                options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                                context:VPAIDvideoControllerStatusObservationContext];
-
-        }
+- (void)playerItemDidReachEnd: (id)object {
+    if (!self.isDidReachEndSent) {
+        self.isDidReachEndSent = YES;
+        self.shouldPlay = NO;
+        [self.eventSender trackEvent: LoopMeVASTEventTypeLinearComplete];
+        [self.delegate videoClientDidReachEnd: self];
+        [self.omidVideoEvents complete];
+    }
+    if ([self.vastUIView hasEndCard]) {
+        [self showEndCard];
+    } else {
+        [self.delegate videoClientShouldCloseAd: self];
     }
 }
 
-- (void)playbackStalled:(NSNotification *)n {
+- (void)playerItemDidFailedToPlayToEndTime: (id)object {
+    [self pause];
+}
+
+- (void)playbackStalled: (NSNotification *)n {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self play];
     });
 }
 
-- (void)setPlayer:(AVPlayer *)player {
-    if (_player != player) {
-        
-        [self.playerLayer removeFromSuperlayer];
-        [self.videoView removeFromSuperview];
-        self.playerLayer = nil;
-        
-        if (_player) {
-            [_player removeTimeObserver:self.playbackTimeObserver];
-            [self.playbackTimeObserver invalidate];
-            self.playbackTimeObserver = nil;
-        }
-        _player = player;
-        
-        if (_player) {
-            
-//            [self.audioSession setActive:YES error:nil];
-            [self addTimerForCurrentTime];
-            [self videoView];
-            self.shouldPlay = NO;
-        }
+- (void)setPlayerItem: (AVPlayerItem *)playerItem {
+    if (_playerItem == playerItem) {
+        return;
+    }
+    self.isDidReachEndSent = NO;
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    if (_playerItem) {
+        [_playerItem removeObserver: self
+                         forKeyPath: kLoopMeVPAIDVideoStatusKey
+                            context: VPAIDvideoControllerStatusObservationContext];
+        [_playerItem removeObserver: self
+                         forKeyPath: kLoopMeVPAIDLoadedTimeRangesKey
+                            context: VPAIDvideoControllerStatusObservationContext];
+        [nc removeObserver: self name: AVPlayerItemDidPlayToEndTimeNotification object: _playerItem];
+        [nc removeObserver: self name: AVPlayerItemFailedToPlayToEndTimeNotification object: _playerItem];
+        [nc removeObserver: self name: AVPlayerItemPlaybackStalledNotification object: _playerItem];
+    }
+    _playerItem = playerItem;
+    if (!_playerItem) {
+        return;
+    }
+    [_playerItem addObserver: self
+                  forKeyPath: kLoopMeVPAIDVideoStatusKey
+                     options: NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                     context: VPAIDvideoControllerStatusObservationContext];
+    [_playerItem addObserver: self
+                  forKeyPath: kLoopMeVPAIDLoadedTimeRangesKey
+                     options: NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                     context: VPAIDvideoControllerStatusObservationContext];
+    [nc addObserver: self
+           selector: @selector(playerItemDidReachEnd:)
+               name: AVPlayerItemDidPlayToEndTimeNotification
+             object: _playerItem];
+    [nc addObserver: self
+           selector: @selector(playerItemDidFailedToPlayToEndTime:)
+               name: AVPlayerItemFailedToPlayToEndTimeNotification
+             object: _playerItem];
+    [nc addObserver: self
+           selector: @selector(playbackStalled:)
+               name: AVPlayerItemPlaybackStalledNotification
+             object: _playerItem];
+    
+}
+
+- (void)addTimerForCurrentTime {
+    CMTime interval = CMTimeMakeWithSeconds(0.1, NSEC_PER_USEC);
+    __weak LoopMeVPAIDVideoClient *selfWeak = self;
+    self.playbackTimeObserver =
+    [self.player addPeriodicTimeObserverForInterval: interval
+                                              queue: NULL
+                                         usingBlock: ^(CMTime time) {
+         float currentTime = (float)CMTimeGetSeconds(time);
+         double percent = currentTime / CMTimeGetSeconds(selfWeak.playerItem.duration);
+         [selfWeak.delegate currentTime: currentTime percent: percent];
+         if (currentTime > 0 && selfWeak.isShouldPlay) {
+             [selfWeak.vastUIView setVideoCurrentTime: currentTime];
+         }
+     }];
+}
+
+- (void)setPlayer: (AVPlayer *)player {
+    if (_player == player) {
+        return;
+    }
+    [self.playerLayer removeFromSuperlayer];
+    [self.videoView removeFromSuperview];
+    self.playerLayer = nil;
+    if (_player) {
+        [_player removeTimeObserver: self.playbackTimeObserver];
+        self.playbackTimeObserver = nil;
+    }
+    _player = player;
+    if (_player) {
+        [self addTimerForCurrentTime];
+        [self videoView];
+        self.shouldPlay = NO;
     }
 }
 
 #pragma mark - Life Cycle
+
+- (void)unregisterObservers {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver: self name: AVAudioSessionRouteChangeNotification object: nil];
+    [nc removeObserver: self name: UIApplicationDidBecomeActiveNotification object: nil];
+    [nc removeObserver: self name: UIApplicationDidEnterBackgroundNotification object: nil];
+}
+
+- (void)cancel {
+    [self.playerLayer removeFromSuperlayer];
+    [_videoView removeFromSuperview];
+    [_vastUIView removeFromSuperview];
+    self.player = nil;
+    self.playerItem = nil;
+    self.videoView = nil;
+    self.playerLayer = nil;
+    self.shouldPlay = NO;
+}
 
 - (void)dealloc {
     if (![NSThread isMainThread]) {
@@ -207,7 +259,36 @@ const NSInteger kResizeOffsetVPAID = 11;
     }
 }
 
-- (instancetype)initWithDelegate:(id<LoopMeVPAIDVideoClientDelegate>)delegate {
+- (void)routeChange: (NSNotification*)notification {
+    NSInteger routeChangeReason = [[notification.userInfo valueForKey: AVAudioSessionRouteChangeReasonKey] integerValue];
+    if (routeChangeReason == AVAudioSessionRouteChangeReasonNewDeviceAvailable ||
+        routeChangeReason == AVAudioSessionRouteChangeReasonOldDeviceUnavailable
+    ) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.isShouldPlay) {
+                [self.player play];
+            }
+        });
+    }
+}
+
+- (void)registerObservers {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver: self
+           selector: @selector(routeChange:)
+               name: AVAudioSessionRouteChangeNotification
+             object: nil];
+    [nc addObserver: self
+           selector: @selector(didBecomeActive:)
+               name: UIApplicationDidBecomeActiveNotification
+             object: nil];
+    [nc addObserver: self
+           selector: @selector(didEnterBackground:)
+               name: UIApplicationDidEnterBackgroundNotification
+             object: nil];
+}
+
+- (instancetype)initWithDelegate: (id<LoopMeVPAIDVideoClientDelegate>)delegate {
     if (self = [super init]) {
         _delegate = delegate;
         _audioSession = [AVAudioSession sharedInstance];
@@ -218,174 +299,94 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 #pragma mark - Private
 
-- (NSURL *)currentAssetURLForPlayer:(AVPlayer *)player {
-    AVAsset *currentPlayerAsset = player.currentItem.asset;
-    if (![currentPlayerAsset isKindOfClass:AVURLAsset.class]) {
-        return nil;
-    }
-    return [(AVURLAsset *)currentPlayerAsset URL];
-}
-
-- (void)setupPlayerWithFileURL:(NSURL *)URL {
+- (void)setupPlayerWithFileURL: (NSURL *)URL {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.playerItem = [AVPlayerItem playerItemWithURL:URL];
-        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+        if ([URL isFileURL]) {
+            self.playerItem = [AVPlayerItem playerItemWithURL:URL];
+        } else {
+            NSString *cacheKey = [self.delegate.adConfigurationObject.appKey lm_MD5];
+            self.cachingPlayerItemWrapper = [[CachingPlayerItemWrapper alloc] initWithUrl:URL cacheKey:cacheKey];
+            self.cachingPlayerItemWrapper.delegate = self;
+            self.playerItem = self.cachingPlayerItemWrapper.avPlayerItem;
+        }
+
+        if (self.player != nil) {
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+            [self.videoBufferingTracker cancelTracking];
+        } else {
+            self.player = [AVPlayer playerWithPlayerItem: self.playerItem];
+            self.videoBufferingTracker = [[LoopMeVideoBufferingTracker alloc] initWithPlayer:self.player
+                                                                                    delegate:self];
+            self.avPlayerResumer = [[LoopMeAVPlayerResumer alloc] initWithPlayer:self.player];
+        }
     });
 }
 
-- (BOOL)playerHasBufferedURL:(NSURL *)URL {
-    if (!self.videoPath) {
-        return NO;
-    }
-    return [[self currentAssetURLForPlayer:self.player].absoluteString hasSuffix:self.videoPath];
-}
-
 - (void)showEndCard {
-    [self.vastUIView showEndCard:YES];
-    [self.eventSender trackEvent:LoopMeVASTEventTypeCompanionCreativeView];
+    [self.vastUIView showEndCard: YES];
+    [self.eventSender trackEvent: LoopMeVASTEventTypeCompanionCreativeView];
 }
 
 #pragma mark Observers & Timers
 
-- (void)registerObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(routeChange:)
-                                                 name:AVAudioSessionRouteChangeNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didBecomeActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didEnterBackground:)
-                                                 name:UIApplicationDidEnterBackgroundNotification
-                                               object:nil];
-    
-//    [self.audioSession addObserver:self forKeyPath:@"outputVolume" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:VPAIDvideoControllerStatusObservationContext];
-    
+- (void)didBecomeActive: (NSNotification*)notification {
+    [self.delegate videoClientDidBecomeActive: self];
 }
 
-- (void)unregisterObservers {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:AVAudioSessionRouteChangeNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidBecomeActiveNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidEnterBackgroundNotification
-                                                  object:nil];
-}
-
-- (void)addTimerForCurrentTime {
-    CMTime interval = CMTimeMakeWithSeconds(0.1, NSEC_PER_USEC);
-    __weak LoopMeVPAIDVideoClient *selfWeak = self;
-    self.playbackTimeObserver =
-    [self.player addPeriodicTimeObserverForInterval:interval
-                                              queue:NULL
-                                         usingBlock:^(CMTime time) {
-                                             float currentTime = (float)CMTimeGetSeconds(time);
-                                             double percent = currentTime / CMTimeGetSeconds(selfWeak.playerItem.duration);
-                                             [selfWeak.delegate currentTime:currentTime percent:percent];
-                                             if (currentTime > 0 && selfWeak.isShouldPlay) {
-                                                 [selfWeak.vastUIView setVideoCurrentTime:currentTime];
-                                             }
-                                         }];
-}
-
-- (void)routeChange:(NSNotification*)notification {
-    NSDictionary *interuptionDict = notification.userInfo;
-    NSInteger routeChangeReason = [[interuptionDict valueForKey:AVAudioSessionRouteChangeReasonKey] integerValue];
-    switch (routeChangeReason) {
-        case AVAudioSessionRouteChangeReasonNewDeviceAvailable:
-        case AVAudioSessionRouteChangeReasonOldDeviceUnavailable:
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                if (self.isShouldPlay) {
-                    [self.player play];
-                }
-            });
-            break;
-    }
-}
-
-- (void)didBecomeActive:(NSNotification*)notification {
-    [self.delegate videoClientDidBecomeActive:self];
-}
-
-- (void)didEnterBackground:(NSNotification*)notification {
-    
-    //OMID
+- (void)didEnterBackground: (NSNotification*)notification {
     [self.omidVideoEvents pause];
-    
     [self.player pause];
 }
+
 #pragma mark Player state notification
 
-- (void)playerItemDidReachEnd:(id)object {
-    
-    if (!self.isDidReachEndSent) {
-        self.isDidReachEndSent = YES;
-        
-        self.shouldPlay = NO;
-        [self.eventSender trackEvent:LoopMeVASTEventTypeLinearComplete];
-        [self.delegate videoClientDidReachEnd:self];
-        
-        [self.omidVideoEvents complete];
+- (void)observeValueForKeyPath: (NSString *)keyPath
+                      ofObject: (id)object
+                        change: (NSDictionary *)change
+                       context: (void *)context {
+    if (object != self.playerItem ) {
+        return;
     }
-    
-    if ([self.vastUIView endCardImage]) {
-        [self showEndCard];
-    } else {
-        [self.delegate videoClientShouldCloseAd:self];
+    if (![keyPath isEqualToString: kLoopMeVPAIDVideoStatusKey]) {
+        return;
     }
-}
-
-- (void)playerItemDidFailedToPlayToEndTime:(id)object {
-    [self pause];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                        change:(NSDictionary *)change context:(void *)context {
-    if (object == self.playerItem ) {
-        if ([keyPath isEqualToString:kLoopMeVPAIDVideoStatusKey]) {
-            if (self.playerItem.status == AVPlayerItemStatusFailed) {
-                NSMutableDictionary *infoDictionary =   [self.delegate.adConfigurationObject toDictionary];
-                [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
-                [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
-                                     errorMessage: @"Video player could not init file"
-                                             info: infoDictionary];
-                [self.delegate videoClient:self didFailToLoadVideoWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeMediaDisplay]];
-            } else if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
-                if ([self.videoManager hasCachedURL:self.videoURL]) {
-                    [self.delegate videoClientDidLoadVideo:self];
-                    [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
-                }
-            }
-        }
-    } //else if (object == self.audioSession) {
-//        NSNumber * newValue = [change objectForKey:NSKeyValueChangeNewKey];
-//        [self.omidVideoEvents volumeChangeTo:newValue.floatValue];
-   // }
+    if (self.playerItem.status == AVPlayerItemStatusFailed) {
+        NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
+        infoDictionary[kErrorInfoClass] = @"LoopMeVPAIDVideoClient";
+        infoDictionary[kErrorInfoUrl] = self.videoURL;
+        [LoopMeErrorEventSender sendError: LoopMeEventErrorTypeBadAsset
+                             errorMessage: @"Video player could not init file"
+                                     info: infoDictionary];
+        [self uiViewClose];
+        [self.delegate videoClient: self didFailToLoadVideoWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeMediaDisplay]];
+    }
+    if (self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
+        [self.delegate videoClientDidLoadVideo: self];
+        [self.vastUIView setVideoDuration: CMTimeGetSeconds(self.player.currentItem.asset.duration)];
+    }
 }
 
 #pragma mark - Public
 
-- (void)adjustViewToFrame:(CGRect)frame {
+- (void)adjustViewToFrame: (CGRect)frame {
     self.videoView.frame = frame;
-    
     if (SYSTEM_VERSION_LESS_THAN(@"13.0")) {
         NSBundle *resourcesBundle = [LoopMeSDK resourcesBundle];
-        
         self.vastUIView.frame = frame;
-        MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
+        MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: frame];
         volumeView.showsVolumeSlider = YES;
         volumeView.showsRouteButton = NO;
-        [volumeView setVolumeThumbImage:[UIImage imageNamed:@"thumb" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-        [volumeView setMaximumVolumeSliderImage:[UIImage imageNamed:@"maximumVolume" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-        [volumeView setMinimumVolumeSliderImage:[UIImage imageNamed:@"minimumVolume" inBundle:resourcesBundle compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-        volumeView.alpha = 1;
         
-//        [self.vastUIView addSubview:volumeView];
+        UIImage *thumb = [UIImage imageNamed: @"thumb" inBundle: resourcesBundle compatibleWithTraitCollection: nil];
+        [volumeView setVolumeThumbImage: thumb forState: UIControlStateNormal];
+        
+        UIImage *max = [UIImage imageNamed: @"maximumVolume" inBundle: resourcesBundle compatibleWithTraitCollection: nil];
+        [volumeView setMaximumVolumeSliderImage: max forState: UIControlStateNormal];
+        
+        UIImage *min = [UIImage imageNamed: @"minimumVolume" inBundle: resourcesBundle compatibleWithTraitCollection: nil];
+        [volumeView setMinimumVolumeSliderImage: min forState: UIControlStateNormal];
+        
+        volumeView.alpha = 1;
     }
 
     if (self.playerLayer) {
@@ -395,162 +396,102 @@ const NSInteger kResizeOffsetVPAID = 11;
             self.layerGravity = nil;
             return;
         }
-       
-        //This code was needed for resizable banner ads. I've removed it to fix stretch video bug of fullscreen ads.
-        //If you need banners in future pls take a look here.
-        
-//        CGRect videoRect = [self.playerLayer videoRect];
-//        CGFloat k = 100;
-//        if (videoRect.size.width == self.playerLayer.bounds.size.width) {
-//            k = videoRect.size.height * 100 / self.playerLayer.bounds.size.height;
-//        } else if (videoRect.size.height == self.playerLayer.bounds.size.height) {
-//            k = videoRect.size.width * 100 / self.playerLayer.bounds.size.width;
-//        }
-//        
-//        if ((100 - floorf(k)) <= kResizeOffsetVPAID) {
-//            [self.playerLayer setVideoGravity:AVLayerVideoGravityResize];
-//        }
     }
-    
-    if  ([[self.delegate performSelector:@selector(delegate)] isKindOfClass:[LoopMeAdView class]]) {
-        self.leftVideoUIConstraint.constant = self.playerLayer.videoRect.origin.x;
-        self.rightVideoUIConstraint.constant = self.playerLayer.bounds.size.width - self.playerLayer.videoRect.size.width - self.playerLayer.videoRect.origin.x;
-        self.topVideoUIConstraint.constant = self.playerLayer.videoRect.origin.y;
-        self.bottomVideoUIConstraint.constant = -(self.playerLayer.bounds.size.height - self.playerLayer.videoRect.size.height - self.playerLayer.videoRect.origin.y);
-//        self.vastUIView.frame = self.playerLayer.videoRect;
-    }
-}
+    if ([[self.delegate performSelector: @selector(delegate)] isKindOfClass: [LoopMeAdView class]]) {
+        CGRect videoRect = self.playerLayer.videoRect;
+        CGRect bounds = self.playerLayer.bounds;
 
-- (void)cancel {
-    [self.videoManager cancel];
-    [self.playerLayer removeFromSuperlayer];
-    [_videoView removeFromSuperview];
-    [_vastUIView removeFromSuperview];
-    self.player = nil;
-    self.playerItem = nil;
-    self.videoView = nil;
-    self.playerLayer = nil;
-    self.shouldPlay = NO;
+        self.leftVideoUIConstraint.constant = videoRect.origin.x;
+        self.rightVideoUIConstraint.constant = bounds.size.width - videoRect.size.width - videoRect.origin.x;
+        self.topVideoUIConstraint.constant = videoRect.origin.y;
+        self.bottomVideoUIConstraint.constant = -(bounds.size.height - videoRect.size.height - videoRect.origin.y);
+    }
 }
 
 - (void)moveView {
-    [self.delegate videoClient:self setupView:self.videoView];
+    [self.delegate videoClient: self setupView: self.videoView];
 }
 
 - (void)willAppear {
-        [self.delegate videoClient:self setupView:self.videoView];
-        if (!self.skipped) {
-            LoopMeVastSkipOffset *skipOffset = [self.delegate skipOffset];
-            CMTime skipOffsetTime;
-            if (skipOffset.type == LoopMeTimeOffsetTypeSeconds) {
-                skipOffsetTime = CMTimeMake(skipOffset.value, 1);
-            } else {
-                int sec = CMTimeGetSeconds(self.playerItem.duration) * skipOffset.value / 100;
-                skipOffsetTime = CMTimeMake(sec, 1);
-            }
-            [self.vastUIView setSkipOffset:skipOffsetTime];
-            
-            [self play];
-            //OMID
-            [self.omidVideoEvents startWithDuration:CMTimeGetSeconds(self.playerItem.duration) videoPlayerVolume:self.player.volume];
-        }
+    [self.delegate videoClient: self setupView: self.videoView];
+    if (self.skipped) {
+        return;
+    }
+    LoopMeVastSkipOffset *skipOffset = [self.delegate skipOffset];
+    double skipOffsetTime = skipOffset.type == LoopMeTimeOffsetTypeSeconds ?
+           skipOffset.value : CMTimeGetSeconds(self.playerItem.duration) * skipOffset.value / 100;
+    [self.vastUIView setSkipOffset: CMTimeMake(skipOffsetTime, 1)];
+    [self play];
+    [self.omidVideoEvents startWithDuration: CMTimeGetSeconds(self.playerItem.duration)
+                          videoPlayerVolume: self.player.volume];
 }
 
 - (BOOL)playerReachedEnd {
-    CMTime duration = self.playerItem.duration;
-    CMTime currentTime = self.playerItem.currentTime;
-    return (duration.value == currentTime.value) ? YES : NO;
+    return self.playerItem.duration.value == self.playerItem.currentTime.value;
 }
 
-#pragma mark - LoopMeJSVideoTransportProtocol
+#pragma mark - CachingPlayerItemWrapperDelegate
 
-- (void)loadWithURL:(NSURL *)URL {
-    
-    
+- (void)playerItemReadyToPlay:(CachingPlayerItemWrapper *)playerItem {
+    [self.delegate videoClientDidLoadVideo:self];
+    [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
+}
+
+- (void)playerItemDidFailToPlay:(CachingPlayerItemWrapper *)playerItem error:(NSError *)error {
+    [self.delegate videoClient:self didFailToLoadVideoWithError:error];
+}
+
+- (void)playerItemPlaybackStalled:(CachingPlayerItemWrapper *)playerItem { }
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didFinishDownloadingToURL:(NSURL *)location {
+    if (!self.hasPlaybackStarted) {
+        [self setupPlayerWithFileURL:location];
+    }
+}
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem didDownloadBytesSoFar:(int64_t)bytesDownloaded outOf:(int64_t)bytesExpected { }
+
+- (void)playerItem:(CachingPlayerItemWrapper *)playerItem downloadingFailedWith:(NSError *)error {
+    [self.delegate videoClient:self didFailToLoadVideoWithError:error];
+}
+
+- (void)loadWithURL: (NSURL *)URL {
     self.videoURL = URL;
-    
-    self.videoPath = [NSString stringWithFormat:@"%@.mp4", [URL.absoluteString lm_MD5]];
-    self.videoManager = [[LoopMeVideoManager alloc] initWithVideoPath:self.videoPath delegate:self];
-    if ([self playerHasBufferedURL:URL]) {
-        [self.vastUIView setVideoDuration:CMTimeGetSeconds(self.player.currentItem.asset.duration)];
-    } else if ([self.videoManager hasCachedURL:URL]) {
-        [self setupPlayerWithFileURL:[self.videoManager videoFileURL]];
-    } else {
-        if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi && [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi) {
-            [self videoManager:self.videoManager didFailLoadWithError:[LoopMeVPAIDError errorForStatusCode:LoopMeVPAIDErrorCodeUndefined]];
-            return;
-        }
-        
-        self.loadingVideoStartDate = [NSDate date];
-        [self.videoManager loadVideoWithURL:URL];
+    if ([LoopMeGlobalSettings sharedInstance].doNotLoadVideoWithoutWiFi &&
+        [[LoopMeReachability reachabilityForLocalWiFi] connectionType] != LoopMeConnectionTypeWiFi
+    ) {
+        [self.delegate videoClient: self didFailToLoadVideoWithError: [LoopMeVPAIDError errorForStatusCode: LoopMeVPAIDErrorCodeUndefined]];
+        return;
     }
-}
-
-- (void)setMute:(BOOL)mute {
-    self.player.volume = (mute) ? 0.0f : 1.0f;
-    
-    [self.omidVideoEvents volumeChangeTo:self.player.volume];
-}
-
-- (void)seekToTime:(double)time {
-    if (time >= 0) {
-        CMTime timeStruct = CMTimeMake(time, 1000);
-        [self.player seekToTime:timeStruct
-                toleranceBefore:kCMTimeZero
-                 toleranceAfter:kCMTimePositiveInfinity];
+    if (!self.isDidLoadSent) {
+        [self setupPlayerWithFileURL: URL];
+        self.didLoadSent = YES;
     }
-}
-
-- (void)playFromTime:(double)time {
-    //if time is negative, dont seek. Hack for setVisibleNoJS property in LoopMeAdDisplaycontroller.    
-    if (time >= 0) {
-        [self seekToTime:time];
-    }
-
-    [self play];
 }
 
 - (void)resume {
     [self.omidVideoEvents resume];
     [self play];
-    [self.eventSender trackEvent:LoopMeVASTEventTypeLinearResume];
+    [self.eventSender trackEvent: LoopMeVASTEventTypeLinearResume];
 }
 
 - (void)play {
+    self.hasPlaybackStarted = true;
     [self.player play];
     if (self.shouldPlay) {
-        [self.vastUIView showEndCard:NO];
+        [self.vastUIView showEndCard: NO];
     }
-    [self.eventSender trackEvent:LoopMeVASTEventTypeLinearStart];
-
+    [self.eventSender trackEvent: LoopMeVASTEventTypeLinearStart];
     self.shouldPlay = YES;
 }
 
 - (void)pause {
     self.shouldPlay = NO;
     [self.player pause];
-    
-    //OMID
     [self.omidVideoEvents pause];
 }
 
-- (void)skip {
-    self.shouldPlay = NO;
-    self.skipped = YES;
-    [self.eventSender trackEvent:LoopMeVASTEventTypeLinearSkip];
-    [self pause];
-    
-    //OMID
-    [self.omidVideoEvents skipped];
-    
-    if ([self.vastUIView endCardImage]) {
-        [self showEndCard];
-    } else {
-        [self.delegate videoClientShouldCloseAd:self];
-    }
-}
-
-- (void)setGravity:(NSString *)gravity {
+- (void)setGravity: (NSString *)gravity {
     self.layerGravity = gravity;
     if (self.playerLayer) {
         self.playerLayer.videoGravity = gravity;
@@ -559,19 +500,45 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 #pragma mark - LoopMeVideoUIViewDelegate
 
-- (void)uiViewMuted:(BOOL)mute {
+- (void)setMute: (BOOL)mute {
+    self.player.volume = mute ? 0.0f : 1.0f;
+    [self.omidVideoEvents volumeChangeTo: self.player.volume];
+}
+
+- (void)uiViewMuted: (BOOL)mute {
     [self.eventSender trackEvent: mute ? LoopMeVASTEventTypeLinearMute : LoopMeVASTEventTypeLinearUnmute];
-    [self setMute:mute];
+    [self setMute: mute];
 }
 
 - (void)uiViewClose {
-    [_audioSession setActive:NO error:nil];
-    [self.delegate videoClientShouldCloseAd:self];
+    [_audioSession setActive: NO error: nil];
+    [self.delegate videoClientShouldCloseAd: self];
+}
+
+- (void)playFromTime: (double)time {
+    //if time is negative, dont seek. Hack for setVisibleNoJS property in LoopMeAdDisplaycontroller.
+    if (time >= 0) {
+        [self.player seekToTime: CMTimeMake(time, 1000) toleranceBefore: kCMTimeZero toleranceAfter: kCMTimePositiveInfinity];
+    }
+    [self play];
 }
 
 - (void)uiViewReplay {
     self.shouldPlay = YES;
-    [self playFromTime:0];
+    [self playFromTime: 0];
+}
+
+- (void)skip {
+    self.shouldPlay = NO;
+    self.skipped = YES;
+    [self.eventSender trackEvent:LoopMeVASTEventTypeLinearSkip];
+    [self pause];
+    [self.omidVideoEvents skipped];
+    if ([self.vastUIView hasEndCard]) {
+        [self showEndCard];
+    } else {
+        [self.delegate videoClientShouldCloseAd: self];
+    }
 }
 
 - (void)uiViewSkip {
@@ -584,29 +551,39 @@ const NSInteger kResizeOffsetVPAID = 11;
 
 - (void)uiViewVideoTapped {
     [self.delegate videoClientDidVideoTap];
-    
-    [self.omidVideoEvents adUserInteractionWithType:OMIDInteractionTypeClick];
+    [self.omidVideoEvents adUserInteractionWithType: OMIDInteractionTypeClick];
 }
 
-- (void)uiViewExpand:(BOOL)expand {
-    [self.delegate videoClientDidExpandTap:expand];
+- (void)uiViewExpand: (BOOL)expand {
+    [self.delegate videoClientDidExpandTap: expand];
 }
 
-#pragma mark - LoopMeVideoManagerDelegate
+#pragma mark - LoopMeVideoBufferingTrackerDelegate
 
-- (void)videoManager:(LoopMeVideoManager *)videoManager didLoadVideo:(NSURL *)videoURL {
-    NSTimeInterval secondsFromVideoLoadStart = [self.loadingVideoStartDate timeIntervalSinceNow];
-    [LoopMeLoggingSender sharedInstance].videoLoadingTimeInterval = fabs(secondsFromVideoLoadStart);
-    [self setupPlayerWithFileURL:videoURL];
-}
-
-- (void)videoManager:(LoopMeVideoManager *)videoManager didFailLoadWithError:(NSError *)error {
-
-    [self.delegate videoClient:self didFailToLoadVideoWithError:error];
-}
-
-- (LoopMeAdConfiguration *)adConfigurationObject {
-    return self.delegate.adConfigurationObject;
+-(void)videoBufferingTracker:(LoopMeVideoBufferingTracker *)tracker
+             didCaptureEvent:(LoopMeVideoBufferingEvent *)event {
+    // Only proceed if the total buffering duration is greater than 0 seconds
+    if ([event.duration integerValue] > 0) {
+        // Convert adConfigurationObject to a mutable dictionary
+        NSMutableDictionary *infoDictionary = [self.delegate.adConfigurationObject toDictionary];
+        
+        // Add the class information
+        [infoDictionary setObject:@"LoopMeVPAIDVideoClient" forKey:kErrorInfoClass];
+        
+        // Add buffering event details
+        [infoDictionary setObject:event.duration forKey:kErrorInfoDuration];
+        [infoDictionary setObject:event.durationAvg forKey:kErrorInfoDurationAvg];
+        [infoDictionary setObject:event.bufferCount forKey:kErrorInfoBufferCount];
+        
+        // Safely add media URL as a string
+        NSString *mediaURLString = event.mediaURL.absoluteString ?: @"";
+        [infoDictionary setObject:mediaURLString forKey:kErrorInfoMediaUrl];
+        
+        // Send the buffering event using LoopMeErrorEventSender
+        [LoopMeErrorEventSender sendError:LoopMeEventErrorTypeCustom
+                             errorMessage:@"video_buffering_average"
+                                     info:infoDictionary];
+    }
 }
 
 @end

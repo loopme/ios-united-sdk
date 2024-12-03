@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
 // swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name LoopMeUnitedSDK
+import AVFoundation
 import Foundation
 import OMSDK_Loopme
 import Swift
@@ -8,6 +9,13 @@ import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@objc(LoopMeVideoBufferingTrackerDelegate) public protocol VideoBufferingTrackerDelegate {
+  @objc func videoBufferingTracker(_ tracker: LoopMeUnitedSDK.VideoBufferingTracker, didCaptureEvent event: LoopMeUnitedSDK.VideoBufferingEvent)
+}
+@objcMembers @objc(LoopMeAVPlayerResumer) final public class AVPlayerResumer : ObjectiveC.NSObject {
+  @objc public init(player: AVFoundation.AVPlayer)
+  @objc deinit
+}
 public struct ProgressEvent : Swift.Hashable {
   public static func == (lhs: LoopMeUnitedSDK.ProgressEvent, rhs: LoopMeUnitedSDK.ProgressEvent) -> Swift.Bool
   public var link: Swift.String
@@ -33,6 +41,39 @@ public struct LoopMeOMIDVideoEvents {
   @objc public func volumeChange(to playerVolume: CoreFoundation.CGFloat)
   @objc public func adUserInteraction(withType interactionType: OMSDK_Loopme.OMIDInteractionType)
   @objc deinit
+}
+@objc public protocol CachingPlayerItemDelegate {
+  @objc optional func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, didFinishDownloadingFileAt filePath: Swift.String)
+  @objc optional func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, didDownloadBytesSoFar bytesDownloaded: Swift.Int, outOf bytesExpected: Swift.Int)
+  @objc optional func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, downloadingFailedWith error: any Swift.Error)
+  @objc optional func playerItemReadyToPlay(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem)
+  @objc optional func playerItemDidFailToPlay(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, withError error: (any Swift.Error)?)
+  @objc optional func playerItemPlaybackStalled(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem)
+}
+@objc @_inheritsConvenienceInitializers final public class CachingPlayerItem : AVFoundation.AVPlayerItem {
+  final public var passOnObject: Any?
+  weak final public var delegate: (any LoopMeUnitedSDK.CachingPlayerItemDelegate)?
+  @objc convenience dynamic public init(url: Foundation.URL)
+  convenience public init(url: Foundation.URL, avUrlAssetOptions: [Swift.String : Any]? = nil)
+  convenience public init(url: Foundation.URL, customFileExtension: Swift.String, avUrlAssetOptions: [Swift.String : Any]? = nil)
+  public init(url: Foundation.URL, saveFilePath: Swift.String, customFileExtension: Swift.String?, avUrlAssetOptions: [Swift.String : Any]? = nil)
+  public init(nonCachingURL url: Foundation.URL, avUrlAssetOptions: [Swift.String : Any]? = nil)
+  convenience public init(data: Foundation.Data, customFileExtension: Swift.String) throws
+  public init(filePathURL: Foundation.URL, fileExtension: Swift.String? = nil)
+  @objc override dynamic public init(asset: AVFoundation.AVAsset, automaticallyLoadedAssetKeys: [Swift.String]?)
+  @objc deinit
+  final public func download()
+  final public func cancelDownload()
+  @objc override final public func observeValue(forKeyPath keyPath: Swift.String?, of object: Any?, change: [Foundation.NSKeyValueChangeKey : Any]?, context: Swift.UnsafeMutableRawPointer?)
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers @objc(LoopMeLifecycleManager) public class LifecycleManager : ObjectiveC.NSObject {
+  @objc public static let shared: LoopMeUnitedSDK.LifecycleManager
+  @objc public var sessionId: Swift.String?
+  @objc deinit
+  @objc public func startSession()
+  @objc public func updateSessionDepth(forKey appKey: Swift.String)
+  @objc public func sessionDepth(forAppKey appKey: Swift.String) -> Swift.Int
+  @objc public func timeElapsedSinceStart() -> Foundation.NSNumber
 }
 @objc public class AdSessionContextResult : ObjectiveC.NSObject {
   @objc public var context: OMSDK_Loopme.OMIDLoopmeAdSessionContext?
@@ -80,6 +121,34 @@ extension LoopMeUnitedSDK.VastProperties : Foundation.XMLParserDelegate {
   @objc override dynamic public init()
   @objc deinit
 }
+@objc public protocol CachingPlayerItemWrapperDelegate : ObjectiveC.NSObjectProtocol {
+  @objc optional func playerItemReadyToPlay(_ playerItem: LoopMeUnitedSDK.CachingPlayerItemWrapper)
+  @objc optional func playerItemDidFailToPlay(_ playerItem: LoopMeUnitedSDK.CachingPlayerItemWrapper, error: (any Swift.Error)?)
+  @objc optional func playerItemPlaybackStalled(_ playerItem: LoopMeUnitedSDK.CachingPlayerItemWrapper)
+  @objc optional func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItemWrapper, didFinishDownloadingToURL location: Foundation.URL)
+  @objc optional func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItemWrapper, didDownloadBytesSoFar bytesDownloaded: Swift.Int64, outOf bytesExpected: Swift.Int64)
+  @objc optional func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItemWrapper, downloadingFailedWith error: any Swift.Error)
+}
+@objc public class CachingPlayerItemWrapper : ObjectiveC.NSObject, LoopMeUnitedSDK.CachingPlayerItemDelegate {
+  @objc weak public var delegate: (any LoopMeUnitedSDK.CachingPlayerItemWrapperDelegate)?
+  @objc public init(url: Foundation.URL, cacheKey: Swift.String)
+  @objc public var avPlayerItem: AVFoundation.AVPlayerItem? {
+    @objc get
+  }
+  @objc public func playerItemReadyToPlay(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem)
+  @objc public func playerItemDidFailToPlay(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, withError error: (any Swift.Error)?)
+  @objc public func playerItemPlaybackStalled(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem)
+  @objc public func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, didFinishDownloadingFileAt filePath: Swift.String)
+  @objc public func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, didDownloadBytesSoFar bytesDownloaded: Swift.Int, outOf bytesExpected: Swift.Int)
+  @objc public func playerItem(_ playerItem: LoopMeUnitedSDK.CachingPlayerItem, downloadingFailedWith error: any Swift.Error)
+  @objc deinit
+}
+public enum CachingPlayerItemConfiguration {
+  public static var downloadBufferLimit: Swift.Int
+  public static var readDataLimit: Swift.Int
+  public static var shouldVerifyDownloadedFileSize: Swift.Bool
+  public static var minimumExpectedFileSize: Swift.Int
+}
 public enum ErrorInfoKey : Swift.Int {
   case appKey
   case classKey
@@ -121,6 +190,7 @@ public enum ErrorInfoKey : Swift.Int {
 }
 @_inheritsConvenienceInitializers @objc public class SDKUtility : ObjectiveC.NSObject {
   @objc public static func loopmeSDKVersionString() -> Swift.String
+  @objc public static var ortbVersion: Swift.String
   @objc override dynamic public init()
   @objc deinit
 }
@@ -128,6 +198,7 @@ public enum ErrorInfoKey : Swift.Int {
   @objc public static var defaultUserAgent: Swift.String {
     @objc get
   }
+  @objc public static func formattedDateString(from date: Foundation.Date) -> Swift.String
   @objc override dynamic public init()
   @objc deinit
 }
@@ -149,6 +220,15 @@ public struct AssetLinks : Swift.Equatable {
   @objc func serverCommunicator(_ communicator: LoopMeUnitedSDK.ServerCommunicator, didReceive adConfiguration: LoopMeUnitedSDK.AdConfigurationWrapper)
   @objc func serverCommunicator(_ communicator: LoopMeUnitedSDK.ServerCommunicator, didFailWith error: (any Swift.Error)?)
   @objc func serverCommunicatorDidReceiveAd(_ communicator: LoopMeUnitedSDK.ServerCommunicator)
+  @objc func serverTimeAlert(_ communicator: LoopMeUnitedSDK.ServerCommunicator, timeElapsed: Swift.Int, status: Swift.Bool)
+}
+@objcMembers @objc(LoopMeVideoBufferingEvent) public class VideoBufferingEvent : ObjectiveC.NSObject {
+  @objc final public let duration: Foundation.NSNumber
+  @objc final public let durationAvg: Foundation.NSNumber
+  @objc final public let bufferCount: Foundation.NSNumber
+  @objc final public let mediaURL: Foundation.URL
+  @objc public init(duration: Foundation.NSNumber, durationAvg: Foundation.NSNumber, bufferCount: Foundation.NSNumber, mediaURL: Foundation.URL)
+  @objc deinit
 }
 public let LOOPME_USERDEFAULTS_KEY_AUTOLOADING: Swift.String
 public struct SKAdNetworkFidelity : Swift.Codable {
@@ -453,6 +533,24 @@ public struct AdVerification : Swift.Equatable {
   public var vendor: Swift.String
   public var jsResource: Swift.String
   public var verificationParameters: Swift.String
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class CachingPlayerItemCacheManager : ObjectiveC.NSObject {
+  @objc final public let cacheExpirationInterval: Swift.Double
+  @objc final public let maxCacheSize: Swift.UInt64
+  @objc override dynamic public init()
+  @objc public func defaultCacheDirectory() -> Foundation.URL
+  @objc public func cacheFileURL(forKey key: Swift.String, url: Foundation.URL) -> Foundation.URL
+  @objc public func cacheProgressFileURL(forKey key: Swift.String, url: Foundation.URL) -> Foundation.URL
+  @objc public func cleanCache()
+  @objc deinit
+}
+@objcMembers @objc(LoopMeVideoBufferingTracker) public class VideoBufferingTracker : ObjectiveC.NSObject {
+  @objc public var isDebugMode: Swift.Bool
+  @objc public init(player: AVFoundation.AVPlayer, delegate: (any LoopMeUnitedSDK.VideoBufferingTrackerDelegate)?)
+  @objc public func cancelTracking()
+  @objc public func userDidSkipAd()
+  @objc override dynamic public func observeValue(forKeyPath keyPath: Swift.String?, of object: Any?, change: [Foundation.NSKeyValueChangeKey : Any]?, context: Swift.UnsafeMutableRawPointer?)
+  @objc deinit
 }
 extension LoopMeUnitedSDK.ErrorInfoKey : Swift.Equatable {}
 extension LoopMeUnitedSDK.ErrorInfoKey : Swift.Hashable {}

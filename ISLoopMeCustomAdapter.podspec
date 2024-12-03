@@ -1,7 +1,7 @@
 #  Be sure to run `pod spec lint ISLoopMeCustomAdapter.podspec'
 Pod::Spec.new do |spec|
     spec.name         = "ISLoopMeCustomAdapter"
-    spec.version      = "0.0.13"
+    spec.version      = "0.0.15"
     spec.summary      = "LoopMe IronSource Custom Adapter (ISLoopMeCustomAdapter)"
 
     spec.description  = "LoopMe IronSource Custom Adapter builded to use LoopMe SDK with IronSource SDK through IronSource Mediation."
@@ -19,7 +19,7 @@ Pod::Spec.new do |spec|
     spec.static_framework = true
     spec.source_files  = "Mediation/IronSource/ISLoopMeCustomAdapter/*.{h,m}"
     spec.dependency "IronSourceSDK", "~> 8.0"
-    spec.dependency "LoopMeUnitedSDK", "7.4.21"
+    spec.dependency "LoopMeUnitedSDK", "7.4.23"
     spec.requires_arc = true
     spec.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
     spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }

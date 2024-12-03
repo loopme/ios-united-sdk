@@ -7,6 +7,7 @@
 
 #import "LoopMeVASTPlayerUIView.h"
 #import "LoopMeVideoCommunicatorProtocol.h"
+#import <LoopMeUnitedSDK/LoopMeUnitedSDK-Swift.h>
 
 @class LoopMeVPAIDVideoClient;
 @class LoopMeVASTEventTracker;
@@ -17,7 +18,7 @@
 
 @protocol LoopMeVPAIDVideoClientDelegate;
 
-@interface LoopMeVPAIDVideoClient : NSObject <LoopMeVideoCommunicatorProtocol>
+@interface LoopMeVPAIDVideoClient : NSObject <LoopMeVideoCommunicatorProtocol, CachingPlayerItemDelegate>
 
 @property (nonatomic, weak) UIViewController *viewController;
 @property (nonatomic, weak) LoopMeVASTEventTracker *eventSender;

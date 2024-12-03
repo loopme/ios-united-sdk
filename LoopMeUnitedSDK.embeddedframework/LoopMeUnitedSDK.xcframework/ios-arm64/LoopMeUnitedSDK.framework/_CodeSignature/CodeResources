@@ -14,11 +14,11 @@
 		</data>
 		<key>Headers/LoopMeDefinitions.h</key>
 		<data>
-		nf0naHTf9V3eT7hJL1r13OM04ak=
+		/FYmDLsbm0UyvIdCPrijoT+qh3c=
 		</data>
 		<key>Headers/LoopMeError.h</key>
 		<data>
-		abxCl3TFbnDKTME6UksRRaAkRX8=
+		I+l6IzWJUw0j8C0g4lvVVuwCVxA=
 		</data>
 		<key>Headers/LoopMeGDPRTools.h</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Headers/LoopMeSDK.h</key>
 		<data>
-		6d0P4sxOuEKcGbvryx4LZJxTrQQ=
+		hTFS7eScta8AGVkLfQewG2rri5A=
 		</data>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Headers/LoopMeUnitedSDK-Swift.h</key>
 		<data>
-		6h7Vw1S812SLvGdyqD+dG1oHGoE=
+		oDbfO3GftTRbf0nhJvQGvvAYbAg=
 		</data>
 		<key>Headers/LoopMeVPAIDError.h</key>
 		<data>
@@ -50,27 +50,27 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		EhQdxx6utgU9ve6ZUJQ5/6MexZs=
+		bmUEpZlWr3SSLWMzmXFsnlx5+RQ=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		5qwr8Oi65sjcM3/2lMo1klER9NY=
+		+FzuGYebCTnTCJquT6qrwT3lV8E=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		PxqvY+qqBmMVxWxDANkagJurtJI=
+		zUzN3zxamEm+qgN4fHyWZTGOKWI=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		2IGAntP5ATkrsng7SuRYnWsQlv4=
+		YwK5CuTSO/Nfz0Mr/v8XksV97YM=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		PxqvY+qqBmMVxWxDANkagJurtJI=
+		zUzN3zxamEm+qgN4fHyWZTGOKWI=
 		</data>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		uV7QY/Hbj/1iDnbLc26knBXPSBA=
+		WPwXyFnF9pGE/nUp0WmwrE2pThQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -97,14 +97,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			M14pnZN9q6wup3DP8CVwSYwJbG+HMnI4sSv0OqEQYcs=
+			SX99YZquc9JVSTQtzQZ6k1ZgMxcGDU7ZUnC3WzC16ng=
 			</data>
 		</dict>
 		<key>Headers/LoopMeError.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			oeWshkBOULiVddnky5cfK3oGKadKUmCxFRtowFnUHJA=
+			ZaFdmhCPjSwQRSdXmrXr5c+9/LRI4xlPYLlhfmv86PI=
 			</data>
 		</dict>
 		<key>Headers/LoopMeGDPRTools.h</key>
@@ -132,7 +132,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cxXqNRGWFTgxdxa5aeASCfqVw7/+lOOfL+TOg855pwA=
+			4sRPEbgp3J5iunZpATbAVMp3PTB15qH50CqDs+tFbJ4=
 			</data>
 		</dict>
 		<key>Headers/LoopMeSDKConfiguration.h</key>
@@ -146,7 +146,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			aMAt9xBJ4vW4gEqkuvpakhRao6/Oj16gpPQWYTockeg=
+			6d3aWpPYvq/GJqzSPjUpejI4WgdS5+h78hUEoZI2C2k=
 			</data>
 		</dict>
 		<key>Headers/LoopMeVPAIDError.h</key>
@@ -160,35 +160,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JLcFxB5DRF2eUpL90xL1Wa5OrhWMTAPd/7v480cyLpo=
+			udiTYPzEJ+xzE7c2/qHTk60XBdap9ToCFpu1H635yNI=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			rKIHSUmTfNm5uE94/dZmO/vXzOt4WvxhxUQtBEH3TPM=
+			KMtdKig+4Uz+c5Mwl1aRwRQRbykMmebaaPqpa+zstaE=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jpCuZ3SBKsMScdUUEPI2TnDT1Ux9/KGUZnFQy8qggWc=
+			fLngBkWQom5EyXf1y7xEd2DvMBrGKQjmLy4rOjDgV/k=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			rKIHSUmTfNm5uE94/dZmO/vXzOt4WvxhxUQtBEH3TPM=
+			KMtdKig+4Uz+c5Mwl1aRwRQRbykMmebaaPqpa+zstaE=
 			</data>
 		</dict>
 		<key>Modules/LoopMeUnitedSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xT0rgHkDxxOwDA1Zh/QyPRGw/A8fWuDFVj2ASoJxuJc=
+			8Tvu9xFoGCIH70XZLrEuSBTGbBYBB+rJju74GghUZBQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

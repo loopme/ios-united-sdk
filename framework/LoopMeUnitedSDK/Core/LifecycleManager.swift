@@ -89,8 +89,8 @@ public class LifecycleManager: NSObject {
     
     // MARK: - Time Elapsed Since Session Start
     
-    @objc public func timeElapsedSinceStart() -> NSNumber? {
-        guard let sessionStartTime = sessionStartTime else { return nil }
+    @objc public func timeElapsedSinceStart() -> NSNumber {
+        guard let sessionStartTime = sessionStartTime else { return NSNumber(value: 0.0) }
         let currentTime = Date()
         var elapsedTime = currentTime.timeIntervalSince(sessionStartTime) - totalPausedTime
         if isPaused {
