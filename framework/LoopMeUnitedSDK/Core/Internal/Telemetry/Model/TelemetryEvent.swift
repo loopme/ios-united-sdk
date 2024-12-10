@@ -7,52 +7,31 @@
 
 import Foundation
 
-struct TelemetryEvent {
-    let id: String = UUID().uuidString
-    let type: TelemetryEventType
-    let attributes: [EventAttributeValue]
+@objc(TelemetryEvent)
+class TelemetryEvent: NSObject {
+    @objc let id: String
+    @objc let type: String
+    @objc let attributes: NSDictionary
     
-    init(type: TelemetryEventType, attributes: [EventAttributeValue]) throws {
+    @objc init(id: String = UUID().uuidString, type: String, attributes: NSDictionary) {
+        self.id = id
         self.type = type
         self.attributes = attributes
-        try validateAttributes()
     }
     
     func toDictionary() -> [String: Any] {
-        var dictionary: [String: Any] = ["msg": type.rawValue]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        
-        attributes.forEach { attributeValue in
-            let key = attributeValue.attribute.rawValue
-            let value = attributeValue.value
-            
-            if let dateValue = value as? Date {
-                dictionary[key] = dateFormatter.string(from: dateValue)
-            } else {
-                dictionary[key] = value
-            }
-        }
-        return dictionary
+        return ["id": id, "type": type, "attributes": attributes]
     }
-
     
-    private func validateAttributes() throws {
-        let attributeKeys = Set(attributes.map { $0.attribute })
-        let requiredKeys = Set(type.requiredAttributes)
-        
-        if !requiredKeys.isSubset(of: attributeKeys) {
-            let missingAttributes = Array(requiredKeys.subtracting(attributeKeys))
-            throw TelemetryError.missingRequiredAttributes(eventType: type, missingAttributes: missingAttributes)
+    func toNSDictionary() -> NSDictionary {
+        return toDictionary() as NSDictionary
+    }
+    
+    @objc static func from(dictionary: NSDictionary) -> TelemetryEvent? {
+        guard let type = dictionary["type"] as? String,
+              let attributes = dictionary["attributes"] as? NSDictionary else {
+            return nil
         }
-        
-        for attribute in attributes {
-            let expectedType = attribute.attribute.expectedType
-            if Swift.type(of: attribute.value) != expectedType {
-                throw TelemetryError.typeMismatch(attribute: attribute.attribute,
-                                                  expectedType: expectedType,
-                                                  actualType: Swift.type(of: attribute.value))
-            }
-        }
+        return TelemetryEvent(type: type, attributes: attributes)
     }
 }

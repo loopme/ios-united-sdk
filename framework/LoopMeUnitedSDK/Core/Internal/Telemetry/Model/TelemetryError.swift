@@ -8,18 +8,18 @@
 import Foundation
 
 enum TelemetryError: Error, CustomStringConvertible, Equatable {
-    case missingRequiredAttributes(eventType: TelemetryEventType, missingAttributes: [EventAttribute])
-    case typeMismatch(attribute: EventAttribute, expectedType: Any.Type, actualType: Any.Type)
+    case missingRequiredAttributes(eventType: TelemetryEventType, missingAttributes: [String])
+    case typeMismatch(attribute: String, expectedType: String, actualType: String)
     case invalidEventType(eventType: String)
     
     var description: String {
         switch self {
         case .missingRequiredAttributes(let eventType, let missingAttributes):
-            let attributeNames = missingAttributes.map { $0.rawValue }.joined(separator: ", ")
-            return "Telemetry Error: Missing required attributes for event type '\(eventType.rawValue)': [\(attributeNames)]"
+            let attributeNames = missingAttributes.joined(separator: ", ")
+            return "Telemetry Error: Missing required attributes for event type '\(eventType)': [\(attributeNames)]"
             
         case .typeMismatch(let attribute, let expectedType, let actualType):
-            return "Telemetry Error: Type mismatch for attribute '\(attribute.rawValue)'. Expected \(expectedType), got \(actualType)"
+            return "Telemetry Error: Type mismatch for attribute '\(attribute)'. Expected \(expectedType), got \(actualType)"
             
         case .invalidEventType(let eventType):
             return "Telemetry Error: Invalid event type '\(eventType)'"
