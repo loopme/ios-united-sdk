@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "LoopMeUnitedSDK",
+    "printedName": "LoopMeUnitedSDK",
     "children": [
       {
         "kind": "Import",
@@ -77,6 +77,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -173,6 +189,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -518,6 +548,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Hashable",
             "printedName": "Hashable",
             "usr": "s:SH",
@@ -569,6 +613,22 @@
         "moduleName": "LoopMeUnitedSDK",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -914,6 +974,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -1226,6 +1300,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -1259,6 +1349,8 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
+              "Preconcurrency",
+              "Custom",
               "HasStorage",
               "AccessControl",
               "RawDocComment"
@@ -1369,6 +1461,8 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
+              "Preconcurrency",
+              "Custom",
               "HasStorage",
               "ReferenceOwnership",
               "AccessControl"
@@ -1491,6 +1585,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Nonisolated",
               "Convenience",
               "AccessControl",
               "RawDocComment"
@@ -1548,6 +1643,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC3url17avUrlAssetOptionsAC10Foundation3URLV_SDySSypGSgtcfc",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "Convenience",
               "AccessControl",
               "RawDocComment"
@@ -1611,6 +1708,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC3url19customFileExtension17avUrlAssetOptionsAC10Foundation3URLV_SSSDySSypGSgtcfc",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "Convenience",
               "AccessControl",
               "RawDocComment"
@@ -1688,6 +1787,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC3url12saveFilePath06customJ9Extension17avUrlAssetOptionsAC10Foundation3URLV_S2SSgSDySSypGSgtcfc",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "AccessControl",
               "RawDocComment"
             ],
@@ -1744,6 +1845,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC03nonE3URL17avUrlAssetOptionsAC10Foundation0I0V_SDySSypGSgtcfc",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "AccessControl",
               "RawDocComment"
             ],
@@ -1778,6 +1881,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC4data19customFileExtensionAC10Foundation4DataV_SStKcfc",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "Convenience",
               "AccessControl",
               "RawDocComment"
@@ -1823,6 +1928,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC11filePathURL0H9ExtensionAC10Foundation0J0V_SSSgtcfc",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "AccessControl",
               "RawDocComment"
             ],
@@ -1877,6 +1984,8 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
+              "Custom",
               "AccessControl",
               "Override",
               "RawDocComment"
@@ -1899,6 +2008,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC8downloadyyF",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "Final",
               "AccessControl",
               "RawDocComment"
@@ -1921,6 +2032,8 @@
             "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC14cancelDownloadyyF",
             "moduleName": "LoopMeUnitedSDK",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
               "Final",
               "AccessControl",
               "RawDocComment"
@@ -2015,6 +2128,8 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
+              "Custom",
               "Override",
               "AccessControl"
             ],
@@ -2026,6 +2141,8 @@
         "mangledName": "$s15LoopMeUnitedSDK17CachingPlayerItemC",
         "moduleName": "LoopMeUnitedSDK",
         "declAttributes": [
+          "Preconcurrency",
+          "Custom",
           "Final",
           "AccessControl",
           "RawDocComment",
@@ -2038,6 +2155,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -2401,6 +2532,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -2799,6 +2944,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -3332,6 +3491,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -4288,6 +4461,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -4492,6 +4679,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -4799,6 +5000,22 @@
         "declAttributes": [
           "AccessControl",
           "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -5267,6 +5484,20 @@
           },
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -5703,6 +5934,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -5950,6 +6197,20 @@
         ],
         "enumRawTypeName": "Int",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -6974,6 +7235,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -7205,6 +7480,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -7398,6 +7687,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -7505,6 +7808,20 @@
           "AccessControl"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -7953,6 +8270,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -8169,6 +8500,22 @@
         "declAttributes": [
           "AccessControl",
           "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -8482,6 +8829,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -8660,6 +9021,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Decodable",
             "printedName": "Decodable",
             "usr": "s:Se",
@@ -8739,6 +9114,20 @@
           "AccessControl"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Decodable",
@@ -8908,6 +9297,20 @@
           "AccessControl"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Decodable",
@@ -9100,6 +9503,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -9184,6 +9601,20 @@
           "AccessControl"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -9422,6 +9853,20 @@
         ],
         "enumRawTypeName": "Int",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -9713,6 +10158,20 @@
         ],
         "enumRawTypeName": "Int",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -11490,6 +11949,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -11718,6 +12191,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -11814,6 +12301,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -12254,6 +12755,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -12648,6 +13163,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -12880,6 +13409,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -13188,6 +13731,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -13416,6 +13973,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -13682,6 +14253,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -14566,6 +15151,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -14742,6 +15341,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -15107,6 +15720,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -15336,6 +15963,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -15792,6 +16433,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -16071,6 +16726,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -16470,6 +17139,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -16544,1348 +17227,991 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Utility\/AVPlayerResumer.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Utility\/AVPlayerResumer.swift",
       "kind": "BooleanLiteral",
       "offset": 359,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Utility\/AVPlayerResumer.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Utility\/AVPlayerResumer.swift",
       "kind": "BooleanLiteral",
       "offset": 760,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Utility\/AVPlayerResumer.swift",
-      "kind": "StringLiteral",
-      "offset": 205,
-      "length": 15,
-      "value": "\"LoopMeUnitedSDK.AVPlayerResumer\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 1751,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 1796,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 1846,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4162,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4201,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4248,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4290,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4337,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4379,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4417,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4457,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4496,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4536,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4580,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4628,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4666,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4705,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4745,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4787,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4826,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4874,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 4923,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 6490,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 6547,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 6591,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "StringLiteral",
       "offset": 6630,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "StringLiteral",
       "offset": 6673,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdTrackingLinks.swift",
       "kind": "Array",
       "offset": 6728,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 268,
       "length": 22,
       "value": "\"recordAdStartedEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 317,
       "length": 21,
       "value": "\"recordAdLoadedEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 367,
       "length": 23,
       "value": "\"recordAdCompleteEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 429,
       "length": 33,
       "value": "\"recordAdVideoFirstQuartileEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 496,
       "length": 28,
       "value": "\"recordAdVideoMidpointEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 563,
       "length": 33,
       "value": "\"recordAdVideoThirdQuartileEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 623,
       "length": 21,
       "value": "\"recordAdPausedEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 679,
       "length": 29,
       "value": "\"recordAdExpandedChangeEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 735,
       "length": 16,
       "value": "\"recordAdResume\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 779,
       "length": 22,
       "value": "\"recordAdSkippedEvent\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
       "kind": "StringLiteral",
       "offset": 839,
       "length": 28,
       "value": "\"recordAdVolumeChangeEvent:\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMIDVideoEventsWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 921,
-      "length": 22,
-      "value": "\"LoopMeUnitedSDK.OMIDVideoEventsWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItem.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItem.swift",
       "kind": "StringLiteral",
       "offset": 1525,
       "length": 25,
       "value": "\"cachingPlayerItemScheme\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItem.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItem.swift",
       "kind": "IntegerLiteral",
       "offset": 11025,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
       "kind": "IntegerLiteral",
       "offset": 409,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
       "kind": "BooleanLiteral",
       "offset": 444,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
       "kind": "BooleanLiteral",
       "offset": 490,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
       "kind": "BooleanLiteral",
       "offset": 539,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/LifecycleManager.swift",
       "kind": "IntegerLiteral",
       "offset": 3236,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 272,
-      "length": 22,
-      "value": "\"LoopMeUnitedSDK.AdSessionContextResult\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "BooleanLiteral",
       "offset": 700,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
       "offset": 918,
       "length": 8,
       "value": "\"Loopme\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Viewability\/OMSDK\/OMSDKswift\/OMSDKWrapper.swift",
       "kind": "StringLiteral",
       "offset": 953,
       "length": 9,
       "value": "\"OMID_JS\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "IntegerLiteral",
       "offset": 271,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "Array",
       "offset": 542,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "BooleanLiteral",
       "offset": 583,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "Array",
       "offset": 707,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "Dictionary",
       "offset": 1837,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastProperties.swift",
       "kind": "StringLiteral",
       "offset": 7472,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CCPA\/CCPATools.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CCPA\/CCPATools.swift",
       "kind": "StringLiteral",
       "offset": 258,
       "length": 6,
       "value": "\"1---\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 900,
-      "length": 24,
-      "value": "\"LoopMeUnitedSDK.CachingPlayerItemWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
       "kind": "IntegerLiteral",
       "offset": 343,
       "length": 3,
       "value": "128"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
       "kind": "IntegerLiteral",
       "offset": 459,
       "length": 2,
       "value": "10"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
       "kind": "BooleanLiteral",
       "offset": 706,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/CachingPlayerItemConfiguration.swift",
       "kind": "IntegerLiteral",
       "offset": 1013,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
       "kind": "IntegerLiteral",
       "offset": 224,
       "length": 8,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
       "kind": "IntegerLiteral",
       "offset": 242,
       "length": 3,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
       "kind": "IntegerLiteral",
       "offset": 255,
       "length": 12,
       "value": "3"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
-      "kind": "IntegerLiteral",
-      "offset": 224,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
-      "kind": "IntegerLiteral",
-      "offset": 242,
-      "length": 3,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
-      "kind": "IntegerLiteral",
-      "offset": 255,
-      "length": 12,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
-      "kind": "IntegerLiteral",
-      "offset": 224,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
-      "kind": "IntegerLiteral",
-      "offset": 242,
-      "length": 3,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Enums\/ErrorInfoKey.swift",
-      "kind": "IntegerLiteral",
-      "offset": 255,
-      "length": 12,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/ResourceLoaderDelegate.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/ResourceLoaderDelegate.swift",
       "kind": "StringLiteral",
       "offset": 827,
       "length": 32,
       "value": "\"com.gcd.CachingPlayerItemQueue\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/ResourceLoaderDelegate.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/ResourceLoaderDelegate.swift",
       "kind": "BooleanLiteral",
       "offset": 1255,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/ResourceLoaderDelegate.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/ResourceLoaderDelegate.swift",
       "kind": "BooleanLiteral",
       "offset": 4557,
       "length": 4,
       "value": "true"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItem\/ResourceLoaderDelegate.swift",
-      "kind": "StringLiteral",
-      "offset": 254,
-      "length": 22,
-      "value": "\"LoopMeUnitedSDK.ResourceLoaderDelegate\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 259,
       "length": 11,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 280,
       "length": 19,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 309,
       "length": 14,
       "value": "3"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 333,
       "length": 19,
       "value": "4"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 362,
       "length": 14,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 386,
       "length": 11,
       "value": "6"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 407,
       "length": 11,
       "value": "7"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 428,
       "length": 12,
       "value": "8"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 450,
       "length": 12,
       "value": "9"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 472,
       "length": 14,
       "value": "10"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 496,
       "length": 10,
       "value": "11"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 516,
       "length": 10,
       "value": "12"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 536,
       "length": 12,
       "value": "13"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 558,
       "length": 14,
       "value": "14"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 582,
       "length": 19,
       "value": "15"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 611,
       "length": 21,
       "value": "16"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 642,
       "length": 22,
       "value": "17"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 675,
       "length": 8,
       "value": "18"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 693,
       "length": 11,
       "value": "19"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 714,
       "length": 16,
       "value": "20"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 259,
-      "length": 11,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 280,
-      "length": 19,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 309,
-      "length": 14,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 333,
-      "length": 19,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 362,
-      "length": 14,
-      "value": "5"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 386,
-      "length": 11,
-      "value": "6"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 407,
-      "length": 11,
-      "value": "7"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 428,
-      "length": 12,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 450,
-      "length": 12,
-      "value": "9"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 472,
-      "length": 14,
-      "value": "10"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 496,
-      "length": 10,
-      "value": "11"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 516,
-      "length": 10,
-      "value": "12"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 536,
-      "length": 12,
-      "value": "13"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 558,
-      "length": 14,
-      "value": "14"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 582,
-      "length": 19,
-      "value": "15"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 611,
-      "length": 21,
-      "value": "16"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 642,
-      "length": 22,
-      "value": "17"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 675,
-      "length": 8,
-      "value": "18"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 693,
-      "length": 11,
-      "value": "19"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
-      "kind": "IntegerLiteral",
-      "offset": 714,
-      "length": 16,
-      "value": "20"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "Array",
       "offset": 853,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "Array",
       "offset": 900,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastEventTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 947,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/SDKUtility.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/SDKUtility.swift",
       "kind": "StringLiteral",
       "offset": 429,
       "length": 9,
       "value": "\"2.5\/2.6\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/UserAgent.swift",
+      "kind": "StringLiteral",
+      "offset": 1648,
+      "length": 13,
+      "value": "\"Mozilla\/5.0\""
+    },
+    {
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
       "kind": "Array",
       "offset": 558,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
       "kind": "StringLiteral",
       "offset": 588,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
       "kind": "StringLiteral",
       "offset": 622,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AssetLinks.swift",
       "kind": "Array",
       "offset": 656,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
       "kind": "BooleanLiteral",
       "offset": 381,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
       "kind": "FloatLiteral",
       "offset": 769,
       "length": 4,
       "value": "20.0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
       "kind": "IntegerLiteral",
       "offset": 800,
       "length": 1,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
       "kind": "IntegerLiteral",
       "offset": 839,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/LoopMeServerCommuniator\/LoopMeServerCommuniator\/ServerCommunicator.swift",
-      "kind": "StringLiteral",
-      "offset": 240,
-      "length": 18,
-      "value": "\"LoopMeUnitedSDK.ServerCommunicator\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingEvent.swift",
-      "kind": "StringLiteral",
-      "offset": 231,
-      "length": 19,
-      "value": "\"LoopMeUnitedSDK.VideoBufferingEvent\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
       "offset": 236,
       "length": 19,
       "value": "\"loopmeautoloading\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
       "offset": 938,
       "length": 7,
       "value": "\"VPAID\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
       "offset": 962,
       "length": 6,
       "value": "\"VAST\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
       "offset": 987,
       "length": 6,
       "value": "\"HTML\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
       "offset": 1011,
       "length": 7,
       "value": "\"MRAID\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 938,
-      "length": 7,
-      "value": "\"VPAID\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 962,
-      "length": 6,
-      "value": "\"VAST\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 987,
-      "length": 6,
-      "value": "\"HTML\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 1011,
-      "length": 7,
-      "value": "\"MRAID\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/AdConfiguration.swift",
       "kind": "StringLiteral",
       "offset": 2059,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
       "kind": "IntegerLiteral",
       "offset": 256,
       "length": 7,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
-      "kind": "IntegerLiteral",
-      "offset": 256,
-      "length": 7,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
       "kind": "IntegerLiteral",
       "offset": 528,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
       "kind": "IntegerLiteral",
       "offset": 596,
       "length": 2,
       "value": "30"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
       "kind": "IntegerLiteral",
       "offset": 664,
       "length": 1,
       "value": "5"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/VastSkipOffset.swift",
       "kind": "IntegerLiteral",
       "offset": 731,
       "length": 3,
       "value": "100"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/MRAID\/MRAIDExpandProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/MRAID\/MRAIDExpandProperties.swift",
       "kind": "IntegerLiteral",
       "offset": 249,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/MRAID\/MRAIDExpandProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/MRAID\/MRAIDExpandProperties.swift",
       "kind": "IntegerLiteral",
       "offset": 260,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/MRAID\/MRAIDExpandProperties.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/MRAID\/MRAIDExpandProperties.swift",
       "kind": "BooleanLiteral",
       "offset": 279,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "IntegerLiteral",
       "offset": 116,
       "length": 8,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "IntegerLiteral",
       "offset": 134,
       "length": 9,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 116,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 134,
-      "length": 9,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "IntegerLiteral",
       "offset": 237,
       "length": 4,
       "value": "1"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "IntegerLiteral",
       "offset": 251,
       "length": 6,
       "value": "2"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "IntegerLiteral",
       "offset": 267,
       "length": 5,
       "value": "3"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 237,
-      "length": 4,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 251,
-      "length": 6,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "IntegerLiteral",
-      "offset": 267,
-      "length": 5,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "StringLiteral",
       "offset": 1198,
       "length": 9,
       "value": "\"unknown\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2685,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2944,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3391,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
       "kind": "BooleanLiteral",
       "offset": 4280,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 319,
-      "length": 22,
-      "value": "\"LoopMeUnitedSDK.AdConfigurationWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 4765,
-      "length": 23,
-      "value": "\"LoopMeUnitedSDK.VastEventTrackerWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 5517,
-      "length": 21,
-      "value": "\"LoopMeUnitedSDK.ProgressEventWrappper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 5728,
-      "length": 21,
-      "value": "\"LoopMeUnitedSDK.VastPropertiesWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 7531,
-      "length": 22,
-      "value": "\"LoopMeUnitedSDK.AdTrackingLinksWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 8672,
-      "length": 21,
-      "value": "\"LoopMeUnitedSDK.VastSkipOffsetWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 9337,
-      "length": 17,
-      "value": "\"LoopMeUnitedSDK.AssetLinksWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 9893,
-      "length": 21,
-      "value": "\"LoopMeUnitedSDK.AdVerificationWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 10427,
-      "length": 25,
-      "value": "\"LoopMeUnitedSDK.ViewableImpressionWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 10987,
-      "length": 21,
-      "value": "\"LoopMeUnitedSDK.LinearTrackingWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/ObjcWrapper.swift",
-      "kind": "StringLiteral",
-      "offset": 12545,
-      "length": 27,
-      "value": "\"LoopMeUnitedSDK.ProgressEventTrackerWrapper\""
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CoppaTools.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/UserPrivacy\/CoppaTools.swift",
       "kind": "BooleanLiteral",
       "offset": 281,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdVerification.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdVerification.swift",
       "kind": "StringLiteral",
       "offset": 529,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdVerification.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdVerification.swift",
       "kind": "StringLiteral",
       "offset": 545,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdVerification.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/AdConfiguration\/AdConfiguration\/VAST\/AdVerification.swift",
       "kind": "StringLiteral",
       "offset": 573,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
       "kind": "IntegerLiteral",
       "offset": 251,
       "length": 2,
       "value": "32"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
       "kind": "IntegerLiteral",
       "offset": 256,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
       "kind": "IntegerLiteral",
       "offset": 261,
       "length": 2,
       "value": "60"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
       "kind": "IntegerLiteral",
       "offset": 314,
       "length": 2,
       "value": "50"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
       "kind": "IntegerLiteral",
       "offset": 319,
       "length": 4,
       "value": "1024"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/CacheManager\/CachingPlayerItemManager.swift",
       "kind": "IntegerLiteral",
       "offset": 326,
       "length": 4,
       "value": "1024"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 333,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
       "kind": "BooleanLiteral",
       "offset": 365,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 468,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
       "kind": "IntegerLiteral",
       "offset": 505,
       "length": 1,
       "value": "0"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
       "kind": "BooleanLiteral",
       "offset": 537,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
+      "filePath": "\/Users\/lukasztomaszewski\/Desktop\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
       "kind": "BooleanLiteral",
       "offset": 849,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/Users\/valeriiroman\/Documents\/GitHub\/ios-united-sdk\/framework\/LoopMeUnitedSDK\/Core\/Internal\/Telemetry\/VideoBufferingTracker.swift",
-      "kind": "StringLiteral",
-      "offset": 224,
-      "length": 21,
-      "value": "\"LoopMeUnitedSDK.VideoBufferingTracker\""
     }
   ]
 }

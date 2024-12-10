@@ -1,3 +1,7 @@
+## Version 7.4.24 (10.12.2024)
+
+- Release new version of adapters (#236)
+
 ## Version 7.4.23 (28.11.2024)
 
 - [SDK-575] Fixed: timeElapsedSinceStart is nil (#235)

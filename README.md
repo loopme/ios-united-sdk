@@ -2,11 +2,9 @@ You can find integration guide on [wiki](https://loopme-ltd.gitbook.io/docs-publ
 
 ## What's new ##
 
-**Version 7.4.23**
+**Version 7.4.24**
 
-- [SDK-575] Fixed: timeElapsedSinceStart is nil (#235)
-- Update AppLovinLoopMeCustomAdapter.podspec (#233)
-- Add new version to ISLoopMeCustomAdapter (#232)
+- Release new version of adapters (#236)
 
 Please view the [changelog](CHANGELOG.md) for details.
 
