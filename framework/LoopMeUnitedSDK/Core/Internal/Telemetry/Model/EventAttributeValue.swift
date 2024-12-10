@@ -8,13 +8,31 @@
 import Foundation
 
 struct EventAttributeValue {
-    let attribute: EventAttribute
+    let attribute: String
     let value: Any
-    
-    init<T>(attribute: EventAttribute, value: T) throws {
-        guard attribute.expectedType == T.self else {
-            throw TelemetryError.typeMismatch(attribute: attribute, expectedType: attribute.expectedType, actualType: T.self)
+
+    init<T>(attribute: String, value: T) throws {
+        let expectedType = EventAttribute.expectedType(for: attribute)
+
+        let actualType: String
+        if value is Int {
+            actualType = "Int"
+        } else if value is String {
+            actualType = "String"
+        } else if value is Date {
+            actualType = "Date"
+        } else {
+            actualType = "Unknown"
         }
+
+        guard expectedType == actualType else {
+            throw TelemetryError.typeMismatch(
+                attribute: attribute,
+                expectedType: expectedType,
+                actualType: actualType
+            )
+        }
+
         self.attribute = attribute
         self.value = value
     }
